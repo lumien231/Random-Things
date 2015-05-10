@@ -1,0 +1,142 @@
+itemGroup.rt.name=Random Things
+
+tile.fertilizedDirt.name=Fertilized Dirt
+tile.playerInterface.name=Player Interface
+tile.creativePlayerInterface.name=Creative Player Interface
+tile.lapisGlass.name=Lapis Glass
+tile.portalGenerator.name=Portal Generator
+tile.biomeGlass.name=Biome Glass
+tile.lapisLamp.name=Lapis Lamp
+tile.dyeingMachine.name=Dyeing Machine
+tile.onlineDetector.name=Online Detector
+tile.enderAnchor.name=Ender Anchor
+tile.enderBridge.name=Ender Bridge
+tile.prismarineEnderBridge.name=Prismarine Ender Bridge
+tile.beanStalk.name=Magic Bean Stalk
+tile.lesserBeanStalk.name=Lesser Bean Stalk
+tile.beanPod.name=Bean Pod
+tile.beanSprout.name=Bean Sprout
+tile.lifeAnchor.name=Life Anchor
+tile.chatDetector.name=Chat Detector
+tile.globalChatDetector.name=Global Chat Detector
+tile.redstoneInterface.name=Redstone Interface
+tile.lightRedirector.name=Light Redirector
+tile.imbuingStation.name=Imbuing Station
+tile.spectreBlock.name=Spectre Block
+
+tile.natureCore.name=Nature Core
+tile.netherCore.name=Nether Core
+tile.enderCore.name=Ender Core
+
+tile.stainedBrick.black.name=Black Stained Bricks
+tile.stainedBrick.red.name=Red Stained Bricks
+tile.stainedBrick.green.name=Green Stained Bricks
+tile.stainedBrick.brown.name=Brown Stained Bricks
+tile.stainedBrick.blue.name=Blue Stained Bricks
+tile.stainedBrick.purple.name=Purple Stained Bricks
+tile.stainedBrick.cyan.name=Cyan Stained Bricks
+tile.stainedBrick.silver.name=Light Gray Stained Bricks
+tile.stainedBrick.gray.name=Gray Stained Bricks
+tile.stainedBrick.pink.name=Pink Stained Bricks
+tile.stainedBrick.lime.name=Lime Stained Bricks
+tile.stainedBrick.yellow.name=Yellow Stained Bricks
+tile.stainedBrick.lightBlue.name=Light Blue Stained Bricks
+tile.stainedBrick.magenta.name=Magenta Stained Bricks
+tile.stainedBrick.orange.name=Orange Stained Bricks
+tile.stainedBrick.white.name=White Stained Bricks
+
+tile.coloredGrass.black.name=Black Grass
+tile.coloredGrass.red.name=Red Grass
+tile.coloredGrass.green.name=Green Grass
+tile.coloredGrass.brown.name=Brown Grass
+tile.coloredGrass.blue.name=Blue Grass
+tile.coloredGrass.purple.name=Purple Grass
+tile.coloredGrass.cyan.name=Cyan Grass
+tile.coloredGrass.silver.name=Light Gray Grass
+tile.coloredGrass.gray.name=Gray Grass
+tile.coloredGrass.pink.name=Pink Grass
+tile.coloredGrass.lime.name=Lime Grass
+tile.coloredGrass.yellow.name=Yellow Grass
+tile.coloredGrass.lightBlue.name=Light Grass
+tile.coloredGrass.magenta.name=Magenta Grass
+tile.coloredGrass.orange.name=Orange Grass
+tile.coloredGrass.white.name=White Grass
+
+tile.biomeStone.cobble.name=Biome Cobblestone
+tile.biomeStone.smooth.name=Biome Stone
+tile.biomeStone.brick.name=Biome Stone Bricks
+tile.biomeStone.cracked.name=Cracked Biome Stone Bricks
+tile.biomeStone.chiseled.name=Chiseled Biome Stone Bricks
+
+tile.specialChest.nature.name=Nature Chest
+tile.specialChest.water.name=Water Chest
+
+item.chaliceOfImmortality.name=Chalice of Immortality
+item.positionFilter.name=Position Filter
+item.biomeCrystal.name=Biome Crystal
+item.summoningPendulum.name=Summoning Pendulum
+item.stableEnderpearl.name=Stable Ender Pearl
+item.linkingOrb.name=Linking Orb
+item.inertLinkingOrb.name=Inert Linking Orb
+item.craftingRecipe.name=Crafting Recipe
+item.redstoneTool.name=Redstone Tool
+item.waterWalkingBoots.name=Water Walking Boots
+item.dungeonChestGenerator.name=Dungeon Chest Generator
+item.lavaCharm.name=Lava Charm
+item.lavaWader.name=Lava Waders
+item.obsidianSkull.name=Obsidian Skull
+item.obsidianSkullRing.name=Obsidian Skull Ring
+item.obsidianWaterWalkingBoots.name=Obsidian Water Walking Boots
+item.magicHood.name=Magic Hood
+item.bottleOfAir.name=Bottle of Air
+
+item.bean.name=Bean
+item.lesserMagicBean.name=Lesser Magic Bean
+item.magicBean.name=Magic Bean
+item.beanStew.name=Bean Stew
+
+item.charge.water=Water Charge
+item.charge.lightning=Lightning Charge
+item.charge.ice=Ice Charge
+item.charge.ender=Ender Charge
+item.charge.invalid=Invalid Charge
+
+item.grassSeeds.normal.name=Grass Seeds
+item.grassSeeds.black.name=Black Grass Seeds
+item.grassSeeds.red.name=Red Grass Seeds
+item.grassSeeds.green.name=Green Grass Seeds
+item.grassSeeds.brown.name=Brown Grass Seeds
+item.grassSeeds.blue.name=Blue Grass Seeds
+item.grassSeeds.purple.name=Purple Grass Seeds
+item.grassSeeds.cyan.name=Cyan Grass Seeds
+item.grassSeeds.silver.name=Light Gray Grass Seeds
+item.grassSeeds.gray.name=Gray Grass Seeds
+item.grassSeeds.pink.name=Pink Grass Seeds
+item.grassSeeds.lime.name=Lime Grass Seeds
+item.grassSeeds.yellow.name=Yellow Grass Seeds
+item.grassSeeds.lightBlue.name=Light Grass Seeds
+item.grassSeeds.magenta.name=Magenta Grass Seeds
+item.grassSeeds.orange.name=Orange Grass Seeds
+item.grassSeeds.white.name=White Grass Seeds
+
+item.imbue.fire.name=Fire Imbue
+item.imbue.poison.name=Poison Imbue
+item.imbue.experience.name=Experience Imbue
+item.imbue.wither.name=Wither Imbue
+
+tooltip.general.shift=Hold §6Shift§7 for more information
+tooltip.positionFilter.dimension=Dimension: %d
+tooltip.positionFilter.x=Position-X: %d
+tooltip.positionFilter.y=Position-Y: %d
+tooltip.positionFilter.z=Position-Z: %d
+tooltip.summoningPendulum.entityCount.singular=§5Holding %d Entity
+tooltip.summoningPendulum.entityCount.plural=§5Holding %d Entitys
+tooltip.stableEnderpearl.boundto=§5Bound to %s
+
+gui.redstoneInterface.notarget=No Target
+gui.redstoneInterface.targetX=Target-X: %s
+gui.redstoneInterface.targetY=Target-Y: %s
+gui.redstoneInterface.targetZ=Target-Z: %s
+
+item.dungeonChestGenerator.category=Category: %s
+item.dungeonChestGenerator.shiftCategory=Shift click to change category

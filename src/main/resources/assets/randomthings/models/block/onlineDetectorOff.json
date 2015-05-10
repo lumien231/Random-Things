@@ -1,0 +1,6 @@
+{
+    "parent": "randomthings:block/onlineDetector",
+    "textures": {
+        "side": "randomthings:blocks/onlineDetector/sideOff"
+    }
+}

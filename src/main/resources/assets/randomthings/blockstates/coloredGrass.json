@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "randomthings:coloredGrass" },
+            { "model": "randomthings:coloredGrass", "y": 90 },
+            { "model": "randomthings:coloredGrass", "y": 180 },
+            { "model": "randomthings:coloredGrass", "y": 270 }
+        ]
+    }
+}

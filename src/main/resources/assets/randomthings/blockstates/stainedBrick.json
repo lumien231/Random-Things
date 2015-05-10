@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "color=white": { "model": "randomthings:stainedBrick/white" },
+        "color=orange": { "model": "randomthings:stainedBrick/orange" },
+        "color=magenta": { "model": "randomthings:stainedBrick/magenta" },
+        "color=light_blue": { "model": "randomthings:stainedBrick/lightBlue" },
+        "color=yellow": { "model": "randomthings:stainedBrick/yellow" },
+        "color=lime": { "model": "randomthings:stainedBrick/lime" },
+        "color=pink": { "model": "randomthings:stainedBrick/pink" },
+        "color=gray": { "model": "randomthings:stainedBrick/gray" },
+        "color=silver": { "model": "randomthings:stainedBrick/silver" },
+        "color=cyan": { "model": "randomthings:stainedBrick/cyan" },
+        "color=purple": { "model": "randomthings:stainedBrick/purple" },
+        "color=blue": { "model": "randomthings:stainedBrick/blue" },
+        "color=brown": { "model": "randomthings:stainedBrick/brown" },
+        "color=green": { "model": "randomthings:stainedBrick/green" },
+        "color=red": { "model": "randomthings:stainedBrick/red" },
+        "color=black": { "model": "randomthings:stainedBrick/black" }
+    }
+}

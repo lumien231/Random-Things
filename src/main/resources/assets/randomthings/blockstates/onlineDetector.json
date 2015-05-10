@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=true": { "model": "randomthings:onlineDetectorOn" },
+        "powered=false": { "model": "randomthings:onlineDetectorOff" }
+    }
+}

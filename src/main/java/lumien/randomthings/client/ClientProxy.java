@@ -1,0 +1,140 @@
+package lumien.randomthings.client;
+
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import lumien.randomthings.CommonProxy;
+import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.models.BlockModels;
+import lumien.randomthings.client.models.ItemModels;
+import lumien.randomthings.client.render.RenderSoul;
+import lumien.randomthings.client.render.RenderSpecialChest;
+import lumien.randomthings.entitys.EntityReviveCircle;
+import lumien.randomthings.entitys.EntitySoul;
+import lumien.randomthings.item.ModItems;
+import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
+import lumien.randomthings.tileentity.TileEntitySpecialChest;
+import lumien.randomthings.util.client.RenderUtils;
+
+public class ClientProxy extends CommonProxy
+{
+	@Override
+	public void registerModels()
+	{
+		ItemModels.register();
+		BlockModels.register();
+
+		// RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class,
+		// new RenderRev(Minecraft.getMinecraft().getRenderManager()));
+	}
+
+	@Override
+	public void registerRenderers()
+	{
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul(Minecraft.getMinecraft().getRenderManager()));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
+	}
+	
+	@Override
+	public void renderRedstoneInterfaceStuff(float partialTicks)
+	{
+		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+		ItemStack itemStack = player.getCurrentEquippedItem();
+		if (itemStack != null)
+		{
+			Item item = itemStack.getItem();
+
+			if (item == ModItems.redstoneTool)
+			{
+				drawInterfaceLines(player, partialTicks);
+				drawLinkingCube(itemStack, player, partialTicks);
+			}
+		}
+	}
+
+	private void drawLinkingCube(ItemStack itemStack, EntityPlayerSP player, float partialTicks)
+	{
+		if (itemStack.getTagCompound() != null)
+		{
+			NBTTagCompound compound = itemStack.getTagCompound();
+			if (compound.getBoolean("linking"))
+			{
+				int oX = compound.getInteger("oX");
+				int oY = compound.getInteger("oY");
+				int oZ = compound.getInteger("oZ");
+				double playerX = player.prevPosX + (player.posX - player.prevPosX) * partialTicks;
+				double playerY = player.prevPosY + (player.posY - player.prevPosY) * partialTicks;
+				double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * partialTicks;
+
+				GlStateManager.enableBlend();
+				GlStateManager.pushMatrix();
+				{
+					GlStateManager.translate(-playerX, -playerY, -playerZ);
+					RenderUtils.drawCube(oX - 0.01F, oY - 0.01F, oZ - 0.01F, 1.02f, 0.5f, 0F, 0F, 0.18f);
+				}
+				GlStateManager.popMatrix();
+				GlStateManager.disableBlend();
+			}
+		}
+	}
+
+	private void drawInterfaceLines(EntityPlayerSP player, float partialTicks)
+	{
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+
+		double playerX = player.prevPosX + (player.posX - player.prevPosX) * partialTicks;
+		double playerY = player.prevPosY + (player.posY - player.prevPosY) * partialTicks;
+		double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * partialTicks;
+
+		GlStateManager.pushAttrib();
+		GL11.glEnable(GL11.GL_LINE_SMOOTH);
+		GL11.glLineWidth(10);
+		GlStateManager.disableTexture2D();
+		GlStateManager.disableLighting();
+		Minecraft.getMinecraft().entityRenderer.disableLightmap();
+		GlStateManager.pushMatrix();
+		{
+			worldRenderer.startDrawing(GL11.GL_LINES);
+			worldRenderer.setColorOpaque(255, 0, 0);
+			for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
+			{
+				if (!redstoneInterface.isInvalid())
+				{
+					BlockPos position = redstoneInterface.getPos();
+					BlockPos target = redstoneInterface.getTarget();
+
+					if (position.distanceSq(player.getPosition()) < 225)
+					{
+						if (target != null)
+						{
+							if (redstoneInterface.getWorld().isRemote)
+							{
+								worldRenderer.addVertex(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ);
+								worldRenderer.addVertex(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ);
+							}
+						}
+					}
+				}
+			}
+			tessellator.draw();
+		}
+		GlStateManager.popMatrix();
+		GL11.glDisable(GL11.GL_LINE_SMOOTH);
+		GlStateManager.enableTexture2D();
+		GlStateManager.popAttrib();
+		Minecraft.getMinecraft().entityRenderer.enableLightmap();
+	}
+}

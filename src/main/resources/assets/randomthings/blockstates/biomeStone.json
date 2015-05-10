@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "variant=cobble": { "model": "randomthings:biomeStone/cobble" },
+        "variant=smooth": { "model": "randomthings:biomeStone/smooth" },
+        "variant=brick": { "model": "randomthings:biomeStone/brick" },
+        "variant=cracked": { "model": "randomthings:biomeStone/cracked" },
+        "variant=chiseled": { "model": "randomthings:biomeStone/chiseled" }
+    }
+}

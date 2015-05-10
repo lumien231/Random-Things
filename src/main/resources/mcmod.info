@@ -1,0 +1,16 @@
+[
+{
+  "modid": "RandomThings",
+  "name": "Random Things",
+  "description": "Random Things packed into one Mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://minecraft.curseforge.com/mc-mods/59816-random-things",
+  "updateUrl": "",
+  "authorList": ["Lumien"],
+  "credits": "Lumien (Mod);Drakeflame13 (Soul Texture);benzrf,CaptainMalone (Too Many Plants Content),Lorc (Biome Crystal)",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
