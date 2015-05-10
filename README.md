@@ -7,7 +7,7 @@ Source Code of the Random Things mod. Feel free to make pull requests for transl
 ##License
 The MIT License (MIT)
 
-Copyright (c) <2014> <lumien>
+Copyright (c) <2015> <lumien>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
