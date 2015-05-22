@@ -12,6 +12,8 @@ public class ItemBlockSpecialChest extends ItemBlock
     public ItemBlockSpecialChest(Block block)
 	{
 		super(block);
+		
+		this.setHasSubtypes(true);
 	}
 
     @Override
