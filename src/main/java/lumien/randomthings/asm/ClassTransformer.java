@@ -117,7 +117,7 @@ public class ClassTransformer implements IClassTransformer
 			shouldSideBeRendered.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -175,7 +175,7 @@ public class ClassTransformer implements IClassTransformer
 
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -247,7 +247,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -353,7 +353,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -479,7 +479,7 @@ public class ClassTransformer implements IClassTransformer
 			canRenderName.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -524,7 +524,7 @@ public class ClassTransformer implements IClassTransformer
 			addCollisionBoxesToList.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -568,7 +568,7 @@ public class ClassTransformer implements IClassTransformer
 			getModelFromBlockState.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -687,7 +687,7 @@ public class ClassTransformer implements IClassTransformer
 			getRedstonePower.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -700,7 +700,7 @@ public class ClassTransformer implements IClassTransformer
 		classReader.accept(classNode, 0);
 		logger.log(Level.DEBUG, "Found Dummy Class: " + classNode.name);
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
