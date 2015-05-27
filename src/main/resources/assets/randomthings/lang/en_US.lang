@@ -96,12 +96,6 @@ item.lesserMagicBean.name=Lesser Magic Bean
 item.magicBean.name=Magic Bean
 item.beanStew.name=Bean Stew
 
-item.charge.water=Water Charge
-item.charge.lightning=Lightning Charge
-item.charge.ice=Ice Charge
-item.charge.ender=Ender Charge
-item.charge.invalid=Invalid Charge
-
 item.grassSeeds.normal.name=Grass Seeds
 item.grassSeeds.black.name=Black Grass Seeds
 item.grassSeeds.red.name=Red Grass Seeds
