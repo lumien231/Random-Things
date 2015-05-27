@@ -1,5 +1,6 @@
 package lumien.randomthings.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
@@ -25,11 +26,23 @@ public class BlockLightRedirector extends BlockBase
 		this.setStepSound(soundTypeWood);
 		this.setHardness(2);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
 	{
 		return true;
+	}
+
+	@Override
+	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	{
+		if (worldIn.isRemote)
+		{
+			for (EnumFacing facing : EnumFacing.VALUES)
+			{
+				worldIn.markBlockForUpdate(pos.offset(facing));
+			}
+		}
 	}
 }
