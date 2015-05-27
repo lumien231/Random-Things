@@ -91,6 +91,6 @@ public class RandomThings
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event)
 	{
-		event.registerServerCommand(new CommandRT());
+		
 	}
 }
