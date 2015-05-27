@@ -1,6 +1,7 @@
 package lumien.randomthings.client.render;
 
 import lumien.randomthings.entitys.EntitySoul;
+import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

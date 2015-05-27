@@ -1,7 +1,10 @@
 package lumien.randomthings.entitys;
 
+import java.util.List;
+
 import io.netty.buffer.ByteBuf;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.entity.Entity;
@@ -47,8 +50,6 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	{
 		super(worldObj);
 		this.setSize(0.3F, 0.3F);
-		this.width = 0.3F;
-		this.height = 0.3F;
 		this.setPosition(posX, posY, posZ);
 		this.motionX = 0;
 		this.motionY = 0;
@@ -58,21 +59,48 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		this.playerName = playerName;
 	}
 
+	public void applyEntityCollision(Entity entityIn)
+	{
+
+	}
+
+	protected boolean pushOutOfBlocks(double x, double y, double z)
+	{
+		return false;
+	}
+
 	@Override
 	public boolean canBeCollidedWith()
 	{
 		return true;
 	}
 
+	protected void doBlockCollisions()
+	{
+
+	}
+
 	@Override
 	public boolean interactFirst(EntityPlayer user)
 	{
 		ItemStack equipped = user.getCurrentEquippedItem();
-		if (!worldObj.isRemote && MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(playerName) != null)
+		if (!worldObj.isRemote && equipped.getItem() instanceof ItemRezStone && MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(playerName) != null)
 		{
-			worldObj.spawnEntityInWorld(new EntityReviveCircle(worldObj, posX, posY, posZ, this));
+			List<EntityReviveCircle> circles = this.worldObj.getEntitiesWithinAABB(EntityReviveCircle.class, AxisAlignedBB.fromBounds(this.posX - 2, this.posY - 2, this.posZ - 2, this.posX + 2, this.posZ + 2, this.posZ + 2));
+			
+			for (EntityReviveCircle circle:circles)
+			{
+				if (circle.toRevive==this)
+				{
+					return false;
+				}
+			}
+			
+			worldObj.spawnEntityInWorld(new EntityReviveCircle(worldObj, user, posX, posY, posZ, this));
+			
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override

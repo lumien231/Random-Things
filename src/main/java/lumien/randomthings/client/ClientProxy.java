@@ -1,9 +1,15 @@
 package lumien.randomthings.client;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -18,10 +24,12 @@ import lumien.randomthings.CommonProxy;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.BlockModels;
 import lumien.randomthings.client.models.ItemModels;
+import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
 import lumien.randomthings.client.render.RenderSpecialChest;
 import lumien.randomthings.entitys.EntityReviveCircle;
 import lumien.randomthings.entitys.EntitySoul;
+import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
@@ -30,23 +38,56 @@ import lumien.randomthings.util.client.RenderUtils;
 public class ClientProxy extends CommonProxy
 {
 	@Override
+	public boolean canBeCollidedWith(EntitySoul soul)
+	{
+		ItemStack equipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+		if (equipped != null && equipped.getItem() instanceof ItemRezStone)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
 	public void registerModels()
 	{
 		ItemModels.register();
 		BlockModels.register();
+	}
+	
+	@Override
+	public boolean isPlayerOnline(String username)
+	{
+		NetHandlerPlayClient netclienthandler = Minecraft.getMinecraft().thePlayer.sendQueue;
+		Collection collection = netclienthandler.func_175106_d();
 
-		// RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class,
-		// new RenderRev(Minecraft.getMinecraft().getRenderManager()));
+		Iterator<NetworkPlayerInfo> iterator = collection.iterator();
+		
+		while (iterator.hasNext())
+		{
+			NetworkPlayerInfo info = iterator.next();
+			
+			if (info.getGameProfile().getName().toLowerCase().equals(username.toLowerCase()))
+			{
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	@Override
 	public void registerRenderers()
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle(Minecraft.getMinecraft().getRenderManager()));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 	}
-	
+
 	@Override
 	public void renderRedstoneInterfaceStuff(float partialTicks)
 	{

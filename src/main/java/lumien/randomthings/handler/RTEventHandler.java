@@ -310,11 +310,11 @@ public class RTEventHandler
 					}
 					else if (livingEntity.isPotionActive(ModPotions.imbueWither))
 					{
-						event.entityLiving.addPotionEffect(new PotionEffect(Potion.wither.id, 5*20,1));
+						event.entityLiving.addPotionEffect(new PotionEffect(Potion.wither.id, 5 * 20, 1));
 					}
 					else if (livingEntity.isPotionActive(ModPotions.imbuePoison))
 					{
-						event.entityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 10*20, 1));
+						event.entityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 10 * 20, 1));
 					}
 				}
 			}
@@ -472,14 +472,28 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void livingDeath(LivingDeathEvent event)
 	{
-		if (!event.entityLiving.worldObj.isRemote && event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative())
+		if (!event.entityLiving.worldObj.isRemote)
 		{
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			PlayerAbilitiesProperty abilities = (PlayerAbilitiesProperty) player.getExtendedProperties(PlayerAbilitiesProperty.KEY);
-			if (abilities.isImmortal())
+			if (event.entityLiving instanceof EntityPlayer)
 			{
-				player.setHealth(0.1f);
-				event.setCanceled(true);
+				if (!(event.entityLiving instanceof FakePlayer))
+				{
+					EntityPlayer player = (EntityPlayer) event.entityLiving;
+					if (!event.source.canHarmInCreative())
+					{
+						PlayerAbilitiesProperty abilities = (PlayerAbilitiesProperty) player.getExtendedProperties(PlayerAbilitiesProperty.KEY);
+						if (abilities.isImmortal())
+						{
+							player.setHealth(0.1f);
+							event.setCanceled(true);
+						}
+					}
+
+					if (!event.isCanceled())
+					{
+						player.worldObj.spawnEntityInWorld(new EntitySoul(player.worldObj, player.posX, player.posY, player.posZ, player.getGameProfile().getName()));
+					}
+				}
 			}
 		}
 	}

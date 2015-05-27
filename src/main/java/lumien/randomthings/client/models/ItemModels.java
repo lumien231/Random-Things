@@ -59,6 +59,7 @@ public class ItemModels
 		registerItem(ModItems.obsidianWaterWalkingBoots);
 		registerItem(ModItems.magicHood);
 		registerItem(ModItems.bottleOfAir);
+		registerItem(ModItems.rezStone);
 		// registerItem(ModItems.craftingRecipe);
 
 		registerBricks();

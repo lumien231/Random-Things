@@ -27,6 +27,7 @@ public class ModItems
 	public static ItemMagicHood magicHood;
 	public static ItemImbue imbue;
 	public static ItemBottleOfAir bottleOfAir;
+	public static ItemRezStone rezStone;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -51,6 +52,7 @@ public class ModItems
 		magicHood = new ItemMagicHood();
 		imbue = new ItemImbue();
 		bottleOfAir = new ItemBottleOfAir();
+		rezStone = new ItemRezStone();
 		
 		grassSeeds = new ItemGrassSeeds();
 	}

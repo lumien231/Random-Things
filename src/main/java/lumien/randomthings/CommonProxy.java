@@ -1,8 +1,10 @@
 package lumien.randomthings;
 
+import net.minecraft.server.MinecraftServer;
+import lumien.randomthings.entitys.EntitySoul;
+
 public class CommonProxy
 {
-
 	public void registerModels()
 	{
 		
@@ -17,4 +19,13 @@ public class CommonProxy
 	{
 	}
 
+	public boolean canBeCollidedWith(EntitySoul soul)
+	{
+		return false;
+	}
+	
+	public boolean isPlayerOnline(String username)
+	{
+		return MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(username) != null;
+	}
 }
