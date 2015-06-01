@@ -16,6 +16,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.item.ItemObsidianSkullRing;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.lib.Colors;
 import lumien.randomthings.lib.PlayerAbilitiesProperty;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
@@ -25,7 +26,9 @@ import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
@@ -52,7 +55,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
@@ -112,9 +117,48 @@ public class RTEventHandler
 	@SideOnly(Side.CLIENT)
 	public void renderGameOverlay(RenderGameOverlayEvent event)
 	{
-		if (event.type != null && event.type == RenderGameOverlayEvent.ElementType.HEALTH)
+		if (event.type != null)
 		{
-			renderLavaCharm(event);
+			if (event.type == RenderGameOverlayEvent.ElementType.HEALTH)
+			{
+				renderLavaCharm(event);
+			}
+			else if (event.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS)
+			{
+				renderRedstoneTool(event);
+			}
+		}
+	}
+
+	private void renderRedstoneTool(RenderGameOverlayEvent event)
+	{
+		ItemStack equippedItem;
+
+		Minecraft minecraft = Minecraft.getMinecraft();
+
+		if ((equippedItem = minecraft.thePlayer.getCurrentEquippedItem()) != null)
+		{
+			if (equippedItem.getItem() == ModItems.redstoneTool)
+			{
+				MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
+
+				if (objectMouseOver != null && objectMouseOver.typeOfHit == MovingObjectType.BLOCK)
+				{
+					IBlockState hitState = minecraft.theWorld.getBlockState(objectMouseOver.getBlockPos());
+					Block hitBlock = hitState.getBlock();
+
+					if (hitBlock instanceof BlockRedstoneWire)
+					{
+						int width = event.resolution.getScaledWidth();
+						int height = event.resolution.getScaledHeight();
+
+						int power = (Integer) hitState.getValue(BlockRedstoneWire.POWER);
+
+						Minecraft.getMinecraft().fontRendererObj.drawString(power + "", width/2 + 5, height/2 + 5, Colors.RED_INT);
+						GlStateManager.color(1, 1, 1, 1);
+					}
+				}
+			}
 		}
 	}
 
