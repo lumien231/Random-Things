@@ -26,7 +26,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.*'])
 }
 
-version = "3.5.1"
+version = "3.5.2"
 group= "lumien.randomthings"
 archivesBaseName = "RandomThings-MC1.8"
 
