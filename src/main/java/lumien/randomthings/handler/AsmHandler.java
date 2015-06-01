@@ -12,6 +12,7 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockSpecialChest;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
+import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
@@ -170,6 +171,11 @@ public class AsmHandler
 	{
 		if (currentlyRendering != null)
 		{
+			if (currentlyRendering.getItem() instanceof ItemRedstoneTool)
+			{
+				return Color.RED.darker().getRGB()| -16777216;
+			}
+			
 			NBTTagCompound compound;
 			if ((compound = currentlyRendering.getTagCompound()) != null)
 			{
