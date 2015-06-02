@@ -9,4 +9,5 @@ public class GuiIds
 	public static final int REDSTONE_INTERFACE = 4;
 	public static final int GLOBAL_CHAT_DETECTOR = 6;
 	public static final int IMBUING_STATION = 7;
+	public static final int ANALOG_EMITTER = 8;
 }

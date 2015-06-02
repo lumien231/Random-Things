@@ -87,7 +87,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.redstoneInterface), "iri", "rsr", "iri", 'i', "ingotIron", 'r', redstoneDust, 's', stableEnderpearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.lightRedirector), "pgp", "gxg", "pgp", 'g', "blockGlass", 'p', "plankWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.imbuingStation), "xwx", "vcv", "lel", 'w', Items.water_bucket, 'v', Blocks.vine, 'c', Blocks.hardened_clay, 'l', Blocks.waterlily, 'e', Items.emerald));
-
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.analogEmitter),"tir","iii","rit",'t',redstoneTorch,'i',"ingotIron",'r',redstoneDust));
+		
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.grass));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stableEnderpearl), "olo", "lel", "olo", 'o', obsidian, 'l', lapis, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', bean, 'n', "nuggetGold"));

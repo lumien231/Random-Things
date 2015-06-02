@@ -40,6 +40,7 @@ public class ItemModels
 		registerBlock(ModBlocks.lightRedirector);
 		registerBlock(ModBlocks.imbuingStation);
 		registerBlock(ModBlocks.spectreBlock);
+		registerBlock(ModBlocks.analogEmitter);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);

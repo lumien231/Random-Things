@@ -1,0 +1,7 @@
+{
+    "parent": "block/orientable_vertical",
+    "textures": {
+        "front": "randomthings:blocks/analogEmitter/front",
+        "side": "randomthings:blocks/analogEmitter/side"
+    }
+}

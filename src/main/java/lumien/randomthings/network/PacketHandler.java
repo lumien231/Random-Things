@@ -1,5 +1,6 @@
 package lumien.randomthings.network;
 
+import lumien.randomthings.network.messages.MessageAnalogEmitter;
 import lumien.randomthings.network.messages.MessageChatDetector;
 import lumien.randomthings.network.messages.MessageOnlineDetector;
 
@@ -11,5 +12,6 @@ public class PacketHandler
 	{
 		INSTANCE.registerMessage(MessageOnlineDetector.class);
 		INSTANCE.registerMessage(MessageChatDetector.class);
+		INSTANCE.registerMessage(MessageAnalogEmitter.class);
 	}
 }

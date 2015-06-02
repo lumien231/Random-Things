@@ -30,6 +30,7 @@ public class ModBlocks
 	public static BlockImbuingStation imbuingStation;
 	public static BlockSpectreBlock spectreBlock;
 	public static BlockSpecialChest specialChest;
+	public static BlockAnalogEmitter analogEmitter;
 	
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
@@ -62,6 +63,7 @@ public class ModBlocks
 		imbuingStation = new BlockImbuingStation();
 		spectreBlock = new BlockSpectreBlock();
 		specialChest = new BlockSpecialChest();
+		analogEmitter = new BlockAnalogEmitter();
 		
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

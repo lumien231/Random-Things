@@ -23,6 +23,7 @@ tile.redstoneInterface.name=Redstone Interface
 tile.lightRedirector.name=Light Redirector
 tile.imbuingStation.name=Imbuing Station
 tile.spectreBlock.name=Spectre Block
+tile.analogEmitter.name=Analog Emitter
 
 tile.natureCore.name=Nature Core
 tile.netherCore.name=Nether Core

@@ -21,5 +21,6 @@ public class ModTileEntitys
 		GameRegistry.registerTileEntity(TileEntityRedstoneInterface.class, "redstoneInterface");
 		GameRegistry.registerTileEntity(TileEntityImbuingStation.class, "imbuingStation");
 		GameRegistry.registerTileEntity(TileEntitySpecialChest.class, "specialChest");
+		GameRegistry.registerTileEntity(TileEntityAnalogEmitter.class, "analogEmitter");
 	}
 }
