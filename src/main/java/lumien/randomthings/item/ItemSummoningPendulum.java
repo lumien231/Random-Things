@@ -103,7 +103,7 @@ public class ItemSummoningPendulum extends ItemBase
 			return false;
 		}
 
-		if (!(entity instanceof IMob))
+		if (!(entity instanceof IMob || entity instanceof EntityPlayer))
 		{
 			itemstack = player.getCurrentEquippedItem();
 			NBTTagCompound compound = itemstack.getTagCompound();
