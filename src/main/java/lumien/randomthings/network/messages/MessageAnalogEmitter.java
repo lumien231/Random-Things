@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import lumien.randomthings.container.ContainerAnalogEmitter;
 import lumien.randomthings.container.ContainerEmptyContainer;
@@ -43,28 +44,36 @@ public class MessageAnalogEmitter implements IRTMessage
 	}
 
 	@Override
-	public void onMessage(MessageContext context)
+	public void onMessage(final MessageContext context)
 	{
-		if (level > 0 && level < 16)
+		FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(new Runnable()
 		{
-			if (context.netHandler instanceof NetHandlerPlayServer)
+			@Override
+			public void run()
 			{
-				NetHandlerPlayServer handler = (NetHandlerPlayServer) context.netHandler;
-
-				EntityPlayerMP player = handler.playerEntity;
-
-				if (player != null && player.openContainer != null && player.openContainer instanceof ContainerAnalogEmitter)
+				if (level > 0 && level < 16)
 				{
-					TileEntity te = player.worldObj.getTileEntity(pos);
-
-					if (te != null && te instanceof TileEntityAnalogEmitter)
+					if (context.netHandler instanceof NetHandlerPlayServer)
 					{
-						TileEntityAnalogEmitter analogEmitter = (TileEntityAnalogEmitter) te;
+						NetHandlerPlayServer handler = (NetHandlerPlayServer) context.netHandler;
 
-						analogEmitter.setLevel(level);
+						EntityPlayerMP player = handler.playerEntity;
+
+						if (player != null && player.openContainer != null && player.openContainer instanceof ContainerAnalogEmitter)
+						{
+							TileEntity te = player.worldObj.getTileEntity(pos);
+
+							if (te != null && te instanceof TileEntityAnalogEmitter)
+							{
+								TileEntityAnalogEmitter analogEmitter = (TileEntityAnalogEmitter) te;
+
+								analogEmitter.setLevel(level);
+							}
+						}
 					}
 				}
 			}
-		}
+		});
+
 	}
 }

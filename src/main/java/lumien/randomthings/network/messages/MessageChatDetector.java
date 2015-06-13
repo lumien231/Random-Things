@@ -6,8 +6,10 @@ import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.tileentity.TileEntityOnlineDetector;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
@@ -49,16 +51,25 @@ public class MessageChatDetector implements IRTMessage
 	}
 
 	@Override
-	public void onMessage(MessageContext ctx)
+	public void onMessage(final MessageContext ctx)
 	{
-		EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-		World worldObj = player.worldObj;
-		if (worldObj.getTileEntity(pos) instanceof TileEntityChatDetector && pos.distanceSq(player.getPosition()) < 100)
+		FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(new Runnable()
 		{
-			TileEntityChatDetector od = (TileEntityChatDetector) worldObj.getTileEntity(pos);
-			od.setChatMessage(chatMessage);
-			od.setConsume(consume);
-		}
+			@Override
+			public void run()
+			{
+				EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+				World worldObj = player.worldObj;
+				TileEntity te = worldObj.getTileEntity(pos);
+				if (te!=null && te instanceof TileEntityChatDetector && pos.distanceSq(player.getPosition()) < 100)
+				{
+					TileEntityChatDetector od = (TileEntityChatDetector) worldObj.getTileEntity(pos);
+					od.setChatMessage(chatMessage);
+					od.setConsume(consume);
+				}
+			}
+		});
+		
 	}
 
 }
