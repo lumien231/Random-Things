@@ -75,10 +75,10 @@ public class BlockLapisGlass extends BlockBase
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean isVisuallyOpaque()
-    {
-        return true;
-    }
+	{
+		return true;
+	}
 }

@@ -22,16 +22,16 @@ public class ItemBlockColoredGrass extends ItemBlock
 	{
 		return ItemDye.dyeColors[EnumDyeColor.byMetadata(stack.getItemDamage()).getDyeDamage()];
 	}
-	
+
 	@Override
 	public int getMetadata(int damage)
-    {
-        return damage;
-    }
-	
-    @Override
+	{
+		return damage;
+	}
+
+	@Override
 	public String getUnlocalizedName(ItemStack stack)
-    {
-        return super.getUnlocalizedName() + "." + EnumDyeColor.byMetadata(stack.getMetadata()).getUnlocalizedName();
-    }
+	{
+		return super.getUnlocalizedName() + "." + EnumDyeColor.byMetadata(stack.getMetadata()).getUnlocalizedName();
+	}
 }

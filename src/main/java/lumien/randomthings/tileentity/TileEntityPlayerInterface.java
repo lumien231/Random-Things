@@ -3,7 +3,6 @@ package lumien.randomthings.tileentity;
 import java.util.UUID;
 
 import lumien.randomthings.block.ModBlocks;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;

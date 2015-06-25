@@ -25,6 +25,6 @@ public abstract class BlockContainerBase extends BlockContainer
 		this.setCreativeTab(RandomThings.instance.creativeTab);
 		this.setUnlocalizedName(name);
 
-		GameRegistry.registerBlock(this,itemBlock, name);
+		GameRegistry.registerBlock(this, itemBlock, name);
 	}
 }

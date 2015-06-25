@@ -2,17 +2,15 @@ package lumien.randomthings.tileentity;
 
 import java.util.UUID;
 
-import com.mojang.authlib.GameProfile;
-
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.SimpleComponent;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.Optional.Interface;
+
+import com.mojang.authlib.GameProfile;
 
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
 public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface implements SimpleComponent

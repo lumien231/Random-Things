@@ -6,9 +6,7 @@ import lumien.randomthings.client.gui.elements.GuiCustomButton;
 import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageChatDetector;
-import lumien.randomthings.network.messages.MessageOnlineDetector;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
-import lumien.randomthings.tileentity.TileEntityOnlineDetector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -49,7 +47,7 @@ public class GuiChatDetector extends GuiContainer
 		chatMessageInput.setCanLoseFocus(true);
 		chatMessageInput.setText(te.getChatMessage());
 
-		consumeButton = new GuiCustomButton(0,te.consume(), guiLeft + 112, guiTop + 5, 20, 20, "", background, 136, 0);
+		consumeButton = new GuiCustomButton(0, te.consume(), guiLeft + 112, guiTop + 5, 20, 20, "", background, 136, 0);
 		this.buttonList.add(consumeButton);
 	}
 

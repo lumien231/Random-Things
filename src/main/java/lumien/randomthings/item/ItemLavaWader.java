@@ -21,19 +21,19 @@ public class ItemLavaWader extends ItemArmor
 	{
 		return EnumRarity.RARE;
 	}
-	
+
 	@Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
-    {
-        return "randomthings:textures/models/armor/lavaWader.png";
-    }
-	
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	{
+		return "randomthings:textures/models/armor/lavaWader.png";
+	}
+
 	@Override
 	public int getMaxDamage()
 	{
 		return 0;
 	}
-	
+
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
 	{
@@ -61,7 +61,7 @@ public class ItemLavaWader extends ItemArmor
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean isDamageable()
 	{

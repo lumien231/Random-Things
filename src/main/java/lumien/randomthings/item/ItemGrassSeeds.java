@@ -22,7 +22,7 @@ public class ItemGrassSeeds extends ItemBase
 	public ItemGrassSeeds()
 	{
 		super("grassSeeds");
-		
+
 		this.setHasSubtypes(true);
 	}
 

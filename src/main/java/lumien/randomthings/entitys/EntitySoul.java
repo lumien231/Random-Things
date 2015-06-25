@@ -1,11 +1,10 @@
 package lumien.randomthings.entitys;
 
+import io.netty.buffer.ByteBuf;
+
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.item.ItemRezStone;
-import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,11 +58,13 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		this.playerName = playerName;
 	}
 
+	@Override
 	public void applyEntityCollision(Entity entityIn)
 	{
 
 	}
 
+	@Override
 	protected boolean pushOutOfBlocks(double x, double y, double z)
 	{
 		return false;
@@ -75,6 +76,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		return true;
 	}
 
+	@Override
 	protected void doBlockCollisions()
 	{
 
@@ -87,17 +89,17 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		if (!worldObj.isRemote && equipped.getItem() instanceof ItemRezStone && MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(playerName) != null)
 		{
 			List<EntityReviveCircle> circles = this.worldObj.getEntitiesWithinAABB(EntityReviveCircle.class, AxisAlignedBB.fromBounds(this.posX - 2, this.posY - 2, this.posZ - 2, this.posX + 2, this.posZ + 2, this.posZ + 2));
-			
-			for (EntityReviveCircle circle:circles)
+
+			for (EntityReviveCircle circle : circles)
 			{
-				if (circle.toRevive==this)
+				if (circle.toRevive == this)
 				{
 					return false;
 				}
 			}
-			
+
 			worldObj.spawnEntityInWorld(new EntityReviveCircle(worldObj, user, posX, posY, posZ, this));
-			
+
 			return true;
 		}
 		return false;

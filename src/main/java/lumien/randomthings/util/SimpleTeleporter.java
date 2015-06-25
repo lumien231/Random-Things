@@ -11,13 +11,15 @@ public class SimpleTeleporter extends Teleporter
 		super(worldIn);
 	}
 
+	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw)
-    {
-		
-    }
-	
+	{
+
+	}
+
+	@Override
 	public void removeStalePortalLocations(long p_85189_1_)
-    {
-		
-    }
+	{
+
+	}
 }

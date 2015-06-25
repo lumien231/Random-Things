@@ -34,7 +34,7 @@ public class BlockEnderBridge extends BlockContainerBase
 	{
 		return new TileEntityEnderBridge();
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
@@ -121,11 +121,11 @@ public class BlockEnderBridge extends BlockContainerBase
 	{
 		return new BlockState(this, new IProperty[] { FACING });
 	}
-	
-    @Override
+
+	@Override
 	@SideOnly(Side.CLIENT)
-    public IBlockState getStateForEntityRender(IBlockState state)
-    {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
-    }
+	public IBlockState getStateForEntityRender(IBlockState state)
+	{
+		return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
+	}
 }

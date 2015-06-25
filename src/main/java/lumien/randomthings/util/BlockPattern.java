@@ -2,7 +2,6 @@ package lumien.randomthings.util;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -21,12 +20,12 @@ public class BlockPattern
 
 			this.mod = mod;
 		}
-		
+
 		public BlockPos getMod()
 		{
 			return mod;
 		}
-		
+
 		public IBlockState getState()
 		{
 			return state;
@@ -39,7 +38,7 @@ public class BlockPattern
 	{
 		blockInfos = new ArrayList<BlockInfo>();
 	}
-	
+
 	public ArrayList<BlockInfo> getBlockInfo()
 	{
 		return blockInfos;

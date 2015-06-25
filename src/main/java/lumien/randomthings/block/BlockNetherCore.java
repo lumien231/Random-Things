@@ -18,8 +18,8 @@ public class BlockNetherCore extends BlockContainerBase
 {
 	protected BlockNetherCore()
 	{
-		super("netherCore",Material.rock);
-		
+		super("netherCore", Material.rock);
+
 		this.setBlockUnbreakable().setResistance(6000000.0F);
 	}
 
@@ -34,23 +34,23 @@ public class BlockNetherCore extends BlockContainerBase
 	{
 		return 0;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer()
 	{
 		return EnumWorldBlockLayer.CUTOUT;
 	}
-	
+
 	@Override
 	public int getRenderType()
 	{
 		return 3;
 	}
-	
-    @Override
-    public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity)
-    {
-    	return false;
-    }
+
+	@Override
+	public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity)
+	{
+		return false;
+	}
 }

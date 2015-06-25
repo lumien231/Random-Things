@@ -1,9 +1,9 @@
 package lumien.randomthings.block;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
+import lumien.randomthings.item.block.ItemBlockSpecialChest;
+import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -12,12 +12,10 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -30,8 +28,6 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import lumien.randomthings.item.block.ItemBlockSpecialChest;
-import lumien.randomthings.tileentity.TileEntitySpecialChest;
 
 public class BlockSpecialChest extends BlockContainerBase
 {
@@ -61,7 +57,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
-			this.spawnAsEntity(world, pos, new ItemStack(this, 1, ((TileEntitySpecialChest) world.getTileEntity(pos)).getChestType()));
+			Block.spawnAsEntity(world, pos, new ItemStack(this, 1, ((TileEntitySpecialChest) world.getTileEntity(pos)).getChestType()));
 		}
 		return world.setBlockToAir(pos);
 	}
@@ -69,9 +65,10 @@ public class BlockSpecialChest extends BlockContainerBase
 	@Override
 	public void onBlockExploded(World world, BlockPos pos, Explosion explosion)
 	{
-		this.spawnAsEntity(world, pos, new ItemStack(this, 1, ((TileEntitySpecialChest) world.getTileEntity(pos)).getChestType()));
+		Block.spawnAsEntity(world, pos, new ItemStack(this, 1, ((TileEntitySpecialChest) world.getTileEntity(pos)).getChestType()));
 	}
 
+	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
@@ -85,34 +82,40 @@ public class BlockSpecialChest extends BlockContainerBase
 		return new TileEntitySpecialChest();
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isFullCube()
 	{
 		return false;
 	}
 
+	@Override
 	public int getRenderType()
 	{
 		return -1;
 	}
 
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
 	{
 		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 	}
 
+	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 
+	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3).getOpposite();
+		EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3).getOpposite();
 		state = state.withProperty(FACING, enumfacing);
 		worldIn.setBlockState(pos, state, 3);
 
@@ -129,6 +132,7 @@ public class BlockSpecialChest extends BlockContainerBase
 		}
 	}
 
+	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -142,6 +146,7 @@ public class BlockSpecialChest extends BlockContainerBase
 		super.breakBlock(worldIn, pos, state);
 	}
 
+	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
@@ -177,16 +182,19 @@ public class BlockSpecialChest extends BlockContainerBase
 		}
 	}
 
+	@Override
 	public boolean hasComparatorInputOverride()
 	{
 		return true;
 	}
 
+	@Override
 	public int getComparatorInputOverride(World worldIn, BlockPos pos)
 	{
 		return Container.calcRedstoneFromInventory(this.getLockableContainer(worldIn, pos));
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		EnumFacing enumfacing = EnumFacing.getFront(meta);
@@ -199,11 +207,13 @@ public class BlockSpecialChest extends BlockContainerBase
 		return this.getDefaultState().withProperty(FACING, enumfacing);
 	}
 
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		return ((EnumFacing) state.getValue(FACING)).getIndex();
 	}
 
+	@Override
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] { FACING });

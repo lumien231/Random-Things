@@ -24,7 +24,7 @@ public class BlockDyeingMachine extends BlockBase
 	{
 		if (!worldIn.isRemote)
 		{
-			playerIn.openGui(RandomThings.instance, GuiIds.DYEING_MACHINE, worldIn, pos.getX(),pos.getY(),pos.getZ());
+			playerIn.openGui(RandomThings.instance, GuiIds.DYEING_MACHINE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

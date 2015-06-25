@@ -14,7 +14,7 @@ public class GuiHandler implements IGuiHandler
 {
 	private enum GuiContainerConnection
 	{
-		DYEING_MACHINE(GuiIds.DYEING_MACHINE, "lumien.randomthings.client.gui.GuiDyeingMachine", "lumien.randomthings.container.ContainerDyeingMachine"), ONLINE_DETECTOR(GuiIds.ONLINE_DETECTOR, "lumien.randomthings.client.gui.GuiOnlineDetector", "lumien.randomthings.container.ContainerEmptyContainer"), CHAT_DETECTOR(GuiIds.CHAT_DETECTOR, "lumien.randomthings.client.gui.GuiChatDetector", "lumien.randomthings.container.ContainerEmptyContainer"), CRAFTING_RECIPE(GuiIds.CRAFTING_RECIPE, "lumien.randomthings.client.gui.GuiCraftingRecipe", "lumien.randomthings.container.ContainerCraftingRecipe"), REDSTONE_INTERFACE(GuiIds.REDSTONE_INTERFACE, "lumien.randomthings.client.gui.GuiRedstoneInterface", "lumien.randomthings.container.ContainerEmptyContainer"), IMBUING_STATION(GuiIds.IMBUING_STATION, "lumien.randomthings.client.gui.GuiImbuingStation", "lumien.randomthings.container.ContainerImbuingStation"),ANALOG_EMITTER(GuiIds.ANALOG_EMITTER, "lumien.randomthings.client.gui.GuiAnalogEmitter", "lumien.randomthings.container.ContainerAnalogEmitter");
+		DYEING_MACHINE(GuiIds.DYEING_MACHINE, "lumien.randomthings.client.gui.GuiDyeingMachine", "lumien.randomthings.container.ContainerDyeingMachine"), ONLINE_DETECTOR(GuiIds.ONLINE_DETECTOR, "lumien.randomthings.client.gui.GuiOnlineDetector", "lumien.randomthings.container.ContainerEmptyContainer"), CHAT_DETECTOR(GuiIds.CHAT_DETECTOR, "lumien.randomthings.client.gui.GuiChatDetector", "lumien.randomthings.container.ContainerEmptyContainer"), CRAFTING_RECIPE(GuiIds.CRAFTING_RECIPE, "lumien.randomthings.client.gui.GuiCraftingRecipe", "lumien.randomthings.container.ContainerCraftingRecipe"), REDSTONE_INTERFACE(GuiIds.REDSTONE_INTERFACE, "lumien.randomthings.client.gui.GuiRedstoneInterface", "lumien.randomthings.container.ContainerEmptyContainer"), IMBUING_STATION(GuiIds.IMBUING_STATION, "lumien.randomthings.client.gui.GuiImbuingStation", "lumien.randomthings.container.ContainerImbuingStation"), ANALOG_EMITTER(GuiIds.ANALOG_EMITTER, "lumien.randomthings.client.gui.GuiAnalogEmitter", "lumien.randomthings.container.ContainerAnalogEmitter");
 
 		int guiID;
 		String guiClass;
@@ -110,7 +110,7 @@ public class GuiHandler implements IGuiHandler
 
 				if (guiClass != null)
 				{
-					
+
 					Constructor constructor = null;
 					try
 					{

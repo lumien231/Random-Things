@@ -4,10 +4,6 @@ import java.lang.reflect.Field;
 
 import lumien.randomthings.asm.MCPNames;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityUtil
 {
@@ -28,7 +24,7 @@ public class EntityUtil
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static boolean isJumping(EntityLivingBase entity)
 	{
 		try

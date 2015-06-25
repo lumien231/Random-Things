@@ -1,7 +1,6 @@
 package lumien.randomthings.tileentity;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.WeakHashMap;
@@ -9,9 +8,7 @@ import java.util.WeakHashMap;
 import li.cil.oc.api.network.Environment;
 import li.cil.oc.api.network.SimpleComponent;
 import lumien.randomthings.block.BlockChatDetector;
-import lumien.randomthings.block.BlockOnlineDetector;
 import lumien.randomthings.block.ModBlocks;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -42,7 +39,7 @@ public class TileEntityChatDetector extends TileEntityBase implements IUpdatePla
 			detectors.add(this);
 		}
 	}
-	
+
 	@Override
 	public void onChunkUnload()
 	{

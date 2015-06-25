@@ -3,11 +3,9 @@ package lumien.randomthings.item;
 import java.util.List;
 
 import lumien.randomthings.worldgen.SingleRandomChestContent;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +15,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,7 +25,7 @@ public class ItemSummoningPendulum extends ItemBase
 	public ItemSummoningPendulum()
 	{
 		super("summoningPendulum");
-		
+
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new SingleRandomChestContent(new ItemStack(this), 1, 1, 2));
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new SingleRandomChestContent(new ItemStack(this), 1, 1, 30));
 	}
@@ -47,7 +44,7 @@ public class ItemSummoningPendulum extends ItemBase
 
 		return 1 - 1F / 5F * entityCount;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack)
@@ -60,7 +57,7 @@ public class ItemSummoningPendulum extends ItemBase
 			NBTTagList tagList = compound.getTagList("entitys", 10);
 			entityCount = tagList.tagCount();
 		}
-		
+
 		return entityCount == 5;
 	}
 
@@ -164,7 +161,7 @@ public class ItemSummoningPendulum extends ItemBase
 		}
 		return true;
 	}
-	
+
 	@Override
 	public EnumRarity getRarity(ItemStack stack)
 	{

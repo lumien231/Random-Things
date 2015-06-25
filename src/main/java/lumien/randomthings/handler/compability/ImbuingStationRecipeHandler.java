@@ -8,14 +8,13 @@ import java.util.List;
 import lumien.randomthings.client.gui.GuiImbuingStation;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipe;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;

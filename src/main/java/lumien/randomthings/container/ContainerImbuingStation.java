@@ -20,7 +20,7 @@ public class ContainerImbuingStation extends Container
 
 	public ContainerImbuingStation(EntityPlayer player, World world, int x, int y, int z)
 	{
-		this.te = (TileEntityImbuingStation) world.getTileEntity(new BlockPos(x,y,z));
+		this.te = (TileEntityImbuingStation) world.getTileEntity(new BlockPos(x, y, z));
 
 		this.addSlotToContainer(new Slot(te, 0, 80, 9));
 		this.addSlotToContainer(new Slot(te, 1, 35, 54));
@@ -213,7 +213,7 @@ public class ContainerImbuingStation extends Container
 
 	@Override
 	public void onCraftGuiOpened(ICrafting listener)
-    {
+	{
 		super.onCraftGuiOpened(listener);
 		listener.sendProgressBarUpdate(this, 0, this.te.imbuingProgress);
 	}

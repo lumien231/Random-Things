@@ -2,8 +2,6 @@ package lumien.randomthings.potion;
 
 import java.lang.reflect.Field;
 
-import org.apache.logging.log4j.Level;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.potion.imbues.ImbueExperience;
@@ -14,23 +12,25 @@ import lumien.randomthings.util.ReflectionUtil;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import org.apache.logging.log4j.Level;
+
 public class ModPotions
 {
 	public static ImbueFire imbueFire;
 	public static ImbuePoison imbuePoison;
 	public static ImbueExperience imbueExperience;
 	public static ImbueWither imbueWither;
-	
+
 	public static void preInit(FMLPreInitializationEvent event)
 	{
 		extendPotionArray();
-		
+
 		imbueFire = new ImbueFire();
 		imbuePoison = new ImbuePoison();
 		imbueExperience = new ImbueExperience();
 		imbueWither = new ImbueWither();
 	}
-	
+
 	private static void extendPotionArray()
 	{
 		try
@@ -46,7 +46,7 @@ public class ModPotions
 				{
 					newArray[i] = Potion.potionTypes[i];
 				}
-				
+
 				potionTypesField.set(null, newArray);
 				RandomThings.instance.logger.log(Level.INFO, "Extended Potion ID Array to 128");
 			}

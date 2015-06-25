@@ -4,9 +4,6 @@ import java.awt.Color;
 
 import lumien.randomthings.container.ContainerDyeingMachine;
 import lumien.randomthings.util.DyeUtil;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiDyeingMachine extends GuiContainer
 {

@@ -1,17 +1,13 @@
 package lumien.randomthings.client.render;
 
-import java.util.Calendar;
-
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelChest;
-import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -107,7 +103,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 			short1 = -90;
 		}
 
-		GlStateManager.rotate((float) short1, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(short1, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 		float f1 = p_180538_1_.prevLidAngle + (p_180538_1_.lidAngle - p_180538_1_.prevLidAngle) * p_180538_8_;
 		float f2;
@@ -128,6 +124,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 		}
 	}
 
+	@Override
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float p_180535_8_, int p_180535_9_)
 	{
 		this.func_180538_a((TileEntitySpecialChest) te, x, y, z, p_180535_8_, p_180535_9_);

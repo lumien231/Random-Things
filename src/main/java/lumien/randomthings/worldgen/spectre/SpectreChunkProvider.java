@@ -13,7 +13,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 public class SpectreChunkProvider implements IChunkProvider
 {
 	World worldObj;
-	
+
 	public SpectreChunkProvider(World worldObj)
 	{
 		this.worldObj = worldObj;
@@ -30,17 +30,17 @@ public class SpectreChunkProvider implements IChunkProvider
 	{
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 
-        Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
-        chunk.resetRelightChecks();
-        
-        return chunk;
+		Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
+		chunk.resetRelightChecks();
+
+		return chunk;
 	}
 
 	@Override
-    public Chunk provideChunk(BlockPos blockPosIn)
-    {
-        return this.provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
-    }
+	public Chunk provideChunk(BlockPos blockPosIn)
+	{
+		return this.provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
+	}
 
 	@Override
 	public void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_)

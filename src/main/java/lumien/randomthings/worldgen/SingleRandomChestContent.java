@@ -13,6 +13,7 @@ public class SingleRandomChestContent extends WeightedRandomChestContent
 		super(stack, minimumChance, maximumChance, itemWeightIn);
 	}
 
+	@Override
 	protected ItemStack[] generateChestContent(Random random, IInventory newInventory)
 	{
 		for (int slot = 0; slot < newInventory.getSizeInventory(); slot++)

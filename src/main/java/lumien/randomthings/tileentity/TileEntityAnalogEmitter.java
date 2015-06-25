@@ -4,7 +4,6 @@ import lumien.randomthings.block.BlockAnalogEmitter;
 import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -20,7 +19,7 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 		emitLevel = 1;
 		powering = false;
 	}
-	
+
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
 	{
@@ -67,14 +66,14 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 		this.emitLevel = level;
 		this.worldObj.markBlockForUpdate(this.pos);
 		EnumFacing[] aenumfacing = EnumFacing.values();
-        int i = aenumfacing.length;
+		int i = aenumfacing.length;
 
-        for (int j = 0; j < i; ++j)
-        {
-            EnumFacing enumfacing = aenumfacing[j];
-            worldObj.notifyNeighborsOfStateChange(pos.offset(enumfacing), this.blockType);
-        }
-        
-        worldObj.notifyNeighborsOfStateChange(pos, this.blockType);
+		for (int j = 0; j < i; ++j)
+		{
+			EnumFacing enumfacing = aenumfacing[j];
+			worldObj.notifyNeighborsOfStateChange(pos.offset(enumfacing), this.blockType);
+		}
+
+		worldObj.notifyNeighborsOfStateChange(pos, this.blockType);
 	}
 }

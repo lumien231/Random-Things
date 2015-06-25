@@ -11,7 +11,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
@@ -29,7 +28,7 @@ public class ContainerCraftingRecipe extends Container
 
 		if (openedWith != null && openedWith.getItem() == ModItems.craftingRecipe)
 		{
-			ItemCraftingRecipe.load(openedWith,craftMatrix,craftResult);
+			ItemCraftingRecipe.load(openedWith, craftMatrix, craftResult);
 		}
 
 		InventoryPlayer playerInventory = player.inventory;
@@ -63,11 +62,13 @@ public class ContainerCraftingRecipe extends Container
 		this.onCraftMatrixChanged(this.craftMatrix);
 	}
 
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{
 		return null;
 	}
 
+	@Override
 	public void onCraftMatrixChanged(IInventory inventoryIn)
 	{
 		this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.worldObj));
@@ -80,6 +81,7 @@ public class ContainerCraftingRecipe extends Container
 		return equipped != null && equipped.isItemEqual(openedWith);
 	}
 
+	@Override
 	public void onContainerClosed(EntityPlayer playerIn)
 	{
 		super.onContainerClosed(playerIn);

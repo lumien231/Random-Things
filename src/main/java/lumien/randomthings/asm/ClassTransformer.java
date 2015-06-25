@@ -1,14 +1,33 @@
 package lumien.randomthings.asm;
 
-import static org.objectweb.asm.Opcodes.*;
+import static org.objectweb.asm.Opcodes.ACONST_NULL;
+import static org.objectweb.asm.Opcodes.ALOAD;
+import static org.objectweb.asm.Opcodes.ARETURN;
+import static org.objectweb.asm.Opcodes.DUP;
+import static org.objectweb.asm.Opcodes.GETFIELD;
+import static org.objectweb.asm.Opcodes.GETSTATIC;
+import static org.objectweb.asm.Opcodes.GOTO;
+import static org.objectweb.asm.Opcodes.ICONST_0;
+import static org.objectweb.asm.Opcodes.IFEQ;
+import static org.objectweb.asm.Opcodes.IFGT;
+import static org.objectweb.asm.Opcodes.IFLT;
+import static org.objectweb.asm.Opcodes.IF_ACMPEQ;
+import static org.objectweb.asm.Opcodes.IF_ICMPEQ;
+import static org.objectweb.asm.Opcodes.ILOAD;
+import static org.objectweb.asm.Opcodes.INVOKESTATIC;
+import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
+import static org.objectweb.asm.Opcodes.IRETURN;
+import static org.objectweb.asm.Opcodes.POP;
+import static org.objectweb.asm.Opcodes.PUTSTATIC;
+import static org.objectweb.asm.Opcodes.RETURN;
 import net.minecraft.launchwrapper.IClassTransformer;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
-import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
@@ -367,17 +386,12 @@ public class ClassTransformer implements IClassTransformer
 		logger.log(Level.DEBUG, "Found EntityLivingBase Class: " + classNode.name);
 
 		MethodNode updatePotionEffects = null;
-		MethodNode onDeathUpdate = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
 			if (mn.name.equals(MCPNames.method("func_70679_bo")))
 			{
 				updatePotionEffects = mn;
-			}
-			else if (mn.name.equals(MCPNames.method("func_70609_aI")))
-			{
-				onDeathUpdate = mn;
 			}
 		}
 
@@ -407,33 +421,6 @@ public class ClassTransformer implements IClassTransformer
 
 						updatePotionEffects.instructions.insertBefore(aload, toInsert);
 						break;
-					}
-				}
-			}
-		}
-
-		if (onDeathUpdate != null)
-		{
-			logger.log(Level.DEBUG, "- Found onDeathUpdate");
-
-			for (int i = 0; i < onDeathUpdate.instructions.size(); i++)
-			{
-				AbstractInsnNode ain = onDeathUpdate.instructions.get(i);
-
-				if (ain instanceof MethodInsnNode)
-				{
-					MethodInsnNode min = (MethodInsnNode) ain;
-
-					if (min.name.equals(MCPNames.method("func_70693_a")))
-					{
-						InsnList toInsert = new InsnList();
-
-						toInsert.add(new VarInsnNode(ALOAD, 0));
-						toInsert.add(new VarInsnNode(ALOAD, 0));
-						toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/entity/EntityLivingBase", MCPNames.field("field_70717_bb"), "Lnet/minecraft/entity/player/EntityPlayer;"));
-						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getExperienceDrops", "(ILnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/entity/player/EntityPlayer;)I", false));
-
-						onDeathUpdate.instructions.insert(min, toInsert);
 					}
 				}
 			}

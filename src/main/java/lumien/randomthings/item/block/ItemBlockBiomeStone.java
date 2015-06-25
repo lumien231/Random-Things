@@ -9,23 +9,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockBiomeStone extends ItemBlock
 {
-    public ItemBlockBiomeStone(Block block)
+	public ItemBlockBiomeStone(Block block)
 	{
 		super(block);
 	}
 
 	@Override
 	public int getMetadata(int damage)
-    {
-        return damage;
-    }
+	{
+		return damage;
+	}
 
-    @Override
+	@Override
 	public String getUnlocalizedName(ItemStack stack)
-    {
-        return super.getUnlocalizedName() + "." + BlockBiomeStone.EnumType.byMetadata(stack.getItemDamage()).getUnlocalizedName();
-    }
-    
+	{
+		return super.getUnlocalizedName() + "." + BlockBiomeStone.EnumType.byMetadata(stack.getItemDamage()).getUnlocalizedName();
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int renderPass)

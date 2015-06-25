@@ -41,6 +41,7 @@ public class ItemModels
 		registerBlock(ModBlocks.imbuingStation);
 		registerBlock(ModBlocks.spectreBlock);
 		registerBlock(ModBlocks.analogEmitter);
+		registerBlock(ModBlocks.fluidDisplay);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);
@@ -71,7 +72,7 @@ public class ItemModels
 		registerImbues();
 		registerChests();
 	}
-	
+
 	private static void registerChests()
 	{
 		Item chestItem = Item.getItemFromBlock(ModBlocks.specialChest);

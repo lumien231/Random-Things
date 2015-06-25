@@ -16,7 +16,7 @@ public class ModConfiguration
 		PotionIds.IMBUE_POISON = getPotionID("ImbuePoison", 71);
 		PotionIds.IMBUE_EXPERIENCE = getPotionID("ImbueExperience", 72);
 		PotionIds.IMBUE_WITHER = getPotionID("ImbueWither", 73);
-		
+
 		Features.removeAirBubble = configuration.getBoolean("RemoveUnderwaterTexture", "Features", false, "TRIES to remove the weird water texture showing around ALL non full blocks. This might look weird when you, for example, are on a ladder underwater.");
 
 		if (configuration.hasChanged())

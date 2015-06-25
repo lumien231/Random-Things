@@ -6,30 +6,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.vecmath.Vector3d;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import lumien.randomthings.item.ItemInertLinkingOrb;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityBase;
 import lumien.randomthings.util.WorldUtil;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Vec3;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 public class TileEntityEnderCore extends TileEntityBase implements IUpdatePlayerListBox
 {
@@ -40,7 +31,7 @@ public class TileEntityEnderCore extends TileEntityBase implements IUpdatePlayer
 
 	static ArrayList<Pair<ItemStack, ItemStack>> recipes = new ArrayList<Pair<ItemStack, ItemStack>>();
 	{
-		recipes.add(Pair.of(new ItemStack(ModItems.inertLinkingOrb,1,0), new ItemStack(ModItems.linkingOrb,1,0)));
+		recipes.add(Pair.of(new ItemStack(ModItems.inertLinkingOrb, 1, 0), new ItemStack(ModItems.linkingOrb, 1, 0)));
 	}
 
 	public TileEntityEnderCore()
@@ -155,13 +146,13 @@ public class TileEntityEnderCore extends TileEntityBase implements IUpdatePlayer
 				{
 					if (ItemStack.areItemStacksEqual(itemStack, recipePair.getLeft()))
 					{
-						double difX = this.pos.getX() - ei.posX + rand.nextFloat()*2-1;
-						double difY = this.pos.getY() - ei.posY + 0.5 + rand.nextFloat()*2-1;
-						double difZ = this.pos.getZ() - ei.posZ + rand.nextFloat()*2-1;
+						double difX = this.pos.getX() - ei.posX + rand.nextFloat() * 2 - 1;
+						double difY = this.pos.getY() - ei.posY + 0.5 + rand.nextFloat() * 2 - 1;
+						double difZ = this.pos.getZ() - ei.posZ + rand.nextFloat() * 2 - 1;
 
 						// Spawn Particles
-						EntityFX particle = new EntityEnchantmentTableParticleFX.EnchantmentTable().getEntityFX(0,worldObj,ei.posX, ei.posY + 1.5, ei.posZ, difX + 0.5, difY - 1.5, difZ + 0.5, new int[0]);
-						particle.setRBGColorF(1F/255F * 110, 0, 1F/255F * 183);
+						EntityFX particle = new EntityEnchantmentTableParticleFX.EnchantmentTable().getEntityFX(0, worldObj, ei.posX, ei.posY + 1.5, ei.posZ, difX + 0.5, difY - 1.5, difZ + 0.5, new int[0]);
+						particle.setRBGColorF(1F / 255F * 110, 0, 1F / 255F * 183);
 						Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 					}
 				}

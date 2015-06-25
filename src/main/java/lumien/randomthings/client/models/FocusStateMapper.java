@@ -7,12 +7,12 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 public class FocusStateMapper extends StateMapperBase
 {
 	ModelResourceLocation mrl;
-	
+
 	public FocusStateMapper(ModelResourceLocation mrl)
 	{
 		this.mrl = mrl;
 	}
-	
+
 	@Override
 	protected ModelResourceLocation getModelResourceLocation(IBlockState p_178132_1_)
 	{

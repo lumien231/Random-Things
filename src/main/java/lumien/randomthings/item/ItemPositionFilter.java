@@ -2,12 +2,6 @@ package lumien.randomthings.item;
 
 import java.util.List;
 
-import lumien.randomthings.block.ModBlocks;
-import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
-
-import org.lwjgl.input.Keyboard;
-
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,6 +10,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import org.lwjgl.input.Keyboard;
 
 public class ItemPositionFilter extends ItemBase
 {

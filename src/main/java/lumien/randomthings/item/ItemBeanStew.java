@@ -17,6 +17,7 @@ public class ItemBeanStew extends ItemFood
 		RegisterUtil.registerItem(this, "beanStew");
 	}
 
+	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
 	{
 		super.onItemUseFinish(stack, worldIn, playerIn);

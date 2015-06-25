@@ -18,18 +18,20 @@ public class SlotGhost extends Slot
 		this.putStack(null);
 		return false;
 	}
-	
-    public boolean isItemValid(ItemStack stack)
-    {
-    	ItemStack copy = stack.copy();
-    	copy.stackSize = 1;
-    	this.putStack(copy);
-        return false;
-    }
-    
-    public ItemStack decrStackSize(int amount)
-    {
-    	this.putStack(null);
-        return null;
-    }
+
+	@Override
+	public boolean isItemValid(ItemStack stack)
+	{
+		ItemStack copy = stack.copy();
+		copy.stackSize = 1;
+		this.putStack(copy);
+		return false;
+	}
+
+	@Override
+	public ItemStack decrStackSize(int amount)
+	{
+		this.putStack(null);
+		return null;
+	}
 }

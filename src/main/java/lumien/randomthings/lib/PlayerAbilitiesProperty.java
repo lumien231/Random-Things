@@ -8,9 +8,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 public class PlayerAbilitiesProperty implements IExtendedEntityProperties
 {
 	public static final String KEY = "RTAbilities";
-	
+
 	boolean immortal;
-	
+
 	public PlayerAbilitiesProperty()
 	{
 		this.immortal = false;
@@ -31,7 +31,7 @@ public class PlayerAbilitiesProperty implements IExtendedEntityProperties
 	@Override
 	public void init(Entity entity, World world)
 	{
-		
+
 	}
 
 	public boolean isImmortal()

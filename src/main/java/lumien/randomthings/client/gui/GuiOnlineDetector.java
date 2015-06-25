@@ -38,7 +38,7 @@ public class GuiOnlineDetector extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
-		usernameInput = new GuiTextField(0,this.fontRendererObj, (width / 2 - xSize / 2) + 5, (height / 2), 127, 20);
+		usernameInput = new GuiTextField(0, this.fontRendererObj, (width / 2 - xSize / 2) + 5, (height / 2), 127, 20);
 		usernameInput.setFocused(false);
 		usernameInput.setCanLoseFocus(true);
 		usernameInput.setText(te.getPlayerName());
@@ -64,7 +64,7 @@ public class GuiOnlineDetector extends GuiContainer
 		{
 			this.mc.thePlayer.closeScreen();
 		}
-		
+
 		if (this.usernameInput.textboxKeyTyped(par1, pressedKey))
 		{
 			MessageOnlineDetector packet = new MessageOnlineDetector(usernameInput.getText(), te.getPos());

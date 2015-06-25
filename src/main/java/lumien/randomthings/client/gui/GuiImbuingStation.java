@@ -2,17 +2,15 @@ package lumien.randomthings.client.gui;
 
 import lumien.randomthings.container.ContainerImbuingStation;
 import lumien.randomthings.tileentity.TileEntityImbuingStation;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiImbuingStation extends GuiContainer
 {
@@ -25,9 +23,9 @@ public class GuiImbuingStation extends GuiContainer
 
 	public GuiImbuingStation(EntityPlayer player, World world, int x, int y, int z)
 	{
-		super(new ContainerImbuingStation(player,world,x,y,z));
+		super(new ContainerImbuingStation(player, world, x, y, z));
 
-		this.te = (TileEntityImbuingStation) world.getTileEntity(new BlockPos(x,y,z));
+		this.te = (TileEntityImbuingStation) world.getTileEntity(new BlockPos(x, y, z));
 
 		this.xSize = 176;
 		this.ySize = 208;

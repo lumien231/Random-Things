@@ -24,6 +24,7 @@ tile.lightRedirector.name=Light Redirector
 tile.imbuingStation.name=Imbuing Station
 tile.spectreBlock.name=Spectre Block
 tile.analogEmitter.name=Analog Emitter
+tile.fluidDisplay.name=Fluid Display
 
 tile.natureCore.name=Nature Core
 tile.netherCore.name=Nether Core

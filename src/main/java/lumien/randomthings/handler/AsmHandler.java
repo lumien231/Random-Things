@@ -5,25 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.logging.log4j.Level;
-import org.lwjgl.input.Keyboard;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockSpecialChest;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ModItems;
-import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGlass;
-import net.minecraft.block.BlockLever;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -32,9 +23,7 @@ import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -43,14 +32,14 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureOceanMonumentPieces.MonumentCoreRoom;
-import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.apache.logging.log4j.Level;
 
 public class AsmHandler
 {
@@ -144,24 +133,28 @@ public class AsmHandler
 	// Returns whether to cancel normal behaviour
 	public static boolean addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity collidingEntity)
 	{
-		if (collidingEntity != null && collidingEntity instanceof EntityPlayer && state.getBlock() instanceof BlockLiquid && collidingEntity.posY > pos.getY() + 0.9 && !(worldIn.getBlockState(pos.up()).getBlock().getMaterial() == Material.lava || worldIn.getBlockState(pos.up()).getBlock().getMaterial() == Material.water))
+		if (collidingEntity != null && collidingEntity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) collidingEntity;
 
-			if (!player.isSneaking())
+			if (state.getBlock() instanceof BlockLiquid && collidingEntity.posY > pos.getY() + 0.9 && !(worldIn.getBlockState(pos.up()).getBlock().getMaterial() == Material.lava || worldIn.getBlockState(pos.up()).getBlock().getMaterial() == Material.water))
 			{
-				ItemStack boots = player.inventory.armorItemInSlot(0);
-				if (boots != null && ((((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader) && state.getBlock().getMaterial() == Material.water) || (boots.getItem() == ModItems.lavaWader && state.getBlock().getMaterial() == Material.lava)))
+				if (!player.isSneaking())
 				{
-					AxisAlignedBB bb = new AxisAlignedBB((double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), (double) pos.getX() + 1, (double) pos.getY() + 1, (double) pos.getZ() + 1);
-					if (mask.intersectsWith(bb))
+					ItemStack boots = player.inventory.armorItemInSlot(0);
+					if (boots != null && ((((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader) && state.getBlock().getMaterial() == Material.water) || (boots.getItem() == ModItems.lavaWader && state.getBlock().getMaterial() == Material.lava)))
 					{
-						list.add(bb);
+						AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), (double) pos.getX() + 1, (double) pos.getY() + 1, (double) pos.getZ() + 1);
+						if (mask.intersectsWith(bb))
+						{
+							list.add(bb);
+						}
+						return true;
 					}
-					return true;
 				}
 			}
 		}
+
 		return false;
 	}
 
@@ -173,9 +166,9 @@ public class AsmHandler
 		{
 			if (currentlyRendering.getItem() instanceof ItemRedstoneTool)
 			{
-				return Color.RED.darker().getRGB()| -16777216;
+				return Color.RED.darker().getRGB() | -16777216;
 			}
-			
+
 			NBTTagCompound compound;
 			if ((compound = currentlyRendering.getTagCompound()) != null)
 			{
@@ -223,16 +216,6 @@ public class AsmHandler
 		return -1;
 	}
 
-	public static int getExperienceDrops(int original, EntityLivingBase entity, EntityPlayer attackingPlayer)
-	{
-		if (attackingPlayer != null && attackingPlayer.isPotionActive(ModPotions.imbueExperience))
-		{
-			return (int) Math.floor((original * 2));
-		}
-
-		return original;
-	}
-
 	static HashMap<MonumentCoreRoom, Integer> generationMap = new HashMap<MonumentCoreRoom, Integer>();
 
 	public static void handleOceanCoreRoomGeneration(MonumentCoreRoom structure, World worldObj, StructureBoundingBox structureBoundingBox, StructureBoundingBox idkWhatThisIsBoundingBox, EnumFacing coordBaseMode)
@@ -247,7 +230,7 @@ public class AsmHandler
 		}
 
 		int count = generationMap.get(structure);
-		
+
 		if (count == 4)
 		{
 			generationMap.remove(structure);

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.lib.ChestCategory;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -99,15 +98,15 @@ public class ItemDungeonChestGenerator extends ItemBase
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
+	{
 		if (!worldIn.isRemote && !playerIn.isSneaking())
 		{
 			pos = pos.offset(side);
 
-	        if (!playerIn.canPlayerEdit(pos, side, stack))
-	        {
-	            return false;
-	        }
+			if (!playerIn.canPlayerEdit(pos, side, stack))
+			{
+				return false;
+			}
 			else
 			{
 				if (worldIn.isAirBlock(pos))
@@ -130,7 +129,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 		}
 		return false;
 	}
-	
+
 	@Override
 	public EnumRarity getRarity(ItemStack stack)
 	{

@@ -38,7 +38,7 @@ public class SlotDyeCrafting extends SlotCrafting
 				this.craftMatrix.decrStackSize(i, 1);
 			}
 		}
-		
+
 		this.containerDyeingMachine.onCraftMatrixChanged(craftMatrix);
 	}
 }

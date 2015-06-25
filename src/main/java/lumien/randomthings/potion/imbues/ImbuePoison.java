@@ -3,7 +3,6 @@ package lumien.randomthings.potion.imbues;
 import java.awt.Color;
 
 import lumien.randomthings.config.PotionIds;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,10 +15,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ImbuePoison extends Potion
 {
 	ResourceLocation icon = new ResourceLocation("randomthings:textures/gui/imbues/poison.png");
+
 	public ImbuePoison()
 	{
 		super(PotionIds.IMBUE_POISON, new ResourceLocation("imbue_poison"), false, Color.GREEN.darker().getRGB());
-		
+
 		this.setPotionName("Poison Imbue");
 	}
 
@@ -28,10 +28,10 @@ public class ImbuePoison extends Potion
 	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc)
 	{
 		super.renderInventoryEffect(x, y, effect, mc);
-		
+
 		mc.renderEngine.bindTexture(icon);
-		
+
 		GlStateManager.enableBlend();
-		Gui.drawModalRectWithCustomSizedTexture(x+6, y+7, 0, 0, 18, 18, 18, 18);
+		Gui.drawModalRectWithCustomSizedTexture(x + 6, y + 7, 0, 0, 18, 18, 18, 18);
 	}
 }

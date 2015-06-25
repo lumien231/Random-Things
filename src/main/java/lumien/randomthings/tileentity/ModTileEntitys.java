@@ -22,5 +22,6 @@ public class ModTileEntitys
 		GameRegistry.registerTileEntity(TileEntityImbuingStation.class, "imbuingStation");
 		GameRegistry.registerTileEntity(TileEntitySpecialChest.class, "specialChest");
 		GameRegistry.registerTileEntity(TileEntityAnalogEmitter.class, "analogEmitter");
+		GameRegistry.registerTileEntity(TileEntityFluidDisplay.class, "fluidDisplay");
 	}
 }

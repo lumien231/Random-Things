@@ -4,12 +4,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import lumien.randomthings.recipes.ModRecipes;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 public class DyeUtil
 {
@@ -25,7 +24,7 @@ public class DyeUtil
 			int id = OreDictionary.getOreID(dyeString);
 			if (oreDictIds.contains(id))
 			{
-				return ItemDye.dyeColors[15-i];
+				return ItemDye.dyeColors[15 - i];
 			}
 		}
 

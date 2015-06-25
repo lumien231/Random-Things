@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import lumien.randomthings.network.IRTMessage;
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
-import lumien.randomthings.tileentity.TileEntityOnlineDetector;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -17,7 +16,7 @@ public class MessageChatDetector implements IRTMessage
 {
 	String chatMessage;
 	boolean consume;
-	
+
 	BlockPos pos;
 
 	public MessageChatDetector()
@@ -25,7 +24,7 @@ public class MessageChatDetector implements IRTMessage
 
 	}
 
-	public MessageChatDetector(String chatMessage,boolean consume, BlockPos pos)
+	public MessageChatDetector(String chatMessage, boolean consume, BlockPos pos)
 	{
 		this.chatMessage = chatMessage;
 		this.pos = pos;
@@ -46,7 +45,7 @@ public class MessageChatDetector implements IRTMessage
 	{
 		chatMessage = ByteBufUtils.readUTF8String(buffer);
 		consume = buffer.readBoolean();
-		
+
 		pos = MessageUtil.readBlockPos(buffer);
 	}
 
@@ -61,7 +60,7 @@ public class MessageChatDetector implements IRTMessage
 				EntityPlayerMP player = ctx.getServerHandler().playerEntity;
 				World worldObj = player.worldObj;
 				TileEntity te = worldObj.getTileEntity(pos);
-				if (te!=null && te instanceof TileEntityChatDetector && pos.distanceSq(player.getPosition()) < 100)
+				if (te != null && te instanceof TileEntityChatDetector && pos.distanceSq(player.getPosition()) < 100)
 				{
 					TileEntityChatDetector od = (TileEntityChatDetector) worldObj.getTileEntity(pos);
 					od.setChatMessage(chatMessage);
@@ -69,7 +68,7 @@ public class MessageChatDetector implements IRTMessage
 				}
 			}
 		});
-		
+
 	}
 
 }

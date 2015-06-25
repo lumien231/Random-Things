@@ -2,9 +2,6 @@ package lumien.randomthings.client.gui;
 
 import java.io.IOException;
 
-import org.lwjgl.opengl.GL11;
-
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.network.PacketHandler;
@@ -14,10 +11,11 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiAnalogEmitter extends GuiContainer
 {

@@ -1,27 +1,22 @@
 package lumien.randomthings.handler;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-import org.objectweb.asm.tree.MethodNode;
-
-import baubles.api.BaublesApi;
+import java.util.Set;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockLifeAnchor;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.entitys.EntitySoul;
-import lumien.randomthings.item.ItemObsidianSkullRing;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.lib.PlayerAbilitiesProperty;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
-import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
-import lumien.randomthings.util.DyeUtil;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.client.RenderUtils;
@@ -33,40 +28,30 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.GuiIngameForge;
-import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
-import net.minecraftforge.client.event.EntityViewRenderEvent.RenderFogEvent;
-import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
-import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.FakePlayer;
@@ -75,21 +60,68 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.NameFormat;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.discovery.ASMDataTable;
+import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.apache.logging.log4j.Level;
+
 public class RTEventHandler
 {
 	static Random rng = new Random();
+
+	@SubscribeEvent
+	public void livingExperience(LivingExperienceDropEvent event)
+	{
+		if (event.getAttackingPlayer() != null && event.getAttackingPlayer().isPotionActive(ModPotions.imbueExperience))
+		{
+			event.setDroppedExperience(event.getDroppedExperience() + event.getOriginalExperience());
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void modelBake(ModelBakeEvent event)
+	{
+		ModelFluidDisplay modelFluidDisplay = new ModelFluidDisplay();
+		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:fluidDisplay", "normal"), modelFluidDisplay);
+		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:fluidDisplay", "inventory"), modelFluidDisplay);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void textureStitch(TextureStitchEvent.Pre event)
+	{
+		try
+		{
+			ASMDataTable asmData = RandomThings.instance.getASMData();
+
+			Set<ASMData> atlasSet = asmData.getAll(AtlasSprite.class.getName());
+
+			for (ASMData data : atlasSet)
+			{
+				Class clazz = Class.forName(data.getClassName());
+				Field f = clazz.getDeclaredField(data.getObjectName());
+				f.setAccessible(true);
+				ResourceLocation rl = new ResourceLocation((String) data.getAnnotationInfo().get("resource"));
+
+				f.set(null, event.map.registerSprite(rl));
+			}
+		}
+		catch (Exception e)
+		{
+			RandomThings.instance.logger.log(Level.ERROR, "Error stitching extra textures");
+			e.printStackTrace();
+		}
+	}
 
 	@SubscribeEvent
 	public void chatEvent(ServerChatEvent event)
@@ -154,7 +186,7 @@ public class RTEventHandler
 
 						int power = (Integer) hitState.getValue(BlockRedstoneWire.POWER);
 
-						Minecraft.getMinecraft().fontRendererObj.drawString(power + "", width/2 + 5, height/2 + 5, Colors.RED_INT);
+						Minecraft.getMinecraft().fontRendererObj.drawString(power + "", width / 2 + 5, height / 2 + 5, Colors.RED_INT);
 						GlStateManager.color(1, 1, 1, 1);
 					}
 				}

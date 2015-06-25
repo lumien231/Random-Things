@@ -1,20 +1,15 @@
 package lumien.randomthings.item;
 
-import java.util.Iterator;
 import java.util.List;
 
 import lumien.randomthings.potion.ModPotions;
-
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -61,22 +56,26 @@ public class ItemImbue extends ItemBase
 		}
 	}
 
+	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
 		return 32;
 	}
 
+	@Override
 	public EnumAction getItemUseAction(ItemStack stack)
 	{
 		return EnumAction.DRINK;
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
 	{
 		playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
 		return itemStackIn;
 	}
 
+	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
 	{
 		if (!playerIn.capabilities.isCreativeMode)

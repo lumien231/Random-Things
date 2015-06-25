@@ -8,11 +8,8 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.tileentity.TileEntityBase;
 import lumien.randomthings.util.BlockPattern.BlockInfo;
 import lumien.randomthings.worldgen.WorldGenCores;
-
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -22,15 +19,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityNatureCore extends TileEntityBase implements IUpdatePlayerListBox
 {
@@ -65,7 +56,7 @@ public class TileEntityNatureCore extends TileEntityBase implements IUpdatePlaye
 						}
 						if (entityliving != null)
 						{
-							entityliving.setLocationAndAngles((double) rX, (double) rY, (double) rZ, rand.nextFloat() * 360.0F, 0.0F);
+							entityliving.setLocationAndAngles(rX, rY, rZ, rand.nextFloat() * 360.0F, 0.0F);
 
 							if (entityliving.getCanSpawnHere())
 							{

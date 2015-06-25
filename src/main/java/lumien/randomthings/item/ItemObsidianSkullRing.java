@@ -1,15 +1,10 @@
 package lumien.randomthings.item;
 
-import java.util.List;
-
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
 
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "Baubles")
 public class ItemObsidianSkullRing extends ItemBase implements IBauble
@@ -17,10 +12,10 @@ public class ItemObsidianSkullRing extends ItemBase implements IBauble
 	public ItemObsidianSkullRing()
 	{
 		super("obsidianSkullRing");
-		
+
 		this.setMaxStackSize(1);
 	}
-	
+
 	@Override
 	public BaubleType getBaubleType(ItemStack itemstack)
 	{

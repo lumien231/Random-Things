@@ -1,11 +1,12 @@
 package lumien.randomthings.util.client;
 
-import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+
+import org.lwjgl.opengl.GL11;
 
 public class RenderUtils
 {
@@ -14,18 +15,18 @@ public class RenderUtils
 	public static void drawCube(float posX, float posY, float posZ, float size, float red, float green, float blue, float alpha)
 	{
 		Minecraft.getMinecraft().entityRenderer.disableLightmap();
-		
+
 		Tessellator t = Tessellator.getInstance();
 		WorldRenderer wr = t.getWorldRenderer();
-		
+
 		GlStateManager.disableTexture2D();
-		
+
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(posX, posY, posZ);
-		
+
 		wr.startDrawingQuads();
 		wr.setColorRGBA_F(red, green, blue, alpha);
-		
+
 		wr.addVertex(0F, 0F, 0F); // P1
 		wr.addVertex(0F, size, 0F); // P2
 		wr.addVertex(size, size, 0F); // P3
@@ -55,9 +56,9 @@ public class RenderUtils
 		wr.addVertex(0F, size, size); // P2
 		wr.addVertex(size, size, size); // P3
 		wr.addVertex(size, size, 0F); // P4
-		
+
 		t.draw();
-		
+
 		GlStateManager.popMatrix();
 		GlStateManager.enableTexture2D();
 

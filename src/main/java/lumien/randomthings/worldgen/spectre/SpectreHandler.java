@@ -3,15 +3,11 @@ package lumien.randomthings.worldgen.spectre;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import lumien.randomthings.util.Size;
 import lumien.randomthings.worldgen.ModDimensions;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;

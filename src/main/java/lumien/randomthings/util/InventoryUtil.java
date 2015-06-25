@@ -2,14 +2,13 @@ package lumien.randomthings.util;
 
 import java.util.Random;
 
-import baubles.api.BaublesApi;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
+import baubles.api.BaublesApi;
 
 public class InventoryUtil
 {

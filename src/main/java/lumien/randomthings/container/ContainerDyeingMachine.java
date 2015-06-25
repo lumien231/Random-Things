@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class ContainerDyeingMachine extends Container
 {
 	InventoryCrafting ingredients = new InventoryCrafting(this, 2, 1);
-	
+
 	IInventory dyeResult = new InventoryCraftResult();
 	IInventory enchantmentResult = new InventoryCraftResult();
 
@@ -38,8 +38,8 @@ public class ContainerDyeingMachine extends Container
 
 		this.addSlotToContainer(new SlotDyeable(ingredients, 0, 27, 22));
 		this.addSlotToContainer(new SlotDye(ingredients, 1, 76, 22));
-		this.addSlotToContainer(new SlotDyeCrafting(player, this,ingredients, dyeResult, 2, 133, 22));
-		this.addSlotToContainer(new SlotDyeCrafting(player, this,ingredients, enchantmentResult, 2, 154, 22));
+		this.addSlotToContainer(new SlotDyeCrafting(player, this, ingredients, dyeResult, 2, 133, 22));
+		this.addSlotToContainer(new SlotDyeCrafting(player, this, ingredients, enchantmentResult, 2, 154, 22));
 		bindPlayerInventory(player.inventory);
 	}
 
@@ -58,12 +58,12 @@ public class ContainerDyeingMachine extends Container
 			{
 				copy.setTagCompound(new NBTTagCompound());
 			}
-			
+
 			NBTTagCompound compound = copy.getTagCompound();
 			copy.stackSize = 1;
 			compound.setInteger("rtDye", dyeColor);
 			this.dyeResult.setInventorySlotContents(0, copy);
-			
+
 			// Enchantment Color
 			ItemStack enchantmentCopy = toDye.copy();
 			enchantmentCopy.stackSize = 1;
@@ -145,7 +145,7 @@ public class ContainerDyeingMachine extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return this.worldObj.getBlockState(new BlockPos(posX,posY,posZ)).getBlock() != ModBlocks.dyeingMachine ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
+		return this.worldObj.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() != ModBlocks.dyeingMachine ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
 	}
 
 	@Override

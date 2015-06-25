@@ -11,8 +11,9 @@ public class SlotDisplay extends Slot
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
-    public boolean canTakeStack(EntityPlayer playerIn)
-    {
-        return false;
-    }
+	@Override
+	public boolean canTakeStack(EntityPlayer playerIn)
+	{
+		return false;
+	}
 }

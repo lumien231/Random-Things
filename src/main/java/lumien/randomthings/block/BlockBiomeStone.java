@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import java.util.List;
 
 import lumien.randomthings.item.block.ItemBlockBiomeStone;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;

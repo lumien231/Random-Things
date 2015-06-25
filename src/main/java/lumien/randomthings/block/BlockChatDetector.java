@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
-import lumien.randomthings.tileentity.TileEntityPlayerInterface;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -26,7 +25,7 @@ public class BlockChatDetector extends BlockContainerBase
 	protected BlockChatDetector()
 	{
 		super("chatDetector", Material.rock);
-		
+
 		this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, false));
 		this.setHardness(2);
 	}
@@ -36,7 +35,7 @@ public class BlockChatDetector extends BlockContainerBase
 	{
 		return new TileEntityChatDetector();
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{

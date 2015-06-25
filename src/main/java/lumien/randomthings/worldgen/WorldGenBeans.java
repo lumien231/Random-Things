@@ -3,16 +3,14 @@ package lumien.randomthings.worldgen;
 import java.util.Random;
 
 import lumien.randomthings.block.ModBlocks;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenBeans implements IWorldGenerator
 {
+	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
 		if (random.nextBoolean())

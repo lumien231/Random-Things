@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.util.Size;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -80,7 +79,7 @@ public class SpectreCube
 		this.size = newSize;
 		generate(worldObj);
 	}
-	
+
 	public BlockPos getSpawnBlock()
 	{
 		return new BlockPos(position * 16 + 8, 50, 8);

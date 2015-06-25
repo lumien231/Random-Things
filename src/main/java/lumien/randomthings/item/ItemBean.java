@@ -48,6 +48,7 @@ public class ItemBean extends ItemBase
 		return "item.bean.name";
 	}
 
+	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (side != EnumFacing.UP)

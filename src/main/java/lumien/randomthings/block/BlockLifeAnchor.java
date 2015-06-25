@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.item.ItemLinkingOrb;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

@@ -13,7 +13,7 @@ public class GuiCustomButton extends GuiButton
 	int uY;
 	boolean value;
 
-	public GuiCustomButton(int buttonId,boolean value, int x, int y, int widthIn, int heightIn, String buttonText, ResourceLocation buttonTextures, int uX, int uY)
+	public GuiCustomButton(int buttonId, boolean value, int x, int y, int widthIn, int heightIn, String buttonText, ResourceLocation buttonTextures, int uX, int uY)
 	{
 		super(buttonId, x, y, widthIn, heightIn, buttonText);
 
@@ -22,12 +22,13 @@ public class GuiCustomButton extends GuiButton
 		this.uY = uY;
 		this.value = value;
 	}
-	
+
 	public void toggle()
 	{
-		value=!value;
+		value = !value;
 	}
 
+	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY)
 	{
 		if (this.visible)

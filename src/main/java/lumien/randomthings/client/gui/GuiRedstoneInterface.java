@@ -1,9 +1,5 @@
 package lumien.randomthings.client.gui;
 
-import java.awt.Color;
-
-import org.lwjgl.opengl.GL11;
-
 import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -12,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiRedstoneInterface extends GuiContainer
 {
@@ -38,13 +36,13 @@ public class GuiRedstoneInterface extends GuiContainer
 		if (target == null)
 		{
 			String center = I18n.format("gui.redstoneInterface.notarget");
-			fontRendererObj.drawString(center, 136/2 - fontRendererObj.getStringWidth(center)/2, 54/2 - fontRendererObj.FONT_HEIGHT/2+3, 9830400);
+			fontRendererObj.drawString(center, 136 / 2 - fontRendererObj.getStringWidth(center) / 2, 54 / 2 - fontRendererObj.FONT_HEIGHT / 2 + 3, 9830400);
 		}
 		else
 		{
-			fontRendererObj.drawString(I18n.format("gui.redstoneInterface.targetX",target.getX()), 8, 18, 1310740);
-			fontRendererObj.drawString(I18n.format("gui.redstoneInterface.targetY",target.getY()), 8, 28, 1310740);
-			fontRendererObj.drawString(I18n.format("gui.redstoneInterface.targetZ",target.getZ()), 8, 38, 1310740);
+			fontRendererObj.drawString(I18n.format("gui.redstoneInterface.targetX", target.getX()), 8, 18, 1310740);
+			fontRendererObj.drawString(I18n.format("gui.redstoneInterface.targetY", target.getY()), 8, 28, 1310740);
+			fontRendererObj.drawString(I18n.format("gui.redstoneInterface.targetZ", target.getZ()), 8, 38, 1310740);
 		}
 	}
 

@@ -1,17 +1,16 @@
 package lumien.randomthings.network.messages;
 
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.container.ContainerAnalogEmitter;
+import lumien.randomthings.network.IRTMessage;
+import lumien.randomthings.network.MessageUtil;
+import lumien.randomthings.tileentity.TileEntityAnalogEmitter;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import lumien.randomthings.container.ContainerAnalogEmitter;
-import lumien.randomthings.container.ContainerEmptyContainer;
-import lumien.randomthings.network.IRTMessage;
-import lumien.randomthings.network.MessageUtil;
-import lumien.randomthings.tileentity.TileEntityAnalogEmitter;
 
 public class MessageAnalogEmitter implements IRTMessage
 {

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.item.ModItems;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -38,7 +37,7 @@ public class BlockPod extends BlockBase
 		{
 			drops.add(new ItemStack(ModItems.beans, beanAmount));
 		}
-		
+
 		if (ironAmount > 0)
 		{
 			drops.add(new ItemStack(Items.iron_ingot, ironAmount));

@@ -1,6 +1,5 @@
 package lumien.randomthings.item;
 
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModItems
@@ -40,7 +39,7 @@ public class ModItems
 		beanStew = new ItemBeanStew();
 		linkingOrb = new ItemLinkingOrb();
 		inertLinkingOrb = new ItemInertLinkingOrb();
-		//craftingRecipe = new ItemCraftingRecipe();
+		// craftingRecipe = new ItemCraftingRecipe();
 		redstoneTool = new ItemRedstoneTool();
 		waterWalkingBoots = new ItemWaterWalkingBoots();
 		dungeonChestGenerator = new ItemDungeonChestGenerator();
@@ -53,7 +52,7 @@ public class ModItems
 		imbue = new ItemImbue();
 		bottleOfAir = new ItemBottleOfAir();
 		rezStone = new ItemRezStone();
-		
+
 		grassSeeds = new ItemGrassSeeds();
 	}
 }

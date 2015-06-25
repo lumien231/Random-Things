@@ -5,7 +5,6 @@ import java.util.Random;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.item.block.ItemBlockColoredGrass;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.material.Material;
@@ -45,12 +44,12 @@ public class BlockColoredGrass extends Block
 
 		GameRegistry.registerBlock(this, ItemBlockColoredGrass.class, "coloredGrass");
 	}
-	
-    @Override
+
+	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
-        return false;
-    }
+	{
+		return false;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

@@ -42,7 +42,7 @@ public class BlockFertilizedDirt extends BlockBase
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos)
 	{
-		return new ItemStack(ModBlocks.fertilizedDirt,1,0);
+		return new ItemStack(ModBlocks.fertilizedDirt, 1, 0);
 	}
 
 	@Override

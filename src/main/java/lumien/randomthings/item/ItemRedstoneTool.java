@@ -2,14 +2,11 @@ package lumien.randomthings.item;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
-import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,7 +17,7 @@ public class ItemRedstoneTool extends ItemBase
 	public ItemRedstoneTool()
 	{
 		super("redstoneTool");
-		
+
 		this.setMaxStackSize(1);
 	}
 
@@ -37,7 +34,7 @@ public class ItemRedstoneTool extends ItemBase
 
 		return false;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D()

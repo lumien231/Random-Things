@@ -1,7 +1,6 @@
 package lumien.randomthings.item;
 
 import lumien.randomthings.lib.PlayerAbilitiesProperty;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -14,7 +13,7 @@ public class ItemImmortalityChalice extends ItemBase
 	public ItemImmortalityChalice()
 	{
 		super("chaliceOfImmortality");
-		
+
 		this.setMaxStackSize(1);
 	}
 
@@ -43,31 +42,31 @@ public class ItemImmortalityChalice extends ItemBase
 
 		return itemStackIn;
 	}
-	
+
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
-    {
-        if (!playerIn.capabilities.isCreativeMode)
-        {
-            --stack.stackSize;
-        }
+	{
+		if (!playerIn.capabilities.isCreativeMode)
+		{
+			--stack.stackSize;
+		}
 
-        if (!worldIn.isRemote)
-        {
-            PlayerAbilitiesProperty abilities = (PlayerAbilitiesProperty) playerIn.getExtendedProperties(PlayerAbilitiesProperty.KEY);
-            abilities.setImmortal(true);
-        }
+		if (!worldIn.isRemote)
+		{
+			PlayerAbilitiesProperty abilities = (PlayerAbilitiesProperty) playerIn.getExtendedProperties(PlayerAbilitiesProperty.KEY);
+			abilities.setImmortal(true);
+		}
 
-        if (!playerIn.capabilities.isCreativeMode)
-        {
-            if (stack.stackSize <= 0)
-            {
-                return new ItemStack(Items.glass_bottle);
-            }
+		if (!playerIn.capabilities.isCreativeMode)
+		{
+			if (stack.stackSize <= 0)
+			{
+				return new ItemStack(Items.glass_bottle);
+			}
 
-            playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
-        }
+			playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+		}
 
-        return stack;
-    }
+		return stack;
+	}
 }

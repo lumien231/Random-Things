@@ -17,7 +17,7 @@ public class BlockLapisLamp extends BlockBase
 	protected BlockLapisLamp()
 	{
 		super("lapisLamp", Material.ground);
-		
+
 		this.setStepSound(soundTypeGlass);
 		this.setHardness(0.3F);
 	}
@@ -28,12 +28,12 @@ public class BlockLapisLamp extends BlockBase
 	{
 		worldIn.checkLightFor(EnumSkyBlock.BLOCK, pos);
 	}
-	
+
 	@Override
 	public int getLightValue(IBlockAccess world, BlockPos pos)
 	{
 		IBlockState state = world.getBlockState(pos);
-		if (state.getBlock()!= this)
+		if (state.getBlock() != this)
 		{
 			return state.getBlock().getLightValue(world, pos);
 		}

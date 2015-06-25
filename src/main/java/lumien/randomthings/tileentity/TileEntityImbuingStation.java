@@ -8,7 +8,6 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IChatComponent;
 
 public class TileEntityImbuingStation extends TileEntityBase implements IInventory, IUpdatePlayerListBox

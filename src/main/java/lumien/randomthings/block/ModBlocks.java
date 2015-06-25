@@ -1,7 +1,5 @@
 package lumien.randomthings.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModBlocks
@@ -31,14 +29,15 @@ public class ModBlocks
 	public static BlockSpectreBlock spectreBlock;
 	public static BlockSpecialChest specialChest;
 	public static BlockAnalogEmitter analogEmitter;
-	
+	public static BlockFluidDisplay fluidDisplay;
+
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
 	public static BlockEnderCore enderCore;
-	
+
 	public static BlockBeanStalk beanStalk;
 	public static BlockBeanStalk lesserBeanStalk;
-	
+
 	public static void load(FMLPreInitializationEvent event)
 	{
 		fertilizedDirt = new BlockFertilizedDirt(false);
@@ -64,11 +63,12 @@ public class ModBlocks
 		spectreBlock = new BlockSpectreBlock();
 		specialChest = new BlockSpecialChest();
 		analogEmitter = new BlockAnalogEmitter();
-		
+		fluidDisplay = new BlockFluidDisplay();
+
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();
 		enderCore = new BlockEnderCore();
-		
+
 		biomeStone = new BlockBiomeStone();
 		biomeGlass = new BlockBiomeGlass();
 		stainedBrick = new BlockStainedBrick();

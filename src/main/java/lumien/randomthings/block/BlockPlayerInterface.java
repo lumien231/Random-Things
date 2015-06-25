@@ -25,12 +25,12 @@ public class BlockPlayerInterface extends BlockContainerBase
 	{
 		return new TileEntityPlayerInterface();
 	}
-	
+
 	@Override
-    public int getRenderType()
-    {
-        return 3;
-    }
+	public int getRenderType()
+	{
+		return 3;
+	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)

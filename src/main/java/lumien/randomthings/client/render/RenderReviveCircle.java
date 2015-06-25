@@ -1,7 +1,5 @@
 package lumien.randomthings.client.render;
 
-import java.awt.Color;
-
 import lumien.randomthings.entitys.EntityReviveCircle;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -14,9 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class RenderReviveCircle extends Render
@@ -49,7 +44,7 @@ public class RenderReviveCircle extends Render
 			GlStateManager.color(1, 1, 1, renderAge * 0.05F);
 		}
 
-		GlStateManager.rotate(renderAge*renderAge/50, 0f, 1, 0f);
+		GlStateManager.rotate(renderAge * renderAge / 50, 0f, 1, 0f);
 		GlStateManager.translate(0.5f, 0, 0.5f);
 		GlStateManager.rotate(90, 1, 0, 0);
 

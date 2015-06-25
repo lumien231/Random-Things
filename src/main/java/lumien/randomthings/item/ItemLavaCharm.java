@@ -1,11 +1,6 @@
 package lumien.randomthings.item;
 
-import java.util.List;
-
 import lumien.randomthings.worldgen.SingleRandomChestContent;
-
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,8 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
 
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "Baubles")
 public class ItemLavaCharm extends ItemBase implements IBauble
@@ -26,7 +21,7 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 		super("lavaCharm");
 
 		this.setMaxStackSize(1);
-		
+
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new SingleRandomChestContent(new ItemStack(this), 1, 1, 1));
 		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new SingleRandomChestContent(new ItemStack(this), 1, 1, 1));
 		ChestGenHooks.addItem(ChestGenHooks.NETHER_FORTRESS, new SingleRandomChestContent(new ItemStack(this), 1, 1, 5));

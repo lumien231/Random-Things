@@ -1,5 +1,9 @@
 package lumien.randomthings.tileentity;
 
+import static lumien.randomthings.tileentity.TileEntityPrismarineEnderBridge.BRIDGESTATE.IDLE;
+import static lumien.randomthings.tileentity.TileEntityPrismarineEnderBridge.BRIDGESTATE.SCANNING;
+import static lumien.randomthings.tileentity.TileEntityPrismarineEnderBridge.BRIDGESTATE.WAITING;
+
 import java.util.List;
 
 import lumien.randomthings.block.BlockEnderBridge;
@@ -13,7 +17,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import static lumien.randomthings.tileentity.TileEntityPrismarineEnderBridge.BRIDGESTATE.*;
 
 public class TileEntityPrismarineEnderBridge extends TileEntityBase implements IUpdatePlayerListBox
 {

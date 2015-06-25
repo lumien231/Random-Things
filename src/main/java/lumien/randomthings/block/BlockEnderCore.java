@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import java.util.Random;
 
 import lumien.randomthings.tileentity.cores.TileEntityEnderCore;
-import lumien.randomthings.tileentity.cores.TileEntityNetherCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -19,8 +18,8 @@ public class BlockEnderCore extends BlockContainerBase
 {
 	protected BlockEnderCore()
 	{
-		super("enderCore",Material.rock);
-		
+		super("enderCore", Material.rock);
+
 		this.setBlockUnbreakable().setResistance(6000000.0F);
 	}
 
@@ -35,30 +34,30 @@ public class BlockEnderCore extends BlockContainerBase
 	{
 		return 0;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer()
 	{
 		return EnumWorldBlockLayer.CUTOUT;
 	}
-	
+
 	@Override
 	public int getRenderType()
 	{
 		return 3;
 	}
-	
-    @Override
-    public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity)
-    {
-    	return false;
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos)
-    {
-    	return 210;
-    }
+
+	@Override
+	public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity)
+	{
+		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos)
+	{
+		return 210;
+	}
 }

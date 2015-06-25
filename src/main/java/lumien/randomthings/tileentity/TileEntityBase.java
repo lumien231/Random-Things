@@ -12,22 +12,27 @@ public abstract class TileEntityBase extends TileEntity
 	public void writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
-		
+
 		writeDataToNBT(compound);
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		
+
 		readDataFromNBT(compound);
 	}
-	
+
 	@Override
 	public final void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
 		readDataFromNBT(packet.getNbtCompound());
+
+		if (renderAfterData())
+		{
+			this.worldObj.markBlockForUpdate(this.pos);
+		}
 	}
 
 	@Override
@@ -37,8 +42,13 @@ public abstract class TileEntityBase extends TileEntity
 		this.writeDataToNBT(nbtTag);
 		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
-	
+
 	public abstract void writeDataToNBT(NBTTagCompound compound);
-	
+
 	public abstract void readDataFromNBT(NBTTagCompound compound);
+
+	public boolean renderAfterData()
+	{
+		return false;
+	}
 }

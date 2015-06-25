@@ -135,9 +135,9 @@ public class BlockAnalogEmitter extends BlockContainerBase
 				if (facing != side)
 				{
 					worldIn.setBlockState(pos, state.withProperty(FACING, side));
-					
+
 					TileEntityAnalogEmitter analogEmitter = (TileEntityAnalogEmitter) worldIn.getTileEntity(pos);
-					
+
 					analogEmitter.setLevel(analogEmitter.emitLevel);
 				}
 			}
@@ -184,6 +184,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 		}
 	}
 
+	@Override
 	public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
 		return isProvidingStrongPower(worldIn, pos, state, side);

@@ -1,6 +1,7 @@
-package lumien.randomthings.client.models;
+package lumien.randomthings.client.models.blocks;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.models.FocusStateMapper;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 

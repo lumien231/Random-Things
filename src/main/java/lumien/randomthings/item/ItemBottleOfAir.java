@@ -9,7 +9,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class ItemBottleOfAir extends ItemBase
 {
@@ -28,7 +27,7 @@ public class ItemBottleOfAir extends ItemBase
 		{
 			e.printStackTrace();
 		}
-		
+
 		inUseField.setAccessible(true);
 	}
 
@@ -37,11 +36,13 @@ public class ItemBottleOfAir extends ItemBase
 		super("bottleOfAir");
 	}
 
+	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
 		return 32;
 	}
 
+	@Override
 	public EnumAction getItemUseAction(ItemStack stack)
 	{
 		return EnumAction.DRINK;
@@ -56,7 +57,7 @@ public class ItemBottleOfAir extends ItemBase
 		}
 		return itemStack;
 	}
-	
+
 	@Override
 	public EnumRarity getRarity(ItemStack stack)
 	{
@@ -68,7 +69,7 @@ public class ItemBottleOfAir extends ItemBase
 	{
 		super.onUsingTick(stack, player, count);
 
-		if (player.isInsideOfMaterial(Material.water) || player.getAir()<270)
+		if (player.isInsideOfMaterial(Material.water) || player.getAir() < 270)
 		{
 			if (count % 5 == 0)
 			{

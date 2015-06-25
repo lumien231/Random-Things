@@ -1,6 +1,5 @@
 package lumien.randomthings.block;
 
-import lumien.randomthings.tileentity.TileEntityEnderBridge;
 import lumien.randomthings.tileentity.TileEntityPrismarineEnderBridge;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -35,7 +34,7 @@ public class BlockPrismarineEnderBridge extends BlockContainerBase
 	{
 		return new TileEntityPrismarineEnderBridge();
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
@@ -122,11 +121,11 @@ public class BlockPrismarineEnderBridge extends BlockContainerBase
 	{
 		return new BlockState(this, new IProperty[] { FACING });
 	}
-	
-    @Override
+
+	@Override
 	@SideOnly(Side.CLIENT)
-    public IBlockState getStateForEntityRender(IBlockState state)
-    {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
-    }
+	public IBlockState getStateForEntityRender(IBlockState state)
+	{
+		return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
+	}
 }

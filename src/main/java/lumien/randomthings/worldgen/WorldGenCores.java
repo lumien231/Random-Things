@@ -7,7 +7,6 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.util.BlockPattern;
 import lumien.randomthings.util.InventoryUtil;
-
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockOldLog;
@@ -18,8 +17,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;

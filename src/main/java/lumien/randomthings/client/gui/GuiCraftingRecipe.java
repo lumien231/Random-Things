@@ -1,16 +1,13 @@
 package lumien.randomthings.client.gui;
 
 import lumien.randomthings.container.ContainerCraftingRecipe;
-
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiCraftingRecipe extends GuiContainer
 {
@@ -19,7 +16,7 @@ public class GuiCraftingRecipe extends GuiContainer
 	public GuiCraftingRecipe(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerCraftingRecipe(player, world, x, y, z));
-		
+
 		this.width = 176;
 		this.height = 166;
 	}
