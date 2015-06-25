@@ -6,16 +6,20 @@ import java.util.List;
 import lumien.randomthings.block.BlockFluidDisplay;
 import lumien.randomthings.lib.AtlasSprite;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 {
@@ -54,7 +58,13 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 
 			if (fluid != null)
 			{
-				cache.put(fluidName, new ModelCubeAll(flowing ? fluid.getFlowingIcon() : fluid.getStillIcon(), false));
+				TextureMap textureMap = Minecraft.getMinecraft().getTextureMapBlocks();
+				FluidStack fluidStack = new FluidStack(fluid, 1000);
+
+				ResourceLocation flowingResource = fluid.getFlowing(fluidStack);
+				ResourceLocation stillResource = fluid.getFlowing(fluidStack);
+
+				cache.put(fluidName, new ModelCubeAll(flowing ? textureMap.getAtlasSprite(fluid.getFlowing(fluidStack).toString()) : textureMap.getAtlasSprite(fluid.getStill(fluidStack).toString()), false));
 				return cache.get(fluidName);
 			}
 		}
