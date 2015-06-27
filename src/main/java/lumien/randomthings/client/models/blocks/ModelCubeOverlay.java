@@ -1,33 +1,47 @@
 package lumien.randomthings.client.models.blocks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 
 import com.google.common.primitives.Ints;
 
-public class ModelCubeAll implements IFlexibleBakedModel
+public class ModelCubeOverlay implements IFlexibleBakedModel
 {
-	TextureAtlasSprite texture;
+	IBakedModel original;
 	boolean isAmbientOcclusion;
 
-	public ModelCubeAll(TextureAtlasSprite texture, boolean isAmbientOcclusion)
+	HashMap<EnumFacing, TextureAtlasSprite> overlays;
+
+	public ModelCubeOverlay(IBakedModel original, HashMap<EnumFacing, TextureAtlasSprite> overlays, boolean isAmbientOcclusion)
 	{
-		this.texture = texture;
+		this.original = original;
 		this.isAmbientOcclusion = isAmbientOcclusion;
+		this.overlays = overlays;
 	}
 
 	@Override
 	public List getFaceQuads(EnumFacing p_177551_1_)
 	{
-		return new ArrayList();
+		List<BakedQuad> ret = new ArrayList<BakedQuad>();
+
+		ret.addAll(original.getFaceQuads(p_177551_1_));
+		
+		if (overlays.containsKey(p_177551_1_))
+		{
+			ret.add(createSidedBakedQuad(0, 1.00001F, 0, 1.00001F, 1.00001F, overlays.get(p_177551_1_), p_177551_1_));
+		}
+		
+		return ret;
 	}
 
 	private int[] vertexToInts(float x, float y, float z, int color, TextureAtlasSprite texture, float u, float v)
@@ -37,21 +51,50 @@ public class ModelCubeAll implements IFlexibleBakedModel
 
 	private BakedQuad createSidedBakedQuad(float x1, float x2, float z1, float z2, float y, TextureAtlasSprite texture, EnumFacing side)
 	{
-		Vec3 v1 = rotate(new Vec3(x1 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
-		Vec3 v2 = rotate(new Vec3(x1 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
-		Vec3 v3 = rotate(new Vec3(x2 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
-		Vec3 v4 = rotate(new Vec3(x2 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
-		return new BakedQuad(Ints.concat(vertexToInts((float) v1.xCoord, (float) v1.yCoord, (float) v1.zCoord, -1, texture, 0, 0), vertexToInts((float) v2.xCoord, (float) v2.yCoord, (float) v2.zCoord, -1, texture, 0, 16), vertexToInts((float) v3.xCoord, (float) v3.yCoord, (float) v3.zCoord, -1, texture, 16, 16), vertexToInts((float) v4.xCoord, (float) v4.yCoord, (float) v4.zCoord, -1, texture, 16, 0)), -1, side);
+		Vec3 c1 = rotate(new Vec3(x1 - .5, y - .5, z1 - .5), side).addVector(.5, 0.5, .5);
+		Vec3 c2 = rotate(new Vec3(x1 - .5, y - .5, z2 - .5), side).addVector(.5, 0.5, .5);
+		Vec3 c3 = rotate(new Vec3(x2 - .5, y - .5, z2 - .5), side).addVector(.5, 0.5, .5);
+		Vec3 c4 = rotate(new Vec3(x2 - .5, y - .5, z1 - .5), side).addVector(.5, 0.5, .5);
+
+		EnumFacing rotation = EnumFacing.SOUTH;
+
+		if (side == EnumFacing.WEST || side == EnumFacing.EAST || side == EnumFacing.SOUTH)
+		{
+			rotation = EnumFacing.SOUTH;
+		}
+		else if (side == EnumFacing.NORTH)
+		{
+			rotation = EnumFacing.WEST;
+			c1 = rotate(c1.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
+			c2 = rotate(c2.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
+			c3 = rotate(c3.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
+			c4 = rotate(c4.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
+		}
+
+		if (side != EnumFacing.UP && side != EnumFacing.SOUTH)
+		{
+			c1 = rotate(c1.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
+			c2 = rotate(c2.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
+			c3 = rotate(c3.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
+			c4 = rotate(c4.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
+		}
+
+		return new BakedQuad(Ints.concat(vertexToInts((float) c1.xCoord, (float) c1.yCoord, (float) c1.zCoord, -1, texture, 0, 0), vertexToInts((float) c2.xCoord, (float) c2.yCoord, (float) c2.zCoord, -1, texture, 0, 16), vertexToInts((float) c3.xCoord, (float) c3.yCoord, (float) c3.zCoord, -1, texture, 16, 16), vertexToInts((float) c4.xCoord, (float) c4.yCoord, (float) c4.zCoord, -1, texture, 16, 0)), -1, side);
 	}
 
 	@Override
 	public List<BakedQuad> getGeneralQuads()
 	{
-		int len = 1 * 5 + 1;
 		List<BakedQuad> ret = new ArrayList<BakedQuad>();
+
+		ret.addAll(original.getGeneralQuads());
+
 		for (EnumFacing f : EnumFacing.values())
 		{
-			ret.add(createSidedBakedQuad(0, 1, 0, 1, 1, getTexture(), f));
+			if (overlays.containsKey(f))
+			{
+				ret.add(createSidedBakedQuad(-0.0001F, 1.0001F, -0.0001F, 1.0001F, 1.0001F, overlays.get(f), f));
+			}
 		}
 		return ret;
 	}
@@ -77,7 +120,7 @@ public class ModelCubeAll implements IFlexibleBakedModel
 	@Override
 	public TextureAtlasSprite getTexture()
 	{
-		return texture;
+		return original.getTexture();
 	}
 
 	@Override

@@ -42,6 +42,7 @@ public class ItemModels
 		registerBlock(ModBlocks.spectreBlock);
 		registerBlock(ModBlocks.analogEmitter);
 		registerBlock(ModBlocks.fluidDisplay);
+		registerBlock(ModBlocks.customWorkbench);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);

@@ -9,6 +9,7 @@ import java.util.Set;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockLifeAnchor;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
 import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.item.ModItems;
@@ -94,6 +95,10 @@ public class RTEventHandler
 		ModelFluidDisplay modelFluidDisplay = new ModelFluidDisplay();
 		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:fluidDisplay", "normal"), modelFluidDisplay);
 		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:fluidDisplay", "inventory"), modelFluidDisplay);
+		
+		ModelCustomWorkbench modelCustomWorkbench = new ModelCustomWorkbench();
+		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:customWorkbench", "normal"), modelCustomWorkbench);
+		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:customWorkbench", "inventory"), modelCustomWorkbench);
 	}
 
 	@SideOnly(Side.CLIENT)

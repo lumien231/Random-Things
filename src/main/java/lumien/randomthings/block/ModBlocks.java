@@ -30,6 +30,7 @@ public class ModBlocks
 	public static BlockSpecialChest specialChest;
 	public static BlockAnalogEmitter analogEmitter;
 	public static BlockFluidDisplay fluidDisplay;
+	public static BlockCustomWorkbench customWorkbench;
 
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
@@ -64,6 +65,7 @@ public class ModBlocks
 		specialChest = new BlockSpecialChest();
 		analogEmitter = new BlockAnalogEmitter();
 		fluidDisplay = new BlockFluidDisplay();
+		customWorkbench = new BlockCustomWorkbench();
 
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

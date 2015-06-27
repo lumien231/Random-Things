@@ -3,25 +3,37 @@ package lumien.randomthings.tileentity;
 import lumien.randomthings.tileentity.cores.TileEntityEnderCore;
 import lumien.randomthings.tileentity.cores.TileEntityNatureCore;
 import lumien.randomthings.tileentity.cores.TileEntityNetherCore;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModTileEntitys
 {
 	public static void register()
 	{
-		GameRegistry.registerTileEntity(TileEntityPlayerInterface.class, "playerInterface");
-		GameRegistry.registerTileEntity(TileEntityCreativePlayerInterface.class, "creativePlayerInterface");
-		GameRegistry.registerTileEntity(TileEntityOnlineDetector.class, "onlineDetector");
-		GameRegistry.registerTileEntity(TileEntityEnderBridge.class, "enderBridge");
-		GameRegistry.registerTileEntity(TileEntityPrismarineEnderBridge.class, "prismarineEnderBridge");
-		GameRegistry.registerTileEntity(TileEntityNatureCore.class, "natureCore");
-		GameRegistry.registerTileEntity(TileEntityNetherCore.class, "netherCore");
-		GameRegistry.registerTileEntity(TileEntityEnderCore.class, "enderCore");
-		GameRegistry.registerTileEntity(TileEntityChatDetector.class, "chatDetector");
-		GameRegistry.registerTileEntity(TileEntityRedstoneInterface.class, "redstoneInterface");
-		GameRegistry.registerTileEntity(TileEntityImbuingStation.class, "imbuingStation");
-		GameRegistry.registerTileEntity(TileEntitySpecialChest.class, "specialChest");
-		GameRegistry.registerTileEntity(TileEntityAnalogEmitter.class, "analogEmitter");
-		GameRegistry.registerTileEntity(TileEntityFluidDisplay.class, "fluidDisplay");
+		registerTEBackward(TileEntityPlayerInterface.class, "playerInterface");
+		registerTEBackward(TileEntityCreativePlayerInterface.class, "creativePlayerInterface");
+		registerTEBackward(TileEntityOnlineDetector.class, "onlineDetector");
+		registerTEBackward(TileEntityEnderBridge.class, "enderBridge");
+		registerTEBackward(TileEntityPrismarineEnderBridge.class, "prismarineEnderBridge");
+		registerTEBackward(TileEntityNatureCore.class, "natureCore");
+		registerTEBackward(TileEntityNetherCore.class, "netherCore");
+		registerTEBackward(TileEntityEnderCore.class, "enderCore");
+		registerTEBackward(TileEntityChatDetector.class, "chatDetector");
+		registerTEBackward(TileEntityRedstoneInterface.class, "redstoneInterface");
+		registerTEBackward(TileEntityImbuingStation.class, "imbuingStation");
+		registerTEBackward(TileEntitySpecialChest.class, "specialChest");
+		registerTEBackward(TileEntityAnalogEmitter.class, "analogEmitter");
+		registerTE(TileEntityFluidDisplay.class, "fluidDisplay");
+		registerTE(TileEntityCustomWorkbench.class, "customWorkbench");
+	}
+
+	private static void registerTEBackward(Class<? extends TileEntity> clazz, String name)
+	{
+		GameRegistry.registerTileEntityWithAlternatives(clazz, "randomthings:" + name, name); // TODO: Remove alternative after some versions
+	}
+
+	private static void registerTE(Class<? extends TileEntity> clazz, String name)
+	{
+		GameRegistry.registerTileEntity(clazz, "randomthings:" + name);
 	}
 }
