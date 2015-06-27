@@ -29,6 +29,7 @@ public class BlockFluidDisplay extends BlockContainerBase
 		super("fluidDisplay", Material.glass);
 
 		this.setStepSound(soundTypeGlass);
+		this.setHardness(0.3F);
 	}
 
 	@Override
