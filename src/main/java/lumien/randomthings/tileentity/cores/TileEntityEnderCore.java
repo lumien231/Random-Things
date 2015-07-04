@@ -105,7 +105,7 @@ public class TileEntityEnderCore extends TileEntityBase implements IUpdatePlayer
 			}
 
 			// Switch
-			if (rand.nextInt(200) == 0)
+			if (rand.nextInt(500) == 0)
 			{
 				List<EntityLivingBase> livingEntitys = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, myBoundingBox.expand(20, 20, 20));
 				if (livingEntitys.size() >= 2)
