@@ -102,7 +102,14 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		TileEntityCustomWorkbench te = (TileEntityCustomWorkbench) worldIn.getTileEntity(pos);
 		IExtendedBlockState actualState = (IExtendedBlockState) state;
 
-		return actualState.withProperty(WOOD_STATE, te.getWoodState());
+		if (te.getWoodState() != null)
+		{
+			return actualState.withProperty(WOOD_STATE, te.getWoodState());
+		}
+		else
+		{
+			return actualState.withProperty(WOOD_STATE, Blocks.planks.getDefaultState());
+		}
 	}
 
 	@Override
