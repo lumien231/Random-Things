@@ -1,6 +1,7 @@
 package lumien.randomthings.tileentity;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +20,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	{
 		this.woodMaterial = Blocks.planks;
 		this.woodMeta = 0;
+		this.woodState = Blocks.planks.getDefaultState();
 	}
 
 	@Override
@@ -41,9 +43,9 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	{
 		String woodMaterialMod = compound.getString("woodMaterialMod");
 		String woodMaterialName = compound.getString("woodMaterialName");
-		int woodMeta = compound.getInteger("woodMeta");
+		woodMeta = compound.getInteger("woodMeta");
 
-		woodMaterial = GameRegistry.findBlock(woodMaterialMod, woodMaterialName);
+		woodMaterial = Block.getBlockFromName((woodMaterialMod + ":" + woodMaterialName));
 
 		if (woodMaterial == null)
 		{
@@ -53,7 +55,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 
 		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
 		{
-			IBlockState woodState = woodMaterial.getStateFromMeta(woodMeta);
+			woodState = woodMaterial.getStateFromMeta(woodMeta);
 
 			if (woodState == null)
 			{
@@ -64,6 +66,18 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 
 	public IBlockState getWoodState()
 	{
-		return woodState;
+		return this.woodState;
+	}
+
+	@Override
+	public boolean renderAfterData()
+	{
+		return true;
+	}
+
+	public void setWood(Block woodBlock, int meta)
+	{
+		this.woodMaterial = woodBlock;
+		this.woodMeta = meta;
 	}
 }

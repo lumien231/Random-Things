@@ -108,6 +108,9 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 4), "ccc", "cbc", "ccc", 'c', chiseledStoneBricks, 'b', biomeCrystal));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeGlass, 16), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', biomeCrystal));
 
+		GameRegistry.addRecipe(new RecipeWorkbench());
+		
+		
 		createDyeRecipes(new ItemStack(Blocks.brick_block), ModBlocks.stainedBrick);
 		createGrassSeedsRecipes();
 

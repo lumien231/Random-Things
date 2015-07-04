@@ -33,7 +33,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.lwjgl.opengl.GL11;
 
 public class ClientProxy extends CommonProxy
-{
+{	
 	@Override
 	public boolean canBeCollidedWith(EntitySoul soul)
 	{

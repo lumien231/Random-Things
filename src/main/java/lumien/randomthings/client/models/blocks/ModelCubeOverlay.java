@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import lumien.randomthings.client.RenderReference;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.Vec3;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 
 import com.google.common.primitives.Ints;
@@ -19,14 +23,16 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 {
 	IBakedModel original;
 	boolean isAmbientOcclusion;
+	boolean itemModel;
 
 	HashMap<EnumFacing, TextureAtlasSprite> overlays;
 
-	public ModelCubeOverlay(IBakedModel original, HashMap<EnumFacing, TextureAtlasSprite> overlays, boolean isAmbientOcclusion)
+	public ModelCubeOverlay(IBakedModel original, HashMap<EnumFacing, TextureAtlasSprite> overlays, boolean isAmbientOcclusion, boolean itemModel)
 	{
 		this.original = original;
 		this.isAmbientOcclusion = isAmbientOcclusion;
 		this.overlays = overlays;
+		this.itemModel = itemModel;
 	}
 
 	@Override
@@ -34,13 +40,21 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 	{
 		List<BakedQuad> ret = new ArrayList<BakedQuad>();
 
-		ret.addAll(original.getFaceQuads(p_177551_1_));
-		
-		if (overlays.containsKey(p_177551_1_))
+		EnumWorldBlockLayer layer = MinecraftForgeClient.getRenderLayer();
+
+		if (itemModel || layer == EnumWorldBlockLayer.SOLID)
 		{
-			ret.add(createSidedBakedQuad(0, 1.00001F, 0, 1.00001F, 1.00001F, overlays.get(p_177551_1_), p_177551_1_));
+			ret.addAll(original.getFaceQuads(p_177551_1_));
 		}
-		
+
+		if (itemModel || layer == EnumWorldBlockLayer.TRANSLUCENT)
+		{
+			if (overlays.containsKey(p_177551_1_))
+			{
+				ret.add(createSidedBakedQuad(-0.0001F, 1.0001F, -0.0001F, 1.0001F, 1.0001F, overlays.get(p_177551_1_), p_177551_1_));
+			}
+		}
+
 		return ret;
 	}
 
@@ -86,16 +100,24 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 	public List<BakedQuad> getGeneralQuads()
 	{
 		List<BakedQuad> ret = new ArrayList<BakedQuad>();
+		EnumWorldBlockLayer layer = MinecraftForgeClient.getRenderLayer();
 
-		ret.addAll(original.getGeneralQuads());
-
-		for (EnumFacing f : EnumFacing.values())
+		if (itemModel || layer == EnumWorldBlockLayer.SOLID)
 		{
-			if (overlays.containsKey(f))
+			ret.addAll(original.getGeneralQuads());
+		}
+
+		if (itemModel || layer == EnumWorldBlockLayer.TRANSLUCENT)
+		{
+			for (EnumFacing f : EnumFacing.values())
 			{
-				ret.add(createSidedBakedQuad(-0.0001F, 1.0001F, -0.0001F, 1.0001F, 1.0001F, overlays.get(f), f));
+				if (overlays.containsKey(f))
+				{
+					ret.add(createSidedBakedQuad(-0.0001F, 1.0001F, -0.0001F, 1.0001F, 1.0001F, overlays.get(f), f));
+				}
 			}
 		}
+
 		return ret;
 	}
 
@@ -127,7 +149,7 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 	@Deprecated
 	public ItemCameraTransforms getItemCameraTransforms()
 	{
-		return ItemCameraTransforms.DEFAULT;
+		return RenderReference.BLOCK_ITEM_TRANSFORM;
 	}
 
 	private static Vec3 rotate(Vec3 vec, EnumFacing side)
