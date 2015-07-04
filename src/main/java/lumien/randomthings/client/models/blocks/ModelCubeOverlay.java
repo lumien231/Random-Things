@@ -51,7 +51,7 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 		{
 			if (overlays.containsKey(p_177551_1_))
 			{
-				ret.add(createSidedBakedQuad(-0.0001F, 1.0001F, -0.0001F, 1.0001F, 1.0001F, overlays.get(p_177551_1_), p_177551_1_));
+				ret.add(createSidedBakedQuad(-0.0002F, 1.0002F, -0.0002F, 1.0002F, 1.0002F, overlays.get(p_177551_1_), p_177551_1_));
 			}
 		}
 
