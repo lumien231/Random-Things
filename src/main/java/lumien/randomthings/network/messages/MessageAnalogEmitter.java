@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class MessageAnalogEmitter implements IRTMessage
 {
@@ -74,5 +75,11 @@ public class MessageAnalogEmitter implements IRTMessage
 			}
 		});
 
+	}
+
+	@Override
+	public Side getHandlingSide()
+	{
+		return Side.SERVER;
 	}
 }

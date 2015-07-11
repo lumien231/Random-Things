@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class MessageChatDetector implements IRTMessage
 {
@@ -69,6 +70,12 @@ public class MessageChatDetector implements IRTMessage
 			}
 		});
 
+	}
+	
+	@Override
+	public Side getHandlingSide()
+	{
+		return Side.SERVER;
 	}
 
 }
