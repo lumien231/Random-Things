@@ -3,8 +3,6 @@ package lumien.randomthings.item;
 import java.util.List;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.handler.EnderLetterHandler;
-import lumien.randomthings.handler.EnderLetterHandler.EnderMailboxInventory;
 import lumien.randomthings.lib.GuiIds;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

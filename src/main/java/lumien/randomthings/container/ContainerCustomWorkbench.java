@@ -2,7 +2,6 @@ package lumien.randomthings.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;

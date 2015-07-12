@@ -15,8 +15,6 @@ import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.worldgen.ModDimensions;
 import lumien.randomthings.worldgen.WorldGenBeans;
 import lumien.randomthings.worldgen.WorldGenCores;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -27,12 +25,8 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry.ItemStackHolder;
-import net.minecraftforge.oredict.OreDictionary;
-
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION)
@@ -93,12 +87,6 @@ public class RandomThings
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		proxy.registerRenderers();
-	}
-
-	@EventHandler
-	public void serverStarting(FMLServerStartingEvent event)
-	{
-
 	}
 
 	public ASMDataTable getASMData()

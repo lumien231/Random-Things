@@ -95,7 +95,7 @@ public class RTEventHandler
 		ModelFluidDisplay modelFluidDisplay = new ModelFluidDisplay();
 		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:fluidDisplay", "normal"), modelFluidDisplay);
 		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:fluidDisplay", "inventory"), modelFluidDisplay);
-		
+
 		ModelCustomWorkbench modelCustomWorkbench = new ModelCustomWorkbench();
 		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:customWorkbench", "normal"), modelCustomWorkbench);
 		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:customWorkbench", "inventory"), modelCustomWorkbench);

@@ -3,7 +3,6 @@ package lumien.randomthings.container;
 import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.container.slots.SlotDisplay;
 import lumien.randomthings.container.slots.SlotOutputOnly;
-import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

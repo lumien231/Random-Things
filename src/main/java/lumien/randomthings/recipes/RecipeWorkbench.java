@@ -1,7 +1,6 @@
 package lumien.randomthings.recipes;
 
 import lumien.randomthings.block.ModBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;

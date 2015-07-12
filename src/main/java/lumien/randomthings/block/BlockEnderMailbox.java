@@ -1,9 +1,6 @@
 package lumien.randomthings.block;
 
-import java.util.List;
 import java.util.Random;
-import java.util.UUID;
-
 import com.mojang.authlib.GameProfile;
 
 import lumien.randomthings.RandomThings;
@@ -19,14 +16,12 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
@@ -61,23 +56,23 @@ public class BlockEnderMailbox extends BlockContainerBase
 		{
 			for (int i = 0; i < 4; ++i)
 			{
-				double d0 = (double) ((float) pos.getX() + rand.nextFloat());
-				double d1 = (double) ((float) pos.getY() + rand.nextFloat());
-				double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
-				double d3 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
-				double d4 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
-				double d5 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+				double d0 = pos.getX() + rand.nextFloat();
+				double d1 = pos.getY() + rand.nextFloat();
+				double d2 = pos.getZ() + rand.nextFloat();
+				double d3 = (rand.nextFloat() - 0.5D) * 0.5D;
+				double d4 = (rand.nextFloat() - 0.5D) * 0.5D;
+				double d5 = (rand.nextFloat() - 0.5D) * 0.5D;
 				int j = rand.nextInt(2) * 2 - 1;
 
 				if (worldIn.getBlockState(pos.west()).getBlock() != this && worldIn.getBlockState(pos.east()).getBlock() != this)
 				{
-					d0 = (double) pos.getX() + 0.5D + 0.25D * (double) j;
-					d3 = (double) (rand.nextFloat() * 2.0F * (float) j);
+					d0 = pos.getX() + 0.5D + 0.25D * j;
+					d3 = rand.nextFloat() * 2.0F * j;
 				}
 				else
 				{
-					d2 = (double) pos.getZ() + 0.5D + 0.25D * (double) j;
-					d5 = (double) (rand.nextFloat() * 2.0F * (float) j);
+					d2 = pos.getZ() + 0.5D + 0.25D * j;
+					d5 = rand.nextFloat() * 2.0F * j;
 				}
 
 				worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5, new int[0]);
@@ -167,6 +162,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 		return worldIn.isAirBlock(pos.up()) && super.canPlaceBlockAt(worldIn, pos);
 	}
 
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
 	{
 		EnumFacing facing = (EnumFacing) worldIn.getBlockState(pos).getValue(FACING);
@@ -181,22 +177,26 @@ public class BlockEnderMailbox extends BlockContainerBase
 		}
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isFullCube()
 	{
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IBlockState getStateForEntityRender(IBlockState state)
 	{
 		return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		boolean active;
@@ -220,21 +220,25 @@ public class BlockEnderMailbox extends BlockContainerBase
 		return this.getDefaultState().withProperty(FACING, enumfacing).withProperty(ACTIVE, active);
 	}
 
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		return ((EnumFacing) state.getValue(FACING)).getIndex() + ((Boolean) state.getValue(ACTIVE) ? 6 : 0);
 	}
 
+	@Override
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] { FACING, ACTIVE });
 	}
 
+	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(ACTIVE, false);
 	}
 
+	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(ACTIVE, false), 2);

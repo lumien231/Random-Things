@@ -1,6 +1,5 @@
 package lumien.randomthings.container.inventories;
 
-import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

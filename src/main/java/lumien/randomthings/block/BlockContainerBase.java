@@ -2,7 +2,6 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.RandomThings;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;

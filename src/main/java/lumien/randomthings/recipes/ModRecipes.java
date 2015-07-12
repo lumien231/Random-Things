@@ -23,7 +23,7 @@ public class ModRecipes
 
 	public static void register()
 	{
-		RecipeSorter.INSTANCE.register("randomthings:customWorkbenchRecipe", RecipeWorkbench.class, Category.SHAPED, "");
+		RecipeSorter.register("randomthings:customWorkbenchRecipe", RecipeWorkbench.class, Category.SHAPED, "");
 
 		final ItemStack stone = new ItemStack(Blocks.stone);
 		final ItemStack rottenFlesh = new ItemStack(Items.rotten_flesh);

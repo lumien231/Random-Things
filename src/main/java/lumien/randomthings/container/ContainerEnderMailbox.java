@@ -1,6 +1,5 @@
 package lumien.randomthings.container;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.container.slots.SlotOutputOnly;
 import lumien.randomthings.handler.EnderLetterHandler;
 import lumien.randomthings.handler.EnderLetterHandler.EnderMailboxInventory;
@@ -8,10 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
 public class ContainerEnderMailbox extends Container
