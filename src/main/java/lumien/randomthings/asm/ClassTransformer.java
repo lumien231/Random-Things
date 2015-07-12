@@ -28,6 +28,7 @@ import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
@@ -94,7 +95,60 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchLiquidBlock(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.network.NetHandlerPlayServer"))
+		{
+			return patchNetHandler(basicClass);
+		}
 		return basicClass;
+	}
+
+	private byte[] patchNetHandler(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found NetHandler: " + classNode.name);
+
+		MethodNode processPlayerBlockPlacement = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_147346_a")))
+			{
+				processPlayerBlockPlacement = mn;
+			}
+		}
+
+		int counter = 0;
+
+		for (int i = 0; i < processPlayerBlockPlacement.instructions.size(); i++)
+		{
+			AbstractInsnNode ain = processPlayerBlockPlacement.instructions.get(i);
+			
+			if (ain instanceof MethodInsnNode)
+			{
+				MethodInsnNode min = (MethodInsnNode) ain;
+				
+				if (min.name.equals(MCPNames.method("func_77944_b")))
+				{
+					AbstractInsnNode next = processPlayerBlockPlacement.instructions.get(i+1);
+					
+					if (next.getOpcode() == Opcodes.AASTORE)
+					{
+						logger.log(Level.DEBUG, " - Patched Equipped Item Cloning");
+						processPlayerBlockPlacement.instructions.insert(next, new InsnNode(Opcodes.POP));
+						processPlayerBlockPlacement.instructions.insert(next, new InsnNode(Opcodes.POP));
+						processPlayerBlockPlacement.instructions.insert(next, new InsnNode(Opcodes.POP));
+						processPlayerBlockPlacement.instructions.remove(next);
+					}
+				}
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchLiquidBlock(byte[] basicClass)
