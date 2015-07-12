@@ -9,8 +9,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -21,6 +23,8 @@ public class ModRecipes
 
 	public static void register()
 	{
+		RecipeSorter.INSTANCE.register("randomthings:customWorkbenchRecipe", RecipeWorkbench.class, Category.SHAPED, "");
+
 		final ItemStack stone = new ItemStack(Blocks.stone);
 		final ItemStack rottenFlesh = new ItemStack(Items.rotten_flesh);
 		final ItemStack boneMeal = new ItemStack(Items.dye, 1, 15);
