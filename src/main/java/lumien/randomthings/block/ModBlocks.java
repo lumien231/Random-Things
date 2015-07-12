@@ -31,6 +31,7 @@ public class ModBlocks
 	public static BlockAnalogEmitter analogEmitter;
 	public static BlockFluidDisplay fluidDisplay;
 	public static BlockCustomWorkbench customWorkbench;
+	public static BlockEnderMailbox enderMailbox;
 
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
@@ -66,6 +67,7 @@ public class ModBlocks
 		analogEmitter = new BlockAnalogEmitter();
 		fluidDisplay = new BlockFluidDisplay();
 		customWorkbench = new BlockCustomWorkbench();
+		enderMailbox = new BlockEnderMailbox();
 
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

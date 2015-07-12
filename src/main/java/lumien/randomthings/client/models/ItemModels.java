@@ -43,6 +43,7 @@ public class ItemModels
 		registerBlock(ModBlocks.analogEmitter);
 		registerBlock(ModBlocks.fluidDisplay);
 		registerBlock(ModBlocks.customWorkbench);
+		registerBlock(ModBlocks.enderMailbox);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);
@@ -63,6 +64,7 @@ public class ItemModels
 		registerItem(ModItems.magicHood);
 		registerItem(ModItems.bottleOfAir);
 		registerItem(ModItems.rezStone);
+		registerItem(ModItems.enderLetter);
 		// registerItem(ModItems.craftingRecipe);
 
 		registerBricks();

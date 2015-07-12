@@ -25,6 +25,7 @@ public class ModTileEntitys
 		registerTEBackward(TileEntityAnalogEmitter.class, "analogEmitter");
 		registerTE(TileEntityFluidDisplay.class, "fluidDisplay");
 		registerTE(TileEntityCustomWorkbench.class, "customWorkbench");
+		registerTE(TileEntityEnderMailbox.class, "enderMailbox");
 	}
 
 	private static void registerTEBackward(Class<? extends TileEntity> clazz, String name)

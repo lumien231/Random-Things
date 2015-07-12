@@ -88,8 +88,9 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.lightRedirector), "pgp", "gxg", "pgp", 'g', "blockGlass", 'p', "plankWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.imbuingStation), "xwx", "vcv", "lel", 'w', Items.water_bucket, 'v', Blocks.vine, 'c', Blocks.hardened_clay, 'l', Blocks.waterlily, 'e', Items.emerald));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.analogEmitter), "tir", "iii", "rit", 't', redstoneTorch, 'i', "ingotIron", 'r', redstoneDust));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fluidDisplay),"ggg","gbg","ggg",'g',"blockGlassColorless",'b',Items.glass_bottle));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fluidDisplay), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', Items.glass_bottle));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderMailbox), "ehe", "iii", "xfx", 'e', enderPearl, 'h', Blocks.hopper, 'i', "ingotIron", 'f', Blocks.oak_fence));
+
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.grass));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stableEnderpearl), "olo", "lel", "olo", 'o', obsidian, 'l', lapis, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', bean, 'n', "nuggetGold"));
@@ -99,6 +100,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.inertLinkingOrb), "rtr", "tst", "rtr", 'r', redstoneDust, 't', ghastTear, 's', "stone"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneTool), "xrx", "xsx", "xsx", 'r', redstoneDust, 's', "stickWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.obsidianSkull), "oro", "bwb", "oro", 'o', obsidian, 'r', Items.blaze_rod, 'w', witherSkull, 'b', netherBrick));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderLetter),"xxx","pep","xpx",'p',Items.paper,'e',enderPearl));
 
 		// Biome Blocks
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 0), "ccc", "cbc", "ccc", 'c', cobblestone, 'b', biomeCrystal));
@@ -109,8 +111,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeGlass, 16), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', biomeCrystal));
 
 		GameRegistry.addRecipe(new RecipeWorkbench());
-		
-		
+
 		createDyeRecipes(new ItemStack(Blocks.brick_block), ModBlocks.stainedBrick);
 		createGrassSeedsRecipes();
 

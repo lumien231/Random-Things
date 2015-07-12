@@ -26,6 +26,7 @@ tile.spectreBlock.name=Spectre Block
 tile.analogEmitter.name=Analog Emitter
 tile.fluidDisplay.name=Fluid Display
 tile.customWorkbench.name=Crafting Table
+tile.enderMailbox.name=Ender Mailbox
 
 tile.natureCore.name=Nature Core
 tile.netherCore.name=Nether Core
@@ -93,6 +94,7 @@ item.obsidianWaterWalkingBoots.name=Obsidian Water Walking Boots
 item.magicHood.name=Magic Hood
 item.bottleOfAir.name=Bottle of Air
 item.rezStone.name=Blood Stone
+item.enderLetter.name=Ender Letter
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -136,5 +138,12 @@ gui.redstoneInterface.targetX=Target-X: %s
 gui.redstoneInterface.targetY=Target-Y: %s
 gui.redstoneInterface.targetZ=Target-Z: %s
 
+block.enderMailbox.owner=You are not the owner of this mailbox
+
 item.dungeonChestGenerator.category=Category: %s
 item.dungeonChestGenerator.shiftCategory=Shift click to change category
+
+item.enderLetter.sender=Sender: %s
+item.enderLetter.receiver=Receiver: %s
+item.enderLetter.noPlayer=%s does not seem to reside in this world
+item.enderLetter.noSpace=The letter appears to get rejected

@@ -112,7 +112,7 @@ public class BlockFluidDisplay extends BlockContainerBase
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createTileEntity(World world,IBlockState state)
 	{
 		return new TileEntityFluidDisplay();
 	}
