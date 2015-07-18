@@ -23,7 +23,7 @@ public class ContainerEnderLetter extends Container
 	public ContainerEnderLetter(EntityPlayer player, World world, int x, int y, int z)
 	{
 		enderLetterStack = player.inventory.getCurrentItem();
-		inventory = new InventoryItem("EnderLetterContent", 9, enderLetterStack);
+		inventory = new InventoryItem(player,"EnderLetterContent", 9, enderLetterStack);
 
 		NBTTagCompound compound;
 
@@ -43,7 +43,7 @@ public class ContainerEnderLetter extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return playerIn.getCurrentEquippedItem() == enderLetterStack;
+		return ItemStack.areItemStacksEqual(inventory.getItemStack(), playerIn.getCurrentEquippedItem());
 	}
 
 	@Override

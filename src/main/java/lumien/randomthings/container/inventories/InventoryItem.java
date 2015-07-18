@@ -10,14 +10,16 @@ import net.minecraft.util.IChatComponent;
 
 public class InventoryItem implements IInventory
 {
+	EntityPlayer player;
 	String name;
 	int size;
 	ItemStack itemStack;
 	ItemStack[] cacheInventory;
 	boolean reading;
 
-	public InventoryItem(String name, int size, ItemStack itemStack)
+	public InventoryItem(EntityPlayer player, String name, int size, ItemStack itemStack)
 	{
+		this.player = player;
 		this.name = name;
 		this.size = size;
 		this.itemStack = itemStack;
@@ -41,7 +43,7 @@ public class InventoryItem implements IInventory
 
 			this.reading = true;
 			InventoryUtil.readInventoryFromCompound(inventoryCompound, this);
-			
+
 			this.reading = false;
 		}
 	}
@@ -149,16 +151,22 @@ public class InventoryItem implements IInventory
 	@Override
 	public void markDirty()
 	{
-		if (itemStack.getTagCompound() == null)
+		ItemStack equipped = player.getCurrentEquippedItem();
+
+		if (equipped != null && ItemStack.areItemStacksEqual(equipped, itemStack))
 		{
-			itemStack.setTagCompound(new NBTTagCompound());
+			itemStack = equipped;
+			if (itemStack.getTagCompound() == null)
+			{
+				itemStack.setTagCompound(new NBTTagCompound());
+			}
+
+			NBTTagCompound compound = itemStack.getTagCompound().getCompoundTag(name);
+
+			InventoryUtil.saveInventoryInCompound(compound, this);
+
+			itemStack.getTagCompound().setTag(name, compound);
 		}
-
-		NBTTagCompound compound = itemStack.getTagCompound().getCompoundTag(name);
-
-		InventoryUtil.saveInventoryInCompound(compound, this);
-		
-		itemStack.getTagCompound().setTag(name, compound);
 	}
 
 	@Override
@@ -207,6 +215,11 @@ public class InventoryItem implements IInventory
 		{
 			this.cacheInventory[i] = null;
 		}
+	}
+
+	public ItemStack getItemStack()
+	{
+		return itemStack;
 	}
 
 }
