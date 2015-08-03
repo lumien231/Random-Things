@@ -26,7 +26,10 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 
 	public TileEntityRedstoneInterface()
 	{
-		interfaces.add(this);
+		synchronized (interfaces)
+		{
+			interfaces.add(this);
+		}
 	}
 
 	@Override
@@ -82,7 +85,7 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 
 	static HashSet<BlockPos> checkedPositions = new HashSet<BlockPos>();
 
-	public static int getRedstonePower(World blockWorld, BlockPos pos, EnumFacing facing)
+	public static synchronized int getRedstonePower(World blockWorld, BlockPos pos, EnumFacing facing)
 	{
 		if (checkedPositions.contains(pos))
 		{
@@ -91,22 +94,25 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 		checkedPositions.add(pos);
 
 		BlockPos checkingBlock = pos.offset(facing.getOpposite());
-		for (TileEntityRedstoneInterface redstoneInterface : interfaces)
+		synchronized (interfaces)
 		{
-			if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.target != null)
+			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
 			{
-				if (redstoneInterface.target.equals(pos))
+				if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.target != null)
 				{
-					int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos, facing);
-					checkedPositions.remove(pos);
-					return remotePower;
-				}
-				else if (redstoneInterface.target.equals(checkingBlock))
-				{
-					int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos.offset(facing), facing);
+					if (redstoneInterface.target.equals(pos))
+					{
+						int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos, facing);
+						checkedPositions.remove(pos);
+						return remotePower;
+					}
+					else if (redstoneInterface.target.equals(checkingBlock))
+					{
+						int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos.offset(facing), facing);
 
-					checkedPositions.remove(pos);
-					return remotePower;
+						checkedPositions.remove(pos);
+						return remotePower;
+					}
 				}
 			}
 		}

@@ -147,21 +147,24 @@ public class ClientProxy extends CommonProxy
 		{
 			worldRenderer.startDrawing(GL11.GL_LINES);
 			worldRenderer.setColorOpaque(255, 0, 0);
-			for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
+			synchronized (TileEntityRedstoneInterface.interfaces)
 			{
-				if (!redstoneInterface.isInvalid())
+				for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
 				{
-					BlockPos position = redstoneInterface.getPos();
-					BlockPos target = redstoneInterface.getTarget();
-
-					if (position.distanceSq(player.getPosition()) < 225)
+					if (!redstoneInterface.isInvalid())
 					{
-						if (target != null)
+						BlockPos position = redstoneInterface.getPos();
+						BlockPos target = redstoneInterface.getTarget();
+
+						if (position.distanceSq(player.getPosition()) < 225)
 						{
-							if (redstoneInterface.getWorld().isRemote)
+							if (target != null)
 							{
-								worldRenderer.addVertex(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ);
-								worldRenderer.addVertex(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ);
+								if (redstoneInterface.getWorld().isRemote)
+								{
+									worldRenderer.addVertex(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ);
+									worldRenderer.addVertex(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ);
+								}
 							}
 						}
 					}
