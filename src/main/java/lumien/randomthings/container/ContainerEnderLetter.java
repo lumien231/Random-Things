@@ -43,7 +43,7 @@ public class ContainerEnderLetter extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return ItemStack.areItemStacksEqual(inventory.getItemStack(), playerIn.getCurrentEquippedItem());
+		return ItemStack.areItemsEqual(inventory.getItemStack(), playerIn.getCurrentEquippedItem());
 	}
 
 	@Override

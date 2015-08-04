@@ -34,6 +34,12 @@ public class ItemEnderLetter extends ItemBase
 	}
 
 	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
+	{
+		return oldStack.getItem() != newStack.getItem();
+	}
+
+	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
 	{
 		super.addInformation(stack, playerIn, tooltip, advanced);
@@ -52,7 +58,7 @@ public class ItemEnderLetter extends ItemBase
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean doesSneakBypassUse(World world, BlockPos pos, EntityPlayer player)
 	{
