@@ -92,6 +92,8 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 			return 0;
 		}
 		checkedPositions.add(pos);
+		
+		int totalPower = 0;
 
 		BlockPos checkingBlock = pos.offset(facing.getOpposite());
 		synchronized (interfaces)
@@ -104,20 +106,28 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 					{
 						int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos, facing);
 						checkedPositions.remove(pos);
-						return remotePower;
+						
+						if (remotePower > totalPower)
+						{
+							totalPower = remotePower;
+						}
 					}
 					else if (redstoneInterface.target.equals(checkingBlock))
 					{
 						int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos.offset(facing), facing);
-
 						checkedPositions.remove(pos);
-						return remotePower;
+						
+						if (remotePower > totalPower)
+						{
+							totalPower = remotePower;
+						}
 					}
 				}
 			}
 		}
+		
 		checkedPositions.remove(pos);
-		return 0;
+		return totalPower;
 	}
 
 	public static int getStrongPower(BlockPos pos, EnumFacing facing)
