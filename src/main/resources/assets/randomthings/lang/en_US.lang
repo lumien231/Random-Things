@@ -27,6 +27,7 @@ tile.analogEmitter.name=Analog Emitter
 tile.fluidDisplay.name=Fluid Display
 tile.customWorkbench.name=Crafting Table
 tile.enderMailbox.name=Ender Mailbox
+tile.pitcherPlant.name=Pitcher Plant
 
 tile.natureCore.name=Nature Core
 tile.netherCore.name=Nether Core

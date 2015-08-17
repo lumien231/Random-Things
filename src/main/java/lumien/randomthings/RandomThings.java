@@ -13,7 +13,7 @@ import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.ModRecipes;
 import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.worldgen.ModDimensions;
-import lumien.randomthings.worldgen.WorldGenBeans;
+import lumien.randomthings.worldgen.WorldGenPlants;
 import lumien.randomthings.worldgen.WorldGenCores;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -79,7 +79,7 @@ public class RandomThings
 		ModRecipes.register();
 		ModDimensions.register();
 
-		GameRegistry.registerWorldGenerator(new WorldGenBeans(), 1000);
+		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 1000);
 		GameRegistry.registerWorldGenerator(new WorldGenCores(), 1000);
 	}
 

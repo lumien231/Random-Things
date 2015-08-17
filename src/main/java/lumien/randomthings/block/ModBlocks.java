@@ -32,6 +32,7 @@ public class ModBlocks
 	public static BlockFluidDisplay fluidDisplay;
 	public static BlockCustomWorkbench customWorkbench;
 	public static BlockEnderMailbox enderMailbox;
+	public static BlockPitcherPlant pitcherPlant;
 
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
@@ -68,6 +69,7 @@ public class ModBlocks
 		fluidDisplay = new BlockFluidDisplay();
 		customWorkbench = new BlockCustomWorkbench();
 		enderMailbox = new BlockEnderMailbox();
+		pitcherPlant = new BlockPitcherPlant();
 
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();
