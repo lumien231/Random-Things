@@ -34,7 +34,10 @@ public class BlockLightRedirector extends BlockBase
 		{
 			for (EnumFacing facing : EnumFacing.VALUES)
 			{
-				worldIn.markBlockForUpdate(pos.offset(facing));
+				if (!(worldIn.getBlockState(pos.offset(facing)).getBlock() instanceof BlockLightRedirector))
+				{
+					worldIn.markBlockForUpdate(pos.offset(facing));
+				}
 			}
 		}
 	}
