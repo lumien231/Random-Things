@@ -36,7 +36,7 @@ public class WorldGenPlants implements IWorldGenerator
 			BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 			BiomeGenBase biome = world.getBiomeGenForCoords(target);
 
-			if (world.isAirBlock(target) && biome.getFloatTemperature(target) >= 0.8F && biome.getFloatRainfall() >= 0.8F && ModBlocks.pitcherPlant.canBlockStay(world, target, ModBlocks.pitcherPlant.getDefaultState()))
+			if (world.isAirBlock(target) && biome.getFloatTemperature(target) >= 0.8F && ModBlocks.pitcherPlant.canBlockStay(world, target, ModBlocks.pitcherPlant.getDefaultState()))
 			{
 				world.setBlockState(target, ModBlocks.pitcherPlant.getDefaultState(), 2);
 			}
