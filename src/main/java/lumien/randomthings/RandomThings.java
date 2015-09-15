@@ -1,5 +1,7 @@
 package lumien.randomthings;
 
+import org.apache.logging.log4j.Logger;
+
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.ModConfiguration;
@@ -13,8 +15,8 @@ import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.ModRecipes;
 import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.worldgen.ModDimensions;
-import lumien.randomthings.worldgen.WorldGenPlants;
 import lumien.randomthings.worldgen.WorldGenCores;
+import lumien.randomthings.worldgen.WorldGenPlants;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +29,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION)
 public class RandomThings

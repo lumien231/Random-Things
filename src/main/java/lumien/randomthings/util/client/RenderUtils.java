@@ -12,6 +12,59 @@ public class RenderUtils
 {
 	static Gui gui = new Gui();
 
+	public static void drawCube(float posX, float posY, float posZ, float width, float length, float height, float red, float green, float blue, float alpha)
+	{
+		Minecraft.getMinecraft().entityRenderer.disableLightmap();
+
+		Tessellator t = Tessellator.getInstance();
+		WorldRenderer wr = t.getWorldRenderer();
+
+		GlStateManager.disableTexture2D();
+
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(posX, posY, posZ);
+
+		wr.startDrawingQuads();
+		wr.setColorRGBA_F(red, green, blue, alpha);
+
+		wr.addVertex(0F, 0F, 0F); // P1
+		wr.addVertex(0F, height, 0F); // P2
+		wr.addVertex(width, height, 0F); // P3
+		wr.addVertex(width, 0F, 0F); // P4
+
+		wr.addVertex(width, height, 0F); // P1
+		wr.addVertex(width, height, length); // P2
+		wr.addVertex(width, 0F, length); // P3
+		wr.addVertex(width, 0F, 0F); // P4
+
+		wr.addVertex(width, height, length); // P1
+		wr.addVertex(0F, height, length); // P1
+		wr.addVertex(0F, 0F, length); // P1
+		wr.addVertex(width, 0F, length); // P1
+
+		wr.addVertex(0F, height, length); // P1
+		wr.addVertex(0F, height, 0F); // P1
+		wr.addVertex(0F, 0F, 0F); // P1
+		wr.addVertex(0F, 0F, length); // P1
+
+		wr.addVertex(0F, 0F, 0F); // P1
+		wr.addVertex(width, 0F, 0F); // P1
+		wr.addVertex(width, 0F, length); // P1
+		wr.addVertex(0F, 0F, length); // P1
+
+		wr.addVertex(0F, height, 0F); // P1
+		wr.addVertex(0F, height, length); // P2
+		wr.addVertex(width, height, length); // P3
+		wr.addVertex(width, height, 0F); // P4
+
+		t.draw();
+
+		GlStateManager.popMatrix();
+		GlStateManager.enableTexture2D();
+
+		Minecraft.getMinecraft().entityRenderer.enableLightmap();
+	}
+
 	public static void drawCube(float posX, float posY, float posZ, float size, float red, float green, float blue, float alpha)
 	{
 		Minecraft.getMinecraft().entityRenderer.disableLightmap();

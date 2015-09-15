@@ -118,7 +118,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox()
+	public AxisAlignedBB getCollisionBoundingBox()
 	{
 		return null;
 	}

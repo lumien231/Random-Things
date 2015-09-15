@@ -28,6 +28,6 @@ public class SingleRandomChestContent extends WeightedRandomChestContent
 			}
 		}
 
-		return net.minecraftforge.common.ChestGenHooks.generateStacks(random, theItemId, theMinimumChanceToGenerateItem, theMaximumChanceToGenerateItem);
+		return net.minecraftforge.common.ChestGenHooks.generateStacks(random, theItemId, minStackSize, maxStackSize);
 	}
 }

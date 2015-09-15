@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockSpecialChest;
 import lumien.randomthings.block.ModBlocks;
@@ -38,8 +40,6 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.apache.logging.log4j.Level;
 
 public class AsmHandler
 {

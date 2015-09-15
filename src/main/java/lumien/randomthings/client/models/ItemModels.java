@@ -45,6 +45,7 @@ public class ItemModels
 		registerBlock(ModBlocks.customWorkbench);
 		registerBlock(ModBlocks.enderMailbox);
 		registerBlock(ModBlocks.pitcherPlant);
+		registerBlock(ModBlocks.specialChest);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);
