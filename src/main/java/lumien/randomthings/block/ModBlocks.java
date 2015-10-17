@@ -33,6 +33,7 @@ public class ModBlocks
 	public static BlockCustomWorkbench customWorkbench;
 	public static BlockEnderMailbox enderMailbox;
 	public static BlockPitcherPlant pitcherPlant;
+	public static BlockPlatform platform;
 
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
@@ -70,6 +71,7 @@ public class ModBlocks
 		customWorkbench = new BlockCustomWorkbench();
 		enderMailbox = new BlockEnderMailbox();
 		pitcherPlant = new BlockPitcherPlant();
+		platform = new BlockPlatform();
 
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

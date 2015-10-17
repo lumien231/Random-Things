@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "variant=oak": { "model": "randomthings:platform/oak" },
+        "variant=spruce": { "model": "randomthings:platform/spruce" },
+        "variant=birch": { "model": "randomthings:platform/birch" },
+        "variant=acacia": { "model": "randomthings:platform/acacia" },
+        "variant=jungle": { "model": "randomthings:platform/jungle" },
+        "variant=darkoak": { "model": "randomthings:platform/darkOak" }
+    }
+}

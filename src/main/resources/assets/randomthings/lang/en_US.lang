@@ -76,6 +76,13 @@ tile.biomeStone.chiseled.name=Chiseled Biome Stone Bricks
 tile.specialChest.nature.name=Nature Chest
 tile.specialChest.water.name=Water Chest
 
+tile.platform.oak.name=Oak Platform
+tile.platform.spruce.name=Spruce Platform
+tile.platform.birch.name=Birch Platform
+tile.platform.acacia.name=Acacia Platform
+tile.platform.jungle.name=Jungle Platform
+tile.platform.darkOak.name=Dark Oak Platform
+
 item.chaliceOfImmortality.name=Chalice of Immortality
 item.positionFilter.name=Position Filter
 item.biomeCrystal.name=Biome Crystal

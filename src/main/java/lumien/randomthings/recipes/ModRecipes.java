@@ -104,7 +104,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.inertLinkingOrb), "rtr", "tst", "rtr", 'r', redstoneDust, 't', ghastTear, 's', "stone"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneTool), "xrx", "xsx", "xsx", 'r', redstoneDust, 's', "stickWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.obsidianSkull), "oro", "bwb", "oro", 'o', obsidian, 'r', Items.blaze_rod, 'w', witherSkull, 'b', netherBrick));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderLetter),"xxx","pep","xpx",'p',Items.paper,'e',enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderLetter), "xxx", "pep", "xpx", 'p', Items.paper, 'e', enderPearl));
 
 		// Biome Blocks
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 0), "ccc", "cbc", "ccc", 'c', cobblestone, 'b', biomeCrystal));
@@ -113,6 +113,14 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 3), "ccc", "cbc", "ccc", 'c', crackedStoneBricks, 'b', biomeCrystal));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 4), "ccc", "cbc", "ccc", 'c', chiseledStoneBricks, 'b', biomeCrystal));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeGlass, 16), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', biomeCrystal));
+
+		// Platforms
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 0), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 0), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 1), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 1), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 2), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 2), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 3), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 3), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 4), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 4), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 5), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 5), 'e', enderPearl));
 
 		GameRegistry.addRecipe(new RecipeWorkbench());
 

@@ -46,6 +46,7 @@ public class ItemModels
 		registerBlock(ModBlocks.enderMailbox);
 		registerBlock(ModBlocks.pitcherPlant);
 		registerBlock(ModBlocks.specialChest);
+		registerBlock(ModBlocks.platform);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);
@@ -76,6 +77,7 @@ public class ItemModels
 		registerBeans();
 		registerImbues();
 		registerChests();
+		registerPlatforms();
 	}
 
 	private static void registerChests()
@@ -159,5 +161,22 @@ public class ItemModels
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 2, new ModelResourceLocation("randomthings:biomeStone/brick", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 3, new ModelResourceLocation("randomthings:biomeStone/cracked", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 4, new ModelResourceLocation("randomthings:biomeStone/chiseled", "inventory"));
+	}
+	
+	private static void registerPlatforms()
+	{
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.platform), "randomthings:platform/oak");
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.platform), "randomthings:platform/birch");
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.platform), "randomthings:platform/spruce");
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.platform), "randomthings:platform/acacia");
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.platform), "randomthings:platform/jungle");
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.platform), "randomthings:platform/darkOak");
+
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 0, new ModelResourceLocation("randomthings:platform/oak", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 1, new ModelResourceLocation("randomthings:platform/spruce", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 2, new ModelResourceLocation("randomthings:platform/birch", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 3, new ModelResourceLocation("randomthings:platform/jungle", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 4, new ModelResourceLocation("randomthings:platform/acacia", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 5, new ModelResourceLocation("randomthings:platform/darkOak", "inventory"));
 	}
 }
