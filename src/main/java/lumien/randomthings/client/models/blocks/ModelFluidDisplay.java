@@ -58,7 +58,7 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 			{
 				TextureMap textureMap = Minecraft.getMinecraft().getTextureMapBlocks();
 
-				cache.put(fluidName, new ModelCubeAll(flowing ? textureMap.getAtlasSprite(fluid.getFlowing().toString()) : textureMap.getAtlasSprite(fluid.getStill().toString()), false));
+				cache.put(fluidName, new ModelCubeAll(flowing ? textureMap.getAtlasSprite(fluid.getFlowing().toString()) : textureMap.getAtlasSprite(fluid.getStill().toString()), true));
 				return cache.get(fluidName);
 			}
 		}

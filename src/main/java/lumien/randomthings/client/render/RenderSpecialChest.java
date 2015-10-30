@@ -17,7 +17,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 {
 	private static final ResourceLocation textureNatureChest = new ResourceLocation("randomthings:textures/blocks/specialChest/nature.png");
 	private static final ResourceLocation textureWaterChest = new ResourceLocation("randomthings:textures/blocks/specialChest/water.png");
-
+	
 	private ModelChest simpleChest = new ModelChest();
 	private boolean isChristams;
 	private static final String __OBFID = "CL_00000965";

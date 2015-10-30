@@ -27,12 +27,37 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 
 	HashMap<EnumFacing, TextureAtlasSprite> overlays;
 
+	List<BakedQuad> solidQuads;
+	List<BakedQuad> translucentQuads;
+
 	public ModelCubeOverlay(IBakedModel original, HashMap<EnumFacing, TextureAtlasSprite> overlays, boolean isAmbientOcclusion, boolean itemModel)
 	{
 		this.original = original;
 		this.isAmbientOcclusion = isAmbientOcclusion;
 		this.overlays = overlays;
 		this.itemModel = itemModel;
+
+		solidQuads = new ArrayList<BakedQuad>();
+		translucentQuads = new ArrayList<BakedQuad>();
+
+		if (itemModel)
+		{
+			solidQuads.addAll(original.getGeneralQuads());
+		}
+
+		if (itemModel)
+		{
+			for (EnumFacing f : EnumFacing.values())
+			{
+				if (overlays.get(f) != null)
+				{
+					if (overlays.containsKey(f))
+					{
+						translucentQuads.add(createSidedBakedQuad(-0.0001F, 1.0001F, -0.0001F, 1.0001F, 1.0001F, overlays.get(f), f));
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -58,9 +83,17 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 		return ret;
 	}
 
-	private int[] vertexToInts(float x, float y, float z, int color, TextureAtlasSprite texture, float u, float v)
+	private int[] vertexToInts(float x, float y, float z, int color, TextureAtlasSprite texture, float u, float v, EnumFacing side)
 	{
-		return new int[] { Float.floatToRawIntBits(x), Float.floatToRawIntBits(y), Float.floatToRawIntBits(z), color, Float.floatToRawIntBits(texture.getInterpolatedU(u)), Float.floatToRawIntBits(texture.getInterpolatedV(v)), 0 };
+		int normal;
+
+		int xN = ((byte) (side.getFrontOffsetX() * 127)) & 0xFF;
+		int yN = ((byte) (side.getFrontOffsetY() * 127)) & 0xFF;
+		int zN = ((byte) (side.getFrontOffsetZ() * 127)) & 0xFF;
+
+		normal = xN | (yN << 0x08) | (zN << 0x10);
+
+		return new int[] { Float.floatToRawIntBits(x), Float.floatToRawIntBits(y), Float.floatToRawIntBits(z), color, Float.floatToRawIntBits(texture.getInterpolatedU(u)), Float.floatToRawIntBits(texture.getInterpolatedV(v)), normal };
 	}
 
 	private BakedQuad createSidedBakedQuad(float x1, float x2, float z1, float z2, float y, TextureAtlasSprite texture, EnumFacing side)
@@ -93,32 +126,24 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 			c4 = rotate(c4.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
 		}
 
-		return new BakedQuad(Ints.concat(vertexToInts((float) c1.xCoord, (float) c1.yCoord, (float) c1.zCoord, -1, texture, 0, 0), vertexToInts((float) c2.xCoord, (float) c2.yCoord, (float) c2.zCoord, -1, texture, 0, 16), vertexToInts((float) c3.xCoord, (float) c3.yCoord, (float) c3.zCoord, -1, texture, 16, 16), vertexToInts((float) c4.xCoord, (float) c4.yCoord, (float) c4.zCoord, -1, texture, 16, 0)), -1, side);
+		return new BakedQuad(Ints.concat(vertexToInts((float) c1.xCoord, (float) c1.yCoord, (float) c1.zCoord, -1, texture, 0, 0, side), vertexToInts((float) c2.xCoord, (float) c2.yCoord, (float) c2.zCoord, -1, texture, 0, 16, side), vertexToInts((float) c3.xCoord, (float) c3.yCoord, (float) c3.zCoord, -1, texture, 16, 16, side), vertexToInts((float) c4.xCoord, (float) c4.yCoord, (float) c4.zCoord, -1, texture, 16, 0, side)), -1, side);
 	}
 
 	@Override
 	public List<BakedQuad> getGeneralQuads()
 	{
-		List<BakedQuad> ret = new ArrayList<BakedQuad>();
 		EnumWorldBlockLayer layer = MinecraftForgeClient.getRenderLayer();
-
-		if (itemModel || layer == EnumWorldBlockLayer.SOLID)
+		
+		if (layer == EnumWorldBlockLayer.SOLID)
 		{
-			ret.addAll(original.getGeneralQuads());
+			return solidQuads;
 		}
-
-		if (itemModel || layer == EnumWorldBlockLayer.TRANSLUCENT)
+		else if (layer == EnumWorldBlockLayer.TRANSLUCENT)
 		{
-			for (EnumFacing f : EnumFacing.values())
-			{
-				if (overlays.containsKey(f))
-				{
-					ret.add(createSidedBakedQuad(-0.0001F, 1.0001F, -0.0001F, 1.0001F, 1.0001F, overlays.get(f), f));
-				}
-			}
+			return translucentQuads;
 		}
-
-		return ret;
+		
+		return new ArrayList<BakedQuad>();
 	}
 
 	@Override
