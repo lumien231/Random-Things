@@ -47,6 +47,7 @@ public class ItemModels
 		registerBlock(ModBlocks.pitcherPlant);
 		registerBlock(ModBlocks.specialChest);
 		registerBlock(ModBlocks.platform);
+		registerBlock(ModBlocks.entityDetector);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);

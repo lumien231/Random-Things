@@ -28,6 +28,7 @@ tile.fluidDisplay.name=Fluid Display
 tile.customWorkbench.name=Crafting Table
 tile.enderMailbox.name=Ender Mailbox
 tile.pitcherPlant.name=Pitcher Plant
+tile.entityDetector.name=Entity Detector
 
 tile.natureCore.name=Nature Core
 tile.netherCore.name=Nether Core
@@ -145,6 +146,17 @@ gui.redstoneInterface.notarget=No Target
 gui.redstoneInterface.targetX=Target-X: %s
 gui.redstoneInterface.targetY=Target-Y: %s
 gui.redstoneInterface.targetZ=Target-Z: %s
+
+gui.entityDetector.radiusX=Radius X: %s
+gui.entityDetector.radiusY=Radius Y: %s
+gui.entityDetector.radiusZ=Radius Z: %s
+gui.entityDetector.filter.all=All Entitys
+gui.entityDetector.filter.living=Living Entity
+gui.entityDetector.filter.animal=Animals
+gui.entityDetector.filter.monster=Monster
+gui.entityDetector.filter.player=Players
+gui.entityDetector.filter.item=Items
+gui.entityDetector.filter.custom=Custom Filter
 
 block.enderMailbox.owner=You are not the owner of this mailbox
 

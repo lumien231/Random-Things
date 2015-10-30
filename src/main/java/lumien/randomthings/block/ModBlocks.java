@@ -34,6 +34,7 @@ public class ModBlocks
 	public static BlockEnderMailbox enderMailbox;
 	public static BlockPitcherPlant pitcherPlant;
 	public static BlockPlatform platform;
+	public static BlockEntityDetector entityDetector;
 
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
@@ -72,6 +73,7 @@ public class ModBlocks
 		enderMailbox = new BlockEnderMailbox();
 		pitcherPlant = new BlockPitcherPlant();
 		platform = new BlockPlatform();
+		entityDetector = new BlockEntityDetector();
 
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

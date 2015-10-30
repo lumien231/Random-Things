@@ -27,7 +27,10 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
-		readDataFromNBT(packet.getNbtCompound());
+		if (writeNBTToDescriptionPacket())
+		{
+			readDataFromNBT(packet.getNbtCompound());
+		}
 
 		if (renderAfterData())
 		{
@@ -39,7 +42,10 @@ public abstract class TileEntityBase extends TileEntity
 	public final Packet getDescriptionPacket()
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeDataToNBT(nbtTag);
+		if (writeNBTToDescriptionPacket())
+		{
+			this.writeDataToNBT(nbtTag);
+		}
 		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
 
@@ -50,5 +56,10 @@ public abstract class TileEntityBase extends TileEntity
 	public boolean renderAfterData()
 	{
 		return false;
+	}
+
+	public boolean writeNBTToDescriptionPacket()
+	{
+		return true;
 	}
 }

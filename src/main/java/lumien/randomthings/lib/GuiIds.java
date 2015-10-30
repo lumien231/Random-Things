@@ -12,4 +12,5 @@ public class GuiIds
 	public static final int ANALOG_EMITTER = 8;
 	public static final int ENDER_MAILBOX = 9;
 	public static final int ENDER_LETTER = 10;
+	public static final int ENTITY_DETECTOR = 11;
 }
