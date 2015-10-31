@@ -78,5 +78,21 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	{
 		this.woodMaterial = woodBlock;
 		this.woodMeta = meta;
+		
+		if (woodMaterial == null)
+		{
+			woodMaterial = Blocks.planks;
+			woodMeta = 0;
+		}
+
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
+		{
+			woodState = woodMaterial.getStateFromMeta(woodMeta);
+
+			if (woodState == null)
+			{
+				woodState = Blocks.planks.getDefaultState();
+			}
+		}
 	}
 }
