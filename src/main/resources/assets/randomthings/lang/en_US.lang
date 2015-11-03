@@ -29,6 +29,8 @@ tile.customWorkbench.name=Crafting Table
 tile.enderMailbox.name=Ender Mailbox
 tile.pitcherPlant.name=Pitcher Plant
 tile.entityDetector.name=Entity Detector
+tile.quartzLamp.name=Quartz Lamp
+tile.quartzGlass.name=Quartz Glass
 
 tile.natureCore.name=Nature Core
 tile.netherCore.name=Nether Core

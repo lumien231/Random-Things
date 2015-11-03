@@ -70,6 +70,8 @@ public class ModRecipes
 		final ItemStack glisteringMelon = new ItemStack(Items.speckled_melon);
 		final ItemStack witherSkull = new ItemStack(Items.skull, 1, 1);
 		final ItemStack stonePressurePlate = new ItemStack(Blocks.stone_pressure_plate);
+		final ItemStack quartz = new ItemStack(Items.quartz);
+		final ItemStack quartzBlock = new ItemStack(Blocks.quartz_block);
 
 		for (int i = 0; i < oreDictDyes.length; i++)
 		{
@@ -96,6 +98,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fluidDisplay), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', Items.glass_bottle));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderMailbox), "ehe", "iii", "xfx", 'e', enderPearl, 'h', Blocks.hopper, 'i', "ingotIron", 'f', Blocks.oak_fence));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.entityDetector),"srs","epe","srs",'s',"stone",'r',redstoneTorch,'e',enderPearl,'p',stonePressurePlate));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzLamp), "xqx","qlq","xqx",'q',quartz,'l',redstoneLamp));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzGlass, 8, 0), "ggg", "gqg", "ggg", 'g', "blockGlass", 'q', quartzBlock));
 		
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.grass));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stableEnderpearl), "olo", "lel", "olo", 'o', obsidian, 'l', lapis, 'e', enderPearl));

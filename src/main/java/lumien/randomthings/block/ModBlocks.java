@@ -35,6 +35,8 @@ public class ModBlocks
 	public static BlockPitcherPlant pitcherPlant;
 	public static BlockPlatform platform;
 	public static BlockEntityDetector entityDetector;
+	public static BlockQuartzLamp quartzLamp;
+	public static BlockQuartzGlass quartzGlass;
 
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
@@ -74,6 +76,8 @@ public class ModBlocks
 		pitcherPlant = new BlockPitcherPlant();
 		platform = new BlockPlatform();
 		entityDetector = new BlockEntityDetector();
+		quartzLamp = new BlockQuartzLamp();
+		quartzGlass = new BlockQuartzGlass();
 
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

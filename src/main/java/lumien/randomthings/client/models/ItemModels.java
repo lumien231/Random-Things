@@ -48,6 +48,8 @@ public class ItemModels
 		registerBlock(ModBlocks.specialChest);
 		registerBlock(ModBlocks.platform);
 		registerBlock(ModBlocks.entityDetector);
+		registerBlock(ModBlocks.quartzLamp);
+		registerBlock(ModBlocks.quartzGlass);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);
