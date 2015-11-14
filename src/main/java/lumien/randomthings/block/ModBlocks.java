@@ -37,6 +37,7 @@ public class ModBlocks
 	public static BlockEntityDetector entityDetector;
 	public static BlockQuartzLamp quartzLamp;
 	public static BlockQuartzGlass quartzGlass;
+	public static BlockPotionVaporizer potionVaporizer;
 
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
@@ -78,6 +79,7 @@ public class ModBlocks
 		entityDetector = new BlockEntityDetector();
 		quartzLamp = new BlockQuartzLamp();
 		quartzGlass = new BlockQuartzGlass();
+		potionVaporizer = new BlockPotionVaporizer();
 
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

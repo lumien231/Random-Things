@@ -27,6 +27,7 @@ public class ModTileEntitys
 		registerTE(TileEntityCustomWorkbench.class, "customWorkbench");
 		registerTE(TileEntityEnderMailbox.class, "enderMailbox");
 		registerTE(TileEntityEntityDetector.class,"entityDetector");
+		registerTE(TileEntityPotionVaporizer.class,"potionVaporizer");
 	}
 
 	private static void registerTEBackward(Class<? extends TileEntity> clazz, String name)

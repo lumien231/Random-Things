@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down":  { "model": "randomthings:potionVaporizer_vertical", "x": 180 },
+        "facing=up":    { "model": "randomthings:potionVaporizer_vertical" },
+        "facing=north": { "model": "randomthings:potionVaporizer" },
+        "facing=south": { "model": "randomthings:potionVaporizer", "y": 180 },
+        "facing=west":  { "model": "randomthings:potionVaporizer", "y": 270 },
+        "facing=east":  { "model": "randomthings:potionVaporizer", "y": 90 }
+    }
+}

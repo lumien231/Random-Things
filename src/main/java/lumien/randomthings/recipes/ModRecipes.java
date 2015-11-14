@@ -97,10 +97,11 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.analogEmitter), "tir", "iii", "rit", 't', redstoneTorch, 'i', "ingotIron", 'r', redstoneDust));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fluidDisplay), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', Items.glass_bottle));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderMailbox), "ehe", "iii", "xfx", 'e', enderPearl, 'h', Blocks.hopper, 'i', "ingotIron", 'f', Blocks.oak_fence));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.entityDetector),"srs","epe","srs",'s',"stone",'r',redstoneTorch,'e',enderPearl,'p',stonePressurePlate));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzLamp), "xqx","qlq","xqx",'q',quartz,'l',redstoneLamp));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.entityDetector), "srs", "epe", "srs", 's', "stone", 'r', redstoneTorch, 'e', enderPearl, 'p', stonePressurePlate));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzLamp), "xqx", "qlq", "xqx", 'q', quartz, 'l', redstoneLamp));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzGlass, 8, 0), "ggg", "gqg", "ggg", 'g', "blockGlass", 'q', quartzBlock));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.potionVaporizer), "ctc", "iui", "cfc", 'c', "cobblestone", 't', Blocks.iron_trapdoor, 'i', "ingotIron", 'u', Items.cauldron, 'f', Blocks.furnace));
+
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.grass));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stableEnderpearl), "olo", "lel", "olo", 'o', obsidian, 'l', lapis, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', bean, 'n', "nuggetGold"));

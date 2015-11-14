@@ -13,4 +13,5 @@ public class GuiIds
 	public static final int ENDER_MAILBOX = 9;
 	public static final int ENDER_LETTER = 10;
 	public static final int ENTITY_DETECTOR = 11;
+	public static final int POTION_VAPORIZER = 12;
 }

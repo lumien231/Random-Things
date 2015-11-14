@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "randomthings:blocks/potionVaporizer/side",
+        "front": "randomthings:blocks/potionVaporizer/front",
+        "side": "randomthings:blocks/potionVaporizer/side"
+    }
+}
