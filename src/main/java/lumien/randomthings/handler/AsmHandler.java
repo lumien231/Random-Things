@@ -2,6 +2,7 @@ package lumien.randomthings.handler;
 
 import java.awt.Color;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -89,30 +90,42 @@ public class AsmHandler
 		return true;
 	}
 
-	static boolean ignore = false;
-
+	static HashSet<BlockPos> posSet = new HashSet<BlockPos>();
+	
 	@SideOnly(Side.CLIENT)
 	public static IBakedModel getModelFromBlockState(IBlockState state, IBlockAccess access, BlockPos pos)
 	{
-		if (pos != null && access != null && state != null && !ignore)
+		IBakedModel model = getModelFromBlockStateRec(state,access,pos);
+		posSet.clear();
+		return model;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static IBakedModel getModelFromBlockStateRec(IBlockState state, IBlockAccess access, BlockPos pos)
+	{
+		if (pos != null && access != null && state != null)
 		{
 			for (EnumFacing facing : EnumFacing.VALUES)
 			{
-				IBlockState faceState = access.getBlockState(pos.offset(facing));
-				if (faceState != null && faceState.getBlock() == ModBlocks.lightRedirector)
+				BlockPos offset = pos.offset(facing);
+
+				if (!posSet.contains(offset))
 				{
-					BlockPos opPos = pos.offset(facing, 2);
-					IBlockState oppositeState = access.getBlockState(opPos);
-					if (oppositeState != null && !oppositeState.getBlock().isAir(access, opPos))
+					posSet.add(offset);
+					IBlockState faceState = access.getBlockState(offset);
+					if (faceState != null && faceState.getBlock() == ModBlocks.lightRedirector)
 					{
-						ignore = true;
-						IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelFromBlockState(oppositeState, access, opPos);
-						ignore = false;
-						if (model instanceof ISmartBlockModel)
+						BlockPos opPos = pos.offset(facing, 2);
+						IBlockState oppositeState = access.getBlockState(opPos);
+						if (oppositeState != null && !oppositeState.getBlock().isAir(access, opPos))
 						{
-							model = ((ISmartBlockModel) model).handleBlockState(oppositeState);
+							IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelFromBlockState(oppositeState, access, opPos);
+							if (model instanceof ISmartBlockModel)
+							{
+								model = ((ISmartBlockModel) model).handleBlockState(oppositeState);
+							}
+							return model;
 						}
-						return model;
 					}
 				}
 			}
