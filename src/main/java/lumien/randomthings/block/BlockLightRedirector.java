@@ -14,7 +14,7 @@ public class BlockLightRedirector extends BlockBase
 {
 	public BlockLightRedirector()
 	{
-		super("lightRedirector", Material.glass);
+		super("lightRedirector", Material.rock);
 
 		this.setStepSound(soundTypeWood);
 		this.setHardness(2);
