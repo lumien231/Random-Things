@@ -91,11 +91,11 @@ public class AsmHandler
 	}
 
 	static HashSet<BlockPos> posSet = new HashSet<BlockPos>();
-	
+
 	@SideOnly(Side.CLIENT)
 	public static IBakedModel getModelFromBlockState(IBlockState state, IBlockAccess access, BlockPos pos)
 	{
-		IBakedModel model = getModelFromBlockStateRec(state,access,pos);
+		IBakedModel model = getModelFromBlockStateRec(state, access, pos);
 		posSet.clear();
 		return model;
 	}
@@ -103,6 +103,7 @@ public class AsmHandler
 	@SideOnly(Side.CLIENT)
 	public static IBakedModel getModelFromBlockStateRec(IBlockState state, IBlockAccess access, BlockPos pos)
 	{
+		access = Minecraft.getMinecraft().theWorld;
 		if (pos != null && access != null && state != null)
 		{
 			for (EnumFacing facing : EnumFacing.VALUES)
