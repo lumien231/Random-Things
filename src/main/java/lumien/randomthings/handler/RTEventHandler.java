@@ -12,6 +12,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
 import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.entitys.EntitySoul;
+import lumien.randomthings.item.ItemEntityFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
@@ -29,6 +30,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
@@ -45,6 +48,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
@@ -526,6 +530,8 @@ public class RTEventHandler
 		}
 		else
 		{
+			spawnEntityFilterParticles(event);
+
 			if (event.entityLiving instanceof EntityPlayer)
 			{
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
@@ -548,6 +554,26 @@ public class RTEventHandler
 			}
 		}
 
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void spawnEntityFilterParticles(LivingUpdateEvent event)
+	{
+		EntityPlayer thePlayer = Minecraft.getMinecraft().thePlayer;
+
+		ItemStack equipped = thePlayer.getCurrentEquippedItem();
+
+		if (equipped != null && equipped.getItem() == ModItems.entityFilter)
+		{
+			if (ItemEntityFilter.filterAppliesTo(equipped, event.entityLiving))
+			{
+				for (int i = 0; i < 1; ++i)
+				{
+					EntityFX fx = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.entityLiving.posX + (this.rng.nextDouble() - 0.5D) * (double) event.entityLiving.width, event.entityLiving.posY + this.rng.nextDouble() * (double) event.entityLiving.height - 0.25D, event.entityLiving.posZ + (this.rng.nextDouble() - 0.5D) * (double) event.entityLiving.width, (this.rng.nextDouble() - 0.5D) * 2.0D, -this.rng.nextDouble(), (this.rng.nextDouble() - 0.5D) * 2.0D);
+					fx.setRBGColorF(0.2F, 0.2F, 1);
+				}
+			}
+		}
 	}
 
 	@SubscribeEvent

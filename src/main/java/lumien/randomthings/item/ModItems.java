@@ -28,6 +28,7 @@ public class ModItems
 	public static ItemBottleOfAir bottleOfAir;
 	public static ItemRezStone rezStone;
 	public static ItemEnderLetter enderLetter;
+	public static ItemEntityFilter entityFilter;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -54,6 +55,7 @@ public class ModItems
 		bottleOfAir = new ItemBottleOfAir();
 		rezStone = new ItemRezStone();
 		enderLetter = new ItemEnderLetter();
+		entityFilter = new ItemEntityFilter();
 
 		grassSeeds = new ItemGrassSeeds();
 	}

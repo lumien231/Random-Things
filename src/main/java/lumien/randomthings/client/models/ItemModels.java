@@ -72,6 +72,7 @@ public class ItemModels
 		registerItem(ModItems.bottleOfAir);
 		registerItem(ModItems.rezStone);
 		registerItem(ModItems.enderLetter);
+		registerItem(ModItems.entityFilter);
 		// registerItem(ModItems.craftingRecipe);
 
 		registerBricks();

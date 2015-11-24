@@ -107,6 +107,7 @@ item.magicHood.name=Magic Hood
 item.bottleOfAir.name=Bottle of Air
 item.rezStone.name=Blood Stone
 item.enderLetter.name=Ender Letter
+item.entityFilter.name=Entity Filter
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -144,6 +145,7 @@ tooltip.positionFilter.z=Position-Z: %d
 tooltip.summoningPendulum.entityCount.singular=§5Holding %d Entity
 tooltip.summoningPendulum.entityCount.plural=§5Holding %d Entitys
 tooltip.stableEnderpearl.boundto=§5Bound to %s
+tooltip.entityFilter.invalidEntity=Invalid Entity
 
 gui.redstoneInterface.notarget=No Target
 gui.redstoneInterface.targetX=Target-X: %s
