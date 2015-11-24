@@ -62,7 +62,7 @@ public class EntityReviveCircle extends Entity
 				}
 			}
 
-			if (this.age >= 200 && this.worldObj.getTotalWorldTime() % 10 == 0)
+			if (this.age >= 220 && this.worldObj.getTotalWorldTime() % 10 == 0)
 			{
 				reviver.attackEntityFrom(DamageSource.magic, 1f);
 			}
