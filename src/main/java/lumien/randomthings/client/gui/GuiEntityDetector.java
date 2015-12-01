@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
 import lumien.randomthings.container.ContainerEnderLetter;
 import lumien.randomthings.container.ContainerEntityDetector;
+import lumien.randomthings.item.ItemEntityFilter;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageEntityDetector;
 import lumien.randomthings.tileentity.TileEntityEntityDetector;
@@ -16,6 +17,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -115,7 +117,21 @@ public class GuiEntityDetector extends GuiContainer
 
 		String radiusZ = I18n.format("gui.entityDetector.radiusZ", entityDetector.getRangeZ());
 		fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2 - 3, 76, 4210752);
-
+		
+		ItemStack filter;
+		if ((filter = this.entityDetector.getInventory().getStackInSlot(0)) != null)
+		{
+			Class clazz = ItemEntityFilter.getEntityClass(filter);
+			
+			String filterClazz = clazz.getSimpleName();
+			
+			if (filterClazz.startsWith("Entity"))
+			{
+				filterClazz = filterClazz.substring(6);
+			}
+			fontRendererObj.drawString(filterClazz, 100, 126, 4210752);
+		}
+		
 		if (this.entityDetector.getFilter() == FILTER.CUSTOM)
 		{
 			this.mc.renderEngine.bindTexture(background);
