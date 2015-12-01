@@ -5,35 +5,45 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import lumien.randomthings.block.ModBlocks;
-import lumien.randomthings.tileentity.TileEntityEntityDetector.FILTER;
+import lumien.randomthings.item.ItemEntityFilter;
+import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 
-public class TileEntityEntityDetector extends TileEntityBase implements IUpdatePlayerListBox
+public class TileEntityEntityDetector extends TileEntityBase implements ITickable
 {
 	boolean powered;
 
 	int rangeX = 5;
 	int rangeY = 5;
 	int rangeZ = 5;
-	
+
 	boolean invert;
 
 	static final int MAX_RANGE = 10;
 
 	FILTER filter = FILTER.ALL;
 
+	InventoryBasic filterInventory;
+
+	public TileEntityEntityDetector()
+	{
+		filterInventory = new InventoryBasic("tile.entityDetector", false, 1);
+	}
+
 	public enum FILTER
 	{
-		ALL("all", Entity.class), LIVING("living", EntityLivingBase.class), ANIMAL("animal", IAnimals.class), MONSTER("monster", IMob.class), PLAYER("player", EntityPlayer.class), ITEMS("item",EntityItem.class);
+		ALL("all", Entity.class), LIVING("living", EntityLivingBase.class), ANIMAL("animal", IAnimals.class), MONSTER("monster", IMob.class), PLAYER("player", EntityPlayer.class), ITEMS("item", EntityItem.class), CUSTOM("custom", null);
 
 		String languageKey;
 		Class filterClass;
@@ -48,6 +58,11 @@ public class TileEntityEntityDetector extends TileEntityBase implements IUpdateP
 		{
 			return languageKey;
 		}
+	}
+
+	public IInventory getInventory()
+	{
+		return filterInventory;
 	}
 
 	@Override
@@ -86,15 +101,26 @@ public class TileEntityEntityDetector extends TileEntityBase implements IUpdateP
 
 	private boolean checkSupposedPowereredState()
 	{
-		if (filter.filterClass != null)
-		{
-			List<Entity> entityList = worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.pos, this.pos.add(1, 1, 1)).expand(rangeX, rangeY, rangeZ),new Predicate<Entity>()
-			{
+		Class filterClass = filter.filterClass;
 
+		if (filterClass == null)
+		{
+			ItemStack filter;
+			if ((filter = filterInventory.getStackInSlot(0)) != null)
+			{
+				filterClass = ItemEntityFilter.getEntityClass(filter);
+			}
+		}
+
+		if (filterClass != null)
+		{
+			final Class finalFilterClass = filterClass;
+			List<Entity> entityList = worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.pos, this.pos.add(1, 1, 1)).expand(rangeX, rangeY, rangeZ), new Predicate<Entity>()
+			{
 				@Override
 				public boolean apply(Entity input)
 				{
-					return !invert == filter.filterClass.isAssignableFrom(input.getClass());
+					return !invert == finalFilterClass.isAssignableFrom(input.getClass());
 				}
 			});
 			return entityList != null && entityList.size() > 0;
@@ -103,7 +129,6 @@ public class TileEntityEntityDetector extends TileEntityBase implements IUpdateP
 		{
 			return false;
 		}
-		
 	}
 
 	@Override
@@ -115,8 +140,12 @@ public class TileEntityEntityDetector extends TileEntityBase implements IUpdateP
 		compound.setInteger("rangeY", rangeY);
 		compound.setInteger("rangeZ", rangeZ);
 
-		compound.setInteger("filter", filter.ordinal());	
+		compound.setInteger("filter", filter.ordinal());
 		compound.setBoolean("invert", invert);
+
+		NBTTagCompound inventoryCompound = new NBTTagCompound();
+		InventoryUtil.saveInventoryInCompound(inventoryCompound, filterInventory);
+		compound.setTag("inventory", inventoryCompound);
 	}
 
 	@Override
@@ -130,6 +159,13 @@ public class TileEntityEntityDetector extends TileEntityBase implements IUpdateP
 
 		filter = FILTER.values()[compound.getInteger("filter")];
 		invert = compound.getBoolean("invert");
+
+		NBTTagCompound inventoryCompound = compound.getCompoundTag("inventory");
+
+		if (inventoryCompound != null)
+		{
+			InventoryUtil.readInventoryFromCompound(inventoryCompound, filterInventory);
+		}
 	}
 
 	public boolean isPowered()
@@ -199,19 +235,19 @@ public class TileEntityEntityDetector extends TileEntityBase implements IUpdateP
 
 		this.worldObj.markBlockForUpdate(pos);
 	}
-	
+
 	public void toggleInvert()
 	{
 		invert = !invert;
-		
+
 		this.worldObj.markBlockForUpdate(pos);
 	}
-	
+
 	public boolean invert()
 	{
 		return invert;
 	}
-	
+
 	public FILTER getFilter()
 	{
 		return filter;

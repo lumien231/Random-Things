@@ -12,13 +12,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 
-public class TileEntityPrismarineEnderBridge extends TileEntityBase implements IUpdatePlayerListBox
+public class TileEntityPrismarineEnderBridge extends TileEntityBase implements ITickable
 {
 	enum BRIDGESTATE
 	{

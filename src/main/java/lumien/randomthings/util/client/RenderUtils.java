@@ -5,6 +5,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 import org.lwjgl.opengl.GL11;
 
@@ -24,38 +25,42 @@ public class RenderUtils
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(posX, posY, posZ);
 
-		wr.startDrawingQuads();
-		wr.setColorRGBA_F(red, green, blue, alpha);
+		wr.func_181668_a(7, DefaultVertexFormats.field_181706_f);
 
-		wr.addVertex(0F, 0F, 0F); // P1
-		wr.addVertex(0F, height, 0F); // P2
-		wr.addVertex(width, height, 0F); // P3
-		wr.addVertex(width, 0F, 0F); // P4
+		int r = (int) (1F * 255F * red);
+		int g = (int) (1F * 255F * green);
+		int b = (int) (1F * 255F * blue);
+		int a = (int) (1F * 255F * alpha);
 
-		wr.addVertex(width, height, 0F); // P1
-		wr.addVertex(width, height, length); // P2
-		wr.addVertex(width, 0F, length); // P3
-		wr.addVertex(width, 0F, 0F); // P4
+		wr.func_181662_b(0F, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, height, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P2
+		wr.func_181662_b(width, height, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P3
+		wr.func_181662_b(width, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P4
 
-		wr.addVertex(width, height, length); // P1
-		wr.addVertex(0F, height, length); // P1
-		wr.addVertex(0F, 0F, length); // P1
-		wr.addVertex(width, 0F, length); // P1
+		wr.func_181662_b(width, height, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(width, height, length).func_181669_b(r, g, b, a).func_181675_d(); // P2
+		wr.func_181662_b(width, 0F, length).func_181669_b(r, g, b, a).func_181675_d(); // P3
+		wr.func_181662_b(width, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P4
 
-		wr.addVertex(0F, height, length); // P1
-		wr.addVertex(0F, height, 0F); // P1
-		wr.addVertex(0F, 0F, 0F); // P1
-		wr.addVertex(0F, 0F, length); // P1
+		wr.func_181662_b(width, height, length).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, height, length).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, 0F, length).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(width, 0F, length).func_181669_b(r, g, b, a).func_181675_d(); // P1
 
-		wr.addVertex(0F, 0F, 0F); // P1
-		wr.addVertex(width, 0F, 0F); // P1
-		wr.addVertex(width, 0F, length); // P1
-		wr.addVertex(0F, 0F, length); // P1
+		wr.func_181662_b(0F, height, length).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, height, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, 0F, length).func_181669_b(r, g, b, a).func_181675_d(); // P1
 
-		wr.addVertex(0F, height, 0F); // P1
-		wr.addVertex(0F, height, length); // P2
-		wr.addVertex(width, height, length); // P3
-		wr.addVertex(width, height, 0F); // P4
+		wr.func_181662_b(0F, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(width, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(width, 0F, length).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, 0F, length).func_181669_b(r, g, b, a).func_181675_d(); // P1
+
+		wr.func_181662_b(0F, height, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, height, length).func_181669_b(r, g, b, a).func_181675_d(); // P2
+		wr.func_181662_b(width, height, length).func_181669_b(r, g, b, a).func_181675_d(); // P3
+		wr.func_181662_b(width, height, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P4
 
 		t.draw();
 
@@ -73,42 +78,45 @@ public class RenderUtils
 		WorldRenderer wr = t.getWorldRenderer();
 
 		GlStateManager.disableTexture2D();
-
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(posX, posY, posZ);
 
-		wr.startDrawingQuads();
-		wr.setColorRGBA_F(red, green, blue, alpha);
+		wr.func_181668_a(7, DefaultVertexFormats.field_181706_f);
 
-		wr.addVertex(0F, 0F, 0F); // P1
-		wr.addVertex(0F, size, 0F); // P2
-		wr.addVertex(size, size, 0F); // P3
-		wr.addVertex(size, 0F, 0F); // P4
+		int r = (int) (1F * 255F * red);
+		int g = (int) (1F * 255F * green);
+		int b = (int) (1F * 255F * blue);
+		int a = (int) (1F * 255F * alpha);
 
-		wr.addVertex(size, size, 0F); // P1
-		wr.addVertex(size, size, size); // P2
-		wr.addVertex(size, 0F, size); // P3
-		wr.addVertex(size, 0F, 0F); // P4
+		wr.func_181662_b(0F, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, size, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P2
+		wr.func_181662_b(size, size, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P3
+		wr.func_181662_b(size, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P4
 
-		wr.addVertex(size, size, size); // P1
-		wr.addVertex(0F, size, size); // P1
-		wr.addVertex(0F, 0F, size); // P1
-		wr.addVertex(size, 0F, size); // P1
+		wr.func_181662_b(size, size, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(size, size, size).func_181669_b(r, g, b, a).func_181675_d(); // P2
+		wr.func_181662_b(size, 0F, size).func_181669_b(r, g, b, a).func_181675_d(); // P3
+		wr.func_181662_b(size, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P4
 
-		wr.addVertex(0F, size, size); // P1
-		wr.addVertex(0F, size, 0F); // P1
-		wr.addVertex(0F, 0F, 0F); // P1
-		wr.addVertex(0F, 0F, size); // P1
+		wr.func_181662_b(size, size, size).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, size, size).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, 0F, size).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(size, 0F, size).func_181669_b(r, g, b, a).func_181675_d(); // P1
 
-		wr.addVertex(0F, 0F, 0F); // P1
-		wr.addVertex(size, 0F, 0F); // P1
-		wr.addVertex(size, 0F, size); // P1
-		wr.addVertex(0F, 0F, size); // P1
+		wr.func_181662_b(0F, size, size).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, size, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, 0F, size).func_181669_b(r, g, b, a).func_181675_d(); // P1
 
-		wr.addVertex(0F, size, 0F); // P1
-		wr.addVertex(0F, size, size); // P2
-		wr.addVertex(size, size, size); // P3
-		wr.addVertex(size, size, 0F); // P4
+		wr.func_181662_b(0F, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(size, 0F, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(size, 0F, size).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, 0F, size).func_181669_b(r, g, b, a).func_181675_d(); // P1
+
+		wr.func_181662_b(0F, size, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P1
+		wr.func_181662_b(0F, size, size).func_181669_b(r, g, b, a).func_181675_d(); // P2
+		wr.func_181662_b(size, size, size).func_181669_b(r, g, b, a).func_181675_d(); // P3
+		wr.func_181662_b(size, size, 0F).func_181669_b(r, g, b, a).func_181675_d(); // P4
 
 		t.draw();
 

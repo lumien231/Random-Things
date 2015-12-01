@@ -24,7 +24,7 @@ public class SpectreWorldProvider extends WorldProvider
 	@Override
 	public String getDimensionName()
 	{
-		return "The Spectre Dimension";
+		return "SpectreDimension";
 	}
 
 	@Override

@@ -161,7 +161,7 @@ gui.entityDetector.filter.animal=Animals
 gui.entityDetector.filter.monster=Monster
 gui.entityDetector.filter.player=Players
 gui.entityDetector.filter.item=Items
-gui.entityDetector.filter.custom=Custom Filter
+gui.entityDetector.filter.custom=Custom
 
 block.enderMailbox.owner=You are not the owner of this mailbox
 

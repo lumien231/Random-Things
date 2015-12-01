@@ -24,6 +24,40 @@ public class ItemEntityFilter extends ItemBase
 	{
 		super("entityFilter");
 	}
+	
+	public static Class getEntityClass(ItemStack filter)
+	{
+		NBTTagCompound compound;
+		if ((compound = filter.getTagCompound()) != null)
+		{
+			if (compound.getBoolean("modded"))
+			{
+				String modID = compound.getString("modID");
+				int entityID = compound.getInteger("entityID");
+
+				ModContainer modContainer = Loader.instance().getIndexedModList().get(modID);
+
+				if (modContainer != null)
+				{
+					EntityRegistration registration = EntityRegistry.instance().lookupModSpawn(modContainer, entityID);
+
+					if (registration != null)
+					{
+						return registration.getEntityClass();
+					}
+				}
+				
+			}
+			else
+			{
+				int entityID = compound.getInteger("entityID");
+
+				return EntityList.getClassFromID(entityID);
+			}
+		}
+
+		return null;
+	}
 
 	public static boolean filterAppliesTo(ItemStack filter, EntityLivingBase entity)
 	{

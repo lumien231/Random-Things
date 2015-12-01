@@ -24,6 +24,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -147,8 +148,7 @@ public class ClientProxy extends CommonProxy
 		Minecraft.getMinecraft().entityRenderer.disableLightmap();
 		GlStateManager.pushMatrix();
 		{
-			worldRenderer.startDrawing(GL11.GL_LINES);
-			worldRenderer.setColorOpaque(255, 0, 0);
+			worldRenderer.func_181668_a(GL11.GL_LINES, DefaultVertexFormats.field_181706_f);
 			synchronized (TileEntityRedstoneInterface.interfaces)
 			{
 				for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
@@ -164,8 +164,8 @@ public class ClientProxy extends CommonProxy
 							{
 								if (redstoneInterface.getWorld().isRemote)
 								{
-									worldRenderer.addVertex(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ);
-									worldRenderer.addVertex(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ);
+									worldRenderer.func_181662_b(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).func_181669_b(255, 0, 0, 255).func_181675_d();
+									worldRenderer.func_181662_b(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).func_181669_b(255, 0, 0, 255).func_181675_d();
 								}
 							}
 						}

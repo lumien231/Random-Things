@@ -16,14 +16,14 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class TileEntityNatureCore extends TileEntityBase implements IUpdatePlayerListBox
+public class TileEntityNatureCore extends TileEntityBase implements ITickable
 {
 	static Random rand = new Random();
 
@@ -35,7 +35,7 @@ public class TileEntityNatureCore extends TileEntityBase implements IUpdatePlaye
 			// Animal Spawning
 			if (rand.nextInt(400) == 0)
 			{
-				List<IAnimals> closeAnimals = worldObj.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(this.pos, this.pos).expand(5, 5, 5));
+				List<EntityAnimal> closeAnimals = worldObj.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(this.pos, this.pos).expand(5, 5, 5));
 				if (closeAnimals.size() < 2)
 				{
 					int rX = this.pos.getX() + rand.nextInt(11) - 5;

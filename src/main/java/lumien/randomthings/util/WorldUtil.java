@@ -10,7 +10,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ClassInheritanceMultiMap;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
@@ -41,7 +41,7 @@ public class WorldUtil
 
 	public static List getEntitiesWithinAABBs(World worldObj, Class classEntity, AxisAlignedBB... bbs)
 	{
-		return getEntitiesWithinAABBs(worldObj, classEntity, IEntitySelector.NOT_SPECTATING, bbs);
+		return getEntitiesWithinAABBs(worldObj, classEntity, EntitySelectors.NOT_SPECTATING, bbs);
 	}
 
 	public static List getEntitiesWithinAABBs(World worldObj, Class clazz, Predicate filter, AxisAlignedBB... bbs)

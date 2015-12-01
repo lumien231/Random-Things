@@ -1,6 +1,5 @@
 package lumien.randomthings.tileentity;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,17 +20,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IChatComponent;
-import net.minecraft.world.WorldServer;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-public class TileEntityPotionVaporizer extends TileEntityBase implements IUpdatePlayerListBox, ISidedInventory
+public class TileEntityPotionVaporizer extends TileEntityBase implements ITickable, ISidedInventory
 {
 	HashSet<BlockPos> affectedBlocks;
 

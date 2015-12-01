@@ -16,14 +16,14 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntitySpecialChest extends TileEntityLockable implements IUpdatePlayerListBox, IInventory
+public class TileEntitySpecialChest extends TileEntityLockable implements ITickable, IInventory
 {
 	private ItemStack[] chestContents = new ItemStack[27];
 	/** The current angle of the lid (between 0 and 1) */

@@ -7,10 +7,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 
-public class TileEntityImbuingStation extends TileEntityBase implements IInventory, IUpdatePlayerListBox
+public class TileEntityImbuingStation extends TileEntityBase implements IInventory, ITickable
 {
 	InventoryBasic inventory;
 	public int imbuingProgress;

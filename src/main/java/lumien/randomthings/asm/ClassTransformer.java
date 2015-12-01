@@ -118,7 +118,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (shouldSideBeRendered != null)
 		{
-			logger.log(Level.DEBUG, " - Found shouldSideBeRendered");
+			logger.log(Level.DEBUG, " - Found shouldSideBeRendered (1/1)");
 
 			LabelNode l1 = new LabelNode(new Label());
 
@@ -163,7 +163,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (addComponentParts != null)
 		{
-			logger.log(Level.DEBUG, " - Found addComponentParts");
+			logger.log(Level.DEBUG, " - Found addComponentParts (1/1)");
 
 			for (int i = 0; i < addComponentParts.instructions.size(); i++)
 			{
@@ -217,7 +217,7 @@ public class ClassTransformer implements IClassTransformer
 			{
 				func_177183_a = mn;
 			}
-			else if (mn.name.equals("func_177182_a"))
+			else if (mn.name.equals(MCPNames.method("func_177182_a")))
 			{
 				func_177182_a = mn;
 			}
@@ -225,7 +225,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (func_177183_a != null)
 		{
-			logger.log(Level.DEBUG, "- Found func_177183_a (Effect Rendering)");
+			logger.log(Level.DEBUG, "- Found func_177183_a (Effect Rendering 1/2)");
 
 			for (int i = 0; i < func_177183_a.instructions.size(); i++)
 			{
@@ -245,7 +245,8 @@ public class ClassTransformer implements IClassTransformer
 
 		if (func_177182_a != null)
 		{
-			logger.log(Level.DEBUG, "- Found func_177182_a (ItemStack Information)");
+			System.out.println("- Found func_177182_a (ItemStack Information 2/2)");
+			logger.log(Level.DEBUG, "- Found func_177182_a (ItemStack Information 2/2)");
 			for (int i = 0; i < func_177182_a.instructions.size(); i++)
 			{
 				AbstractInsnNode ain = func_177182_a.instructions.get(i);
@@ -297,7 +298,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (renderEffect != null)
 		{
-			logger.log(Level.DEBUG, "- Found renderEffect");
+			logger.log(Level.DEBUG, "- Found renderEffect (1/2)");
 
 			for (int i = 0; i < renderEffect.instructions.size(); i++)
 			{
@@ -321,7 +322,7 @@ public class ClassTransformer implements IClassTransformer
 		if (renderItem != null)
 		{
 			boolean found = false;
-			logger.log(Level.DEBUG, "- Found renderItem");
+			logger.log(Level.DEBUG, "- Found renderItem (2/2)");
 
 			for (int i = 0; i < renderItem.instructions.size(); i++)
 			{
@@ -398,7 +399,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (updatePotionEffects != null)
 		{
-			logger.log(Level.DEBUG, "- Found updatePotionEffects");
+			logger.log(Level.DEBUG, "- Found updatePotionEffects (1/1)");
 
 			for (int i = 0; i < updatePotionEffects.instructions.size(); i++)
 			{
@@ -453,7 +454,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (canRenderName != null)
 		{
-			logger.log(Level.DEBUG, "- Found canRenderName");
+			logger.log(Level.DEBUG, "- Found canRenderName (1/1)");
 			LabelNode l1 = new LabelNode(new Label());
 			InsnList toInsert = new InsnList();
 
@@ -493,7 +494,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (addCollisionBoxesToList != null)
 		{
-			logger.log(Level.DEBUG, "- Found addCollisionBoxesToList");
+			logger.log(Level.DEBUG, "- Found addCollisionBoxesToList (1/1)");
 
 			InsnList toInsert = new InsnList();
 			LabelNode l1 = new LabelNode(new Label());
@@ -537,7 +538,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (getModelFromBlockState != null)
 		{
-			logger.log(Level.DEBUG, "- Found getModelFromBlockState");
+			logger.log(Level.DEBUG, "- Found getModelFromBlockState (1/1)");
 
 			InsnList toInsert = new InsnList();
 			LabelNode l1 = new LabelNode(new Label());
@@ -583,7 +584,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (getColorFromItemStack != null)
 		{
-			logger.log(Level.DEBUG, "- Found getColorFromItemStack");
+			logger.log(Level.DEBUG, "- Found getColorFromItemStack (1/1)");
 			LabelNode l0 = new LabelNode(new Label());
 			LabelNode l1 = new LabelNode(new Label());
 			LabelNode l2 = new LabelNode(new Label());
@@ -635,7 +636,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (getRedstonePower != null)
 		{
-			logger.log(Level.DEBUG, "Found getRedstonePower");
+			logger.log(Level.DEBUG, "- Found getRedstonePower (1/2)");
 
 			InsnList toInsert = new InsnList();
 
@@ -656,7 +657,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (getStrongPower != null)
 		{
-			logger.log(Level.DEBUG, "Found getStrongPower");
+			logger.log(Level.DEBUG, "- Found getStrongPower (2/2)");
 
 			InsnList toInsert = new InsnList();
 

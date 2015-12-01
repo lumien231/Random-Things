@@ -12,13 +12,13 @@ import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
-public class TileEntityOnlineDetector extends TileEntityBase implements SimpleComponent, IUpdatePlayerListBox
+public class TileEntityOnlineDetector extends TileEntityBase implements SimpleComponent, ITickable
 {
 	String username;
 	boolean playerOnline;

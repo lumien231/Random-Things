@@ -80,7 +80,7 @@ public class ModBlocks
 		quartzLamp = new BlockQuartzLamp();
 		quartzGlass = new BlockQuartzGlass();
 		potionVaporizer = new BlockPotionVaporizer();
-
+		
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();
 		enderCore = new BlockEnderCore();

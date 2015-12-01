@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -55,12 +56,13 @@ public class RenderSoul extends Render
 			GlStateManager.color(1, 1, 1);
 			Tessellator tessellator = Tessellator.getInstance();
 			WorldRenderer worldRenderer = tessellator.getWorldRenderer();
-			worldRenderer.startDrawingQuads();
-			worldRenderer.setNormal(0.0F, 1.0F, 0.0F);
-			worldRenderer.addVertexWithUV(0.0F - f7, 0.0F - f8, 0.0D, f2, f5);
-			worldRenderer.addVertexWithUV(f6 - f7, 0.0F - f8, 0.0D, f3, f5);
-			worldRenderer.addVertexWithUV(f6 - f7, 1.0F - f8, 0.0D, f3, f4);
-			worldRenderer.addVertexWithUV(0.0F - f7, 1.0F - f8, 0.0D, f2, f4);
+			worldRenderer.func_181668_a(7, DefaultVertexFormats.field_181707_g);
+			
+			worldRenderer.func_181662_b(0.0F - f7, 0.0F - f8, 0.0D).func_181673_a(f2, f5).func_181675_d();
+			worldRenderer.func_181662_b(f6 - f7, 0.0F - f8, 0.0D).func_181673_a(f3, f5).func_181675_d();
+			worldRenderer.func_181662_b(f6 - f7, 1.0F - f8, 0.0D).func_181673_a(f3, f4).func_181675_d();
+			worldRenderer.func_181662_b(0.0F - f7, 1.0F - f8, 0.0D).func_181673_a(f2, f4).func_181675_d();
+			
 			tessellator.draw();
 			GlStateManager.enableLighting();
 			GlStateManager.disableBlend();

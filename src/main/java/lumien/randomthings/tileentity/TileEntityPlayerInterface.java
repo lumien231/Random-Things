@@ -10,12 +10,12 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 
-public class TileEntityPlayerInterface extends TileEntityBase implements ISidedInventory, IUpdatePlayerListBox
+public class TileEntityPlayerInterface extends TileEntityBase implements ISidedInventory, ITickable
 {
 	UUID playerUUID;
 	EntityPlayerMP playerEntity;

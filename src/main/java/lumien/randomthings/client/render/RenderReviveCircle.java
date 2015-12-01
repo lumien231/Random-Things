@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -60,17 +61,18 @@ public class RenderReviveCircle extends Render
 
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer renderer = tessellator.getWorldRenderer();
-		renderer.startDrawingQuads();
-		renderer.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.addVertexWithUV(0.0F - f7, 0.0F - f8, 0.0D, f2, f5);
-		renderer.addVertexWithUV(f6 - f7, 0.0F - f8, 0.0D, f3, f5);
-		renderer.addVertexWithUV(f6 - f7, 1.0F - f8, 0.0D, f3, f4);
-		renderer.addVertexWithUV(0.0F - f7, 1.0F - f8, 0.0D, f2, f4);
+		renderer.func_181668_a(7, DefaultVertexFormats.field_181707_g);
+		
+		renderer.func_181662_b(0.0F - f7, 0.0F - f8, 0.0D).func_181673_a(f2, f5).func_181675_d();
+		renderer.func_181662_b(f6 - f7, 0.0F - f8, 0.0D).func_181673_a(f3, f5).func_181675_d();
+		renderer.func_181662_b(f6 - f7, 1.0F - f8, 0.0D).func_181673_a(f3, f4).func_181675_d();
+		renderer.func_181662_b(0.0F - f7, 1.0F - f8, 0.0D).func_181673_a(f2, f4).func_181675_d();
 
-		renderer.addVertexWithUV(f6 - f7, 0.0F - f8, 0.0D, f3, f5);
-		renderer.addVertexWithUV(0.0F - f7, 0.0F - f8, 0.0D, f2, f5);
-		renderer.addVertexWithUV(0.0F - f7, 1.0F - f8, 0.0D, f2, f4);
-		renderer.addVertexWithUV(f6 - f7, 1.0F - f8, 0.0D, f3, f4);
+		renderer.func_181662_b(f6 - f7, 0.0F - f8, 0.0D).func_181673_a(f3, f5).func_181675_d();
+		renderer.func_181662_b(0.0F - f7, 0.0F - f8, 0.0D).func_181673_a(f2, f5).func_181675_d();
+		renderer.func_181662_b(0.0F - f7, 1.0F - f8, 0.0D).func_181673_a(f2, f4).func_181675_d();
+		renderer.func_181662_b(f6 - f7, 1.0F - f8, 0.0D).func_181673_a(f3, f4).func_181675_d();
+		
 		tessellator.draw();
 
 		GlStateManager.enableLighting();

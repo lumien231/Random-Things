@@ -5,14 +5,13 @@ import java.util.UUID;
 import lumien.randomthings.block.BlockEnderMailbox;
 import lumien.randomthings.handler.EnderLetterHandler;
 import lumien.randomthings.util.InventoryUtil;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 
-public class TileEntityEnderMailbox extends TileEntityBase implements IUpdatePlayerListBox
+public class TileEntityEnderMailbox extends TileEntityBase implements ITickable
 {
 	UUID owner;
 

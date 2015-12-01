@@ -1,6 +1,17 @@
 package lumien.randomthings.client.render;
 
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL15;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL31;
+
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
+import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.Minecraft;
@@ -9,6 +20,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -17,7 +29,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 {
 	private static final ResourceLocation textureNatureChest = new ResourceLocation("randomthings:textures/blocks/specialChest/nature.png");
 	private static final ResourceLocation textureWaterChest = new ResourceLocation("randomthings:textures/blocks/specialChest/water.png");
-	
+
 	private ModelChest simpleChest = new ModelChest();
 	private boolean isChristams;
 	private static final String __OBFID = "CL_00000965";

@@ -12,14 +12,14 @@ import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Optional;
 
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
-public class TileEntityChatDetector extends TileEntityBase implements IUpdatePlayerListBox, SimpleComponent
+public class TileEntityChatDetector extends TileEntityBase implements ITickable, SimpleComponent
 {
 	public static Set<TileEntityChatDetector> detectors = Collections.newSetFromMap(new WeakHashMap());
 
