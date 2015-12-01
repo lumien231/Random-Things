@@ -107,7 +107,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', bean, 'n', "nuggetGold"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beanStew, 1, 0), "xwx", "bbb", "xox", 'b', bean, 'w', wheat, 'o', bowl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beanStew, 1, 0), "bbb", "xwx", "xox", 'b', bean, 'w', wheat, 'o', bowl));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.positionFilter, 1, 0), "xdx", "dpd", "xdx", 'd', "purpleDye", 'p', paper));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.positionFilter, 1, 0), "xdx", "dpd", "xdx", 'd', "dyePurple", 'p', paper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.inertLinkingOrb), "rtr", "tst", "rtr", 'r', redstoneDust, 't', ghastTear, 's', "stone"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneTool), "xrx", "xsx", "xsx", 'r', redstoneDust, 's', "stickWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.obsidianSkull), "oro", "bwb", "oro", 'o', obsidian, 'r', Items.blaze_rod, 'w', witherSkull, 'b', netherBrick));
