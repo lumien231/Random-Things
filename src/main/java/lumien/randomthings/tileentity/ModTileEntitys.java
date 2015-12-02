@@ -10,29 +10,24 @@ public class ModTileEntitys
 {
 	public static void register()
 	{
-		registerTEBackward(TileEntityPlayerInterface.class, "playerInterface");
-		registerTEBackward(TileEntityCreativePlayerInterface.class, "creativePlayerInterface");
-		registerTEBackward(TileEntityOnlineDetector.class, "onlineDetector");
-		registerTEBackward(TileEntityEnderBridge.class, "enderBridge");
-		registerTEBackward(TileEntityPrismarineEnderBridge.class, "prismarineEnderBridge");
-		registerTEBackward(TileEntityNatureCore.class, "natureCore");
-		registerTEBackward(TileEntityNetherCore.class, "netherCore");
-		registerTEBackward(TileEntityEnderCore.class, "enderCore");
-		registerTEBackward(TileEntityChatDetector.class, "chatDetector");
-		registerTEBackward(TileEntityRedstoneInterface.class, "redstoneInterface");
-		registerTEBackward(TileEntityImbuingStation.class, "imbuingStation");
-		registerTEBackward(TileEntitySpecialChest.class, "specialChest");
-		registerTEBackward(TileEntityAnalogEmitter.class, "analogEmitter");
+		registerTE(TileEntityPlayerInterface.class, "playerInterface");
+		registerTE(TileEntityCreativePlayerInterface.class, "creativePlayerInterface");
+		registerTE(TileEntityOnlineDetector.class, "onlineDetector");
+		registerTE(TileEntityEnderBridge.class, "enderBridge");
+		registerTE(TileEntityPrismarineEnderBridge.class, "prismarineEnderBridge");
+		registerTE(TileEntityNatureCore.class, "natureCore");
+		registerTE(TileEntityNetherCore.class, "netherCore");
+		registerTE(TileEntityEnderCore.class, "enderCore");
+		registerTE(TileEntityChatDetector.class, "chatDetector");
+		registerTE(TileEntityRedstoneInterface.class, "redstoneInterface");
+		registerTE(TileEntityImbuingStation.class, "imbuingStation");
+		registerTE(TileEntitySpecialChest.class, "specialChest");
+		registerTE(TileEntityAnalogEmitter.class, "analogEmitter");
 		registerTE(TileEntityFluidDisplay.class, "fluidDisplay");
 		registerTE(TileEntityCustomWorkbench.class, "customWorkbench");
 		registerTE(TileEntityEnderMailbox.class, "enderMailbox");
-		registerTE(TileEntityEntityDetector.class,"entityDetector");
-		registerTE(TileEntityPotionVaporizer.class,"potionVaporizer");
-	}
-
-	private static void registerTEBackward(Class<? extends TileEntity> clazz, String name)
-	{
-		GameRegistry.registerTileEntityWithAlternatives(clazz, "randomthings:" + name, name); // TODO: Remove alternative after some versions
+		registerTE(TileEntityEntityDetector.class, "entityDetector");
+		registerTE(TileEntityPotionVaporizer.class, "potionVaporizer");
 	}
 
 	private static void registerTE(Class<? extends TileEntity> clazz, String name)
