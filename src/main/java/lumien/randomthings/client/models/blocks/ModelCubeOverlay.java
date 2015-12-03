@@ -165,9 +165,9 @@ public class ModelCubeOverlay implements IFlexibleBakedModel
 	}
 
 	@Override
-	public TextureAtlasSprite getTexture()
+	public TextureAtlasSprite getParticleTexture()
 	{
-		return original.getTexture();
+		return original.getParticleTexture();
 	}
 
 	@Override

@@ -110,7 +110,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 	 * GUI.
 	 */
 	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
+	public ItemStack removeStackFromSlot(int index)
 	{
 		if (this.chestContents[index] != null)
 		{
@@ -146,7 +146,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 	 * "Rcon")
 	 */
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return this.hasCustomName() ? this.customName : "container.chest";
 	}

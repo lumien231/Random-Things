@@ -138,7 +138,7 @@ public class EnderLetterHandler extends WorldSavedData
 		}
 
 		@Override
-		public String getCommandSenderName()
+		public String getName()
 		{
 			return "tile.enderMailbox";
 		}
@@ -152,7 +152,7 @@ public class EnderLetterHandler extends WorldSavedData
 		@Override
 		public IChatComponent getDisplayName()
 		{
-			return new ChatComponentTranslation(getCommandSenderName());
+			return new ChatComponentTranslation(getName());
 		}
 
 		@Override
@@ -201,7 +201,7 @@ public class EnderLetterHandler extends WorldSavedData
 		}
 
 		@Override
-		public ItemStack getStackInSlotOnClosing(int index)
+		public ItemStack removeStackFromSlot(int index)
 		{
 			if (this.enderLetters[index] != null)
 			{

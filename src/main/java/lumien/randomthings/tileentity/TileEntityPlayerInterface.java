@@ -139,14 +139,14 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int i)
+	public ItemStack removeStackFromSlot(int i)
 	{
 		checkPlayerEntity();
 		if (this.playerEntity == null)
 		{
 			return null;
 		}
-		return playerEntity.inventory.getStackInSlotOnClosing(i);
+		return playerEntity.inventory.removeStackFromSlot(i);
 	}
 
 	@Override
@@ -320,11 +320,11 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 	@Override
 	public IChatComponent getDisplayName()
 	{
-		return new ChatComponentTranslation(getCommandSenderName());
+		return new ChatComponentTranslation(getName());
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return "container.playerinterface";
 	}

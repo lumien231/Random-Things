@@ -85,9 +85,9 @@ public class ModelCustomWorkbench implements ISmartBlockModel, ISmartItemModel
 	}
 
 	@Override
-	public TextureAtlasSprite getTexture()
+	public TextureAtlasSprite getParticleTexture()
 	{
-		return defaultModel.getTexture();
+		return defaultModel.getParticleTexture();
 	}
 
 	@Override

@@ -97,7 +97,7 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 	}
 
 	@Override
-	public TextureAtlasSprite getTexture()
+	public TextureAtlasSprite getParticleTexture()
 	{
 		return defaultSprite;
 	}

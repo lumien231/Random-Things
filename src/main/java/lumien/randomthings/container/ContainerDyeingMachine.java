@@ -116,7 +116,7 @@ public class ContainerDyeingMachine extends Container
 		{
 			for (int i = 0; i < 2; ++i)
 			{
-				ItemStack itemstack = this.ingredients.getStackInSlotOnClosing(i);
+				ItemStack itemstack = this.ingredients.removeStackFromSlot(i);
 
 				if (itemstack != null)
 				{

@@ -358,9 +358,9 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
+	public ItemStack removeStackFromSlot(int index)
 	{
-		return inventory.getStackInSlotOnClosing(index);
+		return inventory.removeStackFromSlot(index);
 	}
 
 	@Override
@@ -424,9 +424,9 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
-		return inventory.getCommandSenderName();
+		return inventory.getName();
 	}
 
 	@Override

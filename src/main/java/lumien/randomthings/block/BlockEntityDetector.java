@@ -33,7 +33,7 @@ public class BlockEntityDetector extends BlockContainerBase
 	}
 
 	@Override
-	public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
 		TileEntityEntityDetector te = (TileEntityEntityDetector) worldIn.getTileEntity(pos);
 

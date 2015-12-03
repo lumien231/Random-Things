@@ -193,7 +193,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		 * Gets the name of this command sender (usually username, but possibly "Rcon")
 		 */
 		@Override
-		public String getCommandSenderName()
+		public String getName()
 		{
 			return null;
 		}

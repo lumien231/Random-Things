@@ -61,17 +61,17 @@ public class RenderReviveCircle extends Render
 
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer renderer = tessellator.getWorldRenderer();
-		renderer.func_181668_a(7, DefaultVertexFormats.field_181707_g);
+		renderer.begin(7, DefaultVertexFormats.POSITION_TEX);
 		
-		renderer.func_181662_b(0.0F - f7, 0.0F - f8, 0.0D).func_181673_a(f2, f5).func_181675_d();
-		renderer.func_181662_b(f6 - f7, 0.0F - f8, 0.0D).func_181673_a(f3, f5).func_181675_d();
-		renderer.func_181662_b(f6 - f7, 1.0F - f8, 0.0D).func_181673_a(f3, f4).func_181675_d();
-		renderer.func_181662_b(0.0F - f7, 1.0F - f8, 0.0D).func_181673_a(f2, f4).func_181675_d();
+		renderer.pos(0.0F - f7, 0.0F - f8, 0.0D).tex(f2, f5).endVertex();
+		renderer.pos(f6 - f7, 0.0F - f8, 0.0D).tex(f3, f5).endVertex();
+		renderer.pos(f6 - f7, 1.0F - f8, 0.0D).tex(f3, f4).endVertex();
+		renderer.pos(0.0F - f7, 1.0F - f8, 0.0D).tex(f2, f4).endVertex();
 
-		renderer.func_181662_b(f6 - f7, 0.0F - f8, 0.0D).func_181673_a(f3, f5).func_181675_d();
-		renderer.func_181662_b(0.0F - f7, 0.0F - f8, 0.0D).func_181673_a(f2, f5).func_181675_d();
-		renderer.func_181662_b(0.0F - f7, 1.0F - f8, 0.0D).func_181673_a(f2, f4).func_181675_d();
-		renderer.func_181662_b(f6 - f7, 1.0F - f8, 0.0D).func_181673_a(f3, f4).func_181675_d();
+		renderer.pos(f6 - f7, 0.0F - f8, 0.0D).tex(f3, f5).endVertex();
+		renderer.pos(0.0F - f7, 0.0F - f8, 0.0D).tex(f2, f5).endVertex();
+		renderer.pos(0.0F - f7, 1.0F - f8, 0.0D).tex(f2, f4).endVertex();
+		renderer.pos(f6 - f7, 1.0F - f8, 0.0D).tex(f3, f4).endVertex();
 		
 		tessellator.draw();
 

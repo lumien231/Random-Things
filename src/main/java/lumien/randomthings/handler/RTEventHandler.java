@@ -647,7 +647,7 @@ public class RTEventHandler
 						GlStateManager.pushMatrix();
 						{
 							GlStateManager.translate(-playerX, -playerY, -playerZ);
-							RenderUtils.drawCube(filterX - 0.01F, filterY - 0.01F, filterZ - 0.01F, 1.02f, 0.4f, 0, 1, 0.2f);
+							RenderUtils.drawCube(filterX - 0.01F, filterY - 0.01F, filterZ - 0.01F, 1.02f, 102, 0, 255, 51);
 						}
 						GlStateManager.popMatrix();
 						GlStateManager.disableBlend();

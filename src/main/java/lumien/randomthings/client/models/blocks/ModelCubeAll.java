@@ -31,7 +31,7 @@ public class ModelCubeAll implements IFlexibleBakedModel
 		generalQuads = new ArrayList<BakedQuad>();
 		for (EnumFacing f : EnumFacing.values())
 		{
-			generalQuads.add(createSidedBakedQuad(0, 1, 0, 1, 1, getTexture(), f));
+			generalQuads.add(createSidedBakedQuad(0, 1, 0, 1, 1, getParticleTexture(), f));
 		}
 	}
 
@@ -99,7 +99,7 @@ public class ModelCubeAll implements IFlexibleBakedModel
 	}
 
 	@Override
-	public TextureAtlasSprite getTexture()
+	public TextureAtlasSprite getParticleTexture()
 	{
 		return texture;
 	}

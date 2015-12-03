@@ -56,12 +56,12 @@ public class RenderSoul extends Render
 			GlStateManager.color(1, 1, 1);
 			Tessellator tessellator = Tessellator.getInstance();
 			WorldRenderer worldRenderer = tessellator.getWorldRenderer();
-			worldRenderer.func_181668_a(7, DefaultVertexFormats.field_181707_g);
+			worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
 			
-			worldRenderer.func_181662_b(0.0F - f7, 0.0F - f8, 0.0D).func_181673_a(f2, f5).func_181675_d();
-			worldRenderer.func_181662_b(f6 - f7, 0.0F - f8, 0.0D).func_181673_a(f3, f5).func_181675_d();
-			worldRenderer.func_181662_b(f6 - f7, 1.0F - f8, 0.0D).func_181673_a(f3, f4).func_181675_d();
-			worldRenderer.func_181662_b(0.0F - f7, 1.0F - f8, 0.0D).func_181673_a(f2, f4).func_181675_d();
+			worldRenderer.pos(0.0F - f7, 0.0F - f8, 0.0D).tex(f2, f5).endVertex();
+			worldRenderer.pos(f6 - f7, 0.0F - f8, 0.0D).tex(f3, f5).endVertex();
+			worldRenderer.pos(f6 - f7, 1.0F - f8, 0.0D).tex(f3, f4).endVertex();
+			worldRenderer.pos(0.0F - f7, 1.0F - f8, 0.0D).tex(f2, f4).endVertex();
 			
 			tessellator.draw();
 			GlStateManager.enableLighting();

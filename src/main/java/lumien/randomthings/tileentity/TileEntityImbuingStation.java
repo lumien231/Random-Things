@@ -131,7 +131,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
+	public ItemStack removeStackFromSlot(int slot)
 	{
 		return inventory.getStackInSlot(slot);
 	}
@@ -205,7 +205,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return "Imbuing Station";
 	}

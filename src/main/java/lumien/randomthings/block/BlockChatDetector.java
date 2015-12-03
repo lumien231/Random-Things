@@ -93,13 +93,13 @@ public class BlockChatDetector extends BlockContainerBase
 	}
 
 	@Override
-	public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
 		return (Boolean) state.getValue(POWERED) ? 15 : 0;
 	}
 
 	@Override
-	public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
 		return (Boolean) state.getValue(POWERED) ? 15 : 0;
 	}

@@ -169,7 +169,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 	}
 
 	@Override
-	public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
 		TileEntityAnalogEmitter te = (TileEntityAnalogEmitter) worldIn.getTileEntity(pos);
 		EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
@@ -185,8 +185,8 @@ public class BlockAnalogEmitter extends BlockContainerBase
 	}
 
 	@Override
-	public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		return isProvidingStrongPower(worldIn, pos, state, side);
+		return getStrongPower(worldIn, pos, state, side);
 	}
 }
