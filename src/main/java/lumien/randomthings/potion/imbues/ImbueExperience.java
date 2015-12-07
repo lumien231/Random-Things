@@ -2,7 +2,6 @@ package lumien.randomthings.potion.imbues;
 
 import java.awt.Color;
 
-import lumien.randomthings.config.PotionIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,7 +17,7 @@ public class ImbueExperience extends Potion
 
 	public ImbueExperience()
 	{
-		super(PotionIds.IMBUE_EXPERIENCE, new ResourceLocation("imbue_experience"), false, Color.YELLOW.getRGB());
+		super(new ResourceLocation("imbue_experience"), false, Color.YELLOW.getRGB());
 
 		this.setPotionName("Experience Imbue");
 	}

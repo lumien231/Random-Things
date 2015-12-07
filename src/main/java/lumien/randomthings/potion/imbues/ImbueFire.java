@@ -2,7 +2,6 @@ package lumien.randomthings.potion.imbues;
 
 import java.awt.Color;
 
-import lumien.randomthings.config.PotionIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,7 +17,7 @@ public class ImbueFire extends Potion
 
 	public ImbueFire()
 	{
-		super(PotionIds.IMBUE_FIRE, new ResourceLocation("imbue_fire"), false, Color.ORANGE.getRGB());
+		super(new ResourceLocation("imbue_fire"), false, Color.ORANGE.getRGB());
 
 		this.setPotionName("Fire Imbue");
 	}

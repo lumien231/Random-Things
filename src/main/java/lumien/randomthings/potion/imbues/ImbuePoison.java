@@ -2,7 +2,6 @@ package lumien.randomthings.potion.imbues;
 
 import java.awt.Color;
 
-import lumien.randomthings.config.PotionIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,7 +17,7 @@ public class ImbuePoison extends Potion
 
 	public ImbuePoison()
 	{
-		super(PotionIds.IMBUE_POISON, new ResourceLocation("imbue_poison"), false, Color.GREEN.darker().getRGB());
+		super(new ResourceLocation("imbue_poison"), false, Color.GREEN.darker().getRGB());
 
 		this.setPotionName("Poison Imbue");
 	}

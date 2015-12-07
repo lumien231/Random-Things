@@ -2,7 +2,6 @@ package lumien.randomthings.potion.imbues;
 
 import java.awt.Color;
 
-import lumien.randomthings.config.PotionIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,7 +17,7 @@ public class ImbueWither extends Potion
 
 	public ImbueWither()
 	{
-		super(PotionIds.IMBUE_WITHER, new ResourceLocation("imbue_wither"), false, Color.BLACK.brighter().getRGB());
+		super(new ResourceLocation("imbue_wither"), false, Color.BLACK.brighter().getRGB());
 
 		this.setPotionName("Wither Imbue");
 	}
