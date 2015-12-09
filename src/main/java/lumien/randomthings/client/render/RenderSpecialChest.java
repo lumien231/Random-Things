@@ -1,5 +1,6 @@
 package lumien.randomthings.client.render;
 
+import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
@@ -10,6 +11,8 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL31;
 
+import lumien.randomthings.handler.magicavoxel.MagicaVoxelLoader;
+import lumien.randomthings.handler.magicavoxel.MagicaVoxelRenderModel;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.Block;
@@ -91,6 +94,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 		}
 
 		GlStateManager.translate((float) p_180538_2_, (float) p_180538_4_ + 1.0F, (float) p_180538_6_ + 1.0F);
+		
 		GlStateManager.scale(1.0F, -1.0F, -1.0F);
 		GlStateManager.translate(0.5F, 0.5F, 0.5F);
 		short short1 = 0;
@@ -125,6 +129,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 		modelchest.chestLid.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
 		modelchest.renderAll();
 		GlStateManager.disableRescaleNormal();
+
 		GlStateManager.popMatrix();
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 

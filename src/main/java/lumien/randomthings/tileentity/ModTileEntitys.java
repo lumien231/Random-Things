@@ -28,6 +28,7 @@ public class ModTileEntitys
 		registerTE(TileEntityEnderMailbox.class, "enderMailbox");
 		registerTE(TileEntityEntityDetector.class, "entityDetector");
 		registerTE(TileEntityPotionVaporizer.class, "potionVaporizer");
+		registerTE(TileEntityVoxelProjector.class, "voxelProjector");
 	}
 
 	private static void registerTE(Class<? extends TileEntity> clazz, String name)

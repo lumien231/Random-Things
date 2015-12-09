@@ -1,5 +1,7 @@
 package lumien.randomthings;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.Logger;
 
 import lumien.randomthings.block.ModBlocks;
@@ -7,6 +9,8 @@ import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.entitys.ModEntitys;
 import lumien.randomthings.handler.RTEventHandler;
+import lumien.randomthings.handler.magicavoxel.MagicaVoxelLoader;
+import lumien.randomthings.handler.magicavoxel.ModelHandler;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.RTCreativeTab;
 import lumien.randomthings.lib.Reference;
@@ -17,6 +21,8 @@ import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.worldgen.ModDimensions;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenPlants;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -44,6 +50,8 @@ public class RandomThings
 	public Logger logger;
 
 	public ModConfiguration configuration;
+	
+	public ModelHandler modelHandler;
 
 	ASMDataTable asmDataTable;
 
@@ -51,6 +59,7 @@ public class RandomThings
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		asmDataTable = event.getAsmData();
+		modelHandler = new ModelHandler(event.getSide());
 
 		creativeTab = new RTCreativeTab();
 		logger = event.getModLog();
@@ -87,6 +96,7 @@ public class RandomThings
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		modelHandler.load();
 		proxy.registerRenderers();
 	}
 

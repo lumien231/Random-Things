@@ -32,6 +32,7 @@ tile.entityDetector.name=Entity Detector
 tile.quartzLamp.name=Quartz Lamp
 tile.quartzGlass.name=Quartz Glass
 tile.potionVaporizer.name=Potion Vaporizer
+tile.voxelProjector.name=[WIP] Voxel Projector
 
 tile.natureCore.name=Nature Core
 tile.netherCore.name=Nether Core

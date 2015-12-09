@@ -49,7 +49,7 @@ public class InventoryItem implements IInventory
 	}
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return name;
 	}
@@ -63,7 +63,7 @@ public class InventoryItem implements IInventory
 	@Override
 	public IChatComponent getDisplayName()
 	{
-		return new ChatComponentTranslation(getCommandSenderName());
+		return new ChatComponentTranslation(getName());
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class InventoryItem implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
+	public ItemStack removeStackFromSlot(int index)
 	{
 		if (this.cacheInventory[index] != null)
 		{

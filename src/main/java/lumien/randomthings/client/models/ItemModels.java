@@ -51,6 +51,7 @@ public class ItemModels
 		registerBlock(ModBlocks.quartzLamp);
 		registerBlock(ModBlocks.quartzGlass);
 		registerBlock(ModBlocks.potionVaporizer);
+		registerBlock(ModBlocks.voxelProjector);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);

@@ -48,6 +48,11 @@ public abstract class TileEntityBase extends TileEntity
 		}
 		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
+	
+	protected void syncTE()
+	{
+		this.worldObj.markBlockForUpdate(this.pos);
+	}
 
 	public abstract void writeDataToNBT(NBTTagCompound compound);
 

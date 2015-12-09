@@ -6,6 +6,7 @@ import lumien.randomthings.network.messages.MessageEnderLetter;
 import lumien.randomthings.network.messages.MessageEntityDetector;
 import lumien.randomthings.network.messages.MessageOnlineDetector;
 import lumien.randomthings.network.messages.MessagePotionVaporizerParticles;
+import lumien.randomthings.network.messages.MessageVoxelProjector;
 
 public class PacketHandler
 {
@@ -19,5 +20,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageEnderLetter.class);
 		INSTANCE.registerMessage(MessageEntityDetector.class);
 		INSTANCE.registerMessage(MessagePotionVaporizerParticles.class);
+		INSTANCE.registerMessage(MessageVoxelProjector.class);
 	}
 }

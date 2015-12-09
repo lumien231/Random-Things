@@ -10,12 +10,14 @@ import lumien.randomthings.client.models.blocks.BlockModels;
 import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
 import lumien.randomthings.client.render.RenderSpecialChest;
+import lumien.randomthings.client.render.RenderVoxelProjector;
 import lumien.randomthings.entitys.EntityReviveCircle;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
+import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -84,8 +86,9 @@ public class ClientProxy extends CommonProxy
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle(Minecraft.getMinecraft().getRenderManager()));
-
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
 	}
 
 	@Override
@@ -123,7 +126,7 @@ public class ClientProxy extends CommonProxy
 				GlStateManager.pushMatrix();
 				{
 					GlStateManager.translate(-playerX, -playerY, -playerZ);
-					RenderUtils.drawCube(oX - 0.01F, oY - 0.01F, oZ - 0.01F, 1.02f, 0.5f, 0F, 0F, 0.18f);
+					RenderUtils.drawCube(oX - 0.01F, oY - 0.01F, oZ - 0.01F, 1.02f, 122, 0, 0, 46);
 				}
 				GlStateManager.popMatrix();
 				GlStateManager.disableBlend();
@@ -148,7 +151,7 @@ public class ClientProxy extends CommonProxy
 		Minecraft.getMinecraft().entityRenderer.disableLightmap();
 		GlStateManager.pushMatrix();
 		{
-			worldRenderer.func_181668_a(GL11.GL_LINES, DefaultVertexFormats.field_181706_f);
+			worldRenderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
 			synchronized (TileEntityRedstoneInterface.interfaces)
 			{
 				for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
@@ -164,8 +167,8 @@ public class ClientProxy extends CommonProxy
 							{
 								if (redstoneInterface.getWorld().isRemote)
 								{
-									worldRenderer.func_181662_b(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).func_181669_b(255, 0, 0, 255).func_181675_d();
-									worldRenderer.func_181662_b(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).func_181669_b(255, 0, 0, 255).func_181675_d();
+									worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
+									worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 								}
 							}
 						}

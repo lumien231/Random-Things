@@ -1,10 +1,11 @@
 package lumien.randomthings;
 
 import lumien.randomthings.entitys.EntitySoul;
+import lumien.randomthings.handler.magicavoxel.ModelLibrary;
 import net.minecraft.server.MinecraftServer;
 
 public class CommonProxy
-{
+{	
 	public void registerModels()
 	{
 
