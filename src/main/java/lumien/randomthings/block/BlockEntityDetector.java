@@ -18,6 +18,8 @@ public class BlockEntityDetector extends BlockContainerBase
 	public BlockEntityDetector()
 	{
 		super("entityDetector", Material.rock);
+		
+		this.setHardness(1.5F);
 	}
 
 	@Override

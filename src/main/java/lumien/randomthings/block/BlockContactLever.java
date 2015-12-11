@@ -28,6 +28,7 @@ public class BlockContactLever extends BlockBase
 		super("contactLever", Material.rock);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(POWERED, Boolean.valueOf(false)));
+		this.setHardness(1.5F);
 	}
 
 	@Override

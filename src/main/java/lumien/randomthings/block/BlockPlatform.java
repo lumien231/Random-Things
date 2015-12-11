@@ -32,6 +32,7 @@ public class BlockPlatform extends BlockBase
 		super("platform", Material.wood, ItemBlockPlatform.class);
 
 		this.setBlockBounds(0, 14F / 16F, 0, 1, 1, 1);
+		this.setHardness(1.5F);
 	}
 
 	public boolean isOpaqueCube()

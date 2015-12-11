@@ -28,6 +28,7 @@ public class BlockContactButton extends BlockBase
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(POWERED, Boolean.valueOf(false)));
 		this.setTickRandomly(true);
+		this.setHardness(1.5F);
 	}
 
 	@Override

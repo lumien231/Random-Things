@@ -18,6 +18,8 @@ public class BlockPod extends BlockBase
 	protected BlockPod()
 	{
 		super("beanPod", Material.plants);
+		
+		this.setHardness(1.5F);
 	}
 
 	@Override

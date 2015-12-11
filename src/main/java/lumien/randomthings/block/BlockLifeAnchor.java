@@ -24,6 +24,8 @@ public class BlockLifeAnchor extends BlockBase
 	protected BlockLifeAnchor()
 	{
 		super("lifeAnchor", Material.rock);
+		
+		this.setHardness(1.5F);
 	}
 
 	@Override

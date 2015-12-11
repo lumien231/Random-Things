@@ -17,6 +17,8 @@ public class BlockVoxelProjector extends BlockContainerBase
 	protected BlockVoxelProjector()
 	{
 		super("voxelProjector", Material.rock);
+		
+		this.setHardness(1.5F);
 	}
 
 	@Override

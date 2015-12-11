@@ -27,6 +27,7 @@ public class BlockEnderBridge extends BlockContainerBase
 		super("enderBridge", Material.rock);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setHardness(1.5F);
 	}
 
 	@Override
