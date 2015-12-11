@@ -61,6 +61,19 @@ public class AsmHandler
 		}
 		return 16777215;
 	}
+	
+	public static int getColorFromArmorStack(ItemStack is)
+	{
+		NBTTagCompound compound;
+		if ((compound = is.getTagCompound()) != null)
+		{
+			if (compound.hasKey("rtDye"))
+			{
+				return compound.getInteger("rtDye");
+			}
+		}
+		return -1;
+	}
 
 	public static boolean shouldRenderPotionParticles(EntityLivingBase entity)
 	{

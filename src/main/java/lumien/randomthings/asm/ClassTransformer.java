@@ -95,6 +95,10 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchLiquidBlock(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.item.ItemArmor"))
+		{
+			return patchItemArmor(basicClass);
+		}
 		return basicClass;
 	}
 
@@ -674,6 +678,52 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new InsnNode(POP));
 
 			getRedstonePower.instructions.insert(toInsert);
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
+	}
+
+	private byte[] patchItemArmor(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found ItemArmor Class: " + classNode.name);
+
+		MethodNode getColor = null;
+
+		for (MethodNode mn:classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_82814_b")))
+			{
+				getColor = mn;
+			}
+		}
+
+		if (getColor != null)
+		{
+			logger.log(Level.DEBUG, "- Found getColor");
+			
+			LabelNode l0 = new LabelNode(new Label());
+			LabelNode l1 = new LabelNode(new Label());
+			LabelNode l2 = new LabelNode(new Label());
+
+			InsnList toInsert = new InsnList();
+
+			toInsert.add(l0);
+			toInsert.add(new VarInsnNode(ALOAD, 1));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getColorFromArmorStack", "(Lnet/minecraft/item/ItemStack;)I", false));
+			toInsert.add(new InsnNode(DUP));
+			toInsert.add(new JumpInsnNode(Opcodes.IFLT, l2));
+			toInsert.add(l1);
+			toInsert.add(new InsnNode(IRETURN));
+			toInsert.add(l2);
+			toInsert.add(new InsnNode(POP));
+
+			getColor.instructions.insert(toInsert);
 		}
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
