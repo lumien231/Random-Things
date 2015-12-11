@@ -36,7 +36,7 @@ public class TileEntityOnlineDetector extends TileEntityBase implements SimpleCo
 		{
 			if (worldObj.getTotalWorldTime() % 20 == 0)
 			{
-				boolean playerCheck = PlayerUtil.isPlayerOnline(username);
+				boolean playerCheck = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(username) != null;
 
 				if (playerOnline != playerCheck)
 				{
