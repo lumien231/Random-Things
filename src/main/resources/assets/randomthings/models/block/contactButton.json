@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "randomthings:blocks/contactButton/side",
+        "front": "randomthings:blocks/contactButton/front",
+        "side": "randomthings:blocks/contactButton/side"
+    }
+}

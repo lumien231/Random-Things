@@ -72,6 +72,8 @@ public class ModRecipes
 		final ItemStack stonePressurePlate = new ItemStack(Blocks.stone_pressure_plate);
 		final ItemStack quartz = new ItemStack(Items.quartz);
 		final ItemStack quartzBlock = new ItemStack(Blocks.quartz_block);
+		final ItemStack lever = new ItemStack(Blocks.lever);
+		final ItemStack stoneButton = new ItemStack(Blocks.stone_button);
 
 		for (int i = 0; i < oreDictDyes.length; i++)
 		{
@@ -102,7 +104,10 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzGlass, 8, 0), "ggg", "gqg", "ggg", 'g', "blockGlass", 'q', quartzBlock));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.potionVaporizer), "ctc", "iui", "cfc", 'c', "cobblestone", 't', Blocks.iron_trapdoor, 'i', "ingotIron", 'u', Items.cauldron, 'f', Blocks.furnace));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voxelProjector), "rgb", "wlw", "www", 'r', "blockGlassRed", 'g', "blockGlassGreen", 'b', "blockGlassBlue", 'w', blackWool, 'l', redstoneLamp));
-
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactButton), "sis","sbs","sss",'s',"stone",'i',Blocks.iron_bars,'b',stoneButton));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactLever), "sis","sbs","sss",'s',"stone",'i',Blocks.iron_bars,'b',lever));
+		
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.grass));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stableEnderpearl), "olo", "lel", "olo", 'o', obsidian, 'l', lapis, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', bean, 'n', "nuggetGold"));

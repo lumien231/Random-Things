@@ -7,6 +7,8 @@ import java.util.Random;
 import java.util.Set;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.block.BlockContactButton;
+import lumien.randomthings.block.BlockContactLever;
 import lumien.randomthings.block.BlockLifeAnchor;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
@@ -48,6 +50,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -67,6 +70,8 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Loader;
@@ -82,6 +87,35 @@ import org.apache.logging.log4j.Level;
 public class RTEventHandler
 {
 	static Random rng = new Random();
+
+	@SubscribeEvent
+	public void playerInteract(PlayerInteractEvent event)
+	{
+		if (!event.world.isRemote && event.action == Action.RIGHT_CLICK_BLOCK)
+		{
+			for (EnumFacing facing : EnumFacing.values())
+			{
+				BlockPos pos = event.pos.offset(facing);
+				IBlockState state = event.world.getBlockState(pos);
+				if (state.getBlock() == ModBlocks.contactButton)
+				{
+					if (state.getValue(BlockContactButton.FACING).getOpposite() == facing)
+					{
+						((BlockContactButton) state.getBlock()).activate(event.world, event.pos.offset(facing), facing.getOpposite());
+						break;
+					}
+				}
+				else if (state.getBlock() == ModBlocks.contactLever)
+				{
+					if (state.getValue(BlockContactLever.FACING).getOpposite() == facing)
+					{
+						((BlockContactLever) state.getBlock()).activate(event.world, event.pos.offset(facing), facing.getOpposite());
+						break;
+					}
+				}
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void livingExperience(LivingExperienceDropEvent event)

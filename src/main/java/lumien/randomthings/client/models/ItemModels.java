@@ -1,5 +1,7 @@
 package lumien.randomthings.client.models;
 
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.mesh.StainedBrickItemMesh;
 import lumien.randomthings.item.ModItems;
@@ -52,6 +54,8 @@ public class ItemModels
 		registerBlock(ModBlocks.quartzGlass);
 		registerBlock(ModBlocks.potionVaporizer);
 		registerBlock(ModBlocks.voxelProjector);
+		registerBlock(ModBlocks.contactButton);
+		registerBlock(ModBlocks.contactLever);
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);

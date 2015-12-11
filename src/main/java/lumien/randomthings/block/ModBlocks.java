@@ -1,5 +1,6 @@
 package lumien.randomthings.block;
 
+import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModBlocks
@@ -39,7 +40,10 @@ public class ModBlocks
 	public static BlockQuartzGlass quartzGlass;
 	public static BlockPotionVaporizer potionVaporizer;
 	public static BlockVoxelProjector voxelProjector;
-
+	
+	public static BlockContactButton contactButton;
+	public static BlockContactLever contactLever;
+	
 	public static BlockNatureCore natureCore;
 	public static BlockNetherCore netherCore;
 	public static BlockEnderCore enderCore;
@@ -82,6 +86,8 @@ public class ModBlocks
 		quartzGlass = new BlockQuartzGlass();
 		potionVaporizer = new BlockPotionVaporizer();
 		voxelProjector = new BlockVoxelProjector();
+		contactButton = new BlockContactButton();
+		contactLever = new BlockContactLever();
 		
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();
