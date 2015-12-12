@@ -25,7 +25,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	{
 		this.model = "Test";
 		this.scale = 1;
-		this.rotationSpeed = 1;
+		this.rotationSpeed = 0;
 	}
 
 	@Override
