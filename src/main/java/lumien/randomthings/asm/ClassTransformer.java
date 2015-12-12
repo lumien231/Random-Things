@@ -249,7 +249,6 @@ public class ClassTransformer implements IClassTransformer
 
 		if (func_177182_a != null)
 		{
-			System.out.println("- Found func_177182_a (ItemStack Information 2/2)");
 			logger.log(Level.DEBUG, "- Found func_177182_a (ItemStack Information 2/2)");
 			for (int i = 0; i < func_177182_a.instructions.size(); i++)
 			{
