@@ -39,27 +39,30 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 	@Override
 	public IBakedModel handleBlockState(IBlockState state)
 	{
-		IExtendedBlockState extendedState = (IExtendedBlockState) state;
-
-		String fluidName = extendedState.getValue(BlockFluidDisplay.FLUID);
-		boolean flowing = extendedState.getValue(BlockFluidDisplay.FLOWING);
-
-		HashMap<String, ModelCubeAll> cache = flowing ? modelCacheFlowing : modelCache;
-
-		if (cache.containsKey(fluidName))
+		if (state.getPropertyNames().contains(BlockFluidDisplay.FLOWING))
 		{
-			return cache.get(fluidName);
-		}
-		else
-		{
-			Fluid fluid = FluidRegistry.getFluid(fluidName);
+			IExtendedBlockState extendedState = (IExtendedBlockState) state;
 
-			if (fluid != null)
+			String fluidName = extendedState.getValue(BlockFluidDisplay.FLUID);
+			boolean flowing = extendedState.getValue(BlockFluidDisplay.FLOWING);
+
+			HashMap<String, ModelCubeAll> cache = flowing ? modelCacheFlowing : modelCache;
+
+			if (cache.containsKey(fluidName))
 			{
-				TextureMap textureMap = Minecraft.getMinecraft().getTextureMapBlocks();
-
-				cache.put(fluidName, new ModelCubeAll(flowing ? textureMap.getAtlasSprite(fluid.getFlowing().toString()) : textureMap.getAtlasSprite(fluid.getStill().toString()), true));
 				return cache.get(fluidName);
+			}
+			else
+			{
+				Fluid fluid = FluidRegistry.getFluid(fluidName);
+
+				if (fluid != null)
+				{
+					TextureMap textureMap = Minecraft.getMinecraft().getTextureMapBlocks();
+
+					cache.put(fluidName, new ModelCubeAll(flowing ? textureMap.getAtlasSprite(fluid.getFlowing().toString()) : textureMap.getAtlasSprite(fluid.getStill().toString()), true));
+					return cache.get(fluidName);
+				}
 			}
 		}
 

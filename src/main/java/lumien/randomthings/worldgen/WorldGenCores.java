@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.BiomeDictionary;
@@ -114,91 +115,94 @@ public class WorldGenCores implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if (world.provider.getDimensionId() == 0)
+		if (world.getWorldType() != WorldType.DEBUG_WORLD)
 		{
-			int x = chunkX * 16 + random.nextInt(16);
-			int z = chunkZ * 16 + random.nextInt(16);
-			BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
-			BiomeGenBase biome = world.getBiomeGenForCoords(target);
+			if (world.provider.getDimensionId() == 0)
+			{
+				int x = chunkX * 16 + random.nextInt(16);
+				int z = chunkZ * 16 + random.nextInt(16);
+				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
+				BiomeGenBase biome = world.getBiomeGenForCoords(target);
 
-			int enderMult = 18;
-			if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
-			{
-				enderMult -= 4;
-			}
-			if (BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY))
-			{
-				enderMult -= 2;
-			}
-			if (BiomeDictionary.isBiomeOfType(biome, Type.SWAMP))
-			{
-				enderMult -= 4;
-			}
-			if (BiomeDictionary.isBiomeOfType(biome, Type.SANDY))
-			{
-				enderMult += 10;
-			}
-
-			int natureMult = 18;
-			if (BiomeDictionary.isBiomeOfType(biome, Type.DENSE))
-			{
-				natureMult -= 4;
-			}
-			if (BiomeDictionary.isBiomeOfType(biome, Type.SPARSE))
-			{
-				natureMult += 4;
-			}
-			if (BiomeDictionary.isBiomeOfType(biome, Type.WET))
-			{
-				natureMult -= 2;
-			}
-			if (BiomeDictionary.isBiomeOfType(biome, Type.DRY))
-			{
-				natureMult += 2;
-			}
-			if (BiomeDictionary.isBiomeOfType(biome, Type.DEAD))
-			{
-				natureMult += 10;
-			}
-			if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
-			{
-				natureMult -= 4;
-			}
-
-			boolean generateNatureCore = random.nextInt(18 * natureMult) == 0;
-			boolean generateEnderCore = random.nextInt(18 * enderMult) == 0;
-
-			if (generateNatureCore || generateEnderCore)
-			{
-				boolean canPlaceCore = true;
-				for (int modX = -2; modX < 3; modX++)
+				int enderMult = 18;
+				if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
 				{
-					for (int modZ = -2; modZ < 3; modZ++)
+					enderMult -= 4;
+				}
+				if (BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY))
+				{
+					enderMult -= 2;
+				}
+				if (BiomeDictionary.isBiomeOfType(biome, Type.SWAMP))
+				{
+					enderMult -= 4;
+				}
+				if (BiomeDictionary.isBiomeOfType(biome, Type.SANDY))
+				{
+					enderMult += 10;
+				}
+
+				int natureMult = 18;
+				if (BiomeDictionary.isBiomeOfType(biome, Type.DENSE))
+				{
+					natureMult -= 4;
+				}
+				if (BiomeDictionary.isBiomeOfType(biome, Type.SPARSE))
+				{
+					natureMult += 4;
+				}
+				if (BiomeDictionary.isBiomeOfType(biome, Type.WET))
+				{
+					natureMult -= 2;
+				}
+				if (BiomeDictionary.isBiomeOfType(biome, Type.DRY))
+				{
+					natureMult += 2;
+				}
+				if (BiomeDictionary.isBiomeOfType(biome, Type.DEAD))
+				{
+					natureMult += 10;
+				}
+				if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
+				{
+					natureMult -= 4;
+				}
+
+				boolean generateNatureCore = random.nextInt(18 * natureMult) == 0;
+				boolean generateEnderCore = random.nextInt(18 * enderMult) == 0;
+
+				if (generateNatureCore || generateEnderCore)
+				{
+					boolean canPlaceCore = true;
+					for (int modX = -2; modX < 3; modX++)
 					{
-						for (int modY = 0; modY < 3; modY++)
+						for (int modZ = -2; modZ < 3; modZ++)
 						{
-							BlockPos check = new BlockPos(target.getX() + modX, target.getY() + modY, target.getZ() + modZ);
-							if (!world.isAirBlock(check.down()) && world.isSideSolid(check.down(), EnumFacing.UP))
+							for (int modY = 0; modY < 3; modY++)
 							{
-								if (!(world.isAirBlock(check) || world.getBlockState(check).getBlock().isReplaceable(world, check)))
+								BlockPos check = new BlockPos(target.getX() + modX, target.getY() + modY, target.getZ() + modZ);
+								if (!world.isAirBlock(check.down()) && world.isSideSolid(check.down(), EnumFacing.UP))
 								{
-									canPlaceCore = false;
-									break;
+									if (!(world.isAirBlock(check) || world.getBlockState(check).getBlock().isReplaceable(world, check)))
+									{
+										canPlaceCore = false;
+										break;
+									}
 								}
 							}
 						}
 					}
-				}
 
-				if (canPlaceCore)
-				{
-					if (generateEnderCore)
+					if (canPlaceCore)
 					{
-						placeEnderCore(random, world, target);
-					}
-					else if (generateNatureCore)
-					{
-						placeNatureCore(random, world, target);
+						if (generateEnderCore)
+						{
+							placeEnderCore(random, world, target);
+						}
+						else if (generateNatureCore)
+						{
+							placeNatureCore(random, world, target);
+						}
 					}
 				}
 			}

@@ -154,7 +154,7 @@ public class ModelCustomWorkbench implements ISmartBlockModel, ISmartItemModel
 
 		IBlockState woodState = extendedState.getValue(BlockCustomWorkbench.WOOD_STATE);
 
-		if (woodState == null)
+		if (woodState == null || !woodState.getProperties().containsKey(BlockCustomWorkbench.WOOD_STATE))
 		{
 			return defaultModel;
 		}

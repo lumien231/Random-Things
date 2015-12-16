@@ -71,7 +71,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world,IBlockState state)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityCustomWorkbench();
 	}
@@ -93,6 +93,11 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	{
 		TileEntityCustomWorkbench te = (TileEntityCustomWorkbench) worldIn.getTileEntity(pos);
 		IExtendedBlockState actualState = (IExtendedBlockState) state;
+
+		if (te == null)
+		{
+			return state;
+		}
 
 		if (te.getWoodState() != null)
 		{
@@ -190,7 +195,8 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		}
 
 		/**
-		 * Gets the name of this command sender (usually username, but possibly "Rcon")
+		 * Gets the name of this command sender (usually username, but possibly
+		 * "Rcon")
 		 */
 		@Override
 		public String getName()
@@ -208,7 +214,8 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		}
 
 		/**
-		 * Get the formatted ChatComponent that will be used for the sender's username in chat
+		 * Get the formatted ChatComponent that will be used for the sender's
+		 * username in chat
 		 */
 		@Override
 		public IChatComponent getDisplayName()

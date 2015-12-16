@@ -79,6 +79,12 @@ public class BlockFluidDisplay extends BlockContainerBase
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		TileEntityFluidDisplay te = (TileEntityFluidDisplay) worldIn.getTileEntity(pos);
+
+		if (te == null)
+		{
+			return super.getExtendedState(state, worldIn, pos);
+		}
+		
 		IExtendedBlockState actualState = (IExtendedBlockState) state;
 
 		return actualState.withProperty(FLUID, te.getFluid()).withProperty(FLOWING, te.flowing());
@@ -112,7 +118,7 @@ public class BlockFluidDisplay extends BlockContainerBase
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world,IBlockState state)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityFluidDisplay();
 	}
