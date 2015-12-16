@@ -23,9 +23,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.*'])
 }
 
-version = "3.5.6"
+version = "3.5.7"
 group= "lumien.randomthings"
-archivesBaseName = "RandomThings-MC1.8"
+archivesBaseName = "RandomThings-MC1.8.8"
 
 jar {
     manifest {
