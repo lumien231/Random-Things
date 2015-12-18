@@ -80,12 +80,11 @@ public class BlockFluidDisplay extends BlockContainerBase
 	{
 		TileEntityFluidDisplay te = (TileEntityFluidDisplay) worldIn.getTileEntity(pos);
 
+		IExtendedBlockState actualState = (IExtendedBlockState) state;
 		if (te == null)
 		{
-			return super.getExtendedState(state, worldIn, pos);
+			return actualState.withProperty(FLUID, null).withProperty(FLOWING, false);
 		}
-		
-		IExtendedBlockState actualState = (IExtendedBlockState) state;
 
 		return actualState.withProperty(FLUID, te.getFluid()).withProperty(FLOWING, te.flowing());
 	}

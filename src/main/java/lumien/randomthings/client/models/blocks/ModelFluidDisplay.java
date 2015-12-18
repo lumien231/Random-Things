@@ -39,11 +39,11 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 	@Override
 	public IBakedModel handleBlockState(IBlockState state)
 	{
-		if (state.getPropertyNames().contains(BlockFluidDisplay.FLOWING))
-		{
-			IExtendedBlockState extendedState = (IExtendedBlockState) state;
+		IExtendedBlockState extendedState = (IExtendedBlockState) state;
 
-			String fluidName = extendedState.getValue(BlockFluidDisplay.FLUID);
+		String fluidName = extendedState.getValue(BlockFluidDisplay.FLUID);
+		if (fluidName != null)
+		{
 			boolean flowing = extendedState.getValue(BlockFluidDisplay.FLOWING);
 
 			HashMap<String, ModelCubeAll> cache = flowing ? modelCacheFlowing : modelCache;
@@ -65,7 +65,7 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 				}
 			}
 		}
-
+		
 		return defaultModel;
 	}
 
