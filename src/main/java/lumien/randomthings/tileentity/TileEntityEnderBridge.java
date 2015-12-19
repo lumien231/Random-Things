@@ -46,8 +46,10 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 			{
 				IBlockState blockState = worldObj.getBlockState(pos);
 				EnumFacing facing = (EnumFacing) blockState.getValue(BlockEnderBridge.FACING);
+				
 				BlockPos nextPos = new BlockPos(pos.offset(facing, scanningCounter));
 				IBlockState nextState = worldObj.getBlockState(nextPos);
+				
 				if (nextState.getBlock() == ModBlocks.enderAnchor)
 				{
 					List<EntityPlayerMP> playerList = worldObj.getEntitiesWithinAABB(EntityPlayerMP.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2));
