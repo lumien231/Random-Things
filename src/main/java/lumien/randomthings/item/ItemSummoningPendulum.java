@@ -26,7 +26,7 @@ public class ItemSummoningPendulum extends ItemBase
 	{
 		super("summoningPendulum");
 
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new SingleRandomChestContent(new ItemStack(this), 1, 1, 2));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new SingleRandomChestContent(new ItemStack(this), 1, 1, 1));
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new SingleRandomChestContent(new ItemStack(this), 1, 1, 30));
 		
 		this.setMaxStackSize(1);
