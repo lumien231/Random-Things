@@ -3,6 +3,7 @@ package lumien.randomthings.worldgen;
 import java.util.Random;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.config.Worldgen;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -18,7 +19,7 @@ public class WorldGenPlants implements IWorldGenerator
 		if (world.getWorldType() != WorldType.DEBUG_WORLD)
 		{
 			// Beans
-			if (random.nextBoolean())
+			if (Worldgen.beans && random.nextBoolean())
 			{
 				int x = chunkX * 16 + random.nextInt(16);
 				int z = chunkZ * 16 + random.nextInt(16);
@@ -31,7 +32,7 @@ public class WorldGenPlants implements IWorldGenerator
 			}
 
 			// Pitcher Plants
-			if (random.nextInt(10) == 0)
+			if (Worldgen.pitcherPlants && random.nextInt(10) == 0)
 			{
 				int x = chunkX * 16 + random.nextInt(16);
 				int z = chunkZ * 16 + random.nextInt(16);
