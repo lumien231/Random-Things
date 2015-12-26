@@ -60,6 +60,7 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.FakePlayer;
@@ -87,6 +88,18 @@ import org.apache.logging.log4j.Level;
 public class RTEventHandler
 {
 	static Random rng = new Random();
+
+	@SubscribeEvent
+	public void cameraSetup(CameraSetup event)
+	{
+		if (event.entity instanceof EntityLivingBase)
+		{
+			if (((EntityLivingBase) event.entity).isPotionActive(ModPotions.collapse))
+			{
+				event.roll = 180;
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void playerInteract(PlayerInteractEvent event)
@@ -434,6 +447,13 @@ public class RTEventHandler
 					else if (livingEntity.isPotionActive(ModPotions.imbuePoison))
 					{
 						event.entityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 10 * 20, 1));
+					}
+					else if (livingEntity.isPotionActive(ModPotions.imbueCollapse))
+					{
+						if (Math.random() < 0.2f)
+						{
+							event.entityLiving.addPotionEffect(new PotionEffect(ModPotions.collapse.id, 10 * 20, 1));
+						}
 					}
 				}
 			}

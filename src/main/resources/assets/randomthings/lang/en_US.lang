@@ -90,6 +90,8 @@ tile.platform.acacia.name=Acacia Platform
 tile.platform.jungle.name=Jungle Platform
 tile.platform.darkOak.name=Dark Oak Platform
 
+tile.shieldRod.name=Rod of Shielding
+
 item.chaliceOfImmortality.name=Chalice of Immortality
 item.positionFilter.name=Position Filter
 item.biomeCrystal.name=Biome Crystal
@@ -139,6 +141,9 @@ item.imbue.fire.name=Fire Imbue
 item.imbue.poison.name=Poison Imbue
 item.imbue.experience.name=Experience Imbue
 item.imbue.wither.name=Wither Imbue
+item.imbue.collapse.name=Collapse Imbue
+
+item.ingredient.sakanadeSpores.name=Sakanade Spores
 
 tooltip.general.shift=Hold §6Shift§7 for more information
 tooltip.positionFilter.dimension=Dimension: %d

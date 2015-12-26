@@ -1,6 +1,6 @@
 package lumien.randomthings.asm;
 
-import static org.objectweb.asm.Opcodes.ACONST_NULL;
+import static org.objectweb.asm.Opcodes.*;
 import static org.objectweb.asm.Opcodes.ALOAD;
 import static org.objectweb.asm.Opcodes.ARETURN;
 import static org.objectweb.asm.Opcodes.DUP;
@@ -99,7 +99,67 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchItemArmor(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer"))
+		{
+			return patchEntityRenderer(basicClass);
+		}
 		return basicClass;
+	}
+
+	private byte[] patchEntityRenderer(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found Entity Renderer Class: " + classNode.name);
+
+		MethodNode renderWorldPass = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_175068_a")))
+			{
+				renderWorldPass = mn;
+				break;
+			}
+		}
+
+		if (renderWorldPass != null)
+		{
+			logger.log(Level.DEBUG, " - Found renderWorldPass");
+
+			for (int i = 0; i < renderWorldPass.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = renderWorldPass.instructions.get(i);
+
+				if (ain instanceof MethodInsnNode)
+				{
+					MethodInsnNode min = (MethodInsnNode) ain;
+
+					if (min.name.equals(MCPNames.method("func_78547_a")))
+					{
+						logger.log(Level.DEBUG, " - Found ICamera.setPosition");
+
+						InsnList toInsert = new InsnList();
+
+						toInsert.add(new VarInsnNode(ALOAD, 8));
+
+						toInsert.add(new VarInsnNode(DLOAD, 10));
+						toInsert.add(new VarInsnNode(DLOAD, 12));
+						toInsert.add(new VarInsnNode(DLOAD, 14));
+
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler,  "cameraHook", "(Lnet/minecraft/client/renderer/culling/ICamera;DDD)V", false));
+						
+						renderWorldPass.instructions.insert(min, toInsert);
+					}
+				}
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchLiquidBlock(byte[] basicClass)
@@ -694,7 +754,7 @@ public class ClassTransformer implements IClassTransformer
 
 		MethodNode getColor = null;
 
-		for (MethodNode mn:classNode.methods)
+		for (MethodNode mn : classNode.methods)
 		{
 			if (mn.name.equals(MCPNames.method("func_82814_b")))
 			{
@@ -705,7 +765,7 @@ public class ClassTransformer implements IClassTransformer
 		if (getColor != null)
 		{
 			logger.log(Level.DEBUG, "- Found getColor");
-			
+
 			LabelNode l0 = new LabelNode(new Label());
 			LabelNode l1 = new LabelNode(new Label());
 			LabelNode l2 = new LabelNode(new Label());
