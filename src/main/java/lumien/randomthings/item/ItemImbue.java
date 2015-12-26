@@ -20,7 +20,6 @@ public class ItemImbue extends ItemBase
 	final static int POISON = 1;
 	final static int EXPERIENCE = 2;
 	final static int WITHER = 3;
-	final static int COLLAPSE = 4;
 
 	public ItemImbue()
 	{
@@ -43,8 +42,6 @@ public class ItemImbue extends ItemBase
 				return "item.imbue.experience";
 			case WITHER:
 				return "item.imbue.wither";
-			case COLLAPSE:
-				return "item.imbue.collapse";
 		}
 		return "item.imbue.invalid";
 	}
@@ -53,7 +50,7 @@ public class ItemImbue extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item itemIn, CreativeTabs tab, List subItems)
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			subItems.add(new ItemStack(this, 1, i));
 		}
@@ -104,9 +101,6 @@ public class ItemImbue extends ItemBase
 				case WITHER:
 					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueWither.id, 60 * 5 * 20));
 					break;
-				case COLLAPSE:
-					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueCollapse.id, 60 * 5 * 20));
-					break;
 			}
 		}
 
@@ -142,10 +136,6 @@ public class ItemImbue extends ItemBase
 		else if (player.isPotionActive(ModPotions.imbueWither))
 		{
 			player.removePotionEffect(ModPotions.imbueWither.id);
-		}
-		else if (player.isPotionActive(ModPotions.imbueCollapse))
-		{
-			player.removePotionEffect(ModPotions.imbueCollapse.id);
 		}
 	}
 }

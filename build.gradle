@@ -15,18 +15,12 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 repositories {
-    maven {
-        url = "http://maven.cil.li/" 
-    }
-    maven{
-        url = "http://dvs1.progwml6.com/files/maven"
-    }
+    maven { url = "http://maven.cil.li/" }
 }
 
 dependencies {
     compile "li.cil.oc:OpenComputers:MC1.8-1.5.+:api"
     compile fileTree(dir: 'libs', include: ['*.*'])
-    deobfCompile "mezz.jei:jei_1.8.8:2.11.3.48"
 }
 
 version = "3.5.7"
@@ -52,8 +46,6 @@ minecraft {
     
     replaceIn "lib/Reference.java"
     replace "@VERSION@",project.version
-    
-    useDepAts = true
 }
 
 dependencies {

@@ -1,11 +1,9 @@
 package lumien.randomthings.recipes;
 
 import lumien.randomthings.block.ModBlocks;
-import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler;
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.EntityBreakingFX.SlimeFactory;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -106,10 +104,10 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzGlass, 8, 0), "ggg", "gqg", "ggg", 'g', "blockGlass", 'q', quartzBlock));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.potionVaporizer), "ctc", "iui", "cfc", 'c', "cobblestone", 't', Blocks.iron_trapdoor, 'i', "ingotIron", 'u', Items.cauldron, 'f', Blocks.furnace));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voxelProjector), "rgb", "wlw", "www", 'r', "blockGlassRed", 'g', "blockGlassGreen", 'b', "blockGlassBlue", 'w', blackWool, 'l', redstoneLamp));
-
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactButton), "sis", "sbs", "sss", 's', "stone", 'i', Blocks.iron_bars, 'b', stoneButton));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactLever), "sis", "sbs", "sss", 's', "stone", 'i', Blocks.iron_bars, 'b', lever));
-
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactButton), "sis","sbs","sss",'s',"stone",'i',Blocks.iron_bars,'b',stoneButton));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactLever), "sis","sbs","sss",'s',"stone",'i',Blocks.iron_bars,'b',lever));
+		
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.grass));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stableEnderpearl), "olo", "lel", "olo", 'o', obsidian, 'l', lapis, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', bean, 'n', "nuggetGold"));
@@ -150,7 +148,6 @@ public class ModRecipes
 		ImbuingRecipeHandler.addRecipe(spiderEye, rottenFlesh, redMushroom, waterBottle, new ItemStack(ModItems.imbue, 1, 1));
 		ImbuingRecipeHandler.addRecipe(new ItemStack(ModItems.beans, 1, 1), lapis, glowStone, waterBottle, new ItemStack(ModItems.imbue, 1, 2));
 		ImbuingRecipeHandler.addRecipe(witherSkull, netherBrick, ghastTear, waterBottle, new ItemStack(ModItems.imbue, 1, 3));
-		ImbuingRecipeHandler.addRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SAKANADE_SPORES.id), vine, new ItemStack(Items.slime_ball), waterBottle, new ItemStack(ModItems.imbue, 1, 4));
 
 	}
 
