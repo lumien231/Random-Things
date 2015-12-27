@@ -22,6 +22,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -49,6 +50,12 @@ public class AsmHandler
 	static Random rng = new Random();
 
 	@SideOnly(Side.CLIENT)
+	public static void cameraHook(ICamera camera, double posX, double posY, double posZ)
+	{
+		
+	}
+
+	@SideOnly(Side.CLIENT)
 	public static int getColorFromItemStack(ItemStack is, int renderPass)
 	{
 		NBTTagCompound compound;
@@ -61,7 +68,7 @@ public class AsmHandler
 		}
 		return 16777215;
 	}
-	
+
 	public static int getColorFromArmorStack(ItemStack is)
 	{
 		NBTTagCompound compound;

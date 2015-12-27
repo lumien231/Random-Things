@@ -29,6 +29,7 @@ public class ModItems
 	public static ItemRezStone rezStone;
 	public static ItemEnderLetter enderLetter;
 	public static ItemEntityFilter entityFilter;
+	public static ItemIngredient ingredients;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -56,6 +57,7 @@ public class ModItems
 		rezStone = new ItemRezStone();
 		enderLetter = new ItemEnderLetter();
 		entityFilter = new ItemEntityFilter();
+		ingredients = new ItemIngredient();
 
 		grassSeeds = new ItemGrassSeeds();
 	}

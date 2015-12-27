@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.asm.MCPNames;
+import lumien.randomthings.potion.effects.EffectCollapse;
+import lumien.randomthings.potion.imbues.ImbueCollapse;
 import lumien.randomthings.potion.imbues.ImbueExperience;
 import lumien.randomthings.potion.imbues.ImbueFire;
 import lumien.randomthings.potion.imbues.ImbuePoison;
@@ -20,6 +22,9 @@ public class ModPotions
 	public static ImbuePoison imbuePoison;
 	public static ImbueExperience imbueExperience;
 	public static ImbueWither imbueWither;
+	public static ImbueCollapse imbueCollapse;
+	
+	public static EffectCollapse collapse;
 
 	public static void preInit(FMLPreInitializationEvent event)
 	{
@@ -29,6 +34,9 @@ public class ModPotions
 		imbuePoison = new ImbuePoison();
 		imbueExperience = new ImbueExperience();
 		imbueWither = new ImbueWither();
+		imbueCollapse = new ImbueCollapse();
+		
+		collapse = new EffectCollapse();
 	}
 
 	private static void extendPotionArray()

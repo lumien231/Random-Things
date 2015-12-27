@@ -40,6 +40,7 @@ public class ModBlocks
 	public static BlockQuartzGlass quartzGlass;
 	public static BlockPotionVaporizer potionVaporizer;
 	public static BlockVoxelProjector voxelProjector;
+	public static BlockSakanade sakanade;
 	
 	public static BlockContactButton contactButton;
 	public static BlockContactLever contactLever;
@@ -50,6 +51,8 @@ public class ModBlocks
 
 	public static BlockBeanStalk beanStalk;
 	public static BlockBeanStalk lesserBeanStalk;
+	
+	public static BlockShieldRod shieldRod;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -88,6 +91,8 @@ public class ModBlocks
 		voxelProjector = new BlockVoxelProjector();
 		contactButton = new BlockContactButton();
 		contactLever = new BlockContactLever();
+		sakanade = new BlockSakanade();
+		shieldRod = new BlockShieldRod();
 		
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

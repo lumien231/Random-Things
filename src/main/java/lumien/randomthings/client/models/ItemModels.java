@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.mesh.StainedBrickItemMesh;
+import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelBakery;
@@ -56,6 +57,9 @@ public class ItemModels
 		registerBlock(ModBlocks.voxelProjector);
 		registerBlock(ModBlocks.contactButton);
 		registerBlock(ModBlocks.contactLever);
+		registerBlock(ModBlocks.sakanade);
+		
+		registerRods();
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);
@@ -88,6 +92,24 @@ public class ItemModels
 		registerImbues();
 		registerChests();
 		registerPlatforms();
+		registerIngredients();
+	}
+
+	private static void registerRods()
+	{
+		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.shieldRod), "randomthings:rods/shieldRod");
+		
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.shieldRod), 0, new ModelResourceLocation("randomthings:rods/shieldRod", "inventory"));
+	}
+
+	private static void registerIngredients()
+	{
+		for (ItemIngredient.INGREDIENT i : ItemIngredient.INGREDIENT.values())
+		{
+			ModelBakery.addVariantName(ModItems.ingredients, "randomthings:ingredient/" + i.name);
+
+			ModelLoader.setCustomModelResourceLocation(ModItems.ingredients, i.id, new ModelResourceLocation("randomthings:ingredient/" + i.name, "inventory"));
+		}
 	}
 
 	private static void registerChests()
@@ -104,11 +126,13 @@ public class ItemModels
 		ModelBakery.addVariantName(ModItems.imbue, "randomthings:imbues/poison");
 		ModelBakery.addVariantName(ModItems.imbue, "randomthings:imbues/experience");
 		ModelBakery.addVariantName(ModItems.imbue, "randomthings:imbues/wither");
+		ModelBakery.addVariantName(ModItems.imbue, "randomthings:imbues/collapse");
 
 		ModelLoader.setCustomModelResourceLocation(ModItems.imbue, 0, new ModelResourceLocation("randomthings:imbues/fire", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ModItems.imbue, 1, new ModelResourceLocation("randomthings:imbues/poison", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ModItems.imbue, 2, new ModelResourceLocation("randomthings:imbues/experience", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ModItems.imbue, 3, new ModelResourceLocation("randomthings:imbues/wither", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(ModItems.imbue, 4, new ModelResourceLocation("randomthings:imbues/collapse", "inventory"));
 	}
 
 	private static void registerBeans()
@@ -172,7 +196,7 @@ public class ItemModels
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 3, new ModelResourceLocation("randomthings:biomeStone/cracked", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 4, new ModelResourceLocation("randomthings:biomeStone/chiseled", "inventory"));
 	}
-	
+
 	private static void registerPlatforms()
 	{
 		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.platform), "randomthings:platform/oak");

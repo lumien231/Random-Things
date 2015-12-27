@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "active=false": { "model": "randomthings:rods/shieldRodInactive" },
+        "active=true": { "model": "randomthings:rods/shieldRodActive" }
+    }
+}
