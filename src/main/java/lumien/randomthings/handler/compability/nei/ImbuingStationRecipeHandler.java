@@ -1,4 +1,4 @@
-package lumien.randomthings.handler.compability;
+package lumien.randomthings.handler.compability.nei;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
