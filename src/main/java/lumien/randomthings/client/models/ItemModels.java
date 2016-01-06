@@ -58,6 +58,7 @@ public class ItemModels
 		registerBlock(ModBlocks.contactButton);
 		registerBlock(ModBlocks.contactLever);
 		registerBlock(ModBlocks.sakanade);
+		registerBlock(ModBlocks.itemCollector);
 		
 		registerRods();
 

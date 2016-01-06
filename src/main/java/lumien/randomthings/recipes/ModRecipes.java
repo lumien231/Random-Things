@@ -106,7 +106,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzGlass, 8, 0), "ggg", "gqg", "ggg", 'g', "blockGlass", 'q', quartzBlock));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.potionVaporizer), "ctc", "iui", "cfc", 'c', "cobblestone", 't', Blocks.iron_trapdoor, 'i', "ingotIron", 'u', Items.cauldron, 'f', Blocks.furnace));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voxelProjector), "rgb", "wlw", "www", 'r', "blockGlassRed", 'g', "blockGlassGreen", 'b', "blockGlassBlue", 'w', blackWool, 'l', redstoneLamp));
-
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex","xhx","ooo",'e',enderPearl,'h',Blocks.hopper,'o',obsidian));
+		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactButton), "sis", "sbs", "sss", 's', "stone", 'i', Blocks.iron_bars, 'b', stoneButton));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactLever), "sis", "sbs", "sss", 's', "stone", 'i', Blocks.iron_bars, 'b', lever));
 

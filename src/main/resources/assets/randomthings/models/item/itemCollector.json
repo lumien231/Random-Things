@@ -1,0 +1,22 @@
+{
+    "parent": "randomthings:block/itemCollector",
+    "display": {
+        "thirdperson": {
+            "rotation": [ 10, -45, 170 ],
+            "translation": [ 0, 1.5, -2.75 ],
+            "scale": [ 0.6, 0.6, 0.6 ]
+        },
+        
+        "firstperson": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 10.5, 2.75 ],
+            "scale": [ 10.5, 10.5, 10.5 ]
+        },
+        
+        "gui": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 10.5, 0 ],
+            "scale": [ 3.5, 3.5, 3.5 ]
+        }
+    }
+}
