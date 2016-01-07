@@ -21,15 +21,14 @@ import mezz.jei.util.Translator;
 
 public class ImbuingRecipeCategory implements IRecipeCategory
 {
-
 	private static final int ingredientSlot1 = 0;
 	private static final int ingredientSlot2 = 1;
 	private static final int ingredientSlot3 = 2;
 	private static final int toImbueSlot = 3;
 	private static final int outputSlot = 4; // for display only
 
-	private static final int outputSlotX = 125;
-	private static final int outputSlotY = 54;
+	private static final int outputSlotX = 92;
+	private static final int outputSlotY = 47;
 
 	@Nonnull
 	private final IDrawable background;
@@ -40,24 +39,12 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	@Nonnull
 	private final String localizedName;
 
-	@Nonnull
-	private final IDrawableAnimated arrow;
-
-	@Nonnull
-	private final IDrawableAnimated bubbles;
-
 
 	public ImbuingRecipeCategory(IGuiHelper guiHelper)
 	{
 		ResourceLocation location = new ResourceLocation("randomthings:textures/gui/imbuingStation.png");
-		background = guiHelper.createDrawable(location, 55, 15, 64, 56, 0, 0, 0, 40);
-		localizedName = Translator.translateToLocal("tile.imbuingStation");
-
-		IDrawableStatic imbueArrow = guiHelper.createDrawable(location, 176, 0, 9, 28);
-		arrow = guiHelper.createAnimatedDrawable(imbueArrow, 400, IDrawableAnimated.StartDirection.LEFT, false);
-
-		IDrawableStatic brewBubblesDrawable = guiHelper.createDrawable(location, 185, 0, 12, 29);
-		bubbles = guiHelper.createAnimatedDrawable(brewBubblesDrawable, 20, IDrawableAnimated.StartDirection.BOTTOM, false);
+		background = guiHelper.createDrawable(location, 32, 6, 112, 112, 0, 0, 0, 0);
+		localizedName = Translator.translateToLocal("tile.imbuingStation.name");
 
 		slotDrawable = guiHelper.getSlotDrawable();
 	}
@@ -66,7 +53,7 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	@Override
 	public String getUid()
 	{
-		return "Imbuing";
+		return RandomThingsPlugin.IMBUE_ID;
 	}
 
 	@Nonnull
@@ -86,14 +73,14 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	@Override
 	public void drawExtras(Minecraft minecraft)
 	{
-		slotDrawable.draw(minecraft, outputSlotX, outputSlotY);
+		
 	}
 
 	@Override
 	public void drawAnimations(Minecraft minecraft)
 	{
-		bubbles.draw(minecraft, 10, 0);
-		arrow.draw(minecraft, 189, 13);
+		//bubbles.draw(minecraft, 10, 0);
+		//arrow.draw(minecraft, 189, 13);
 	}
 
 	@Override
@@ -101,10 +88,10 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	{
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 
-		itemStacks.init(ingredientSlot1, true, 80, 9);
-		itemStacks.init(ingredientSlot2, true, 35, 54);
-		itemStacks.init(ingredientSlot3, true, 80, 99);
-		itemStacks.init(toImbueSlot, true, 80, 54);
+		itemStacks.init(ingredientSlot1, true, 47, 2);
+		itemStacks.init(ingredientSlot2, true, 2, 47);
+		itemStacks.init(ingredientSlot3, true, 47, 92);
+		itemStacks.init(toImbueSlot, true, 47, 47);
 		itemStacks.init(outputSlot, false, outputSlotX, outputSlotY);
 
 		if (recipeWrapper instanceof ImbuingRecipeWrapper)

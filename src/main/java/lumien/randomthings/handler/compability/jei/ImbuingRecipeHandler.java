@@ -2,36 +2,37 @@ package lumien.randomthings.handler.compability.jei;
 
 import javax.annotation.Nonnull;
 
+import lumien.randomthings.recipes.imbuing.ImbuingRecipe;
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 
-public class ImbuingRecipeHandler implements IRecipeHandler<ImbuingRecipeWrapper>
+public class ImbuingRecipeHandler implements IRecipeHandler<ImbuingRecipe>
 {
 	@Nonnull
 	@Override
-	public Class<ImbuingRecipeWrapper> getRecipeClass()
+	public Class<ImbuingRecipe> getRecipeClass()
 	{
-		return ImbuingRecipeWrapper.class;
+		return ImbuingRecipe.class;
 	}
 
 	@Nonnull
 	@Override
 	public String getRecipeCategoryUid()
 	{
-		return "Imbuing";
+		return RandomThingsPlugin.IMBUE_ID;
 	}
 
 	@Nonnull
 	@Override
-	public IRecipeWrapper getRecipeWrapper(@Nonnull ImbuingRecipeWrapper recipe)
+	public IRecipeWrapper getRecipeWrapper(@Nonnull ImbuingRecipe recipe)
 	{
-		return recipe;
+		return new ImbuingRecipeWrapper(recipe.getIngredients(), recipe.toImbue(), recipe.getResult());
 	}
 
 	@Override
-	public boolean isRecipeValid(@Nonnull ImbuingRecipeWrapper recipe)
+	public boolean isRecipeValid(@Nonnull ImbuingRecipe recipe)
 	{
-		return recipe.getInputs().size() == 4 && recipe.getOutputs().size() == 1;
+		return true;
 	}
 }

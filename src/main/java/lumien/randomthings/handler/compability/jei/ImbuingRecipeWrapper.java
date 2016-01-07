@@ -30,8 +30,8 @@ public class ImbuingRecipeWrapper extends BlankRecipeWrapper
 		this.result = result;
 
 		this.inputs = new ArrayList<ItemStack>();
+		this.inputs.addAll(ingredients);
 		this.inputs.add(toImbue);
-		this.inputs.add(ingredients);
 
 		ItemStack firstIngredient = ingredients.get(0);
 
@@ -54,47 +54,6 @@ public class ImbuingRecipeWrapper extends BlankRecipeWrapper
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight)
 	{
 
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof ImbuingRecipeWrapper))
-		{
-			return false;
-		}
-		ImbuingRecipeWrapper other = (ImbuingRecipeWrapper) obj;
-
-		if (!ItemStack.areItemStacksEqual(other.result, result))
-		{
-			return false;
-		}
-
-		if (!ItemStack.areItemStacksEqual(other.toImbue, toImbue))
-		{
-			return false;
-		}
-
-		if (ingredients.size() != other.ingredients.size())
-		{
-			return false;
-		}
-
-		for (int i = 0; i < ingredients.size(); i++)
-		{
-			if (!ItemStack.areItemStacksEqual(ingredients.get(i), other.ingredients.get(i)))
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return hashCode;
 	}
 
 	@Override

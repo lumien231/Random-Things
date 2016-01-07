@@ -36,11 +36,13 @@ public class RandomThingsPlugin implements IModPlugin
 {
 	private IItemRegistry itemRegistry;
 	private IJeiHelpers jeiHelpers;
+	
+	public static String IMBUE_ID = "Imbuing";
 
 	@Override
 	public boolean isModLoaded()
 	{
-		return Loader.isModLoaded(Reference.MOD_ID);
+		return true;
 	}
 
 	@Override
@@ -69,18 +71,14 @@ public class RandomThingsPlugin implements IModPlugin
 
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 
-		recipeTransferRegistry.addRecipeTransferHandler(ContainerImbuingStation.class, "Imbuing", 1, 5, 6, 32);
+		recipeTransferRegistry.addRecipeTransferHandler(ContainerImbuingStation.class, IMBUE_ID, 0, 4, 5, 36);
 
-		registry.addRecipes(ImbuingRecipeMaker.makeRecipes());
+		registry.addRecipes(lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler.imbuingRecipes);
 	}
 
 	@Override
 	public void onRecipeRegistryAvailable(IRecipeRegistry recipeRegistry)
 	{
-		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
-		
-		
-		
 		
 	}
 }
