@@ -163,7 +163,7 @@ public class InventoryItem implements IInventory
 
 			NBTTagCompound compound = itemStack.getTagCompound().getCompoundTag(name);
 
-			InventoryUtil.saveInventoryInCompound(compound, this);
+			InventoryUtil.writeInventoryToCompound(compound, this);
 
 			itemStack.getTagCompound().setTag(name, compound);
 		}

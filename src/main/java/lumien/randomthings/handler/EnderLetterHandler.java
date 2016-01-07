@@ -129,7 +129,7 @@ public class EnderLetterHandler extends WorldSavedData
 
 		public void writeToNBT(NBTTagCompound compound)
 		{
-			InventoryUtil.saveInventoryInCompound(compound, this);
+			InventoryUtil.writeInventoryToCompound(compound, this);
 		}
 
 		public void readFromNBT(NBTTagCompound compound)

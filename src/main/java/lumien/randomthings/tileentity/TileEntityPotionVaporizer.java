@@ -60,7 +60,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)
 	{
-		InventoryUtil.saveInventoryInCompound(compound, inventory);
+		InventoryUtil.writeInventoryToCompound(compound, inventory);
 
 		compound.setInteger("durationLeft", durationLeft);
 		compound.setInteger("fuelBurn", fuelBurn);

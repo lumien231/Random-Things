@@ -114,6 +114,7 @@ item.bottleOfAir.name=Bottle of Air
 item.rezStone.name=Blood Stone
 item.enderLetter.name=Ender Letter
 item.entityFilter.name=Entity Filter
+item.itemFilter.name=Item Filter
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean

@@ -38,7 +38,7 @@ public class InventoryUtil
 		return -1;
 	}
 
-	public static void saveInventoryInCompound(NBTTagCompound compound, IInventory inventory)
+	public static void writeInventoryToCompound(NBTTagCompound compound, IInventory inventory)
 	{
 		for (int i = 0; i < inventory.getSizeInventory(); i++)
 		{

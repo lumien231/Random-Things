@@ -144,7 +144,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 		compound.setBoolean("invert", invert);
 
 		NBTTagCompound inventoryCompound = new NBTTagCompound();
-		InventoryUtil.saveInventoryInCompound(inventoryCompound, filterInventory);
+		InventoryUtil.writeInventoryToCompound(inventoryCompound, filterInventory);
 		compound.setTag("inventory", inventoryCompound);
 	}
 

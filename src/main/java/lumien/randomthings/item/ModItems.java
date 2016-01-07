@@ -30,6 +30,7 @@ public class ModItems
 	public static ItemEnderLetter enderLetter;
 	public static ItemEntityFilter entityFilter;
 	public static ItemIngredient ingredients;
+	public static ItemItemFilter itemFilter;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -58,6 +59,7 @@ public class ModItems
 		enderLetter = new ItemEnderLetter();
 		entityFilter = new ItemEntityFilter();
 		ingredients = new ItemIngredient();
+		itemFilter = new ItemItemFilter();
 
 		grassSeeds = new ItemGrassSeeds();
 	}

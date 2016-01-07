@@ -28,7 +28,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	public void writeDataToNBT(NBTTagCompound nbt)
 	{
 		nbt.setInteger("imbuingProgress", imbuingProgress);
-		InventoryUtil.saveInventoryInCompound(nbt, inventory);
+		InventoryUtil.writeInventoryToCompound(nbt, inventory);
 	}
 
 	@Override

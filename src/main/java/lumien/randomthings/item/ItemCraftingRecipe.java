@@ -59,8 +59,8 @@ public class ItemCraftingRecipe extends ItemBase
 		}
 		NBTTagCompound matrix = new NBTTagCompound();
 		NBTTagCompound result = new NBTTagCompound();
-		InventoryUtil.saveInventoryInCompound(matrix, craftMatrix);
-		InventoryUtil.saveInventoryInCompound(result, craftResult);
+		InventoryUtil.writeInventoryToCompound(matrix, craftMatrix);
+		InventoryUtil.writeInventoryToCompound(result, craftResult);
 
 		compound.setTag("matrix", matrix);
 		compound.setTag("result", result);
