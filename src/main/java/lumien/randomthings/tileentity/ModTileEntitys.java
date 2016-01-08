@@ -29,7 +29,10 @@ public class ModTileEntitys
 		registerTE(TileEntityEntityDetector.class, "entityDetector");
 		registerTE(TileEntityPotionVaporizer.class, "potionVaporizer");
 		registerTE(TileEntityVoxelProjector.class, "voxelProjector");
+		
 		registerTE(TileEntityItemCollector.class, "itemCollector");
+		registerTE(TileEntityAdvancedItemCollector.class,"advancedItemCollector");
+
 		registerTE(TileEntityShieldRod.class, "shieldRod");
 	}
 

@@ -66,4 +66,9 @@ public class GuiCustomButton extends GuiButton
 	{
 		return value;
 	}
+	
+	public void setValue(boolean value)
+	{
+		this.value = value;
+	}
 }

@@ -1,5 +1,6 @@
 package lumien.randomthings.network;
 
+import lumien.randomthings.network.messages.MessageAdvancedItemCollector;
 import lumien.randomthings.network.messages.MessageAnalogEmitter;
 import lumien.randomthings.network.messages.MessageChatDetector;
 import lumien.randomthings.network.messages.MessageEnderLetter;
@@ -21,5 +22,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageEntityDetector.class);
 		INSTANCE.registerMessage(MessagePotionVaporizerParticles.class);
 		INSTANCE.registerMessage(MessageVoxelProjector.class);
+		INSTANCE.registerMessage(MessageAdvancedItemCollector.class);
 	}
 }

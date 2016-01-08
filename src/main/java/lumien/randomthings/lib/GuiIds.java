@@ -16,4 +16,5 @@ public class GuiIds
 	public static final int POTION_VAPORIZER = 12;
 	public static final int VOXEL_PROJECTOR = 13;
 	public static final int ITEM_FILTER = 14;
+	public static final int ADVANCED_ITEM_COLLECTOR = 15;
 }

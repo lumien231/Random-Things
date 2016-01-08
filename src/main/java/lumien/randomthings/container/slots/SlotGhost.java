@@ -15,10 +15,11 @@ public class SlotGhost extends Slot
 	@Override
 	public boolean canTakeStack(EntityPlayer playerIn)
 	{
-		ItemStack holding = playerIn.inventory.getItemStack().copy();
+		ItemStack holding = playerIn.inventory.getItemStack();
 
 		if (holding != null)
 		{
+			holding = holding.copy();
 			holding.stackSize = 1;
 		}
 		this.putStack(holding);

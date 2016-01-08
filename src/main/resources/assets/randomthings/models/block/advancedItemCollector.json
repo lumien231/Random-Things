@@ -1,6 +1,6 @@
 {
 "textures": {
-    "texture": "randomthings:blocks/itemCollector"
+    "texture": "randomthings:blocks/advancedItemCollector"
 },
 "elements": [ 
 {

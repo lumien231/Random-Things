@@ -41,7 +41,9 @@ public class ModBlocks
 	public static BlockPotionVaporizer potionVaporizer;
 	public static BlockVoxelProjector voxelProjector;
 	public static BlockSakanade sakanade;
+	
 	public static BlockItemCollector itemCollector;
+	public static BlockAdvancedItemCollector advancedItemCollector;
 	
 	public static BlockContactButton contactButton;
 	public static BlockContactLever contactLever;
@@ -93,7 +95,9 @@ public class ModBlocks
 		contactButton = new BlockContactButton();
 		contactLever = new BlockContactLever();
 		sakanade = new BlockSakanade();
+		
 		itemCollector = new BlockItemCollector();
+		advancedItemCollector = new BlockAdvancedItemCollector();
 		shieldRod = new BlockShieldRod();
 		
 		natureCore = new BlockNatureCore();
