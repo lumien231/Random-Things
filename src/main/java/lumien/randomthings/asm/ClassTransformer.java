@@ -99,67 +99,7 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchItemArmor(basicClass);
 		}
-		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer"))
-		{
-			return patchEntityRenderer(basicClass);
-		}
 		return basicClass;
-	}
-
-	private byte[] patchEntityRenderer(byte[] basicClass)
-	{
-		ClassNode classNode = new ClassNode();
-		ClassReader classReader = new ClassReader(basicClass);
-		classReader.accept(classNode, 0);
-		logger.log(Level.DEBUG, "Found Entity Renderer Class: " + classNode.name);
-
-		MethodNode renderWorldPass = null;
-
-		for (MethodNode mn : classNode.methods)
-		{
-			if (mn.name.equals(MCPNames.method("func_175068_a")))
-			{
-				renderWorldPass = mn;
-				break;
-			}
-		}
-
-		if (renderWorldPass != null)
-		{
-			logger.log(Level.DEBUG, " - Found renderWorldPass");
-
-			for (int i = 0; i < renderWorldPass.instructions.size(); i++)
-			{
-				AbstractInsnNode ain = renderWorldPass.instructions.get(i);
-
-				if (ain instanceof MethodInsnNode)
-				{
-					MethodInsnNode min = (MethodInsnNode) ain;
-
-					if (min.name.equals(MCPNames.method("func_78547_a")))
-					{
-						logger.log(Level.DEBUG, " - Found ICamera.setPosition");
-
-						InsnList toInsert = new InsnList();
-
-						toInsert.add(new VarInsnNode(ALOAD, 8));
-
-						toInsert.add(new VarInsnNode(DLOAD, 10));
-						toInsert.add(new VarInsnNode(DLOAD, 12));
-						toInsert.add(new VarInsnNode(DLOAD, 14));
-
-						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler,  "cameraHook", "(Lnet/minecraft/client/renderer/culling/ICamera;DDD)V", false));
-						
-						renderWorldPass.instructions.insert(min, toInsert);
-					}
-				}
-			}
-		}
-
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-		classNode.accept(writer);
-
-		return writer.toByteArray();
 	}
 
 	private byte[] patchLiquidBlock(byte[] basicClass)
@@ -353,7 +293,7 @@ public class ClassTransformer implements IClassTransformer
 			{
 				renderEffect = mn;
 			}
-			else if (mn.name.equals(MCPNames.method("func_180454_a")))
+			else if (mn.name.equals(MCPNames.method("func_180454_a")) && mn.desc.equals("(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/resources/model/IBakedModel;)V"))
 			{
 				renderItem = mn;
 			}
@@ -385,7 +325,7 @@ public class ClassTransformer implements IClassTransformer
 		if (renderItem != null)
 		{
 			boolean found = false;
-			logger.log(Level.DEBUG, "- Found renderItem (2/2)");
+			logger.log(Level.DEBUG, "- Found renderItem (2/2) ("+renderItem.desc+")");
 
 			for (int i = 0; i < renderItem.instructions.size(); i++)
 			{

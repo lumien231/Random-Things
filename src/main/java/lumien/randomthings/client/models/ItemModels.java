@@ -61,8 +61,6 @@ public class ItemModels
 		
 		registerBlock(ModBlocks.itemCollector);
 		registerBlock(ModBlocks.advancedItemCollector);
-		
-		registerRods();
 
 		registerItem(ModItems.chaliceOfImmortality);
 		registerItem(ModItems.biomeCrystal);
@@ -97,13 +95,6 @@ public class ItemModels
 		registerChests();
 		registerPlatforms();
 		registerIngredients();
-	}
-
-	private static void registerRods()
-	{
-		ModelBakery.addVariantName(Item.getItemFromBlock(ModBlocks.shieldRod), "randomthings:rods/shieldRod");
-		
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.shieldRod), 0, new ModelResourceLocation("randomthings:rods/shieldRod", "inventory"));
 	}
 
 	private static void registerIngredients()

@@ -8,6 +8,7 @@ import lumien.randomthings.item.ItemItemFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.network.PacketHandler;
+import lumien.randomthings.network.messages.MessageItemFilter;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -24,8 +25,9 @@ public class GuiItemFilter extends GuiContainer
 	EntityPlayer player;
 	ItemStack itemFilter;
 
-	GuiCustomButton oreDictButton;
 	GuiCustomButton metadataButton;
+	GuiCustomButton oreDictButton;
+	GuiCustomButton nbtButton;
 	GuiCustomButton listTypeButton;
 
 	ItemFilterRepresentation repres;
@@ -41,10 +43,7 @@ public class GuiItemFilter extends GuiContainer
 		this.player = player;
 		this.itemFilter = player.getCurrentEquippedItem();
 
-		if (itemFilter != null && itemFilter.getItem() == ModItems.itemFilter)
-		{
-			repres = ItemItemFilter.ItemFilterRepresentation.readFromItemStack(itemFilter);
-		}
+		repres = ((ContainerItemFilter) this.inventorySlots).repres;
 	}
 
 	@Override
@@ -52,22 +51,38 @@ public class GuiItemFilter extends GuiContainer
 	{
 		super.initGui();
 
-		metadataButton = new GuiCustomButton(0, repres.respectMetadata(), guiLeft + 195, guiTop + 4, 20, 20, "", background, 0, 133);
+		metadataButton = new GuiCustomButton(0, repres.respectMetadata(), guiLeft + 173, guiTop + 4, 20, 20, "", background, 0, 133);
 		this.buttonList.add(metadataButton);
 
-		oreDictButton = new GuiCustomButton(1, repres.respectOreDictionary(), guiLeft + 173, guiTop + 4, 20, 20, "", background, 40, 133);
+		oreDictButton = new GuiCustomButton(1, repres.respectOreDictionary(), guiLeft + 195, guiTop + 4, 20, 20, "", background, 40, 133);
 		this.buttonList.add(oreDictButton);
+
+		nbtButton = new GuiCustomButton(2, repres.respectNBT(), guiLeft + 173, guiTop + 4 + 22, 20, 20, "", background, 80, 133);
+		this.buttonList.add(nbtButton);
+
+		listTypeButton = new GuiCustomButton(3, repres.getListType()==0?false:true, guiLeft + 195, guiTop + 4 + 22, 20, 20, "", background, 120, 133);
+		this.buttonList.add(listTypeButton);
 
 		// listTypeButton = new GuiCustomButton(this, 1, guiLeft + 173, guiTop +
 		// 4 + 22);
+	}
 
-		
+	@Override
+	public void updateScreen()
+	{
+		super.updateScreen();
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton pressedButton)
 	{
+		if (pressedButton instanceof GuiCustomButton)
+		{
+			((GuiCustomButton) pressedButton).toggle();
+		}
 
+		MessageItemFilter message = new MessageItemFilter(pressedButton.id);
+		PacketHandler.INSTANCE.sendToServer(message);
 	}
 
 	@Override

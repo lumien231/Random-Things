@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 public class ContainerItemFilter extends Container
 {
-	ItemFilterRepresentation repres;
+	public ItemFilterRepresentation repres;
 
 	public ContainerItemFilter(EntityPlayer player, World world, int x, int y, int z)
 	{

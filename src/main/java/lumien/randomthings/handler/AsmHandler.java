@@ -50,12 +50,6 @@ public class AsmHandler
 	static Random rng = new Random();
 
 	@SideOnly(Side.CLIENT)
-	public static void cameraHook(ICamera camera, double posX, double posY, double posZ)
-	{
-		
-	}
-
-	@SideOnly(Side.CLIENT)
 	public static int getColorFromItemStack(ItemStack is, int renderPass)
 	{
 		NBTTagCompound compound;
@@ -114,7 +108,7 @@ public class AsmHandler
 
 	@SideOnly(Side.CLIENT)
 	public static IBakedModel getModelFromBlockState(IBlockState state, IBlockAccess access, BlockPos pos)
-	{
+	{	
 		IBakedModel model = getModelFromBlockStateRec(state, access, pos);
 		posSet.clear();
 		return model;

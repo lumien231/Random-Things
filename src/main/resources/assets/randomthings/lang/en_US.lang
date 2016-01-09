@@ -93,8 +93,6 @@ tile.platform.acacia.name=Acacia Platform
 tile.platform.jungle.name=Jungle Platform
 tile.platform.darkOak.name=Dark Oak Platform
 
-tile.shieldRod.name=Rod of Shielding
-
 item.chaliceOfImmortality.name=Chalice of Immortality
 item.positionFilter.name=Position Filter
 item.biomeCrystal.name=Biome Crystal

@@ -32,8 +32,6 @@ public class ModTileEntitys
 		
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class,"advancedItemCollector");
-
-		registerTE(TileEntityShieldRod.class, "shieldRod");
 	}
 
 	private static void registerTE(Class<? extends TileEntity> clazz, String name)

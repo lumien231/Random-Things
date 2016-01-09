@@ -1,5 +1,7 @@
 package lumien.randomthings.item;
 
+import com.sun.xml.internal.ws.api.addressing.WSEndpointReference.Metadata;
+
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.util.InventoryUtil;
@@ -17,10 +19,10 @@ public class ItemItemFilter extends ItemBase
 	{
 		InventoryBasic filterInventory;
 
-		boolean metadata;
-		boolean nbt;
-		boolean oreDict;
-		int listType;
+		boolean metadata = true;
+		boolean nbt = true;
+		boolean oreDict = false;
+		int listType = 0;
 
 		public ItemFilterRepresentation()
 		{
@@ -45,6 +47,11 @@ public class ItemItemFilter extends ItemBase
 				{
 					InventoryUtil.readInventoryFromCompound(inventoryCompound, representation.filterInventory);
 				}
+
+				representation.metadata = compound.getBoolean("metadata");
+				representation.oreDict = compound.getBoolean("oreDict");
+				representation.nbt = compound.getBoolean("nbt");
+				representation.listType = compound.getInteger("listType");
 			}
 
 			return representation;
@@ -63,6 +70,11 @@ public class ItemItemFilter extends ItemBase
 			InventoryUtil.writeInventoryToCompound(inventoryCompound, filterInventory);
 
 			compound.setTag("inventory", inventoryCompound);
+
+			compound.setBoolean("metadata", metadata);
+			compound.setBoolean("oreDict", oreDict);
+			compound.setBoolean("nbt", nbt);
+			compound.setInteger("listType", listType);
 		}
 
 		public boolean matchesItemStack(ItemStack stackToCheck)
@@ -136,6 +148,36 @@ public class ItemItemFilter extends ItemBase
 		public boolean respectMetadata()
 		{
 			return metadata;
+		}
+
+		public boolean respectNBT()
+		{
+			return nbt;
+		}
+
+		public int getListType()
+		{
+			return listType;
+		}
+
+		public void toggleMetadata()
+		{
+			metadata = !metadata;
+		}
+
+		public void toggleOreDict()
+		{
+			oreDict = !oreDict;
+		}
+
+		public void toggleNBT()
+		{
+			nbt = !nbt;
+		}
+
+		public void toggleListType()
+		{
+			listType = (listType == 0 ? 1 : 0);
 		}
 	}
 

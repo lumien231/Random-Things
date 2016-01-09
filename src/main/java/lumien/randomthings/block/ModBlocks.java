@@ -1,6 +1,5 @@
 package lumien.randomthings.block;
 
-import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModBlocks
@@ -54,8 +53,6 @@ public class ModBlocks
 
 	public static BlockBeanStalk beanStalk;
 	public static BlockBeanStalk lesserBeanStalk;
-	
-	public static BlockShieldRod shieldRod;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -98,7 +95,6 @@ public class ModBlocks
 		
 		itemCollector = new BlockItemCollector();
 		advancedItemCollector = new BlockAdvancedItemCollector();
-		shieldRod = new BlockShieldRod();
 		
 		natureCore = new BlockNatureCore();
 		netherCore = new BlockNetherCore();

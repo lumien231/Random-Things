@@ -50,7 +50,7 @@ public class RandomThings
 	public Logger logger;
 
 	public ModConfiguration configuration;
-	
+
 	public ModelHandler modelHandler;
 
 	ASMDataTable asmDataTable;
@@ -73,7 +73,7 @@ public class RandomThings
 		ModEntitys.init();
 		ModPotions.preInit(event);
 		proxy.registerModels();
-
+		
 		RTEventHandler eventHandler = new RTEventHandler();
 		MinecraftForge.EVENT_BUS.register(eventHandler);
 		FMLCommonHandler.instance().bus().register(eventHandler);

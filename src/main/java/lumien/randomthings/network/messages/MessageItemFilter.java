@@ -1,9 +1,12 @@
 package lumien.randomthings.network.messages;
 
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.container.ContainerItemFilter;
 import lumien.randomthings.network.IRTMessage;
 import lumien.randomthings.network.MessageUtil;
+import lumien.randomthings.tileentity.TileEntityAdvancedItemCollector;
 import lumien.randomthings.tileentity.TileEntityEntityDetector;
+import net.minecraft.inventory.Container;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -11,35 +14,30 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class MessageEntityDetector implements IRTMessage
+public class MessageItemFilter implements IRTMessage
 {
 	int buttonPressed;
-	BlockPos pos;
 
-	public MessageEntityDetector()
+	public MessageItemFilter()
 	{
 
 	}
 
-	public MessageEntityDetector(int buttonPressed, BlockPos pos)
+	public MessageItemFilter(int buttonPressed)
 	{
 		this.buttonPressed = buttonPressed;
-		this.pos = pos;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
 		buttonPressed = buf.readInt();
-
-		pos = MessageUtil.readBlockPos(buf);
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
 		buf.writeInt(buttonPressed);
-		MessageUtil.writeBlockPos(pos, buf);
 	}
 
 	@Override
@@ -52,41 +50,25 @@ public class MessageEntityDetector implements IRTMessage
 			{
 				NetHandlerPlayServer serverHandler = context.getServerHandler();
 
-				TileEntity te = serverHandler.playerEntity.worldObj.getTileEntity(pos);
+				Container container = context.getServerHandler().playerEntity.openContainer;
 
-				if (te != null && te instanceof TileEntityEntityDetector && serverHandler.playerEntity.getDistanceSq(MessageEntityDetector.this.pos) < 64)
+				if (container != null && container instanceof ContainerItemFilter)
 				{
-					TileEntityEntityDetector entityDetector = (TileEntityEntityDetector) te;
+					ContainerItemFilter itemFilterContainer = (ContainerItemFilter) container;
 
 					switch (buttonPressed)
 					{
 						case 0:
-							entityDetector.setRangeX(entityDetector.getRangeX() - 1);
+							itemFilterContainer.repres.toggleMetadata();
 							break;
 						case 1:
-							entityDetector.setRangeX(entityDetector.getRangeX() + 1);
+							itemFilterContainer.repres.toggleOreDict();
 							break;
-
 						case 2:
-							entityDetector.setRangeY(entityDetector.getRangeY() - 1);
+							itemFilterContainer.repres.toggleNBT();
 							break;
 						case 3:
-							entityDetector.setRangeY(entityDetector.getRangeY() + 1);
-							break;
-
-						case 4:
-							entityDetector.setRangeZ(entityDetector.getRangeZ() - 1);
-							break;
-						case 5:
-							entityDetector.setRangeZ(entityDetector.getRangeZ() + 1);
-							break;
-
-						case 6:
-							entityDetector.cycleFilter();
-							break;
-
-						case 7:
-							entityDetector.toggleInvert();
+							itemFilterContainer.repres.toggleListType();
 							break;
 					}
 				}
