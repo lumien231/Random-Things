@@ -35,6 +35,7 @@ tile.potionVaporizer.name=Potion Vaporizer
 tile.voxelProjector.name=[WIP] Voxel Projector
 tile.contactButton.name=Contact Button
 tile.contactLever.name=Contact Lever
+tile.sakanade.name=Sakanade
 
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector

@@ -34,6 +34,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 		this.setTickRandomly(true);
 
 		this.setBlockBounds(0, 1f - 0.0625F, 0, 1, 1, 1);
+		this.setCreativeTab(null);
 		//this.setCreativeTab(null)
 	}
 
