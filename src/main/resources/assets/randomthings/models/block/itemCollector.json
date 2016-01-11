@@ -1,6 +1,7 @@
 {
 "textures": {
-    "texture": "randomthings:blocks/itemCollector"
+    "texture": "randomthings:blocks/itemCollector",
+    "particle" : "randomthings:blocks/itemCollector"
 },
 "elements": [ 
 {

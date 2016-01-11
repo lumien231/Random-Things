@@ -98,7 +98,7 @@ public class GuiAdvancedItemCollector extends GuiContainer
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		fontRendererObj.drawString(I18n.format("tile.entityDetector.name", new Object[0]), 8 + 14, 6, 4210752);
+		fontRendererObj.drawString(I18n.format("tile.advancedItemCollector.name", new Object[0]), 8 + 14, 6, 4210752);
 
 		String radiusX = I18n.format("gui.entityDetector.radiusX", advancedItemCollector.getRangeX());
 		fontRendererObj.drawString(radiusX, xSize / 2 - fontRendererObj.getStringWidth(radiusX) / 2 - 3, 26, 4210752);

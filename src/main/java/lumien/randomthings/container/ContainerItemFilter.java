@@ -35,6 +35,12 @@ public class ContainerItemFilter extends Container
 
 		bindPlayerInventory(player.inventory);
 	}
+	
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+	{
+		return null;
+	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
