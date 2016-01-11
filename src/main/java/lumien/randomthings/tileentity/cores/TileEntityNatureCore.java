@@ -8,6 +8,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.tileentity.TileEntityBase;
 import lumien.randomthings.util.BlockPattern.BlockInfo;
 import lumien.randomthings.worldgen.WorldGenCores;
+import net.minecraft.block.BlockSand;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
@@ -32,6 +33,28 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 	{
 		if (!worldObj.isRemote)
 		{
+			// Replace Sand
+			if (rand.nextInt(40) == 0)
+			{
+				int rX = this.pos.getX() + rand.nextInt(11) - 5;
+				int rY = this.pos.getY() + rand.nextInt(4) - 3;
+				int rZ = this.pos.getZ() + rand.nextInt(11) - 5;
+
+				BlockPos target = new BlockPos(rX, rY, rZ);
+				IBlockState state = worldObj.getBlockState(target);
+				if (state.getBlock() instanceof BlockSand)
+				{
+					if (this.worldObj.isAirBlock(target.up()))
+					{
+						this.worldObj.setBlockState(target, Blocks.grass.getDefaultState());
+					}
+					else
+					{
+						this.worldObj.setBlockState(target, Blocks.dirt.getDefaultState());
+					}
+				}
+			}
+
 			// Animal Spawning
 			if (rand.nextInt(400) == 0)
 			{
