@@ -1,6 +1,7 @@
 {
 "textures": {
-    "texture": "randomthings:blocks/sakanade"
+    "texture": "randomthings:blocks/sakanade",
+    "particle": "randomthings:blocks/sakanade"
 },
 "elements": [ 
 {

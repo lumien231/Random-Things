@@ -69,7 +69,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 
 		if (!worldIn.isRemote)
 		{
-			AxisAlignedBB bb = new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(2, -2, 2);
+			AxisAlignedBB bb = new AxisAlignedBB(pos, pos.add(1, 1, 1)).expand(2, -5, 2);
 
 			List<EntityLivingBase> entityList = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, bb);
 
@@ -127,7 +127,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 	{
 		Block soil = worldIn.getBlockState(pos.up()).getBlock();
-		return soil == Blocks.stone;
+		return soil == Blocks.brown_mushroom_block;
 	}
 
 	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)

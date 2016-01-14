@@ -24,6 +24,7 @@ import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.client.RenderUtils;
+import lumien.randomthings.worldgen.WorldGenSakanade;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
@@ -74,6 +75,7 @@ import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
@@ -88,6 +90,19 @@ import org.apache.logging.log4j.Level;
 public class RTEventHandler
 {
 	static Random rng = new Random();
+
+	@SubscribeEvent
+	public void biomeDecoration(DecorateBiomeEvent event)
+	{
+		if (event instanceof DecorateBiomeEvent.Pre)
+		{
+
+		}
+		else if (event instanceof DecorateBiomeEvent.Post)
+		{
+			WorldGenSakanade.instance.generate(event.rand, event.pos.getX() >> 4, event.pos.getZ() >> 4, event.world, null, null);
+		}
+	}
 
 	@SubscribeEvent
 	public void cameraSetup(CameraSetup event)

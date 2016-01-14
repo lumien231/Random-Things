@@ -39,6 +39,22 @@ public class WorldUtil
 		}
 	}
 
+	public static BlockPos getHeighestPos(World worldObj, int x, int z)
+	{
+		int startY = worldObj.getChunkFromBlockCoords(new BlockPos(x, 0, z)).getTopFilledSegment() + 16;
+
+		for (int y = startY; y >= 0; y--)
+		{
+			BlockPos toCheck = new BlockPos(x, y, z);
+			if (!worldObj.isAirBlock(toCheck))
+			{
+				return toCheck;
+			}
+		}
+
+		return null;
+	}
+
 	public static List getEntitiesWithinAABBs(World worldObj, Class classEntity, AxisAlignedBB... bbs)
 	{
 		return getEntitiesWithinAABBs(worldObj, classEntity, EntitySelectors.NOT_SPECTATING, bbs);
@@ -47,7 +63,7 @@ public class WorldUtil
 	public static List getEntitiesWithinAABBs(World worldObj, Class clazz, Predicate filter, AxisAlignedBB... bbs)
 	{
 		ArrayList arraylist = new ArrayList();
-		
+
 		HashMap<Vec3i, ArrayList<AxisAlignedBB>> boxMap = new HashMap<Vec3i, ArrayList<AxisAlignedBB>>();
 
 		for (AxisAlignedBB bb : bbs)
@@ -83,35 +99,35 @@ public class WorldUtil
 		for (Vec3i chunkVec : boxMap.keySet())
 		{
 			Chunk chunk = worldObj.getChunkFromChunkCoords(chunkVec.getX(), chunkVec.getZ());
-			
+
 			ClassInheritanceMultiMap[] entityMapArray = chunk.getEntityLists();
-			
+
 			Iterator<Entity> iterator = entityMapArray[chunkVec.getY()].getByClass(clazz).iterator();
-			
+
 			while (iterator.hasNext())
 			{
 				Entity entity = iterator.next();
-				
-				for (AxisAlignedBB bb:boxMap.get(chunkVec))
+
+				for (AxisAlignedBB bb : boxMap.get(chunkVec))
 				{
 					if (entity.getEntityBoundingBox().intersectsWith(bb) && (filter == null || filter.apply(entity)))
 					{
 						arraylist.add(entity);
-						
+
 						Entity[] entityParts = entity.getParts();
 
-	                    if (entityParts != null)
-	                    {
-	                        for (int l = 0; l < entityParts.length; ++l)
-	                        {
-	                        	entity = entityParts[l];
+						if (entityParts != null)
+						{
+							for (int l = 0; l < entityParts.length; ++l)
+							{
+								entity = entityParts[l];
 
-	                            if (entity.getEntityBoundingBox().intersectsWith(bb) && (filter == null || filter.apply(entity)))
-	                            {
-	                                arraylist.add(entity);
-	                            }
-	                        }
-	                    }
+								if (entity.getEntityBoundingBox().intersectsWith(bb) && (filter == null || filter.apply(entity)))
+								{
+									arraylist.add(entity);
+								}
+							}
+						}
 					}
 				}
 			}
