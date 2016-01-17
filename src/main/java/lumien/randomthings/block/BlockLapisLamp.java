@@ -26,7 +26,10 @@ public class BlockLapisLamp extends BlockBase
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		worldIn.checkLightFor(EnumSkyBlock.BLOCK, pos);
+		if (worldIn.isRemote && worldIn.getLight(pos) == 0)
+		{
+			worldIn.checkLightFor(EnumSkyBlock.BLOCK, pos);
+		}
 	}
 
 	@Override

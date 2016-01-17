@@ -40,4 +40,13 @@ public class BlockQuartzLamp extends BlockBase
 			return 0;
 		}
 	}
+	
+	@Override
+	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	{
+		if (worldIn.isRemote && worldIn.getLight(pos)==15)
+		{
+			worldIn.checkLightFor(EnumSkyBlock.BLOCK, pos);
+		}
+	}
 }
