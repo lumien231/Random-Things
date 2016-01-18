@@ -1,6 +1,7 @@
 package lumien.randomthings;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
@@ -18,11 +19,21 @@ import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.ModRecipes;
 import lumien.randomthings.tileentity.ModTileEntitys;
+import lumien.randomthings.tileentity.TileEntityEnderAnchor;
 import lumien.randomthings.worldgen.ModDimensions;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenPlants;
+import lumien.randomthings.worldgen.WorldGenSakanade;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
+import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -37,7 +48,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION)
-public class RandomThings
+public class RandomThings implements LoadingCallback
 {
 	@Instance(Reference.MOD_ID)
 	public static RandomThings instance;
@@ -73,7 +84,7 @@ public class RandomThings
 		ModEntitys.init();
 		ModPotions.preInit(event);
 		proxy.registerModels();
-		
+
 		RTEventHandler eventHandler = new RTEventHandler();
 		MinecraftForge.EVENT_BUS.register(eventHandler);
 		FMLCommonHandler.instance().bus().register(eventHandler);
@@ -81,6 +92,8 @@ public class RandomThings
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		PacketHandler.init();
+		
+		ForgeChunkManager.setForcedChunkLoadingCallback(this, this);
 	}
 
 	@EventHandler
@@ -103,5 +116,26 @@ public class RandomThings
 	public ASMDataTable getASMData()
 	{
 		return asmDataTable;
+	}
+
+	@Override
+	public void ticketsLoaded(List<Ticket> tickets, World world)
+	{
+		for (Ticket t : tickets)
+		{
+			NBTTagCompound compound = t.getModData();
+			TileEntity te = world.getTileEntity(new BlockPos(compound.getInteger("posX"), compound.getInteger("posY"), compound.getInteger("posZ")));
+			if (te != null && te instanceof TileEntityEnderAnchor)
+			{
+				TileEntityEnderAnchor anchor = (TileEntityEnderAnchor) te;
+				anchor.setTicket(t);
+				
+				for (ChunkCoordIntPair pair:t.getChunkList())
+				{
+					ForgeChunkManager.forceChunk(t, pair);
+				}
+			}
+
+		}
 	}
 }

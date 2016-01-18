@@ -46,27 +46,30 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 			{
 				IBlockState blockState = worldObj.getBlockState(pos);
 				EnumFacing facing = (EnumFacing) blockState.getValue(BlockEnderBridge.FACING);
-				
+
 				BlockPos nextPos = new BlockPos(pos.offset(facing, scanningCounter));
 				IBlockState nextState = worldObj.getBlockState(nextPos);
-				
-				if (nextState.getBlock() == ModBlocks.enderAnchor)
-				{
-					List<EntityPlayerMP> playerList = worldObj.getEntitiesWithinAABB(EntityPlayerMP.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2));
-					if (!playerList.isEmpty())
-					{
-						BlockPos target = nextPos.up();
-						for (EntityPlayerMP player : playerList)
-						{
-							player.playerNetServerHandler.setPlayerLocation(target.getX() + 0.5, target.getY(), target.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
-						}
-					}
 
-					state = WAITING;
-				}
-				else if (!nextState.getBlock().isAir(worldObj, nextPos))
+				if (worldObj.isBlockLoaded(nextPos))
 				{
-					state = WAITING;
+					if (nextState.getBlock() == ModBlocks.enderAnchor)
+					{
+						List<EntityPlayerMP> playerList = worldObj.getEntitiesWithinAABB(EntityPlayerMP.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2));
+						if (!playerList.isEmpty())
+						{
+							BlockPos target = nextPos.up();
+							for (EntityPlayerMP player : playerList)
+							{
+								player.playerNetServerHandler.setPlayerLocation(target.getX() + 0.5, target.getY(), target.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
+							}
+						}
+
+						state = WAITING;
+					}
+					else if (!nextState.getBlock().isAir(worldObj, nextPos))
+					{
+						state = WAITING;
+					}
 				}
 
 				scanningCounter++;
