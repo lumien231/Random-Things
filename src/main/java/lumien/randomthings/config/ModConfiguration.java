@@ -19,6 +19,7 @@ public class ModConfiguration
 		Worldgen.beans = configuration.get("worldgen", "Beans", true).getBoolean();
 		Worldgen.cores = configuration.get("worldgen", "Cores", true).getBoolean();
 		Worldgen.pitcherPlants = configuration.get("worldgen", "PitcherPlants", true).getBoolean();
+		Worldgen.sakanade = configuration.get("worldgen", "Sakanade", true).getBoolean();
 		
 		if (configuration.hasChanged())
 		{

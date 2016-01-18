@@ -3,6 +3,7 @@ package lumien.randomthings.worldgen;
 import java.util.Random;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -20,17 +21,20 @@ public class WorldGenSakanade implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		int x = chunkX * 16 + random.nextInt(16);
-		int z = chunkZ * 16 + random.nextInt(16);
-
-		BlockPos target = WorldUtil.getHeighestPos(world, x, z);
-
-		BiomeGenBase biome = world.getBiomeGenForCoords(target);
-		if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM))
+		if (Worldgen.sakanade)
 		{
-			if (world.getBlockState(target).getBlock() == Blocks.brown_mushroom_block && world.isAirBlock(target.down()))
+			int x = chunkX * 16 + random.nextInt(16);
+			int z = chunkZ * 16 + random.nextInt(16);
+
+			BlockPos target = WorldUtil.getHeighestPos(world, x, z);
+
+			BiomeGenBase biome = world.getBiomeGenForCoords(target);
+			if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM))
 			{
-				world.setBlockState(target.down(), ModBlocks.sakanade.getDefaultState());
+				if (world.getBlockState(target).getBlock() == Blocks.brown_mushroom_block && world.isAirBlock(target.down()))
+				{
+					world.setBlockState(target.down(), ModBlocks.sakanade.getDefaultState());
+				}
 			}
 		}
 	}
