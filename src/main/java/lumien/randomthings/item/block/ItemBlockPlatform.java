@@ -1,12 +1,9 @@
 package lumien.randomthings.item.block;
 
-import lumien.randomthings.block.BlockBiomeStone;
 import lumien.randomthings.block.BlockPlatform;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockPlatform extends ItemBlock
 {

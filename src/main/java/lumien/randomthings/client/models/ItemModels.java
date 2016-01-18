@@ -1,7 +1,5 @@
 package lumien.randomthings.client.models;
 
-import org.lwjgl.opengl.GL11;
-
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.mesh.StainedBrickItemMesh;
 import lumien.randomthings.item.ItemIngredient;

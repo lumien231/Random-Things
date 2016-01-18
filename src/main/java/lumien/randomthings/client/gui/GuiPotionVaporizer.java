@@ -4,14 +4,12 @@ import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.container.ContainerEnderLetter;
 import lumien.randomthings.container.ContainerPotionVaporizer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
@@ -117,9 +115,9 @@ public class GuiPotionVaporizer extends GuiContainer
 						s1 = s1 + " " + I18n.format("enchantment.level.4", new Object[0]);
 					}
 
-					this.fontRendererObj.drawStringWithShadow(s1, (float) (i + 10 + 18), (float) (j + 6), 16777215);
+					this.fontRendererObj.drawStringWithShadow(s1, i + 10 + 18, j + 6, 16777215);
 					String s = StringUtils.ticksToElapsedTime(container.durationLeft);
-					this.fontRendererObj.drawStringWithShadow(s, (float) (i + 10 + 18), (float) (j + 6 + 10), 8355711);
+					this.fontRendererObj.drawStringWithShadow(s, i + 10 + 18, j + 6 + 10, 8355711);
 				}
 			}
 		}

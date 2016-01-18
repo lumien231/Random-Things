@@ -39,7 +39,7 @@ public class BlockOnlineDetector extends BlockContainerBase
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((Boolean) state.getValue(POWERED)) ? 1 : 0;
+		return (state.getValue(POWERED)) ? 1 : 0;
 	}
 
 	@Override
@@ -79,13 +79,13 @@ public class BlockOnlineDetector extends BlockContainerBase
 	@Override
 	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		return (Boolean) state.getValue(POWERED) ? 15 : 0;
+		return state.getValue(POWERED) ? 15 : 0;
 	}
 
 	@Override
 	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		return (Boolean) state.getValue(POWERED) ? 15 : 0;
+		return state.getValue(POWERED) ? 15 : 0;
 	}
 
 	@Override

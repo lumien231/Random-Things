@@ -47,7 +47,7 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 				if (state == SCANNING)
 				{
 					IBlockState blockState = worldObj.getBlockState(pos);
-					EnumFacing facing = (EnumFacing) blockState.getValue(BlockEnderBridge.FACING);
+					EnumFacing facing = blockState.getValue(BlockEnderBridge.FACING);
 					BlockPos nextPos = new BlockPos(pos.offset(facing, scanningCounter));
 
 					if (worldObj.isBlockLoaded(nextPos))

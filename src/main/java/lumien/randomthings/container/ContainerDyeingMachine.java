@@ -152,7 +152,7 @@ public class ContainerDyeingMachine extends Container
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(par2);
+		Slot slot = this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
 		{
@@ -209,7 +209,7 @@ public class ContainerDyeingMachine extends Container
 		{
 			while (par1ItemStack.stackSize > 0 && (!par4 && k < par3 || par4 && k >= par2))
 			{
-				slot = (Slot) this.inventorySlots.get(k);
+				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
 				if (itemstack1 != null && itemstack1.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1) && slot.isItemValid(par1ItemStack))
@@ -256,7 +256,7 @@ public class ContainerDyeingMachine extends Container
 
 			while (!par4 && k < par3 || par4 && k >= par2)
 			{
-				slot = (Slot) this.inventorySlots.get(k);
+				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
 				if (itemstack1 == null && slot.isItemValid(par1ItemStack))

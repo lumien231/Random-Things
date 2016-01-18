@@ -7,8 +7,6 @@ import java.util.Set;
 import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
-import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class ModelHandler

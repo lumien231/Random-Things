@@ -9,8 +9,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockQuartzLamp extends BlockBase
 {
@@ -40,11 +38,11 @@ public class BlockQuartzLamp extends BlockBase
 			return 0;
 		}
 	}
-	
+
 	@Override
 	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (worldIn.isRemote && worldIn.getLight(pos)==15)
+		if (worldIn.isRemote && worldIn.getLight(pos) == 15)
 		{
 			worldIn.checkLightFor(EnumSkyBlock.BLOCK, pos);
 		}

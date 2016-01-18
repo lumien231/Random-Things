@@ -14,7 +14,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -71,7 +70,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 						EntityLiving entityliving = null;
 						try
 						{
-							entityliving = (EntityLiving) entry.entityClass.getConstructor(new Class[] { World.class }).newInstance(new Object[] { worldObj });
+							entityliving = entry.entityClass.getConstructor(new Class[] { World.class }).newInstance(new Object[] { worldObj });
 						}
 						catch (Exception exception)
 						{

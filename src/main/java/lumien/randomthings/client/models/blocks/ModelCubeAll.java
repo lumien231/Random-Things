@@ -12,8 +12,6 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
-import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
-
 import com.google.common.primitives.Ints;
 
 public class ModelCubeAll implements IFlexibleBakedModel

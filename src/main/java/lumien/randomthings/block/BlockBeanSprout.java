@@ -49,7 +49,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((Integer) state.getValue(AGE)).intValue();
+		return state.getValue(AGE).intValue();
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable
 	{
 		java.util.List<ItemStack> ret = super.getDrops(world, pos, state, fortune);
 
-		int age = ((Integer) state.getValue(AGE)).intValue();
+		int age = state.getValue(AGE).intValue();
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 
 		if (age >= 7)
@@ -80,7 +80,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable
 
 		if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
 		{
-			int i = ((Integer) state.getValue(AGE)).intValue();
+			int i = state.getValue(AGE).intValue();
 
 			if (i < 7)
 			{
@@ -122,7 +122,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		return ((Integer) state.getValue(AGE)).intValue() < 7;
+		return state.getValue(AGE).intValue() < 7;
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
-		int i = ((Integer) state.getValue(AGE)).intValue() + MathHelper.getRandomIntegerInRange(worldIn.rand, 2, 5);
+		int i = state.getValue(AGE).intValue() + MathHelper.getRandomIntegerInRange(worldIn.rand, 2, 5);
 
 		if (i > 7)
 		{

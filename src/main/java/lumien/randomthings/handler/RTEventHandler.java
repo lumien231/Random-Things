@@ -34,7 +34,6 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
@@ -255,7 +254,7 @@ public class RTEventHandler
 						int width = event.resolution.getScaledWidth();
 						int height = event.resolution.getScaledHeight();
 
-						int power = (Integer) hitState.getValue(BlockRedstoneWire.POWER);
+						int power = hitState.getValue(BlockRedstoneWire.POWER);
 
 						Minecraft.getMinecraft().fontRendererObj.drawString(power + "", width / 2 + 5, height / 2 + 5, Colors.RED_INT);
 						GlStateManager.color(1, 1, 1, 1);
@@ -638,7 +637,7 @@ public class RTEventHandler
 			{
 				for (int i = 0; i < 1; ++i)
 				{
-					EntityFX fx = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.entityLiving.posX + (this.rng.nextDouble() - 0.5D) * (double) event.entityLiving.width, event.entityLiving.posY + this.rng.nextDouble() * (double) event.entityLiving.height - 0.25D, event.entityLiving.posZ + (this.rng.nextDouble() - 0.5D) * (double) event.entityLiving.width, (this.rng.nextDouble() - 0.5D) * 2.0D, -this.rng.nextDouble(), (this.rng.nextDouble() - 0.5D) * 2.0D);
+					EntityFX fx = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.entityLiving.posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.entityLiving.width, event.entityLiving.posY + RTEventHandler.rng.nextDouble() * event.entityLiving.height - 0.25D, event.entityLiving.posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.entityLiving.width, (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
 					fx.setRBGColorF(0.2F, 0.2F, 1);
 				}
 			}

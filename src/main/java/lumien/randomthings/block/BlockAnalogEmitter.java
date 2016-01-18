@@ -70,7 +70,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 	public int getMetaFromState(IBlockState state)
 	{
 		byte b0 = 0;
-		int i = b0 | ((EnumFacing) state.getValue(FACING)).getIndex();
+		int i = b0 | state.getValue(FACING).getIndex();
 
 		return i;
 	}
@@ -92,7 +92,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 	{
 		if (!worldIn.isRemote)
 		{
-			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+			EnumFacing enumfacing = state.getValue(FACING);
 			boolean flag = worldIn.getBlockState(pos.north()).getBlock().isFullBlock();
 			boolean flag1 = worldIn.getBlockState(pos.south()).getBlock().isFullBlock();
 
@@ -130,7 +130,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 		{
 			if (playerIn.isSneaking())
 			{
-				EnumFacing facing = (EnumFacing) state.getValue(FACING);
+				EnumFacing facing = state.getValue(FACING);
 
 				if (facing != side)
 				{
@@ -172,7 +172,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
 		TileEntityAnalogEmitter te = (TileEntityAnalogEmitter) worldIn.getTileEntity(pos);
-		EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+		EnumFacing enumfacing = state.getValue(FACING);
 
 		if (enumfacing.getOpposite() != side)
 		{

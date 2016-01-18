@@ -45,7 +45,7 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 			if (state == SCANNING)
 			{
 				IBlockState blockState = worldObj.getBlockState(pos);
-				EnumFacing facing = (EnumFacing) blockState.getValue(BlockEnderBridge.FACING);
+				EnumFacing facing = blockState.getValue(BlockEnderBridge.FACING);
 
 				BlockPos nextPos = new BlockPos(pos.offset(facing, scanningCounter));
 				IBlockState nextState = worldObj.getBlockState(nextPos);

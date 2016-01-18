@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import java.util.List;
 
 import lumien.randomthings.item.block.ItemBlockPlatform;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -35,11 +34,13 @@ public class BlockPlatform extends BlockBase
 		this.setHardness(1.5F);
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isFullCube()
 	{
 		return false;

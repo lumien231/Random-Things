@@ -2,14 +2,11 @@ package lumien.randomthings.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -153,7 +150,7 @@ public class WorldUtil
 			}
 
 			stack.stackSize -= i;
-			EntityItem entityitem = new EntityItem(worldIn, x + (double) f, y + (double) f1, z + (double) f2, new ItemStack(stack.getItem(), i, stack.getMetadata()));
+			EntityItem entityitem = new EntityItem(worldIn, x + f, y + f1, z + f2, new ItemStack(stack.getItem(), i, stack.getMetadata()));
 
 			if (stack.hasTagCompound())
 			{
@@ -161,9 +158,9 @@ public class WorldUtil
 			}
 
 			float f3 = 0.05F;
-			entityitem.motionX = rng.nextGaussian() * (double) f3;
-			entityitem.motionY = rng.nextGaussian() * (double) f3 + 0.20000000298023224D;
-			entityitem.motionZ = rng.nextGaussian() * (double) f3;
+			entityitem.motionX = rng.nextGaussian() * f3;
+			entityitem.motionY = rng.nextGaussian() * f3 + 0.20000000298023224D;
+			entityitem.motionZ = rng.nextGaussian() * f3;
 			worldIn.spawnEntityInWorld(entityitem);
 		}
 	}

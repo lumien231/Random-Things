@@ -282,7 +282,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	{
 		if (firstCheck)
 		{
-			EnumFacing facing = (EnumFacing) worldObj.getBlockState(pos).getValue(BlockPotionVaporizer.FACING);
+			EnumFacing facing = worldObj.getBlockState(pos).getValue(BlockPotionVaporizer.FACING);
 			toBeChecked.add(this.pos.offset(facing));
 			firstCheck = false;
 		}
@@ -334,7 +334,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		validBlocks.clear();
 		checkedBlocks.clear();
 
-		EnumFacing facing = (EnumFacing) worldObj.getBlockState(pos).getValue(BlockPotionVaporizer.FACING);
+		EnumFacing facing = worldObj.getBlockState(pos).getValue(BlockPotionVaporizer.FACING);
 
 		toBeChecked.add(this.pos.offset(facing));
 	}

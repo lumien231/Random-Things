@@ -1,20 +1,6 @@
 package lumien.randomthings.client.render;
 
-import java.io.IOException;
-import java.nio.FloatBuffer;
-import java.util.ArrayList;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL31;
-
-import lumien.randomthings.handler.magicavoxel.MagicaVoxelLoader;
-import lumien.randomthings.handler.magicavoxel.MagicaVoxelRenderModel;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
-import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.Minecraft;
@@ -23,7 +9,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

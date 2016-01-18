@@ -1,9 +1,5 @@
 package lumien.randomthings.block;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLever;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -34,24 +30,27 @@ public class BlockContactLever extends BlockBase
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		if (((Boolean) state.getValue(POWERED)).booleanValue())
+		if (state.getValue(POWERED).booleanValue())
 		{
-			this.notifyNeighbors(worldIn, pos, (EnumFacing) state.getValue(FACING));
+			this.notifyNeighbors(worldIn, pos, state.getValue(FACING));
 		}
 
 		super.breakBlock(worldIn, pos, state);
 	}
 
+	@Override
 	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		return ((Boolean) state.getValue(POWERED)).booleanValue() ? 15 : 0;
+		return state.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
+	@Override
 	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		return ((Boolean) state.getValue(POWERED)).booleanValue() ? 15 : 0;
+		return state.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
+	@Override
 	public boolean canProvidePower()
 	{
 		return true;
@@ -67,6 +66,7 @@ public class BlockContactLever extends BlockBase
 		}
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		EnumFacing enumfacing;
@@ -85,13 +85,14 @@ public class BlockContactLever extends BlockBase
 	}
 
 
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		int i;
 
 		i = state.getValue(FACING).ordinal();
 
-		if (((Boolean) state.getValue(POWERED)).booleanValue())
+		if (state.getValue(POWERED).booleanValue())
 		{
 			i += 6;
 		}
@@ -99,6 +100,7 @@ public class BlockContactLever extends BlockBase
 		return i;
 	}
 
+	@Override
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] { FACING, POWERED });
@@ -108,7 +110,7 @@ public class BlockContactLever extends BlockBase
 	{
 		if (!worldIn.isRemote)
 		{
-			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+			EnumFacing enumfacing = state.getValue(FACING);
 			boolean flag = worldIn.getBlockState(pos.north()).getBlock().isFullBlock();
 			boolean flag1 = worldIn.getBlockState(pos.south()).getBlock().isFullBlock();
 
@@ -170,7 +172,7 @@ public class BlockContactLever extends BlockBase
 		state = state.cycleProperty(POWERED);
 		world.setBlockState(pos, state, 3);
 		this.notifyNeighbors(world, pos, fromFacing);
-		world.playSoundEffect((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, "random.click", 0.3F, ((Boolean) state.getValue(POWERED)).booleanValue() ? 0.6F : 0.5F);
+		world.playSoundEffect(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, "random.click", 0.3F, state.getValue(POWERED).booleanValue() ? 0.6F : 0.5F);
 		return;
 
 	}

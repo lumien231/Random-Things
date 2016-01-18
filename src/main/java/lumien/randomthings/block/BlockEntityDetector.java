@@ -48,6 +48,7 @@ public class BlockEntityDetector extends BlockContainerBase
 		return true;
 	}
 	
+	@Override
 	public boolean shouldCheckWeakPower(IBlockAccess world, BlockPos pos, EnumFacing side)
     {
 		return false;

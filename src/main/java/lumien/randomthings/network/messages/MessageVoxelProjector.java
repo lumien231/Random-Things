@@ -1,11 +1,9 @@
 package lumien.randomthings.network.messages;
 
 import io.netty.buffer.ByteBuf;
-import lumien.randomthings.container.ContainerAnalogEmitter;
 import lumien.randomthings.container.ContainerVoxelProjector;
 import lumien.randomthings.network.IRTMessage;
 import lumien.randomthings.network.MessageUtil;
-import lumien.randomthings.tileentity.TileEntityAnalogEmitter;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;

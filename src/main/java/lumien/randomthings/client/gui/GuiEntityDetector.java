@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
-import lumien.randomthings.container.ContainerEnderLetter;
 import lumien.randomthings.container.ContainerEntityDetector;
 import lumien.randomthings.item.ItemEntityFilter;
 import lumien.randomthings.network.PacketHandler;
@@ -16,7 +15,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;

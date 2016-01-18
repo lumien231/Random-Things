@@ -28,7 +28,7 @@ public class TileEntityEnderMailbox extends TileEntityBase implements ITickable
 			{
 				tickCounter = 0;
 				IBlockState state = worldObj.getBlockState(this.pos);
-				boolean active = (Boolean) state.getValue(BlockEnderMailbox.ACTIVE);
+				boolean active = state.getValue(BlockEnderMailbox.ACTIVE);
 
 				EnderLetterHandler enderLetterHandler = EnderLetterHandler.get(worldObj);
 				boolean post = enderLetterHandler.hasInventoryFor(this.owner);

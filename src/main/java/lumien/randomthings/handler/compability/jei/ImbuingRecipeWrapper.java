@@ -3,7 +3,6 @@ package lumien.randomthings.handler.compability.jei;
 import com.google.common.base.Objects;
 
 import javax.annotation.Nonnull;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,8 +10,6 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
-import mezz.jei.plugins.vanilla.VanillaRecipeWrapper;
-import mezz.jei.util.Translator;
 
 public class ImbuingRecipeWrapper extends BlankRecipeWrapper
 {

@@ -3,26 +3,21 @@ package lumien.randomthings.client.gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
 import lumien.randomthings.client.gui.elements.GuiStringList;
-import lumien.randomthings.container.ContainerImbuingStation;
 import lumien.randomthings.container.ContainerVoxelProjector;
 import lumien.randomthings.lib.IStringCallback;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageVoxelProjector;
-import lumien.randomthings.tileentity.TileEntityImbuingStation;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiPageButtonList.GuiResponder;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;

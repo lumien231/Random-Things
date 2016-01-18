@@ -5,7 +5,6 @@ import java.util.Random;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.util.WorldUtil;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;

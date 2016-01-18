@@ -2,7 +2,6 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -40,24 +39,27 @@ public class BlockContactButton extends BlockBase
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		if (((Boolean) state.getValue(POWERED)).booleanValue())
+		if (state.getValue(POWERED).booleanValue())
 		{
-			this.notifyNeighbors(worldIn, pos, (EnumFacing) state.getValue(FACING));
+			this.notifyNeighbors(worldIn, pos, state.getValue(FACING));
 		}
 
 		super.breakBlock(worldIn, pos, state);
 	}
 
+	@Override
 	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		return ((Boolean) state.getValue(POWERED)).booleanValue() ? 15 : 0;
+		return state.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
+	@Override
 	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		return ((Boolean) state.getValue(POWERED)).booleanValue() ? 15 : 0;
+		return state.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
+	@Override
 	public boolean canProvidePower()
 	{
 		return true;
@@ -69,15 +71,16 @@ public class BlockContactButton extends BlockBase
 		return true;
 	}
 
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
-			if (((Boolean) state.getValue(POWERED)).booleanValue())
+			if (state.getValue(POWERED).booleanValue())
 			{
 				worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(false)));
-				this.notifyNeighbors(worldIn, pos, (EnumFacing) state.getValue(FACING));
-				worldIn.playSoundEffect((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
+				this.notifyNeighbors(worldIn, pos, state.getValue(FACING));
+				worldIn.playSoundEffect(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, "random.click", 0.3F, 0.5F);
 				worldIn.markBlockRangeForRenderUpdate(pos, pos);
 			}
 		}
@@ -93,6 +96,7 @@ public class BlockContactButton extends BlockBase
 		}
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		EnumFacing enumfacing;
@@ -111,13 +115,14 @@ public class BlockContactButton extends BlockBase
 	}
 
 
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		int i;
 
 		i = state.getValue(FACING).ordinal();
 
-		if (((Boolean) state.getValue(POWERED)).booleanValue())
+		if (state.getValue(POWERED).booleanValue())
 		{
 			i += 6;
 		}
@@ -125,6 +130,7 @@ public class BlockContactButton extends BlockBase
 		return i;
 	}
 
+	@Override
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] { FACING, POWERED });
@@ -134,7 +140,7 @@ public class BlockContactButton extends BlockBase
 	{
 		if (!worldIn.isRemote)
 		{
-			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+			EnumFacing enumfacing = state.getValue(FACING);
 			boolean flag = worldIn.getBlockState(pos.north()).getBlock().isFullBlock();
 			boolean flag1 = worldIn.getBlockState(pos.south()).getBlock().isFullBlock();
 
@@ -187,7 +193,7 @@ public class BlockContactButton extends BlockBase
 	public void activate(World world, BlockPos pos,EnumFacing fromFacing)
 	{
 		IBlockState state = world.getBlockState(pos);
-		if (((Boolean) state.getValue(POWERED)).booleanValue())
+		if (state.getValue(POWERED).booleanValue())
 		{
 			return;
 		}
@@ -195,8 +201,8 @@ public class BlockContactButton extends BlockBase
 		{
 			world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)), 3);
 			world.markBlockRangeForRenderUpdate(pos, pos);
-			world.playSoundEffect((double) pos.offset(fromFacing).getX() + 0.5D, (double) pos.offset(fromFacing).getY() + 0.5D, (double) pos.offset(fromFacing).getZ() + 0.5D, "random.click", 0.3F, 0.6F);
-			this.notifyNeighbors(world, pos, (EnumFacing) state.getValue(FACING));
+			world.playSoundEffect(pos.offset(fromFacing).getX() + 0.5D, pos.offset(fromFacing).getY() + 0.5D, pos.offset(fromFacing).getZ() + 0.5D, "random.click", 0.3F, 0.6F);
+			this.notifyNeighbors(world, pos, state.getValue(FACING));
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 			return;
 		}

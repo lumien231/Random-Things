@@ -1,8 +1,5 @@
 package lumien.randomthings.handler.compability.nei;
 
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
-
 public class NEIRandomThingsConfig implements IConfigureNEI
 {
 	@Override

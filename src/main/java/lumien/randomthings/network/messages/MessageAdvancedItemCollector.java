@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import lumien.randomthings.network.IRTMessage;
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.tileentity.TileEntityAdvancedItemCollector;
-import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;

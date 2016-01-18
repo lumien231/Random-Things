@@ -66,6 +66,7 @@ public class BlockPitcherPlant extends BlockBase
 		return false;
 	}
 
+	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		return super.canPlaceBlockAt(worldIn, pos) && canBlockStay(worldIn, pos, this.getDefaultState());
@@ -86,12 +87,14 @@ public class BlockPitcherPlant extends BlockBase
 		}
 	}
 
+	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
 		super.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
 		this.checkAndDropBlock(worldIn, pos, state);
 	}
 
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		this.checkAndDropBlock(worldIn, pos, state);
@@ -102,21 +105,25 @@ public class BlockPitcherPlant extends BlockBase
 		return ground == Blocks.grass || ground == Blocks.dirt;
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
 	{
 		return null;
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isFullCube()
 	{
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer()
 	{

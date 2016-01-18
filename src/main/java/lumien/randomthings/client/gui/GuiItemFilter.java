@@ -4,8 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
 import lumien.randomthings.container.ContainerItemFilter;
-import lumien.randomthings.item.ItemItemFilter;
-import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageItemFilter;
@@ -13,8 +11,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;

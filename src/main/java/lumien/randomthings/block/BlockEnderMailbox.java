@@ -52,7 +52,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 	@Override
 	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if ((Boolean) state.getValue(ACTIVE))
+		if (state.getValue(ACTIVE))
 		{
 			for (int i = 0; i < 4; ++i)
 			{
@@ -165,7 +165,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
 	{
-		EnumFacing facing = (EnumFacing) worldIn.getBlockState(pos).getValue(FACING);
+		EnumFacing facing = worldIn.getBlockState(pos).getValue(FACING);
 
 		if (facing == EnumFacing.SOUTH || facing == EnumFacing.NORTH)
 		{
@@ -223,7 +223,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((EnumFacing) state.getValue(FACING)).getIndex() + ((Boolean) state.getValue(ACTIVE) ? 6 : 0);
+		return state.getValue(FACING).getIndex() + (state.getValue(ACTIVE) ? 6 : 0);
 	}
 
 	@Override

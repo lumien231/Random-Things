@@ -5,7 +5,6 @@ import com.google.common.base.Predicate;
 import lumien.randomthings.container.slots.SlotFiltered;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityAdvancedItemCollector;
-import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -57,14 +56,14 @@ public class ContainerAdvancedItemCollector extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return this.worldObj.getTileEntity(this.pos) != advancedItemCollector ? false : playerIn.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.pos) != advancedItemCollector ? false : playerIn.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(par2);
+		Slot slot = this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
 		{
@@ -121,7 +120,7 @@ public class ContainerAdvancedItemCollector extends Container
 		{
 			while (par1ItemStack.stackSize > 0 && (!par4 && k < par3 || par4 && k >= par2))
 			{
-				slot = (Slot) this.inventorySlots.get(k);
+				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
 				if (itemstack1 != null && itemstack1.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1) && slot.isItemValid(par1ItemStack))
@@ -168,7 +167,7 @@ public class ContainerAdvancedItemCollector extends Container
 
 			while (!par4 && k < par3 || par4 && k >= par2)
 			{
-				slot = (Slot) this.inventorySlots.get(k);
+				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
 				if (itemstack1 == null && slot.isItemValid(par1ItemStack))

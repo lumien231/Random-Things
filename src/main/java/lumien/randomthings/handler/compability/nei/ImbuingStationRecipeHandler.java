@@ -16,9 +16,6 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
-
 public class ImbuingStationRecipeHandler extends TemplateRecipeHandler
 {
 	static Gui gui = new Gui();

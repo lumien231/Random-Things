@@ -2,16 +2,12 @@ package lumien.randomthings.item;
 
 import java.util.List;
 
-import lumien.randomthings.config.ModConfiguration;
-import lumien.randomthings.util.EntityUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.registry.EntityRegistry;

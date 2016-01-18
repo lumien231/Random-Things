@@ -1,7 +1,5 @@
 package lumien.randomthings.item;
 
-import com.sun.xml.internal.ws.api.addressing.WSEndpointReference.Metadata;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.util.InventoryUtil;

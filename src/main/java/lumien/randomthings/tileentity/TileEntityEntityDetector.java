@@ -87,7 +87,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 
 		index++;
 
-		if (index < filter.values().length)
+		if (index < FILTER.values().length)
 		{
 			filter = FILTER.values()[index];
 		}

@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.TileEntityAdvancedItemCollector;
-import lumien.randomthings.tileentity.TileEntityItemCollector;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -67,11 +66,13 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 		return false;
 	}
 
+	@Override
 	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
 	{
 		return func_181088_a(worldIn, pos, side.getOpposite());
 	}
 
+	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		for (EnumFacing enumfacing : EnumFacing.values())
@@ -106,6 +107,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 	 * Called by ItemBlocks just before a block is actually set in the world, to
 	 * allow for adjustments to the IBlockstate
 	 */
+	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return func_181088_a(worldIn, pos, facing.getOpposite()) ? this.getDefaultState().withProperty(FACING, facing) : this.getDefaultState().withProperty(FACING, EnumFacing.DOWN);
@@ -114,9 +116,10 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 	/**
 	 * Called when a neighboring block changes.
 	 */
+	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
-		if (this.checkForDrop(worldIn, pos, state) && !func_181088_a(worldIn, pos, ((EnumFacing) state.getValue(FACING)).getOpposite()))
+		if (this.checkForDrop(worldIn, pos, state) && !func_181088_a(worldIn, pos, state.getValue(FACING).getOpposite()))
 		{
 			this.dropBlockAsItem(worldIn, pos, state, 0);
 			worldIn.setBlockToAir(pos);
@@ -137,6 +140,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 		}
 	}
 
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
 	{
 		this.updateBlockBounds(worldIn.getBlockState(pos));
@@ -144,7 +148,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 
 	private void updateBlockBounds(IBlockState state)
 	{
-		EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+		EnumFacing enumfacing = state.getValue(FACING);
 		float f = 0.25F;
 		float f1 = 0.375F;
 		float f2 = 5 / 16.0F;
@@ -183,6 +187,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 		return true;
 	}
 
+	@Override
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] { FACING });

@@ -53,7 +53,7 @@ public class BlockPrismarineEnderBridge extends BlockContainerBase
 	{
 		if (!worldIn.isRemote)
 		{
-			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+			EnumFacing enumfacing = state.getValue(FACING);
 			boolean flag = worldIn.getBlockState(pos.north()).getBlock().isFullBlock();
 			boolean flag1 = worldIn.getBlockState(pos.south()).getBlock().isFullBlock();
 
@@ -112,7 +112,7 @@ public class BlockPrismarineEnderBridge extends BlockContainerBase
 	public int getMetaFromState(IBlockState state)
 	{
 		byte b0 = 0;
-		int i = b0 | ((EnumFacing) state.getValue(FACING)).getIndex();
+		int i = b0 | state.getValue(FACING).getIndex();
 
 		return i;
 	}

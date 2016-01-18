@@ -5,7 +5,6 @@ import javax.annotation.Nonnull;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipe;
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 
 public class ImbuingRecipeHandler implements IRecipeHandler<ImbuingRecipe>
 {

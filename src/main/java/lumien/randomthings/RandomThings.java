@@ -1,6 +1,5 @@
 package lumien.randomthings;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.logging.log4j.Logger;
@@ -10,7 +9,6 @@ import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.entitys.ModEntitys;
 import lumien.randomthings.handler.RTEventHandler;
-import lumien.randomthings.handler.magicavoxel.MagicaVoxelLoader;
 import lumien.randomthings.handler.magicavoxel.ModelHandler;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.RTCreativeTab;
@@ -23,12 +21,9 @@ import lumien.randomthings.tileentity.TileEntityEnderAnchor;
 import lumien.randomthings.worldgen.ModDimensions;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenPlants;
-import lumien.randomthings.worldgen.WorldGenSakanade;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
