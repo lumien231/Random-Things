@@ -87,18 +87,21 @@ public class BlockPlatform extends BlockBase
 	@Override
 	public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity collidingEntity)
 	{
-		if (collidingEntity.posY < pos.getY() + 14F / 16F)
+		if (collidingEntity != null)
 		{
-			return;
-		}
-
-		if (collidingEntity instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer) collidingEntity;
-
-			if (player.isSneaking() && player.motionY <= 0)
+			if (collidingEntity.posY < pos.getY() + 14F / 16F)
 			{
 				return;
+			}
+
+			if (collidingEntity instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) collidingEntity;
+
+				if (player.isSneaking() && player.motionY <= 0)
+				{
+					return;
+				}
 			}
 		}
 
@@ -107,7 +110,7 @@ public class BlockPlatform extends BlockBase
 
 	public static enum EnumType implements IStringSerializable
 	{
-		OAK(0, "oak"), SPRUCE(1, "spruce"), BIRCH(2, "birch"), JUNGLE(3,"jungle"), ACACIA(4, "acacia"), DARK_OAK(5, "darkOak");
+		OAK(0, "oak"), SPRUCE(1, "spruce"), BIRCH(2, "birch"), JUNGLE(3, "jungle"), ACACIA(4, "acacia"), DARK_OAK(5, "darkOak");
 		private static final BlockPlatform.EnumType[] META_LOOKUP = new BlockPlatform.EnumType[values().length];
 		private final int meta;
 		private final String name;
