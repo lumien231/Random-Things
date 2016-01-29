@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.asm.MCPNames;
+import lumien.randomthings.potion.effects.EffectBoss;
 import lumien.randomthings.potion.effects.EffectCollapse;
 import lumien.randomthings.potion.imbues.ImbueCollapse;
 import lumien.randomthings.potion.imbues.ImbueExperience;
@@ -25,6 +26,7 @@ public class ModPotions
 	public static ImbueCollapse imbueCollapse;
 	
 	public static EffectCollapse collapse;
+	public static EffectBoss boss;
 
 	public static void preInit(FMLPreInitializationEvent event)
 	{
@@ -37,6 +39,7 @@ public class ModPotions
 		imbueCollapse = new ImbueCollapse();
 		
 		collapse = new EffectCollapse();
+		boss = new EffectBoss();
 	}
 
 	private static void extendPotionArray()

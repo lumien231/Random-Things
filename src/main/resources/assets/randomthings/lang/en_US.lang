@@ -147,6 +147,7 @@ item.imbue.wither.name=Wither Imbue
 item.imbue.collapse.name=Collapse Imbue
 
 item.ingredient.sakanadeSpores.name=Sakanade Spores
+item.ingredient.evilTear.name=Evil Tear
 
 tooltip.general.shift=Hold §6Shift§7 for more information
 tooltip.positionFilter.dimension=Dimension: %d

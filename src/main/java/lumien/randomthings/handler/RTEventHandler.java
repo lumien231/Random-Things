@@ -37,6 +37,8 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.BossStatus;
+import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -58,6 +60,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
@@ -103,7 +106,41 @@ public class RTEventHandler
 		}
 	}
 
+
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void renderLiving(RenderLivingEvent.Pre<EntityLivingBase> event)
+	{
+		final EntityLivingBase entity = event.entity;
+		if (event.entity.isPotionActive(ModPotions.boss))
+		{
+			IBossDisplayData displayData = new IBossDisplayData()
+			{
+				@Override
+				public float getMaxHealth()
+				{
+					return entity.getMaxHealth();
+				}
+
+				@Override
+				public float getHealth()
+				{
+					return entity.getHealth();
+				}
+
+				@Override
+				public IChatComponent getDisplayName()
+				{
+					return entity.getDisplayName();
+				}
+
+			};
+			BossStatus.setBossStatus(displayData, false);
+		}
+	}
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void cameraSetup(CameraSetup event)
 	{
 		if (event.entity instanceof EntityLivingBase)
