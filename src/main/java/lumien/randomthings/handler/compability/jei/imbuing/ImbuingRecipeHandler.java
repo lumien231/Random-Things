@@ -1,7 +1,8 @@
-package lumien.randomthings.handler.compability.jei;
+package lumien.randomthings.handler.compability.jei.imbuing;
 
 import javax.annotation.Nonnull;
 
+import lumien.randomthings.handler.compability.jei.RandomThingsPlugin;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipe;
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;

@@ -20,6 +20,8 @@ import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.lib.PlayerAbilitiesProperty;
 import lumien.randomthings.potion.ModPotions;
+import lumien.randomthings.recipes.anvil.AnvilRecipe;
+import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
@@ -54,6 +56,7 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
@@ -304,33 +307,14 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void anvilUpdate(AnvilUpdateEvent event)
 	{
-		ItemStack left = event.left;
-		ItemStack right = event.right;
-
-		if (left != null && right != null)
+		if (event.left != null && event.right != null)
 		{
-			Item leftItem = left.getItem();
-			Item rightItem = right.getItem();
+			AnvilRecipe recipe = AnvilRecipeHandler.getRecipe(event.left, event.right);
 
-			if (Loader.isModLoaded("Baubles"))
+			if (recipe != null)
 			{
-				if (arePairs(leftItem, rightItem, ModItems.obsidianSkull, Items.fire_charge))
-				{
-					event.output = new ItemStack(ModItems.obsidianSkullRing);
-					event.cost = 3;
-				}
-			}
-
-			if (arePairs(leftItem, rightItem, ModItems.waterWalkingBoots, ModItems.obsidianSkull) || arePairs(leftItem, rightItem, ModItems.waterWalkingBoots, ModItems.obsidianSkullRing))
-			{
-				event.output = new ItemStack(ModItems.obsidianWaterWalkingBoots);
-				event.cost = 10;
-			}
-
-			if (arePairs(leftItem, rightItem, ModItems.obsidianWaterWalkingBoots, ModItems.lavaCharm))
-			{
-				event.output = new ItemStack(ModItems.lavaWader);
-				event.cost = 15;
+				event.output = recipe.getOutput();
+				event.cost = recipe.getCost();
 			}
 		}
 	}

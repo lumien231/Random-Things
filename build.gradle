@@ -26,12 +26,12 @@ repositories {
 dependencies {
     compile "li.cil.oc:OpenComputers:MC1.8-1.5.+:api"
     compile fileTree(dir: 'libs', include: ['*.*'])
-    deobfCompile "mezz.jei:jei_1.8.9:2.13.3.58"
+    deobfCompile "mezz.jei:jei_1.8.9:2.22.4.106"
 }
 
-version = "3.5.7"
+version = "3.5.8"
 group= "lumien.randomthings"
-archivesBaseName = "RandomThings-MC1.8.8"
+archivesBaseName = "RandomThings-MC1.8.9"
 
 jar {
     manifest {
@@ -40,7 +40,7 @@ jar {
 }
 
 minecraft {
-    version = "1.8.9-11.15.0.1669"
+    version = "1.8.9-11.15.1.1726"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -48,7 +48,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20151228"
+    mappings = "snapshot_20160128"
     
     replaceIn "lib/Reference.java"
     replace "@VERSION@",project.version

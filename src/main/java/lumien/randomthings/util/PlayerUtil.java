@@ -24,11 +24,6 @@ public class PlayerUtil
 	{
 		int currentExperience = player.experienceTotal;
 
-		System.out.println("Level: " + player.experienceLevel);
-		System.out.println("% Experience in bar:" + player.experience * player.xpBarCap());
-		System.out.println("Experience in bar:" + player.experience * player.xpBarCap());
-		System.out.println("Total Experience: " + player.experienceTotal);
-
 		if (amount > currentExperience)
 		{
 			return false;
@@ -38,12 +33,10 @@ public class PlayerUtil
 			player.experienceTotal -= amount;
 			while (amount > 0)
 			{
-				System.out.println(player.experience * player.xpBarCap());
 				int amountInBar = (int) (Math.floor(player.experience * player.xpBarCap()));
 
 				if (amountInBar >= amount)
 				{
-					System.out.println("Available");
 					player.experience -= 1F / player.xpBarCap() * amount;
 					amount = 0;
 				}

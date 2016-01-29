@@ -18,6 +18,8 @@ public class EffectCollapse extends Potion
 	public EffectCollapse()
 	{
 		super(new ResourceLocation("collapse"), false, Color.PINK.getRGB());
+		
+		this.setPotionName("Collapse");
 	}
 	
 	@Override

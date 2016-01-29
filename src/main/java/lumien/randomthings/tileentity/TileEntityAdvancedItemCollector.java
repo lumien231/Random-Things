@@ -35,7 +35,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 	public TileEntityAdvancedItemCollector()
 	{
 		filterInventory = new InventoryBasic("tile.advancedItemCollector", false, 1);
-		filterInventory.func_110134_a(this);
+		filterInventory.addInventoryChangeListener(this);
 	}
 
 

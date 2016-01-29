@@ -1,4 +1,4 @@
-package lumien.randomthings.handler.compability.jei;
+package lumien.randomthings.handler.compability.jei.imbuing;
 
 import com.google.common.base.Objects;
 
