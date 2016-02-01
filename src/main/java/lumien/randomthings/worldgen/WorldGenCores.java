@@ -127,28 +127,28 @@ public class WorldGenCores implements IWorldGenerator
 					BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 					BiomeGenBase biome = world.getBiomeGenForCoords(target);
 
-					int enderMult = 18;
+					int enderMult = 40;
 					if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
 					{
-						enderMult -= 4;
+						enderMult -= 8;
 					}
 					if (BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY))
 					{
-						enderMult -= 2;
+						enderMult -= 4;
 					}
 					if (BiomeDictionary.isBiomeOfType(biome, Type.SWAMP))
 					{
-						enderMult -= 4;
+						enderMult -= 8;
 					}
 					if (BiomeDictionary.isBiomeOfType(biome, Type.SANDY))
 					{
 						enderMult += 10;
 					}
 
-					int natureMult = 18;
+					int natureMult = 30;
 					if (BiomeDictionary.isBiomeOfType(biome, Type.DENSE))
 					{
-						natureMult -= 4;
+						natureMult -= 8;
 					}
 					if (BiomeDictionary.isBiomeOfType(biome, Type.SPARSE))
 					{
@@ -156,7 +156,7 @@ public class WorldGenCores implements IWorldGenerator
 					}
 					if (BiomeDictionary.isBiomeOfType(biome, Type.WET))
 					{
-						natureMult -= 2;
+						natureMult -= 4;
 					}
 					if (BiomeDictionary.isBiomeOfType(biome, Type.DRY))
 					{
@@ -168,7 +168,7 @@ public class WorldGenCores implements IWorldGenerator
 					}
 					if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
 					{
-						natureMult -= 4;
+						natureMult -= 8;
 					}
 
 					boolean generateNatureCore = random.nextInt(18 * natureMult) == 0;
