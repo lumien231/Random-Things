@@ -12,6 +12,7 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockSpecialChest;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
+import lumien.randomthings.handler.compability.chisel.ChiselModelWrapper;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
@@ -107,7 +108,7 @@ public class AsmHandler
 
 	@SideOnly(Side.CLIENT)
 	public static IBakedModel getModelFromBlockState(IBlockState state, IBlockAccess access, BlockPos pos)
-	{	
+	{
 		IBakedModel model = getModelFromBlockStateRec(state, access, pos);
 		posSet.clear();
 		return model;
@@ -136,8 +137,15 @@ public class AsmHandler
 							IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelFromBlockState(oppositeState, access, opPos);
 							if (model instanceof ISmartBlockModel)
 							{
-								model = ((ISmartBlockModel) model).handleBlockState(oppositeState);
+								IBlockState extendedState = oppositeState.getBlock().getExtendedState(oppositeState, access, opPos);
+								model = ((ISmartBlockModel) model).handleBlockState(extendedState);
 							}
+
+							if (model != null && model instanceof ISmartBlockModel)
+							{
+								model = new ChiselModelWrapper((ISmartBlockModel) model);
+							}
+
 							return model;
 						}
 					}
