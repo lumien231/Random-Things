@@ -16,7 +16,7 @@ public class ItemIngredient extends ItemBase
 
 	public enum INGREDIENT
 	{
-		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear");
+		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm");
 
 		public String name;
 

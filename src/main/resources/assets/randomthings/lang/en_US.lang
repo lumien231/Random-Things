@@ -148,6 +148,7 @@ item.imbue.collapse.name=Collapse Imbue
 
 item.ingredient.sakanadeSpores.name=Sakanade Spores
 item.ingredient.evilTear.name=Evil Tear
+item.ingredient.ectoPlasm.name=Ectoplasm
 
 tooltip.general.shift=Hold §6Shift§7 for more information
 tooltip.positionFilter.dimension=Dimension: %d
@@ -184,3 +185,5 @@ item.enderLetter.sender=Sender: %s
 item.enderLetter.receiver=Receiver: %s
 item.enderLetter.noPlayer=%s does not seem to reside in this world
 item.enderLetter.noSpace=The letter appears to get rejected
+
+entity.RandomThings.spirit.name=Spirit

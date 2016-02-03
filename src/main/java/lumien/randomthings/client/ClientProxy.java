@@ -9,9 +9,11 @@ import lumien.randomthings.client.models.blocks.BlockModels;
 import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
 import lumien.randomthings.client.render.RenderSpecialChest;
+import lumien.randomthings.client.render.RenderSpirit;
 import lumien.randomthings.client.render.RenderVoxelProjector;
 import lumien.randomthings.entitys.EntityReviveCircle;
 import lumien.randomthings.entitys.EntitySoul;
+import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
@@ -20,6 +22,7 @@ import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
@@ -32,6 +35,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.network.internal.EntitySpawnHandler;
 
 import org.lwjgl.opengl.GL11;
 
@@ -84,6 +88,7 @@ public class ClientProxy extends CommonProxy
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(Minecraft.getMinecraft().getRenderManager(), new ModelSlime(16), 0.25F));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
