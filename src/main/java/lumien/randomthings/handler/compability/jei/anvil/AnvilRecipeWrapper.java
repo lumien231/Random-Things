@@ -1,9 +1,11 @@
 package lumien.randomthings.handler.compability.jei.anvil;
 
 import com.google.common.base.Objects;
-import com.mojang.realmsclient.util.Pair;
 
 import javax.annotation.Nonnull;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,8 +28,8 @@ public class AnvilRecipeWrapper extends BlankRecipeWrapper
 		this.input = Pair.of(input1, input2);
 		
 		this.inputs = new ArrayList<ItemStack>();
-		this.inputs.add(input.first());
-		this.inputs.add(input.second());
+		this.inputs.add(input.getLeft());
+		this.inputs.add(input.getRight());
 	}
 	
 	public Pair<ItemStack,ItemStack> getInputPair()

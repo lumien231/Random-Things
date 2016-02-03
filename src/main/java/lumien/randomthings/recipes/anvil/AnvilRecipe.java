@@ -1,6 +1,6 @@
 package lumien.randomthings.recipes.anvil;
 
-import com.mojang.realmsclient.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraft.item.ItemStack;
 
@@ -24,12 +24,12 @@ public class AnvilRecipe
 
 	public ItemStack getSecond()
 	{
-		return inputPair.second();
+		return inputPair.getRight();
 	}
 
 	public ItemStack getFirst()
 	{
-		return inputPair.first();
+		return inputPair.getLeft();
 	}
 	
 	public int getCost()
