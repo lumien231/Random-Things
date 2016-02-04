@@ -25,7 +25,8 @@ public class WorldGenPlants implements IWorldGenerator
 				int z = chunkZ * 16 + random.nextInt(16);
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
-				if (world.isAirBlock(target) && (!world.provider.getHasNoSky() || target.getY() < 255) && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
+
+				if (target != null && world.isAirBlock(target) && (!world.provider.getHasNoSky() || target.getY() < 255) && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
 				{
 					world.setBlockState(target, ModBlocks.beanSprout.getDefaultState(), 2);
 				}
@@ -38,11 +39,15 @@ public class WorldGenPlants implements IWorldGenerator
 				int z = chunkZ * 16 + random.nextInt(16);
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
-				BiomeGenBase biome = world.getBiomeGenForCoords(target);
 
-				if (world.isAirBlock(target) && biome.getFloatTemperature(target) >= 0.8F && ModBlocks.pitcherPlant.canBlockStay(world, target, ModBlocks.pitcherPlant.getDefaultState()))
+				if (target != null)
 				{
-					world.setBlockState(target, ModBlocks.pitcherPlant.getDefaultState(), 2);
+					BiomeGenBase biome = world.getBiomeGenForCoords(target);
+
+					if (world.isAirBlock(target) && biome.getFloatTemperature(target) >= 0.8F && ModBlocks.pitcherPlant.canBlockStay(world, target, ModBlocks.pitcherPlant.getDefaultState()))
+					{
+						world.setBlockState(target, ModBlocks.pitcherPlant.getDefaultState(), 2);
+					}
 				}
 			}
 		}

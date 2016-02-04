@@ -27,12 +27,16 @@ public class WorldGenSakanade implements IWorldGenerator
 
 			BlockPos target = WorldUtil.getHeighestPos(world, x, z);
 
-			BiomeGenBase biome = world.getBiomeGenForCoords(target);
-			if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM))
+
+			if (target != null)
 			{
-				if (world.getBlockState(target).getBlock() == Blocks.brown_mushroom_block && world.isAirBlock(target.down()))
+				BiomeGenBase biome = world.getBiomeGenForCoords(target);
+				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM))
 				{
-					world.setBlockState(target.down(), ModBlocks.sakanade.getDefaultState());
+					if (world.getBlockState(target).getBlock() == Blocks.brown_mushroom_block && world.isAirBlock(target.down()))
+					{
+						world.setBlockState(target.down(), ModBlocks.sakanade.getDefaultState());
+					}
 				}
 			}
 		}

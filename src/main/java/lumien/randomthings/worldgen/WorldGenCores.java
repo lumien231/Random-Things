@@ -116,15 +116,16 @@ public class WorldGenCores implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if (Worldgen.cores)
+		if (world.getWorldType() != WorldType.DEBUG_WORLD)
 		{
-			if (world.getWorldType() != WorldType.DEBUG_WORLD)
+			if (world.provider.getDimensionId() == 0)
 			{
-				if (world.provider.getDimensionId() == 0)
+				int x = chunkX * 16 + random.nextInt(16);
+				int z = chunkZ * 16 + random.nextInt(16);
+				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
+
+				if (target != null)
 				{
-					int x = chunkX * 16 + random.nextInt(16);
-					int z = chunkZ * 16 + random.nextInt(16);
-					BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 					BiomeGenBase biome = world.getBiomeGenForCoords(target);
 
 					int enderMult = 40;
@@ -173,6 +174,16 @@ public class WorldGenCores implements IWorldGenerator
 
 					boolean generateNatureCore = random.nextInt(18 * natureMult) == 0;
 					boolean generateEnderCore = random.nextInt(18 * enderMult) == 0;
+
+					if (!Worldgen.enderCore)
+					{
+						generateEnderCore = false;
+					}
+
+					if (!Worldgen.natureCore)
+					{
+						generateNatureCore = false;
+					}
 
 					if (generateNatureCore || generateEnderCore)
 					{
