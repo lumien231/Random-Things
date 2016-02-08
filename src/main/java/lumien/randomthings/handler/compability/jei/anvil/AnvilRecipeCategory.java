@@ -17,7 +17,6 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.util.StackUtil;
 import mezz.jei.util.Translator;
 
 public class AnvilRecipeCategory implements IRecipeCategory
@@ -93,8 +92,8 @@ public class AnvilRecipeCategory implements IRecipeCategory
 		if (recipeWrapper instanceof AnvilRecipeWrapper)
 		{
 			List inputs = recipeWrapper.getInputs();
-			List<ItemStack> inputStacks1 = StackUtil.toItemStackList(inputs.get(input1));
-			List<ItemStack> inputStacks2 = StackUtil.toItemStackList(inputs.get(input2));
+			List<ItemStack> inputStacks1 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(input1));
+			List<ItemStack> inputStacks2 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(input2));
 
 			itemStacks.setFromRecipe(input1, inputStacks1);
 			itemStacks.setFromRecipe(input2, inputStacks2);

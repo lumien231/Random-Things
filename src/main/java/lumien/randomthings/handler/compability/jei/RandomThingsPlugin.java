@@ -1,7 +1,6 @@
 package lumien.randomthings.handler.compability.jei;
 
 import lumien.randomthings.client.gui.GuiImbuingStation;
-import lumien.randomthings.container.ContainerAnalogEmitter;
 import lumien.randomthings.container.ContainerImbuingStation;
 import lumien.randomthings.handler.compability.jei.anvil.AnvilRecipeCategory;
 import lumien.randomthings.handler.compability.jei.anvil.AnvilRecipeHandler;
@@ -10,10 +9,12 @@ import lumien.randomthings.handler.compability.jei.imbuing.ImbuingRecipeHandler;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IItemRegistry;
 import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.IRecipeRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.inventory.ContainerRepair;
 
@@ -22,6 +23,7 @@ public class RandomThingsPlugin implements IModPlugin
 {
 	private IItemRegistry itemRegistry;
 	private IJeiHelpers jeiHelpers;
+	public static IStackHelper stackHelper;
 
 	public static String IMBUE_ID = "Imbuing";
 	public static String ANVIL_ID = "AnvilCraftingRT";
@@ -30,6 +32,7 @@ public class RandomThingsPlugin implements IModPlugin
 	public void onJeiHelpersAvailable(IJeiHelpers jeiHelpers)
 	{
 		this.jeiHelpers = jeiHelpers;
+		stackHelper = jeiHelpers.getStackHelper();
 	}
 
 	@Override
@@ -61,5 +64,11 @@ public class RandomThingsPlugin implements IModPlugin
 	public void onRecipeRegistryAvailable(IRecipeRegistry recipeRegistry)
 	{
 
+	}
+
+	@Override
+	public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
+	{
+		
 	}
 }

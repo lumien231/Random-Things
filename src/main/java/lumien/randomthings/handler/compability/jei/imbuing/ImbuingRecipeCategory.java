@@ -16,7 +16,6 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.util.StackUtil;
 import mezz.jei.util.Translator;
 
 public class ImbuingRecipeCategory implements IRecipeCategory
@@ -97,10 +96,10 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 		if (recipeWrapper instanceof ImbuingRecipeWrapper)
 		{
 			List inputs = recipeWrapper.getInputs();
-			List<ItemStack> inputStacks1 = StackUtil.toItemStackList(inputs.get(ingredientSlot1));
-			List<ItemStack> inputStacks2 = StackUtil.toItemStackList(inputs.get(ingredientSlot2));
-			List<ItemStack> inputStacks3 = StackUtil.toItemStackList(inputs.get(ingredientSlot3));
-			List<ItemStack> toImbueStacks = StackUtil.toItemStackList(inputs.get(toImbueSlot));
+			List<ItemStack> inputStacks1 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(ingredientSlot1));
+			List<ItemStack> inputStacks2 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(ingredientSlot2));
+			List<ItemStack> inputStacks3 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(ingredientSlot3));
+			List<ItemStack> toImbueStacks = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(toImbueSlot));
 
 			itemStacks.setFromRecipe(ingredientSlot1, inputStacks1);
 			itemStacks.setFromRecipe(ingredientSlot2, inputStacks2);
