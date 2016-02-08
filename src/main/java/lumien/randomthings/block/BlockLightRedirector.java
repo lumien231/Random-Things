@@ -1,5 +1,7 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.network.MessageUtil;
+import lumien.randomthings.network.messages.MessageLightRedirector;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -30,15 +32,11 @@ public class BlockLightRedirector extends BlockBase
 	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
-		if (worldIn.isRemote)
+		if (!worldIn.isRemote)
 		{
-			for (EnumFacing facing : EnumFacing.VALUES)
-			{
-				if (!(worldIn.getBlockState(pos.offset(facing)).getBlock() instanceof BlockLightRedirector))
-				{
-					worldIn.markBlockForUpdate(pos.offset(facing));
-				}
-			}
+			MessageLightRedirector message = new MessageLightRedirector(worldIn.provider.getDimensionId(), pos);
+			
+			MessageUtil.sendToAllWatchingPos(worldIn, pos, message);
 		}
 	}
 }

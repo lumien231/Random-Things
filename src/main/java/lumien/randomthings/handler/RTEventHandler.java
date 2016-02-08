@@ -109,7 +109,6 @@ public class RTEventHandler
 		}
 	}
 
-
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void renderLiving(RenderLivingEvent.Pre<EntityLivingBase> event)

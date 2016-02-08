@@ -27,7 +27,6 @@ public class WorldGenSakanade implements IWorldGenerator
 
 			BlockPos target = WorldUtil.getHeighestPos(world, x, z);
 
-
 			if (target != null)
 			{
 				BiomeGenBase biome = world.getBiomeGenForCoords(target);
