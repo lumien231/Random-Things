@@ -66,6 +66,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeHooks;
@@ -258,9 +259,9 @@ public class RTEventHandler
 	@SideOnly(Side.CLIENT)
 	public void renderGameOverlay(RenderGameOverlayEvent event)
 	{
-		if (event.type != null)
+		if (event.type != null && event instanceof RenderGameOverlayEvent.Post)
 		{
-			if (event.type == RenderGameOverlayEvent.ElementType.HEALTH)
+			if (event.type == RenderGameOverlayEvent.ElementType.ARMOR)
 			{
 				renderLavaCharm(event);
 			}
@@ -369,12 +370,8 @@ public class RTEventHandler
 
 				int left = 0;
 
-				int top = height - 40 - 10;
-
-				if (ForgeHooks.getTotalArmorValue(mc.thePlayer) != 0)
-				{
-					top -= 10;
-				}
+				int top = height - GuiIngameForge.left_height - 1;
+				GuiIngameForge.left_height += 10;
 
 				GlStateManager.enableBlend();
 				for (int i = 0; i < count + 1; i++)
