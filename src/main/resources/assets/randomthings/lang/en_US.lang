@@ -36,6 +36,7 @@ tile.voxelProjector.name=[WIP] Voxel Projector
 tile.contactButton.name=Contact Button
 tile.contactLever.name=Contact Lever
 tile.sakanade.name=Sakanade
+tile.rainShield.name=Rain Shield
 
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector

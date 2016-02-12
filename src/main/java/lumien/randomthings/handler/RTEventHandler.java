@@ -23,6 +23,7 @@ import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.anvil.AnvilRecipe;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
+import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.client.RenderUtils;
@@ -88,6 +89,7 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -107,6 +109,15 @@ public class RTEventHandler
 		else if (event instanceof DecorateBiomeEvent.Post)
 		{
 			WorldGenSakanade.instance.generate(event.rand, event.pos.getX() >> 4, event.pos.getZ() >> 4, event.world, null, null);
+		}
+	}
+
+	@SubscribeEvent
+	public void tick(TickEvent tickEvent)
+	{
+		if ((tickEvent.type == TickEvent.Type.CLIENT || tickEvent.type == TickEvent.Type.SERVER) && tickEvent.phase == TickEvent.Phase.END)
+		{
+			TileEntityRainShield.rainCache.clear();
 		}
 	}
 

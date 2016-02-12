@@ -39,7 +39,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 				break;
 		}
 		int j;
-
+		
 		if (!p_180538_1_.hasWorldObj())
 		{
 			j = 0;
@@ -79,7 +79,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 		}
 
 		GlStateManager.translate((float) p_180538_2_, (float) p_180538_4_ + 1.0F, (float) p_180538_6_ + 1.0F);
-		
+
 		GlStateManager.scale(1.0F, -1.0F, -1.0F);
 		GlStateManager.translate(0.5F, 0.5F, 0.5F);
 		short short1 = 0;

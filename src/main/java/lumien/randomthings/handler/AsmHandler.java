@@ -15,6 +15,7 @@ import lumien.randomthings.config.Features;
 import lumien.randomthings.handler.compability.chisel.ChiselModelWrapper;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import net.minecraft.block.Block;
@@ -33,6 +34,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.BlockPos.MutableBlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -61,6 +63,11 @@ public class AsmHandler
 			}
 		}
 		return 16777215;
+	}
+
+	public static boolean shouldRain(World worldObj, BlockPos pos)
+	{
+		return TileEntityRainShield.shouldRain(worldObj, pos.add(0,-pos.getY(),0));
 	}
 
 	public static int getColorFromArmorStack(ItemStack is)

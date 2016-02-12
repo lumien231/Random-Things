@@ -99,6 +99,10 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchItemArmor(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer"))
+		{
+			return patchEntityRenderer(basicClass);
+		}
 		return basicClass;
 	}
 
@@ -325,7 +329,7 @@ public class ClassTransformer implements IClassTransformer
 		if (renderItem != null)
 		{
 			boolean found = false;
-			logger.log(Level.DEBUG, "- Found renderItem (2/2) ("+renderItem.desc+")");
+			logger.log(Level.DEBUG, "- Found renderItem (2/2) (" + renderItem.desc + ")");
 
 			for (int i = 0; i < renderItem.instructions.size(); i++)
 			{
@@ -624,6 +628,7 @@ public class ClassTransformer implements IClassTransformer
 
 		MethodNode getRedstonePower = null;
 		MethodNode getStrongPower = null;
+		MethodNode isRainingAt = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
@@ -634,6 +639,10 @@ public class ClassTransformer implements IClassTransformer
 			else if (mn.name.equals(MCPNames.method("func_175676_y")))
 			{
 				getStrongPower = mn;
+			}
+			else if (mn.name.equals(MCPNames.method("func_175727_C")))
+			{
+				isRainingAt = mn;
 			}
 		}
 
@@ -677,6 +686,26 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new InsnNode(POP));
 
 			getRedstonePower.instructions.insert(toInsert);
+		}
+
+		if (isRainingAt != null)
+		{
+			logger.log(Level.DEBUG, "- Found isRainingAt");
+			
+			AbstractInsnNode returnNode = isRainingAt.instructions.get(isRainingAt.instructions.size()-2);
+			
+			InsnList toInsert = new InsnList();
+			LabelNode returnLabel = new LabelNode(new Label());
+			
+			toInsert.add(new InsnNode(Opcodes.DUP));
+			toInsert.add(new JumpInsnNode(IFEQ, returnLabel));
+			toInsert.add(new InsnNode(POP));
+			toInsert.add(new VarInsnNode(ALOAD, 0));
+			toInsert.add(new VarInsnNode(ALOAD, 1));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Z", false));
+			toInsert.add(returnLabel);
+			
+			isRainingAt.instructions.insertBefore(returnNode, toInsert);
 		}
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -723,6 +752,108 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new InsnNode(POP));
 
 			getColor.instructions.insert(toInsert);
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
+	}
+
+	private byte[] patchEntityRenderer(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found EntityRenderer Class: " + classNode.name);
+
+		MethodNode renderRainSnow = null;
+		MethodNode addRainParticles = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_78474_d")))
+			{
+				renderRainSnow = mn;
+			}
+			else if (mn.name.equals(MCPNames.method("func_78484_h")))
+			{
+				addRainParticles = mn;
+			}
+		}
+
+		if (renderRainSnow != null)
+		{
+			logger.log(Level.DEBUG, "- Found renderRainSnow");
+
+			VarInsnNode insnPoint = null;
+			for (int i = 0; i < renderRainSnow.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = renderRainSnow.instructions.get(i);
+				if (ain instanceof MethodInsnNode)
+				{
+					MethodInsnNode min = (MethodInsnNode) ain;
+
+					if (min.name.equals(MCPNames.method("func_76738_d")))
+					{
+						logger.log(Level.DEBUG, "- Found canRain");
+
+						insnPoint = (VarInsnNode) renderRainSnow.instructions.get(i - 1);
+					}
+
+					if (min.name.equals(MCPNames.method("func_76746_c")))
+					{
+						logger.log(Level.DEBUG, "- Found getEnableSnow");
+						int jumpCounter = i + 1;
+
+						AbstractInsnNode jumpNode;
+
+						while (!((jumpNode = renderRainSnow.instructions.get(jumpCounter)) instanceof JumpInsnNode))
+						{
+							jumpCounter++;
+						}
+
+						JumpInsnNode jin = (JumpInsnNode) jumpNode;
+						LabelNode labelNode = jin.label;
+
+						InsnList toInsert = new InsnList();
+						toInsert.add(new VarInsnNode(ALOAD, 5));
+						toInsert.add(new VarInsnNode(ALOAD, 21));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Z", false));
+						toInsert.add(new JumpInsnNode(IFEQ, labelNode));
+						renderRainSnow.instructions.insertBefore(insnPoint, toInsert);
+						i += 4;
+					}
+				}
+			}
+		}
+
+		if (addRainParticles != null)
+		{
+			logger.log(Level.DEBUG, "- Found addRainParticles");
+
+			for (int i = 0; i < addRainParticles.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = addRainParticles.instructions.get(i);
+				if (ain instanceof JumpInsnNode)
+				{
+					JumpInsnNode jin = (JumpInsnNode) ain;
+					if (jin.getOpcode() == Opcodes.IF_ICMPGT)
+					{
+						LabelNode jumpTarget = jin.label;
+
+						InsnList toInsert = new InsnList();
+						toInsert.add(new VarInsnNode(ALOAD, 3));
+						toInsert.add(new VarInsnNode(ALOAD, 15));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Z", false));
+						toInsert.add(new JumpInsnNode(IFEQ, jumpTarget));
+
+						addRainParticles.instructions.insert(jin, toInsert);
+
+						break;
+					}
+				}
+			}
 		}
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);

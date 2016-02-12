@@ -29,10 +29,11 @@ public class ModTileEntitys
 		registerTE(TileEntityEntityDetector.class, "entityDetector");
 		registerTE(TileEntityPotionVaporizer.class, "potionVaporizer");
 		registerTE(TileEntityVoxelProjector.class, "voxelProjector");
-		registerTE(TileEntityEnderAnchor.class,"enderAnchor");
-		
+		registerTE(TileEntityEnderAnchor.class, "enderAnchor");
+		registerTE(TileEntityRainShield.class, "rainShield");
+
 		registerTE(TileEntityItemCollector.class, "itemCollector");
-		registerTE(TileEntityAdvancedItemCollector.class,"advancedItemCollector");
+		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");
 	}
 
 	private static void registerTE(Class<? extends TileEntity> clazz, String name)
