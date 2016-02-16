@@ -41,6 +41,7 @@ public class ModBlocks
 	public static BlockVoxelProjector voxelProjector;
 	public static BlockSakanade sakanade;
 	public static BlockRainShield rainShield;
+	public static BlockBlockBreaker blockBreaker;
 	
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
@@ -94,6 +95,7 @@ public class ModBlocks
 		contactLever = new BlockContactLever();
 		sakanade = new BlockSakanade();
 		rainShield = new BlockRainShield();
+		blockBreaker = new BlockBlockBreaker();
 		
 		itemCollector = new BlockItemCollector();
 		advancedItemCollector = new BlockAdvancedItemCollector();

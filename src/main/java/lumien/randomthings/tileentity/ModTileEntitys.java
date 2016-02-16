@@ -31,6 +31,7 @@ public class ModTileEntitys
 		registerTE(TileEntityVoxelProjector.class, "voxelProjector");
 		registerTE(TileEntityEnderAnchor.class, "enderAnchor");
 		registerTE(TileEntityRainShield.class, "rainShield");
+		registerTE(TileEntityBlockBreaker.class,"blockBreaker");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");
