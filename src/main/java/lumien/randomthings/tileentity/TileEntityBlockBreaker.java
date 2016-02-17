@@ -28,10 +28,11 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 	UUID uuid;
 
 	boolean mining;
+	boolean canMine;
 
 	WeakReference<FakePlayer> fakePlayer;
 
-	float curBlockDamageMP;
+	float curBlockDamage;
 
 	@Override
 	public void onLoad()
@@ -47,7 +48,12 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 			}
 
 			fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) worldObj, new GameProfile(null, "RTBlockBreaker")));
-			fakePlayer.get().setCurrentItemOrArmor(0, new ItemStack(Items.iron_pickaxe, 1, -1));
+
+			ItemStack unbreakingIronPickaxe = new ItemStack(Items.iron_pickaxe, 1);
+			unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
+			unbreakingIronPickaxe.getTagCompound().setBoolean("Unbreakable", true);
+
+			fakePlayer.get().setCurrentItemOrArmor(0, unbreakingIronPickaxe);
 			fakePlayer.get().onGround = true;
 
 			fakePlayer.get().playerNetServerHandler = new NetHandlerPlayServer(MinecraftServer.getServer(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
@@ -72,14 +78,14 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 
 				IBlockState targetState = worldObj.getBlockState(targetPos);
 
-				this.curBlockDamageMP += targetState.getBlock().getPlayerRelativeBlockHardness(fakePlayer.get(), worldObj, targetPos);
+				this.curBlockDamage += targetState.getBlock().getPlayerRelativeBlockHardness(fakePlayer.get(), worldObj, targetPos);
 
-				if (curBlockDamageMP >= 1.0f)
+				if (curBlockDamage >= 1.0f)
 				{
 					mining = false;
-					curBlockDamageMP = 0;
-
-					worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, -1);
+					
+					resetProgress();
+					
 					if (fakePlayer.get() != null)
 					{
 						fakePlayer.get().theItemInWorldManager.tryHarvestBlock(targetPos);
@@ -87,7 +93,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 				}
 				else
 				{
-					worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, (int) (this.curBlockDamageMP * 10.0F) - 1);
+					worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, (int) (this.curBlockDamage * 10.0F) - 1);
 				}
 			}
 		}
@@ -100,6 +106,10 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		{
 			compound.setString("uuid", uuid.toString());
 		}
+
+		compound.setBoolean("mining", mining);
+		compound.setBoolean("canMine", canMine);
+		compound.setFloat("curBlockDamage", curBlockDamage);
 	}
 
 	@Override
@@ -109,22 +119,56 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		{
 			uuid = UUID.fromString(compound.getString("uuid"));
 		}
+
+		mining = compound.getBoolean("mining");
+		canMine = compound.getBoolean("canMine");
+		curBlockDamage = compound.getFloat("curBlockDamage");
 	}
 
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
 		BlockPos targetPos = pos.offset(state.getValue(BlockBlockBreaker.FACING));
+		
+		canMine = !(worldIn.isBlockIndirectlyGettingPowered(pos)>0);
 
 		IBlockState targetState = worldIn.getBlockState(targetPos);
 
-		if (!worldIn.isAirBlock(targetPos))
+		if (canMine)
 		{
-			mining = true;
-			curBlockDamageMP = 0;
+			if (!worldIn.isAirBlock(targetPos))
+			{
+				mining = true;
+				curBlockDamage = 0;
+			}
+			else
+			{
+				mining = false;
+				resetProgress();
+			}
 		}
 		else
 		{
-			mining = false;
+			if (mining)
+			{
+				mining = false;
+				resetProgress();
+			}
 		}
+	}
+
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (mining && uuid != null)
+		{
+			resetProgress();
+		}
+	}
+
+	private void resetProgress()
+	{
+		BlockPos targetPos = pos.offset(worldObj.getBlockState(pos).getValue(BlockBlockBreaker.FACING));
+		worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, -1);
+		
+		curBlockDamage = 0;
 	}
 }

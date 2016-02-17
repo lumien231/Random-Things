@@ -57,6 +57,7 @@ public class ItemModels
 		registerBlock(ModBlocks.contactLever);
 		registerBlock(ModBlocks.sakanade);
 		registerBlock(ModBlocks.rainShield);
+		registerBlock(ModBlocks.blockBreaker);
 		
 		registerBlock(ModBlocks.itemCollector);
 		registerBlock(ModBlocks.advancedItemCollector);

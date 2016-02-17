@@ -26,6 +26,15 @@ public class BlockBlockBreaker extends BlockContainerBase
 	public BlockBlockBreaker()
 	{
 		super("blockBreaker", Material.rock);
+		
+		this.setHardness(3.5F);
+	}
+	
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		((TileEntityBlockBreaker) worldIn.getTileEntity(pos)).breakBlock(worldIn, pos, state);
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
@@ -45,6 +54,8 @@ public class BlockBlockBreaker extends BlockContainerBase
 	{
 		super.onBlockAdded(worldIn, pos, state);
 		this.setDefaultDirection(worldIn, pos, state);
+		
+		((TileEntityBlockBreaker) worldIn.getTileEntity(pos)).onNeighborBlockChange(worldIn, pos, state, null);
 	}
 
 	private void setDefaultDirection(World worldIn, BlockPos pos, IBlockState state)

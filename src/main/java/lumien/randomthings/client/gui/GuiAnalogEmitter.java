@@ -27,7 +27,7 @@ public class GuiAnalogEmitter extends GuiContainer
 	{
 		super(new ContainerEmptyContainer(player, world, x, y, z));
 
-		this.xSize = 77;
+		this.xSize = 78;
 		this.ySize = 50;
 		analogEmitter = (TileEntityAnalogEmitter) world.getTileEntity(new BlockPos(x, y, z));
 	}
