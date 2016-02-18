@@ -78,16 +78,19 @@ public class WorldUtil
 				{
 					for (int y = minChunkY; y <= maxChunkY; y++)
 					{
-						Vec3i chunkVec = new Vec3i(x, y, z);
-
-						ArrayList<AxisAlignedBB> boxList = boxMap.get(chunkVec);
-						if (boxList == null)
+						if (y >= 0 && y < worldObj.getHeight() / 16)
 						{
-							boxList = new ArrayList<AxisAlignedBB>();
-							boxMap.put(chunkVec, boxList);
-						}
+							Vec3i chunkVec = new Vec3i(x, y, z);
 
-						boxList.add(bb);
+							ArrayList<AxisAlignedBB> boxList = boxMap.get(chunkVec);
+							if (boxList == null)
+							{
+								boxList = new ArrayList<AxisAlignedBB>();
+								boxMap.put(chunkVec, boxList);
+							}
+
+							boxList.add(bb);
+						}
 					}
 				}
 			}
