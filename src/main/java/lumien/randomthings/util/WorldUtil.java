@@ -35,6 +35,11 @@ public class WorldUtil
 			e.setPositionAndUpdate(posX, posY, posZ);
 		}
 	}
+	
+	public static boolean isValidPosition(BlockPos pos)
+	{
+		return pos.getX() >= -30000000 && pos.getZ() >= -30000000 && pos.getX() < 30000000 && pos.getZ() < 30000000 && pos.getY() >= 0 && pos.getY() < 256;
+	}
 
 	public static BlockPos getHeighestPos(World worldObj, int x, int z)
 	{

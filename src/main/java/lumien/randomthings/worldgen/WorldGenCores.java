@@ -8,6 +8,7 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.util.BlockPattern;
 import lumien.randomthings.util.InventoryUtil;
+import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockOldLog;
@@ -195,6 +196,13 @@ public class WorldGenCores implements IWorldGenerator
 								for (int modY = 0; modY < 3; modY++)
 								{
 									BlockPos check = new BlockPos(target.getX() + modX, target.getY() + modY, target.getZ() + modZ);
+									
+									if (!WorldUtil.isValidPosition(check))
+									{
+										canPlaceCore = false;
+										break;
+									}
+									
 									if (!world.isAirBlock(check.down()) && world.isSideSolid(check.down(), EnumFacing.UP))
 									{
 										if (!(world.isAirBlock(check) || world.getBlockState(check).getBlock().isReplaceable(world, check)))
