@@ -204,7 +204,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 				{
 					List<PotionEffect> effects = Items.potionitem.getEffects(newPotion);
 
-					if (effects != null && !effects.isEmpty())
+					if (effects != null && !effects.isEmpty() && !Potion.potionTypes[effects.get(0).getPotionID()].isInstant())
 					{
 						currentPotionEffect = new PotionEffect(effects.get(0));
 						durationLeft = currentPotionEffect.getDuration();
