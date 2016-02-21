@@ -6,12 +6,13 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import lumien.randomthings.config.Numbers;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.BlockPos.MutableBlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 
 public class TileEntityRainShield extends TileEntityBase
@@ -29,6 +30,8 @@ public class TileEntityRainShield extends TileEntityBase
 
 	int currentRange;
 
+	boolean active = true;
+
 	public TileEntityRainShield()
 	{
 		synchronized (shields)
@@ -42,19 +45,26 @@ public class TileEntityRainShield extends TileEntityBase
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)
 	{
-
+		compound.setBoolean("active", active);
 	}
 
 	@Override
 	public void readDataFromNBT(NBTTagCompound compound)
 	{
-
+		if (!compound.hasKey("active"))
+		{
+			this.active = true;
+		}
+		else
+		{
+			this.active = compound.getBoolean("active");
+		}
 	}
-	
+
 	@Override
 	public boolean writeNBTToDescriptionPacket()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -80,7 +90,7 @@ public class TileEntityRainShield extends TileEntityBase
 		{
 			for (TileEntityRainShield rainShield : shields)
 			{
-				if (rainShield.worldObj == worldObj && !rainShield.isInvalid() && rainShield.getPos().add(0, -rainShield.getPos().getY(), 0).distanceSq(pos) < (Numbers.RAIN_SHIELD_RANGE) * (Numbers.RAIN_SHIELD_RANGE))
+				if (rainShield.active && rainShield.worldObj == worldObj && !rainShield.isInvalid() && rainShield.getPos().add(0, -rainShield.getPos().getY(), 0).distanceSq(pos) < (Numbers.RAIN_SHIELD_RANGE) * (Numbers.RAIN_SHIELD_RANGE))
 				{
 					rainCache.put(pos, Boolean.FALSE);
 					return false;
@@ -90,5 +100,21 @@ public class TileEntityRainShield extends TileEntityBase
 
 		rainCache.put(pos, Boolean.TRUE);
 		return true;
+	}
+
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	{
+		this.active = !(worldIn.isBlockIndirectlyGettingPowered(pos) > 0);
+	}
+
+	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state2, Block neighborBlock)
+	{
+		boolean desiredState = !(worldIn.isBlockIndirectlyGettingPowered(pos) > 0);
+
+		if (desiredState != this.active)
+		{
+			this.active = desiredState;
+			this.worldObj.markBlockForUpdate(this.pos);
+		}
 	}
 }

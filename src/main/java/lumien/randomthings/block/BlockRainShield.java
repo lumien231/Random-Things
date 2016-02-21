@@ -2,6 +2,7 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import lumien.randomthings.tileentity.TileEntityBlockBreaker;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,6 +32,9 @@ public class BlockRainShield extends BlockContainerBase
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         this.checkForDrop(worldIn, pos, state);
+        
+        TileEntityRainShield te = (TileEntityRainShield) worldIn.getTileEntity(pos);
+        te.onBlockAdded(worldIn,pos,state);
     }
 
 	@Override
@@ -85,6 +90,7 @@ public class BlockRainShield extends BlockContainerBase
 	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
+		((TileEntityRainShield) worldIn.getTileEntity(pos)).onNeighborBlockChange(worldIn, pos, state, neighborBlock);
 		checkForDrop(worldIn, pos, state);
 	}
 	
