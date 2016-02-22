@@ -88,17 +88,22 @@ public class BlockBeanStalk extends BlockBase
 					return;
 				}
 			}
-			if (!worldIn.isAirBlock(pos.up()))
+
+			if (worldIn.getBlockState(pos.up()).getBlock().getBlockHardness(worldIn, pos.up()) != -1)
 			{
-				worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), worldIn.getBlockState(pos.up()).getBlock().stepSound.getBreakSound(), 1, 1f);
+				if (!worldIn.isAirBlock(pos.up()))
+				{
+					worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), worldIn.getBlockState(pos.up()).getBlock().stepSound.getBreakSound(), 1, 1f);
+				}
+				else
+				{
+					worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), this.stepSound.getBreakSound(), 1, 2);
+				}
+				
+				worldIn.playAuxSFX(2005, pos.up(), 0);
+				worldIn.setBlockState(pos.up(), this.getDefaultState());
+				worldIn.scheduleUpdate(pos.up(), this, strongMagic ? 1 : 5);
 			}
-			else
-			{
-				worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), this.stepSound.getBreakSound(), 1, 2);
-			}
-			worldIn.playAuxSFX(2005, pos.up(), 0);
-			worldIn.setBlockState(pos.up(), this.getDefaultState());
-			worldIn.scheduleUpdate(pos.up(), this, strongMagic ? 1 : 5);
 		}
 	}
 
