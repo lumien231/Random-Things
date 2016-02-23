@@ -115,21 +115,24 @@ public class GuiEntityDetector extends GuiContainer
 
 		String radiusZ = I18n.format("gui.entityDetector.radiusZ", entityDetector.getRangeZ());
 		fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2 - 3, 76, 4210752);
-		
+
 		ItemStack filter;
 		if ((filter = this.entityDetector.getInventory().getStackInSlot(0)) != null)
 		{
 			Class clazz = ItemEntityFilter.getEntityClass(filter);
-			
-			String filterClazz = clazz.getSimpleName();
-			
-			if (filterClazz.startsWith("Entity"))
+
+			if (clazz != null)
 			{
-				filterClazz = filterClazz.substring(6);
+				String filterClazz = clazz.getSimpleName();
+
+				if (filterClazz.startsWith("Entity"))
+				{
+					filterClazz = filterClazz.substring(6);
+				}
+				fontRendererObj.drawString(filterClazz, 100, 126, 4210752);
 			}
-			fontRendererObj.drawString(filterClazz, 100, 126, 4210752);
 		}
-		
+
 		if (this.entityDetector.getFilter() == FILTER.CUSTOM)
 		{
 			this.mc.renderEngine.bindTexture(background);
