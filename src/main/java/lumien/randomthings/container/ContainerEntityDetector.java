@@ -70,7 +70,7 @@ public class ContainerEntityDetector extends Container
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 < 3)
+			if (par2 < 1)
 			{
 				if (!this.mergeItemStack(itemstack1, 1, 37, true))
 				{
