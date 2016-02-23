@@ -29,7 +29,7 @@ dependencies {
     deobfCompile "mezz.jei:jei_1.8.9:2.25.7.145"
 }
 
-version = "3.6.2"
+version = "3.6.3"
 group= "lumien.randomthings"
 archivesBaseName = "RandomThings-MC1.8.9"
 
