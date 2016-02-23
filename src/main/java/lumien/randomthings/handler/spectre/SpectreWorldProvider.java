@@ -1,4 +1,4 @@
-package lumien.randomthings.worldgen.spectre;
+package lumien.randomthings.handler.spectre;
 
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
@@ -70,7 +70,7 @@ public class SpectreWorldProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z)
 	{
-		return true;
+		return false;
 	}
 
 	@Override

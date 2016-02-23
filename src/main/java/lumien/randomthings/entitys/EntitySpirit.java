@@ -3,6 +3,8 @@ package lumien.randomthings.entitys;
 import java.awt.Color;
 import java.util.Random;
 
+import io.netty.buffer.ByteBuf;
+import lumien.randomthings.config.Numbers;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
@@ -17,12 +19,15 @@ import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntitySpirit extends EntityFlying
 {
@@ -32,6 +37,8 @@ public class EntitySpirit extends EntityFlying
 
 	int changePositionCounter = 0;
 
+	int spiritAge;
+
 	public EntitySpirit(World worldIn)
 	{
 		super(worldIn);
@@ -40,7 +47,53 @@ public class EntitySpirit extends EntityFlying
 
 		this.moveHelper = new SpiritMoveHelper(this);
 	}
+
+	public EntitySpirit(World worldIn, double posX, double posY, double posZ)
+	{
+		this(worldIn);
+		this.setPosition(posX, posY, posZ);
+	}
 	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tagCompund)
+	{
+		super.readEntityFromNBT(tagCompund);
+		
+		this.spiritAge = tagCompund.getInteger("spiritAge");
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tagCompound)
+	{
+		super.writeEntityToNBT(tagCompound);
+		
+		tagCompound.setInteger("spiritAge", spiritAge);
+	}
+
+	@Override
+	public void onLivingUpdate()
+	{
+		super.onLivingUpdate();
+
+		spiritAge++;
+
+		if (!this.worldObj.isRemote && spiritAge > Numbers.SPIRIT_LIFETIME)
+		{
+			this.onKillCommand();
+		}
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount)
+	{
+		if (!source.isMagicDamage() && source != DamageSource.outOfWorld && !source.isCreativePlayer())
+		{
+			return false;
+		}
+
+		return super.attackEntityFrom(source, amount);
+	}
+
 	@Override
 	protected void applyEntityAttributes()
 	{
@@ -106,16 +159,19 @@ public class EntitySpirit extends EntityFlying
 	@Override
 	protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier)
 	{
-		int i = this.rand.nextInt(3);
-
-		if (lootingModifier > 0)
+		if (wasRecentlyHit)
 		{
-			i += this.rand.nextInt(lootingModifier + 1);
-		}
+			int i = 1;
 
-		for (int j = 0; j < i; ++j)
-		{
-			this.entityDropItem(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.ECTO_PLASM.id), 0);
+			if (rand.nextInt(5) == 0)
+			{
+				i += 1;
+			}
+
+			for (int j = 0; j < i; ++j)
+			{
+				this.entityDropItem(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.ECTO_PLASM.id), 0);
+			}
 		}
 	}
 
@@ -128,7 +184,7 @@ public class EntitySpirit extends EntityFlying
 		{
 			if (Math.random() < 0.5)
 			{
-				this.worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, this.posX, this.posY, this.posZ, Math.random() * 0.02 - 0.01, Math.random() * 0.02, Math.random() * 0.02 - 0.01);
+				this.worldObj.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, this.posX, this.posY, this.posZ, Math.random() * 0.02 - 0.01, Math.random() * 0.02, Math.random() * 0.02 - 0.01);
 			}
 		}
 	}
@@ -146,7 +202,7 @@ public class EntitySpirit extends EntityFlying
 
 		public void onUpdateMoveHelper()
 		{
-			parentEntity.getLookHelper().setLookPosition(parentEntity.posX, parentEntity.posY, parentEntity.posZ-1, 10f, parentEntity.getVerticalFaceSpeed());
+			parentEntity.getLookHelper().setLookPosition(parentEntity.posX, parentEntity.posY, parentEntity.posZ - 1, 10f, parentEntity.getVerticalFaceSpeed());
 			if (this.update)
 			{
 				double d0 = this.posX - this.parentEntity.posX;

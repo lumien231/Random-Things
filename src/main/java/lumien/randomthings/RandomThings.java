@@ -8,6 +8,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.entitys.ModEntitys;
+import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.RTEventHandler;
 import lumien.randomthings.handler.magicavoxel.ModelHandler;
 import lumien.randomthings.item.ModItems;
@@ -18,7 +19,6 @@ import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.ModRecipes;
 import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.tileentity.TileEntityEnderAnchor;
-import lumien.randomthings.worldgen.ModDimensions;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenPlants;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,6 +39,7 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -106,6 +107,12 @@ public class RandomThings implements LoadingCallback
 	{
 		modelHandler.load();
 		proxy.registerRenderers();
+	}
+	
+	@EventHandler
+	public void serverStarting(FMLServerStartingEvent event)
+	{
+		// event.registerServerCommand(new RTCommand()); DEBUG
 	}
 
 	public ASMDataTable getASMData()

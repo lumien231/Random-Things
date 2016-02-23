@@ -25,8 +25,6 @@ public class MessageUtil
 			getInstanceMethod = PlayerManager.class.getDeclaredMethod(MCPNames.method("func_72690_a"), int.class, int.class, boolean.class);
 			getInstanceMethod.setAccessible(true);
 
-
-
 			sendMethod = playerInstanceClass.getDeclaredMethod(MCPNames.method("func_151251_a"), Packet.class);
 			sendMethod.setAccessible(true);
 		}

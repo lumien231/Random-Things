@@ -1,5 +1,7 @@
 package lumien.randomthings.item;
 
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
 import lumien.randomthings.worldgen.SingleRandomChestContent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,8 +12,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.common.Optional;
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
 
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "Baubles")
 public class ItemLavaCharm extends ItemBase implements IBauble

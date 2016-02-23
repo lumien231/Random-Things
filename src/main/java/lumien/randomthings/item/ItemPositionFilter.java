@@ -2,16 +2,16 @@ package lumien.randomthings.item;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import org.lwjgl.input.Keyboard;
 
 public class ItemPositionFilter extends ItemBase
 {
@@ -70,8 +70,8 @@ public class ItemPositionFilter extends ItemBase
 		return positionFilter.getTagCompound().getInteger("dimension");
 	}
 
-	public static Vec3 getPosition(ItemStack positionFilter)
+	public static BlockPos getPosition(ItemStack positionFilter)
 	{
-		return new Vec3(positionFilter.getTagCompound().getInteger("filterX"), positionFilter.getTagCompound().getInteger("filterY"), positionFilter.getTagCompound().getInteger("filterZ"));
+		return new BlockPos(positionFilter.getTagCompound().getInteger("filterX"), positionFilter.getTagCompound().getInteger("filterY"), positionFilter.getTagCompound().getInteger("filterZ"));
 	}
 }

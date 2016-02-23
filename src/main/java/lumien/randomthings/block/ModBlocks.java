@@ -55,6 +55,8 @@ public class ModBlocks
 
 	public static BlockBeanStalk beanStalk;
 	public static BlockBeanStalk lesserBeanStalk;
+	
+	public static BlockSpectreCore spectreCore;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -108,5 +110,7 @@ public class ModBlocks
 		biomeGlass = new BlockBiomeGlass();
 		stainedBrick = new BlockStainedBrick();
 		coloredGrass = new BlockColoredGrass();
+		
+		spectreCore = new BlockSpectreCore();
 	}
 }

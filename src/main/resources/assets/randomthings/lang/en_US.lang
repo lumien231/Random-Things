@@ -38,6 +38,7 @@ tile.contactLever.name=Contact Lever
 tile.sakanade.name=Sakanade
 tile.rainShield.name=Rain Shield
 tile.blockBreaker.name=Block Breaker
+tile.spectreCore.name=Spectre Core
 
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector
@@ -118,6 +119,7 @@ item.rezStone.name=Blood Stone
 item.enderLetter.name=Ender Letter
 item.entityFilter.name=Entity Filter
 item.itemFilter.name=Item Filter
+item.spectreKey.name=Spectre Key
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -151,6 +153,7 @@ item.imbue.collapse.name=Collapse Imbue
 item.ingredient.sakanadeSpores.name=Sakanade Spores
 item.ingredient.evilTear.name=Evil Tear
 item.ingredient.ectoPlasm.name=Ectoplasm
+item.ingredient.spectreIngot.name=Spectre Ingot
 
 tooltip.general.shift=Hold §6Shift§7 for more information
 tooltip.positionFilter.dimension=Dimension: %d

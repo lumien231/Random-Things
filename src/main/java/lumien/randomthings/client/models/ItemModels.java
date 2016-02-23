@@ -58,6 +58,7 @@ public class ItemModels
 		registerBlock(ModBlocks.sakanade);
 		registerBlock(ModBlocks.rainShield);
 		registerBlock(ModBlocks.blockBreaker);
+		registerBlock(ModBlocks.spectreCore);
 		
 		registerBlock(ModBlocks.itemCollector);
 		registerBlock(ModBlocks.advancedItemCollector);
@@ -84,6 +85,7 @@ public class ItemModels
 		registerItem(ModItems.enderLetter);
 		registerItem(ModItems.entityFilter);
 		registerItem(ModItems.itemFilter);
+		registerItem(ModItems.spectreKey);
 		// registerItem(ModItems.craftingRecipe);
 
 		registerBricks();

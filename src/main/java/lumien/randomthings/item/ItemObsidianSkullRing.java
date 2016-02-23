@@ -1,10 +1,10 @@
 package lumien.randomthings.item;
 
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Optional;
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
 
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "Baubles")
 public class ItemObsidianSkullRing extends ItemBase implements IBauble

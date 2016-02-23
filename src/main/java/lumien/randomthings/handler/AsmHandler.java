@@ -14,6 +14,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.handler.compability.chisel.ChiselModelWrapper;
 import lumien.randomthings.item.ItemRedstoneTool;
+import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
@@ -34,7 +35,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraft.util.BlockPos.MutableBlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
@@ -209,6 +209,11 @@ public class AsmHandler
 			if (currentlyRendering.getItem() instanceof ItemRedstoneTool)
 			{
 				return Color.RED.darker().getRGB() | -16777216;
+			}
+			
+			if (currentlyRendering.getItem() instanceof ItemSpectreKey)
+			{
+				return Color.CYAN.darker().getRGB() | -16777216;
 			}
 
 			NBTTagCompound compound;

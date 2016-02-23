@@ -1,6 +1,9 @@
-package lumien.randomthings.worldgen.spectre;
+package lumien.randomthings.handler.spectre;
 
+import java.util.Arrays;
 import java.util.List;
+
+import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.BlockPos;
@@ -74,13 +77,13 @@ public class SpectreChunkProvider implements IChunkProvider
 	@Override
 	public String makeString()
 	{
-		return null;
+		return "Spectre";
 	}
 
 	@Override
 	public List getPossibleCreatures(EnumCreatureType p_177458_1_, BlockPos p_177458_2_)
 	{
-		return null;
+		return ImmutableList.of();
 	}
 
 	@Override

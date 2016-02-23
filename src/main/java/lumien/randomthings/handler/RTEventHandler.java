@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.logging.log4j.Level;
+
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockContactButton;
 import lumien.randomthings.block.BlockContactLever;
@@ -13,11 +15,15 @@ import lumien.randomthings.block.BlockLifeAnchor;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
 import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
+import lumien.randomthings.config.Numbers;
 import lumien.randomthings.entitys.EntitySoul;
+import lumien.randomthings.entitys.EntitySpirit;
+import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.ItemEntityFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
+import lumien.randomthings.lib.IExplosionImmune;
 import lumien.randomthings.lib.PlayerAbilitiesProperty;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.anvil.AnvilRecipe;
@@ -41,10 +47,10 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.BossStatus;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -62,15 +68,14 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.client.GuiIngameForge;
+import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.client.GuiIngameForge;
-import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.ServerChatEvent;
@@ -83,8 +88,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -92,8 +97,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.apache.logging.log4j.Level;
 
 public class RTEventHandler
 {
@@ -113,6 +116,22 @@ public class RTEventHandler
 	}
 
 	@SubscribeEvent
+	public void explosionDetonate(ExplosionEvent.Detonate event)
+	{
+		Iterator<BlockPos> iterator = event.getAffectedBlocks().iterator();
+
+		while (iterator.hasNext())
+		{
+			BlockPos pos = iterator.next();
+
+			if (event.world.getBlockState(pos).getBlock() instanceof IExplosionImmune)
+			{
+				iterator.remove();
+			}
+		}
+	}
+
+	@SubscribeEvent
 	public void tick(TickEvent tickEvent)
 	{
 		if ((tickEvent.type == TickEvent.Type.CLIENT || tickEvent.type == TickEvent.Type.SERVER) && tickEvent.phase == TickEvent.Phase.END)
@@ -126,6 +145,7 @@ public class RTEventHandler
 	public void renderLiving(RenderLivingEvent.Pre<EntityLivingBase> event)
 	{
 		final EntityLivingBase entity = event.entity;
+
 		if (event.entity.isPotionActive(ModPotions.boss))
 		{
 			IBossDisplayData displayData = new IBossDisplayData()
@@ -450,7 +470,7 @@ public class RTEventHandler
 	{
 		if (!event.entityLiving.worldObj.isRemote)
 		{
-			if (event.ammount > 0 && event.entityLiving instanceof EntityPlayerMP)
+			if (!event.isCanceled() && event.ammount > 0 && event.entityLiving instanceof EntityPlayerMP)
 			{
 				EntityPlayerMP player = (EntityPlayerMP) event.entityLiving;
 
@@ -622,6 +642,16 @@ public class RTEventHandler
 				{
 					player.heal(0.5F);
 				}
+
+				if (player.dimension == ModDimensions.SPECTRE_ID)
+				{
+					SpectreHandler spectreHandler;
+
+					if ((spectreHandler = SpectreHandler.getInstance()) != null)
+					{
+						spectreHandler.checkPosition((EntityPlayerMP) player);
+					}
+				}
 			}
 		}
 		else
@@ -677,6 +707,40 @@ public class RTEventHandler
 	{
 		if (!event.entityLiving.worldObj.isRemote)
 		{
+			if (event.entityLiving instanceof EntityDragon)
+			{
+				RTWorldInformation rtInfo = RTWorldInformation.getInstance();
+				if (rtInfo != null)
+				{
+					rtInfo.setEnderDragonDefeated(true);
+				}
+			}
+
+			if (event.source.getEntity() != null && !(event.source.getEntity() instanceof FakePlayer) && event.source.getEntity() instanceof EntityPlayer && !(event.entity instanceof EntitySpirit))
+			{
+				double chance = Numbers.SPIRIT_CHANCE_NORMAL;
+
+				RTWorldInformation rtInfo = RTWorldInformation.getInstance();
+
+				if (rtInfo != null)
+				{
+					if (rtInfo.isDragonDefeated())
+					{
+						chance += Numbers.SPIRIT_CHANCE_END_INCREASE;
+					}
+				}
+
+				if (event.entityLiving.worldObj.canBlockSeeSky(event.entityLiving.getPosition()) && !event.entityLiving.worldObj.isDaytime())
+				{
+					chance += event.entityLiving.worldObj.getCurrentMoonPhaseFactor() / 100f * Numbers.SPIRIT_CHANCE_MOON_MULT;
+				}
+
+				if (Math.random() < chance)
+				{
+					event.entityLiving.worldObj.spawnEntityInWorld(new EntitySpirit(event.entityLiving.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ));
+				}
+			}
+
 			if (event.entityLiving instanceof EntityPlayer)
 			{
 				if (!(event.entityLiving instanceof FakePlayer))

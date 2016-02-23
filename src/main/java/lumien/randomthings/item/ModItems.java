@@ -31,6 +31,7 @@ public class ModItems
 	public static ItemEntityFilter entityFilter;
 	public static ItemIngredient ingredients;
 	public static ItemItemFilter itemFilter;
+	public static ItemSpectreKey spectreKey;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -60,6 +61,7 @@ public class ModItems
 		entityFilter = new ItemEntityFilter();
 		ingredients = new ItemIngredient();
 		itemFilter = new ItemItemFilter();
+		spectreKey = new ItemSpectreKey();
 
 		grassSeeds = new ItemGrassSeeds();
 	}

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "orientation=nw": { "model": "randomthings:spectreCore/spectreCore_nw" },
+        "orientation=ne": { "model": "randomthings:spectreCore/spectreCore_ne" },
+        "orientation=es": { "model": "randomthings:spectreCore/spectreCore_es" },
+        "orientation=sw": { "model": "randomthings:spectreCore/spectreCore_sw" }
+    }
+}

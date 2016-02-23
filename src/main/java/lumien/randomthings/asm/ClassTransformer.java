@@ -691,12 +691,12 @@ public class ClassTransformer implements IClassTransformer
 		if (isRainingAt != null)
 		{
 			logger.log(Level.DEBUG, "- Found isRainingAt");
-			
-			AbstractInsnNode returnNode = isRainingAt.instructions.get(isRainingAt.instructions.size()-2);
-			
+
+			AbstractInsnNode returnNode = isRainingAt.instructions.get(isRainingAt.instructions.size() - 2);
+
 			InsnList toInsert = new InsnList();
 			LabelNode returnLabel = new LabelNode(new Label());
-			
+
 			toInsert.add(new InsnNode(Opcodes.DUP));
 			toInsert.add(new JumpInsnNode(IFEQ, returnLabel));
 			toInsert.add(new InsnNode(POP));
@@ -704,7 +704,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new VarInsnNode(ALOAD, 1));
 			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Z", false));
 			toInsert.add(returnLabel);
-			
+
 			isRainingAt.instructions.insertBefore(returnNode, toInsert);
 		}
 
