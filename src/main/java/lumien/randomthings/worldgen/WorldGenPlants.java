@@ -26,7 +26,7 @@ public class WorldGenPlants implements IWorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null && world.isAirBlock(target) && (!world.provider.getHasNoSky() || target.getY() < 255) && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
+				if (target != null && target.getY() > 0 && world.isAirBlock(target) && (!world.provider.getHasNoSky() || target.getY() < 255) && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
 				{
 					world.setBlockState(target, ModBlocks.beanSprout.getDefaultState(), 2);
 				}
@@ -40,7 +40,7 @@ public class WorldGenPlants implements IWorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null)
+				if (target != null && target.getY() >= 0)
 				{
 					BiomeGenBase biome = world.getBiomeGenForCoords(target);
 

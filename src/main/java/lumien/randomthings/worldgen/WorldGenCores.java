@@ -125,7 +125,7 @@ public class WorldGenCores implements IWorldGenerator
 				int z = chunkZ * 16 + random.nextInt(16);
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null)
+				if (target != null && target.getY() >= 0)
 				{
 					BiomeGenBase biome = world.getBiomeGenForCoords(target);
 
@@ -196,13 +196,13 @@ public class WorldGenCores implements IWorldGenerator
 								for (int modY = 0; modY < 3; modY++)
 								{
 									BlockPos check = new BlockPos(target.getX() + modX, target.getY() + modY, target.getZ() + modZ);
-									
+
 									if (!WorldUtil.isValidPosition(check))
 									{
 										canPlaceCore = false;
 										break;
 									}
-									
+
 									if (!world.isAirBlock(check.down()) && world.isSideSolid(check.down(), EnumFacing.UP))
 									{
 										if (!(world.isAirBlock(check) || world.getBlockState(check).getBlock().isReplaceable(world, check)))
