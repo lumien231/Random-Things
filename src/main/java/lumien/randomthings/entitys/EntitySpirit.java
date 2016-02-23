@@ -202,7 +202,6 @@ public class EntitySpirit extends EntityFlying
 
 		public void onUpdateMoveHelper()
 		{
-			parentEntity.getLookHelper().setLookPosition(parentEntity.posX, parentEntity.posY, parentEntity.posZ - 1, 10f, parentEntity.getVerticalFaceSpeed());
 			if (this.update)
 			{
 				double d0 = this.posX - this.parentEntity.posX;
