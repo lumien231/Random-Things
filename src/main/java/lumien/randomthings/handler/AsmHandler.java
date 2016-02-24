@@ -67,7 +67,7 @@ public class AsmHandler
 
 	public static boolean shouldRain(World worldObj, BlockPos pos)
 	{
-		return TileEntityRainShield.shouldRain(worldObj, pos.add(0,-pos.getY(),0));
+		return TileEntityRainShield.shouldRain(worldObj, pos.add(0, -pos.getY(), 0));
 	}
 
 	public static int getColorFromArmorStack(ItemStack is)
@@ -169,7 +169,7 @@ public class AsmHandler
 
 	public static int getStrongPower(World worldObj, BlockPos pos, EnumFacing facing)
 	{
-		return TileEntityRedstoneInterface.getStrongPower(pos, facing);
+		return TileEntityRedstoneInterface.getStrongPower(worldObj, pos, facing);
 	}
 
 	// Returns whether to cancel normal behaviour
@@ -210,7 +210,7 @@ public class AsmHandler
 			{
 				return Color.RED.darker().getRGB() | -16777216;
 			}
-			
+
 			if (currentlyRendering.getItem() instanceof ItemSpectreKey)
 			{
 				return Color.CYAN.darker().getRGB() | -16777216;

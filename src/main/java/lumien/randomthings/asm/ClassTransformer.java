@@ -636,7 +636,7 @@ public class ClassTransformer implements IClassTransformer
 			{
 				getRedstonePower = mn;
 			}
-			else if (mn.name.equals(MCPNames.method("func_175676_y")))
+			else if (mn.name.equals(MCPNames.method("func_175627_a")) && mn.desc.equals("(Lnet/minecraft/util/BlockPos;Lnet/minecraft/util/EnumFacing;)I"))
 			{
 				getStrongPower = mn;
 			}
@@ -685,7 +685,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(l1);
 			toInsert.add(new InsnNode(POP));
 
-			getRedstonePower.instructions.insert(toInsert);
+			getStrongPower.instructions.insert(toInsert);
 		}
 
 		if (isRainingAt != null)
