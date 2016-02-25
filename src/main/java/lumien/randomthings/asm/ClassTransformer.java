@@ -37,6 +37,7 @@ import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LdcInsnNode;
+import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
@@ -800,11 +801,27 @@ public class ClassTransformer implements IClassTransformer
 
 						insnPoint = (VarInsnNode) renderRainSnow.instructions.get(i - 1);
 					}
-
+					
 					if (min.name.equals(MCPNames.method("func_76746_c")))
 					{
 						logger.log(Level.DEBUG, "- Found getEnableSnow");
 						int jumpCounter = i + 1;
+						
+						int worldIndex = 5;
+						int blockPosIndex = 21;
+						
+						// Optifine Why :'(
+						for (LocalVariableNode lv:renderRainSnow.localVariables)
+						{
+							if (lv.desc.equals("Lnet/minecraft/client/multiplayer/WorldClient;") || lv.desc.equals("Lnet/minecraft/world/World;"))
+							{
+								worldIndex = lv.index;
+							}
+							else if (lv.desc.equals("Lnet/minecraft/util/BlockPos$MutableBlockPos;"))
+							{
+								blockPosIndex = lv.index;
+							}
+						}
 
 						AbstractInsnNode jumpNode;
 
@@ -817,8 +834,8 @@ public class ClassTransformer implements IClassTransformer
 						LabelNode labelNode = jin.label;
 
 						InsnList toInsert = new InsnList();
-						toInsert.add(new VarInsnNode(ALOAD, 5));
-						toInsert.add(new VarInsnNode(ALOAD, 21));
+						toInsert.add(new VarInsnNode(ALOAD, worldIndex));
+						toInsert.add(new VarInsnNode(ALOAD, blockPosIndex));
 						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Z", false));
 						toInsert.add(new JumpInsnNode(IFEQ, labelNode));
 						renderRainSnow.instructions.insertBefore(insnPoint, toInsert);
