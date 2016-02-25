@@ -34,37 +34,33 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 
 	float curBlockDamage;
 
-	@Override
-	public void onLoad()
+	boolean firstTick = true;
+
+	private void initFakePlayer()
 	{
-		super.onLoad();
-
-		if (!this.worldObj.isRemote)
+		if (uuid == null)
 		{
-			if (uuid == null)
-			{
-				uuid = UUID.randomUUID();
-				this.worldObj.markBlockForUpdate(this.pos);
-			}
-
-			fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) worldObj, new GameProfile(null, "RTBlockBreaker")));
-
-			ItemStack unbreakingIronPickaxe = new ItemStack(Items.iron_pickaxe, 1);
-			unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
-			unbreakingIronPickaxe.getTagCompound().setBoolean("Unbreakable", true);
-
-			fakePlayer.get().setCurrentItemOrArmor(0, unbreakingIronPickaxe);
-			fakePlayer.get().onGround = true;
-
-			fakePlayer.get().playerNetServerHandler = new NetHandlerPlayServer(MinecraftServer.getServer(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
-			{
-				@Override
-				public void sendPacket(Packet packetIn)
-				{
-
-				}
-			};
+			uuid = UUID.randomUUID();
+			this.worldObj.markBlockForUpdate(this.pos);
 		}
+
+		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) worldObj, new GameProfile(null, "RTBlockBreaker")));
+
+		ItemStack unbreakingIronPickaxe = new ItemStack(Items.iron_pickaxe, 1);
+		unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
+		unbreakingIronPickaxe.getTagCompound().setBoolean("Unbreakable", true);
+
+		fakePlayer.get().setCurrentItemOrArmor(0, unbreakingIronPickaxe);
+		fakePlayer.get().onGround = true;
+
+		fakePlayer.get().playerNetServerHandler = new NetHandlerPlayServer(MinecraftServer.getServer(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
+		{
+			@Override
+			public void sendPacket(Packet packetIn)
+			{
+
+			}
+		};
 	}
 
 	@Override
@@ -72,6 +68,12 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 	{
 		if (!this.worldObj.isRemote)
 		{
+			if (firstTick)
+			{
+				firstTick = false;
+				initFakePlayer();
+			}
+
 			if (mining)
 			{
 				BlockPos targetPos = pos.offset(worldObj.getBlockState(pos).getValue(BlockBlockBreaker.FACING));
@@ -83,9 +85,9 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 				if (curBlockDamage >= 1.0f)
 				{
 					mining = false;
-					
+
 					resetProgress();
-					
+
 					if (fakePlayer.get() != null)
 					{
 						fakePlayer.get().theItemInWorldManager.tryHarvestBlock(targetPos);
@@ -128,8 +130,8 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
 		BlockPos targetPos = pos.offset(state.getValue(BlockBlockBreaker.FACING));
-		
-		canMine = !(worldIn.isBlockIndirectlyGettingPowered(pos)>0);
+
+		canMine = !(worldIn.isBlockIndirectlyGettingPowered(pos) > 0);
 
 		IBlockState targetState = worldIn.getBlockState(targetPos);
 
@@ -166,9 +168,12 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 
 	private void resetProgress()
 	{
-		BlockPos targetPos = pos.offset(worldObj.getBlockState(pos).getValue(BlockBlockBreaker.FACING));
-		worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, -1);
-		
-		curBlockDamage = 0;
+		if (uuid != null)
+		{
+			BlockPos targetPos = pos.offset(worldObj.getBlockState(pos).getValue(BlockBlockBreaker.FACING));
+			worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, -1);
+
+			curBlockDamage = 0;
+		}
 	}
 }
