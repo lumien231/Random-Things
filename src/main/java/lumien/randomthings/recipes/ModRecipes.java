@@ -77,10 +77,10 @@ public class ModRecipes
 		final ItemStack quartzBlock = new ItemStack(Blocks.quartz_block);
 		final ItemStack lever = new ItemStack(Blocks.lever);
 		final ItemStack stoneButton = new ItemStack(Blocks.stone_button);
-		
+
 		final ItemStack ectoPlasm = new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.ECTO_PLASM.id);
 		final ItemStack spectreIngot = new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id);
-		
+
 		for (int i = 0; i < oreDictDyes.length; i++)
 		{
 			oreDictDyes[i] = "dye" + dyes[i];
@@ -111,8 +111,9 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.potionVaporizer), "ctc", "iui", "cfc", 'c', "cobblestone", 't', Blocks.iron_trapdoor, 'i', "ingotIron", 'u', Items.cauldron, 'f', Blocks.furnace));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voxelProjector), "rgb", "wlw", "www", 'r', "blockGlassRed", 'g', "blockGlassGreen", 'b', "blockGlassBlue", 'w', blackWool, 'l', redstoneLamp));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainShield), "xfx", "xbx", "nnn", 'f', flint, 'b', Items.blaze_rod, 'n', netherRack));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockBreaker),"cpc","crc","ccc",'c',"cobblestone",'p',Items.iron_pickaxe,'r',redstoneTorch));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockBreaker), "cpc", "crc", "ccc", 'c', "cobblestone", 'p', Items.iron_pickaxe, 'r', redstoneTorch));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainbowLamp), "xgx", "rlb", 'g', "dyeGreen", 'r', "dyeRed", 'b', "dyeBlue",'l',redstoneLamp));
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.hopper, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));
 
@@ -131,8 +132,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderLetter), "xxx", "pep", "xpx", 'p', Items.paper, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.entityFilter), "xdx", "dpd", "xdx", 'd', "dyeBlue", 'p', paper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.itemFilter), "xyx", "ypy", "xyx", 'y', "dyeYellow", 'p', paper));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreKey), "ixx","ipx","xxi",'i',spectreIngot,'p',stableEnderpearl));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreKey), "ixx", "ipx", "xxi", 'i', spectreIngot, 'p', stableEnderpearl));
+
 		// Ingredients
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.EVIL_TEAR.id), "xsx", "xtx", "xex", 's', witherSkull, 't', ghastTear, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id), "xlx", "xix", "xex", 'l', lapis, 'i', "ingotGold", 'e', ectoPlasm));

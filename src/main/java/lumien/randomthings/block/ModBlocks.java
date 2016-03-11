@@ -57,6 +57,8 @@ public class ModBlocks
 	public static BlockBeanStalk lesserBeanStalk;
 	
 	public static BlockSpectreCore spectreCore;
+	
+	public static BlockRainbowLamp rainbowLamp;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -112,5 +114,7 @@ public class ModBlocks
 		coloredGrass = new BlockColoredGrass();
 		
 		spectreCore = new BlockSpectreCore();
+		
+		rainbowLamp = new BlockRainbowLamp();
 	}
 }

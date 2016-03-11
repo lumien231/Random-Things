@@ -20,7 +20,6 @@ public class ItemModels
 		registerBlock(ModBlocks.playerInterface);
 		registerBlock(ModBlocks.creativePlayerInterface);
 		registerBlock(ModBlocks.lapisGlass);
-		// registerBlock(ModBlocks.portalGenerator); TODO Portal Generator
 		registerBlock(ModBlocks.biomeGlass);
 		registerBlock(ModBlocks.lapisLamp);
 		registerBlock(ModBlocks.dyeingMachine);
@@ -59,6 +58,7 @@ public class ItemModels
 		registerBlock(ModBlocks.rainShield);
 		registerBlock(ModBlocks.blockBreaker);
 		registerBlock(ModBlocks.spectreCore);
+		registerBlock(ModBlocks.rainbowLamp);
 		
 		registerBlock(ModBlocks.itemCollector);
 		registerBlock(ModBlocks.advancedItemCollector);
