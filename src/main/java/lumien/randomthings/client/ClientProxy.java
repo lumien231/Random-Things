@@ -1,7 +1,9 @@
 package lumien.randomthings.client;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 
 import lumien.randomthings.CommonProxy;
 import lumien.randomthings.client.models.ItemModels;
@@ -18,6 +20,7 @@ import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityAdvancedRedstoneInterface;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import lumien.randomthings.util.client.RenderUtils;
@@ -90,7 +93,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(Minecraft.getMinecraft().getRenderManager(), new ModelSlime(16), 0.25F));
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
 	}
@@ -160,21 +163,43 @@ public class ClientProxy extends CommonProxy
 			{
 				for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
 				{
-					if (!redstoneInterface.isInvalid() && redstoneInterface instanceof TileEntityBasicRedstoneInterface)
+					if (!redstoneInterface.isInvalid() && redstoneInterface.getWorld().isRemote)
 					{
-						TileEntityBasicRedstoneInterface simpleRedstoneInterface = (TileEntityBasicRedstoneInterface) redstoneInterface;
-						BlockPos position = simpleRedstoneInterface.getPos();
-						BlockPos target = simpleRedstoneInterface.getTarget();
+						ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
 
-						if (position.distanceSq(player.getPosition()) < 225)
+						if (redstoneInterface instanceof TileEntityBasicRedstoneInterface)
 						{
+							TileEntityBasicRedstoneInterface simpleRedstoneInterface = (TileEntityBasicRedstoneInterface) redstoneInterface;
+							BlockPos position = simpleRedstoneInterface.getPos();
+							BlockPos target = simpleRedstoneInterface.getTarget();
 							if (target != null)
 							{
-								if (simpleRedstoneInterface.getWorld().isRemote)
-								{
-									worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
-									worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
-								}
+								positions.add(target);
+								positions.add(position);
+							}
+						}
+						else if (redstoneInterface instanceof TileEntityAdvancedRedstoneInterface)
+						{
+							TileEntityAdvancedRedstoneInterface advancedRedstoneInterface = (TileEntityAdvancedRedstoneInterface) redstoneInterface;
+							BlockPos position = advancedRedstoneInterface.getPos();
+							Set<BlockPos> targets = advancedRedstoneInterface.getTargets();
+							
+							for (BlockPos target:targets)
+							{
+								positions.add(target);
+								positions.add(position);
+							}
+						}
+
+						for (int i = 0; i < positions.size(); i += 2)
+						{
+							BlockPos target = positions.get(i);
+							BlockPos position = positions.get(i + 1);
+
+							if (position.distanceSq(player.getPosition()) < 225)
+							{
+								worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
+								worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 							}
 						}
 					}

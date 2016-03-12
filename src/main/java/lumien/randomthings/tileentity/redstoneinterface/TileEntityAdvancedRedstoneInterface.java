@@ -2,6 +2,7 @@ package lumien.randomthings.tileentity.redstoneinterface;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
@@ -27,6 +28,11 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	{
 		targets = new HashSet<BlockPos>();
 		positionInventory.addInventoryChangeListener(this);
+	}
+	
+	public Set<BlockPos> getTargets()
+	{
+		return targets;
 	}
 
 	@Override
