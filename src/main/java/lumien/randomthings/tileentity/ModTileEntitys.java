@@ -3,6 +3,8 @@ package lumien.randomthings.tileentity;
 import lumien.randomthings.tileentity.cores.TileEntityEnderCore;
 import lumien.randomthings.tileentity.cores.TileEntityNatureCore;
 import lumien.randomthings.tileentity.cores.TileEntityNetherCore;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityAdvancedRedstoneInterface;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -19,7 +21,9 @@ public class ModTileEntitys
 		registerTE(TileEntityNetherCore.class, "netherCore");
 		registerTE(TileEntityEnderCore.class, "enderCore");
 		registerTE(TileEntityChatDetector.class, "chatDetector");
-		registerTE(TileEntityRedstoneInterface.class, "redstoneInterface");
+		GameRegistry.registerTileEntityWithAlternatives(TileEntityBasicRedstoneInterface.class, "basicRedstoneInterface", "redstoneInterface");
+		registerTE(TileEntityAdvancedRedstoneInterface.class, "advancedRedstoneInterface");
+		registerTE(TileEntityBasicRedstoneInterface.class, "redstoneInterface");
 		registerTE(TileEntityImbuingStation.class, "imbuingStation");
 		registerTE(TileEntitySpecialChest.class, "specialChest");
 		registerTE(TileEntityAnalogEmitter.class, "analogEmitter");
@@ -31,7 +35,7 @@ public class ModTileEntitys
 		registerTE(TileEntityVoxelProjector.class, "voxelProjector");
 		registerTE(TileEntityEnderAnchor.class, "enderAnchor");
 		registerTE(TileEntityRainShield.class, "rainShield");
-		registerTE(TileEntityBlockBreaker.class,"blockBreaker");
+		registerTE(TileEntityBlockBreaker.class, "blockBreaker");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

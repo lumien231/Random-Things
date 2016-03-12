@@ -1,7 +1,8 @@
 package lumien.randomthings.item;
 
 import lumien.randomthings.block.ModBlocks;
-import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -49,7 +50,7 @@ public class ItemRedstoneTool extends ItemBase
 
 		if (!stack.hasTagCompound())
 		{
-			if (state.getBlock() == ModBlocks.redstoneInterface)
+			if (state.getBlock() == ModBlocks.basicRedstoneInterface)
 			{
 				stack.setTagCompound(new NBTTagCompound());
 			}
@@ -69,9 +70,9 @@ public class ItemRedstoneTool extends ItemBase
 			if (!linkingTo.equals(pos))
 			{
 				IBlockState redstoneInterfaceState = worldIn.getBlockState(linkingTo);
-				if (redstoneInterfaceState.getBlock() == ModBlocks.redstoneInterface)
+				if (redstoneInterfaceState.getBlock() == ModBlocks.basicRedstoneInterface)
 				{
-					TileEntityRedstoneInterface redstoneInterface = (TileEntityRedstoneInterface) worldIn.getTileEntity(linkingTo);
+					TileEntityBasicRedstoneInterface redstoneInterface = (TileEntityBasicRedstoneInterface) worldIn.getTileEntity(linkingTo);
 
 					redstoneInterface.setTarget(pos);
 				}
@@ -81,7 +82,7 @@ public class ItemRedstoneTool extends ItemBase
 		}
 		else
 		{
-			if (state.getBlock() == ModBlocks.redstoneInterface)
+			if (state.getBlock() == ModBlocks.basicRedstoneInterface)
 			{
 				compound.setBoolean("linking", true);
 				compound.setInteger("oX", pos.getX());

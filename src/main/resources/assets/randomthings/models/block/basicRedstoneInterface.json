@@ -2,6 +2,6 @@
     "parent": "block/cube_all",
     "textures": 
     {
-        "all": "randomthings:blocks/redstoneInterface"
+        "all": "randomthings:blocks/redstoneInterface/basic"
     }
 }

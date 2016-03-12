@@ -99,7 +99,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.dyeingMachine), "xgx", "rcb", "xwx", 'g', "dyeGreen", 'r', "dyeRed", 'b', "dyeBlue", 'w', blackWool, 'c', craftingTable));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.prismarineEnderBridge), "scs", "cbc", "scs", 's', prismarineShard, 'c', prismarineCrystal, 'b', new ItemStack(ModBlocks.enderBridge)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.lifeAnchor), "dad", "ana", "dad", 'd', "blockDiamond", 'a', new ItemStack(ModBlocks.enderAnchor), 'n', netherStar));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.redstoneInterface), "iri", "rsr", "iri", 'i', "ingotIron", 'r', redstoneDust, 's', stableEnderpearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.basicRedstoneInterface), "iri", "rsr", "iri", 'i', "ingotIron", 'r', redstoneDust, 's', stableEnderpearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.lightRedirector), "pgp", "gxg", "pgp", 'g', "blockGlass", 'p', "plankWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.imbuingStation), "xwx", "vcv", "lel", 'w', Items.water_bucket, 'v', Blocks.vine, 'c', Blocks.hardened_clay, 'l', Blocks.waterlily, 'e', Items.emerald));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.analogEmitter), "tir", "iii", "rit", 't', redstoneTorch, 'i', "ingotIron", 'r', redstoneDust));

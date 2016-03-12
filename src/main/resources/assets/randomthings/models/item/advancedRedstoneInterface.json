@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/redstoneInterface",
+    "parent": "randomthings:block/advancedRedstoneInterface",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

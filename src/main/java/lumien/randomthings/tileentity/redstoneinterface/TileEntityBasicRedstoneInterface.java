@@ -1,4 +1,4 @@
-package lumien.randomthings.tileentity;
+package lumien.randomthings.tileentity.redstoneinterface;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,19 +19,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
-public class TileEntityRedstoneInterface extends TileEntityBase implements SimpleComponent
+public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterface implements SimpleComponent
 {
-	public static Set<TileEntityRedstoneInterface> interfaces = Collections.newSetFromMap(new WeakHashMap());
-
 	BlockPos target;
-
-	public TileEntityRedstoneInterface()
-	{
-		synchronized (interfaces)
-		{
-			interfaces.add(this);
-		}
-	}
 
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)
@@ -51,12 +41,6 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 		{
 			target = new BlockPos(compound.getInteger("targetX"), compound.getInteger("targetY"), compound.getInteger("targetZ"));
 		}
-	}
-
-	@Override
-	public void onChunkUnload()
-	{
-		this.invalidate();
 	}
 
 	public void setTarget(BlockPos newTarget)
@@ -84,93 +68,6 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 		}
 	}
 
-	static HashSet<BlockPos> checkedWeakPositions = new HashSet<BlockPos>();
-
-	public static synchronized int getRedstonePower(World blockWorld, BlockPos pos, EnumFacing facing)
-	{
-		if (checkedWeakPositions.contains(pos))
-		{
-			return 0;
-		}
-		checkedWeakPositions.add(pos);
-
-		int totalPower = 0;
-
-		BlockPos checkingBlock = pos.offset(facing.getOpposite());
-		synchronized (interfaces)
-		{
-			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
-			{
-				if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.target != null)
-				{
-					// if (redstoneInterface.target.equals(pos))
-					// {
-					// int remotePower =
-					// redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos,
-					// facing);
-					// checkedPositions.remove(pos);
-					//
-					// if (remotePower > totalPower)
-					// {
-					// totalPower = remotePower;
-					// }
-					// }
-					if (redstoneInterface.target.equals(checkingBlock))
-					{
-						int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos.offset(facing), facing);
-						checkedWeakPositions.remove(pos);
-
-						if (remotePower > totalPower)
-						{
-							totalPower = remotePower;
-						}
-					}
-				}
-			}
-		}
-
-		checkedWeakPositions.remove(pos);
-		return totalPower;
-	}
-
-	static HashSet<BlockPos> checkedStrongPositions = new HashSet<BlockPos>();
-
-	public static int getStrongPower(World blockWorld, BlockPos pos, EnumFacing facing)
-	{
-		if (checkedStrongPositions.contains(pos))
-		{
-			return 0;
-		}
-		checkedStrongPositions.add(pos);
-
-		int totalPower = 0;
-
-		BlockPos checkingBlock = pos.offset(facing.getOpposite());
-
-		synchronized (interfaces)
-		{
-			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
-			{
-				if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.target != null)
-				{
-					if (redstoneInterface.target.equals(checkingBlock))
-					{
-						int remotePower = redstoneInterface.worldObj.getStrongPower(redstoneInterface.pos.offset(facing), facing);
-						checkedStrongPositions.remove(pos);
-
-						if (remotePower > totalPower)
-						{
-							totalPower = remotePower;
-						}
-					}
-				}
-			}
-		}
-
-		checkedStrongPositions.remove(pos);
-		return totalPower;
-	}
-
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
 		if (this.target != null)
@@ -183,9 +80,10 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 
 	public void broken()
 	{
+		super.broken();
+
 		if (this.target != null)
 		{
-			this.invalidate();
 			IBlockState targetState = worldObj.getBlockState(target);
 			targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, this.blockType);
 			worldObj.notifyNeighborsOfStateChange(target, targetState.getBlock());
@@ -223,5 +121,11 @@ public class TileEntityRedstoneInterface extends TileEntityBase implements Simpl
 		{
 			return new Object[] { target.getX(), target.getY(), target.getZ() };
 		}
+	}
+
+	@Override
+	protected boolean isTargeting(BlockPos pos)
+	{
+		return this.target != null && this.target.equals(pos);
 	}
 }

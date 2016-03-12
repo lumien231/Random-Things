@@ -1,5 +1,7 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.block.redstoneinterface.BlockAdvancedRedstoneInterface;
+import lumien.randomthings.block.redstoneinterface.BlockBasicRedstoneInterface;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModBlocks
@@ -23,7 +25,6 @@ public class ModBlocks
 	public static BlockPod beanPod;
 	public static BlockBeanSprout beanSprout;
 	public static BlockLifeAnchor lifeAnchor;
-	public static BlockRedstoneInterface redstoneInterface;
 	public static BlockLightRedirector lightRedirector;
 	public static BlockImbuingStation imbuingStation;
 	public static BlockSpectreBlock spectreBlock;
@@ -59,6 +60,9 @@ public class ModBlocks
 	public static BlockSpectreCore spectreCore;
 	
 	public static BlockRainbowLamp rainbowLamp;
+	
+	public static BlockBasicRedstoneInterface basicRedstoneInterface;
+	public static BlockAdvancedRedstoneInterface advancedRedstoneInterface;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -79,7 +83,6 @@ public class ModBlocks
 		beanPod = new BlockPod();
 		beanSprout = new BlockBeanSprout();
 		lifeAnchor = new BlockLifeAnchor();
-		redstoneInterface = new BlockRedstoneInterface();
 		lightRedirector = new BlockLightRedirector();
 		imbuingStation = new BlockImbuingStation();
 		spectreBlock = new BlockSpectreBlock();
@@ -116,5 +119,8 @@ public class ModBlocks
 		spectreCore = new BlockSpectreCore();
 		
 		rainbowLamp = new BlockRainbowLamp();
+		
+		basicRedstoneInterface = new BlockBasicRedstoneInterface();
+		advancedRedstoneInterface = new BlockAdvancedRedstoneInterface();
 	}
 }

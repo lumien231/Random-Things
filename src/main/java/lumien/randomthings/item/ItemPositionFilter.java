@@ -26,7 +26,7 @@ public class ItemPositionFilter extends ItemBase
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
 		{
 			NBTTagCompound compound;
-			if ((compound = par1ItemStack.getTagCompound()) != null)
+			if ((compound = par1ItemStack.getTagCompound()) != null && compound.getBoolean("hasPosition"))
 			{
 				int dimension = compound.getInteger("dimension");
 				int filterX = compound.getInteger("filterX");
@@ -57,6 +57,7 @@ public class ItemPositionFilter extends ItemBase
 				stack.setTagCompound(compound = new NBTTagCompound());
 			}
 
+			compound.setBoolean("hasPosition", true);
 			compound.setInteger("dimension", worldIn.provider.getDimensionId());
 			compound.setInteger("filterX", pos.getX());
 			compound.setInteger("filterY", pos.getY());
@@ -72,6 +73,12 @@ public class ItemPositionFilter extends ItemBase
 
 	public static BlockPos getPosition(ItemStack positionFilter)
 	{
-		return new BlockPos(positionFilter.getTagCompound().getInteger("filterX"), positionFilter.getTagCompound().getInteger("filterY"), positionFilter.getTagCompound().getInteger("filterZ"));
+		NBTTagCompound compound;
+		if ((compound = positionFilter.getTagCompound()) == null || !compound.getBoolean("hasPosition"))
+		{
+			return null;
+		}
+
+		return new BlockPos(compound.getInteger("filterX"), compound.getInteger("filterY"), compound.getInteger("filterZ"));
 	}
 }

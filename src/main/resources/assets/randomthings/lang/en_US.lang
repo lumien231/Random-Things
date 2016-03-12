@@ -19,7 +19,6 @@ tile.beanSprout.name=Bean Sprout
 tile.lifeAnchor.name=Life Anchor
 tile.chatDetector.name=Chat Detector
 tile.globalChatDetector.name=Global Chat Detector
-tile.redstoneInterface.name=Redstone Interface
 tile.lightRedirector.name=Light Redirector
 tile.imbuingStation.name=Imbuing Station
 tile.spectreBlock.name=Spectre Block
@@ -98,6 +97,9 @@ tile.platform.acacia.name=Acacia Platform
 tile.platform.jungle.name=Jungle Platform
 tile.platform.darkOak.name=Dark Oak Platform
 
+tile.basicRedstoneInterface.name=Basic Redstone Interface
+tile.advancedRedstoneInterface.name=Advanced Redstone Interface
+
 item.chaliceOfImmortality.name=Chalice of Immortality
 item.positionFilter.name=Position Filter
 item.biomeCrystal.name=Biome Crystal
@@ -121,6 +123,7 @@ item.enderLetter.name=Ender Letter
 item.entityFilter.name=Entity Filter
 item.itemFilter.name=Item Filter
 item.spectreKey.name=Spectre Key
+item.soundRecorder.name=Sound Recorder
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -166,10 +169,10 @@ tooltip.summoningPendulum.entityCount.plural=§5Holding %d Entitys
 tooltip.stableEnderpearl.boundto=§5Bound to %s
 tooltip.entityFilter.invalidEntity=Invalid Entity
 
-gui.redstoneInterface.notarget=No Target
-gui.redstoneInterface.targetX=Target-X: %s
-gui.redstoneInterface.targetY=Target-Y: %s
-gui.redstoneInterface.targetZ=Target-Z: %s
+gui.basicRedstoneInterface.notarget=No Target
+gui.basicRedstoneInterface.targetX=Target-X: %s
+gui.basicRedstoneInterface.targetY=Target-Y: %s
+gui.basicRedstoneInterface.targetZ=Target-Z: %s
 
 gui.entityDetector.radiusX=Radius X: %s
 gui.entityDetector.radiusY=Radius Y: %s

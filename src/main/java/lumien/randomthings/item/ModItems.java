@@ -32,6 +32,7 @@ public class ModItems
 	public static ItemIngredient ingredients;
 	public static ItemItemFilter itemFilter;
 	public static ItemSpectreKey spectreKey;
+	public static ItemSoundRecorder soundRecorder;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -62,6 +63,7 @@ public class ModItems
 		ingredients = new ItemIngredient();
 		itemFilter = new ItemItemFilter();
 		spectreKey = new ItemSpectreKey();
+		soundRecorder = new ItemSoundRecorder();
 
 		grassSeeds = new ItemGrassSeeds();
 	}

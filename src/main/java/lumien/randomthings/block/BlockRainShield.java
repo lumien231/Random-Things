@@ -4,7 +4,7 @@ import java.util.Random;
 
 import lumien.randomthings.tileentity.TileEntityBlockBreaker;
 import lumien.randomthings.tileentity.TileEntityRainShield;
-import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

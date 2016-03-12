@@ -16,9 +16,10 @@ import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
-import lumien.randomthings.tileentity.TileEntityRedstoneInterface;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -159,16 +160,17 @@ public class ClientProxy extends CommonProxy
 			{
 				for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
 				{
-					if (!redstoneInterface.isInvalid())
+					if (!redstoneInterface.isInvalid() && redstoneInterface instanceof TileEntityBasicRedstoneInterface)
 					{
-						BlockPos position = redstoneInterface.getPos();
-						BlockPos target = redstoneInterface.getTarget();
+						TileEntityBasicRedstoneInterface simpleRedstoneInterface = (TileEntityBasicRedstoneInterface) redstoneInterface;
+						BlockPos position = simpleRedstoneInterface.getPos();
+						BlockPos target = simpleRedstoneInterface.getTarget();
 
 						if (position.distanceSq(player.getPosition()) < 225)
 						{
 							if (target != null)
 							{
-								if (redstoneInterface.getWorld().isRemote)
+								if (simpleRedstoneInterface.getWorld().isRemote)
 								{
 									worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 									worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();

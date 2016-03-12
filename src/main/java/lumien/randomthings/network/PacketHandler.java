@@ -9,6 +9,7 @@ import lumien.randomthings.network.messages.MessageItemFilter;
 import lumien.randomthings.network.messages.MessageLightRedirector;
 import lumien.randomthings.network.messages.MessageOnlineDetector;
 import lumien.randomthings.network.messages.MessagePotionVaporizerParticles;
+import lumien.randomthings.network.messages.MessageSoundRecorder;
 import lumien.randomthings.network.messages.MessageVoxelProjector;
 
 public class PacketHandler
@@ -27,5 +28,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageAdvancedItemCollector.class);
 		INSTANCE.registerMessage(MessageItemFilter.class);
 		INSTANCE.registerMessage(MessageLightRedirector.class);
+		INSTANCE.registerMessage(MessageSoundRecorder.class);
 	}
 }

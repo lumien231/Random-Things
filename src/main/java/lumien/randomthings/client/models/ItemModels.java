@@ -36,7 +36,8 @@ public class ItemModels
 		registerBlock(ModBlocks.enderCore);
 		registerBlock(ModBlocks.lifeAnchor);
 		registerBlock(ModBlocks.chatDetector);
-		registerBlock(ModBlocks.redstoneInterface);
+		registerBlock(ModBlocks.basicRedstoneInterface);
+		registerBlock(ModBlocks.advancedRedstoneInterface);
 		registerBlock(ModBlocks.lightRedirector);
 		registerBlock(ModBlocks.imbuingStation);
 		registerBlock(ModBlocks.spectreBlock);

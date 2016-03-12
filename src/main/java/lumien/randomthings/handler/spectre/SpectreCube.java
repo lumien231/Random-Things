@@ -188,7 +188,6 @@ public class SpectreCube implements IInvBasic
 		else
 		{
 			spawnBlock = ItemPositionFilter.getPosition(spawnPosStack);
-			
 		}
 
 		this.handler.markDirty();

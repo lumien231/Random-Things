@@ -21,6 +21,7 @@ import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.tileentity.TileEntityEnderAnchor;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenPlants;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -37,11 +38,15 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry.Type;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION)
 public class RandomThings implements LoadingCallback
@@ -88,7 +93,7 @@ public class RandomThings implements LoadingCallback
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		PacketHandler.init();
-		
+
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this);
 	}
 
@@ -108,7 +113,7 @@ public class RandomThings implements LoadingCallback
 		modelHandler.load();
 		proxy.registerRenderers();
 	}
-	
+
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event)
 	{
@@ -131,13 +136,33 @@ public class RandomThings implements LoadingCallback
 			{
 				TileEntityEnderAnchor anchor = (TileEntityEnderAnchor) te;
 				anchor.setTicket(t);
-				
-				for (ChunkCoordIntPair pair:t.getChunkList())
+
+				for (ChunkCoordIntPair pair : t.getChunkList())
 				{
 					ForgeChunkManager.forceChunk(t, pair);
 				}
 			}
 
+		}
+	}
+
+	@EventHandler
+	public void missingMapping(FMLMissingMappingsEvent event)
+	{
+		for (MissingMapping mapping : event.getAll())
+		{
+			if (mapping.name.equals("randomthings:redstoneInterface"))
+			{
+				System.out.println("Fixing Redstone Interface Mapping");
+				if (mapping.type == Type.BLOCK)
+				{
+					mapping.remap(ModBlocks.basicRedstoneInterface);
+				}
+				else if (mapping.type == Type.ITEM)
+				{
+					mapping.remap(Item.getItemFromBlock(ModBlocks.basicRedstoneInterface));
+				}
+			}
 		}
 	}
 }

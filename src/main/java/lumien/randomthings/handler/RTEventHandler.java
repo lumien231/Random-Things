@@ -25,6 +25,8 @@ import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.lib.IExplosionImmune;
 import lumien.randomthings.lib.PlayerAbilitiesProperty;
+import lumien.randomthings.network.PacketHandler;
+import lumien.randomthings.network.messages.MessageSoundRecorder;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.anvil.AnvilRecipe;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
@@ -75,6 +77,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.event.sound.SoundEvent.SoundSourceEvent;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
@@ -92,15 +95,32 @@ import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RTEventHandler
 {
 	static Random rng = new Random();
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void soundSourceEvent(SoundSourceEvent event)
+	{
+		ItemStack currentlyEquipped;
+
+		if (event.name != null && Minecraft.getMinecraft().thePlayer != null && (currentlyEquipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem()) != null && currentlyEquipped.getItem() == ModItems.soundRecorder)
+		{
+			MessageSoundRecorder message = new MessageSoundRecorder(event.name);
+
+			PacketHandler.INSTANCE.sendToServer(message);
+		}
+	}
 
 	@SubscribeEvent
 	public void biomeDecoration(DecorateBiomeEvent event)
