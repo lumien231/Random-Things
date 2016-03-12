@@ -145,24 +145,4 @@ public class RandomThings implements LoadingCallback
 
 		}
 	}
-
-	@EventHandler
-	public void missingMapping(FMLMissingMappingsEvent event)
-	{
-		for (MissingMapping mapping : event.getAll())
-		{
-			if (mapping.name.equals("randomthings:redstoneInterface"))
-			{
-				System.out.println("Fixing Redstone Interface Mapping");
-				if (mapping.type == Type.BLOCK)
-				{
-					mapping.remap(ModBlocks.basicRedstoneInterface);
-				}
-				else if (mapping.type == Type.ITEM)
-				{
-					mapping.remap(Item.getItemFromBlock(ModBlocks.basicRedstoneInterface));
-				}
-			}
-		}
-	}
 }

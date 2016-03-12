@@ -21,7 +21,7 @@ public class ModTileEntitys
 		registerTE(TileEntityNetherCore.class, "netherCore");
 		registerTE(TileEntityEnderCore.class, "enderCore");
 		registerTE(TileEntityChatDetector.class, "chatDetector");
-		GameRegistry.registerTileEntityWithAlternatives(TileEntityBasicRedstoneInterface.class, "basicRedstoneInterface", "redstoneInterface");
+		registerTE(TileEntityBasicRedstoneInterface.class,"basicRedstoneInterface");
 		registerTE(TileEntityAdvancedRedstoneInterface.class, "advancedRedstoneInterface");
 		registerTE(TileEntityBasicRedstoneInterface.class, "redstoneInterface");
 		registerTE(TileEntityImbuingStation.class, "imbuingStation");
