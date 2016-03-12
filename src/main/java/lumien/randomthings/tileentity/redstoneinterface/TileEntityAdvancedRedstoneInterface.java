@@ -6,6 +6,7 @@ import java.util.Set;
 
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.NBTUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +30,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 		targets = new HashSet<BlockPos>();
 		positionInventory.addInventoryChangeListener(this);
 	}
-	
+
 	public Set<BlockPos> getTargets()
 	{
 		return targets;
@@ -55,6 +56,10 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 		}
 
 		compound.setTag("targets", nbtTargetList);
+
+		NBTTagCompound inventoryCompound = new NBTTagCompound();
+		InventoryUtil.writeInventoryToCompound(inventoryCompound, positionInventory);
+		compound.setTag("inventory", inventoryCompound);
 	}
 
 	@Override
@@ -71,50 +76,60 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 				this.targets.add(NBTUtil.readBlockPosFromNBT(targetCompound, "target"));
 			}
 		}
+
+		NBTTagCompound inventoryCompound = compound.getCompoundTag("inventory");
+
+		if (inventoryCompound != null)
+		{
+			InventoryUtil.readInventoryFromCompound(inventoryCompound, positionInventory);
+		}
 	}
 
 	@Override
 	public void onInventoryChanged(InventoryBasic inventory)
 	{
-		HashSet<BlockPos> newTargets = new HashSet<BlockPos>();
-
-		for (int i = 0; i < inventory.getSizeInventory(); i++)
+		if (this.worldObj != null && this.pos != null)
 		{
-			ItemStack stack = inventory.getStackInSlot(i);
+			HashSet<BlockPos> newTargets = new HashSet<BlockPos>();
 
-			BlockPos target;
-			if (stack != null && stack.getItem() == ModItems.positionFilter && (target = ItemPositionFilter.getPosition(stack)) != null)
+			for (int i = 0; i < inventory.getSizeInventory(); i++)
 			{
-				newTargets.add(target);
+				ItemStack stack = inventory.getStackInSlot(i);
+
+				BlockPos target;
+				if (stack != null && stack.getItem() == ModItems.positionFilter && (target = ItemPositionFilter.getPosition(stack)) != null)
+				{
+					newTargets.add(target);
+				}
 			}
-		}
 
-		HashSet<BlockPos> changedPositions = new HashSet<BlockPos>();
+			HashSet<BlockPos> changedPositions = new HashSet<BlockPos>();
 
-		for (BlockPos target : newTargets)
-		{
-			if (!targets.contains(target))
+			for (BlockPos target : newTargets)
 			{
-				changedPositions.add(target); // Added
+				if (!targets.contains(target))
+				{
+					changedPositions.add(target); // Added
+				}
 			}
-		}
 
-		for (BlockPos oldTarget : targets)
-		{
-			if (!newTargets.contains(oldTarget))
+			for (BlockPos oldTarget : targets)
 			{
-				changedPositions.add(oldTarget); // Added
+				if (!newTargets.contains(oldTarget))
+				{
+					changedPositions.add(oldTarget); // Added
+				}
 			}
-		}
 
-		this.targets = newTargets;
-		this.worldObj.markBlockForUpdate(this.pos);
+			this.targets = newTargets;
+			this.worldObj.markBlockForUpdate(this.pos);
 
-		for (BlockPos changedPos : changedPositions)
-		{
-			IBlockState targetState = worldObj.getBlockState(changedPos);
-			targetState.getBlock().onNeighborBlockChange(worldObj, changedPos, targetState, this.blockType);
-			worldObj.notifyNeighborsOfStateChange(changedPos, targetState.getBlock());
+			for (BlockPos changedPos : changedPositions)
+			{
+				IBlockState targetState = worldObj.getBlockState(changedPos);
+				targetState.getBlock().onNeighborBlockChange(worldObj, changedPos, targetState, this.blockType);
+				worldObj.notifyNeighborsOfStateChange(changedPos, targetState.getBlock());
+			}
 		}
 	}
 
@@ -122,7 +137,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	{
 		return positionInventory;
 	}
-	
+
 	public void broken()
 	{
 		super.broken();
