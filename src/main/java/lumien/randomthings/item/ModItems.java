@@ -33,6 +33,7 @@ public class ModItems
 	public static ItemItemFilter itemFilter;
 	public static ItemSpectreKey spectreKey;
 	public static ItemSoundRecorder soundRecorder;
+	public static ItemRedstoneActivator redstoneActivator;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -45,7 +46,6 @@ public class ModItems
 		beanStew = new ItemBeanStew();
 		linkingOrb = new ItemLinkingOrb();
 		inertLinkingOrb = new ItemInertLinkingOrb();
-		// craftingRecipe = new ItemCraftingRecipe();
 		redstoneTool = new ItemRedstoneTool();
 		waterWalkingBoots = new ItemWaterWalkingBoots();
 		dungeonChestGenerator = new ItemDungeonChestGenerator();
@@ -64,6 +64,7 @@ public class ModItems
 		itemFilter = new ItemItemFilter();
 		spectreKey = new ItemSpectreKey();
 		soundRecorder = new ItemSoundRecorder();
+		redstoneActivator = new ItemRedstoneActivator();
 
 		grassSeeds = new ItemGrassSeeds();
 	}

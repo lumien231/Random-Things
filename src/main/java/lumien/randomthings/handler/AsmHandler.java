@@ -13,6 +13,7 @@ import lumien.randomthings.block.BlockSpecialChest;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.handler.compability.chisel.ChiselModelWrapper;
+import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ModItems;
@@ -164,12 +165,12 @@ public class AsmHandler
 
 	public static int getRedstonePower(World worldObj, BlockPos pos, EnumFacing facing)
 	{
-		return TileEntityRedstoneInterface.getRedstonePower(worldObj, pos, facing);
+		return Math.max(TileEntityRedstoneInterface.getRedstonePower(worldObj, pos, facing),RedstoneSignalHandler.getHandler().getStrongPower(worldObj, pos, facing));
 	}
 
 	public static int getStrongPower(World worldObj, BlockPos pos, EnumFacing facing)
 	{
-		return TileEntityRedstoneInterface.getStrongPower(worldObj, pos, facing);
+		return Math.max(TileEntityRedstoneInterface.getStrongPower(worldObj, pos, facing), RedstoneSignalHandler.getHandler().getStrongPower(worldObj, pos, facing));
 	}
 
 	// Returns whether to cancel normal behaviour

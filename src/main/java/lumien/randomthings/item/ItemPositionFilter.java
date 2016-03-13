@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
+import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

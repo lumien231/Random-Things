@@ -18,6 +18,7 @@ import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
+import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.ItemEntityFilter;
 import lumien.randomthings.item.ModItems;
@@ -100,6 +101,8 @@ import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent.MissingMappin
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -157,6 +160,16 @@ public class RTEventHandler
 		if ((tickEvent.type == TickEvent.Type.CLIENT || tickEvent.type == TickEvent.Type.SERVER) && tickEvent.phase == TickEvent.Phase.END)
 		{
 			TileEntityRainShield.rainCache.clear();
+		}
+
+		if (tickEvent instanceof WorldTickEvent)
+		{
+			WorldTickEvent worldTickEvent = (WorldTickEvent) tickEvent;
+
+			if (worldTickEvent.phase == Phase.END && !worldTickEvent.world.isRemote && worldTickEvent.world.provider.getDimensionId() == 0)
+			{
+				RedstoneSignalHandler.getHandler().tick();
+			}
 		}
 	}
 
