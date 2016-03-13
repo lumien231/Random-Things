@@ -112,7 +112,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voxelProjector), "rgb", "wlw", "www", 'r', "blockGlassRed", 'g', "blockGlassGreen", 'b', "blockGlassBlue", 'w', blackWool, 'l', redstoneLamp));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainShield), "xfx", "xbx", "nnn", 'f', flint, 'b', Items.blaze_rod, 'n', netherRack));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockBreaker), "cpc", "crc", "ccc", 'c', "cobblestone", 'p', Items.iron_pickaxe, 'r', redstoneTorch));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainbowLamp), "xgx", "rlb", 'g', "dyeGreen", 'r', "dyeRed", 'b', "dyeBlue",'l',redstoneLamp));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainbowLamp), "xgx", "rlb", 'g', "dyeGreen", 'r', "dyeRed", 'b', "dyeBlue", 'l', redstoneLamp));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedRedstoneInterface), "ror", "oio", "ror", 'r', "blockRedstone", 'o', obsidian, 'i', ModBlocks.basicRedstoneInterface));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.hopper, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));
