@@ -6,6 +6,8 @@ import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -18,7 +20,7 @@ public class BlockEntityDetector extends BlockContainerBase
 	public BlockEntityDetector()
 	{
 		super("entityDetector", Material.rock);
-		
+
 		this.setHardness(1.5F);
 	}
 
@@ -27,7 +29,7 @@ public class BlockEntityDetector extends BlockContainerBase
 	{
 		return new TileEntityEntityDetector();
 	}
-	
+
 	@Override
 	public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
@@ -41,25 +43,25 @@ public class BlockEntityDetector extends BlockContainerBase
 
 		return te.isPowered() ? 15 : 0;
 	}
-	
+
 	@Override
 	public boolean isNormalCube()
 	{
 		return true;
 	}
-	
+
 	@Override
 	public boolean shouldCheckWeakPower(IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
+	{
 		return false;
-    }
-	
+	}
+
 	@Override
 	public boolean canProvidePower()
 	{
 		return true;
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
@@ -68,5 +70,14 @@ public class BlockEntityDetector extends BlockContainerBase
 			playerIn.openGui(RandomThings.instance, GuiIds.ENTITY_DETECTOR, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
+	}
+
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntityEntityDetector tileentity = (TileEntityEntityDetector) worldIn.getTileEntity(pos);
+		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity.getInventory());
+
+		super.breakBlock(worldIn, pos, state);
 	}
 }

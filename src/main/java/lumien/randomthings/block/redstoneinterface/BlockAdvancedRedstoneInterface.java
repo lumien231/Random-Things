@@ -13,6 +13,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -30,9 +32,18 @@ public class BlockAdvancedRedstoneInterface extends BlockRedstoneInterface
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world,IBlockState state)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityAdvancedRedstoneInterface();
+	}
+
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntityAdvancedRedstoneInterface tileentity = (TileEntityAdvancedRedstoneInterface) worldIn.getTileEntity(pos);
+		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity.getTargetInventory());
+
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override

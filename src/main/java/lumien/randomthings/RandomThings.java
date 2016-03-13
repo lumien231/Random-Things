@@ -142,7 +142,6 @@ public class RandomThings implements LoadingCallback
 					ForgeChunkManager.forceChunk(t, pair);
 				}
 			}
-
 		}
 	}
 }
