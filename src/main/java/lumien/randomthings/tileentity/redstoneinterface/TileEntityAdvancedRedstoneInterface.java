@@ -39,7 +39,10 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	@Override
 	protected boolean isTargeting(BlockPos pos)
 	{
-		return targets.contains(pos);
+		synchronized (targets)
+		{
+			return targets.contains(pos);
+		}
 	}
 
 	@Override
@@ -121,7 +124,11 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 				}
 			}
 
-			this.targets = newTargets;
+			synchronized (targets)
+			{
+				this.targets = newTargets;
+			}
+			
 			this.worldObj.markBlockForUpdate(this.pos);
 
 			for (BlockPos changedPos : changedPositions)
