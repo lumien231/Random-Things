@@ -87,7 +87,7 @@ public class ItemModels
 		registerItem(ModItems.entityFilter);
 		registerItem(ModItems.itemFilter);
 		registerItem(ModItems.spectreKey);
-		// registerItem(ModItems.craftingRecipe);
+		registerItem(ModItems.redstoneActivator);
 
 		registerBricks();
 		registerBiomeStone();
