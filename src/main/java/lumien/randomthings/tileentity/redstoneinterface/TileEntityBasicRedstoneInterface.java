@@ -9,8 +9,10 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.SimpleComponent;
+import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.BlockPos.MutableBlockPos;
@@ -55,15 +57,15 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 			if (oldTarget != null)
 			{
 				IBlockState targetState = worldObj.getBlockState(oldTarget);
-				targetState.getBlock().onNeighborBlockChange(worldObj, oldTarget, targetState, this.blockType);
-				worldObj.notifyNeighborsOfStateChange(oldTarget, targetState.getBlock());
+				targetState.getBlock().onNeighborBlockChange(worldObj, oldTarget, targetState, Blocks.redstone_block);
+				worldObj.notifyNeighborsOfStateChange(oldTarget, Blocks.redstone_block);
 			}
 
 			if (this.target != null)
 			{
 				IBlockState targetState = worldObj.getBlockState(target);
-				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, this.blockType);
-				worldObj.notifyNeighborsOfStateChange(target, targetState.getBlock());
+				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.redstone_block);
+				worldObj.notifyNeighborsOfStateChange(target, Blocks.redstone_block);
 			}
 		}
 	}
@@ -74,7 +76,7 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 		{
 			IBlockState targetState = worldIn.getBlockState(target);
 			targetState.getBlock().onNeighborBlockChange(worldIn, target, targetState, neighborBlock);
-			worldIn.notifyNeighborsOfStateChange(target, targetState.getBlock());
+			worldIn.notifyNeighborsOfStateChange(target, neighborBlock);
 		}
 	}
 
@@ -85,8 +87,8 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 		if (this.target != null)
 		{
 			IBlockState targetState = worldObj.getBlockState(target);
-			targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, this.blockType);
-			worldObj.notifyNeighborsOfStateChange(target, targetState.getBlock());
+			targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.redstone_block);
+			worldObj.notifyNeighborsOfStateChange(target, Blocks.redstone_block);
 		}
 	}
 

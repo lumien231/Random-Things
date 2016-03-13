@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.NBTUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInvBasic;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -134,8 +136,8 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 			for (BlockPos changedPos : changedPositions)
 			{
 				IBlockState targetState = worldObj.getBlockState(changedPos);
-				targetState.getBlock().onNeighborBlockChange(worldObj, changedPos, targetState, this.blockType);
-				worldObj.notifyNeighborsOfStateChange(changedPos, targetState.getBlock());
+				targetState.getBlock().onNeighborBlockChange(worldObj, changedPos, targetState, Blocks.redstone_block);
+				worldObj.notifyNeighborsOfStateChange(changedPos, Blocks.redstone_block);
 			}
 		}
 	}
@@ -154,8 +156,8 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 			if (target != null)
 			{
 				IBlockState targetState = worldObj.getBlockState(target);
-				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, this.blockType);
-				worldObj.notifyNeighborsOfStateChange(target, targetState.getBlock());
+				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.redstone_block);
+				worldObj.notifyNeighborsOfStateChange(target, Blocks.redstone_block);
 			}
 		}
 	}
@@ -169,7 +171,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 			{
 				IBlockState targetState = worldObj.getBlockState(target);
 				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, neighborBlock);
-				worldObj.notifyNeighborsOfStateChange(target, targetState.getBlock());
+				worldObj.notifyNeighborsOfStateChange(target, neighborBlock);
 			}
 		}
 	}

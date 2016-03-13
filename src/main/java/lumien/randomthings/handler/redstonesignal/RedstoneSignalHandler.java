@@ -60,7 +60,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 	{
 		IBlockState targetState = worldObj.getBlockState(pos);
 		targetState.getBlock().onNeighborBlockChange(worldObj, pos, targetState, Blocks.redstone_block);
-		worldObj.notifyNeighborsOfStateChange(pos, targetState.getBlock());
+		worldObj.notifyNeighborsOfStateChange(pos, Blocks.redstone_block);
 	}
 
 	public synchronized boolean addSignal(World worldObj, BlockPos pos, int duration, int strength)
