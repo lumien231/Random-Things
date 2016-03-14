@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.mojang.authlib.GameProfile;
 
 import lumien.randomthings.block.BlockBlockBreaker;
+import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -162,15 +163,20 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 	{
 		if (mining && uuid != null)
 		{
-			resetProgress();
+			resetProgress(state);
 		}
 	}
-
+	
 	private void resetProgress()
+	{
+		resetProgress(this.worldObj.getBlockState(this.pos));
+	}
+
+	private void resetProgress(IBlockState state)
 	{
 		if (uuid != null)
 		{
-			BlockPos targetPos = pos.offset(worldObj.getBlockState(pos).getValue(BlockBlockBreaker.FACING));
+			BlockPos targetPos = pos.offset(state.getValue(BlockBlockBreaker.FACING));
 			worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, -1);
 
 			curBlockDamage = 0;
