@@ -7,6 +7,7 @@ import lumien.randomthings.lib.Colors;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageAnalogEmitter;
 import lumien.randomthings.tileentity.TileEntityAnalogEmitter;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -56,8 +57,11 @@ public class GuiAnalogEmitter extends GuiContainer
 	{
 		fontRendererObj.drawString(I18n.format("tile.analogEmitter.name", new Object[0]), 4, 6, 4210752);
 
-		int stringWidth = fontRendererObj.getStringWidth(analogEmitter.emitLevel + "");
-		fontRendererObj.drawString(analogEmitter.emitLevel + "", xSize / 2 - stringWidth / 2 + 3, ySize / 2 - fontRendererObj.FONT_HEIGHT / 2 + 5, Colors.RED_INT);
+		if (analogEmitter != null)
+		{
+			int stringWidth = fontRendererObj.getStringWidth(analogEmitter.emitLevel + "");
+			fontRendererObj.drawString(analogEmitter.emitLevel + "", xSize / 2 - stringWidth / 2 + 3, ySize / 2 - fontRendererObj.FONT_HEIGHT / 2 + 5, Colors.RED_INT);
+		}
 	}
 
 	@Override
