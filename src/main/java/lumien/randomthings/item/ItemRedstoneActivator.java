@@ -13,6 +13,8 @@ public class ItemRedstoneActivator extends ItemBase
 	public ItemRedstoneActivator()
 	{
 		super("redstoneActivator");
+		
+		this.setMaxStackSize(1);
 	}
 
 	@Override
