@@ -63,7 +63,7 @@ public class ModItems
 		ingredients = new ItemIngredient();
 		itemFilter = new ItemItemFilter();
 		spectreKey = new ItemSpectreKey();
-		soundRecorder = new ItemSoundRecorder();
+		//soundRecorder = new ItemSoundRecorder(); REMOVE FOR NOW
 		redstoneActivator = new ItemRedstoneActivator();
 
 		grassSeeds = new ItemGrassSeeds();

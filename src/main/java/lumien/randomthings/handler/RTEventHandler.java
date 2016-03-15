@@ -117,7 +117,7 @@ public class RTEventHandler
 	{
 		ItemStack currentlyEquipped;
 
-		if (event.name != null && Minecraft.getMinecraft().thePlayer != null && (currentlyEquipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem()) != null && currentlyEquipped.getItem() == ModItems.soundRecorder)
+		if (event.name != null && ModItems.soundRecorder!=null &&  Minecraft.getMinecraft().thePlayer != null && (currentlyEquipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem()) != null && currentlyEquipped.getItem() == ModItems.soundRecorder)
 		{
 			MessageSoundRecorder message = new MessageSoundRecorder(event.name);
 
