@@ -73,6 +73,8 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 			{
 				firstTick = false;
 				initFakePlayer();
+				
+				onNeighborBlockChange(worldObj, pos, this.worldObj.getBlockState(pos), null);
 			}
 
 			if (mining)
