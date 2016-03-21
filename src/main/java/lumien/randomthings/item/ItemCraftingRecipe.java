@@ -10,6 +10,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -39,14 +42,14 @@ public class ItemCraftingRecipe extends ItemBase
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		if (!worldIn.isRemote)
 		{
 			playerIn.openGui(RandomThings.instance, GuiIds.CRAFTING_RECIPE, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
 		}
 
-		return itemStackIn;
+		return new ActionResult(EnumActionResult.SUCCESS,itemStackIn);
 	}
 
 	public static void save(ItemStack toSave, InventoryCrafting craftMatrix, IInventory craftResult)

@@ -6,14 +6,13 @@ import java.util.UUID;
 
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.InventoryUtil;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 
@@ -150,9 +149,9 @@ public class EnderLetterHandler extends WorldSavedData
 		}
 
 		@Override
-		public IChatComponent getDisplayName()
+		public ITextComponent getDisplayName()
 		{
-			return new ChatComponentTranslation(getName());
+			return new TextComponentTranslation(getName());
 		}
 
 		@Override

@@ -18,7 +18,7 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInterface implements IInvBasic
@@ -130,8 +130,9 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 			{
 				this.targets = newTargets;
 			}
-			
-			this.worldObj.markBlockForUpdate(this.pos);
+
+			IBlockState state = this.worldObj.getBlockState(this.pos);
+			this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 
 			for (BlockPos changedPos : changedPositions)
 			{

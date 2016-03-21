@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -20,7 +21,7 @@ public class ItemEntityFilter extends ItemBase
 	{
 		super("entityFilter");
 	}
-	
+
 	public static Class getEntityClass(ItemStack filter)
 	{
 		NBTTagCompound compound;
@@ -42,7 +43,7 @@ public class ItemEntityFilter extends ItemBase
 						return registration.getEntityClass();
 					}
 				}
-				
+
 			}
 			else
 			{
@@ -76,7 +77,7 @@ public class ItemEntityFilter extends ItemBase
 						return registration.getEntityClass().isAssignableFrom(entity.getClass());
 					}
 				}
-				
+
 			}
 			else
 			{
@@ -90,11 +91,11 @@ public class ItemEntityFilter extends ItemBase
 	}
 
 	@Override
-	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target)
+	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand)
 	{
 		if (!playerIn.worldObj.isRemote)
 		{
-			stack = playerIn.getCurrentEquippedItem();
+			stack = playerIn.getHeldItemMainhand();
 			if (stack.getTagCompound() == null)
 			{
 				stack.setTagCompound(new NBTTagCompound());
@@ -154,7 +155,7 @@ public class ItemEntityFilter extends ItemBase
 			{
 				int entityID = compound.getInteger("entityID");
 
-				entityName = EntityList.getStringFromID(entityID);
+				entityName = EntityList.getEntityStringFromClass((EntityList.getClassFromID(entityID)));
 			}
 
 			if (entityName != null)

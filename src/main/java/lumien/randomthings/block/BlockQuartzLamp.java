@@ -2,9 +2,10 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -16,17 +17,16 @@ public class BlockQuartzLamp extends BlockBase
 	{
 		super("quartzLamp", Material.ground);
 
-		this.setStepSound(soundTypeGlass);
+		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3F);
 	}
 
 	@Override
-	public int getLightValue(IBlockAccess world, BlockPos pos)
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() != this)
 		{
-			return state.getBlock().getLightValue(world, pos);
+			return state.getBlock().getLightValue(state, world, pos);
 		}
 
 		if (FMLCommonHandler.instance().getEffectiveSide().isServer())
@@ -40,7 +40,7 @@ public class BlockQuartzLamp extends BlockBase
 	}
 
 	@Override
-	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
 	{
 		if (worldIn.isRemote && worldIn.getLight(pos) == 15)
 		{

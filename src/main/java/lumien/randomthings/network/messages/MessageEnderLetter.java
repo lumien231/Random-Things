@@ -45,7 +45,7 @@ public class MessageEnderLetter implements IRTMessage
 
 			if (serverHandler.playerEntity != null)
 			{
-				ItemStack equipped = serverHandler.playerEntity.getCurrentEquippedItem();
+				ItemStack equipped = serverHandler.playerEntity.getHeldItemMainhand();
 
 				if (equipped != null && equipped.getItem() instanceof ItemEnderLetter)
 				{

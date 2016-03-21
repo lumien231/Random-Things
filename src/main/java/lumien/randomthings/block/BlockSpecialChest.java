@@ -5,10 +5,11 @@ import java.util.List;
 import lumien.randomthings.item.block.ItemBlockSpecialChest;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,9 +20,12 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.ILockableContainer;
@@ -33,13 +37,21 @@ public class BlockSpecialChest extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
+	protected static final AxisAlignedBB CHEST_AABB = new AxisAlignedBB(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+
 	public BlockSpecialChest()
 	{
 		super("specialChest", Material.wood, ItemBlockSpecialChest.class);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
-		this.setHardness(2.5F).setStepSound(soundTypeWood);
+		this.setHardness(2.5F);
+		this.setSoundType(SoundType.WOOD);
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return CHEST_AABB;
 	}
 
 	@Override
@@ -53,7 +65,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
@@ -83,27 +95,21 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return -1;
-	}
-
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-	{
-		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override
@@ -147,7 +153,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{
@@ -183,13 +189,13 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride()
+	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(World worldIn, BlockPos pos)
+	public int getComparatorInputOverride(IBlockState state, World worldIn, BlockPos pos)
 	{
 		return Container.calcRedstoneFromInventory(this.getLockableContainer(worldIn, pos));
 	}
@@ -214,8 +220,8 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { FACING });
+		return new BlockStateContainer(this, new IProperty[] { FACING });
 	}
 }

@@ -1,5 +1,6 @@
 package lumien.randomthings.client.models.blocks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,19 +8,22 @@ import lumien.randomthings.block.BlockFluidDisplay;
 import lumien.randomthings.lib.AtlasSprite;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemOverride;
+import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.model.IBakedModel;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.model.ISmartBlockModel;
-import net.minecraftforge.client.model.ISmartItemModel;
+import net.minecraft.world.World;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
+public class ModelFluidDisplay implements IBakedModel
 {
 	HashMap<String, ModelCubeAll> modelCache;
 	HashMap<String, ModelCubeAll> modelCacheFlowing;
@@ -37,9 +41,16 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 	}
 
 	@Override
-	public IBakedModel handleBlockState(IBlockState state)
+	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
 	{
+		if (state == null)
+		{
+			return defaultModel.getQuads(state, side, rand);
+		}
+
 		IExtendedBlockState extendedState = (IExtendedBlockState) state;
+
+		IBakedModel model = defaultModel;
 
 		String fluidName = extendedState.getValue(BlockFluidDisplay.FLUID);
 		if (fluidName != null)
@@ -50,7 +61,7 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 
 			if (cache.containsKey(fluidName))
 			{
-				return cache.get(fluidName);
+				model = cache.get(fluidName);
 			}
 			else
 			{
@@ -61,24 +72,12 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 					TextureMap textureMap = Minecraft.getMinecraft().getTextureMapBlocks();
 
 					cache.put(fluidName, new ModelCubeAll(flowing ? textureMap.getAtlasSprite(fluid.getFlowing().toString()) : textureMap.getAtlasSprite(fluid.getStill().toString()), true));
-					return cache.get(fluidName);
+					model = cache.get(fluidName);
 				}
 			}
 		}
-		
-		return defaultModel;
-	}
 
-	@Override
-	public List getFaceQuads(EnumFacing p_177551_1_)
-	{
-		return defaultModel.getFaceQuads(p_177551_1_);
-	}
-
-	@Override
-	public List getGeneralQuads()
-	{
-		return defaultModel.getGeneralQuads();
+		return model.getQuads(extendedState, side, rand);
 	}
 
 	@Override
@@ -113,8 +112,8 @@ public class ModelFluidDisplay implements ISmartBlockModel, ISmartItemModel
 	}
 
 	@Override
-	public IBakedModel handleItemState(ItemStack stack)
+	public ItemOverrideList getOverrides()
 	{
-		return defaultModel;
+		return ItemOverrideList.NONE;
 	}
 }

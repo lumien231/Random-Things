@@ -1,13 +1,15 @@
 package lumien.randomthings.block;
 
 import lumien.randomthings.tileentity.TileEntityPlayerInterface;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockPlayerInterface extends BlockContainerBase
@@ -16,7 +18,7 @@ public class BlockPlayerInterface extends BlockContainerBase
 	{
 		super("playerInterface", Material.rock);
 
-		this.setStepSound(soundTypeStone);
+		this.setSoundType(SoundType.STONE);
 		this.setHardness(4.0F);
 	}
 
@@ -27,9 +29,9 @@ public class BlockPlayerInterface extends BlockContainerBase
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override

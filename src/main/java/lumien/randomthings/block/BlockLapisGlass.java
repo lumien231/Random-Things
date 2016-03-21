@@ -3,14 +3,16 @@ package lumien.randomthings.block;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,29 +24,30 @@ public class BlockLapisGlass extends BlockBase
 	{
 		super("lapisGlass", Material.ground);
 
-		this.setStepSound(soundTypeGlass);
+		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3f);
 	}
 
 	@Override
-	public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity collidingEntity)
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn)
 	{
-		AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBox(worldIn, pos, state);
+		AxisAlignedBB blockBox = state.getCollisionBoundingBox(worldIn, pos);
+		AxisAlignedBB axisalignedbb = blockBox.offset(pos);
 
-		if (axisalignedbb1 != null && mask.intersectsWith(axisalignedbb1) && (collidingEntity instanceof EntityPlayer))
+		if (axisalignedbb != null && entityBox.intersectsWith(axisalignedbb) && entityIn != null && entityIn instanceof EntityPlayer)
 		{
-			list.add(axisalignedbb1);
+			collidingBoxes.add(axisalignedbb);
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
 	{
-		IBlockState iblockstate = worldIn.getBlockState(pos);
+		IBlockState iblockstate = worldIn.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
 
-		if (worldIn.getBlockState(pos.offset(side.getOpposite())) != iblockstate)
+		if (state != iblockstate)
 		{
 			return true;
 		}
@@ -54,24 +57,24 @@ public class BlockLapisGlass extends BlockBase
 			return false;
 		}
 
-		return block == this ? false : super.shouldSideBeRendered(worldIn, pos, side);
+		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullBlock(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
@@ -80,5 +83,11 @@ public class BlockLapisGlass extends BlockBase
 	public boolean isVisuallyOpaque()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean isNormalCube(IBlockState state)
+	{
+		return false;
 	}
 }

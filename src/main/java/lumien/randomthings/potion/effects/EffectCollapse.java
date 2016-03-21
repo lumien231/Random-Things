@@ -2,22 +2,22 @@ package lumien.randomthings.potion.effects;
 
 import java.awt.Color;
 
+import lumien.randomthings.potion.PotionBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EffectCollapse extends Potion
+public class EffectCollapse extends PotionBase
 {
 	ResourceLocation icon = new ResourceLocation("randomthings:textures/gui/effects/collapse.png");
 	
 	public EffectCollapse()
 	{
-		super(new ResourceLocation("collapse"), false, Color.PINK.getRGB());
+		super("collapse", false, Color.PINK.getRGB());
 		
 		this.setPotionName("Collapse");
 	}

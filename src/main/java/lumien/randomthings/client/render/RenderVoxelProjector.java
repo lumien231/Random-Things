@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderVoxelProjector extends TileEntitySpecialRenderer
+public class RenderVoxelProjector extends TileEntitySpecialRenderer<TileEntityVoxelProjector>
 {
 	public RenderVoxelProjector()
 	{
@@ -56,14 +56,14 @@ public class RenderVoxelProjector extends TileEntitySpecialRenderer
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float p_180535_8_, int p_180535_9_)
+	public void renderTileEntityAt(TileEntityVoxelProjector te, double x, double y, double z, float p_180535_8_, int p_180535_9_)
 	{
 		this.func_180538_a((TileEntityVoxelProjector) te, x, y, z, p_180535_8_, p_180535_9_);
 	}
 
 	@Override
-	public boolean forceTileEntityRender()
-	{
-		return true;
-	}
+	public boolean isGlobalRenderer(TileEntityVoxelProjector voxelProjector)
+    {
+        return true;
+    }
 }

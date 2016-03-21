@@ -1,13 +1,23 @@
 package lumien.randomthings.util.client;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-
-import org.lwjgl.opengl.GL11;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 
 public class RenderUtils
 {
@@ -18,7 +28,7 @@ public class RenderUtils
 		Minecraft.getMinecraft().entityRenderer.disableLightmap();
 
 		Tessellator t = Tessellator.getInstance();
-		WorldRenderer wr = t.getWorldRenderer();
+		VertexBuffer wr = t.getBuffer();
 
 		GlStateManager.disableTexture2D();
 
@@ -63,6 +73,24 @@ public class RenderUtils
 		GlStateManager.enableTexture2D();
 
 		Minecraft.getMinecraft().entityRenderer.enableLightmap();
+	}
+
+	public static Map<EnumFacing, List<BakedQuad>> getQuadFaceMapFromState(IBlockState state)
+	{
+		HashMap<EnumFacing, List<BakedQuad>> map = new HashMap<EnumFacing, List<BakedQuad>>();
+
+		IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().getModelForState(state);
+
+		Random rng = new Random();
+
+		for (EnumFacing f : EnumFacing.values())
+		{
+			map.put(f, model.getQuads(state, f, rng.nextLong()));
+		}
+		
+		map.put(null, model.getQuads(state, null, rng.nextLong()));
+
+		return map;
 	}
 
 	public static void drawCube(float posX, float posY, float posZ, float size, int red, int green, int blue, int alpha)

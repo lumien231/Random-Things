@@ -43,7 +43,7 @@ public class ContainerEnderLetter extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return ItemStack.areItemsEqual(inventory.getItemStack(), playerIn.getCurrentEquippedItem());
+		return ItemStack.areItemsEqual(inventory.getItemStack(), playerIn.getHeldItemMainhand());
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ContainerEnderLetter extends Container
 
 		for (int i = 0; i < 9; i++)
 		{
-			if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getCurrentEquippedItem())
+			if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getHeldItemMainhand())
 			{
 				addSlotToContainer(new SlotDisplay(inventoryPlayer, i, 8 + i * 18, 109));
 			}

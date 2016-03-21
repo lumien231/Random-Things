@@ -12,7 +12,7 @@ import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -105,7 +105,7 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable,
 	public void setChatMessage(String chatMessage)
 	{
 		this.chatMessage = chatMessage;
-		this.worldObj.markBlockForUpdate(pos);
+		this.syncTE();
 	}
 
 	public void setPlayerUUID(UUID playerUUID)
@@ -131,7 +131,7 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable,
 	{
 		if (!this.worldObj.isRemote)
 		{
-			UUID sendUUID = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(user).getGameProfile().getId();
+			UUID sendUUID = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(user).getGameProfile().getId();
 			if (sendUUID.equals(this.playerUUID))
 			{
 				if (this instanceof Environment)

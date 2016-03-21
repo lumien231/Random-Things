@@ -5,13 +5,16 @@ import java.util.Random;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.item.block.ItemBlockColoredGrass;
+import lumien.randomthings.lib.IRTBlockColor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,30 +22,26 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockColoredGrass extends Block
+public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 {
 	public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
 	public BlockColoredGrass()
 	{
-		super(Material.grass);
+		super("coloredGrass", Material.grass, ItemBlockColoredGrass.class);
 
 		this.setHardness(0.6F);
-		this.setStepSound(soundTypeGrass);
-		this.setCreativeTab(RandomThings.instance.creativeTab);
+		this.setSoundType(SoundType.PLANT);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(COLOR, EnumDyeColor.WHITE));
-		this.setUnlocalizedName("coloredGrass");
 		this.setTickRandomly(true);
-
-		GameRegistry.registerBlock(this, ItemBlockColoredGrass.class, "coloredGrass");
 	}
 
 	@Override
@@ -53,17 +52,9 @@ public class BlockColoredGrass extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getRenderColor(IBlockState state)
+	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
 	{
 		EnumDyeColor color = (EnumDyeColor) state.getValue(COLOR);
-		return ItemDye.dyeColors[color.getDyeDamage()];
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
-	{
-		EnumDyeColor color = (EnumDyeColor) worldIn.getBlockState(pos).getValue(COLOR);
 		return ItemDye.dyeColors[color.getDyeDamage()];
 	}
 
@@ -78,7 +69,8 @@ public class BlockColoredGrass extends Block
 	{
 		if (!worldIn.isRemote)
 		{
-			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getBlock().getLightOpacity(worldIn, pos.up()) > 2)
+			IBlockState upState = worldIn.getBlockState(pos.up());
+			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && upState.getBlock().getLightOpacity(upState, worldIn, pos.up()) > 2)
 			{
 				worldIn.setBlockState(pos, Blocks.dirt.getDefaultState());
 			}
@@ -87,16 +79,22 @@ public class BlockColoredGrass extends Block
 				if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
 				{
 					for (int i = 0; i < 4; ++i)
-					{
-						BlockPos blockpos1 = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
-						Block block = worldIn.getBlockState(blockpos1.up()).getBlock();
-						IBlockState iblockstate1 = worldIn.getBlockState(blockpos1);
+                    {
+                        BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
-						if (iblockstate1.getBlock() == Blocks.dirt && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos1.up()) >= 4 && block.getLightOpacity(worldIn, blockpos1.up()) <= 2)
-						{
-							worldIn.setBlockState(blockpos1, state);
-						}
-					}
+                        if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos))
+                        {
+                            return;
+                        }
+
+                        IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
+                        IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
+
+                        if (iblockstate1.getBlock() == Blocks.dirt && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
+                        {
+                            worldIn.setBlockState(blockpos, state);
+                        }
+                    }
 				}
 			}
 		}
@@ -135,15 +133,15 @@ public class BlockColoredGrass extends Block
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { COLOR });
+		return new BlockStateContainer(this, new IProperty[] { COLOR });
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT_MIPPED;
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 }

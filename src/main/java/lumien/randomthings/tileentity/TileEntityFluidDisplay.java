@@ -41,7 +41,7 @@ public class TileEntityFluidDisplay extends TileEntityBase
 	{
 		flowing = !flowing;
 		this.markDirty();
-		worldObj.markBlockForUpdate(this.pos);
+		syncTE();
 	}
 
 	public String getFluid()

@@ -7,8 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -37,27 +38,20 @@ public class BlockEnderCore extends BlockContainerBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity)
+	public boolean canEntityDestroy(IBlockState state,IBlockAccess world, BlockPos pos, Entity entity)
 	{
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos)
-	{
-		return 210;
 	}
 }

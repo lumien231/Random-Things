@@ -3,8 +3,8 @@ package lumien.randomthings.container;
 import lumien.randomthings.container.slots.SlotDisplay;
 import lumien.randomthings.container.slots.SlotGhost;
 import lumien.randomthings.item.ItemItemFilter;
-import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
+import lumien.randomthings.item.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -18,7 +18,7 @@ public class ContainerItemFilter extends Container
 
 	public ContainerItemFilter(EntityPlayer player, World world, int x, int y, int z)
 	{
-		ItemStack filterStack = player.getCurrentEquippedItem();
+		ItemStack filterStack = player.getHeldItemMainhand();
 
 		if (filterStack != null && filterStack.getItem() == ModItems.itemFilter)
 		{
@@ -45,13 +45,13 @@ public class ContainerItemFilter extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return playerIn.getCurrentEquippedItem() != null && playerIn.getCurrentEquippedItem().getItem() == ModItems.itemFilter;
+		return playerIn.getHeldItemMainhand() != null && playerIn.getHeldItemMainhand().getItem() == ModItems.itemFilter;
 	}
 
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn)
 	{
-		ItemStack filterStack = playerIn.getCurrentEquippedItem();
+		ItemStack filterStack = playerIn.getHeldItemMainhand();
 
 		if (filterStack != null && filterStack.getItem() == ModItems.itemFilter)
 		{
@@ -71,7 +71,7 @@ public class ContainerItemFilter extends Container
 
 		for (int i = 0; i < 9; i++)
 		{
-			if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getCurrentEquippedItem())
+			if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getHeldItemMainhand())
 			{
 				addSlotToContainer(new SlotDisplay(inventoryPlayer, i, 8 + i * 18, 109));
 			}

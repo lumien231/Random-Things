@@ -3,7 +3,7 @@ package lumien.randomthings.client.models.blocks;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.EmptyStateMapper;
 import lumien.randomthings.client.models.FocusStateMapper;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockModels

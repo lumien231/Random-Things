@@ -12,6 +12,7 @@ import lumien.randomthings.util.WorldUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -20,12 +21,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class TileEntityPotionVaporizer extends TileEntityBase implements ITickable, ISidedInventory
@@ -165,7 +167,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	{
 		if (this.currentPotionEffect != null)
 		{
-			return Potion.potionTypes[currentPotionEffect.getPotionID()].getLiquidColor();
+			return currentPotionEffect.getPotion().getLiquidColor();
 		}
 		else
 		{
@@ -202,9 +204,9 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 
 				if (output == null || output.stackSize < 64)
 				{
-					List<PotionEffect> effects = Items.potionitem.getEffects(newPotion);
+					List<PotionEffect> effects = PotionUtils.getEffectsFromStack((newPotion));
 
-					if (effects != null && !effects.isEmpty() && !Potion.potionTypes[effects.get(0).getPotionID()].isInstant())
+					if (effects != null && !effects.isEmpty() && !effects.get(0).getPotion().isInstant())
 					{
 						currentPotionEffect = new PotionEffect(effects.get(0));
 						durationLeft = currentPotionEffect.getDuration();
@@ -245,11 +247,11 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 
 				for (EntityLivingBase entity : (List<EntityLivingBase>) WorldUtil.getEntitiesWithinAABBs(worldObj, EntityLivingBase.class, bbs))
 				{
-					PotionEffect activeEffect = entity.getActivePotionEffect(Potion.potionTypes[currentPotionEffect.getPotionID()]);
-					boolean isNightVision = currentPotionEffect.getPotionID() == Potion.nightVision.id;
+					PotionEffect activeEffect = entity.getActivePotionEffect(currentPotionEffect.getPotion());
+					boolean isNightVision = currentPotionEffect.getPotion() == MobEffects.nightVision;
 					if (activeEffect == null || activeEffect.getDuration() < (isNightVision ? 205 : 3))
 					{
-						PotionEffect applyEffect = new PotionEffect(new PotionEffect(currentPotionEffect.getPotionID(), isNightVision ? 205 : 80, currentPotionEffect.getAmplifier(), currentPotionEffect.getIsAmbient(), currentPotionEffect.getIsShowParticles()));
+						PotionEffect applyEffect = new PotionEffect(new PotionEffect(currentPotionEffect.getPotion(), isNightVision ? 205 : 80, currentPotionEffect.getAmplifier(), currentPotionEffect.getIsAmbient(), currentPotionEffect.doesShowParticles()));
 						entity.addPotionEffect(applyEffect);
 					}
 				}
@@ -266,8 +268,8 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	{
 		if (!worldObj.isRemote && currentPotionEffect != null && worldObj.getTotalWorldTime() % 5 == 0)
 		{
-			MessagePotionVaporizerParticles message = new MessagePotionVaporizerParticles(new ArrayList<BlockPos>(affectedBlocks), Potion.potionTypes[currentPotionEffect.getPotionID()].getLiquidColor());
-			PacketHandler.INSTANCE.sendToAllAround(message, new TargetPoint(this.worldObj.provider.getDimensionId(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 32));
+			MessagePotionVaporizerParticles message = new MessagePotionVaporizerParticles(new ArrayList<BlockPos>(affectedBlocks), currentPotionEffect.getPotion().getLiquidColor());
+			PacketHandler.INSTANCE.sendToAllAround(message, new TargetPoint(this.worldObj.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 32));
 		}
 	}
 
@@ -436,7 +438,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public IChatComponent getDisplayName()
+	public ITextComponent getDisplayName()
 	{
 		return inventory.getDisplayName();
 	}
@@ -480,7 +482,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		}
 		else
 		{
-			return currentPotionEffect.getPotionID();
+			return Potion.getIdFromPotion(currentPotionEffect.getPotion());
 		}
 	}
 

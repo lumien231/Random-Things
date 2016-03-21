@@ -37,7 +37,7 @@ public class GuiItemFilter extends GuiContainer
 
 
 		this.player = player;
-		this.itemFilter = player.getCurrentEquippedItem();
+		this.itemFilter = player.getHeldItemMainhand();
 
 		repres = ((ContainerItemFilter) this.inventorySlots).repres;
 	}

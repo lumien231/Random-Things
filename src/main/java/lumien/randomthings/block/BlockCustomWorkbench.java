@@ -6,9 +6,10 @@ import lumien.randomthings.container.ContainerCustomWorkbench;
 import lumien.randomthings.tileentity.TileEntityCustomWorkbench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,11 +21,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
@@ -42,7 +45,8 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	{
 		super("customWorkbench", Material.wood);
 
-		this.setHardness(2.5F).setStepSound(soundTypeWood);
+		this.setHardness(2.5F);
+		this.setSoundType(SoundType.WOOD);
 	}
 
 	@Override
@@ -65,9 +69,9 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public boolean canRenderInLayer(EnumWorldBlockLayer layer)
+	public boolean canRenderInLayer(BlockRenderLayer layer)
 	{
-		return layer == EnumWorldBlockLayer.SOLID || layer == EnumWorldBlockLayer.TRANSLUCENT;
+		return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
@@ -77,13 +81,13 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
 		return new ExtendedBlockState(this, new IProperty[] {}, new IUnlistedProperty[] { WOOD_STATE });
 	}
@@ -164,7 +168,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{
@@ -209,13 +213,13 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		}
 
 		/**
-		 * Get the formatted ChatComponent that will be used for the sender's
+		 * Get the formatted TextComponent that will be used for the sender's
 		 * username in chat
 		 */
 		@Override
-		public IChatComponent getDisplayName()
+		public ITextComponent getDisplayName()
 		{
-			return new ChatComponentTranslation(ModBlocks.customWorkbench.getUnlocalizedName() + ".name", new Object[0]);
+			return new TextComponentTranslation(ModBlocks.customWorkbench.getUnlocalizedName() + ".name", new Object[0]);
 		}
 
 		@Override

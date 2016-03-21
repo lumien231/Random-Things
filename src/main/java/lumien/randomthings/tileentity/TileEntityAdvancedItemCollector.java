@@ -5,6 +5,7 @@ import java.util.List;
 import lumien.randomthings.block.BlockItemCollector;
 import lumien.randomthings.item.ItemItemFilter;
 import lumien.randomthings.util.InventoryUtil;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInvBasic;
 import net.minecraft.inventory.IInventory;
@@ -13,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
@@ -144,7 +145,8 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 			this.rangeX = MAX_RANGE;
 		}
 
-		this.worldObj.markBlockForUpdate(pos);
+		IBlockState state = this.worldObj.getBlockState(this.pos);
+		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 	}
 
 	public int getRangeY()
@@ -165,7 +167,8 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 			this.rangeY = MAX_RANGE;
 		}
 
-		this.worldObj.markBlockForUpdate(pos);
+		IBlockState state = this.worldObj.getBlockState(this.pos);
+		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 	}
 
 	public int getRangeZ()
@@ -186,7 +189,8 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 			this.rangeZ = MAX_RANGE;
 		}
 
-		this.worldObj.markBlockForUpdate(pos);
+		IBlockState state = this.worldObj.getBlockState(this.pos);
+		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 	}
 
 

@@ -5,12 +5,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -39,19 +41,19 @@ public class BlockContactLever extends BlockBase
 	}
 
 	@Override
-	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
-		return state.getValue(POWERED).booleanValue() ? 15 : 0;
+		return blockState.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
 	@Override
-	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
-		return state.getValue(POWERED).booleanValue() ? 15 : 0;
+		return blockState.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
 	@Override
-	public boolean canProvidePower()
+	public boolean canProvidePower(IBlockState state)
 	{
 		return true;
 	}
@@ -101,48 +103,44 @@ public class BlockContactLever extends BlockBase
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { FACING, POWERED });
+		return new BlockStateContainer(this, new IProperty[] { FACING, POWERED });
 	}
 
-	private void setDefaultDirection(World worldIn, BlockPos pos, IBlockState state)
-	{
-		if (!worldIn.isRemote)
-		{
-			EnumFacing enumfacing = state.getValue(FACING);
-			boolean flag = worldIn.getBlockState(pos.north()).getBlock().isFullBlock();
-			boolean flag1 = worldIn.getBlockState(pos.south()).getBlock().isFullBlock();
+	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
+    {
+        if (!worldIn.isRemote)
+        {
+            IBlockState iblockstate = worldIn.getBlockState(pos.north());
+            IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
+            IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
+            IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
+            EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
 
-			if (enumfacing == EnumFacing.NORTH && flag && !flag1)
-			{
-				enumfacing = EnumFacing.SOUTH;
-			}
-			else if (enumfacing == EnumFacing.SOUTH && flag1 && !flag)
-			{
-				enumfacing = EnumFacing.NORTH;
-			}
-			else
-			{
-				boolean flag2 = worldIn.getBlockState(pos.west()).getBlock().isFullBlock();
-				boolean flag3 = worldIn.getBlockState(pos.east()).getBlock().isFullBlock();
+            if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
+            {
+                enumfacing = EnumFacing.SOUTH;
+            }
+            else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock())
+            {
+                enumfacing = EnumFacing.NORTH;
+            }
+            else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock())
+            {
+                enumfacing = EnumFacing.EAST;
+            }
+            else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock())
+            {
+                enumfacing = EnumFacing.WEST;
+            }
 
-				if (enumfacing == EnumFacing.WEST && flag2 && !flag3)
-				{
-					enumfacing = EnumFacing.EAST;
-				}
-				else if (enumfacing == EnumFacing.EAST && flag3 && !flag2)
-				{
-					enumfacing = EnumFacing.WEST;
-				}
-			}
-
-			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
-		}
-	}
+            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+        }
+    }
 	
 	@Override
-	public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean isSideSolid(IBlockState base_state,IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		return true;
 	}
@@ -150,20 +148,20 @@ public class BlockContactLever extends BlockBase
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(FACING, BlockPistonBase.getFacingFromEntity(worldIn, pos, placer));
+		return this.getDefaultState().withProperty(FACING, BlockPistonBase.getFacingFromEntity( pos, placer));
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		worldIn.setBlockState(pos, state.withProperty(FACING, BlockPistonBase.getFacingFromEntity(worldIn, pos, placer)), 2);
+		worldIn.setBlockState(pos, state.withProperty(FACING, BlockPistonBase.getFacingFromEntity( pos, placer)), 2);
 	}
 
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.onBlockAdded(worldIn, pos, state);
-		this.setDefaultDirection(worldIn, pos, state);
+		this.setDefaultFacing(worldIn, pos, state);
 	}
 
 	public void activate(World world, BlockPos pos, EnumFacing fromFacing)
@@ -172,7 +170,7 @@ public class BlockContactLever extends BlockBase
 		state = state.cycleProperty(POWERED);
 		world.setBlockState(pos, state, 3);
 		this.notifyNeighbors(world, pos, fromFacing);
-		world.playSoundEffect(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, "random.click", 0.3F, state.getValue(POWERED).booleanValue() ? 0.6F : 0.5F);
+		world.playSound(null,pos.add(0.5,0.5,0.5), SoundEvents.ui_button_click,SoundCategory.BLOCKS, 0.3F, state.getValue(POWERED).booleanValue() ? 0.6F : 0.5F);
 		return;
 
 	}

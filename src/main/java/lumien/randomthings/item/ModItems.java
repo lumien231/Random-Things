@@ -7,7 +7,6 @@ public class ModItems
 	public static ItemStableEnderpearl stableEnderpearl;
 	public static ItemBiomeCrystal biomeCrystal;
 	public static ItemPositionFilter positionFilter;
-	public static ItemImmortalityChalice chaliceOfImmortality;
 	public static ItemSummoningPendulum summoningPendulum;
 	public static ItemGrassSeeds grassSeeds;
 	public static ItemBean beans;
@@ -40,7 +39,6 @@ public class ModItems
 		stableEnderpearl = new ItemStableEnderpearl();
 		biomeCrystal = new ItemBiomeCrystal();
 		positionFilter = new ItemPositionFilter();
-		chaliceOfImmortality = new ItemImmortalityChalice();
 		summoningPendulum = new ItemSummoningPendulum();
 		beans = new ItemBean();
 		beanStew = new ItemBeanStew();

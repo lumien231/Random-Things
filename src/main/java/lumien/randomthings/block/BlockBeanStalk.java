@@ -6,16 +6,19 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -24,15 +27,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockBeanStalk extends BlockBase
 {
 	boolean strongMagic;
+	
+	protected static final AxisAlignedBB STALK_AABB = new AxisAlignedBB(0.4f, 0, 0.4f, 0.6f, 1, 0.6f);
 
 	protected BlockBeanStalk(boolean strongMagic)
 	{
 		super(strongMagic ? "beanStalk" : "lesserBeanStalk", Material.plants);
 
-		this.setStepSound(soundTypeGrass);
-		this.setBlockBounds(0.4f, 0, 0.4f, 0.6f, 1, 0.6f);
+		this.setSoundType(SoundType.PLANT);
 
 		this.strongMagic = strongMagic;
+	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return STALK_AABB;
 	}
 
 	@Override
@@ -89,15 +99,16 @@ public class BlockBeanStalk extends BlockBase
 				}
 			}
 
-			if (worldIn.getBlockState(pos.up()).getBlock().getBlockHardness(worldIn, pos.up()) != -1)
+			IBlockState upState = worldIn.getBlockState(pos.up());
+			if (upState.getBlock().getBlockHardness(upState,worldIn, pos.up()) != -1)
 			{
 				if (!worldIn.isAirBlock(pos.up()))
 				{
-					worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), worldIn.getBlockState(pos.up()).getBlock().stepSound.getBreakSound(), 1, 1f);
+					worldIn.playSound(null,pos, worldIn.getBlockState(pos.up()).getBlock().getSoundType().getBreakSound(),SoundCategory.BLOCKS, 1, 1f);
 				}
 				else
 				{
-					worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), this.stepSound.getBreakSound(), 1, 2);
+					worldIn.playSound(null,pos, this.getSoundType().getBreakSound(),SoundCategory.BLOCKS, 1, 2);
 				}
 				
 				worldIn.playAuxSFX(2005, pos.up(), 0);
@@ -159,26 +170,26 @@ public class BlockBeanStalk extends BlockBase
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
+	public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
 
 	@Override
-	public boolean isFullCube()
-	{
-		return false;
-	}
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	public boolean isLadder(IBlockAccess world, BlockPos pos, EntityLivingBase entity)
+	public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity)
 	{
 		return true;
 	}

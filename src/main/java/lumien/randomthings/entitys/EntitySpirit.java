@@ -1,9 +1,7 @@
 package lumien.randomthings.entitys;
 
-import java.awt.Color;
 import java.util.Random;
 
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
@@ -11,23 +9,15 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntitySpirit extends EntityFlying
 {
@@ -98,7 +88,7 @@ public class EntitySpirit extends EntityFlying
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1.0);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0);
 	}
 
 	public void fall(float distance, float damageMultiplier)
@@ -202,7 +192,7 @@ public class EntitySpirit extends EntityFlying
 
 		public void onUpdateMoveHelper()
 		{
-			if (this.update)
+			if (this.action == EntityMoveHelper.Action.MOVE_TO)
 			{
 				double d0 = this.posX - this.parentEntity.posX;
 				double d1 = this.posY - this.parentEntity.posY;
@@ -219,7 +209,7 @@ public class EntitySpirit extends EntityFlying
 				}
 				else
 				{
-					this.update = false;
+					this.action = EntityMoveHelper.Action.WAIT;
 				}
 			}
 		}
@@ -238,7 +228,7 @@ public class EntitySpirit extends EntityFlying
 			{
 				axisalignedbb = axisalignedbb.offset(d0, d1, d2);
 
-				if (!this.parentEntity.worldObj.getCollidingBoundingBoxes(this.parentEntity, axisalignedbb).isEmpty())
+				if (!this.parentEntity.worldObj.getCubes(this.parentEntity, axisalignedbb).isEmpty())
 				{
 					return false;
 				}

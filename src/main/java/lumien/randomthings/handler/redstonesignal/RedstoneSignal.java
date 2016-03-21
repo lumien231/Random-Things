@@ -2,7 +2,7 @@ package lumien.randomthings.handler.redstonesignal;
 
 import lumien.randomthings.util.NBTUtil;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public class RedstoneSignal
 {

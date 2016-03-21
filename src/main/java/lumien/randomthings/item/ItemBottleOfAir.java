@@ -4,10 +4,14 @@ import java.lang.reflect.Field;
 
 import lumien.randomthings.asm.MCPNames;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class ItemBottleOfAir extends ItemBase
@@ -17,7 +21,7 @@ public class ItemBottleOfAir extends ItemBase
 	{
 		try
 		{
-			inUseField = EntityPlayer.class.getDeclaredField(MCPNames.field("field_71072_f"));
+			inUseField = EntityLivingBase.class.getDeclaredField(MCPNames.field("field_184628_bn"));
 		}
 		catch (NoSuchFieldException e)
 		{
@@ -49,13 +53,15 @@ public class ItemBottleOfAir extends ItemBase
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World worldObj, EntityPlayer player)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World worldObj, EntityPlayer player, EnumHand hand)
 	{
 		if (player.isInsideOfMaterial(Material.water))
 		{
-			player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
+			player.setActiveHand(hand);
+			
+			return new ActionResult(EnumActionResult.SUCCESS, itemStack);
 		}
-		return itemStack;
+		return new ActionResult(EnumActionResult.FAIL, itemStack);
 	}
 
 	@Override
@@ -65,17 +71,17 @@ public class ItemBottleOfAir extends ItemBase
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
+	public void onUsingTick(ItemStack stack, EntityLivingBase livingEntity, int count)
 	{
-		super.onUsingTick(stack, player, count);
+		super.onUsingTick(stack, livingEntity, count);
 
-		if (player.isInsideOfMaterial(Material.water) || player.getAir() < 270)
+		if (livingEntity.isInsideOfMaterial(Material.water) || livingEntity.getAir() < 270)
 		{
 			if (count % 5 == 0)
 			{
-				if (player.getAir() < 270)
+				if (livingEntity.getAir() < 270)
 				{
-					player.setAir(player.getAir() + 20);
+					livingEntity.setAir(livingEntity.getAir() + 20);
 				}
 			}
 
@@ -83,7 +89,7 @@ public class ItemBottleOfAir extends ItemBase
 			{
 				try
 				{
-					inUseField.set(player, 20);
+					inUseField.set(livingEntity, 20);
 				}
 				catch (IllegalArgumentException e)
 				{

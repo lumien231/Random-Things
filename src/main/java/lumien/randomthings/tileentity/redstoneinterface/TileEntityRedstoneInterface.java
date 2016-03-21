@@ -5,19 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.machine.Callback;
-import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.SimpleComponent;
 import lumien.randomthings.tileentity.TileEntityBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.BlockPos.MutableBlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional;
 
 public abstract class TileEntityRedstoneInterface extends TileEntityBase
 {

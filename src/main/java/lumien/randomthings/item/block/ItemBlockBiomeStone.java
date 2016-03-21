@@ -1,17 +1,23 @@
 package lumien.randomthings.item.block;
 
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockBiomeStone;
+import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBlockBiomeStone extends ItemBlock
+public class ItemBlockBiomeStone extends ItemBlock implements IRTItemColor
 {
 	public ItemBlockBiomeStone(Block block)
 	{
 		super(block);
+		
+		RandomThings.proxy.scheduleColor(this);
 	}
 
 	@Override
@@ -28,8 +34,8 @@ public class ItemBlockBiomeStone extends ItemBlock
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int renderPass)
+	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
-		return this.block.getBlockColor();
+		return ModBlocks.biomeStone.colorMultiplier(null, Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer.getPosition(), 0);
 	}
 }

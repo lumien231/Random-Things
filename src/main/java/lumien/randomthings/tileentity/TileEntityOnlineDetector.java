@@ -12,9 +12,10 @@ import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Optional;
 
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
@@ -36,7 +37,7 @@ public class TileEntityOnlineDetector extends TileEntityBase implements SimpleCo
 		{
 			if (worldObj.getTotalWorldTime() % 20 == 0)
 			{
-				boolean playerCheck = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(username) != null;
+				boolean playerCheck = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(username) != null;
 
 				if (playerOnline != playerCheck)
 				{
@@ -58,7 +59,7 @@ public class TileEntityOnlineDetector extends TileEntityBase implements SimpleCo
 	{
 		this.username = username;
 		this.markDirty();
-		this.worldObj.markBlockForUpdate(pos);
+		this.syncTE();
 	}
 
 	public String getPlayerName()
@@ -83,7 +84,7 @@ public class TileEntityOnlineDetector extends TileEntityBase implements SimpleCo
 	@Optional.Method(modid = "OpenComputers")
 	public Object[] getPlayerList(Context context, Arguments args)
 	{
-		return new Object[] { Arrays.asList(MinecraftServer.getServer().getAllUsernames()) };
+		return new Object[] { Arrays.asList(FMLCommonHandler.instance().getMinecraftServerInstance().getAllUsernames()) };
 	}
 
 	@Override

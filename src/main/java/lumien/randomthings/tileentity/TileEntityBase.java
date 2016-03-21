@@ -1,9 +1,10 @@
 package lumien.randomthings.tileentity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityBase extends TileEntity
@@ -25,7 +26,7 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public final void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	public final void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
 	{
 		if (writeNBTToDescriptionPacket())
 		{
@@ -34,7 +35,8 @@ public abstract class TileEntityBase extends TileEntity
 
 		if (renderAfterData())
 		{
-			this.worldObj.markBlockForUpdate(this.pos);
+			IBlockState state = this.worldObj.getBlockState(this.pos);
+			this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 		}
 	}
 
@@ -46,12 +48,13 @@ public abstract class TileEntityBase extends TileEntity
 		{
 			this.writeDataToNBT(nbtTag);
 		}
-		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
 	
-	protected void syncTE()
+	public void syncTE()
 	{
-		this.worldObj.markBlockForUpdate(this.pos);
+		IBlockState state = this.worldObj.getBlockState(this.pos);
+		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 	}
 
 	public abstract void writeDataToNBT(NBTTagCompound compound);

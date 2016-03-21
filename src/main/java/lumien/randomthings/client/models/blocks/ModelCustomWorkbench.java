@@ -1,32 +1,35 @@
 package lumien.randomthings.client.models.blocks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import lumien.randomthings.block.BlockCustomWorkbench;
 import lumien.randomthings.client.RenderReference;
 import lumien.randomthings.lib.AtlasSprite;
-
+import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemOverride;
+import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.IBakedModel;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.model.ISmartBlockModel;
-import net.minecraftforge.client.model.ISmartItemModel;
+import net.minecraft.world.World;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
-public class ModelCustomWorkbench implements ISmartBlockModel, ISmartItemModel
+public class ModelCustomWorkbench implements IBakedModel
 {
 	ModelCubeOverlay defaultModel;
 
 	HashMap<IBlockState, ModelCubeOverlay> modelCache;
-	HashMap<IBlockState, ModelCubeOverlay> itemModelCache;
 
 	@AtlasSprite(resource = "randomthings:blocks/workbench/crafting_front")
 	static TextureAtlasSprite overlayFront;
@@ -42,7 +45,6 @@ public class ModelCustomWorkbench implements ISmartBlockModel, ISmartItemModel
 	public ModelCustomWorkbench()
 	{
 		modelCache = new HashMap<IBlockState, ModelCubeOverlay>();
-		itemModelCache = new HashMap<IBlockState, ModelCubeOverlay>();
 
 		overlays = new HashMap<EnumFacing, TextureAtlasSprite>();
 
@@ -55,38 +57,56 @@ public class ModelCustomWorkbench implements ISmartBlockModel, ISmartItemModel
 	}
 
 	@Override
-	public List getFaceQuads(EnumFacing p_177551_1_)
+	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
 	{
-		return defaultModel.getFaceQuads(p_177551_1_);
-	}
+		checkDefault();
+		
+		IBakedModel model = defaultModel;
 
-	@Override
-	public List getGeneralQuads()
-	{
-		return defaultModel.getGeneralQuads();
+		IExtendedBlockState extendedState = (IExtendedBlockState) state;
+
+		IBlockState woodState = extendedState.getValue(BlockCustomWorkbench.WOOD_STATE);
+
+		if (woodState != null)
+		{
+			if (modelCache.containsKey(woodState))
+			{
+				model = modelCache.get(woodState);
+			}
+			else
+			{
+				modelCache.put(woodState, new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(woodState), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.planks.getDefaultState()).getParticleTexture(), true));
+				model = modelCache.get(woodState);
+			}
+		}
+		return model.getQuads(woodState, side, rand);
 	}
 
 	@Override
 	public boolean isAmbientOcclusion()
 	{
+		checkDefault();
 		return defaultModel.isAmbientOcclusion();
 	}
 
 	@Override
 	public boolean isGui3d()
 	{
+		checkDefault();
 		return defaultModel.isGui3d();
 	}
 
 	@Override
 	public boolean isBuiltInRenderer()
 	{
+		checkDefault();
 		return defaultModel.isBuiltInRenderer();
 	}
 
 	@Override
 	public TextureAtlasSprite getParticleTexture()
 	{
+		checkDefault();
 		return defaultModel.getParticleTexture();
 	}
 
@@ -96,77 +116,65 @@ public class ModelCustomWorkbench implements ISmartBlockModel, ISmartItemModel
 	{
 		return RenderReference.BLOCK_ITEM_TRANSFORM;
 	}
-
-	@Override
-	public IBakedModel handleItemState(ItemStack stack)
+	
+	private void checkDefault()
 	{
-		NBTTagCompound compound;
-
-		String woodName;
-		int meta;
-
-		if ((compound = stack.getTagCompound()) != null)
+		if (defaultModel == null)
 		{
-			woodName = compound.getString("woodName");
-			meta = compound.getInteger("woodMeta");
-		}
-		else
-		{
-			woodName = "minecraft:planks";
-			meta = 0;
-		}
-
-		Block woodBlock = Block.getBlockFromName(woodName);
-
-		if (woodBlock == null)
-		{
-			woodBlock = Blocks.planks;
-			meta = 0;
-		}
-
-		IBlockState woodState = woodBlock.getStateFromMeta(meta);
-
-		if (woodState == null)
-		{
-			return defaultModel;
-		}
-
-		if (itemModelCache.containsKey(woodState))
-		{
-			return itemModelCache.get(woodState);
-		}
-		else
-		{
-			itemModelCache.put(woodState, new ModelCubeOverlay(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().getModelForState(woodState), overlays, true, true));
-			return itemModelCache.get(woodState);
+			defaultModel = new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(Blocks.planks.getDefaultState()), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.planks.getDefaultState()).getParticleTexture(), true);
 		}
 	}
 
 	@Override
-	public IBakedModel handleBlockState(IBlockState state)
+	public ItemOverrideList getOverrides()
 	{
-		if (defaultModel == null)
+		return new ItemOverrideList(new ArrayList<ItemOverride>())
 		{
-			defaultModel = new ModelCubeOverlay(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().getModelForState(Blocks.planks.getDefaultState()), overlays, true, false);
-		}
+			@Override
+			public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity)
+			{
+				checkDefault();
+				NBTTagCompound compound;
 
-		IExtendedBlockState extendedState = (IExtendedBlockState) state;
+				String woodName;
+				int meta;
 
-		IBlockState woodState = extendedState.getValue(BlockCustomWorkbench.WOOD_STATE);
+				if ((compound = stack.getTagCompound()) != null)
+				{
+					woodName = compound.getString("woodName");
+					meta = compound.getInteger("woodMeta");
+				}
+				else
+				{
+					woodName = "minecraft:planks";
+					meta = 0;
+				}
 
-		if (woodState == null)
-		{
-			return defaultModel;
-		}
+				Block woodBlock = Block.getBlockFromName(woodName);
 
-		if (modelCache.containsKey(woodState))
-		{
-			return modelCache.get(woodState);
-		}
-		else
-		{
-			modelCache.put(woodState, new ModelCubeOverlay(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().getModelForState(woodState), overlays, true, false));
-			return modelCache.get(woodState);
-		}
+				if (woodBlock == null)
+				{
+					woodBlock = Blocks.planks;
+					meta = 0;
+				}
+
+				IBlockState woodState = woodBlock.getStateFromMeta(meta);
+
+				if (woodState == null)
+				{
+					return defaultModel;
+				}
+
+				if (modelCache.containsKey(woodState))
+				{
+					return modelCache.get(woodState);
+				}
+				else
+				{
+					modelCache.put(woodState, new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(woodState), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.planks.getDefaultState()).getParticleTexture(), true));
+					return modelCache.get(woodState);
+				}
+			}
+		};
 	}
 }

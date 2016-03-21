@@ -56,11 +56,7 @@ public class ClassTransformer implements IClassTransformer
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] basicClass)
 	{
-		if (transformedName.equals("net.minecraft.item.Item"))
-		{
-			return patchItemClass(basicClass);
-		}
-		else if (transformedName.equals("net.minecraft.world.World"))
+		if (transformedName.equals("net.minecraft.world.World"))
 		{
 			return patchWorldClass(basicClass);
 		}
@@ -72,15 +68,15 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchBlock(basicClass);
 		}
-		else if (transformedName.equals("net.minecraft.client.renderer.entity.RendererLivingEntity"))
+		else if (transformedName.equals("net.minecraft.client.renderer.entity.RenderLivingBase"))
 		{
-			return patchRenderLiving(basicClass);
+			return patchRenderLivingBase(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.entity.EntityLivingBase"))
 		{
 			return patchEntityLivingBase(basicClass);
 		}
-		else if (transformedName.equals("net.minecraft.client.renderer.entity.RenderItem"))
+		else if (transformedName.equals("net.minecraft.client.renderer.RenderItem"))
 		{
 			return patchRenderItem(basicClass);
 		}
@@ -90,15 +86,13 @@ public class ClassTransformer implements IClassTransformer
 		}
 		else if (transformedName.equals("net.minecraft.world.gen.structure.StructureOceanMonumentPieces$MonumentCoreRoom"))
 		{
-			return patchOceanCoreRoom(basicClass);
+			// return patchOceanCoreRoom(basicClass); TODO Reimplement Without
+			// asm?
 		}
 		else if (transformedName.equals("net.minecraft.block.BlockLiquid"))
 		{
-			return patchLiquidBlock(basicClass);
-		}
-		else if (transformedName.equals("net.minecraft.item.ItemArmor"))
-		{
-			return patchItemArmor(basicClass);
+			// return patchLiquidBlock(basicClass); TODO Ehhhh, was this fixed
+			// by vanilla?
 		}
 		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer"))
 		{
@@ -136,7 +130,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new VarInsnNode(ALOAD, 1));
 			toInsert.add(new VarInsnNode(ALOAD, 2));
 			toInsert.add(new VarInsnNode(ALOAD, 3));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldLiquidSideBeRendered", "(Lnet/minecraft/block/BlockLiquid;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/BlockPos;Lnet/minecraft/util/EnumFacing;)I", false));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldLiquidSideBeRendered", "(Lnet/minecraft/block/BlockLiquid;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/EnumFacing;)I", false));
 			toInsert.add(new InsnNode(DUP));
 			toInsert.add(new JumpInsnNode(IFLT, l1));
 			toInsert.add(new InsnNode(IRETURN));
@@ -152,64 +146,6 @@ public class ClassTransformer implements IClassTransformer
 		return writer.toByteArray();
 	}
 
-	private byte[] patchOceanCoreRoom(byte[] basicClass)
-	{
-		ClassNode classNode = new ClassNode();
-		ClassReader classReader = new ClassReader(basicClass);
-		classReader.accept(classNode, 0);
-		logger.log(Level.DEBUG, "Found StructureOceanMonumentPieces$MonumentCoreRoom Class: " + classNode.name);
-
-		MethodNode addComponentParts = null;
-
-		for (MethodNode mn : classNode.methods)
-		{
-			if (mn.name.equals(MCPNames.method("func_74875_a")))
-			{
-				addComponentParts = mn;
-				break;
-			}
-		}
-
-		if (addComponentParts != null)
-		{
-			logger.log(Level.DEBUG, " - Found addComponentParts (1/1)");
-
-			for (int i = 0; i < addComponentParts.instructions.size(); i++)
-			{
-				AbstractInsnNode ain = addComponentParts.instructions.get(i);
-
-				if (ain instanceof InsnNode)
-				{
-					InsnNode in = (InsnNode) ain;
-
-					if (in.getOpcode() == IRETURN)
-					{
-						InsnList toInsert = new InsnList();
-
-						toInsert.add(new VarInsnNode(ALOAD, 0));
-						toInsert.add(new VarInsnNode(ALOAD, 1));
-						toInsert.add(new VarInsnNode(ALOAD, 0));
-						toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/world/gen/structure/StructureComponent", MCPNames.field("field_74887_e"), "Lnet/minecraft/world/gen/structure/StructureBoundingBox;"));
-						toInsert.add(new VarInsnNode(ALOAD, 3));
-						toInsert.add(new VarInsnNode(ALOAD, 0));
-						toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/world/gen/structure/StructureComponent", MCPNames.field("field_74885_f"), "Lnet/minecraft/util/EnumFacing;"));
-						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "handleOceanCoreRoomGeneration", "(Lnet/minecraft/world/gen/structure/StructureOceanMonumentPieces$MonumentCoreRoom;Lnet/minecraft/world/World;Lnet/minecraft/world/gen/structure/StructureBoundingBox;Lnet/minecraft/world/gen/structure/StructureBoundingBox;Lnet/minecraft/util/EnumFacing;)V", false));
-
-						addComponentParts.instructions.insertBefore(in, toInsert);
-
-						i += 8;
-					}
-				}
-			}
-
-		}
-
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-		classNode.accept(writer);
-
-		return writer.toByteArray();
-	}
-
 	private byte[] patchLayerArmorBase(byte[] basicClass)
 	{
 		ClassNode classNode = new ClassNode();
@@ -217,28 +153,28 @@ public class ClassTransformer implements IClassTransformer
 		classReader.accept(classNode, 0);
 		logger.log(Level.DEBUG, "Found LayerArmorBase Class: " + classNode.name);
 
-		MethodNode func_177183_a = null; // Where the effect is rendered
-		MethodNode func_177182_a = null; // Getting ItemStack from here
+		MethodNode renderEnchantedGlint = null; // Where the effect is rendered
+		MethodNode renderArmorLayer = null; // Getting ItemStack from here
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals("func_177183_a"))
+			if (mn.name.equals(MCPNames.method("func_188364_a")))
 			{
-				func_177183_a = mn;
+				renderEnchantedGlint = mn;
 			}
-			else if (mn.name.equals(MCPNames.method("func_177182_a")))
+			else if (mn.name.equals(MCPNames.method("func_188361_a")))
 			{
-				func_177182_a = mn;
+				renderArmorLayer = mn;
 			}
 		}
 
-		if (func_177183_a != null)
+		if (renderEnchantedGlint != null)
 		{
-			logger.log(Level.DEBUG, "- Found func_177183_a (Effect Rendering 1/2)");
+			logger.log(Level.DEBUG, "- Found renderEnchantedGlint (Effect Rendering 1/2)");
 
-			for (int i = 0; i < func_177183_a.instructions.size(); i++)
+			for (int i = 0; i < renderEnchantedGlint.instructions.size(); i++)
 			{
-				AbstractInsnNode ain = func_177183_a.instructions.get(i);
+				AbstractInsnNode ain = renderEnchantedGlint.instructions.get(i);
 
 				if (ain instanceof MethodInsnNode)
 				{
@@ -246,31 +182,48 @@ public class ClassTransformer implements IClassTransformer
 
 					if (min.owner.equals("net/minecraft/client/renderer/GlStateManager") && min.name.equals(MCPNames.method("func_179131_c")))
 					{
-						func_177183_a.instructions.insert(min, new MethodInsnNode(INVOKESTATIC, asmHandler, "armorEnchantmentHook", "()V", false));
+						renderEnchantedGlint.instructions.insert(min, new MethodInsnNode(INVOKESTATIC, asmHandler, "armorEnchantmentHook", "()V", false));
 					}
 				}
 			}
 		}
 
-		if (func_177182_a != null)
+		int renderCounter = 0;
+		if (renderArmorLayer != null)
 		{
-			logger.log(Level.DEBUG, "- Found func_177182_a (ItemStack Information 2/2)");
-			for (int i = 0; i < func_177182_a.instructions.size(); i++)
+			logger.log(Level.DEBUG, "- Found renderArmorLayer (ItemStack Information & Armor Coloring 2/2)");
+			for (int i = 0; i < renderArmorLayer.instructions.size(); i++)
 			{
-				AbstractInsnNode ain = func_177182_a.instructions.get(i);
+				AbstractInsnNode ain = renderArmorLayer.instructions.get(i);
 
 				if (ain instanceof MethodInsnNode)
 				{
 					MethodInsnNode min = (MethodInsnNode) ain;
 
-					if (min.name.equals("func_177183_a"))
+					if (min.name.equals("func_188364_a"))
 					{
 						logger.log(Level.DEBUG, "- Set currentlyRendering");
 						InsnList toInsert = new InsnList();
 						toInsert.add(new VarInsnNode(ALOAD, 10));
 						toInsert.add(new FieldInsnNode(PUTSTATIC, asmHandler, "currentlyRendering", "Lnet/minecraft/item/ItemStack;"));
-						func_177182_a.instructions.insertBefore(min, toInsert);
-						break;
+						renderArmorLayer.instructions.insertBefore(min, toInsert);
+
+						i += 2;
+					}
+
+					if (min.name.equals(MCPNames.method("func_78088_a")))
+					{
+						if (renderCounter == 1)
+						{
+							logger.log(Level.DEBUG, "- Found render");
+							InsnList toInsert = new InsnList();
+
+							toInsert.add(new VarInsnNode(ALOAD, 10));
+							toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "armorColorHook", "(Lnet/minecraft/item/ItemStack;)V", false));
+
+							renderArmorLayer.instructions.insertBefore(min, toInsert);
+						}
+						renderCounter++;
 					}
 				}
 			}
@@ -291,6 +244,7 @@ public class ClassTransformer implements IClassTransformer
 
 		MethodNode renderEffect = null;
 		MethodNode renderItem = null;
+		MethodNode renderQuads = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
@@ -298,15 +252,19 @@ public class ClassTransformer implements IClassTransformer
 			{
 				renderEffect = mn;
 			}
-			else if (mn.name.equals(MCPNames.method("func_180454_a")) && mn.desc.equals("(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/resources/model/IBakedModel;)V"))
+			else if (mn.name.equals(MCPNames.method("func_180454_a")) && mn.desc.equals("(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/renderer/block/model/IBakedModel;)V"))
 			{
 				renderItem = mn;
+			}
+			else if (mn.name.equals(MCPNames.method("func_175032_a")))
+			{
+				renderQuads = mn;
 			}
 		}
 
 		if (renderEffect != null)
 		{
-			logger.log(Level.DEBUG, "- Found renderEffect (1/2)");
+			logger.log(Level.DEBUG, "- Found renderEffect (1/3)");
 
 			for (int i = 0; i < renderEffect.instructions.size(); i++)
 			{
@@ -330,7 +288,7 @@ public class ClassTransformer implements IClassTransformer
 		if (renderItem != null)
 		{
 			boolean found = false;
-			logger.log(Level.DEBUG, "- Found renderItem (2/2) (" + renderItem.desc + ")");
+			logger.log(Level.DEBUG, "- Found renderItem (2/3) (" + renderItem.desc + ")");
 
 			for (int i = 0; i < renderItem.instructions.size(); i++)
 			{
@@ -377,6 +335,33 @@ public class ClassTransformer implements IClassTransformer
 						renderItem.instructions.insert(min, insertAfter);
 
 						i += 8;
+					}
+				}
+			}
+		}
+
+		if (renderQuads != null)
+		{
+			logger.log(Level.DEBUG, "- Found renderQuads (3/3) (" + renderQuads.desc + ")");
+
+			for (int i = 0; i < renderQuads.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = renderQuads.instructions.get(i);
+
+				if (ain instanceof MethodInsnNode)
+				{
+					MethodInsnNode min = (MethodInsnNode) ain;
+
+					if (min.name.equals("renderQuadColor"))
+					{
+						InsnList toInsert = new InsnList();
+
+						toInsert.add(new InsnNode(POP));
+						toInsert.add(new VarInsnNode(ALOAD, 4));
+						toInsert.add(new VarInsnNode(ILOAD, 9));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getColorFromItemStack", "(Lnet/minecraft/item/ItemStack;I)I", false));
+						renderQuads.instructions.insertBefore(min, toInsert);
+						i += 4;
 					}
 				}
 			}
@@ -442,18 +427,18 @@ public class ClassTransformer implements IClassTransformer
 		return writer.toByteArray();
 	}
 
-	private byte[] patchRenderLiving(byte[] basicClass)
+	private byte[] patchRenderLivingBase(byte[] basicClass)
 	{
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(basicClass);
 		classReader.accept(classNode, 0);
-		logger.log(Level.DEBUG, "Found RendererLivingEntity Class: " + classNode.name);
+		logger.log(Level.DEBUG, "Found RenderLivingBase Class: " + classNode.name);
 
 		MethodNode canRenderName = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(MCPNames.method("func_110813_b")))
+			if (mn.name.equals(MCPNames.method("func_177070_b")))
 			{
 				canRenderName = mn;
 				break;
@@ -467,7 +452,7 @@ public class ClassTransformer implements IClassTransformer
 			InsnList toInsert = new InsnList();
 
 			toInsert.add(new VarInsnNode(ALOAD, 1));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "canRenderName", "(Lnet/minecraft/entity/Entity;)Z", false));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "canRenderName", "(Lnet/minecraft/entity/EntityLivingBase;)Z", false));
 			toInsert.add(new JumpInsnNode(IFGT, l1));
 			toInsert.add(new InsnNode(ICONST_0));
 			toInsert.add(new InsnNode(IRETURN));
@@ -493,7 +478,7 @@ public class ClassTransformer implements IClassTransformer
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(MCPNames.method("func_180638_a")))
+			if (mn.name.equals(MCPNames.method("func_185477_a")))
 			{
 				addCollisionBoxesToList = mn;
 				break;
@@ -513,7 +498,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new VarInsnNode(ALOAD, 4));
 			toInsert.add(new VarInsnNode(ALOAD, 5));
 			toInsert.add(new VarInsnNode(ALOAD, 6));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "addCollisionBoxesToList", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/util/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;)Z", false));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "addCollisionBoxesToList", "(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;)Z", false));
 			toInsert.add(new JumpInsnNode(IFEQ, l1));
 			toInsert.add(new InsnNode(RETURN));
 			toInsert.add(l1);
@@ -534,84 +519,37 @@ public class ClassTransformer implements IClassTransformer
 		classReader.accept(classNode, 0);
 		logger.log(Level.DEBUG, "Found BlockRendererDispatcher Class: " + classNode.name);
 
-		MethodNode getModelFromBlockState = null;
+		MethodNode renderBlock = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(MCPNames.method("func_175022_a")))
+			if (mn.name.equals(MCPNames.method("func_175018_a")))
 			{
-				getModelFromBlockState = mn;
+				renderBlock = mn;
 			}
 		}
 
-		if (getModelFromBlockState != null)
+		if (renderBlock != null)
 		{
-			logger.log(Level.DEBUG, "- Found getModelFromBlockState (1/1)");
+			logger.log(Level.DEBUG, "- Found renderBlock (1/1)");
 
 			InsnList toInsert = new InsnList();
 			LabelNode l1 = new LabelNode(new Label());
 
+			toInsert.add(new VarInsnNode(ALOAD, 0));
 			toInsert.add(new VarInsnNode(ALOAD, 1));
 			toInsert.add(new VarInsnNode(ALOAD, 2));
 			toInsert.add(new VarInsnNode(ALOAD, 3));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getModelFromBlockState", "(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/BlockPos;)Lnet/minecraft/client/resources/model/IBakedModel;", false));
+			toInsert.add(new VarInsnNode(ALOAD, 4));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "renderBlock", "(Lnet/minecraft/client/renderer/BlockRendererDispatcher;Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/client/renderer/VertexBuffer;)I", false));
 			toInsert.add(new InsnNode(DUP));
-			toInsert.add(new InsnNode(ACONST_NULL));
-			toInsert.add(new JumpInsnNode(IF_ACMPEQ, l1));
-			toInsert.add(new InsnNode(ARETURN));
-			toInsert.add(l1);
-			toInsert.add(new InsnNode(POP));
-
-			getModelFromBlockState.instructions.insert(toInsert);
-		}
-
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-		classNode.accept(writer);
-
-		return writer.toByteArray();
-	}
-
-	private byte[] patchItemClass(byte[] basicClass)
-	{
-		ClassNode classNode = new ClassNode();
-		ClassReader classReader = new ClassReader(basicClass);
-		classReader.accept(classNode, 0);
-
-		logger.log(Level.DEBUG, "Found Item Class: " + classNode.name);
-
-		String getColorFromItemStackName = MCPNames.method("func_82790_a");
-		MethodNode getColorFromItemStack = null;
-
-		for (MethodNode mn : classNode.methods)
-		{
-			if (mn.name.equals(getColorFromItemStackName))
-			{
-				getColorFromItemStack = mn;
-			}
-		}
-
-		if (getColorFromItemStack != null)
-		{
-			logger.log(Level.DEBUG, "- Found getColorFromItemStack (1/1)");
-			LabelNode l0 = new LabelNode(new Label());
-			LabelNode l1 = new LabelNode(new Label());
-			LabelNode l2 = new LabelNode(new Label());
-
-			InsnList toInsert = new InsnList();
-
-			toInsert.add(l0);
-			toInsert.add(new VarInsnNode(ALOAD, 1));
-			toInsert.add(new VarInsnNode(ILOAD, 2));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getColorFromItemStack", "(Lnet/minecraft/item/ItemStack;I)I", false));
-			toInsert.add(new InsnNode(DUP));
-			toInsert.add(new LdcInsnNode(16777215));
-			toInsert.add(new JumpInsnNode(IF_ICMPEQ, l2));
-			toInsert.add(l1);
+			toInsert.add(new InsnNode(ICONST_2));
+			toInsert.add(new JumpInsnNode(IF_ICMPEQ, l1));
 			toInsert.add(new InsnNode(IRETURN));
-			toInsert.add(l2);
+			toInsert.add(l1);
 			toInsert.add(new InsnNode(POP));
 
-			getColorFromItemStack.instructions.insert(toInsert);
+			renderBlock.instructions.insert(toInsert);
 		}
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -637,7 +575,7 @@ public class ClassTransformer implements IClassTransformer
 			{
 				getRedstonePower = mn;
 			}
-			else if (mn.name.equals(MCPNames.method("func_175627_a")) && mn.desc.equals("(Lnet/minecraft/util/BlockPos;Lnet/minecraft/util/EnumFacing;)I"))
+			else if (mn.name.equals(MCPNames.method("func_175627_a")) && mn.desc.equals("(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/EnumFacing;)I"))
 			{
 				getStrongPower = mn;
 			}
@@ -649,7 +587,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (getRedstonePower != null)
 		{
-			logger.log(Level.DEBUG, "- Found getRedstonePower (1/2)");
+			logger.log(Level.DEBUG, "- Found getRedstonePower (1/3)");
 
 			InsnList toInsert = new InsnList();
 
@@ -658,7 +596,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new VarInsnNode(ALOAD, 0));
 			toInsert.add(new VarInsnNode(ALOAD, 1));
 			toInsert.add(new VarInsnNode(ALOAD, 2));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getRedstonePower", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/util/EnumFacing;)I", false));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getRedstonePower", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/EnumFacing;)I", false));
 			toInsert.add(new InsnNode(DUP));
 			toInsert.add(new JumpInsnNode(IFEQ, l1));
 			toInsert.add(new InsnNode(IRETURN));
@@ -670,7 +608,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (getStrongPower != null)
 		{
-			logger.log(Level.DEBUG, "- Found getStrongPower (2/2)");
+			logger.log(Level.DEBUG, "- Found getStrongPower (2/3)");
 
 			InsnList toInsert = new InsnList();
 
@@ -679,7 +617,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new VarInsnNode(ALOAD, 0));
 			toInsert.add(new VarInsnNode(ALOAD, 1));
 			toInsert.add(new VarInsnNode(ALOAD, 2));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getStrongPower", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;Lnet/minecraft/util/EnumFacing;)I", false));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getStrongPower", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/EnumFacing;)I", false));
 			toInsert.add(new InsnNode(DUP));
 			toInsert.add(new JumpInsnNode(IFEQ, l1));
 			toInsert.add(new InsnNode(IRETURN));
@@ -691,7 +629,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (isRainingAt != null)
 		{
-			logger.log(Level.DEBUG, "- Found isRainingAt");
+			logger.log(Level.DEBUG, "- Found isRainingAt (3/3)");
 
 			AbstractInsnNode returnNode = isRainingAt.instructions.get(isRainingAt.instructions.size() - 2);
 
@@ -703,56 +641,10 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new InsnNode(POP));
 			toInsert.add(new VarInsnNode(ALOAD, 0));
 			toInsert.add(new VarInsnNode(ALOAD, 1));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Z", false));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Z", false));
 			toInsert.add(returnLabel);
 
 			isRainingAt.instructions.insertBefore(returnNode, toInsert);
-		}
-
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-		classNode.accept(writer);
-
-		return writer.toByteArray();
-	}
-
-	private byte[] patchItemArmor(byte[] basicClass)
-	{
-		ClassNode classNode = new ClassNode();
-		ClassReader classReader = new ClassReader(basicClass);
-		classReader.accept(classNode, 0);
-		logger.log(Level.DEBUG, "Found ItemArmor Class: " + classNode.name);
-
-		MethodNode getColor = null;
-
-		for (MethodNode mn : classNode.methods)
-		{
-			if (mn.name.equals(MCPNames.method("func_82814_b")))
-			{
-				getColor = mn;
-			}
-		}
-
-		if (getColor != null)
-		{
-			logger.log(Level.DEBUG, "- Found getColor");
-
-			LabelNode l0 = new LabelNode(new Label());
-			LabelNode l1 = new LabelNode(new Label());
-			LabelNode l2 = new LabelNode(new Label());
-
-			InsnList toInsert = new InsnList();
-
-			toInsert.add(l0);
-			toInsert.add(new VarInsnNode(ALOAD, 1));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getColorFromArmorStack", "(Lnet/minecraft/item/ItemStack;)I", false));
-			toInsert.add(new InsnNode(DUP));
-			toInsert.add(new JumpInsnNode(Opcodes.IFLT, l2));
-			toInsert.add(l1);
-			toInsert.add(new InsnNode(IRETURN));
-			toInsert.add(l2);
-			toInsert.add(new InsnNode(POP));
-
-			getColor.instructions.insert(toInsert);
 		}
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -801,23 +693,23 @@ public class ClassTransformer implements IClassTransformer
 
 						insnPoint = (VarInsnNode) renderRainSnow.instructions.get(i - 1);
 					}
-					
+
 					if (min.name.equals(MCPNames.method("func_76746_c")))
 					{
 						logger.log(Level.DEBUG, "- Found getEnableSnow");
 						int jumpCounter = i + 1;
-						
+
 						int worldIndex = 5;
 						int blockPosIndex = 21;
-						
+
 						// Optifine Why :'(
-						for (LocalVariableNode lv:renderRainSnow.localVariables)
+						for (LocalVariableNode lv : renderRainSnow.localVariables)
 						{
 							if (lv.desc.equals("Lnet/minecraft/client/multiplayer/WorldClient;") || lv.desc.equals("Lnet/minecraft/world/World;"))
 							{
 								worldIndex = lv.index;
 							}
-							else if (lv.desc.equals("Lnet/minecraft/util/BlockPos$MutableBlockPos;"))
+							else if (lv.desc.equals("Lnet/minecraft/util/math/BlockPos$MutableBlockPos;"))
 							{
 								blockPosIndex = lv.index;
 							}
@@ -836,7 +728,7 @@ public class ClassTransformer implements IClassTransformer
 						InsnList toInsert = new InsnList();
 						toInsert.add(new VarInsnNode(ALOAD, worldIndex));
 						toInsert.add(new VarInsnNode(ALOAD, blockPosIndex));
-						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Z", false));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Z", false));
 						toInsert.add(new JumpInsnNode(IFEQ, labelNode));
 						renderRainSnow.instructions.insertBefore(insnPoint, toInsert);
 						i += 4;
@@ -862,7 +754,7 @@ public class ClassTransformer implements IClassTransformer
 						InsnList toInsert = new InsnList();
 						toInsert.add(new VarInsnNode(ALOAD, 3));
 						toInsert.add(new VarInsnNode(ALOAD, 15));
-						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/BlockPos;)Z", false));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Z", false));
 						toInsert.add(new JumpInsnNode(IFEQ, jumpTarget));
 
 						addRainParticles.instructions.insert(jin, toInsert);

@@ -4,12 +4,16 @@ import java.util.List;
 
 import lumien.randomthings.potion.ModPotions;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -72,56 +76,59 @@ public class ItemImbue extends ItemBase
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
-		playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
-		return itemStackIn;
+		playerIn.setActiveHand(hand);
+		return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase livingEntity)
 	{
-		if (!playerIn.capabilities.isCreativeMode)
+		if (livingEntity instanceof EntityPlayer)
 		{
-			--stack.stackSize;
-		}
-
-		if (!worldIn.isRemote)
-		{
-			clearImbues(playerIn);
-
-			switch (stack.getItemDamage())
+			EntityPlayer playerIn = (EntityPlayer) livingEntity;
+			if (!playerIn.capabilities.isCreativeMode)
 			{
-				case FIRE:
-					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueFire.id, 60 * 5 * 20));
-					break;
-				case POISON:
-					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbuePoison.id, 60 * 5 * 20));
-					break;
-				case EXPERIENCE:
-					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueExperience.id, 60 * 5 * 20));
-					break;
-				case WITHER:
-					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueWither.id, 60 * 5 * 20));
-					break;
-				case COLLAPSE:
-					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueCollapse.id, 60 * 5 * 20));
-					break;
+				--stack.stackSize;
+			}
+
+			if (!worldIn.isRemote)
+			{
+				clearImbues(playerIn);
+
+				switch (stack.getItemDamage())
+				{
+					case FIRE:
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueFire, 60 * 5 * 20));
+						break;
+					case POISON:
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbuePoison, 60 * 5 * 20));
+						break;
+					case EXPERIENCE:
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueExperience, 60 * 5 * 20));
+						break;
+					case WITHER:
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueWither, 60 * 5 * 20));
+						break;
+					case COLLAPSE:
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueCollapse, 60 * 5 * 20));
+						break;
+				}
+			}
+
+			if (!playerIn.capabilities.isCreativeMode)
+			{
+				if (stack.stackSize <= 0)
+				{
+					return new ItemStack(Items.glass_bottle);
+				}
+				else
+				{
+					playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+				}
 			}
 		}
-
-		if (!playerIn.capabilities.isCreativeMode)
-		{
-			if (stack.stackSize <= 0)
-			{
-				return new ItemStack(Items.glass_bottle);
-			}
-			else
-			{
-				playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
-			}
-		}
-
 		return stack;
 	}
 
@@ -129,23 +136,23 @@ public class ItemImbue extends ItemBase
 	{
 		if (player.isPotionActive(ModPotions.imbueFire))
 		{
-			player.removePotionEffect(ModPotions.imbueFire.id);
+			player.removePotionEffect(ModPotions.imbueFire);
 		}
 		else if (player.isPotionActive(ModPotions.imbuePoison))
 		{
-			player.removePotionEffect(ModPotions.imbuePoison.id);
+			player.removePotionEffect(ModPotions.imbuePoison);
 		}
 		else if (player.isPotionActive(ModPotions.imbueExperience))
 		{
-			player.removePotionEffect(ModPotions.imbueExperience.id);
+			player.removePotionEffect(ModPotions.imbueExperience);
 		}
 		else if (player.isPotionActive(ModPotions.imbueWither))
 		{
-			player.removePotionEffect(ModPotions.imbueWither.id);
+			player.removePotionEffect(ModPotions.imbueWither);
 		}
 		else if (player.isPotionActive(ModPotions.imbueCollapse))
 		{
-			player.removePotionEffect(ModPotions.imbueCollapse.id);
+			player.removePotionEffect(ModPotions.imbueCollapse);
 		}
 	}
 }

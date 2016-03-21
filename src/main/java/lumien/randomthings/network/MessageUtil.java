@@ -6,7 +6,8 @@ import io.netty.buffer.ByteBuf;
 import lumien.randomthings.asm.MCPNames;
 import net.minecraft.network.Packet;
 import net.minecraft.server.management.PlayerManager;
-import net.minecraft.util.BlockPos;
+import net.minecraft.server.management.PlayerManager.PlayerInstance;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -14,27 +15,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class MessageUtil
 {
-	static Method sendMethod;
-	static Method getInstanceMethod;
-
-	static
-	{
-		try
-		{
-			Class playerInstanceClass = PlayerManager.class.getDeclaredClasses()[0];
-			getInstanceMethod = PlayerManager.class.getDeclaredMethod(MCPNames.method("func_72690_a"), int.class, int.class, boolean.class);
-			getInstanceMethod.setAccessible(true);
-
-			sendMethod = playerInstanceClass.getDeclaredMethod(MCPNames.method("func_151251_a"), Packet.class);
-			sendMethod.setAccessible(true);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-
 	public static void writeBlockPos(BlockPos pos, ByteBuf buffer)
 	{
 		buffer.writeInt(pos.getX());
@@ -59,10 +39,10 @@ public class MessageUtil
 			{
 				Chunk c = worldObj.getChunkFromBlockCoords(pos);
 
-				PlayerManager playerManager = ((WorldServer) worldObj).getPlayerManager();
+				PlayerManager playerManager = ((WorldServer) worldObj).getPlayerChunkManager();
 
-				Object playerInstance = getInstanceMethod.invoke(playerManager, c.xPosition, c.zPosition, false);
-				sendMethod.invoke(playerInstance, PacketHandler.INSTANCE.getPacketFrom(message));
+				PlayerInstance playerInstance = playerManager.getEntry(c.xPosition, c.zPosition);
+				playerInstance.sendPacket(PacketHandler.INSTANCE.getPacketFrom(message));
 			}
 			catch (Exception e)
 			{

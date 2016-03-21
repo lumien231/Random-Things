@@ -5,20 +5,28 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockItemCollector extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
+	
+	protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 1.0F - 5 / 16.0F, 0.625F, 0.625F, 1.0F);
+	protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 0.0F, 0.625F, 0.625F, 5 / 16.0F);
+	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(1.0F - 5 / 16.0F, 0.375F, 0.375F, 1.0F, 0.625F, 0.625F);
+	protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0F, 0.375F, 0.375F, 5 / 16.0F, 0.625F, 0.625F);
+	protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.375F, 0.0F, 0.375F, 0.625F, 0.0F + 5 / 16.0F, 0.625F);
+	protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.375F, 1.0F - 5 / 16.0F, 0.375F, 0.625F, 1.0F, 0.625F);
 
 	protected BlockItemCollector()
 	{
@@ -47,19 +55,19 @@ public class BlockItemCollector extends BlockContainerBase
 	}
 
 	@Override
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
@@ -137,47 +145,33 @@ public class BlockItemCollector extends BlockContainerBase
 			return false;
 		}
 	}
-
+	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-	{
-		this.updateBlockBounds(worldIn.getBlockState(pos));
-	}
-
-	private void updateBlockBounds(IBlockState state)
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		EnumFacing enumfacing = state.getValue(FACING);
-		float f = 0.25F;
-		float f1 = 0.375F;
-		float f2 = 5 / 16.0F;
-		float f3 = 0.125F;
-		float f4 = 0.1875F;
-
 		switch (enumfacing)
 		{
 			case EAST:
-				this.setBlockBounds(0.0F, 0.375F, 0.375F, f2, 0.625F, 0.625F);
-				break;
+				return EAST_AABB;
 			case WEST:
-				this.setBlockBounds(1.0F - f2, 0.375F, 0.375F, 1.0F, 0.625F, 0.625F);
-				break;
+				return WEST_AABB;
 			case SOUTH:
-				this.setBlockBounds(0.375F, 0.375F, 0.0F, 0.625F, 0.625F, f2);
-				break;
+				return SOUTH_AABB;
 			case NORTH:
-				this.setBlockBounds(0.375F, 0.375F, 1.0F - f2, 0.625F, 0.625F, 1.0F);
-				break;
+				return NORTH_AABB;
 			case UP:
-				this.setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 0.0F + f2, 0.625F);
-				break;
+				return UP_AABB;
 			case DOWN:
-				this.setBlockBounds(0.375F, 1.0F - f2, 0.375F, 0.625F, 1.0F, 0.625F);
+				return DOWN_AABB;
 		}
+		
+		return UP_AABB;
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { FACING });
+		return new BlockStateContainer(this, new IProperty[] { FACING });
 	}
 }

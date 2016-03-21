@@ -6,7 +6,6 @@ import java.util.UUID;
 import com.mojang.authlib.GameProfile;
 
 import lumien.randomthings.block.BlockBlockBreaker;
-import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -16,13 +15,14 @@ import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 {
@@ -42,7 +42,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		if (uuid == null)
 		{
 			uuid = UUID.randomUUID();
-			this.worldObj.markBlockForUpdate(this.pos);
+			syncTE();
 		}
 
 		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) worldObj, new GameProfile(null, "RTBlockBreaker")));
@@ -51,10 +51,10 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
 		unbreakingIronPickaxe.getTagCompound().setBoolean("Unbreakable", true);
 
-		fakePlayer.get().setCurrentItemOrArmor(0, unbreakingIronPickaxe);
+		fakePlayer.get().setHeldItem(EnumHand.MAIN_HAND, unbreakingIronPickaxe);
 		fakePlayer.get().onGround = true;
 
-		fakePlayer.get().playerNetServerHandler = new NetHandlerPlayServer(MinecraftServer.getServer(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
+		fakePlayer.get().playerNetServerHandler = new NetHandlerPlayServer(FMLCommonHandler.instance().getMinecraftServerInstance(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
 		{
 			@Override
 			public void sendPacket(Packet packetIn)
@@ -83,7 +83,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 
 				IBlockState targetState = worldObj.getBlockState(targetPos);
 
-				this.curBlockDamage += targetState.getBlock().getPlayerRelativeBlockHardness(fakePlayer.get(), worldObj, targetPos);
+				this.curBlockDamage += targetState.getBlock().getPlayerRelativeBlockHardness(targetState,fakePlayer.get(), worldObj, targetPos);
 
 				if (curBlockDamage >= 1.0f)
 				{
@@ -93,7 +93,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 
 					if (fakePlayer.get() != null)
 					{
-						fakePlayer.get().theItemInWorldManager.tryHarvestBlock(targetPos);
+						fakePlayer.get().interactionManager.tryHarvestBlock(targetPos);
 					}
 				}
 				else

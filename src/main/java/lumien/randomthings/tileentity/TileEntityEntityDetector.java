@@ -17,7 +17,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.ITickable;
 
 public class TileEntityEntityDetector extends TileEntityBase implements ITickable
@@ -75,7 +75,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			if (newPowered != powered)
 			{
 				powered = newPowered;
-				this.worldObj.markBlockForUpdate(pos);
+				this.syncTE();
 				this.worldObj.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector);
 			}
 		}
@@ -96,7 +96,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			filter = FILTER.values()[0];
 		}
 
-		this.worldObj.markBlockForUpdate(this.pos);
+		syncTE();
 	}
 
 	private boolean checkSupposedPowereredState()
@@ -191,7 +191,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			this.rangeX = MAX_RANGE;
 		}
 
-		this.worldObj.markBlockForUpdate(pos);
+		this.syncTE();
 	}
 
 	public int getRangeY()
@@ -212,7 +212,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			this.rangeY = MAX_RANGE;
 		}
 
-		this.worldObj.markBlockForUpdate(pos);
+		this.syncTE();
 	}
 
 	public int getRangeZ()
@@ -233,14 +233,14 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			this.rangeZ = MAX_RANGE;
 		}
 
-		this.worldObj.markBlockForUpdate(pos);
+		this.syncTE();
 	}
 
 	public void toggleInvert()
 	{
 		invert = !invert;
 
-		this.worldObj.markBlockForUpdate(pos);
+		this.syncTE();
 	}
 
 	public boolean invert()

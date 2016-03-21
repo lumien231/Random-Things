@@ -8,17 +8,16 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
 
 public class ItemDungeonChestGenerator extends ItemBase
 {
@@ -57,19 +56,20 @@ public class ItemDungeonChestGenerator extends ItemBase
 	public String getItemStackDisplayName(ItemStack par1ItemStack)
 	{
 		NBTTagCompound nbt = par1ItemStack.getTagCompound();
+
 		if (nbt != null)
 		{
 			ChestCategory selectedCategory = ChestCategory.values()[nbt.getInteger("category")];
-			return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim() + " (" + selectedCategory.getName() + ")";
+			return ("" + I18n.format(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim() + " (" + selectedCategory.getName() + ")";
 		}
 		else
 		{
-			return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim();
+			return ("" + I18n.format(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim();
 		}
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
 		if (!par2World.isRemote && par3EntityPlayer.isSneaking())
 		{
@@ -92,12 +92,14 @@ public class ItemDungeonChestGenerator extends ItemBase
 				}
 				par1ItemStack.getTagCompound().setInteger("category", currentCategory);
 			}
+
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, par1ItemStack);
 		}
-		return par1ItemStack;
+		return new ActionResult<ItemStack>(EnumActionResult.FAIL, par1ItemStack);
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote && !playerIn.isSneaking())
 		{
@@ -105,7 +107,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 
 			if (!playerIn.canPlayerEdit(pos, side, stack))
 			{
-				return false;
+				return EnumActionResult.FAIL;
 			}
 			else
 			{
@@ -121,13 +123,13 @@ public class ItemDungeonChestGenerator extends ItemBase
 						}
 						ChestCategory category = ChestCategory.values()[stack.getTagCompound().getInteger("category")];
 						worldIn.setBlockState(pos, Blocks.chest.getDefaultState());
-						WeightedRandomChestContent.generateChestContents(rng, ChestGenHooks.getItems(category.getName(), rng), (IInventory) worldIn.getTileEntity(pos), ChestGenHooks.getCount(category.getName(), rng));
+						//WeightedRandomChestContent.generateChestContents(rng, ChestGenHooks.getItems(category.getName(), rng), (IInventory) worldIn.getTileEntity(pos), ChestGenHooks.getCount(category.getName(), rng));
 					}
 				}
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
 
 	@Override

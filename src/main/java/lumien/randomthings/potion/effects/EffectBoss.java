@@ -2,22 +2,22 @@ package lumien.randomthings.potion.effects;
 
 import java.awt.Color;
 
+import lumien.randomthings.potion.PotionBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EffectBoss extends Potion
+public class EffectBoss extends PotionBase
 {
 	ResourceLocation icon = new ResourceLocation("randomthings:textures/gui/effects/boss.png");
 	
 	public EffectBoss()
 	{
-		super(new ResourceLocation("boss"), false, Color.BLACK.getRGB());
+		super("boss", false, Color.BLACK.getRGB());
 		
 		this.setPotionName("Boss");
 	}

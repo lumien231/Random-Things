@@ -11,9 +11,9 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityReddustFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,21 +30,21 @@ public class BlockLifeAnchor extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state,World worldIn, BlockPos pos, Random rand)
 	{
-		ItemStack equipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+		ItemStack equipped = Minecraft.getMinecraft().thePlayer.getActiveItemStack();
 		if (equipped != null && equipped.getItem() instanceof ItemLinkingOrb)
 		{
-			AxisAlignedBB boundingBox = AxisAlignedBB.fromBounds(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ()).expand(5, 5, 5);
+			AxisAlignedBB boundingBox = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ()).expand(5, 5, 5);
 
 			List<EntityLivingBase> entityList = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, boundingBox);
 			entityList.remove(Minecraft.getMinecraft().thePlayer);
 
-			Vec3 thisBlock = new Vec3(pos.getX(), pos.getY(), pos.getZ());
+			Vec3d thisBlock = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
 
 			for (EntityLivingBase e : entityList)
 			{
-				Vec3 dif = e.getPositionVector().subtract(thisBlock);
+				Vec3d dif = e.getPositionVector().subtract(thisBlock);
 
 				for (double d = 0; d <= 1; d += 0.02d)
 				{

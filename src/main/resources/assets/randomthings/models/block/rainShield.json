@@ -1,4 +1,5 @@
-{   
+{
+    "parent": "block/block",   
     "display": {
         "head": {
             "rotation": [ -60, 0, 0 ],

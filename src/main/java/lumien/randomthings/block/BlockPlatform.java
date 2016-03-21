@@ -6,17 +6,17 @@ import lumien.randomthings.item.block.ItemBlockPlatform;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,28 +26,35 @@ public class BlockPlatform extends BlockBase
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockPlatform.EnumType.class);
 
+	protected static final AxisAlignedBB PLATFORM_AABB = new AxisAlignedBB(0, 14F / 16F, 0, 1, 1, 1);
+	
 	public BlockPlatform()
 	{
 		super("platform", Material.wood, ItemBlockPlatform.class);
 
-		this.setBlockBounds(0, 14F / 16F, 0, 1, 1, 1);
 		this.setHardness(1.5F);
 	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return PLATFORM_AABB;
+	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		return side == EnumFacing.UP;
 	}
@@ -79,13 +86,13 @@ public class BlockPlatform extends BlockBase
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { VARIANT });
+		return new BlockStateContainer(this, new IProperty[] { VARIANT });
 	}
 
 	@Override
-	public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity collidingEntity)
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB mask, List list, Entity collidingEntity)
 	{
 		if (collidingEntity != null)
 		{
@@ -105,12 +112,12 @@ public class BlockPlatform extends BlockBase
 			}
 		}
 
-		super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+		super.addCollisionBoxToList(state, worldIn, pos, mask, list, collidingEntity);
 	}
 
 	public static enum EnumType implements IStringSerializable
 	{
-		OAK(0, "oak"), SPRUCE(1, "spruce"), BIRCH(2, "birch"), JUNGLE(3, "jungle"), ACACIA(4, "acacia"), DARK_OAK(5, "darkOak");
+		OAK(0, "oak"), SPRUCE(1, "spruce"), BIRCH(2, "birch"), JUNGLE(3, "jungle"), ACACIA(4, "acacia"), DARK_OAK(5, "darkoak");
 		private static final BlockPlatform.EnumType[] META_LOOKUP = new BlockPlatform.EnumType[values().length];
 		private final int meta;
 		private final String name;

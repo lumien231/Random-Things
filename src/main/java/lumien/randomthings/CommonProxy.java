@@ -1,7 +1,7 @@
 package lumien.randomthings;
 
 import lumien.randomthings.entitys.EntitySoul;
-import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class CommonProxy
 {	
@@ -26,6 +26,11 @@ public class CommonProxy
 
 	public boolean isPlayerOnline(String username)
 	{
-		return MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(username) != null;
+		return FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(username) != null;
+	}
+
+	public void scheduleColor(Object o)
+	{
+		
 	}
 }

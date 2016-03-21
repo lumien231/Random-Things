@@ -30,8 +30,6 @@ public class ModPotions
 
 	public static void preInit(FMLPreInitializationEvent event)
 	{
-		extendPotionArray();
-
 		imbueFire = new ImbueFire();
 		imbuePoison = new ImbuePoison();
 		imbueExperience = new ImbueExperience();
@@ -40,32 +38,5 @@ public class ModPotions
 		
 		collapse = new EffectCollapse();
 		boss = new EffectBoss();
-	}
-
-	private static void extendPotionArray()
-	{
-		try
-		{
-			Field potionTypesField = Potion.class.getDeclaredField(MCPNames.field("field_76425_a"));
-			ReflectionUtil.makeModifiable(potionTypesField);
-			int potionArraySize = Potion.potionTypes.length;
-			if (potionArraySize < 128)
-			{
-				Potion[] newArray = new Potion[128];
-
-				for (int i = 0; i < potionArraySize; i++)
-				{
-					newArray[i] = Potion.potionTypes[i];
-				}
-
-				potionTypesField.set(null, newArray);
-				RandomThings.instance.logger.log(Level.INFO, "Extended Potion ID Array to 128");
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			RandomThings.instance.logger.log(Level.WARN, "Could not extend Potion Array to 128");
-		}
 	}
 }

@@ -1,6 +1,7 @@
 package lumien.randomthings.block;
 
 import java.util.Random;
+
 import com.mojang.authlib.GameProfile;
 
 import lumien.randomthings.RandomThings;
@@ -9,25 +10,29 @@ import lumien.randomthings.handler.EnderLetterHandler.EnderMailboxInventory;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.TileEntityEnderMailbox;
-
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,19 +43,36 @@ public class BlockEnderMailbox extends BlockContainerBase
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
 
+	protected static final AxisAlignedBB MAILBOX_SN_AABB = new AxisAlignedBB(0.3125F, 0F, 0.0625F, 1 - 0.3125F, 1.375F, 1 - 0.0625F);
+	protected static final AxisAlignedBB MAILBOX_WE_AABB = new AxisAlignedBB(0.0625F, 0F, 0.3125F, 1 - 0.0625F, 1.375F, 1 - 0.3125F);
+	
 	protected BlockEnderMailbox()
 	{
 		super("enderMailbox", Material.rock);
 
 		this.setHardness(1.5F);
 		this.setResistance(10.0F);
-		this.setStepSound(soundTypePiston);
+		this.setSoundType(SoundType.STONE);
 		this.setTickRandomly(true);
-		this.setBlockBounds(0.3125F, 0F, 0.0625F, 1 - 0.3125F, 1.375F, 1 - 0.0625F);
+	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		EnumFacing facing = state.getValue(FACING);
+
+		if (facing == EnumFacing.SOUTH || facing == EnumFacing.NORTH)
+		{
+			return MAILBOX_SN_AABB;
+		}
+		else
+		{
+			return MAILBOX_WE_AABB;
+		}
 	}
 
 	@Override
-	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
 	{
 		if (state.getValue(ACTIVE))
 		{
@@ -87,23 +109,22 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
+		System.out.println(worldIn.isRemote);
 		if (!worldIn.isRemote)
 		{
-			if (playerIn.isSneaking())
+			if (playerIn.isSneaking() && heldItem != null)
 			{
-				ItemStack equipped = playerIn.getCurrentEquippedItem();
-
-				if (equipped.getItem() == ModItems.enderLetter)
+				if (heldItem.getItem() == ModItems.enderLetter)
 				{
 					NBTTagCompound compound;
 
-					if ((compound = equipped.getTagCompound()) != null)
+					if ((compound = heldItem.getTagCompound()) != null)
 					{
 						if (compound.hasKey("receiver") && !compound.getBoolean("received"))
 						{
-							GameProfile playerProfile = MinecraftServer.getServer().getPlayerProfileCache().getGameProfileForUsername(compound.getString("receiver"));
+							GameProfile playerProfile = worldIn.getMinecraftServer().getPlayerProfileCache().getGameProfileForUsername(compound.getString("receiver"));
 
 							if (playerProfile != null && playerProfile.getId() != null)
 							{
@@ -113,24 +134,24 @@ public class BlockEnderMailbox extends BlockContainerBase
 								{
 									if (mailboxInventory.getStackInSlot(slot) == null)
 									{
-										ItemStack sendingLetter = equipped.copy();
-										equipped.stackSize = 0;
+										ItemStack sendingLetter = heldItem.copy();
+										heldItem.stackSize = 0;
 										sendingLetter.getTagCompound().setBoolean("received", true);
 										sendingLetter.getTagCompound().setString("sender", playerIn.getGameProfile().getName());
 
 										mailboxInventory.setInventorySlotContents(slot, sendingLetter);
 
-										playerIn.worldObj.playSoundAtEntity(playerIn, "mob.endermen.portal", 1, 1);
+										playerIn.worldObj.playSound(null,pos,SoundEvents.entity_endermen_teleport,SoundCategory.BLOCKS , 1, 1);
 
 										return true;
 									}
 								}
 
-								playerIn.addChatComponentMessage(new ChatComponentTranslation("item.enderLetter.noSpace").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)));
+								playerIn.addChatComponentMessage(new TextComponentTranslation("item.enderLetter.noSpace").setChatStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 							}
 							else
 							{
-								playerIn.addChatComponentMessage(new ChatComponentTranslation("item.enderLetter.noPlayer", compound.getString("receiver")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)));
+								playerIn.addChatComponentMessage(new TextComponentTranslation("item.enderLetter.noPlayer", compound.getString("receiver")).setChatStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 							}
 						}
 					}
@@ -149,7 +170,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 				}
 				else
 				{
-					playerIn.addChatComponentMessage(new ChatComponentTranslation("block.enderMailbox.owner").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+					playerIn.addChatComponentMessage(new TextComponentTranslation("block.enderMailbox.owner").setChatStyle(new Style().setColor(TextFormatting.RED)));
 				}
 			}
 		}
@@ -163,37 +184,15 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-	{
-		EnumFacing facing = worldIn.getBlockState(pos).getValue(FACING);
-
-		if (facing == EnumFacing.SOUTH || facing == EnumFacing.NORTH)
-		{
-			this.setBlockBounds(0.3125F, 0F, 0.0625F, 1 - 0.3125F, 1.375F, 1 - 0.0625F);
-		}
-		else
-		{
-			this.setBlockBounds(0.0625F, 0F, 0.3125F, 1 - 0.0625F, 1.375F, 1 - 0.3125F);
-		}
-	}
-
-	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IBlockState getStateForEntityRender(IBlockState state)
-	{
-		return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
 	}
 
 	@Override
@@ -227,9 +226,9 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { FACING, ACTIVE });
+		return new BlockStateContainer(this, new IProperty[] { FACING, ACTIVE });
 	}
 
 	@Override
@@ -258,8 +257,8 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 }

@@ -1,17 +1,11 @@
 {
     "parent": "randomthings:block/platform/birch",
     "display": {
-        "thirdperson": {
-            "rotation": [ 10, -45, 170 ],
-            "translation": [ 0, 1.5, -2.75 ],
-            "scale": [ 0.375, 0.375, 0.375 ]
-        },
-        
-        "gui" : 
+        "gui": 
         {
-            "rotation": [ 0, 0, 0 ],
-            "translation": [ 0, -2.5, 0 ],
-            "scale": [ 1, 1, 1 ]
+            "rotation": [ 30, 225, 0 ],
+            "translation": [ 0, -2.5, 0],
+            "scale":[ 0.625, 0.625, 0.625 ]
         }
     }
 }

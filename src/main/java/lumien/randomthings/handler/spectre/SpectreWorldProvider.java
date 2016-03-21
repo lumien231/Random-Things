@@ -1,9 +1,11 @@
 package lumien.randomthings.handler.spectre;
 
-import net.minecraft.util.Vec3;
+import net.minecraft.init.Biomes;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.WorldChunkManagerHell;
+import net.minecraft.world.biome.BiomeProviderSingle;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,19 +24,7 @@ public class SpectreWorldProvider extends WorldProvider
 	}
 
 	@Override
-	public String getDimensionName()
-	{
-		return "SpectreDimension";
-	}
-
-	@Override
-	public String getInternalNameSuffix()
-	{
-		return "_spectre";
-	}
-
-	@Override
-	public IChunkProvider createChunkGenerator()
+	public IChunkGenerator createChunkGenerator()
 	{
 		return new SpectreChunkProvider(this.worldObj);
 	}
@@ -80,21 +70,27 @@ public class SpectreWorldProvider extends WorldProvider
 	}
 
 	@Override
-	protected void registerWorldChunkManager()
+	protected void createBiomeProvider()
 	{
-		this.worldChunkMgr = new WorldChunkManagerHell(BiomeGenBase.sky, 0F);
+		this.biomeProvider = new BiomeProviderSingle(Biomes.hell);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getFogColor(float p_76562_1_, float p_76562_2_)
+	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
 	{
-		return new Vec3(0.03, 0.2, 0.2);
+		return new Vec3d(0.03, 0.2, 0.2);
 	}
 
 	@Override
 	public float getCloudHeight()
 	{
 		return -5;
+	}
+
+	@Override
+	public DimensionType getDimensionType()
+	{
+		return DimensionType.OVERWORLD;
 	}
 }

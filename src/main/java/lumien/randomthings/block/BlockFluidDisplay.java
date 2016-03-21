@@ -2,15 +2,18 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.lib.properties.UnlistedBool;
 import lumien.randomthings.tileentity.TileEntityFluidDisplay;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
@@ -28,26 +31,24 @@ public class BlockFluidDisplay extends BlockContainerBase
 	{
 		super("fluidDisplay", Material.glass);
 
-		this.setStepSound(soundTypeGlass);
+		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3F);
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		TileEntityFluidDisplay te = (TileEntityFluidDisplay) worldIn.getTileEntity(pos);
-		ItemStack currentItem = playerIn.getCurrentEquippedItem();
 
-		if (currentItem != null)
+		if (heldItem != null)
 		{
-			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(currentItem);
+			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(heldItem);
 			if (liquid != null)
 			{
 				if (!worldIn.isRemote)
 				{
 					te.setFluidName(liquid.getFluid().getName());
-					te.markDirty();
-					worldIn.markBlockForUpdate(pos);
+					te.syncTE();
 				}
 				return true;
 			}
@@ -64,13 +65,13 @@ public class BlockFluidDisplay extends BlockContainerBase
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
 		return new ExtendedBlockState(this, new IProperty[] {}, new IUnlistedProperty[] { FLOWING, FLUID });
 	}

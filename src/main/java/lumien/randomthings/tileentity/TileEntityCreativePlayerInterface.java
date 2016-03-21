@@ -10,6 +10,7 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.UsernameCache;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Optional;
 
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
@@ -57,7 +58,7 @@ public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface
 	@Optional.Method(modid = "OpenComputers")
 	public Object[] setPlayerName(Context context, Arguments args)
 	{
-		GameProfile profile = MinecraftServer.getServer().getPlayerProfileCache().getGameProfileForUsername(args.checkString(0));
+		GameProfile profile = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerProfileCache().getGameProfileForUsername(args.checkString(0));
 		if (profile != null)
 		{
 			this.setPlayerUUID(profile.getId());

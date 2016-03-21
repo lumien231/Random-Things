@@ -7,8 +7,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.ITextComponent;
 
 public class TileEntityImbuingStation extends TileEntityBase implements IInventory, ITickable
 {
@@ -161,7 +161,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	}
 
 	@Override
-	public IChatComponent getDisplayName()
+	public ITextComponent getDisplayName()
 	{
 		return null;
 	}

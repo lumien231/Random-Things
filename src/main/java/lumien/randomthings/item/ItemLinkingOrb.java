@@ -4,8 +4,11 @@ import lumien.randomthings.block.BlockLifeAnchor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,7 +23,7 @@ public class ItemLinkingOrb extends ItemBase
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.getBlockState(pos).getBlock() instanceof BlockLifeAnchor)
 		{
@@ -33,18 +36,18 @@ public class ItemLinkingOrb extends ItemBase
 					stack.setTagCompound(compound = new NBTTagCompound());
 				}
 
-				compound.setInteger("dimension", worldIn.provider.getDimensionId());
+				compound.setInteger("dimension", worldIn.provider.getDimension());
 				compound.setInteger("targetX", pos.getX());
 				compound.setInteger("targetY", pos.getY());
 				compound.setInteger("targetZ", pos.getZ());
 			}
-			return true;
+			return EnumActionResult.SUCCESS;
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -60,15 +63,15 @@ public class ItemLinkingOrb extends ItemBase
 				compound.setBoolean("active", !active);
 				if (compound.getBoolean("active"))
 				{
-					worldIn.playSoundAtEntity(playerIn, "randomthings:linkingOrbEnable", 1, 4);
+					//worldIn.playSoundAtEntity(playerIn, "randomthings:linkingOrbEnable", 1, 4); TODO
 				}
 				else
 				{
-					worldIn.playSoundAtEntity(playerIn, "randomthings:linkingOrbEnable", 1, 0.9f);
+					// worldIn.playSoundAtEntity(playerIn, "randomthings:linkingOrbEnable", 1, 0.9f); TODO
 				}
 			}
 		}
-		return stack;
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 
 	@Override

@@ -9,12 +9,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class RedstoneSignalHandler extends WorldSavedData
 {
@@ -42,7 +43,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 
 	public static RedstoneSignalHandler getHandler()
 	{
-		World overWorld = MinecraftServer.getServer().getEntityWorld();
+		World overWorld = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
 
 		RedstoneSignalHandler handler = (RedstoneSignalHandler) overWorld.getMapStorage().loadData(RedstoneSignalHandler.class, ID);
 
@@ -67,7 +68,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 	{
 		if (worldObj.isBlockLoaded(pos))
 		{
-			redstoneSignals.add(new RedstoneSignal(worldObj.provider.getDimensionId(), pos, duration, strength));
+			redstoneSignals.add(new RedstoneSignal(worldObj.provider.getDimension(), pos, duration, strength));
 
 			updatePosition(worldObj, pos);
 			return true;
@@ -102,7 +103,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 	public synchronized int getStrongPower(World worldObj, BlockPos pos,EnumFacing facing)
 	{
 		pos = pos.offset(facing.getOpposite());
-		int dimension = worldObj.provider.getDimensionId();
+		int dimension = worldObj.provider.getDimension();
 		for (RedstoneSignal rs : redstoneSignals)
 		{
 			if (rs.getDimension() == dimension)

@@ -3,15 +3,18 @@ package lumien.randomthings.block;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -21,19 +24,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockPitcherPlant extends BlockBase
 {
+	protected static final AxisAlignedBB PITCHER_AABB = new AxisAlignedBB(0.5F - 0.2F, 0.0F, 0.5F - 0.2F, 0.5F + 0.2F, 0.2F * 4.0F, 0.5F + 0.2F);
+
+	
 	protected BlockPitcherPlant()
 	{
 		super("pitcherPlant", Material.plants);
 
 		float f = 0.2F;
-		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 4.0F, 0.5F + f);
-		this.setStepSound(soundTypeGrass);
+		this.setSoundType(SoundType.PLANT);
+	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return PITCHER_AABB;
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		ItemStack equipped = playerIn.getCurrentEquippedItem();
+		ItemStack equipped = heldItem;
 
 		if (equipped != null && FluidContainerRegistry.isEmptyContainer(equipped))
 		{
@@ -106,27 +117,27 @@ public class BlockPitcherPlant extends BlockBase
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
-	{
-		return null;
-	}
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+    {
+        return NULL_AABB;
+    }
 
 	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
+	public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
 
 	@Override
-	public boolean isFullCube()
-	{
-		return false;
-	}
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 }

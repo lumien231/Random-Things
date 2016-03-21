@@ -1,21 +1,24 @@
 package lumien.randomthings.item;
 
-import lumien.randomthings.worldgen.SingleRandomChestContent;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ChestGenHooks;
 
 public class ItemMagicHood extends ItemArmor
 {
 	public ItemMagicHood()
 	{
-		super(ItemArmor.ArmorMaterial.CHAIN, 0, 0);
+		super(ItemArmor.ArmorMaterial.CHAIN, 0, EntityEquipmentSlot.HEAD);
 		ItemBase.registerItem("magicHood", this);
 
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new SingleRandomChestContent(new ItemStack(this), 1, 1, 2));
-		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new SingleRandomChestContent(new ItemStack(this), 1, 1, 5));
+		/*
+		 * ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new
+		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 2));
+		 * ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new
+		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 5)); TODO
+		 */
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class ItemMagicHood extends ItemArmor
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
 	{
 		return "randomthings:textures/models/armor/magicHood.png";
 	}

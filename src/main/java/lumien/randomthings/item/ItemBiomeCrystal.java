@@ -1,33 +1,38 @@
 package lumien.randomthings.item;
 
+import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBiomeCrystal extends ItemBase
+public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 {
 	public ItemBiomeCrystal()
 	{
 		super("biomeCrystal");
 
-		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(new ItemStack(this), 1, 15, 20));
-		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(new ItemStack(this), 1, 15, 20));
-		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(this), 1, 1, 1));
+		/*
+		 * ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new
+		 * WeightedRandomChestContent(new ItemStack(this), 1, 15, 20));
+		 * ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new
+		 * WeightedRandomChestContent(new ItemStack(this), 1, 15, 20));
+		 * ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new
+		 * WeightedRandomChestContent(new ItemStack(this), 1, 1, 1));
+		 * TODO
+		 */
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int renderPass)
+	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
 		EntityPlayerSP thePlayer = FMLClientHandler.instance().getClientPlayerEntity();
 		WorldClient theWorld = FMLClientHandler.instance().getWorldClient();

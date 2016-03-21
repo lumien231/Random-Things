@@ -95,7 +95,7 @@ tile.platform.spruce.name=Spruce Platform
 tile.platform.birch.name=Birch Platform
 tile.platform.acacia.name=Acacia Platform
 tile.platform.jungle.name=Jungle Platform
-tile.platform.darkOak.name=Dark Oak Platform
+tile.platform.darkoak.name=Dark Oak Platform
 
 tile.basicRedstoneInterface.name=Basic Redstone Interface
 tile.advancedRedstoneInterface.name=Advanced Redstone Interface

@@ -1,7 +1,7 @@
 package lumien.randomthings.util;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public class NBTUtil
 {

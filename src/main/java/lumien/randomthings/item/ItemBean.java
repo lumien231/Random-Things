@@ -8,8 +8,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -49,15 +52,15 @@ public class ItemBean extends ItemBase
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (side != EnumFacing.UP)
 		{
-			return false;
+			return EnumActionResult.FAIL;
 		}
 		else if (!playerIn.canPlayerEdit(pos.offset(side), side, stack))
 		{
-			return false;
+			return EnumActionResult.FAIL;
 		}
 		else if (worldIn.isAirBlock(pos.up()))
 		{
@@ -65,36 +68,36 @@ public class ItemBean extends ItemBase
 			{
 				worldIn.setBlockState(pos.up(), ModBlocks.beanSprout.getDefaultState());
 
-				worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), ModBlocks.beanSprout.stepSound.getPlaceSound(), 1, 1);
+				worldIn.playSound(null,pos.up(), ModBlocks.beanSprout.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 1);
 
 				--stack.stackSize;
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
 			else if (stack.getItemDamage() == 1 && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up()))
 			{
 				worldIn.setBlockState(pos.up(), ModBlocks.lesserBeanStalk.getDefaultState());
 				worldIn.scheduleUpdate(pos.up(), ModBlocks.lesserBeanStalk, 20);
 
-				worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), ModBlocks.beanStalk.stepSound.getPlaceSound(), 1, 1);
+				worldIn.playSound(null,pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 1);
 
 				--stack.stackSize;
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
 			else if (stack.getItemDamage() == 2 && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up()))
 			{
 				worldIn.setBlockState(pos.up(), ModBlocks.beanStalk.getDefaultState());
 				worldIn.scheduleUpdate(pos.up(), ModBlocks.beanStalk, 20);
 
-				worldIn.playSoundEffect(pos.getX(), pos.up().getY(), pos.getZ(), ModBlocks.beanStalk.stepSound.getPlaceSound(), 1, 1);
+				worldIn.playSound(null,pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 1);
 
 				--stack.stackSize;
-				return true;
+				return EnumActionResult.SUCCESS;
 			}
-			return false;
+			return EnumActionResult.FAIL;
 		}
 		else
 		{
-			return false;
+			return EnumActionResult.FAIL;
 		}
 	}
 

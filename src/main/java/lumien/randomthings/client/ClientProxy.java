@@ -1,11 +1,16 @@
 package lumien.randomthings.client;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import lumien.randomthings.CommonProxy;
+import lumien.randomthings.asm.MCPNames;
+import lumien.randomthings.block.BlockBase;
 import lumien.randomthings.client.models.ItemModels;
 import lumien.randomthings.client.models.blocks.BlockModels;
 import lumien.randomthings.client.render.RenderReviveCircle;
@@ -18,12 +23,16 @@ import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.lib.IRTBlockColor;
+import lumien.randomthings.lib.IRTItemColor;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityAdvancedRedstoneInterface;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import lumien.randomthings.util.client.RenderUtils;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelSlime;
@@ -31,12 +40,16 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.network.internal.EntitySpawnHandler;
@@ -45,10 +58,24 @@ import org.lwjgl.opengl.GL11;
 
 public class ClientProxy extends CommonProxy
 {
+	static Field itemColorsField;
+	static
+	{
+		try
+		{
+			itemColorsField = Minecraft.class.getDeclaredField(MCPNames.field("field_184128_aI"));
+			itemColorsField.setAccessible(true);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public boolean canBeCollidedWith(EntitySoul soul)
 	{
-		ItemStack equipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+		ItemStack equipped = Minecraft.getMinecraft().thePlayer.getHeldItemMainhand();
 		if (equipped != null && equipped.getItem() instanceof ItemRezStone)
 		{
 			return true;
@@ -56,6 +83,63 @@ public class ClientProxy extends CommonProxy
 		else
 		{
 			return false;
+		}
+	}
+
+	HashMap<Object, Object> scheduledColorRegister = new HashMap<Object, Object>();
+
+	@Override
+	public void scheduleColor(Object o)
+	{
+		if (o instanceof IRTBlockColor || o instanceof IRTItemColor)
+		{
+			scheduledColorRegister.put(o, o);
+		}
+	}
+
+	private void registerColors()
+	{
+		for (Entry<Object, Object> entry : scheduledColorRegister.entrySet())
+		{
+			if (entry.getKey() instanceof IRTBlockColor)
+			{
+				final IRTBlockColor blockColor = (IRTBlockColor) entry.getKey();
+				Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new IBlockColor()
+				{
+					@Override
+					public int colorMultiplier(IBlockState state, IBlockAccess p_186720_2_, BlockPos pos, int tintIndex)
+					{
+						return blockColor.colorMultiplier(state, p_186720_2_, pos, tintIndex);
+					}
+
+				}, (Block) entry.getValue());
+			}
+			else if (entry.getKey() instanceof IRTItemColor)
+			{
+				final IRTItemColor itemColor = (IRTItemColor) entry.getKey();
+				try
+				{
+					ItemColors itemColors = (ItemColors) itemColorsField.get(Minecraft.getMinecraft());
+					itemColors.registerItemColorHandler(new IItemColor()
+					{
+
+						@Override
+						public int getColorFromItemstack(ItemStack stack, int tintIndex)
+						{
+							return itemColor.getColorFromItemstack(stack, tintIndex);
+						}
+
+					}, (Item) entry.getValue());
+				}
+				catch (IllegalArgumentException e)
+				{
+					e.printStackTrace();
+				}
+				catch (IllegalAccessException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -96,13 +180,15 @@ public class ClientProxy extends CommonProxy
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
+
+		registerColors();
 	}
 
 	@Override
 	public void renderRedstoneInterfaceStuff(float partialTicks)
 	{
 		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-		ItemStack itemStack = player.getCurrentEquippedItem();
+		ItemStack itemStack = player.getHeldItemMainhand();
 		if (itemStack != null)
 		{
 			Item item = itemStack.getItem();
@@ -144,7 +230,7 @@ public class ClientProxy extends CommonProxy
 	private void drawInterfaceLines(EntityPlayerSP player, float partialTicks)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+		VertexBuffer worldRenderer = tessellator.getBuffer();
 
 		double playerX = player.prevPosX + (player.posX - player.prevPosX) * partialTicks;
 		double playerY = player.prevPosY + (player.posY - player.prevPosY) * partialTicks;
@@ -183,8 +269,8 @@ public class ClientProxy extends CommonProxy
 							TileEntityAdvancedRedstoneInterface advancedRedstoneInterface = (TileEntityAdvancedRedstoneInterface) redstoneInterface;
 							BlockPos position = advancedRedstoneInterface.getPos();
 							Set<BlockPos> targets = advancedRedstoneInterface.getTargets();
-							
-							for (BlockPos target:targets)
+
+							for (BlockPos target : targets)
 							{
 								positions.add(target);
 								positions.add(position);

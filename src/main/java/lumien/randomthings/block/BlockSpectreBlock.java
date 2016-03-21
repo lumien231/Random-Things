@@ -2,12 +2,13 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.lib.IExplosionImmune;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -20,7 +21,8 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 	{
 		super("spectreBlock", Material.rock);
 
-		this.setBlockUnbreakable().setStepSound(soundTypeGlass);
+		this.setBlockUnbreakable();
+		this.setSoundType(SoundType.GLASS);
 		this.blockResistance = Float.MAX_VALUE - 1000f;
 	}
 
@@ -31,27 +33,27 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity)
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.TRANSLUCENT;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isFullyOpaque(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 		Block block = iblockstate.getBlock();
@@ -66,6 +68,6 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 			return true;
 		}
 
-		return block == this ? false : super.shouldSideBeRendered(worldIn, pos, side);
+		return block == this ? false : super.shouldSideBeRendered(state,worldIn, pos, side);
 	}
 }

@@ -2,6 +2,7 @@ package lumien.randomthings.item;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,7 @@ public class ItemLavaWader extends ItemArmor
 {
 	public ItemLavaWader()
 	{
-		super(ItemArmor.ArmorMaterial.CHAIN, 0, 3);
+		super(ItemArmor.ArmorMaterial.CHAIN, 0, EntityEquipmentSlot.FEET);
 		ItemBase.registerItem("lavaWader", this);
 	}
 
@@ -23,7 +24,7 @@ public class ItemLavaWader extends ItemArmor
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
 	{
 		return "randomthings:textures/models/armor/lavaWader.png";
 	}

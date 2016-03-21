@@ -11,12 +11,17 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -57,12 +62,12 @@ public class ItemStableEnderpearl extends ItemBase
 				{
 					String uuidString = itemStack.getTagCompound().getString("player-uuid");
 					UUID uuid = UUID.fromString(uuidString);
-					player = MinecraftServer.getServer().getConfigurationManager().getPlayerByUUID(uuid);
+					player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(uuid);
 				}
 
 				if (player != null)
 				{
-					player.worldObj.playSoundEffect(player.posX, player.posY, player.posZ, "mob.endermen.portal", 1, 1);
+					player.worldObj.playSound(null, player.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1, 1);
 					player.playerNetServerHandler.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, player.rotationYaw, player.rotationPitch);
 				}
 				else
@@ -75,17 +80,17 @@ public class ItemStableEnderpearl extends ItemBase
 						if (target instanceof EntityPlayerMP)
 						{
 							EntityPlayerMP targetPlayer = (EntityPlayerMP) target;
-							targetPlayer.worldObj.playSoundEffect(targetPlayer.posX, targetPlayer.posY, targetPlayer.posZ, "mob.endermen.portal", 1, 1);
+							targetPlayer.worldObj.playSound(null, targetPlayer.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1, 1);
 							targetPlayer.playerNetServerHandler.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, targetPlayer.rotationYaw, targetPlayer.rotationPitch);
 						}
 						else
 						{
-							target.worldObj.playSoundEffect(target.posX, target.posY, target.posZ, "mob.endermen.portal", 1, 1);
+							target.worldObj.playSound(null, target.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1, 1);
 							target.setPositionAndUpdate(entityItem.posX, entityItem.posY, entityItem.posZ);
 						}
 					}
 				}
-				entityItem.worldObj.playSoundEffect(entityItem.posX, entityItem.posY, entityItem.posZ, "mob.endermen.portal", 1, 1);
+				entityItem.worldObj.playSound(null, entityItem.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1, 1);
 			}
 		}
 		else
@@ -110,7 +115,7 @@ public class ItemStableEnderpearl extends ItemBase
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -126,6 +131,6 @@ public class ItemStableEnderpearl extends ItemBase
 			compound.setString("player-uuid", gameProfile.getId().toString());
 			compound.setString("player-name", gameProfile.getName());
 		}
-		return itemStackIn;
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 }

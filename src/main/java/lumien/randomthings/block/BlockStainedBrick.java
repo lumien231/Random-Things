@@ -4,10 +4,11 @@ import java.util.List;
 
 import lumien.randomthings.RandomThings;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
@@ -28,7 +29,7 @@ public class BlockStainedBrick extends Block
 
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
-		this.setStepSound(soundTypePiston);
+		this.setSoundType(SoundType.STONE);
 		this.setCreativeTab(RandomThings.instance.creativeTab);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(COLOR, EnumDyeColor.WHITE));
 		this.setUnlocalizedName("stainedBrick");
@@ -69,8 +70,8 @@ public class BlockStainedBrick extends Block
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { COLOR });
+		return new BlockStateContainer(this, new IProperty[] { COLOR });
 	}
 }

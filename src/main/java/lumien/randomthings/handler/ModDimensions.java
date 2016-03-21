@@ -9,7 +9,7 @@ public class ModDimensions
 
 	public static void register()
 	{
-		DimensionManager.registerProviderType(SPECTRE_ID, SpectreWorldProvider.class, true);
-		DimensionManager.registerDimension(SPECTRE_ID, SPECTRE_ID);
+		//DimensionManager.registerProviderType(SPECTRE_ID, SpectreWorldProvider.class, true);
+		//DimensionManager.registerDimension(SPECTRE_ID, SPECTRE_ID); TODO Reimplement
 	}
 }

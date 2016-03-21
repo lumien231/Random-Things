@@ -1,22 +1,34 @@
 {
     "parent": "randomthings:block/advancedItemCollector",
     "display": {
-        "thirdperson": {
-            "rotation": [ 10, -45, 170 ],
-            "translation": [ 0, 1.5, -2.75 ],
-            "scale": [ 0.6, 0.6, 0.6 ]
+        "thirdperson_righthand": {
+            "rotation": [ 75, 45, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale": [ 0.7, 0.7, 0.7 ]
         },
         
-        "firstperson": {
-            "rotation": [ 0, 0, 0 ],
-            "translation": [ 0, 10.5, 2.75 ],
-            "scale": [ 10.5, 10.5, 10.5 ]
+        "firstperson_righthand": {
+            "rotation": [ 0, 45, 0 ],
+            "translation": [ 0, 8, 0 ],
+            "scale": [ 1, 1, 1 ]
+        },
+        
+        "firstperson_lefthand": {
+            "rotation": [ 0, 225, 0 ],
+            "translation": [ 0, 8, 0 ],
+            "scale": [ 1, 1, 1 ]
         },
         
         "gui": {
-            "rotation": [ 0, 0, 0 ],
+            "rotation": [ 30, 225, 0 ],
             "translation": [ 0, 10.5, 0 ],
-            "scale": [ 3.5, 3.5, 3.5 ]
+            "scale": [ 2.1875, 2.1875, 2.1875 ]
+        },
+        
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 4, 0],
+            "scale":[ 1, 1, 1 ]
         }
     }
 }

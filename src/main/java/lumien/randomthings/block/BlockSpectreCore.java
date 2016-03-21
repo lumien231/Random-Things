@@ -7,18 +7,20 @@ import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.IExplosionImmune;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -50,7 +52,8 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	{
 		super("spectreCore", Material.rock);
 
-		this.setBlockUnbreakable().setStepSound(soundTypeGlass);
+		this.setBlockUnbreakable();
+		this.setSoundType(SoundType.GLASS);
 		this.setResistance(6000000.0F);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(orientation, ORIENTATION.NW));
 		this.setCreativeTab(null);
@@ -88,33 +91,33 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { orientation });
+		return new BlockStateContainer(this, new IProperty[] { orientation });
 	}
 
 	@Override
-	public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity)
-	{
-		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
-	{
-		return EnumWorldBlockLayer.TRANSLUCENT;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+
+	@Override
+	public boolean isFullyOpaque(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 		Block block = iblockstate.getBlock();
@@ -129,16 +132,16 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 			return true;
 		}
 
-		return block == this ? false : super.shouldSideBeRendered(worldIn, pos, side);
+		return block == this ? false : super.shouldSideBeRendered(state, worldIn, pos, side);
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (worldIn.provider.getDimensionId() == ModDimensions.SPECTRE_ID)
+		if (worldIn.provider.getDimension() == ModDimensions.SPECTRE_ID)
 		{
 			ItemStack holding;
-			if ((holding = playerIn.getCurrentEquippedItem()) != null)
+			if ((holding = heldItem) != null)
 			{
 				if (holding.getItem() == ModItems.ingredients && holding.getItemDamage() == ItemIngredient.INGREDIENT.ECTO_PLASM.id)
 				{
@@ -156,6 +159,6 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 			}
 		}
 
-		return super.onBlockActivated(worldIn, pos, state, playerIn, side, hitX, hitY, hitZ);
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
 	}
 }

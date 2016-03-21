@@ -2,19 +2,12 @@ package lumien.randomthings.block;
 
 import java.util.HashSet;
 
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.item.ModItems;
-import lumien.randomthings.lib.GuiIds;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class BlockRedstoneInterface extends BlockContainerBase
@@ -25,9 +18,9 @@ public abstract class BlockRedstoneInterface extends BlockContainerBase
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	static HashSet<BlockPos> notifiedPositions = new HashSet<BlockPos>();

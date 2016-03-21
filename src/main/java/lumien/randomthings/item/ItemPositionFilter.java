@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
-import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemPositionFilter extends ItemBase
@@ -47,7 +47,7 @@ public class ItemPositionFilter extends ItemBase
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -59,12 +59,12 @@ public class ItemPositionFilter extends ItemBase
 			}
 
 			compound.setBoolean("hasPosition", true);
-			compound.setInteger("dimension", worldIn.provider.getDimensionId());
+			compound.setInteger("dimension", worldIn.provider.getDimension());
 			compound.setInteger("filterX", pos.getX());
 			compound.setInteger("filterY", pos.getY());
 			compound.setInteger("filterZ", pos.getZ());
 		}
-		return true;
+		return EnumActionResult.SUCCESS;
 	}
 
 	public static int getDimension(ItemStack positionFilter)

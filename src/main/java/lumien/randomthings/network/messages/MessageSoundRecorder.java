@@ -43,7 +43,7 @@ public class MessageSoundRecorder implements IRTMessage
 		{
 			ItemStack equipped;
 
-			if ((equipped = context.getServerHandler().playerEntity.getCurrentEquippedItem()) != null && equipped.getItem() == ModItems.soundRecorder)
+			if ((equipped = context.getServerHandler().playerEntity.getHeldItemMainhand()) != null && equipped.getItem() == ModItems.soundRecorder)
 			{
 				NBTTagCompound dataCompound = equipped.getSubCompound("soundData", true);
 

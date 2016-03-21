@@ -5,7 +5,8 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentString;
 
 public class RTCommand extends CommandBase
 {
@@ -23,7 +24,7 @@ public class RTCommand extends CommandBase
 	}
 
 	@Override
-	public void processCommand(ICommandSender sender, String[] args) throws CommandException
+	public void execute(MinecraftServer server,ICommandSender sender, String[] args) throws CommandException
 	{
 		if (args[0].equals("teleport"))
 		{
@@ -31,7 +32,7 @@ public class RTCommand extends CommandBase
 		}
 		else if (args[0].equals("info"))
 		{
-			sender.addChatMessage(new ChatComponentText(SpectreHandler.getInstance().getSpectreCubeFromPos(sender.getEntityWorld(), sender.getPosition()).toString()));
+			sender.addChatMessage(new TextComponentString(SpectreHandler.getInstance().getSpectreCubeFromPos(sender.getEntityWorld(), sender.getPosition()).toString()));
 		}
 	}
 

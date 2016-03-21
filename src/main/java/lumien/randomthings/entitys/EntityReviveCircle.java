@@ -4,12 +4,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class EntityReviveCircle extends Entity
 {
@@ -23,7 +23,7 @@ public class EntityReviveCircle extends Entity
 
 		age = 0;
 		this.noClip = true;
-		this.renderDistanceWeight = 5;
+		this.setRenderDistanceWeight(5);
 		this.ignoreFrustumCheck = true;
 	}
 
@@ -34,7 +34,7 @@ public class EntityReviveCircle extends Entity
 		this.setPosition(posX, posY, posZ);
 		this.toRevive = toRevive;
 		this.noClip = true;
-		this.renderDistanceWeight = 5;
+		this.setRenderDistanceWeight(5);
 		this.ignoreFrustumCheck = true;
 		this.reviver = reviver;
 	}
@@ -55,7 +55,7 @@ public class EntityReviveCircle extends Entity
 
 			if (this.worldObj.getTotalWorldTime() % 20 == 0)
 			{
-				EntityPlayerMP player = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(toRevive.playerName);
+				EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(toRevive.playerName);
 				if (player == null)
 				{
 					this.kill();
@@ -72,15 +72,15 @@ public class EntityReviveCircle extends Entity
 				toRevive.setDead();
 				this.setDead();
 
-				EntityPlayerMP player = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(toRevive.playerName);
+				EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(toRevive.playerName);
 				if (player != null)
 				{
 					if (player.getHealth() <= 0)
 					{
-						EntityPlayerMP revived = player.playerNetServerHandler.playerEntity = MinecraftServer.getServer().getConfigurationManager().recreatePlayerEntity(player, 0, false);
-						if (revived.worldObj.provider.getDimensionId() != this.dimension)
+						EntityPlayerMP revived = player.playerNetServerHandler.playerEntity = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().recreatePlayerEntity(player, 0, false);
+						if (revived.worldObj.provider.getDimension() != this.dimension)
 						{
-							MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(revived, this.worldObj.provider.getDimensionId(), new Teleporter((WorldServer) this.worldObj));
+							FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(revived, this.worldObj.provider.getDimension(), new Teleporter((WorldServer) this.worldObj));
 						}
 						revived.playerNetServerHandler.setPlayerLocation(posX, posY, posZ, revived.rotationYaw, revived.rotationPitch);
 						revived.setPositionAndUpdate(posX, posY, posZ);

@@ -9,10 +9,7 @@ import lumien.randomthings.config.Numbers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.BlockPos.MutableBlockPos;
-import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileEntityRainShield extends TileEntityBase
@@ -114,7 +111,7 @@ public class TileEntityRainShield extends TileEntityBase
 		if (desiredState != this.active)
 		{
 			this.active = desiredState;
-			this.worldObj.markBlockForUpdate(this.pos);
+			syncTE();
 		}
 	}
 }

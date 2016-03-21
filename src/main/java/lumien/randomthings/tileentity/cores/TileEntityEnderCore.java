@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityBase;
 import lumien.randomthings.util.WorldUtil;
@@ -14,13 +16,13 @@ import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.Vec3;
-
-import org.apache.commons.lang3.tuple.Pair;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 
 public class TileEntityEnderCore extends TileEntityBase implements ITickable
 {
@@ -46,7 +48,7 @@ public class TileEntityEnderCore extends TileEntityBase implements ITickable
 	{
 		if (!worldObj.isRemote)
 		{
-			AxisAlignedBB myBoundingBox = AxisAlignedBB.fromBounds(this.pos.getX(), this.pos.getY(), this.pos.getZ(), this.pos.getX(), this.pos.getY(), this.pos.getZ());
+			AxisAlignedBB myBoundingBox = new AxisAlignedBB(this.pos.getX(), this.pos.getY(), this.pos.getZ(), this.pos.getX(), this.pos.getY(), this.pos.getZ());
 
 			List<EntityItem> itemEntitys = worldObj.getEntitiesWithinAABB(EntityItem.class, myBoundingBox.expand(7, 7, 7));
 			for (EntityItem ei : itemEntitys)
@@ -115,14 +117,14 @@ public class TileEntityEnderCore extends TileEntityBase implements ITickable
 					int random2 = (random1 + rand.nextInt(livingEntitys.size() - 1) + 1) % livingEntitys.size();
 					EntityLivingBase entity2 = livingEntitys.get(random2);
 
-					Vec3 pos1 = entity1.getPositionVector();
-					Vec3 pos2 = entity2.getPositionVector();
+					Vec3d pos1 = entity1.getPositionVector();
+					Vec3d pos2 = entity2.getPositionVector();
 
 					WorldUtil.setEntityPosition(entity1, pos2.xCoord, pos2.yCoord, pos2.zCoord);
 					WorldUtil.setEntityPosition(entity2, pos1.xCoord, pos1.yCoord, pos1.zCoord);
 
-					entity1.worldObj.playSoundEffect(entity1.posX, entity1.posY, entity1.posZ, "mob.endermen.portal", 0.5f, 1.5F);
-					entity1.worldObj.playSoundEffect(entity2.posX, entity2.posY, entity2.posZ, "mob.endermen.portal", 0.5f, 1.5F);
+					entity1.worldObj.playSound(null, entity1.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.BLOCKS, 0.5f, 1.5F);
+					entity1.worldObj.playSound(null, entity2.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.BLOCKS, 0.5f, 1.5F);
 				}
 			}
 		}
@@ -134,7 +136,7 @@ public class TileEntityEnderCore extends TileEntityBase implements ITickable
 
 	private void spawnParticles()
 	{
-		AxisAlignedBB myBoundingBox = AxisAlignedBB.fromBounds(this.pos.getX(), this.pos.getY(), this.pos.getZ(), this.pos.getX(), this.pos.getY(), this.pos.getZ());
+		AxisAlignedBB myBoundingBox = new AxisAlignedBB(this.pos.getX(), this.pos.getY(), this.pos.getZ(), this.pos.getX(), this.pos.getY(), this.pos.getZ());
 
 		List<EntityItem> itemEntitys = worldObj.getEntitiesWithinAABB(EntityItem.class, myBoundingBox.expand(7, 7, 7));
 		for (EntityItem ei : itemEntitys)

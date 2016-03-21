@@ -7,6 +7,7 @@ import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.potion.ModPotions;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,9 +15,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -25,16 +26,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSakanade extends BlockBase implements IShearable
 {
+	protected static final AxisAlignedBB SAKANDE_AABB = new AxisAlignedBB(0, 1f - 0.0625F, 0, 1, 1, 1);
+
 	public BlockSakanade()
 	{
 		super("sakanade", Material.plants);
 
-		this.setStepSound(soundTypeGrass);
+		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
 
-		this.setBlockBounds(0, 1f - 0.0625F, 0, 1, 1, 1);
 		this.setCreativeTab(null);
-		//this.setCreativeTab(null)
+		// this.setCreativeTab(null)
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return SAKANDE_AABB;
 	}
 
 	@Override
@@ -74,7 +82,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 
 			for (EntityLivingBase entity : entityList)
 			{
-				entity.addPotionEffect(new PotionEffect(ModPotions.collapse.id, 200));
+				entity.addPotionEffect(new PotionEffect(ModPotions.collapse, 200));
 			}
 
 
@@ -83,28 +91,28 @@ public class BlockSakanade extends BlockBase implements IShearable
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World worldIn, BlockPos pos)
 	{
 		return null;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isFullyOpaque(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullBlock(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
@@ -115,9 +123,9 @@ public class BlockSakanade extends BlockBase implements IShearable
 	}
 
 	@Override
-	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
 	{
-		super.randomDisplayTick(worldIn, pos, state, rand);
+		super.randomDisplayTick(state, worldIn, pos, rand);
 	}
 
 	@Override

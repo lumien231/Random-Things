@@ -1,27 +1,31 @@
 package lumien.randomthings.block;
 
+import java.awt.Color;
 import java.util.List;
 
 import lumien.randomthings.item.block.ItemBlockBiomeStone;
+import lumien.randomthings.lib.IRTBlockColor;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBiomeStone extends BlockBase
+public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockBiomeStone.EnumType.class);
 
@@ -31,7 +35,7 @@ public class BlockBiomeStone extends BlockBase
 
 		this.setHardness(1.5F);
 		this.setResistance(10.0F);
-		this.setStepSound(soundTypePiston);
+		this.setSoundType(SoundType.STONE);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockBiomeStone.EnumType.COBBLE));
 	}
 
@@ -68,40 +72,23 @@ public class BlockBiomeStone extends BlockBase
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { VARIANT });
+		return new BlockStateContainer(this, new IProperty[] { VARIANT });
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
+	public int colorMultiplier(IBlockState state,IBlockAccess worldIn, BlockPos pos, int renderPass)
 	{
+		if (pos == null)
+		{
+			return Color.WHITE.getRGB();
+		}
+		
 		int foliageColor = BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
 		int waterColor = BiomeColorHelper.getWaterColorAtPos(worldIn, pos);
 		int grassColor = BiomeColorHelper.getGrassColorAtPos(worldIn, pos);
-
-		return foliageColor;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderColor(IBlockState state)
-	{
-		return getBlockColor();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getBlockColor()
-	{
-		EntityPlayerSP thePlayer = FMLClientHandler.instance().getClientPlayerEntity();
-		WorldClient theWorld = FMLClientHandler.instance().getWorldClient();
-		BlockPos pos = new BlockPos(thePlayer.posX, thePlayer.posY, thePlayer.posZ);
-
-		int foliageColor = BiomeColorHelper.getFoliageColorAtPos(theWorld, pos);
-		int waterColor = BiomeColorHelper.getWaterColorAtPos(theWorld, pos);
-		int grassColor = BiomeColorHelper.getGrassColorAtPos(theWorld, pos);
 
 		return foliageColor;
 	}

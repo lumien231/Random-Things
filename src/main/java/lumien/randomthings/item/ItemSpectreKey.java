@@ -5,10 +5,14 @@ import lumien.randomthings.handler.spectre.SpectreHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -36,35 +40,39 @@ public class ItemSpectreKey extends ItemBase
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer,EnumHand hand)
 	{
-		par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
-		return par1ItemStack;
+		par3EntityPlayer.setActiveHand(hand);
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, par1ItemStack);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack)
 	{
-		return Minecraft.getMinecraft().thePlayer.worldObj.provider.getDimensionId() == ModDimensions.SPECTRE_ID;
+		return Minecraft.getMinecraft().thePlayer.worldObj.provider.getDimension() == ModDimensions.SPECTRE_ID;
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemUseFinish(ItemStack par1ItemStack, World par2World, EntityLivingBase livingEntity)
 	{
 		if (!par2World.isRemote)
 		{
+			if (true)
+			{
+				return par1ItemStack; // TODO Reimplement when Dimensions are there
+			}
 			SpectreHandler spectreHandler;
 
 			if ((spectreHandler = SpectreHandler.getInstance()) != null)
 			{
-				if (par2World.provider.getDimensionId() != ModDimensions.SPECTRE_ID)
+				if (par2World.provider.getDimension() != ModDimensions.SPECTRE_ID)
 				{
-					spectreHandler.teleportPlayerToSpectreCube((EntityPlayerMP) par3EntityPlayer);
+					spectreHandler.teleportPlayerToSpectreCube((EntityPlayerMP) livingEntity);
 				}
 				else
 				{
-					spectreHandler.teleportPlayerBack((EntityPlayerMP) par3EntityPlayer);
+					spectreHandler.teleportPlayerBack((EntityPlayerMP) livingEntity);
 				}
 			}
 		}
@@ -73,9 +81,9 @@ public class ItemSpectreKey extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
+	public void onUsingTick(ItemStack stack, EntityLivingBase livingEntity, int count)
 	{
-		if (player.worldObj.isRemote && count < 60)
+		if (livingEntity.worldObj.isRemote && count < 60)
 		{
 			EntityFX particle;
 			float t = 1F / 255F;
@@ -84,7 +92,7 @@ public class ItemSpectreKey extends ItemBase
 
 			for (int i = 0; i < (60 - count) * 2; i++)
 			{
-				particle = factory.getEntityFX(0, player.worldObj, player.posX + Math.random() * 1.8 - 0.9, player.posY + Math.random() * 1.8f, player.posZ + Math.random() * 1.8 - 0.9, 0, 0, 0);
+				particle = factory.getEntityFX(0, livingEntity.worldObj, livingEntity.posX + Math.random() * 1.8 - 0.9, livingEntity.posY + Math.random() * 1.8f, livingEntity.posZ + Math.random() * 1.8 - 0.9, 0, 0, 0);
 				particle.setRBGColorF(t * 122F, t * 197F, t * 205F);
 				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 			}

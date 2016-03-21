@@ -5,7 +5,7 @@ import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
@@ -64,7 +64,10 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 	public void setLevel(int level)
 	{
 		this.emitLevel = level;
-		this.worldObj.markBlockForUpdate(this.pos);
+		
+		IBlockState state = this.worldObj.getBlockState(this.pos);
+		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
+		
 		EnumFacing[] aenumfacing = EnumFacing.values();
 		int i = aenumfacing.length;
 

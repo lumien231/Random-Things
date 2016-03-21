@@ -6,6 +6,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class RTWorldInformation extends WorldSavedData
 {
@@ -51,7 +52,7 @@ public class RTWorldInformation extends WorldSavedData
 
 	public static RTWorldInformation getInstance()
 	{
-		WorldServer world = MinecraftServer.getServer().worldServerForDimension(0);
+		WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
 		if (world != null)
 		{
 			WorldSavedData handler = world.getMapStorage().loadData(RTWorldInformation.class, ID);

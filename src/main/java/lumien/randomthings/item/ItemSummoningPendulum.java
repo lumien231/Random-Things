@@ -2,21 +2,23 @@ package lumien.randomthings.item;
 
 import java.util.List;
 
-import lumien.randomthings.worldgen.SingleRandomChestContent;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,9 +28,13 @@ public class ItemSummoningPendulum extends ItemBase
 	{
 		super("summoningPendulum");
 
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new SingleRandomChestContent(new ItemStack(this), 1, 1, 1));
-		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new SingleRandomChestContent(new ItemStack(this), 1, 1, 30));
-		
+		/*
+		 * ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new
+		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 1));
+		 * ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CORRIDOR, new
+		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 30)); TODO
+		 */
+
 		this.setMaxStackSize(1);
 	}
 
@@ -95,7 +101,7 @@ public class ItemSummoningPendulum extends ItemBase
 	}
 
 	@Override
-	public boolean itemInteractionForEntity(ItemStack itemstack, net.minecraft.entity.player.EntityPlayer player, EntityLivingBase entity)
+	public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity, EnumHand hand)
 	{
 		if (entity.worldObj.isRemote)
 		{
@@ -104,7 +110,7 @@ public class ItemSummoningPendulum extends ItemBase
 
 		if (!(entity instanceof IMob || entity instanceof EntityPlayer))
 		{
-			itemstack = player.getCurrentEquippedItem();
+			itemstack = player.getHeldItemMainhand();
 			NBTTagCompound compound = itemstack.getTagCompound();
 			if (compound == null)
 			{
@@ -118,11 +124,11 @@ public class ItemSummoningPendulum extends ItemBase
 				entity.writeToNBTOptional(entityNBT);
 				tagList.appendTag(entityNBT);
 				entity.setDead();
-				entity.worldObj.playSoundEffect(player.posX, player.posY, player.posZ, "mob.endermen.portal", 0.5f, 1.5F);
+				entity.worldObj.playSound(null, player.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 0.5f, 1.5F);
 			}
 			else
 			{
-				entity.worldObj.playSoundEffect(player.posX, player.posY, player.posZ, "fire.ignite", 0.5f, 0.2F);
+				entity.worldObj.playSound(null, player.getPosition(), SoundEvents.item_firecharge_use, SoundCategory.PLAYERS, 0.5f, 1.5F);
 			}
 
 			compound.setTag("entitys", tagList);
@@ -133,7 +139,7 @@ public class ItemSummoningPendulum extends ItemBase
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		pos = pos.offset(side);
 		if (!worldIn.isRemote)
@@ -152,16 +158,16 @@ public class ItemSummoningPendulum extends ItemBase
 					{
 						entity.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 						worldIn.spawnEntityInWorld(entity);
-						playerIn.worldObj.playSoundEffect(playerIn.posX, playerIn.posY, playerIn.posZ, "mob.endermen.portal", 0.5f, 0.5F);
+						playerIn.worldObj.playSound(null, playerIn.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 0.5f, 0.5F);
 					}
 				}
 				else
 				{
-					playerIn.worldObj.playSoundEffect(playerIn.posX, playerIn.posY, playerIn.posZ, "fire.ignite", 0.5f, 0.2F);
+					playerIn.worldObj.playSound(null, playerIn.getPosition(), SoundEvents.item_firecharge_use, SoundCategory.PLAYERS, 0.5f, 0.2F);
 				}
 			}
 		}
-		return true;
+		return EnumActionResult.SUCCESS;
 	}
 
 	@Override

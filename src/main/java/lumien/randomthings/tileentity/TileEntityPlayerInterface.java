@@ -9,11 +9,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class TileEntityPlayerInterface extends TileEntityBase implements ISidedInventory, ITickable
 {
@@ -64,7 +64,7 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 			{
 				if (this.playerEntity == null && playerUUID != null)
 				{
-					EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().getPlayerByUUID(playerUUID);
+					EntityPlayerMP tempPlayer = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(playerUUID);
 					if (tempPlayer != null)
 					{
 						playerEntity = tempPlayer;
@@ -73,7 +73,7 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 				}
 				else
 				{
-					EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().getPlayerByUUID(playerUUID);
+					EntityPlayerMP tempPlayer = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(playerUUID);
 					if (tempPlayer != playerEntity)
 					{
 						this.playerEntity = null;
@@ -88,7 +88,7 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 	{
 		this.playerUUID = uuid;
 		this.markDirty();
-		this.worldObj.markBlockForUpdate(this.pos);
+		syncTE();
 	}
 
 	private void checkPlayerEntity()
@@ -318,9 +318,9 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 	}
 
 	@Override
-	public IChatComponent getDisplayName()
+	public ITextComponent getDisplayName()
 	{
-		return new ChatComponentTranslation(getName());
+		return new TextComponentTranslation(getName());
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package lumien.randomthings.item;
 
 import lumien.randomthings.util.RegisterUtil;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -18,9 +19,9 @@ public class ItemBeanStew extends ItemFood
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase livingEntity)
 	{
-		super.onItemUseFinish(stack, worldIn, playerIn);
+		super.onItemUseFinish(stack, worldIn, livingEntity);
 
 		if (stack.stackSize == 0)
 		{
@@ -28,11 +29,14 @@ public class ItemBeanStew extends ItemFood
 		}
 		else
 		{
-			boolean inventory = playerIn.inventory.addItemStackToInventory(new ItemStack(Items.bowl));
-
-			if (!inventory && !worldIn.isRemote)
+			if (livingEntity instanceof EntityPlayer)
 			{
-				worldIn.spawnEntityInWorld(new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, new ItemStack(Items.bowl)));
+				boolean inventory = ((EntityPlayer)livingEntity).inventory.addItemStackToInventory(new ItemStack(Items.bowl));
+
+				if (!inventory && !worldIn.isRemote)
+				{
+					worldIn.spawnEntityInWorld(new EntityItem(worldIn, livingEntity.posX, livingEntity.posY, livingEntity.posZ, new ItemStack(Items.bowl)));
+				}
 			}
 			return stack;
 		}

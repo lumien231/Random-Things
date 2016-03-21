@@ -8,12 +8,15 @@ import lumien.randomthings.tileentity.TileEntityOnlineDetector;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -43,31 +46,31 @@ public class BlockOnlineDetector extends BlockContainerBase
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { POWERED });
+		return new BlockStateContainer(this, new IProperty[] { POWERED });
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side)
-	{
-		return true;
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return 3;
-	}
-
-	@Override
-	public boolean canProvidePower()
+	public boolean isSideSolid(IBlockState base_state,IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumBlockRenderType getRenderType(IBlockState state)
+	{
+		return EnumBlockRenderType.MODEL;
+	}
+
+	@Override
+	public boolean canProvidePower(IBlockState state)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -77,15 +80,15 @@ public class BlockOnlineDetector extends BlockContainerBase
 	}
 
 	@Override
-	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
-		return state.getValue(POWERED) ? 15 : 0;
+		return blockState.getValue(POWERED) ? 15 : 0;
 	}
 
 	@Override
-	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side)
+	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
-		return state.getValue(POWERED) ? 15 : 0;
+		return blockState.getValue(POWERED) ? 15 : 0;
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -55,7 +55,7 @@ public class RenderSoul extends Render
 			float f8 = 1F;
 			GlStateManager.color(1, 1, 1);
 			Tessellator tessellator = Tessellator.getInstance();
-			WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+			VertexBuffer worldRenderer = tessellator.getBuffer();
 			worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
 			
 			worldRenderer.pos(0.0F - f7, 0.0F - f8, 0.0D).tex(f2, f5).endVertex();

@@ -16,9 +16,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -58,13 +58,13 @@ public class ContainerPotionVaporizer extends Container
 				{
 					return false;
 				}
-				List<PotionEffect> effects = Items.potionitem.getEffects(input);
+				List<PotionEffect> effects = PotionUtils.getEffectsFromStack(input);
 				if (effects==null || effects.size()==0)
 				{
 					return false;
 				}
 				
-				return !Potion.potionTypes[effects.get(0).getPotionID()].isInstant();
+				return !effects.get(0).getPotion().isInstant();
 				
 			}
 		}));

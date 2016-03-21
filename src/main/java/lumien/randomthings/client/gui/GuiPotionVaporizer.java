@@ -82,10 +82,10 @@ public class GuiPotionVaporizer extends GuiContainer
 		{
 			ContainerPotionVaporizer container = (ContainerPotionVaporizer) inventorySlots;
 
-			if (container.duration != 0 && container.potionID >= 0 && container.potionID < Potion.potionTypes.length)
+			if (container.duration != 0 && container.potionID >= 0)
 			{
 				int i = mouseX - guiLeft, j = mouseY - guiTop;
-				Potion potion = Potion.potionTypes[container.potionID];
+				Potion potion = Potion.getPotionById(container.potionID);
 
 				if (potion != null)
 				{

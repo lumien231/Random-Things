@@ -3,12 +3,14 @@ package lumien.randomthings.block;
 import java.util.Random;
 
 import lumien.randomthings.tileentity.cores.TileEntityNatureCore;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
@@ -22,7 +24,7 @@ public class BlockNatureCore extends BlockContainerBase
 	{
 		super("natureCore", Material.rock);
 
-		this.setStepSound(soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 		this.setBlockUnbreakable().setResistance(6000000.0F);
 	}
 
@@ -33,33 +35,26 @@ public class BlockNatureCore extends BlockContainerBase
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world,IBlockState state)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityNatureCore();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState state)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
-	{
-		return BiomeColorHelper.getWaterColorAtPos(worldIn, pos);
-	}
-
-	@Override
-	public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity)
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{
 		return false;
 	}

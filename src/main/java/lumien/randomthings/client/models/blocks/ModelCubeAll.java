@@ -1,25 +1,31 @@
 package lumien.randomthings.client.models.blocks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import lumien.randomthings.client.RenderReference;
-
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.client.model.IFlexibleBakedModel;
 import com.google.common.primitives.Ints;
 
-public class ModelCubeAll implements IFlexibleBakedModel
+import lumien.randomthings.client.RenderReference;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemOverrideList;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.Vec3d;
+
+public class ModelCubeAll implements IBakedModel
 {
 	TextureAtlasSprite texture;
 	boolean isAmbientOcclusion;
 
 	List<BakedQuad> generalQuads;
+	Map<EnumFacing, List<BakedQuad>> faceQuads;
 
 	public ModelCubeAll(TextureAtlasSprite texture, boolean isAmbientOcclusion)
 	{
@@ -27,26 +33,17 @@ public class ModelCubeAll implements IFlexibleBakedModel
 		this.isAmbientOcclusion = isAmbientOcclusion;
 
 		generalQuads = new ArrayList<BakedQuad>();
+		faceQuads = new HashMap<EnumFacing, List<BakedQuad>>();
+
 		for (EnumFacing f : EnumFacing.values())
 		{
-			generalQuads.add(createSidedBakedQuad(0, 1, 0, 1, 1, getParticleTexture(), f));
+			List<BakedQuad> faceQuadList;
+			faceQuads.put(f, faceQuadList = new ArrayList<BakedQuad>());
+			BakedQuad quad = createSidedBakedQuad(0, 1, 0, 1, 1, getParticleTexture(), f);
+
+			generalQuads.add(quad);
+			faceQuadList.add(quad);
 		}
-	}
-
-	@Override
-	public List getFaceQuads(EnumFacing p_177551_1_)
-	{
-		List<BakedQuad> faceQuads = new ArrayList();
-
-		for (BakedQuad quad : generalQuads)
-		{
-			if (quad.getFace() == p_177551_1_)
-			{
-				faceQuads.add(quad);
-			}
-		}
-
-		return faceQuads;
 	}
 
 	private int[] vertexToInts(float x, float y, float z, int color, TextureAtlasSprite texture, float u, float v, EnumFacing side)
@@ -64,18 +61,23 @@ public class ModelCubeAll implements IFlexibleBakedModel
 
 	private BakedQuad createSidedBakedQuad(float x1, float x2, float z1, float z2, float y, TextureAtlasSprite texture, EnumFacing side)
 	{
-		Vec3 v1 = rotate(new Vec3(x1 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
-		Vec3 v2 = rotate(new Vec3(x1 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
-		Vec3 v3 = rotate(new Vec3(x2 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
-		Vec3 v4 = rotate(new Vec3(x2 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
+		Vec3d v1 = rotate(new Vec3d(x1 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
+		Vec3d v2 = rotate(new Vec3d(x1 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
+		Vec3d v3 = rotate(new Vec3d(x2 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
+		Vec3d v4 = rotate(new Vec3d(x2 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
 
-		return new BakedQuad(Ints.concat(vertexToInts((float) v1.xCoord, (float) v1.yCoord, (float) v1.zCoord, -1, texture, 0, 0, side), vertexToInts((float) v2.xCoord, (float) v2.yCoord, (float) v2.zCoord, -1, texture, 0, 16, side), vertexToInts((float) v3.xCoord, (float) v3.yCoord, (float) v3.zCoord, -1, texture, 16, 16, side), vertexToInts((float) v4.xCoord, (float) v4.yCoord, (float) v4.zCoord, -1, texture, 16, 0, side)), -1, side);
+		return new BakedQuad(Ints.concat(vertexToInts((float) v1.xCoord, (float) v1.yCoord, (float) v1.zCoord, -1, texture, 0, 0, side), vertexToInts((float) v2.xCoord, (float) v2.yCoord, (float) v2.zCoord, -1, texture, 0, 16, side), vertexToInts((float) v3.xCoord, (float) v3.yCoord, (float) v3.zCoord, -1, texture, 16, 16, side), vertexToInts((float) v4.xCoord, (float) v4.yCoord, (float) v4.zCoord, -1, texture, 16, 0, side)), -1, side, texture, false, DefaultVertexFormats.ITEM);
 	}
 
 	@Override
-	public List<BakedQuad> getGeneralQuads()
+	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
 	{
-		return generalQuads;
+		if (side == null)
+		{
+			return generalQuads;
+		}
+
+		return faceQuads.get(side);
 	}
 
 	@Override
@@ -109,49 +111,49 @@ public class ModelCubeAll implements IFlexibleBakedModel
 		return RenderReference.BLOCK_ITEM_TRANSFORM;
 	}
 
-	private static Vec3 rotate(Vec3 vec, EnumFacing side)
+	private static Vec3d rotate(Vec3d vec, EnumFacing side)
 	{
 		switch (side)
 		{
 			case DOWN:
-				return new Vec3(vec.xCoord, -vec.yCoord, -vec.zCoord);
+				return new Vec3d(vec.xCoord, -vec.yCoord, -vec.zCoord);
 			case UP:
-				return new Vec3(vec.xCoord, vec.yCoord, vec.zCoord);
+				return new Vec3d(vec.xCoord, vec.yCoord, vec.zCoord);
 			case NORTH:
-				return new Vec3(vec.xCoord, vec.zCoord, -vec.yCoord);
+				return new Vec3d(vec.xCoord, vec.zCoord, -vec.yCoord);
 			case SOUTH:
-				return new Vec3(vec.xCoord, -vec.zCoord, vec.yCoord);
+				return new Vec3d(vec.xCoord, -vec.zCoord, vec.yCoord);
 			case WEST:
-				return new Vec3(-vec.yCoord, vec.xCoord, vec.zCoord);
+				return new Vec3d(-vec.yCoord, vec.xCoord, vec.zCoord);
 			case EAST:
-				return new Vec3(vec.yCoord, -vec.xCoord, vec.zCoord);
+				return new Vec3d(vec.yCoord, -vec.xCoord, vec.zCoord);
 		}
 		return null;
 	}
 
-	private static Vec3 revRotate(Vec3 vec, EnumFacing side)
+	private static Vec3d revRotate(Vec3d vec, EnumFacing side)
 	{
 		switch (side)
 		{
 			case DOWN:
-				return new Vec3(vec.xCoord, -vec.yCoord, -vec.zCoord);
+				return new Vec3d(vec.xCoord, -vec.yCoord, -vec.zCoord);
 			case UP:
-				return new Vec3(vec.xCoord, vec.yCoord, vec.zCoord);
+				return new Vec3d(vec.xCoord, vec.yCoord, vec.zCoord);
 			case NORTH:
-				return new Vec3(vec.xCoord, -vec.zCoord, vec.yCoord);
+				return new Vec3d(vec.xCoord, -vec.zCoord, vec.yCoord);
 			case SOUTH:
-				return new Vec3(vec.xCoord, vec.zCoord, -vec.yCoord);
+				return new Vec3d(vec.xCoord, vec.zCoord, -vec.yCoord);
 			case WEST:
-				return new Vec3(vec.yCoord, -vec.xCoord, vec.zCoord);
+				return new Vec3d(vec.yCoord, -vec.xCoord, vec.zCoord);
 			case EAST:
-				return new Vec3(-vec.yCoord, vec.xCoord, vec.zCoord);
+				return new Vec3d(-vec.yCoord, vec.xCoord, vec.zCoord);
 		}
 		return null;
 	}
 
 	@Override
-	public VertexFormat getFormat()
+	public ItemOverrideList getOverrides()
 	{
-		return new VertexFormat();
+		return ItemOverrideList.NONE;
 	}
 }

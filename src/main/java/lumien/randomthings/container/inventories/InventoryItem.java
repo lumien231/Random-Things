@@ -5,8 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class InventoryItem implements IInventory
 {
@@ -61,9 +61,9 @@ public class InventoryItem implements IInventory
 	}
 
 	@Override
-	public IChatComponent getDisplayName()
+	public ITextComponent getDisplayName()
 	{
-		return new ChatComponentTranslation(getName());
+		return new TextComponentTranslation(getName());
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public class InventoryItem implements IInventory
 	@Override
 	public void markDirty()
 	{
-		ItemStack equipped = player.getCurrentEquippedItem();
+		ItemStack equipped = player.getHeldItemMainhand();
 
 		if (equipped != null && ItemStack.areItemStacksEqual(equipped, itemStack))
 		{

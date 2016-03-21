@@ -5,9 +5,14 @@ import java.util.List;
 import lumien.randomthings.potion.ModPotions;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ItemIngredient extends ItemBase
@@ -66,25 +71,25 @@ public class ItemIngredient extends ItemBase
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		if (!worldIn.isRemote)
 		{
 			if (getIngredient(itemStackIn) == INGREDIENT.EVIL_TEAR && !playerIn.isPotionActive(ModPotions.boss))
 			{
-				playerIn.addPotionEffect(new PotionEffect(ModPotions.boss.id, 20 * 60 * 20));
-				worldIn.playSoundAtEntity(playerIn, "random.burp", 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.4F);
+				playerIn.addPotionEffect(new PotionEffect(ModPotions.boss, 20 * 60 * 20));
+				worldIn.playSound(null,playerIn.getPosition(), SoundEvents.entity_player_burp,SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.4F);
 
 				ItemStack reduce = itemStackIn.copy();
 				if (!playerIn.capabilities.isCreativeMode)
 				{
 					reduce.stackSize--;
 				}
-				
-				return reduce;
+
+				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, reduce);
 			}
 		}
 
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn);
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 }

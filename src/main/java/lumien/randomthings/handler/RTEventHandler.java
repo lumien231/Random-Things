@@ -25,7 +25,6 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.lib.IExplosionImmune;
-import lumien.randomthings.lib.PlayerAbilitiesProperty;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageSoundRecorder;
 import lumien.randomthings.potion.ModPotions;
@@ -47,30 +46,33 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
+import net.minecraft.world.BossInfo.Color;
+import net.minecraft.world.BossInfo.Overlay;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -96,14 +98,11 @@ import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -117,7 +116,7 @@ public class RTEventHandler
 	{
 		ItemStack currentlyEquipped;
 
-		if (event.name != null && ModItems.soundRecorder!=null &&  Minecraft.getMinecraft().thePlayer != null && (currentlyEquipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem()) != null && currentlyEquipped.getItem() == ModItems.soundRecorder)
+		if (event.name != null && ModItems.soundRecorder != null && Minecraft.getMinecraft().thePlayer != null && (currentlyEquipped = Minecraft.getMinecraft().thePlayer.getHeldItemMainhand()) != null && currentlyEquipped.getItem() == ModItems.soundRecorder)
 		{
 			MessageSoundRecorder message = new MessageSoundRecorder(event.name);
 
@@ -166,7 +165,7 @@ public class RTEventHandler
 		{
 			WorldTickEvent worldTickEvent = (WorldTickEvent) tickEvent;
 
-			if (worldTickEvent.phase == Phase.END && !worldTickEvent.world.isRemote && worldTickEvent.world.provider.getDimensionId() == 0)
+			if (worldTickEvent.phase == Phase.END && !worldTickEvent.world.isRemote && worldTickEvent.world.provider.getDimension() == 0)
 			{
 				RedstoneSignalHandler.getHandler().tick();
 			}
@@ -181,28 +180,13 @@ public class RTEventHandler
 
 		if (event.entity.isPotionActive(ModPotions.boss))
 		{
-			IBossDisplayData displayData = new IBossDisplayData()
+			BossInfo displayData = new BossInfo(entity.getUniqueID(), entity.getDisplayName(), Color.PURPLE, Overlay.PROGRESS)
 			{
-				@Override
-				public float getMaxHealth()
-				{
-					return entity.getMaxHealth();
-				}
 
-				@Override
-				public float getHealth()
-				{
-					return entity.getHealth();
-				}
-
-				@Override
-				public IChatComponent getDisplayName()
-				{
-					return entity.getDisplayName();
-				}
 
 			};
-			BossStatus.setBossStatus(displayData, false);
+
+			// BossStatus.setBossStatus(displayData, false); TODO
 		}
 	}
 
@@ -210,9 +194,9 @@ public class RTEventHandler
 	@SideOnly(Side.CLIENT)
 	public void cameraSetup(CameraSetup event)
 	{
-		if (event.entity instanceof EntityLivingBase)
+		if (event.getEntity() instanceof EntityLivingBase)
 		{
-			if (((EntityLivingBase) event.entity).isPotionActive(ModPotions.collapse))
+			if (((EntityLivingBase) event.getEntity()).isPotionActive(ModPotions.collapse))
 			{
 				event.roll = 180;
 			}
@@ -261,13 +245,14 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void modelBake(ModelBakeEvent event)
 	{
+
 		ModelFluidDisplay modelFluidDisplay = new ModelFluidDisplay();
-		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:fluidDisplay", "normal"), modelFluidDisplay);
-		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:fluidDisplay", "inventory"), modelFluidDisplay);
+		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:fluidDisplay", "normal"), modelFluidDisplay);
+		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:fluidDisplay", "inventory"), modelFluidDisplay);
 
 		ModelCustomWorkbench modelCustomWorkbench = new ModelCustomWorkbench();
-		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:customWorkbench", "normal"), modelCustomWorkbench);
-		event.modelRegistry.putObject(new ModelResourceLocation("randomthings:customWorkbench", "inventory"), modelCustomWorkbench);
+		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "normal"), modelCustomWorkbench);
+		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "inventory"), modelCustomWorkbench);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -311,7 +296,7 @@ public class RTEventHandler
 			}
 			else
 			{
-				if (chatDetector.checkMessage(event.username, event.message))
+				if (chatDetector.checkMessage(event.getUsername(), event.getMessage()))
 				{
 					event.setCanceled(true);
 				}
@@ -342,13 +327,13 @@ public class RTEventHandler
 
 		Minecraft minecraft = Minecraft.getMinecraft();
 
-		if ((equippedItem = minecraft.thePlayer.getCurrentEquippedItem()) != null)
+		if ((equippedItem = minecraft.thePlayer.getHeldItemMainhand()) != null)
 		{
 			if (equippedItem.getItem() == ModItems.redstoneTool)
 			{
-				MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
+				RayTraceResult objectMouseOver = minecraft.objectMouseOver;
 
-				if (objectMouseOver != null && objectMouseOver.typeOfHit == MovingObjectType.BLOCK)
+				if (objectMouseOver != null && objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK)
 				{
 					IBlockState hitState = minecraft.theWorld.getBlockState(objectMouseOver.getBlockPos());
 					Block hitBlock = hitState.getBlock();
@@ -408,7 +393,7 @@ public class RTEventHandler
 			lavaProtector = lavaCharm;
 		}
 
-		ItemStack boots = player.getEquipmentInSlot(1);
+		ItemStack boots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
 		if (boots != null)
 		{
 			if (boots.getItem() == ModItems.lavaWader)
@@ -473,7 +458,7 @@ public class RTEventHandler
 			lavaProtector = lavaCharm;
 		}
 
-		ItemStack boots = event.entityLiving.getEquipmentInSlot(1);
+		ItemStack boots = event.entityLiving.getItemStackFromSlot(EntityEquipmentSlot.FEET);
 		if (boots != null)
 		{
 			if (boots.getItem() == ModItems.lavaWader)
@@ -537,17 +522,17 @@ public class RTEventHandler
 					}
 					else if (livingEntity.isPotionActive(ModPotions.imbueWither))
 					{
-						event.entityLiving.addPotionEffect(new PotionEffect(Potion.wither.id, 5 * 20, 1));
+						event.entityLiving.addPotionEffect(new PotionEffect(MobEffects.wither, 5 * 20, 1));
 					}
 					else if (livingEntity.isPotionActive(ModPotions.imbuePoison))
 					{
-						event.entityLiving.addPotionEffect(new PotionEffect(Potion.poison.id, 10 * 20, 1));
+						event.entityLiving.addPotionEffect(new PotionEffect(MobEffects.poison, 10 * 20, 1));
 					}
 					else if (livingEntity.isPotionActive(ModPotions.imbueCollapse))
 					{
 						if (Math.random() < 0.2f)
 						{
-							event.entityLiving.addPotionEffect(new PotionEffect(ModPotions.collapse.id, 10 * 20, 1));
+							event.entityLiving.addPotionEffect(new PotionEffect(ModPotions.collapse, 10 * 20, 1));
 						}
 					}
 				}
@@ -570,7 +555,7 @@ public class RTEventHandler
 					World worldObj = DimensionManager.getWorld(compound.getInteger("dimension"));
 					if (worldObj != null && worldObj.isBlockLoaded(anchor) && worldObj.getBlockState(anchor).getBlock() instanceof BlockLifeAnchor)
 					{
-						AxisAlignedBB boundingBox = AxisAlignedBB.fromBounds(anchor.getX(), anchor.getY(), anchor.getZ(), anchor.getX(), anchor.getY(), anchor.getZ()).expand(5, 5, 5);
+						AxisAlignedBB boundingBox = new AxisAlignedBB(anchor.getX(), anchor.getY(), anchor.getZ(), anchor.getX(), anchor.getY(), anchor.getZ()).expand(5, 5, 5);
 
 						float damageLeft = event.ammount;
 						List<EntityLivingBase> entityList = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, boundingBox);
@@ -620,7 +605,12 @@ public class RTEventHandler
 		EntityPlayer player = (EntityPlayer) event.entityLiving;
 		ItemStack baubleSkull = InventoryUtil.getBauble(ModItems.obsidianSkullRing, player);
 		ItemStack inventorySkull = InventoryUtil.getPlayerInventoryItem(ModItems.obsidianSkull, player);
-		ItemStack obsidianBoots = player.getEquipmentInSlot(1);
+		ItemStack obsidianBoots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
+
+		if (obsidianBoots != null && !(obsidianBoots.getItem() == ModItems.obsidianWaterWalkingBoots || obsidianBoots.getItem() == ModItems.lavaWader))
+		{
+			obsidianBoots = null;
+		}
 
 		ItemStack skull = null;
 
@@ -658,7 +648,7 @@ public class RTEventHandler
 		{
 			event.setResult(Result.ALLOW);
 			event.world.setBlockState(event.pos, ModBlocks.fertilizedDirtTilled.getDefaultState());
-			event.world.playSoundEffect(event.pos.getX() + 0.5F, event.pos.getY() + 0.5F, event.pos.getZ() + 0.5F, ModBlocks.fertilizedDirtTilled.stepSound.getStepSound(), (ModBlocks.fertilizedDirtTilled.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.stepSound.getFrequency() * 0.8F);
+			event.world.playSound(null, event.pos.add(0.5, 0.5, 0.5), ModBlocks.fertilizedDirtTilled.getSoundType().getStepSound(), SoundCategory.BLOCKS, (ModBlocks.fertilizedDirtTilled.getSoundType().getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.getSoundType().getPitch() * 0.8F);
 		}
 	}
 
@@ -670,12 +660,6 @@ public class RTEventHandler
 			if (event.entityLiving instanceof EntityPlayer)
 			{
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
-				PlayerAbilitiesProperty abilities = (PlayerAbilitiesProperty) player.getExtendedProperties(PlayerAbilitiesProperty.KEY);
-				if (abilities.isImmortal())
-				{
-					player.heal(0.5F);
-				}
-
 				if (player.dimension == ModDimensions.SPECTRE_ID)
 				{
 					SpectreHandler spectreHandler;
@@ -702,9 +686,9 @@ public class RTEventHandler
 						BlockPos liquid = new BlockPos(Math.floor(player.posX), Math.floor(player.posY), Math.floor(player.posZ));
 						BlockPos air = new BlockPos((int) player.posX, (int) (player.posY + player.height), (int) player.posZ);
 						Block liquidBlock = player.worldObj.getBlockState(liquid).getBlock();
-						Material liquidMaterial = liquidBlock.getMaterial();
+						Material liquidMaterial = liquidBlock.getMaterial(player.worldObj.getBlockState(liquid));
 
-						if ((liquidMaterial == Material.water || (boots.getItem() == ModItems.lavaWader && liquidMaterial == Material.lava)) && player.worldObj.getBlockState(air).getBlock().isAir(player.worldObj, air) && EntityUtil.isJumping(player))
+						if ((liquidMaterial == Material.water || (boots.getItem() == ModItems.lavaWader && liquidMaterial == Material.lava)) && player.worldObj.getBlockState(air).getBlock().isAir(player.worldObj.getBlockState(air), player.worldObj, air) && EntityUtil.isJumping(player))
 						{
 							player.moveEntity(0, 0.22, 0);
 						}
@@ -720,7 +704,7 @@ public class RTEventHandler
 	{
 		EntityPlayer thePlayer = Minecraft.getMinecraft().thePlayer;
 
-		ItemStack equipped = thePlayer.getCurrentEquippedItem();
+		ItemStack equipped = thePlayer.getHeldItemMainhand();
 
 		if (equipped != null && equipped.getItem() == ModItems.entityFilter)
 		{
@@ -779,15 +763,6 @@ public class RTEventHandler
 				if (!(event.entityLiving instanceof FakePlayer))
 				{
 					EntityPlayer player = (EntityPlayer) event.entityLiving;
-					if (!event.source.canHarmInCreative())
-					{
-						PlayerAbilitiesProperty abilities = (PlayerAbilitiesProperty) player.getExtendedProperties(PlayerAbilitiesProperty.KEY);
-						if (abilities.isImmortal())
-						{
-							player.setHealth(0.1f);
-							event.setCanceled(true);
-						}
-					}
 
 					if (!event.isCanceled())
 					{
@@ -795,15 +770,6 @@ public class RTEventHandler
 					}
 				}
 			}
-		}
-	}
-
-	@SubscribeEvent
-	public void entityConstructing(EntityConstructing event)
-	{
-		if (event.entity instanceof EntityPlayer)
-		{
-			event.entity.registerExtendedProperties(PlayerAbilitiesProperty.KEY, new PlayerAbilitiesProperty());
 		}
 	}
 
@@ -817,7 +783,7 @@ public class RTEventHandler
 		EntityPlayer player = mc.thePlayer;
 		if (player != null)
 		{
-			ItemStack itemStack = player.getCurrentEquippedItem();
+			ItemStack itemStack = player.getHeldItemMainhand();
 
 			if (itemStack != null)
 			{

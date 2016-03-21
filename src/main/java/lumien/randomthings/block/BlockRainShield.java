@@ -2,17 +2,16 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
-import lumien.randomthings.tileentity.TileEntityBlockBreaker;
 import lumien.randomthings.tileentity.TileEntityRainShield;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,22 +19,29 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockRainShield extends BlockContainerBase
 {
+	protected static final AxisAlignedBB RAINSHIELD_AABB = new AxisAlignedBB(6F / 16F, 0.0F, 6F / 16F, 10F / 16F, 1.0F, 10F / 16F);
+
 	protected BlockRainShield()
 	{
 		super("rainShield", Material.rock);
 
-		this.setBlockBounds(6F / 16F, 0.0F, 6F / 16F, 10F / 16F, 1.0F, 10F / 16F);
 		this.setHardness(2.0F);
 	}
-	
+
 	@Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-    {
-        this.checkForDrop(worldIn, pos, state);
-        
-        TileEntityRainShield te = (TileEntityRainShield) worldIn.getTileEntity(pos);
-        te.onBlockAdded(worldIn,pos,state);
-    }
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return RAINSHIELD_AABB;
+	}
+
+	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	{
+		this.checkForDrop(worldIn, pos, state);
+
+		TileEntityRainShield te = (TileEntityRainShield) worldIn.getTileEntity(pos);
+		te.onBlockAdded(worldIn, pos, state);
+	}
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
@@ -58,27 +64,27 @@ public class BlockRainShield extends BlockContainerBase
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public EnumWorldBlockLayer getBlockLayer()
+	public BlockRenderLayer getBlockLayer()
 	{
-		return EnumWorldBlockLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube()
+	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
 	{
-		super.randomDisplayTick(worldIn, pos, state, rand);
+		super.randomDisplayTick(state, worldIn, pos, rand);
 
 		if (worldIn.isRaining())
 		{
@@ -86,17 +92,17 @@ public class BlockRainShield extends BlockContainerBase
 			worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0, 0);
 		}
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
 	{
 		((TileEntityRainShield) worldIn.getTileEntity(pos)).onNeighborBlockChange(worldIn, pos, state, neighborBlock);
 		checkForDrop(worldIn, pos, state);
 	}
-	
+
 	private boolean canPlaceOn(World worldIn, BlockPos pos)
 	{
-		return World.doesBlockHaveSolidTopSurface(worldIn, pos);
+		return worldIn.isSideSolid(pos, EnumFacing.UP);
 	}
 
 	protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)

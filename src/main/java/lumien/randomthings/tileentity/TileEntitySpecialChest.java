@@ -6,6 +6,7 @@ import java.util.List;
 import lumien.randomthings.block.BlockSpecialChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
@@ -15,11 +16,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -282,7 +285,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 			double d1 = i + 0.5D;
 			d2 = k + 0.5D;
 
-			this.worldObj.playSoundEffect(d1, j + 0.5D, d2, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			this.worldObj.playSound(null, new BlockPos(d1, j + 0.5D, d2), SoundEvents.block_chest_open, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
@@ -310,7 +313,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 				d2 = i + 0.5D;
 				double d0 = k + 0.5D;
 
-				this.worldObj.playSoundEffect(d2, j + 0.5D, d0, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+				this.worldObj.playSound(null, new BlockPos(d2, j + 0.5D, d0), SoundEvents.block_chest_close, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 
 			if (this.lidAngle < 0.0F)
@@ -482,7 +485,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 	}
 
 	@Override
-	public final void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	public final void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
 	{
 		readFromNBT(packet.getNbtCompound());
 	}
@@ -492,6 +495,6 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
 }

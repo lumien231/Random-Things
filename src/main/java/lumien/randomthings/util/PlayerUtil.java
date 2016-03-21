@@ -3,8 +3,8 @@ package lumien.randomthings.util;
 import lumien.randomthings.RandomThings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class PlayerUtil
 {
@@ -18,7 +18,7 @@ public class PlayerUtil
 		boolean comingFromEnd = player.dimension == 1;
 
 
-		MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, dimension, new SimpleTeleporter(MinecraftServer.getServer().worldServerForDimension(dimension)));
+		FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(player, dimension, new SimpleTeleporter(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(dimension)));
 
 		// If a player is teleported from the end certain logic elements are ignored in transferPlayerToDimension
 		if (comingFromEnd)

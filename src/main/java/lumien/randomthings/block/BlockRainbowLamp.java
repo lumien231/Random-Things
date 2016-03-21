@@ -3,14 +3,14 @@ package lumien.randomthings.block;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockRainbowLamp extends BlockBase
@@ -21,7 +21,8 @@ public class BlockRainbowLamp extends BlockBase
 	{
 		super("rainbowLamp", Material.redstoneLight);
 
-		this.setHardness(0.3F).setStepSound(soundTypeGlass);
+		this.setHardness(0.3F);
+		this.setSoundType(SoundType.GLASS);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(COLOR, EnumDyeColor.WHITE));
 
 		this.setLightLevel(1.0F);
@@ -88,8 +89,8 @@ public class BlockRainbowLamp extends BlockBase
 	}
 
 	@Override
-	protected BlockState createBlockState()
+	protected BlockStateContainer createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { COLOR });
+		return new BlockStateContainer(this, new IProperty[] { COLOR });
 	}
 }

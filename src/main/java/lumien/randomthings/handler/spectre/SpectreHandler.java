@@ -11,12 +11,13 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class SpectreHandler extends WorldSavedData
 {
@@ -50,7 +51,7 @@ public class SpectreHandler extends WorldSavedData
 
 	public SpectreCube getSpectreCubeFromPos(World worldObj, BlockPos pos)
 	{
-		if (worldObj.provider.getDimensionId() != ModDimensions.SPECTRE_ID)
+		if (worldObj.provider.getDimension() != ModDimensions.SPECTRE_ID)
 		{
 			return null;
 		}
@@ -210,7 +211,7 @@ public class SpectreHandler extends WorldSavedData
 		}
 		else
 		{
-			MinecraftServer.getServer().getConfigurationManager().recreatePlayerEntity(player, player.dimension, true);
+			FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().recreatePlayerEntity(player, player.dimension, true);
 		}
 	}
 

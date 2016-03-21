@@ -14,8 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.BlockPos.MutableBlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
@@ -52,7 +51,8 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 			BlockPos oldTarget = this.target;
 
 			this.target = newTarget;
-			this.worldObj.markBlockForUpdate(this.pos);
+			IBlockState state = this.worldObj.getBlockState(this.pos);
+			this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 
 			if (oldTarget != null)
 			{

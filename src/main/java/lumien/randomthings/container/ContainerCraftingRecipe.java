@@ -24,7 +24,7 @@ public class ContainerCraftingRecipe extends Container
 
 	public ContainerCraftingRecipe(EntityPlayer player, World world, int x, int y, int z)
 	{
-		openedWith = player.getCurrentEquippedItem();
+		openedWith = player.getHeldItemMainhand();
 
 		if (openedWith != null && openedWith.getItem() == ModItems.craftingRecipe)
 		{
@@ -77,7 +77,7 @@ public class ContainerCraftingRecipe extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		ItemStack equipped = playerIn.getCurrentEquippedItem();
+		ItemStack equipped = playerIn.getHeldItemMainhand();
 		return equipped != null && equipped.isItemEqual(openedWith);
 	}
 
@@ -86,7 +86,7 @@ public class ContainerCraftingRecipe extends Container
 	{
 		super.onContainerClosed(playerIn);
 
-		ItemStack toSave = playerIn.getCurrentEquippedItem();
+		ItemStack toSave = playerIn.getHeldItemMainhand();
 		if (toSave != null && toSave.getItem() instanceof ItemCraftingRecipe)
 		{
 			ItemCraftingRecipe.save(toSave, craftMatrix, craftResult);

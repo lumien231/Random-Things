@@ -9,6 +9,8 @@ public class ItemBase extends Item
 	public ItemBase(String name)
 	{
 		registerItem(name, this);
+		
+		RandomThings.proxy.scheduleColor(this);
 	}
 
 	public static void registerItem(String name, Item item)

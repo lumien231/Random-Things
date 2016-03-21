@@ -3,6 +3,7 @@ package lumien.randomthings.item;
 import java.util.List;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,13 +12,15 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemGrassSeeds extends ItemBase
+public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 {
 	public ItemGrassSeeds()
 	{
@@ -51,7 +54,7 @@ public class ItemGrassSeeds extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int renderPass)
+	public int getColorFromItemstack(ItemStack stack, int renderPass)
 	{
 		if (stack.getItemDamage() == 0)
 		{
@@ -64,7 +67,7 @@ public class ItemGrassSeeds extends ItemBase
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -79,8 +82,12 @@ public class ItemGrassSeeds extends ItemBase
 				{
 					worldIn.setBlockState(pos, ModBlocks.coloredGrass.getStateFromMeta(stack.getItemDamage() - 1));
 				}
+				
+				return EnumActionResult.SUCCESS;
 			}
+			
+			return EnumActionResult.FAIL;
 		}
-		return true;
+		return EnumActionResult.SUCCESS;
 	}
 }
