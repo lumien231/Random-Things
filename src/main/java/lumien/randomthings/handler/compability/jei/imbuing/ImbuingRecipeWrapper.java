@@ -48,12 +48,6 @@ public class ImbuingRecipeWrapper extends BlankRecipeWrapper
 	}
 
 	@Override
-	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight)
-	{
-
-	}
-
-	@Override
 	public String toString()
 	{
 		return ingredients + " + " + toImbue + " = " + result;

@@ -1,5 +1,7 @@
 package lumien.randomthings.handler.compability.jei;
 
+import javax.annotation.Nonnull;
+
 import lumien.randomthings.client.gui.GuiImbuingStation;
 import lumien.randomthings.container.ContainerImbuingStation;
 import lumien.randomthings.handler.compability.jei.anvil.AnvilRecipeCategory;
@@ -29,21 +31,12 @@ public class RandomThingsPlugin implements IModPlugin
 	public static String ANVIL_ID = "AnvilCraftingRT";
 
 	@Override
-	public void onJeiHelpersAvailable(IJeiHelpers jeiHelpers)
-	{
-		this.jeiHelpers = jeiHelpers;
-		stackHelper = jeiHelpers.getStackHelper();
-	}
-
-	@Override
-	public void onItemRegistryAvailable(IItemRegistry itemRegistry)
-	{
-		this.itemRegistry = itemRegistry;
-	}
-
-	@Override
 	public void register(IModRegistry registry)
 	{
+		this.itemRegistry = registry.getItemRegistry();
+		this.jeiHelpers = registry.getJeiHelpers();
+		this.stackHelper = jeiHelpers.getStackHelper();
+		
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		registry.addRecipeCategories(new ImbuingRecipeCategory(guiHelper), new AnvilRecipeCategory(guiHelper));
 
@@ -58,12 +51,6 @@ public class RandomThingsPlugin implements IModPlugin
 		registry.addRecipes(lumien.randomthings.recipes.anvil.AnvilRecipeHandler.getAllRecipes());
 
 		registry.addRecipeClickArea(GuiImbuingStation.class, 99, 54, 22, 16, IMBUE_ID);
-	}
-
-	@Override
-	public void onRecipeRegistryAvailable(IRecipeRegistry recipeRegistry)
-	{
-
 	}
 
 	@Override

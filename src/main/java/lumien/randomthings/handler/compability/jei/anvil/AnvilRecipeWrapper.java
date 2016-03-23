@@ -48,10 +48,4 @@ public class AnvilRecipeWrapper extends BlankRecipeWrapper
 	{
 		return Collections.singletonList(result);
 	}
-
-	@Override
-	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight)
-	{
-
-	}
 }
