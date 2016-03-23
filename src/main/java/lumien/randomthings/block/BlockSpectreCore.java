@@ -119,20 +119,20 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
 	{
-		IBlockState iblockstate = worldIn.getBlockState(pos);
+		IBlockState iblockstate = worldIn.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
 
 		if (block == this || iblockstate.getBlock() == ModBlocks.spectreBlock)
 		{
 			return false;
 		}
-
-		if (worldIn.getBlockState(pos.offset(side.getOpposite())) != iblockstate)
+		
+		if (state != iblockstate)
 		{
 			return true;
 		}
 
-		return block == this ? false : super.shouldSideBeRendered(state, worldIn, pos, side);
+		return false;
 	}
 
 	@Override

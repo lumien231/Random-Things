@@ -2,6 +2,7 @@ package lumien.randomthings.item;
 
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.spectre.SpectreHandler;
+import lumien.randomthings.handler.spectre.SpectreWorldProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
@@ -50,7 +51,7 @@ public class ItemSpectreKey extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack)
 	{
-		return Minecraft.getMinecraft().thePlayer.worldObj.provider.getDimension() == ModDimensions.SPECTRE_ID;
+		return Minecraft.getMinecraft().thePlayer.worldObj.provider instanceof SpectreWorldProvider;
 	}
 
 	@Override
@@ -58,10 +59,6 @@ public class ItemSpectreKey extends ItemBase
 	{
 		if (!par2World.isRemote)
 		{
-			if (true)
-			{
-				return par1ItemStack; // TODO Reimplement when Dimensions are there
-			}
 			SpectreHandler spectreHandler;
 
 			if ((spectreHandler = SpectreHandler.getInstance()) != null)
