@@ -6,8 +6,6 @@ public class Worldgen
 	public static boolean pitcherPlants;
 	public static boolean sakanade;
 	
-	
-	public static boolean enderCore;
 	public static boolean natureCore;
 }
 

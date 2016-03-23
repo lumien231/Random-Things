@@ -1,8 +1,6 @@
 package lumien.randomthings.tileentity;
 
-import lumien.randomthings.tileentity.cores.TileEntityEnderCore;
 import lumien.randomthings.tileentity.cores.TileEntityNatureCore;
-import lumien.randomthings.tileentity.cores.TileEntityNetherCore;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityAdvancedRedstoneInterface;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
 import net.minecraft.tileentity.TileEntity;
@@ -18,8 +16,6 @@ public class ModTileEntitys
 		registerTE(TileEntityEnderBridge.class, "enderBridge");
 		registerTE(TileEntityPrismarineEnderBridge.class, "prismarineEnderBridge");
 		registerTE(TileEntityNatureCore.class, "natureCore");
-		registerTE(TileEntityNetherCore.class, "netherCore");
-		registerTE(TileEntityEnderCore.class, "enderCore");
 		registerTE(TileEntityChatDetector.class, "chatDetector");
 		registerTE(TileEntityBasicRedstoneInterface.class,"basicRedstoneInterface");
 		registerTE(TileEntityAdvancedRedstoneInterface.class, "advancedRedstoneInterface");

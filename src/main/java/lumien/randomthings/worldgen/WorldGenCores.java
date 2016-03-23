@@ -33,49 +33,10 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class WorldGenCores implements IWorldGenerator
 {
 	public static BlockPattern natureCore;
-	public static BlockPattern enderCore;
 
 	public WorldGenCores()
 	{
 		natureCore = new BlockPattern();
-		enderCore = new BlockPattern();
-
-		IBlockState obsidian = Blocks.obsidian.getDefaultState();
-		IBlockState blackGlass = Blocks.stained_glass.getDefaultState().withProperty(BlockStainedGlass.COLOR, EnumDyeColor.BLACK);
-
-		enderCore.addBlock(obsidian, 0, 0, 0);
-		enderCore.addBlock(blackGlass, 0, 2, 0);
-		enderCore.addBlock(ModBlocks.enderCore.getDefaultState(), 0, 1, 0);
-
-		enderCore.addBlock(obsidian, -1, 0, -1);
-		enderCore.addBlock(obsidian, 1, 0, -1);
-		enderCore.addBlock(obsidian, -1, 0, 1);
-		enderCore.addBlock(obsidian, 1, 0, 1);
-
-		enderCore.addBlock(blackGlass, 1, 1, 0);
-		enderCore.addBlock(blackGlass, 0, 1, 1);
-		enderCore.addBlock(blackGlass, 0, 1, -1);
-		enderCore.addBlock(blackGlass, -1, 1, 0);
-
-		enderCore.addBlock(obsidian, -1, 2, -1);
-		enderCore.addBlock(obsidian, 1, 2, -1);
-		enderCore.addBlock(obsidian, -1, 2, 1);
-		enderCore.addBlock(obsidian, 1, 2, 1);
-
-		enderCore.addBlock(obsidian, 1, 0, 0);
-		enderCore.addBlock(obsidian, 0, 0, 1);
-		enderCore.addBlock(obsidian, 0, 0, -1);
-		enderCore.addBlock(obsidian, -1, 0, 0);
-
-		enderCore.addBlock(obsidian, -1, 1, -1);
-		enderCore.addBlock(obsidian, 1, 1, -1);
-		enderCore.addBlock(obsidian, -1, 1, 1);
-		enderCore.addBlock(obsidian, 1, 1, 1);
-
-		enderCore.addBlock(obsidian, 1, 2, 0);
-		enderCore.addBlock(obsidian, 0, 2, 1);
-		enderCore.addBlock(obsidian, 0, 2, -1);
-		enderCore.addBlock(obsidian, -1, 2, 0);
 
 		IBlockState jungleLog = Blocks.log.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE);
 		IBlockState jungleLeaves = Blocks.leaves.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockLeaves.CHECK_DECAY, false).withProperty(BlockLeaves.DECAYABLE, false);
@@ -130,24 +91,6 @@ public class WorldGenCores implements IWorldGenerator
 				{
 					BiomeGenBase biome = world.getBiomeGenForCoords(target);
 
-					int enderMult = 40;
-					if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
-					{
-						enderMult -= 8;
-					}
-					if (BiomeDictionary.isBiomeOfType(biome, Type.SPOOKY))
-					{
-						enderMult -= 4;
-					}
-					if (BiomeDictionary.isBiomeOfType(biome, Type.SWAMP))
-					{
-						enderMult -= 8;
-					}
-					if (BiomeDictionary.isBiomeOfType(biome, Type.SANDY))
-					{
-						enderMult += 10;
-					}
-
 					int natureMult = 30;
 					if (BiomeDictionary.isBiomeOfType(biome, Type.DENSE))
 					{
@@ -175,19 +118,13 @@ public class WorldGenCores implements IWorldGenerator
 					}
 
 					boolean generateNatureCore = random.nextInt(18 * natureMult) == 0;
-					boolean generateEnderCore = random.nextInt(18 * enderMult) == 0;
-
-					if (!Worldgen.enderCore)
-					{
-						generateEnderCore = false;
-					}
 
 					if (!Worldgen.natureCore)
 					{
 						generateNatureCore = false;
 					}
 
-					if (generateNatureCore || generateEnderCore)
+					if (generateNatureCore)
 					{
 						boolean canPlaceCore = true;
 						for (int modX = -2; modX < 3; modX++)
@@ -218,35 +155,13 @@ public class WorldGenCores implements IWorldGenerator
 
 						if (canPlaceCore)
 						{
-							if (generateEnderCore)
-							{
-								placeEnderCore(random, world, target);
-							}
-							else if (generateNatureCore)
+							if (generateNatureCore)
 							{
 								placeNatureCore(random, world, target);
 							}
 						}
 					}
 				}
-			}
-		}
-	}
-
-	private void placeEnderCore(Random random, World world, BlockPos target)
-	{
-		enderCore.place(world, target, 2);
-
-		for (int i = 0; i < 10; i++)
-		{
-			int rX = random.nextInt(10) - 5;
-			int rY = random.nextInt(2) - 1;
-			int rZ = random.nextInt(10) - 5;
-
-			BlockPos pos = target.add(rX, rY, rZ);
-			if (!world.isAirBlock(pos) && (Math.abs(rX) > 1 || Math.abs(rZ) > 1))
-			{
-				world.setBlockState(pos, Blocks.obsidian.getDefaultState());
 			}
 		}
 	}

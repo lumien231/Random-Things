@@ -28,7 +28,6 @@ public class ModConfiguration
 		configuration.getCategory("worldgen").setComment("Set to false to disable the generation of the respective objects");
 
 		Worldgen.beans = configuration.get("worldgen", "Beans", true).getBoolean();
-		Worldgen.enderCore = configuration.get("worldgen", "Ender-Core", true).getBoolean();
 		Worldgen.natureCore = configuration.get("worldgen", "Nature-Core", true).getBoolean();
 		Worldgen.pitcherPlants = configuration.get("worldgen", "PitcherPlants", true).getBoolean();
 		Worldgen.sakanade = configuration.get("worldgen", "Sakanade", true).getBoolean();

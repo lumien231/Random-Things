@@ -51,8 +51,6 @@ public class ModBlocks
 	public static BlockContactLever contactLever;
 	
 	public static BlockNatureCore natureCore;
-	public static BlockNetherCore netherCore;
-	public static BlockEnderCore enderCore;
 
 	public static BlockBeanStalk beanStalk;
 	public static BlockBeanStalk lesserBeanStalk;
@@ -108,8 +106,6 @@ public class ModBlocks
 		advancedItemCollector = new BlockAdvancedItemCollector();
 		
 		natureCore = new BlockNatureCore();
-		netherCore = new BlockNetherCore();
-		enderCore = new BlockEnderCore();
 
 		biomeStone = new BlockBiomeStone();
 		biomeGlass = new BlockBiomeGlass();

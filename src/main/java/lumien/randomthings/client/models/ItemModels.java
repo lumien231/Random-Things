@@ -1,11 +1,9 @@
 package lumien.randomthings.client.models;
 
 import lumien.randomthings.block.ModBlocks;
-import lumien.randomthings.client.mesh.StainedBrickItemMesh;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -32,8 +30,6 @@ public class ItemModels
 		registerBlock(ModBlocks.beanPod);
 		registerBlock(ModBlocks.beanSprout);
 		registerBlock(ModBlocks.natureCore);
-		registerBlock(ModBlocks.netherCore);
-		registerBlock(ModBlocks.enderCore);
 		registerBlock(ModBlocks.lifeAnchor);
 		registerBlock(ModBlocks.chatDetector);
 		registerBlock(ModBlocks.basicRedstoneInterface);
