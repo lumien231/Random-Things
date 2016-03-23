@@ -4,18 +4,23 @@ import static lumien.randomthings.tileentity.TileEntityEnderBridge.BRIDGESTATE.I
 import static lumien.randomthings.tileentity.TileEntityEnderBridge.BRIDGESTATE.SCANNING;
 import static lumien.randomthings.tileentity.TileEntityEnderBridge.BRIDGESTATE.WAITING;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lumien.randomthings.block.BlockEnderBridge;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileEntityEnderBridge extends TileEntityBase implements ITickable
@@ -29,6 +34,15 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 
 	boolean redstonePowered;
 	int scanningCounter;
+
+	public static Set<Class<? extends Entity>> entityWhitelist;
+
+	static
+	{
+		entityWhitelist = new HashSet<Class<? extends Entity>>();
+		entityWhitelist.add(EntityPlayerMP.class);
+		entityWhitelist.add(EntityItem.class);
+	}
 
 	public TileEntityEnderBridge()
 	{
@@ -48,19 +62,24 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 				EnumFacing facing = blockState.getValue(BlockEnderBridge.FACING);
 
 				BlockPos nextPos = new BlockPos(pos.offset(facing, scanningCounter));
-				IBlockState nextState = worldObj.getBlockState(nextPos);
 
 				if (worldObj.isBlockLoaded(nextPos))
 				{
+					IBlockState nextState = worldObj.getBlockState(nextPos);
 					if (nextState.getBlock() == ModBlocks.enderAnchor)
 					{
-						List<EntityPlayerMP> playerList = worldObj.getEntitiesWithinAABB(EntityPlayerMP.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2));
-						if (!playerList.isEmpty())
+						List<Entity> entityList = worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2), null);
+
+						if (!entityList.isEmpty())
 						{
 							BlockPos target = nextPos.up();
-							for (EntityPlayerMP player : playerList)
+
+							for (Entity e : entityList)
 							{
-								player.playerNetServerHandler.setPlayerLocation(target.getX() + 0.5, target.getY(), target.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
+								if (TileEntityEnderBridge.entityWhitelist.contains(e.getClass()))
+								{
+									WorldUtil.setEntityPosition(e, target.getX() + 0.5, target.getY(), target.getZ() + 0.5);
+								}
 							}
 						}
 

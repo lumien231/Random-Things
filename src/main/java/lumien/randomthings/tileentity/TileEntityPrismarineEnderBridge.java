@@ -8,14 +8,15 @@ import java.util.List;
 
 import lumien.randomthings.block.BlockEnderBridge;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileEntityPrismarineEnderBridge extends TileEntityBase implements ITickable
@@ -55,13 +56,18 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 						IBlockState nextState = worldObj.getBlockState(nextPos);
 						if (nextState.getBlock() == ModBlocks.enderAnchor)
 						{
-							List<EntityPlayerMP> playerList = worldObj.getEntitiesWithinAABB(EntityPlayerMP.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2));
-							if (!playerList.isEmpty())
+							List<Entity> entityList = worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2),null);
+							
+							if (!entityList.isEmpty())
 							{
 								BlockPos target = nextPos.up();
-								for (EntityPlayerMP player : playerList)
+								
+								for (Entity e : entityList)
 								{
-									player.playerNetServerHandler.setPlayerLocation(target.getX() + 0.5, target.getY(), target.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
+									if (TileEntityEnderBridge.entityWhitelist.contains(e.getClass()))
+									{
+										WorldUtil.setEntityPosition(e, target.getX() + 0.5, target.getY(), target.getZ() + 0.5);
+									}
 								}
 							}
 
