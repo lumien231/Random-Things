@@ -46,7 +46,19 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isVisuallyOpaque()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isNormalCube(IBlockState state)
 	{
 		return false;
 	}
