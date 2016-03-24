@@ -30,7 +30,6 @@ public class ItemModels
 		registerBlock(ModBlocks.beanPod);
 		registerBlock(ModBlocks.beanSprout);
 		registerBlock(ModBlocks.natureCore);
-		registerBlock(ModBlocks.lifeAnchor);
 		registerBlock(ModBlocks.chatDetector);
 		registerBlock(ModBlocks.basicRedstoneInterface);
 		registerBlock(ModBlocks.advancedRedstoneInterface);
@@ -65,8 +64,6 @@ public class ItemModels
 		registerItem(ModItems.stableEnderpearl);
 		registerItem(ModItems.positionFilter);
 		registerItem(ModItems.beanStew);
-		registerItem(ModItems.linkingOrb);
-		registerItem(ModItems.inertLinkingOrb);
 		registerItem(ModItems.redstoneTool);
 		registerItem(ModItems.waterWalkingBoots);
 		registerItem(ModItems.dungeonChestGenerator);

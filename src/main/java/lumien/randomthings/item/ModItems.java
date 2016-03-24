@@ -11,8 +11,6 @@ public class ModItems
 	public static ItemGrassSeeds grassSeeds;
 	public static ItemBean beans;
 	public static ItemBeanStew beanStew;
-	public static ItemLinkingOrb linkingOrb;
-	public static ItemInertLinkingOrb inertLinkingOrb;
 	public static ItemCraftingRecipe craftingRecipe;
 	public static ItemRedstoneTool redstoneTool;
 	public static ItemWaterWalkingBoots waterWalkingBoots;
@@ -42,8 +40,6 @@ public class ModItems
 		summoningPendulum = new ItemSummoningPendulum();
 		beans = new ItemBean();
 		beanStew = new ItemBeanStew();
-		linkingOrb = new ItemLinkingOrb();
-		inertLinkingOrb = new ItemInertLinkingOrb();
 		redstoneTool = new ItemRedstoneTool();
 		waterWalkingBoots = new ItemWaterWalkingBoots();
 		dungeonChestGenerator = new ItemDungeonChestGenerator();

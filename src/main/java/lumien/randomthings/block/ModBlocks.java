@@ -24,7 +24,6 @@ public class ModBlocks
 	public static BlockPrismarineEnderBridge prismarineEnderBridge;
 	public static BlockPod beanPod;
 	public static BlockBeanSprout beanSprout;
-	public static BlockLifeAnchor lifeAnchor;
 	public static BlockLightRedirector lightRedirector;
 	public static BlockImbuingStation imbuingStation;
 	public static BlockSpectreBlock spectreBlock;
@@ -80,7 +79,6 @@ public class ModBlocks
 		lesserBeanStalk = new BlockBeanStalk(false);
 		beanPod = new BlockPod();
 		beanSprout = new BlockBeanSprout();
-		lifeAnchor = new BlockLifeAnchor();
 		lightRedirector = new BlockLightRedirector();
 		imbuingStation = new BlockImbuingStation();
 		spectreBlock = new BlockSpectreBlock();

@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Level;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockContactButton;
 import lumien.randomthings.block.BlockContactLever;
-import lumien.randomthings.block.BlockLifeAnchor;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
 import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
@@ -501,11 +500,6 @@ public class RTEventHandler
 				{
 					handleFireProtection(event);
 				}
-
-				if (!event.isCanceled() && !event.source.canHarmInCreative())
-				{
-					handleLinkingOrb(event, player);
-				}
 			}
 
 			if (!event.isCanceled() && event.source instanceof EntityDamageSource && !(event.source instanceof EntityDamageSourceIndirect))
@@ -533,66 +527,6 @@ public class RTEventHandler
 						if (Math.random() < 0.2f)
 						{
 							event.entityLiving.addPotionEffect(new PotionEffect(ModPotions.collapse, 10 * 20, 1));
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private void handleLinkingOrb(LivingAttackEvent event, EntityPlayer player)
-	{
-		int slot = InventoryUtil.getInventorySlotContainItem(player.inventory, ModItems.linkingOrb);
-		if (slot != -1)
-		{
-			ItemStack orb = player.inventory.getStackInSlot(slot);
-			NBTTagCompound compound;
-			if ((compound = orb.getTagCompound()) != null)
-			{
-				if (compound.getBoolean("active") && compound.hasKey("targetX"))
-				{
-					BlockPos anchor = new BlockPos(compound.getInteger("targetX"), compound.getInteger("targetY"), compound.getInteger("targetZ"));
-					World worldObj = DimensionManager.getWorld(compound.getInteger("dimension"));
-					if (worldObj != null && worldObj.isBlockLoaded(anchor) && worldObj.getBlockState(anchor).getBlock() instanceof BlockLifeAnchor)
-					{
-						AxisAlignedBB boundingBox = new AxisAlignedBB(anchor.getX(), anchor.getY(), anchor.getZ(), anchor.getX(), anchor.getY(), anchor.getZ()).expand(5, 5, 5);
-
-						float damageLeft = event.ammount;
-						List<EntityLivingBase> entityList = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, boundingBox);
-						entityList.remove(player);
-
-						if (entityList.size() > 0)
-						{
-							for (EntityLivingBase entity : entityList)
-							{
-								if (entity.isEntityAlive() && entity.getHealth() > 0)
-								{
-									if (damageLeft > 0)
-									{
-										float health = entity.getHealth();
-										if (health >= damageLeft)
-										{
-											entity.attackEntityFrom(event.source, damageLeft);
-											damageLeft = 0;
-										}
-										else
-										{
-											damageLeft -= entity.getHealth();
-											entity.setHealth(0);
-										}
-									}
-								}
-							}
-
-							if (damageLeft != event.ammount)
-							{
-								event.setCanceled(true);
-								if (damageLeft > 0)
-								{
-									event.setCanceled(true);
-									player.attackEntityFrom(event.source, damageLeft);
-								}
-							}
 						}
 					}
 				}
