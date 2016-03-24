@@ -190,7 +190,7 @@ public class ItemItemFilter extends ItemBase
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
-		if (!worldIn.isRemote)
+		if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
 		{
 			playerIn.openGui(RandomThings.instance, GuiIds.ITEM_FILTER, worldIn, 0, 0, 0);
 		}
