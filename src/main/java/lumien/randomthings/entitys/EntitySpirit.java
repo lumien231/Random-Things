@@ -5,7 +5,6 @@ import java.util.Random;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -43,20 +42,20 @@ public class EntitySpirit extends EntityFlying
 		this(worldIn);
 		this.setPosition(posX, posY, posZ);
 	}
-	
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tagCompund)
 	{
 		super.readEntityFromNBT(tagCompund);
-		
+
 		this.spiritAge = tagCompund.getInteger("spiritAge");
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tagCompound)
 	{
 		super.writeEntityToNBT(tagCompound);
-		
+
 		tagCompound.setInteger("spiritAge", spiritAge);
 	}
 
@@ -91,18 +90,26 @@ public class EntitySpirit extends EntityFlying
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0);
 	}
 
-	public void fall(float distance, float damageMultiplier)
-	{
-	}
-
-	protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos)
-	{
-	}
-
 	@Override
 	public void knockBack(Entity entity, float p_70653_2_, double p_70653_3_, double p_70653_5_)
 	{
 
+	}
+
+	@Override
+	protected void collideWithEntity(Entity entityIn)
+	{
+	}
+
+	@Override
+	protected void collideWithNearbyEntities()
+	{
+	}
+
+	@Override
+	public boolean canBePushed()
+	{
+		return false;
 	}
 
 	protected void updateAITasks()
@@ -192,7 +199,7 @@ public class EntitySpirit extends EntityFlying
 
 		public void onUpdateMoveHelper()
 		{
-			if (this.action == EntityMoveHelper.Action.MOVE_TO)
+			if (this.action == Action.MOVE_TO)
 			{
 				double d0 = this.posX - this.parentEntity.posX;
 				double d1 = this.posY - this.parentEntity.posY;
@@ -209,7 +216,7 @@ public class EntitySpirit extends EntityFlying
 				}
 				else
 				{
-					this.action = EntityMoveHelper.Action.WAIT;
+					this.action = Action.WAIT;
 				}
 			}
 		}
