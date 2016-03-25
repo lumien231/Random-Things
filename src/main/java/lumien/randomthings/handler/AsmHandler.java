@@ -253,7 +253,7 @@ public class AsmHandler
 			{
 				if (!player.isSneaking())
 				{
-					ItemStack boots = player.inventory.armorItemInSlot(0);
+					ItemStack boots = player.inventory.armorInventory[0];
 					if (boots != null && ((((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader) && state.getBlock().getMaterial(state) == Material.water) || (boots.getItem() == ModItems.lavaWader && state.getBlock().getMaterial(state) == Material.lava)))
 					{
 						AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), (double) pos.getX() + 1, (double) pos.getY() + 1, (double) pos.getZ() + 1);

@@ -607,7 +607,7 @@ public class RTEventHandler
 				EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 				if (!player.isSneaking())
 				{
-					ItemStack boots = player.inventory.armorItemInSlot(0);
+					ItemStack boots = player.inventory.armorInventory[0];
 					if (boots != null && ((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader))
 					{
 						BlockPos liquid = new BlockPos(Math.floor(player.posX), Math.floor(player.posY), Math.floor(player.posZ));
