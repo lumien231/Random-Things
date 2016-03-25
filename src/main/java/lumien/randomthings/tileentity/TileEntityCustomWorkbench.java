@@ -6,7 +6,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry.UniqueIdentifier;
 
 public class TileEntityCustomWorkbench extends TileEntityBase
 {
@@ -25,14 +24,8 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)
 	{
-		UniqueIdentifier blockIdentifier = GameRegistry.findUniqueIdentifierFor(woodMaterial);
-
-		if (blockIdentifier == null)
-		{
-			blockIdentifier = GameRegistry.findUniqueIdentifierFor(Blocks.planks);
-		}
-		compound.setString("woodMaterialMod", blockIdentifier.modId);
-		compound.setString("woodMaterialName", blockIdentifier.name);
+		String woodMaterialName = woodMaterial.getRegistryName();
+		compound.setString("woodMaterialName", woodMaterialName);
 
 		compound.setInteger("woodMeta", woodMeta);
 	}
@@ -40,11 +33,10 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	@Override
 	public void readDataFromNBT(NBTTagCompound compound)
 	{
-		String woodMaterialMod = compound.getString("woodMaterialMod");
 		String woodMaterialName = compound.getString("woodMaterialName");
 		woodMeta = compound.getInteger("woodMeta");
 
-		woodMaterial = Block.getBlockFromName((woodMaterialMod + ":" + woodMaterialName));
+		woodMaterial = Block.getBlockFromName(woodMaterialName);
 
 		if (woodMaterial == null)
 		{

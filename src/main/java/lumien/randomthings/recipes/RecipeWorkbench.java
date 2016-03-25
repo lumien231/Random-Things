@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry.UniqueIdentifier;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class RecipeWorkbench extends ShapedOreRecipe
@@ -74,8 +73,7 @@ public class RecipeWorkbench extends ShapedOreRecipe
 
 		if (plank != null)
 		{
-			UniqueIdentifier ui = GameRegistry.findUniqueIdentifierFor(((ItemBlock) plank.getItem()).getBlock());
-			compound.setString("woodName", ui.toString());
+			compound.setString("woodName", ((ItemBlock) plank.getItem()).getBlock().getRegistryName());
 			compound.setInteger("woodMeta", plank.getItemDamage());
 
 			return result;

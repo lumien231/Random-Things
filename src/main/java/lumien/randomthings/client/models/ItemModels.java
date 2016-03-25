@@ -142,13 +142,12 @@ public class ItemModels
 
 	private static void registerBlock(Block b)
 	{
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), 0, new ModelResourceLocation("randomthings:" + GameRegistry.findUniqueIdentifierFor(b).name, "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), 0, new ModelResourceLocation(b.getRegistryName(), "inventory"));
 	}
 
 	private static void registerItem(Item i)
 	{
-		String register = "randomthings:" + GameRegistry.findUniqueIdentifierFor(i).name;
-		ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(register, "inventory"));
+		ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), "inventory"));
 	}
 
 	private static void registerBricks()
