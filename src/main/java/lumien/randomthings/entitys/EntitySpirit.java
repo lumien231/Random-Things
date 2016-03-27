@@ -235,7 +235,7 @@ public class EntitySpirit extends EntityFlying
 			{
 				axisalignedbb = axisalignedbb.offset(d0, d1, d2);
 
-				if (!this.parentEntity.worldObj.getCubes(this.parentEntity, axisalignedbb).isEmpty())
+				if (!this.parentEntity.worldObj.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty())
 				{
 					return false;
 				}

@@ -147,11 +147,11 @@ public class BlockEnderMailbox extends BlockContainerBase
 									}
 								}
 
-								playerIn.addChatComponentMessage(new TextComponentTranslation("item.enderLetter.noSpace").setChatStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+								playerIn.addChatComponentMessage(new TextComponentTranslation("item.enderLetter.noSpace").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 							}
 							else
 							{
-								playerIn.addChatComponentMessage(new TextComponentTranslation("item.enderLetter.noPlayer", compound.getString("receiver")).setChatStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+								playerIn.addChatComponentMessage(new TextComponentTranslation("item.enderLetter.noPlayer", compound.getString("receiver")).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 							}
 						}
 					}
@@ -170,7 +170,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 				}
 				else
 				{
-					playerIn.addChatComponentMessage(new TextComponentTranslation("block.enderMailbox.owner").setChatStyle(new Style().setColor(TextFormatting.RED)));
+					playerIn.addChatComponentMessage(new TextComponentTranslation("block.enderMailbox.owner").setStyle(new Style().setColor(TextFormatting.RED)));
 				}
 			}
 		}
