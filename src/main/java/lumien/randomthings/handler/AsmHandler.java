@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +20,7 @@ import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
@@ -143,8 +145,10 @@ public class AsmHandler
 	@SideOnly(Side.CLIENT)
 	public static int renderBlock(BlockRendererDispatcher dispatcher, IBlockState state, BlockPos pos, IBlockAccess blockAccess, VertexBuffer worldRendererIn)
 	{
-		long time = System.currentTimeMillis();
+		blockAccess = Minecraft.getMinecraft().theWorld;
+
 		BlockPos changedPos = getSwitchedPosition(blockAccess, pos);
+
 		posSet.clear();
 
 		if (!changedPos.equals(pos))
@@ -208,21 +212,39 @@ public class AsmHandler
 	{
 		if (pos != null && access != null)
 		{
-			for (EnumFacing facing : EnumFacing.VALUES)
+			synchronized (TileEntityLightRedirector.redirectorSet)
 			{
-				BlockPos offset = pos.offset(facing);
-
-				if (!posSet.contains(offset))
+				Iterator<TileEntityLightRedirector> iterator = TileEntityLightRedirector.redirectorSet.iterator();
+				while (iterator.hasNext())
 				{
-					posSet.add(offset);
-					IBlockState faceState = access.getBlockState(offset);
-					if (faceState != null && faceState.getBlock() == ModBlocks.lightRedirector)
+					TileEntityLightRedirector redirector = iterator.next();
+					if (redirector.isInvalid())
 					{
-						BlockPos opPos = pos.offset(facing, 2);
-						IBlockState oppositeState = access.getBlockState(opPos);
-						if (oppositeState != null && !oppositeState.getBlock().isAir(oppositeState, access, opPos))
+						iterator.remove();
+					}
+					else
+					{
+						if (redirector.established && !posSet.contains(redirector.getPos()))
 						{
-							return getSwitchedPosition(access, opPos);
+							posSet.add(redirector.getPos());
+
+							if (redirector.targets.isEmpty())
+							{
+								for (EnumFacing facing : EnumFacing.values())
+								{
+									redirector.targets.put(redirector.getPos().offset(facing), redirector.getPos().offset(facing.getOpposite()));
+								}
+							}
+
+							if (redirector.targets.containsKey(pos))
+							{
+								BlockPos switched = redirector.targets.get(pos);
+
+								if (!access.isAirBlock(switched))
+								{
+									return getSwitchedPosition(access, switched);
+								}
+							}
 						}
 					}
 				}

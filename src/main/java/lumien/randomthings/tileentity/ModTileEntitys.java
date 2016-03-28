@@ -17,7 +17,7 @@ public class ModTileEntitys
 		registerTE(TileEntityPrismarineEnderBridge.class, "prismarineEnderBridge");
 		registerTE(TileEntityNatureCore.class, "natureCore");
 		registerTE(TileEntityChatDetector.class, "chatDetector");
-		registerTE(TileEntityBasicRedstoneInterface.class,"basicRedstoneInterface");
+		registerTE(TileEntityBasicRedstoneInterface.class, "basicRedstoneInterface");
 		registerTE(TileEntityAdvancedRedstoneInterface.class, "advancedRedstoneInterface");
 		registerTE(TileEntityBasicRedstoneInterface.class, "redstoneInterface");
 		registerTE(TileEntityImbuingStation.class, "imbuingStation");
@@ -32,6 +32,7 @@ public class ModTileEntitys
 		registerTE(TileEntityEnderAnchor.class, "enderAnchor");
 		registerTE(TileEntityRainShield.class, "rainShield");
 		registerTE(TileEntityBlockBreaker.class, "blockBreaker");
+		registerTE(TileEntityLightRedirector.class, "lightRedirector");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");
