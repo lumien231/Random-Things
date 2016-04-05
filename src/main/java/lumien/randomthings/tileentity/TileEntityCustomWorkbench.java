@@ -24,7 +24,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)
 	{
-		String woodMaterialName = woodMaterial.getRegistryName();
+		String woodMaterialName = woodMaterial.getRegistryName().toString();
 		compound.setString("woodMaterialName", woodMaterialName);
 
 		compound.setInteger("woodMeta", woodMeta);

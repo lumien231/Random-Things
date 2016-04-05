@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "randomthings:blocks/itemCorrector/side",
+        "down": "randomthings:blocks/itemCorrector/down",
+        "up": "randomthings:blocks/itemCorrector/up",
+        "north": "randomthings:blocks/itemCorrector/side",
+        "east": "randomthings:blocks/itemCorrector/side",
+        "south": "randomthings:blocks/itemCorrector/side",
+        "west": "randomthings:blocks/itemCorrector/side"
+    }
+}

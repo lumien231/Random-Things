@@ -42,6 +42,12 @@ public class ModBlocks
 	public static BlockSakanade sakanade;
 	public static BlockRainShield rainShield;
 	public static BlockBlockBreaker blockBreaker;
+	public static BlockItemSealer itemSealer;
+	public static BlockSuperLubricentIce superLubricentIce;
+	public static BlockItemCorrector itemCorrector;
+	public static BlockCompressedSlimeBlock compressedSlimeBlock;
+	public static BlockItemRedirector itemRedirector;
+	public static BlockItemRejuvenator itemRejuvenator;
 	
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
@@ -99,6 +105,12 @@ public class ModBlocks
 		sakanade = new BlockSakanade();
 		rainShield = new BlockRainShield();
 		blockBreaker = new BlockBlockBreaker();
+		itemSealer = new BlockItemSealer();
+		superLubricentIce = new BlockSuperLubricentIce();
+		itemCorrector = new BlockItemCorrector();
+		compressedSlimeBlock = new BlockCompressedSlimeBlock();
+		itemRedirector = new BlockItemRedirector();
+		itemRejuvenator = new BlockItemRejuvenator();
 		
 		itemCollector = new BlockItemCollector();
 		advancedItemCollector = new BlockAdvancedItemCollector();

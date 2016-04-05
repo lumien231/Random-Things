@@ -30,7 +30,7 @@ public class ItemRedstoneActivator extends ItemBase
 		}
 		else
 		{
-			return EnumActionResult.SUCCESS;
+			return EnumActionResult.PASS;
 		}
 	}
 }

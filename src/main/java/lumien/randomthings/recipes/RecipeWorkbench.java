@@ -73,7 +73,7 @@ public class RecipeWorkbench extends ShapedOreRecipe
 
 		if (plank != null)
 		{
-			compound.setString("woodName", ((ItemBlock) plank.getItem()).getBlock().getRegistryName());
+			compound.setString("woodName", ((ItemBlock) plank.getItem()).getBlock().getRegistryName().toString());
 			compound.setInteger("woodMeta", plank.getItemDamage());
 
 			return result;

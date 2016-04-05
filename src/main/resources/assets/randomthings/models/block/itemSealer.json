@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "randomthings:blocks/itemSealer/side",
+        "down": "randomthings:blocks/itemSealer/down",
+        "up": "randomthings:blocks/itemSealer/up",
+        "north": "randomthings:blocks/itemSealer/side",
+        "east": "randomthings:blocks/itemSealer/side",
+        "south": "randomthings:blocks/itemSealer/side",
+        "west": "randomthings:blocks/itemSealer/side"
+    }
+}

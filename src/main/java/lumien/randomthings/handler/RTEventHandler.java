@@ -49,9 +49,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -59,6 +61,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -83,7 +86,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -193,31 +196,57 @@ public class RTEventHandler
 				event.setRoll(180);
 			}
 		}
+
 	}
 
 	@SubscribeEvent
 	public void playerInteract(PlayerInteractEvent event)
 	{
-		if (!event.getWorld().isRemote && event.getAction() == Action.RIGHT_CLICK_BLOCK)
+		if (event instanceof RightClickBlock)
 		{
-			for (EnumFacing facing : EnumFacing.values())
+			ItemStack equipped = event.getEntityPlayer().getHeldItem(event.getHand());
+
+			if (equipped != null && equipped.getItem() instanceof ItemSpade)
 			{
-				BlockPos pos = event.getPos().offset(facing);
-				IBlockState state = event.getWorld().getBlockState(pos);
-				if (state.getBlock() == ModBlocks.contactButton)
+				RightClickBlock rcEvent = (RightClickBlock) event;
+				IBlockState targetState = event.getWorld().getBlockState(event.getPos());
+
+				if (targetState.getBlock() == Blocks.slime_block)
 				{
-					if (state.getValue(BlockContactButton.FACING).getOpposite() == facing)
+					event.getEntityPlayer().swingArm(event.getHand());
+					if (!event.getWorld().isRemote)
 					{
-						((BlockContactButton) state.getBlock()).activate(event.getWorld(), event.getPos().offset(facing), facing.getOpposite());
-						break;
+						if (!event.getWorld().isRemote)
+						{
+							event.getWorld().setBlockState(event.getPos(), ModBlocks.compressedSlimeBlock.getDefaultState());
+							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.slime_block.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 1);
+							equipped.damageItem(1, event.getEntityPlayer());
+						}
 					}
 				}
-				else if (state.getBlock() == ModBlocks.contactLever)
+			}
+
+			if (!event.getWorld().isRemote && event.getHand() == EnumHand.MAIN_HAND)
+			{
+				for (EnumFacing facing : EnumFacing.values())
 				{
-					if (state.getValue(BlockContactLever.FACING).getOpposite() == facing)
+					BlockPos pos = event.getPos().offset(facing);
+					IBlockState state = event.getWorld().getBlockState(pos);
+					if (state.getBlock() == ModBlocks.contactButton)
 					{
-						((BlockContactLever) state.getBlock()).activate(event.getWorld(), event.getPos().offset(facing), facing.getOpposite());
-						break;
+						if (state.getValue(BlockContactButton.FACING).getOpposite() == facing)
+						{
+							((BlockContactButton) state.getBlock()).activate(event.getWorld(), event.getPos().offset(facing), facing.getOpposite());
+							break;
+						}
+					}
+					else if (state.getBlock() == ModBlocks.contactLever)
+					{
+						if (state.getValue(BlockContactLever.FACING).getOpposite() == facing)
+						{
+							((BlockContactLever) state.getBlock()).activate(event.getWorld(), event.getPos().offset(facing), facing.getOpposite());
+							break;
+						}
 					}
 				}
 			}

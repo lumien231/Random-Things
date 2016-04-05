@@ -55,6 +55,12 @@ public class ItemModels
 		registerBlock(ModBlocks.blockBreaker);
 		registerBlock(ModBlocks.spectreCore);
 		registerBlock(ModBlocks.rainbowLamp);
+		registerBlock(ModBlocks.itemSealer);
+		registerBlock(ModBlocks.superLubricentIce);
+		registerBlock(ModBlocks.compressedSlimeBlock);
+		registerBlock(ModBlocks.itemCorrector);
+		registerBlock(ModBlocks.itemRedirector);
+		registerBlock(ModBlocks.itemRejuvenator);
 		
 		registerBlock(ModBlocks.itemCollector);
 		registerBlock(ModBlocks.advancedItemCollector);
