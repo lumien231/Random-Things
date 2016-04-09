@@ -48,6 +48,7 @@ public class ModBlocks
 	public static BlockCompressedSlimeBlock compressedSlimeBlock;
 	public static BlockItemRedirector itemRedirector;
 	public static BlockItemRejuvenator itemRejuvenator;
+	public static BlockSuperLubricentPlatform superLubricentPlatform;
 	
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
@@ -111,6 +112,7 @@ public class ModBlocks
 		compressedSlimeBlock = new BlockCompressedSlimeBlock();
 		itemRedirector = new BlockItemRedirector();
 		itemRejuvenator = new BlockItemRejuvenator();
+		superLubricentPlatform = new BlockSuperLubricentPlatform();
 		
 		itemCollector = new BlockItemCollector();
 		advancedItemCollector = new BlockAdvancedItemCollector();

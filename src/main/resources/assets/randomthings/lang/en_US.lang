@@ -44,6 +44,7 @@ tile.compressedSlimeBlock.name=Compressed Slime Block
 tile.itemRedirector.name=Item Redirector
 tile.itemCorrector.name=Item Corrector
 tile.itemRejuvenator.name=Item Rejuvenator
+tile.superLubricentPlatform.name=Super Lubricent Platform
 
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector
