@@ -139,7 +139,7 @@ public class SpectreCube implements IInvBasic
 		BlockPos pos1 = corner;
 		BlockPos pos2 = corner.add(15, height + 1, 15);
 
-		generateCube(worldObj, pos1, pos2, Blocks.air.getDefaultState(), 2);
+		generateCube(worldObj, pos1, pos2, Blocks.AIR.getDefaultState(), 2);
 		this.height = newHeight;
 		generate(worldObj);
 

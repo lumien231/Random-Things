@@ -121,11 +121,11 @@ public class ItemImbue extends ItemBase
 			{
 				if (stack.stackSize <= 0)
 				{
-					return new ItemStack(Items.glass_bottle);
+					return new ItemStack(Items.GLASS_BOTTLE);
 				}
 				else
 				{
-					playerIn.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+					playerIn.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
 				}
 			}
 		}

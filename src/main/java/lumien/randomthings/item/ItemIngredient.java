@@ -78,7 +78,7 @@ public class ItemIngredient extends ItemBase
 			if (getIngredient(itemStackIn) == INGREDIENT.EVIL_TEAR && !playerIn.isPotionActive(ModPotions.boss))
 			{
 				playerIn.addPotionEffect(new PotionEffect(ModPotions.boss, 20 * 60 * 20));
-				worldIn.playSound(null,playerIn.getPosition(), SoundEvents.entity_player_burp,SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.4F);
+				worldIn.playSound(null,playerIn.getPosition(), SoundEvents.ENTITY_PLAYER_BURP,SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.4F);
 
 				ItemStack reduce = itemStackIn.copy();
 				if (!playerIn.capabilities.isCreativeMode)

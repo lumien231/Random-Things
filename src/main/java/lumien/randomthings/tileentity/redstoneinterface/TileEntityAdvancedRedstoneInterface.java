@@ -137,8 +137,8 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 			for (BlockPos changedPos : changedPositions)
 			{
 				IBlockState targetState = worldObj.getBlockState(changedPos);
-				targetState.getBlock().onNeighborBlockChange(worldObj, changedPos, targetState, Blocks.redstone_block);
-				worldObj.notifyNeighborsOfStateChange(changedPos, Blocks.redstone_block);
+				targetState.getBlock().onNeighborBlockChange(worldObj, changedPos, targetState, Blocks.REDSTONE_BLOCK);
+				worldObj.notifyNeighborsOfStateChange(changedPos, Blocks.REDSTONE_BLOCK);
 			}
 		}
 	}
@@ -157,8 +157,8 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 			if (target != null)
 			{
 				IBlockState targetState = worldObj.getBlockState(target);
-				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.redstone_block);
-				worldObj.notifyNeighborsOfStateChange(target, Blocks.redstone_block);
+				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.REDSTONE_BLOCK);
+				worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK);
 			}
 		}
 	}

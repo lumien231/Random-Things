@@ -55,7 +55,7 @@ public class ItemBottleOfAir extends ItemBase
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World worldObj, EntityPlayer player, EnumHand hand)
 	{
-		if (player.isInsideOfMaterial(Material.water))
+		if (player.isInsideOfMaterial(Material.WATER))
 		{
 			player.setActiveHand(hand);
 			
@@ -75,7 +75,7 @@ public class ItemBottleOfAir extends ItemBase
 	{
 		super.onUsingTick(stack, livingEntity, count);
 
-		if (livingEntity.isInsideOfMaterial(Material.water) || livingEntity.getAir() < 270)
+		if (livingEntity.isInsideOfMaterial(Material.WATER) || livingEntity.getAir() < 270)
 		{
 			if (count % 5 == 0)
 			{

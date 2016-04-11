@@ -30,7 +30,7 @@ public class BlockPlatform extends BlockBase
 	
 	public BlockPlatform()
 	{
-		super("platform", Material.wood, ItemBlockPlatform.class);
+		super("platform", Material.WOOD, ItemBlockPlatform.class);
 
 		this.setHardness(1.5F);
 	}

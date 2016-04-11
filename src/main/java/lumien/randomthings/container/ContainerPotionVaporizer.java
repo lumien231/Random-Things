@@ -54,7 +54,7 @@ public class ContainerPotionVaporizer extends Container
 			@Override
 			public boolean apply(ItemStack input)
 			{
-				if (input.getItem() != Items.potionitem)
+				if (input.getItem() != Items.POTIONITEM)
 				{
 					return false;
 				}
@@ -277,9 +277,9 @@ public class ContainerPotionVaporizer extends Container
 	{
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i)
+		for (int i = 0; i < this.listeners.size(); ++i)
 		{
-			ICrafting icrafting = this.crafters.get(i);
+			ICrafting icrafting = this.listeners.get(i);
 
 			if (lastDurationLeft != potionVaporizer.getDurationLeft())
 				icrafting.sendProgressBarUpdate(this, 0, this.potionVaporizer.getDurationLeft());

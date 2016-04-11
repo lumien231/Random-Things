@@ -25,7 +25,7 @@ public class BlockBlockBreaker extends BlockContainerBase
 
 	public BlockBlockBreaker()
 	{
-		super("blockBreaker", Material.rock);
+		super("blockBreaker", Material.ROCK);
 		
 		this.setHardness(3.5F);
 	}

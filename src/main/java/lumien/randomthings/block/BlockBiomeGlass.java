@@ -24,7 +24,7 @@ public class BlockBiomeGlass extends BlockBase implements IRTBlockColor
 {
 	protected BlockBiomeGlass()
 	{
-		super("biomeGlass", Material.ground, ItemBlockColored.class);
+		super("biomeGlass", Material.GROUND, ItemBlockColored.class);
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3f);

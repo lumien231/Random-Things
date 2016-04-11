@@ -72,7 +72,7 @@ public class SpectreWorldProvider extends WorldProvider
 	@Override
 	protected void createBiomeProvider()
 	{
-		this.biomeProvider = new BiomeProviderSingle(Biomes.hell);
+		this.biomeProvider = new BiomeProviderSingle(Biomes.HELL);
 	}
 
 	@Override

@@ -11,7 +11,8 @@ public class PotionBase extends Potion
 	{
 		super(isBadEffectIn, liquidColorIn);
 
-		Potion.potionRegistry.register(-1, new ResourceLocation("randomthings:" + name), this);
+		this.setRegistryName(new ResourceLocation("randomthings:" + name));
+		GameData.getPotionRegistry().register(this);
 	}
 
 }

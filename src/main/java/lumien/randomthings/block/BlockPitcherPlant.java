@@ -29,7 +29,7 @@ public class BlockPitcherPlant extends BlockBase
 	
 	protected BlockPitcherPlant()
 	{
-		super("pitcherPlant", Material.plants);
+		super("pitcherPlant", Material.PLANTS);
 
 		float f = 0.2F;
 		this.setSoundType(SoundType.PLANT);
@@ -66,7 +66,7 @@ public class BlockPitcherPlant extends BlockBase
 
 					if (!added)
 					{
-						playerIn.dropPlayerItemWithRandomChoice(filledContainer, false);
+						playerIn.dropItem(filledContainer, false);
 					}
 				}
 
@@ -94,7 +94,7 @@ public class BlockPitcherPlant extends BlockBase
 		if (!this.canBlockStay(worldIn, pos, state))
 		{
 			this.dropBlockAsItem(worldIn, pos, state, 0);
-			worldIn.setBlockState(pos, Blocks.air.getDefaultState(), 3);
+			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 		}
 	}
 
@@ -113,7 +113,7 @@ public class BlockPitcherPlant extends BlockBase
 
 	protected boolean canPlaceBlockOn(Block ground)
 	{
-		return ground == Blocks.grass || ground == Blocks.dirt;
+		return ground == Blocks.GRASS || ground == Blocks.DIRT;
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class BlockChatDetector extends BlockContainerBase
 
 	protected BlockChatDetector()
 	{
-		super("chatDetector", Material.rock);
+		super("chatDetector", Material.ROCK);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, false));
 		this.setHardness(2);

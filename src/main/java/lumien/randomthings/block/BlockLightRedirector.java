@@ -20,7 +20,7 @@ public class BlockLightRedirector extends BlockContainerBase
 {
 	public BlockLightRedirector()
 	{
-		super("lightRedirector", Material.rock);
+		super("lightRedirector", Material.ROCK);
 
 		this.setSoundType(SoundType.WOOD);
 		this.setHardness(2);

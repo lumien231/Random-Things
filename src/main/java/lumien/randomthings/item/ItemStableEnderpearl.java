@@ -67,7 +67,7 @@ public class ItemStableEnderpearl extends ItemBase
 
 				if (player != null)
 				{
-					player.worldObj.playSound(null, player.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1, 1);
+					player.worldObj.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
 					player.playerNetServerHandler.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, player.rotationYaw, player.rotationPitch);
 				}
 				else
@@ -80,17 +80,17 @@ public class ItemStableEnderpearl extends ItemBase
 						if (target instanceof EntityPlayerMP)
 						{
 							EntityPlayerMP targetPlayer = (EntityPlayerMP) target;
-							targetPlayer.worldObj.playSound(null, targetPlayer.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1, 1);
+							targetPlayer.worldObj.playSound(null, targetPlayer.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
 							targetPlayer.playerNetServerHandler.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, targetPlayer.rotationYaw, targetPlayer.rotationPitch);
 						}
 						else
 						{
-							target.worldObj.playSound(null, target.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1, 1);
+							target.worldObj.playSound(null, target.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
 							target.setPositionAndUpdate(entityItem.posX, entityItem.posY, entityItem.posZ);
 						}
 					}
 				}
-				entityItem.worldObj.playSound(null, entityItem.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 1, 1);
+				entityItem.worldObj.playSound(null, entityItem.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
 			}
 		}
 		else

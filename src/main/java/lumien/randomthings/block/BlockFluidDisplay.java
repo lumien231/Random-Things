@@ -29,7 +29,7 @@ public class BlockFluidDisplay extends BlockContainerBase
 
 	public BlockFluidDisplay()
 	{
-		super("fluidDisplay", Material.glass);
+		super("fluidDisplay", Material.GLASS);
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3F);

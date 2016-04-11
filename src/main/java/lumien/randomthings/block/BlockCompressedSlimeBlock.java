@@ -22,22 +22,22 @@ public class BlockCompressedSlimeBlock extends BlockBase
 
 	protected BlockCompressedSlimeBlock()
 	{
-		super("compressedSlimeBlock", Material.clay);
-		
+		super("compressedSlimeBlock", Material.CLAY);
+
 		this.setSoundType(SoundType.SLIME);
-		
+
 		this.slipperiness = 1F / 0.98F;
 	}
-	
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return Item.getItemFromBlock(Blocks.slime_block);
-    }
 
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
-    {
-        return new ItemStack(Blocks.slime_block);
-    }
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return Item.getItemFromBlock(Blocks.SLIME_BLOCK);
+	}
+
+	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+	{
+		return new ItemStack(Blocks.SLIME_BLOCK);
+	}
 
 	public boolean isFullCube(IBlockState state)
 	{
@@ -65,7 +65,7 @@ public class BlockCompressedSlimeBlock extends BlockBase
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
-		super.onEntityCollidedWithBlock(worldIn, pos, entityIn);
+		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
 
 		if (entityIn.motionY < 1)
 		{

@@ -16,7 +16,7 @@ public class BlockDyeingMachine extends BlockBase
 {
 	public BlockDyeingMachine()
 	{
-		super("dyeingMachine", Material.wood);
+		super("dyeingMachine", Material.WOOD);
 
 		this.setSoundType(SoundType.WOOD);
 		this.setHardness(0.7F);

@@ -43,7 +43,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 
 	public BlockCustomWorkbench()
 	{
-		super("customWorkbench", Material.wood);
+		super("customWorkbench", Material.WOOD);
 
 		this.setHardness(2.5F);
 		this.setSoundType(SoundType.WOOD);
@@ -104,7 +104,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		}
 		else
 		{
-			return actualState.withProperty(WOOD_STATE, Blocks.planks.getDefaultState());
+			return actualState.withProperty(WOOD_STATE, Blocks.PLANKS.getDefaultState());
 		}
 	}
 
@@ -133,7 +133,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 
 		if (woodBlock == null)
 		{
-			woodBlock = Blocks.planks;
+			woodBlock = Blocks.PLANKS;
 			meta = 0;
 		}
 

@@ -28,55 +28,55 @@ public class ModRecipes
 	{
 		RecipeSorter.register("randomthings:customWorkbenchRecipe", RecipeWorkbench.class, Category.SHAPED, "");
 
-		final ItemStack stone = new ItemStack(Blocks.stone);
-		final ItemStack rottenFlesh = new ItemStack(Items.rotten_flesh);
-		final ItemStack boneMeal = new ItemStack(Items.dye, 1, 15);
-		final ItemStack lapis = new ItemStack(Items.dye, 1, 4);
-		final ItemStack dirt = new ItemStack(Blocks.dirt);
-		final ItemStack lapisBlock = new ItemStack(Blocks.lapis_block);
-		final ItemStack repeater = new ItemStack(Items.repeater);
-		final ItemStack redstoneTorch = new ItemStack(Blocks.redstone_torch);
-		final ItemStack obsidian = new ItemStack(Blocks.obsidian);
+		final ItemStack stone = new ItemStack(Blocks.STONE);
+		final ItemStack rottenFlesh = new ItemStack(Items.ROTTEN_FLESH);
+		final ItemStack boneMeal = new ItemStack(Items.DYE, 1, 15);
+		final ItemStack lapis = new ItemStack(Items.DYE, 1, 4);
+		final ItemStack dirt = new ItemStack(Blocks.DIRT);
+		final ItemStack lapisBlock = new ItemStack(Blocks.LAPIS_BLOCK);
+		final ItemStack repeater = new ItemStack(Items.REPEATER);
+		final ItemStack redstoneTorch = new ItemStack(Blocks.REDSTONE_TORCH);
+		final ItemStack obsidian = new ItemStack(Blocks.OBSIDIAN);
 		final ItemStack stableEnderpearl = new ItemStack(ModItems.stableEnderpearl);
-		final ItemStack endStone = new ItemStack(Blocks.end_stone);
-		final ItemStack redstoneDust = new ItemStack(Items.redstone);
-		final ItemStack enderPearl = new ItemStack(Items.ender_pearl);
-		final ItemStack netherStar = new ItemStack(Items.nether_star);
-		final ItemStack enderChest = new ItemStack(Blocks.ender_chest);
-		final ItemStack redstoneLamp = new ItemStack(Blocks.redstone_lamp);
-		final ItemStack blackWool = new ItemStack(Blocks.wool, 1, 15);
-		final ItemStack cobblestone = new ItemStack(Blocks.cobblestone);
+		final ItemStack endStone = new ItemStack(Blocks.END_STONE);
+		final ItemStack redstoneDust = new ItemStack(Items.REDSTONE);
+		final ItemStack enderPearl = new ItemStack(Items.ENDER_PEARL);
+		final ItemStack netherStar = new ItemStack(Items.NETHER_STAR);
+		final ItemStack enderChest = new ItemStack(Blocks.ENDER_CHEST);
+		final ItemStack redstoneLamp = new ItemStack(Blocks.REDSTONE_LAMP);
+		final ItemStack blackWool = new ItemStack(Blocks.WOOL, 1, 15);
+		final ItemStack cobblestone = new ItemStack(Blocks.COBBLESTONE);
 		final ItemStack biomeCrystal = new ItemStack(ModItems.biomeCrystal);
-		final ItemStack stoneBricks = new ItemStack(Blocks.stonebrick);
-		final ItemStack crackedStoneBricks = new ItemStack(Blocks.stonebrick, 1, 2);
-		final ItemStack chiseledStoneBricks = new ItemStack(Blocks.stonebrick, 1, 3);
-		final ItemStack prismarineShard = new ItemStack(Items.prismarine_shard);
-		final ItemStack prismarineCrystal = new ItemStack(Items.prismarine_crystals);
+		final ItemStack stoneBricks = new ItemStack(Blocks.STONEBRICK);
+		final ItemStack crackedStoneBricks = new ItemStack(Blocks.STONEBRICK, 1, 2);
+		final ItemStack chiseledStoneBricks = new ItemStack(Blocks.STONEBRICK, 1, 3);
+		final ItemStack prismarineShard = new ItemStack(Items.PRISMARINE_SHARD);
+		final ItemStack prismarineCrystal = new ItemStack(Items.PRISMARINE_CRYSTALS);
 		final ItemStack bean = new ItemStack(ModItems.beans);
-		final ItemStack wheat = new ItemStack(Items.wheat);
-		final ItemStack bowl = new ItemStack(Items.bowl);
-		final ItemStack ghastTear = new ItemStack(Items.ghast_tear);
-		final ItemStack craftingTable = new ItemStack(Blocks.crafting_table);
-		final ItemStack paper = new ItemStack(Items.paper);
-		final ItemStack stick = new ItemStack(Items.stick);
-		final ItemStack vine = new ItemStack(Blocks.vine);
-		final ItemStack waterBottle = new ItemStack(Items.potionitem);
-		final ItemStack mossyCobblestone = new ItemStack(Blocks.mossy_cobblestone);
-		final ItemStack netherBrick = new ItemStack(Blocks.nether_brick);
-		final ItemStack netherRack = new ItemStack(Blocks.netherrack);
-		final ItemStack coal = new ItemStack(Items.coal);
-		final ItemStack blazePowder = new ItemStack(Items.blaze_powder);
-		final ItemStack flint = new ItemStack(Items.flint);
-		final ItemStack spiderEye = new ItemStack(Items.spider_eye);
-		final ItemStack redMushroom = new ItemStack(Blocks.red_mushroom);
-		final ItemStack glowStone = new ItemStack(Items.glowstone_dust);
-		final ItemStack glisteringMelon = new ItemStack(Items.speckled_melon);
-		final ItemStack witherSkull = new ItemStack(Items.skull, 1, 1);
-		final ItemStack stonePressurePlate = new ItemStack(Blocks.stone_pressure_plate);
-		final ItemStack quartz = new ItemStack(Items.quartz);
-		final ItemStack quartzBlock = new ItemStack(Blocks.quartz_block);
-		final ItemStack lever = new ItemStack(Blocks.lever);
-		final ItemStack stoneButton = new ItemStack(Blocks.stone_button);
+		final ItemStack wheat = new ItemStack(Items.WHEAT);
+		final ItemStack bowl = new ItemStack(Items.BOWL);
+		final ItemStack ghastTear = new ItemStack(Items.GHAST_TEAR);
+		final ItemStack craftingTable = new ItemStack(Blocks.CRAFTING_TABLE);
+		final ItemStack paper = new ItemStack(Items.PAPER);
+		final ItemStack stick = new ItemStack(Items.STICK);
+		final ItemStack vine = new ItemStack(Blocks.VINE);
+		final ItemStack waterBottle = new ItemStack(Items.POTIONITEM);
+		final ItemStack mossyCobblestone = new ItemStack(Blocks.MOSSY_COBBLESTONE);
+		final ItemStack netherBrick = new ItemStack(Blocks.NETHER_BRICK);
+		final ItemStack netherRack = new ItemStack(Blocks.NETHERRACK);
+		final ItemStack coal = new ItemStack(Items.COAL);
+		final ItemStack blazePowder = new ItemStack(Items.BLAZE_POWDER);
+		final ItemStack flint = new ItemStack(Items.FLINT);
+		final ItemStack spiderEye = new ItemStack(Items.SPIDER_EYE);
+		final ItemStack redMushroom = new ItemStack(Blocks.RED_MUSHROOM);
+		final ItemStack glowStone = new ItemStack(Items.GLOWSTONE_DUST);
+		final ItemStack glisteringMelon = new ItemStack(Items.SPECKLED_MELON);
+		final ItemStack witherSkull = new ItemStack(Items.SKULL, 1, 1);
+		final ItemStack stonePressurePlate = new ItemStack(Blocks.STONE_PRESSURE_PLATE);
+		final ItemStack quartz = new ItemStack(Items.QUARTZ);
+		final ItemStack quartzBlock = new ItemStack(Blocks.QUARTZ_BLOCK);
+		final ItemStack lever = new ItemStack(Blocks.LEVER);
+		final ItemStack stoneButton = new ItemStack(Blocks.STONE_BUTTON);
 
 		final ItemStack ectoPlasm = new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.ECTO_PLASM.id);
 		final ItemStack spectreIngot = new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id);
@@ -100,40 +100,40 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.prismarineEnderBridge), "scs", "cbc", "scs", 's', prismarineShard, 'c', prismarineCrystal, 'b', new ItemStack(ModBlocks.enderBridge)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.basicRedstoneInterface), "iri", "rsr", "iri", 'i', "ingotIron", 'r', redstoneDust, 's', stableEnderpearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.lightRedirector), "pgp", "gxg", "pgp", 'g', "blockGlass", 'p', "plankWood"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.imbuingStation), "xwx", "vcv", "lel", 'w', Items.water_bucket, 'v', Blocks.vine, 'c', Blocks.hardened_clay, 'l', Blocks.waterlily, 'e', Items.emerald));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.imbuingStation), "xwx", "vcv", "lel", 'w', Items.WATER_BUCKET, 'v', Blocks.VINE, 'c', Blocks.HARDENED_CLAY, 'l', Blocks.WATERLILY, 'e', Items.EMERALD));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.analogEmitter), "tir", "iii", "rit", 't', redstoneTorch, 'i', "ingotIron", 'r', redstoneDust));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fluidDisplay), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', Items.glass_bottle));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderMailbox), "ehe", "iii", "xfx", 'e', enderPearl, 'h', Blocks.hopper, 'i', "ingotIron", 'f', Blocks.oak_fence));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fluidDisplay), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', Items.GLASS_BOTTLE));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderMailbox), "ehe", "iii", "xfx", 'e', enderPearl, 'h', Blocks.HOPPER, 'i', "ingotIron", 'f', Blocks.OAK_FENCE));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.entityDetector), "srs", "epe", "srs", 's', "stone", 'r', redstoneTorch, 'e', enderPearl, 'p', stonePressurePlate));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzLamp), "xqx", "qlq", "xqx", 'q', quartz, 'l', redstoneLamp));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.quartzGlass, 8, 0), "ggg", "gqg", "ggg", 'g', "blockGlass", 'q', quartzBlock));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.potionVaporizer), "ctc", "iui", "cfc", 'c', "cobblestone", 't', Blocks.iron_trapdoor, 'i', "ingotIron", 'u', Items.cauldron, 'f', Blocks.furnace));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.potionVaporizer), "ctc", "iui", "cfc", 'c', "cobblestone", 't', Blocks.IRON_TRAPDOOR, 'i', "ingotIron", 'u', Items.CAULDRON, 'f', Blocks.FURNACE));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voxelProjector), "rgb", "wlw", "www", 'r', "blockGlassRed", 'g', "blockGlassGreen", 'b', "blockGlassBlue", 'w', blackWool, 'l', redstoneLamp));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainShield), "xfx", "xbx", "nnn", 'f', flint, 'b', Items.blaze_rod, 'n', netherRack));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockBreaker), "cpc", "crc", "ccc", 'c', "cobblestone", 'p', Items.iron_pickaxe, 'r', redstoneTorch));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainShield), "xfx", "xbx", "nnn", 'f', flint, 'b', Items.BLAZE_ROD, 'n', netherRack));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockBreaker), "cpc", "crc", "ccc", 'c', "cobblestone", 'p', Items.IRON_PICKAXE, 'r', redstoneTorch));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainbowLamp), "xgx", "rlb", 'g', "dyeGreen", 'r', "dyeRed", 'b', "dyeBlue", 'l', redstoneLamp));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedRedstoneInterface), "ror", "oio", "ror", 'r', "blockRedstone", 'o', obsidian, 'i', ModBlocks.basicRedstoneInterface));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemRedirector),"ooo","ger","olo",'o',Blocks.obsidian,'g',"dyeGreen",'e',enderPearl,'l',ModBlocks.superLubricentIce,'r',"dyeRed"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemRedirector),"ooo","ger","olo",'o',Blocks.OBSIDIAN,'g',"dyeGreen",'e',enderPearl,'l',ModBlocks.superLubricentIce,'r',"dyeRed"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCorrector), "ili","ccc","ccc",'c',"cobblestone",'i',"ingotIron",'l',ModBlocks.superLubricentIce));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.superLubricentIce,16), "s","i","w",'s',"slimeball",'i',Blocks.ice,'w',Items.water_bucket));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.superLubricentIce,16), "s","i","w",'s',"slimeball",'i',Blocks.ICE,'w',Items.WATER_BUCKET));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemSealer), "ala","ccc","ccc",'c',"cobblestone",'a',"gemLapis",'l',ModBlocks.superLubricentIce));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemRejuvenator), "wlw","ccc","ccc",'c',"cobblestone",'w',Blocks.wool,'l',ModBlocks.superLubricentIce));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemRejuvenator), "wlw","ccc","ccc",'c',"cobblestone",'w',Blocks.WOOL,'l',ModBlocks.superLubricentIce));
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.hopper, 'o', obsidian));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.HOPPER, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactButton), "sis", "sbs", "sss", 's', "stone", 'i', Blocks.iron_bars, 'b', stoneButton));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactLever), "sis", "sbs", "sss", 's', "stone", 'i', Blocks.iron_bars, 'b', lever));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactButton), "sis", "sbs", "sss", 's', "stone", 'i', Blocks.IRON_BARS, 'b', stoneButton));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.contactLever), "sis", "sbs", "sss", 's', "stone", 'i', Blocks.IRON_BARS, 'b', lever));
 
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.grass));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.GRASS));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stableEnderpearl), "olo", "lel", "olo", 'o', obsidian, 'l', lapis, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', bean, 'n', "nuggetGold"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beanStew, 1, 0), "xwx", "bbb", "xox", 'b', bean, 'w', wheat, 'o', bowl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beanStew, 1, 0), "bbb", "xwx", "xox", 'b', bean, 'w', wheat, 'o', bowl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.positionFilter, 1, 0), "xdx", "dpd", "xdx", 'd', "dyePurple", 'p', paper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneTool), "xrx", "xsx", "xsx", 'r', redstoneDust, 's', "stickWood"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.obsidianSkull), "oro", "bwb", "oro", 'o', obsidian, 'r', Items.blaze_rod, 'w', witherSkull, 'b', netherBrick));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderLetter), "xxx", "pep", "xpx", 'p', Items.paper, 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.obsidianSkull), "oro", "bwb", "oro", 'o', obsidian, 'r', Items.BLAZE_ROD, 'w', witherSkull, 'b', netherBrick));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderLetter), "xxx", "pep", "xpx", 'p', Items.PAPER, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.entityFilter), "xdx", "dpd", "xdx", 'd', "dyeBlue", 'p', paper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.itemFilter), "xyx", "ypy", "xyx", 'y', "dyeYellow", 'p', paper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreKey), "ixx", "ipx", "xxi", 'i', spectreIngot, 'p', stableEnderpearl));
@@ -154,16 +154,16 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeGlass, 16), "ggg", "gbg", "ggg", 'g', "blockGlassColorless", 'b', biomeCrystal));
 
 		// Platforms
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 0), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 0), 'e', enderPearl));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 1), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 1), 'e', enderPearl));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 2), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 2), 'e', enderPearl));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 3), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 3), 'e', enderPearl));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 4), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 4), 'e', enderPearl));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 5), "www", "xex", 'w', new ItemStack(Blocks.planks, 1, 5), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 0), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 0), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 1), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 1), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 2), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 2), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 3), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 3), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 4), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 4), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 5), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 5), 'e', enderPearl));
 
 		GameRegistry.addRecipe(new RecipeWorkbench());
 
-		createDyeRecipes(new ItemStack(Blocks.brick_block), ModBlocks.stainedBrick);
+		createDyeRecipes(new ItemStack(Blocks.BRICK_BLOCK), ModBlocks.stainedBrick);
 		createGrassSeedsRecipes();
 
 		// Imbuing Station
@@ -173,13 +173,13 @@ public class ModRecipes
 		ImbuingRecipeHandler.addRecipe(spiderEye, rottenFlesh, redMushroom, waterBottle, new ItemStack(ModItems.imbue, 1, 1));
 		ImbuingRecipeHandler.addRecipe(new ItemStack(ModItems.beans, 1, 1), lapis, glowStone, waterBottle, new ItemStack(ModItems.imbue, 1, 2));
 		ImbuingRecipeHandler.addRecipe(witherSkull, netherBrick, ghastTear, waterBottle, new ItemStack(ModItems.imbue, 1, 3));
-		ImbuingRecipeHandler.addRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SAKANADE_SPORES.id), vine, new ItemStack(Items.slime_ball), waterBottle, new ItemStack(ModItems.imbue, 1, 4));
+		ImbuingRecipeHandler.addRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SAKANADE_SPORES.id), vine, new ItemStack(Items.SLIME_BALL), waterBottle, new ItemStack(ModItems.imbue, 1, 4));
 
 
 		// Anvil
 		if (Loader.isModLoaded("Baubles"))
 		{
-			AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.obsidianSkull), new ItemStack(Items.fire_charge), new ItemStack(ModItems.obsidianSkullRing), 3);
+			AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.obsidianSkull), new ItemStack(Items.FIRE_CHARGE), new ItemStack(ModItems.obsidianSkullRing), 3);
 		}
 
 		AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.waterWalkingBoots), new ItemStack(ModItems.obsidianSkull), new ItemStack(ModItems.obsidianWaterWalkingBoots), 10);

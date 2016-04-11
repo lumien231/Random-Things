@@ -22,7 +22,7 @@ public class BlockNatureCore extends BlockContainerBase
 
 	protected BlockNatureCore()
 	{
-		super("natureCore", Material.rock);
+		super("natureCore", Material.ROCK);
 
 		this.setSoundType(SoundType.WOOD);
 		this.setBlockUnbreakable().setResistance(6000000.0F);

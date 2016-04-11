@@ -28,7 +28,7 @@ public class BlockFertilizedDirt extends BlockBase
 
 	protected BlockFertilizedDirt(boolean tilled)
 	{
-		super("fertilizedDirt" + (tilled ? "Tilled" : ""), Material.ground);
+		super("fertilizedDirt" + (tilled ? "Tilled" : ""), Material.GROUND);
 
 		this.tilled = tilled;
 		this.setTickRandomly(true);
@@ -124,7 +124,7 @@ public class BlockFertilizedDirt extends BlockBase
 		{
 			IBlockState plantState = worldObj.getBlockState(pos.up());
 			Block toBoost = plantState.getBlock();
-			if (plantState != null && toBoost != null && toBoost != Blocks.air && toBoost instanceof IPlantable)
+			if (plantState != null && toBoost != null && toBoost != Blocks.AIR && toBoost instanceof IPlantable)
 			{
 				worldObj.playAuxSFX(2005, pos.up(), 0);
 			}
@@ -132,7 +132,7 @@ public class BlockFertilizedDirt extends BlockBase
 			{
 				plantState = worldObj.getBlockState(pos.up());
 				toBoost = plantState.getBlock();
-				if (plantState != null && toBoost != null && toBoost != Blocks.air && toBoost instanceof IPlantable)
+				if (plantState != null && toBoost != null && toBoost != Blocks.AIR && toBoost instanceof IPlantable)
 				{
 					toBoost.updateTick(worldObj, pos.up(), plantState, rand);
 				}

@@ -11,7 +11,7 @@ public class BlockEnderAnchor extends BlockContainerBase
 {
 	protected BlockEnderAnchor()
 	{
-		super("enderAnchor", Material.rock);
+		super("enderAnchor", Material.ROCK);
 
 		this.setHardness(1.5F);
 	}

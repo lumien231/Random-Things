@@ -28,7 +28,7 @@ public class BlockItemRedirector extends BlockBase
 
 	protected BlockItemRedirector()
 	{
-		super("itemRedirector", Material.rock);
+		super("itemRedirector", Material.ROCK);
 
 		this.setHardness(2.0F);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(INPUT_FACING, EnumFacing.NORTH).withProperty(OUTPUT_FACING, EnumFacing.SOUTH));
@@ -68,7 +68,7 @@ public class BlockItemRedirector extends BlockBase
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing output = EnumFacing.values()[((int)(meta / 4)) + 2];
+		EnumFacing output = EnumFacing.values()[((int) (meta / 4)) + 2];
 		EnumFacing input = EnumFacing.values()[meta - (output.ordinal() - 2) * 4 + 2];
 		return this.getDefaultState().withProperty(INPUT_FACING, input).withProperty(OUTPUT_FACING, output);
 	}
@@ -81,7 +81,7 @@ public class BlockItemRedirector extends BlockBase
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
-		super.onEntityCollidedWithBlock(worldIn, pos, entityIn);
+		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
 
 		if (entityIn instanceof EntityItem)
 		{
@@ -128,7 +128,7 @@ public class BlockItemRedirector extends BlockBase
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

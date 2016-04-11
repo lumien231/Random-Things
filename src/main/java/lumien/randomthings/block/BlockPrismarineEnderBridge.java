@@ -25,7 +25,7 @@ public class BlockPrismarineEnderBridge extends BlockContainerBase
 
 	protected BlockPrismarineEnderBridge()
 	{
-		super("prismarineEnderBridge", Material.rock);
+		super("prismarineEnderBridge", Material.ROCK);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setHardness(1.5F);

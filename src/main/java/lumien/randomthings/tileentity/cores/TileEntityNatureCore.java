@@ -45,11 +45,11 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 				{
 					if (this.worldObj.isAirBlock(target.up()))
 					{
-						this.worldObj.setBlockState(target, Blocks.grass.getDefaultState());
+						this.worldObj.setBlockState(target, Blocks.GRASS.getDefaultState());
 					}
 					else
 					{
-						this.worldObj.setBlockState(target, Blocks.dirt.getDefaultState());
+						this.worldObj.setBlockState(target, Blocks.DIRT.getDefaultState());
 					}
 				}
 			}
@@ -118,10 +118,10 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 
 				BlockPos target = new BlockPos(rX, rY, rZ);
 				IBlockState state = worldObj.getBlockState(target);
-				if (Blocks.sapling.canPlaceBlockAt(worldObj, target.up()))
+				if (Blocks.SAPLING.canPlaceBlockAt(worldObj, target.up()))
 				{
 					worldObj.playAuxSFX(2005, target, 0);
-					worldObj.setBlockState(target.up(), Blocks.sapling.getDefaultState());
+					worldObj.setBlockState(target.up(), Blocks.SAPLING.getDefaultState());
 				}
 			}
 

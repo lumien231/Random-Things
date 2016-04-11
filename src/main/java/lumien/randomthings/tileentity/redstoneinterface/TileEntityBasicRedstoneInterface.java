@@ -57,15 +57,15 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 			if (oldTarget != null)
 			{
 				IBlockState targetState = worldObj.getBlockState(oldTarget);
-				targetState.getBlock().onNeighborBlockChange(worldObj, oldTarget, targetState, Blocks.redstone_block);
-				worldObj.notifyNeighborsOfStateChange(oldTarget, Blocks.redstone_block);
+				targetState.getBlock().onNeighborBlockChange(worldObj, oldTarget, targetState, Blocks.REDSTONE_BLOCK);
+				worldObj.notifyNeighborsOfStateChange(oldTarget, Blocks.REDSTONE_BLOCK);
 			}
 
 			if (this.target != null)
 			{
 				IBlockState targetState = worldObj.getBlockState(target);
-				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.redstone_block);
-				worldObj.notifyNeighborsOfStateChange(target, Blocks.redstone_block);
+				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.REDSTONE_BLOCK);
+				worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK);
 			}
 		}
 	}
@@ -87,8 +87,8 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 		if (this.target != null)
 		{
 			IBlockState targetState = worldObj.getBlockState(target);
-			targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.redstone_block);
-			worldObj.notifyNeighborsOfStateChange(target, Blocks.redstone_block);
+			targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.REDSTONE_BLOCK);
+			worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK);
 		}
 	}
 

@@ -39,7 +39,7 @@ public class MessageUtil
 			{
 				Chunk c = worldObj.getChunkFromBlockCoords(pos);
 
-				PlayerManager playerManager = ((WorldServer) worldObj).getPlayerChunkManager();
+				PlayerManager playerManager = ((WorldServer) worldObj).getPlayerChunkMap();
 
 				PlayerInstance playerInstance = playerManager.getEntry(c.xPosition, c.zPosition);
 				playerInstance.sendPacket(PacketHandler.INSTANCE.getPacketFrom(message));

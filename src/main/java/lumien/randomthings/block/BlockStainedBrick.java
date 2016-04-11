@@ -25,7 +25,7 @@ public class BlockStainedBrick extends Block
 
 	public BlockStainedBrick()
 	{
-		super(Material.rock);
+		super(Material.ROCK);
 
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);

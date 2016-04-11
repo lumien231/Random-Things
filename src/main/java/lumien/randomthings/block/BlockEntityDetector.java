@@ -20,7 +20,7 @@ public class BlockEntityDetector extends BlockContainerBase
 
 	public BlockEntityDetector()
 	{
-		super("entityDetector", Material.rock);
+		super("entityDetector", Material.ROCK);
 
 		this.setHardness(1.5F);
 	}

@@ -35,7 +35,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 
 	protected BlockAdvancedItemCollector()
 	{
-		super("advancedItemCollector", Material.rock);
+		super("advancedItemCollector", Material.ROCK);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		this.setHardness(0.3F);

@@ -48,7 +48,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 	
 	protected BlockEnderMailbox()
 	{
-		super("enderMailbox", Material.rock);
+		super("enderMailbox", Material.ROCK);
 
 		this.setHardness(1.5F);
 		this.setResistance(10.0F);
@@ -141,7 +141,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 
 										mailboxInventory.setInventorySlotContents(slot, sendingLetter);
 
-										playerIn.worldObj.playSound(null,pos,SoundEvents.entity_endermen_teleport,SoundCategory.BLOCKS , 1, 1);
+										playerIn.worldObj.playSound(null,pos,SoundEvents.ENTITY_ENDERMEN_TELEPORT,SoundCategory.BLOCKS , 1, 1);
 
 										return true;
 									}

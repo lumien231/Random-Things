@@ -23,7 +23,7 @@ public class BlockRainShield extends BlockContainerBase
 
 	protected BlockRainShield()
 	{
-		super("rainShield", Material.rock);
+		super("rainShield", Material.ROCK);
 
 		this.setHardness(2.0F);
 	}

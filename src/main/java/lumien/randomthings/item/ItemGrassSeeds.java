@@ -62,7 +62,7 @@ public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 		}
 		else
 		{
-			return ItemDye.dyeColors[EnumDyeColor.byMetadata(stack.getItemDamage() - 1).getDyeDamage()];
+			return ItemDye.DYE_COLORS[EnumDyeColor.byMetadata(stack.getItemDamage() - 1).getDyeDamage()];
 		}
 	}
 
@@ -76,7 +76,7 @@ public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 				--stack.stackSize;
 				if (stack.getItemDamage() == 0)
 				{
-					worldIn.setBlockState(pos, Blocks.grass.getDefaultState());
+					worldIn.setBlockState(pos, Blocks.GRASS.getDefaultState());
 				}
 				else
 				{

@@ -18,7 +18,7 @@ public class BlockImbuingStation extends BlockContainerBase
 {
 	public BlockImbuingStation()
 	{
-		super("imbuingStation", Material.rock);
+		super("imbuingStation", Material.ROCK);
 
 		this.setHardness(1.25F);
 	}

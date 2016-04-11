@@ -41,7 +41,7 @@ public class BlockSpecialChest extends BlockContainerBase
 
 	public BlockSpecialChest()
 	{
-		super("specialChest", Material.wood, ItemBlockSpecialChest.class);
+		super("specialChest", Material.WOOD, ItemBlockSpecialChest.class);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setHardness(2.5F);

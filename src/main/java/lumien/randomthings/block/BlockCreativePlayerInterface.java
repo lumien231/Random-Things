@@ -12,7 +12,7 @@ public class BlockCreativePlayerInterface extends BlockContainerBase
 {
 	protected BlockCreativePlayerInterface()
 	{
-		super("creativePlayerInterface", Material.rock);
+		super("creativePlayerInterface", Material.ROCK);
 
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(4.0F);

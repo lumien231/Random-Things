@@ -21,7 +21,7 @@ public class BlockQuartzGlass extends BlockBase
 {
 	protected BlockQuartzGlass()
 	{
-		super("quartzGlass", Material.ground);
+		super("quartzGlass", Material.GROUND);
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3f);

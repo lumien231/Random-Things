@@ -124,11 +124,11 @@ public class ItemSummoningPendulum extends ItemBase
 				entity.writeToNBTOptional(entityNBT);
 				tagList.appendTag(entityNBT);
 				entity.setDead();
-				entity.worldObj.playSound(null, player.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 0.5f, 1.5F);
+				entity.worldObj.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1.5F);
 			}
 			else
 			{
-				entity.worldObj.playSound(null, player.getPosition(), SoundEvents.item_firecharge_use, SoundCategory.PLAYERS, 0.5f, 1.5F);
+				entity.worldObj.playSound(null, player.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 1.5F);
 			}
 
 			compound.setTag("entitys", tagList);
@@ -158,12 +158,12 @@ public class ItemSummoningPendulum extends ItemBase
 					{
 						entity.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 						worldIn.spawnEntityInWorld(entity);
-						playerIn.worldObj.playSound(null, playerIn.getPosition(), SoundEvents.entity_endermen_teleport, SoundCategory.PLAYERS, 0.5f, 0.5F);
+						playerIn.worldObj.playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 0.5F);
 					}
 				}
 				else
 				{
-					playerIn.worldObj.playSound(null, playerIn.getPosition(), SoundEvents.item_firecharge_use, SoundCategory.PLAYERS, 0.5f, 0.2F);
+					playerIn.worldObj.playSound(null, playerIn.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 0.2F);
 				}
 			}
 		}

@@ -23,7 +23,7 @@ public class BlockContactLever extends BlockBase
 
 	public BlockContactLever()
 	{
-		super("contactLever", Material.rock);
+		super("contactLever", Material.ROCK);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(POWERED, Boolean.valueOf(false)));
 		this.setHardness(1.5F);
@@ -170,7 +170,7 @@ public class BlockContactLever extends BlockBase
 		state = state.cycleProperty(POWERED);
 		world.setBlockState(pos, state, 3);
 		this.notifyNeighbors(world, pos, fromFacing);
-		world.playSound(null,pos.add(0.5,0.5,0.5), SoundEvents.ui_button_click,SoundCategory.BLOCKS, 0.3F, state.getValue(POWERED).booleanValue() ? 0.6F : 0.5F);
+		world.playSound(null,pos.add(0.5,0.5,0.5), SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS, 0.3F, state.getValue(POWERED).booleanValue() ? 0.6F : 0.5F);
 		return;
 
 	}

@@ -22,7 +22,7 @@ public class BlockLapisGlass extends BlockBase
 {
 	protected BlockLapisGlass()
 	{
-		super("lapisGlass", Material.ground);
+		super("lapisGlass", Material.GROUND);
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3f);

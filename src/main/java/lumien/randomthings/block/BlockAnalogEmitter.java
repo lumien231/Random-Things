@@ -30,7 +30,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 
 	protected BlockAnalogEmitter()
 	{
-		super("analogEmitter", Material.rock);
+		super("analogEmitter", Material.ROCK);
 
 		this.setHardness(3.0F).setResistance(5.0F);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));

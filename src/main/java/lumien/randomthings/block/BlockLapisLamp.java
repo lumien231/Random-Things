@@ -17,7 +17,7 @@ public class BlockLapisLamp extends BlockBase
 {
 	protected BlockLapisLamp()
 	{
-		super("lapisLamp", Material.ground);
+		super("lapisLamp", Material.GROUND);
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3F);

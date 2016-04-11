@@ -25,17 +25,17 @@ public class ItemBeanStew extends ItemFood
 
 		if (stack.stackSize == 0)
 		{
-			return new ItemStack(Items.bowl);
+			return new ItemStack(Items.BOWL);
 		}
 		else
 		{
 			if (livingEntity instanceof EntityPlayer)
 			{
-				boolean inventory = ((EntityPlayer)livingEntity).inventory.addItemStackToInventory(new ItemStack(Items.bowl));
+				boolean inventory = ((EntityPlayer)livingEntity).inventory.addItemStackToInventory(new ItemStack(Items.BOWL));
 
 				if (!inventory && !worldIn.isRemote)
 				{
-					worldIn.spawnEntityInWorld(new EntityItem(worldIn, livingEntity.posX, livingEntity.posY, livingEntity.posZ, new ItemStack(Items.bowl)));
+					worldIn.spawnEntityInWorld(new EntityItem(worldIn, livingEntity.posX, livingEntity.posY, livingEntity.posZ, new ItemStack(Items.BOWL)));
 				}
 			}
 			return stack;

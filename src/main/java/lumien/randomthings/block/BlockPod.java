@@ -17,7 +17,7 @@ public class BlockPod extends BlockBase
 
 	protected BlockPod()
 	{
-		super("beanPod", Material.plants);
+		super("beanPod", Material.PLANTS);
 		
 		this.setHardness(1.5F);
 	}
@@ -42,22 +42,22 @@ public class BlockPod extends BlockBase
 
 		if (ironAmount > 0)
 		{
-			drops.add(new ItemStack(Items.iron_ingot, ironAmount));
+			drops.add(new ItemStack(Items.IRON_INGOT, ironAmount));
 		}
 
 		if (goldAmount > 0)
 		{
-			drops.add(new ItemStack(Items.gold_ingot, goldAmount));
+			drops.add(new ItemStack(Items.GOLD_INGOT, goldAmount));
 		}
 
 		if (diamondAmount > 0)
 		{
-			drops.add(new ItemStack(Items.diamond, diamondAmount));
+			drops.add(new ItemStack(Items.DIAMOND, diamondAmount));
 		}
 
 		if (emeraldAmount > 0)
 		{
-			drops.add(new ItemStack(Items.emerald, emeraldAmount));
+			drops.add(new ItemStack(Items.EMERALD, emeraldAmount));
 		}
 
 		return drops;

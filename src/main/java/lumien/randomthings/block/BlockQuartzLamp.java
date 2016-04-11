@@ -15,7 +15,7 @@ public class BlockQuartzLamp extends BlockBase
 {
 	protected BlockQuartzLamp()
 	{
-		super("quartzLamp", Material.ground);
+		super("quartzLamp", Material.GROUND);
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3F);

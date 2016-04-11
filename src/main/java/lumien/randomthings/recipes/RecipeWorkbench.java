@@ -16,7 +16,7 @@ public class RecipeWorkbench extends ShapedOreRecipe
 
 	public RecipeWorkbench()
 	{
-		super(new ItemStack(ModBlocks.customWorkbench), "www", "wxw", "www", 'w', "plankWood", 'x', Blocks.crafting_table);
+		super(new ItemStack(ModBlocks.customWorkbench), "www", "wxw", "www", 'w', "plankWood", 'x', Blocks.CRAFTING_TABLE);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class RecipeWorkbench extends ShapedOreRecipe
 			{
 				ItemStack is = inv.getStackInSlot(i);
 
-				if (is != null && !(is.getItem() == Item.getItemFromBlock(Blocks.crafting_table)))
+				if (is != null && !(is.getItem() == Item.getItemFromBlock(Blocks.CRAFTING_TABLE)))
 				{
 					if (stack != null)
 					{

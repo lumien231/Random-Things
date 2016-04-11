@@ -10,7 +10,7 @@ public class BlockItemCorrector extends BlockContainerBase
 {
 	protected BlockItemCorrector()
 	{
-		super("itemCorrector", Material.rock);
+		super("itemCorrector", Material.ROCK);
 		
 		this.setHardness(2.0F);
 		this.slipperiness = 1F / 0.98F;

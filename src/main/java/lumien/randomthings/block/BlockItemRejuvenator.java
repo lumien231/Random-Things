@@ -11,7 +11,7 @@ public class BlockItemRejuvenator extends BlockContainerBase
 	
 	public BlockItemRejuvenator()
 	{
-		super("itemRejuvenator",Material.rock);
+		super("itemRejuvenator",Material.ROCK);
 		
 		this.setHardness(2.0F);
 		this.slipperiness = 1F / 0.98F;

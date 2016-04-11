@@ -23,7 +23,7 @@ public class BlockBasicRedstoneInterface extends BlockRedstoneInterface
 {
 	public BlockBasicRedstoneInterface()
 	{
-		super("basicRedstoneInterface", Material.rock);
+		super("basicRedstoneInterface", Material.ROCK);
 
 		this.setHardness(2);
 	}

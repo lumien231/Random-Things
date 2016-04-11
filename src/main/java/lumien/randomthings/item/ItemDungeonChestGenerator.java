@@ -113,7 +113,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 			{
 				if (worldIn.isAirBlock(pos))
 				{
-					if (Blocks.chest.canPlaceBlockAt(worldIn, pos))
+					if (Blocks.CHEST.canPlaceBlockAt(worldIn, pos))
 					{
 						NBTTagCompound nbt = stack.getTagCompound();
 						if (nbt == null)
@@ -122,7 +122,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 							stack.getTagCompound().setInteger("category", 0);
 						}
 						ChestCategory category = ChestCategory.values()[stack.getTagCompound().getInteger("category")];
-						worldIn.setBlockState(pos, Blocks.chest.getDefaultState());
+						worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState());
 						//WeightedRandomChestContent.generateChestContents(rng, ChestGenHooks.getItems(category.getName(), rng), (IInventory) worldIn.getTileEntity(pos), ChestGenHooks.getCount(category.getName(), rng));
 					}
 				}

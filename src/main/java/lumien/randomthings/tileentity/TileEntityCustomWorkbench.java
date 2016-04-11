@@ -16,9 +16,9 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 
 	public TileEntityCustomWorkbench()
 	{
-		this.woodMaterial = Blocks.planks;
+		this.woodMaterial = Blocks.PLANKS;
 		this.woodMeta = 0;
-		this.woodState = Blocks.planks.getDefaultState();
+		this.woodState = Blocks.PLANKS.getDefaultState();
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 
 		if (woodMaterial == null)
 		{
-			woodMaterial = Blocks.planks;
+			woodMaterial = Blocks.PLANKS;
 			woodMeta = 0;
 		}
 
@@ -50,7 +50,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 
 			if (woodState == null)
 			{
-				woodState = Blocks.planks.getDefaultState();
+				woodState = Blocks.PLANKS.getDefaultState();
 			}
 		}
 	}
@@ -73,7 +73,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 		
 		if (woodMaterial == null)
 		{
-			woodMaterial = Blocks.planks;
+			woodMaterial = Blocks.PLANKS;
 			woodMeta = 0;
 		}
 
@@ -83,7 +83,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 
 			if (woodState == null)
 			{
-				woodState = Blocks.planks.getDefaultState();
+				woodState = Blocks.PLANKS.getDefaultState();
 			}
 		}
 	}

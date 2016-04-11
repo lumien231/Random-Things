@@ -16,7 +16,7 @@ public class BlockPlayerInterface extends BlockContainerBase
 {
 	protected BlockPlayerInterface()
 	{
-		super("playerInterface", Material.rock);
+		super("playerInterface", Material.ROCK);
 
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(4.0F);

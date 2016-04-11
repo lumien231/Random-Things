@@ -90,7 +90,7 @@ public class GuiPotionVaporizer extends GuiContainer
 				if (potion != null)
 				{
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					this.mc.getTextureManager().bindTexture(inventoryBackground);
+					this.mc.getTextureManager().bindTexture(INVENTORY_BACKGROUND);
 					this.drawTexturedModalRect(i, j, 0, 166, 140, 32);
 
 					if (potion.hasStatusIcon())

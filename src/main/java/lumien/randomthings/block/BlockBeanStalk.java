@@ -32,7 +32,7 @@ public class BlockBeanStalk extends BlockBase
 
 	protected BlockBeanStalk(boolean strongMagic)
 	{
-		super(strongMagic ? "beanStalk" : "lesserBeanStalk", Material.plants);
+		super(strongMagic ? "beanStalk" : "lesserBeanStalk", Material.PLANTS);
 
 		this.setSoundType(SoundType.PLANT);
 

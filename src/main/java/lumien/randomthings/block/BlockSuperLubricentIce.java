@@ -17,7 +17,7 @@ public class BlockSuperLubricentIce extends BlockBase
 
 	protected BlockSuperLubricentIce()
 	{
-		super("superLubricentIce", Material.ice);
+		super("superLubricentIce", Material.ICE);
 
 		this.slipperiness = 1F / 0.98F;
 		this.setHardness(0.5F).setLightOpacity(3);

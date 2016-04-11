@@ -19,7 +19,7 @@ public class BlockRainbowLamp extends BlockBase
 
 	public BlockRainbowLamp()
 	{
-		super("rainbowLamp", Material.redstoneLight);
+		super("rainbowLamp", Material.REDSTONE_LIGHT);
 
 		this.setHardness(0.3F);
 		this.setSoundType(SoundType.GLASS);

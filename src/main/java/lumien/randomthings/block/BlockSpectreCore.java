@@ -50,7 +50,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 
 	protected BlockSpectreCore()
 	{
-		super("spectreCore", Material.rock);
+		super("spectreCore", Material.ROCK);
 
 		this.setBlockUnbreakable();
 		this.setSoundType(SoundType.GLASS);

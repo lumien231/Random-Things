@@ -285,7 +285,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 			double d1 = i + 0.5D;
 			d2 = k + 0.5D;
 
-			this.worldObj.playSound(null, new BlockPos(d1, j + 0.5D, d2), SoundEvents.block_chest_open, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			this.worldObj.playSound(null, new BlockPos(d1, j + 0.5D, d2), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
@@ -313,7 +313,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 				d2 = i + 0.5D;
 				double d0 = k + 0.5D;
 
-				this.worldObj.playSound(null, new BlockPos(d2, j + 0.5D, d0), SoundEvents.block_chest_close, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+				this.worldObj.playSound(null, new BlockPos(d2, j + 0.5D, d0), SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 
 			if (this.lidAngle < 0.0F)

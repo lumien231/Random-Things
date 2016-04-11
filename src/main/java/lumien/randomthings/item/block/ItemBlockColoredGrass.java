@@ -24,7 +24,7 @@ public class ItemBlockColoredGrass extends ItemBlock implements IRTItemColor
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
-		return ItemDye.dyeColors[EnumDyeColor.byMetadata(stack.getItemDamage()).getDyeDamage()];
+		return ItemDye.DYE_COLORS[EnumDyeColor.byMetadata(stack.getItemDamage()).getDyeDamage()];
 	}
 
 	@Override

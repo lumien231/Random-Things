@@ -24,7 +24,7 @@ public class DyeUtil
 			int id = OreDictionary.getOreID(dyeString);
 			if (oreDictIds.contains(id))
 			{
-				return ItemDye.dyeColors[15 - i];
+				return ItemDye.DYE_COLORS[15 - i];
 			}
 		}
 

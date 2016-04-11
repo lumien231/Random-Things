@@ -219,7 +219,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 						}
 						else
 						{
-							setInventorySlotContents(2, new ItemStack(Items.glass_bottle,1,0));
+							setInventorySlotContents(2, new ItemStack(Items.GLASS_BOTTLE,1,0));
 						}
 					}
 				}
@@ -248,7 +248,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 				for (EntityLivingBase entity : (List<EntityLivingBase>) WorldUtil.getEntitiesWithinAABBs(worldObj, EntityLivingBase.class, bbs))
 				{
 					PotionEffect activeEffect = entity.getActivePotionEffect(currentPotionEffect.getPotion());
-					boolean isNightVision = currentPotionEffect.getPotion() == MobEffects.nightVision;
+					boolean isNightVision = currentPotionEffect.getPotion() == MobEffects.NIGHT_VISION;
 					if (activeEffect == null || activeEffect.getDuration() < (isNightVision ? 205 : 3))
 					{
 						PotionEffect applyEffect = new PotionEffect(new PotionEffect(currentPotionEffect.getPotion(), isNightVision ? 205 : 80, currentPotionEffect.getAmplifier(), currentPotionEffect.getIsAmbient(), currentPotionEffect.doesShowParticles()));
@@ -462,7 +462,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 			case 0:
 				return TileEntityFurnace.isItemFuel(itemStackIn);
 			case 1:
-				return itemStackIn.getItem() == Items.potionitem;
+				return itemStackIn.getItem() == Items.POTIONITEM;
 		}
 
 		return false;

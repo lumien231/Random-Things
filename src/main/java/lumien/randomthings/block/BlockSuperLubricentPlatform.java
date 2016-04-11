@@ -22,7 +22,7 @@ public class BlockSuperLubricentPlatform extends BlockBase
 
 	protected BlockSuperLubricentPlatform()
 	{
-		super("superLubricentPlatform", Material.ice);
+		super("superLubricentPlatform", Material.ICE);
 		
 		this.slipperiness = 1F / 0.98F;
 		this.setHardness(0.5F).setLightOpacity(3);

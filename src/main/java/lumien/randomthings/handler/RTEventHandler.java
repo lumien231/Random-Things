@@ -211,7 +211,7 @@ public class RTEventHandler
 				RightClickBlock rcEvent = (RightClickBlock) event;
 				IBlockState targetState = event.getWorld().getBlockState(event.getPos());
 
-				if (targetState.getBlock() == Blocks.slime_block)
+				if (targetState.getBlock() == Blocks.SLIME_BLOCK)
 				{
 					event.getEntityPlayer().swingArm(event.getHand());
 					if (!event.getWorld().isRemote)
@@ -219,7 +219,7 @@ public class RTEventHandler
 						if (!event.getWorld().isRemote)
 						{
 							event.getWorld().setBlockState(event.getPos(), ModBlocks.compressedSlimeBlock.getDefaultState());
-							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.slime_block.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 1);
+							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.SLIME_BLOCK.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 1);
 							equipped.damageItem(1, event.getEntityPlayer());
 						}
 					}
@@ -456,7 +456,7 @@ public class RTEventHandler
 					left += 8;
 					GlStateManager.color(1, 1, 1, 1);
 				}
-				mc.renderEngine.bindTexture(Gui.icons);
+				mc.renderEngine.bindTexture(Gui.ICONS);
 				GlStateManager.disableBlend();
 			}
 		}
@@ -538,11 +538,11 @@ public class RTEventHandler
 					}
 					else if (livingEntity.isPotionActive(ModPotions.imbueWither))
 					{
-						event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.wither, 5 * 20, 1));
+						event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.WITHER, 5 * 20, 1));
 					}
 					else if (livingEntity.isPotionActive(ModPotions.imbuePoison))
 					{
-						event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.poison, 10 * 20, 1));
+						event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.POISON, 10 * 20, 1));
 					}
 					else if (livingEntity.isPotionActive(ModPotions.imbueCollapse))
 					{
@@ -644,7 +644,7 @@ public class RTEventHandler
 						Block liquidBlock = player.worldObj.getBlockState(liquid).getBlock();
 						Material liquidMaterial = liquidBlock.getMaterial(player.worldObj.getBlockState(liquid));
 
-						if ((liquidMaterial == Material.water || (boots.getItem() == ModItems.lavaWader && liquidMaterial == Material.lava)) && player.worldObj.getBlockState(air).getBlock().isAir(player.worldObj.getBlockState(air), player.worldObj, air) && EntityUtil.isJumping(player))
+						if ((liquidMaterial == Material.WATER || (boots.getItem() == ModItems.lavaWader && liquidMaterial == Material.LAVA)) && player.worldObj.getBlockState(air).getBlock().isAir(player.worldObj.getBlockState(air), player.worldObj, air) && EntityUtil.isJumping(player))
 						{
 							player.moveEntity(0, 0.22, 0);
 						}

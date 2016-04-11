@@ -27,7 +27,7 @@ public class BlockOnlineDetector extends BlockContainerBase
 
 	protected BlockOnlineDetector()
 	{
-		super("onlineDetector", Material.rock);
+		super("onlineDetector", Material.ROCK);
 
 		this.setHardness(2);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, false));

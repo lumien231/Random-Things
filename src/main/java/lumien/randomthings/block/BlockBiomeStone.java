@@ -31,7 +31,7 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 
 	protected BlockBiomeStone()
 	{
-		super("biomeStone", Material.rock, ItemBlockBiomeStone.class);
+		super("biomeStone", Material.ROCK, ItemBlockBiomeStone.class);
 
 		this.setHardness(1.5F);
 		this.setResistance(10.0F);

@@ -29,7 +29,7 @@ public class BlockPotionVaporizer extends BlockContainerBase
 
 	protected BlockPotionVaporizer()
 	{
-		super("potionVaporizer", Material.rock);
+		super("potionVaporizer", Material.ROCK);
 		
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setHardness(1.5F);

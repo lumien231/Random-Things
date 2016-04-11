@@ -30,7 +30,7 @@ public class BlockItemCollector extends BlockContainerBase
 
 	protected BlockItemCollector()
 	{
-		super("itemCollector", Material.rock);
+		super("itemCollector", Material.ROCK);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		this.setHardness(0.3F);

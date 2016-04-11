@@ -25,7 +25,7 @@ public class BlockContactButton extends BlockBase
 
 	public BlockContactButton()
 	{
-		super("contactButton", Material.rock);
+		super("contactButton", Material.ROCK);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(POWERED, Boolean.valueOf(false)));
 		this.setTickRandomly(true);
@@ -82,7 +82,7 @@ public class BlockContactButton extends BlockBase
 			{
 				worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(false)));
 				this.notifyNeighbors(worldIn, pos, state.getValue(FACING));
-				worldIn.playSound(null, pos.add(0.5, 0.5, 0.5), SoundEvents.ui_button_click, SoundCategory.BLOCKS, 0.3F, 0.5F);
+				worldIn.playSound(null, pos.add(0.5, 0.5, 0.5), SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.3F, 0.5F);
 				worldIn.markBlockRangeForRenderUpdate(pos, pos);
 			}
 		}
@@ -199,7 +199,7 @@ public class BlockContactButton extends BlockBase
 		{
 			world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)), 3);
 			world.markBlockRangeForRenderUpdate(pos, pos);
-			world.playSound(null,pos.offset(fromFacing).add(0.5,0.5,0.5), SoundEvents.ui_button_click, SoundCategory.BLOCKS, 0.3F, 0.6F);
+			world.playSound(null,pos.offset(fromFacing).add(0.5,0.5,0.5), SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6F);
 			this.notifyNeighbors(world, pos, state.getValue(FACING));
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 			return;

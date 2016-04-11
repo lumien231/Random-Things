@@ -36,7 +36,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 
 	public BlockColoredGrass()
 	{
-		super("coloredGrass", Material.grass, ItemBlockColoredGrass.class);
+		super("coloredGrass", Material.GRASS, ItemBlockColoredGrass.class);
 
 		this.setHardness(0.6F);
 		this.setSoundType(SoundType.PLANT);
@@ -55,13 +55,13 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
 	{
 		EnumDyeColor color = (EnumDyeColor) state.getValue(COLOR);
-		return ItemDye.dyeColors[color.getDyeDamage()];
+		return ItemDye.DYE_COLORS[color.getDyeDamage()];
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Blocks.dirt.getItemDropped(Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), rand, fortune);
+		return Blocks.DIRT.getItemDropped(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), rand, fortune);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 			IBlockState upState = worldIn.getBlockState(pos.up());
 			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && upState.getBlock().getLightOpacity(upState, worldIn, pos.up()) > 2)
 			{
-				worldIn.setBlockState(pos, Blocks.dirt.getDefaultState());
+				worldIn.setBlockState(pos, Blocks.DIRT.getDefaultState());
 			}
 			else
 			{
@@ -90,7 +90,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
                         IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == Blocks.dirt && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
+                        if (iblockstate1.getBlock() == Blocks.DIRT && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
                         {
                             worldIn.setBlockState(blockpos, state);
                         }

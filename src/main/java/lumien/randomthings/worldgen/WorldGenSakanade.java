@@ -33,7 +33,7 @@ public class WorldGenSakanade implements IWorldGenerator
 				BiomeGenBase biome = world.getBiomeGenForCoords(target);
 				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM))
 				{
-					if (world.getBlockState(target).getBlock() == Blocks.brown_mushroom_block && world.isAirBlock(target.down()))
+					if (world.getBlockState(target).getBlock() == Blocks.BROWN_MUSHROOM_BLOCK && world.isAirBlock(target.down()))
 					{
 						world.setBlockState(target.down(), ModBlocks.sakanade.getDefaultState());
 					}

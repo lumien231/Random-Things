@@ -223,9 +223,9 @@ public class ContainerImbuingStation extends Container
 	{
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.crafters.size(); ++i)
+		for (int i = 0; i < this.listeners.size(); ++i)
 		{
-			ICrafting icrafting = this.crafters.get(i);
+			ICrafting icrafting = this.listeners.get(i);
 
 			if (this.lastImbuingProgress != this.te.imbuingProgress)
 			{

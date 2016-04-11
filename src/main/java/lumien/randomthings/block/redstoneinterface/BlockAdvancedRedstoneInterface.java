@@ -27,7 +27,7 @@ public class BlockAdvancedRedstoneInterface extends BlockRedstoneInterface
 
 	public BlockAdvancedRedstoneInterface()
 	{
-		super("advancedRedstoneInterface", Material.rock);
+		super("advancedRedstoneInterface", Material.ROCK);
 
 		this.setHardness(2);
 	}

@@ -11,7 +11,7 @@ public class BlockItemSealer extends BlockContainerBase
 
 	protected BlockItemSealer()
 	{
-		super("itemSealer", Material.rock);
+		super("itemSealer", Material.ROCK);
 
 		this.setHardness(2.0F);
 		this.slipperiness = 1F / 0.98F;

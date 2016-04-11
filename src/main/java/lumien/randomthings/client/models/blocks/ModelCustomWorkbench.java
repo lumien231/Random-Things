@@ -75,7 +75,7 @@ public class ModelCustomWorkbench implements IBakedModel
 			}
 			else
 			{
-				modelCache.put(woodState, new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(woodState), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.planks.getDefaultState()).getParticleTexture(), true));
+				modelCache.put(woodState, new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(woodState), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.PLANKS.getDefaultState()).getParticleTexture(), true));
 				model = modelCache.get(woodState);
 			}
 		}
@@ -121,7 +121,7 @@ public class ModelCustomWorkbench implements IBakedModel
 	{
 		if (defaultModel == null)
 		{
-			defaultModel = new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(Blocks.planks.getDefaultState()), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.planks.getDefaultState()).getParticleTexture(), true);
+			defaultModel = new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(Blocks.PLANKS.getDefaultState()), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.PLANKS.getDefaultState()).getParticleTexture(), true);
 		}
 	}
 
@@ -154,7 +154,7 @@ public class ModelCustomWorkbench implements IBakedModel
 
 				if (woodBlock == null)
 				{
-					woodBlock = Blocks.planks;
+					woodBlock = Blocks.PLANKS;
 					meta = 0;
 				}
 
@@ -171,7 +171,7 @@ public class ModelCustomWorkbench implements IBakedModel
 				}
 				else
 				{
-					modelCache.put(woodState, new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(woodState), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.planks.getDefaultState()).getParticleTexture(), true));
+					modelCache.put(woodState, new ModelCubeOverlay(RenderUtils.getQuadFaceMapFromState(woodState), overlays, Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(Blocks.PLANKS.getDefaultState()).getParticleTexture(), true));
 					return modelCache.get(woodState);
 				}
 			}

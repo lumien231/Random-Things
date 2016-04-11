@@ -30,7 +30,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 
 	public BlockSakanade()
 	{
-		super("sakanade", Material.plants);
+		super("sakanade", Material.PLANTS);
 
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
@@ -137,14 +137,14 @@ public class BlockSakanade extends BlockBase implements IShearable
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 	{
 		Block soil = worldIn.getBlockState(pos.up()).getBlock();
-		return soil == Blocks.brown_mushroom_block;
+		return soil == Blocks.BROWN_MUSHROOM_BLOCK;
 	}
 
 	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		if (!this.canBlockStay(worldIn, pos, state))
 		{
-			worldIn.setBlockState(pos, Blocks.air.getDefaultState(), 3);
+			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
 		}
 	}
 }

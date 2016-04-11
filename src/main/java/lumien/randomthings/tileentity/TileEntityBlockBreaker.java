@@ -47,7 +47,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 
 		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) worldObj, new GameProfile(null, "RTBlockBreaker")));
 
-		ItemStack unbreakingIronPickaxe = new ItemStack(Items.iron_pickaxe, 1);
+		ItemStack unbreakingIronPickaxe = new ItemStack(Items.IRON_PICKAXE, 1);
 		unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
 		unbreakingIronPickaxe.getTagCompound().setBoolean("Unbreakable", true);
 
