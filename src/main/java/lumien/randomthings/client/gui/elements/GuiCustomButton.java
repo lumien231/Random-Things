@@ -1,26 +1,39 @@
 package lumien.randomthings.client.gui.elements;
 
+import java.util.Arrays;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.config.GuiUtils;
 
 public class GuiCustomButton extends GuiButton
 {
+	GuiScreen parent;
 	ResourceLocation buttonTextures;
 	int uX;
 	int uY;
 	boolean value;
 
-	public GuiCustomButton(int buttonId, boolean value, int x, int y, int widthIn, int heightIn, String buttonText, ResourceLocation buttonTextures, int uX, int uY)
+	Pair<String, String> tooltips;
+
+	public GuiCustomButton(GuiScreen parent, int buttonId, boolean value, int x, int y, int widthIn, int heightIn, String buttonText, ResourceLocation buttonTextures, int uX, int uY)
 	{
 		super(buttonId, x, y, widthIn, heightIn, buttonText);
 
+		this.parent = parent;
 		this.buttonTextures = buttonTextures;
 		this.uX = uX;
 		this.uY = uY;
 		this.value = value;
+
+		this.tooltips = Pair.of(null, null);
 	}
 
 	public void toggle()
@@ -59,14 +72,43 @@ public class GuiCustomButton extends GuiButton
 			}
 
 			this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
+
+
 		}
+	}
+
+	@Override
+	public void drawButtonForegroundLayer(int mouseX, int mouseY)
+	{
+		String toolTip;
+		if (this.value)
+		{
+			toolTip = tooltips.getRight();
+		}
+		else
+		{
+			toolTip = tooltips.getLeft();
+		}
+		
+		if (toolTip != null)
+		{
+			toolTip = I18n.format(toolTip);
+			GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { toolTip }), mouseX, mouseY, parent.mc.displayWidth, parent.mc.displayHeight, -1, parent.mc.fontRendererObj);
+		}
+	}
+	
+	public GuiCustomButton setToolTips(String falseTooltip,String trueTooltip)
+	{
+		tooltips = Pair.of(falseTooltip, trueTooltip);
+		
+		return this;
 	}
 
 	public boolean getValue()
 	{
 		return value;
 	}
-	
+
 	public void setValue(boolean value)
 	{
 		this.value = value;

@@ -47,7 +47,7 @@ public class GuiChatDetector extends GuiContainer
 		chatMessageInput.setCanLoseFocus(true);
 		chatMessageInput.setText(te.getChatMessage());
 
-		consumeButton = new GuiCustomButton(0, te.consume(), guiLeft + 112, guiTop + 5, 20, 20, "", background, 136, 0);
+		consumeButton = new GuiCustomButton(this, 0, te.consume(), guiLeft + 112, guiTop + 5, 20, 20, "", background, 136, 0);
 		this.buttonList.add(consumeButton);
 	}
 

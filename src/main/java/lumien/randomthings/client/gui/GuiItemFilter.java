@@ -47,16 +47,16 @@ public class GuiItemFilter extends GuiContainer
 	{
 		super.initGui();
 
-		metadataButton = new GuiCustomButton(0, repres.respectMetadata(), guiLeft + 173, guiTop + 4, 20, 20, "", background, 0, 133);
+		metadataButton = new GuiCustomButton(this, 0, repres.respectMetadata(), guiLeft + 173, guiTop + 4, 20, 20, "", background, 0, 133).setToolTips("tooltip.itemFilter.nometadata", "tooltip.itemFilter.metadata");
 		this.buttonList.add(metadataButton);
 
-		oreDictButton = new GuiCustomButton(1, repres.respectOreDictionary(), guiLeft + 195, guiTop + 4, 20, 20, "", background, 40, 133);
+		oreDictButton = new GuiCustomButton(this, 1, repres.respectOreDictionary(), guiLeft + 195, guiTop + 4, 20, 20, "", background, 40, 133).setToolTips("tooltip.itemFilter.nooredict", "tooltip.itemFilter.oredict");
 		this.buttonList.add(oreDictButton);
 
-		nbtButton = new GuiCustomButton(2, repres.respectNBT(), guiLeft + 173, guiTop + 4 + 22, 20, 20, "", background, 80, 133);
+		nbtButton = new GuiCustomButton(this, 2, repres.respectNBT(), guiLeft + 173, guiTop + 4 + 22, 20, 20, "", background, 80, 133).setToolTips("tooltip.itemFilter.nonbt", "tooltip.itemFilter.nbt");
 		this.buttonList.add(nbtButton);
 
-		listTypeButton = new GuiCustomButton(3, repres.getListType()==0?false:true, guiLeft + 195, guiTop + 4 + 22, 20, 20, "", background, 120, 133);
+		listTypeButton = new GuiCustomButton(this, 3, repres.getListType() == 0 ? false : true, guiLeft + 195, guiTop + 4 + 22, 20, 20, "", background, 120, 133).setToolTips("tooltip.itemFilter.whitelist", "tooltip.itemFilter.blacklist");
 		this.buttonList.add(listTypeButton);
 
 		// listTypeButton = new GuiCustomButton(this, 1, guiLeft + 173, guiTop +
@@ -93,8 +93,17 @@ public class GuiItemFilter extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2)
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
+		for (GuiButton guibutton : this.buttonList)
+        {
+            if (guibutton.isMouseOver())
+            {
+                guibutton.drawButtonForegroundLayer(mouseX - this.guiLeft, mouseY - this.guiTop);
+                break;
+            }
+        }
+		
 		fontRendererObj.drawString(I18n.format("item.itemFilter.name", new Object[0]), 8, 6, 4210752);
 	}
 
