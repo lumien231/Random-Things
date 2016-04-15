@@ -10,15 +10,25 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class ContainerItemFilter extends Container
 {
+	EnumHand using;
+	ItemStack filterStack;
 	public ItemFilterRepresentation repres;
 
 	public ContainerItemFilter(EntityPlayer player, World world, int x, int y, int z)
 	{
-		ItemStack filterStack = player.getHeldItemMainhand();
+		filterStack = player.getHeldItemMainhand();
+		using = EnumHand.MAIN_HAND;
+		if (filterStack == null)
+		{
+			filterStack = player.getHeldItemOffhand();
+			using = EnumHand.OFF_HAND;
+		}
+
 
 		if (filterStack != null && filterStack.getItem() == ModItems.itemFilter)
 		{
@@ -32,10 +42,14 @@ public class ContainerItemFilter extends Container
 				}
 			}
 		}
+		else
+		{
+			filterStack = null;
+		}
 
 		bindPlayerInventory(player.inventory);
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{
@@ -45,18 +59,13 @@ public class ContainerItemFilter extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return playerIn.getHeldItemMainhand() != null && playerIn.getHeldItemMainhand().getItem() == ModItems.itemFilter;
+		return filterStack != null && playerIn.getHeldItem(using) == filterStack;
 	}
 
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn)
 	{
-		ItemStack filterStack = playerIn.getHeldItemMainhand();
-
-		if (filterStack != null && filterStack.getItem() == ModItems.itemFilter)
-		{
-			repres.writeToItemStack(filterStack);
-		}
+		repres.writeToItemStack();
 	}
 
 	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)

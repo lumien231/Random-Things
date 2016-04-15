@@ -10,16 +10,14 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class InventoryItem implements IInventory
 {
-	EntityPlayer player;
 	String name;
 	int size;
 	ItemStack itemStack;
 	ItemStack[] cacheInventory;
 	boolean reading;
 
-	public InventoryItem(EntityPlayer player, String name, int size, ItemStack itemStack)
+	public InventoryItem(String name, int size, ItemStack itemStack)
 	{
-		this.player = player;
 		this.name = name;
 		this.size = size;
 		this.itemStack = itemStack;
@@ -151,22 +149,16 @@ public class InventoryItem implements IInventory
 	@Override
 	public void markDirty()
 	{
-		ItemStack equipped = player.getHeldItemMainhand();
-
-		if (equipped != null && ItemStack.areItemStacksEqual(equipped, itemStack))
+		if (itemStack.getTagCompound() == null)
 		{
-			itemStack = equipped;
-			if (itemStack.getTagCompound() == null)
-			{
-				itemStack.setTagCompound(new NBTTagCompound());
-			}
-
-			NBTTagCompound compound = itemStack.getTagCompound().getCompoundTag(name);
-
-			InventoryUtil.writeInventoryToCompound(compound, this);
-
-			itemStack.getTagCompound().setTag(name, compound);
+			itemStack.setTagCompound(new NBTTagCompound());
 		}
+
+		NBTTagCompound compound = itemStack.getTagCompound().getCompoundTag(name);
+
+		InventoryUtil.writeInventoryToCompound(compound, this);
+
+		itemStack.getTagCompound().setTag(name, compound);
 	}
 
 	@Override

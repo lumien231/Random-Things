@@ -1,6 +1,7 @@
 package lumien.randomthings.item;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,16 +19,18 @@ public class ItemItemFilter extends ItemBase
 {
 	public static class ItemFilterRepresentation
 	{
-		InventoryBasic filterInventory;
-
+		InventoryItem filterInventory;
+		ItemStack filterStack;
+		
 		boolean metadata = true;
 		boolean nbt = true;
 		boolean oreDict = false;
 		int listType = 0;
 
-		public ItemFilterRepresentation()
+		public ItemFilterRepresentation(ItemStack stack)
 		{
-			filterInventory = new InventoryBasic("ItemFilter", false, 9);
+			filterInventory = new InventoryItem("ItemFilter", 9, stack);
+			filterStack = stack;
 		}
 
 		public IInventory getFilterInventory()
@@ -37,7 +40,7 @@ public class ItemItemFilter extends ItemBase
 
 		public static ItemFilterRepresentation readFromItemStack(ItemStack filterStack)
 		{
-			ItemFilterRepresentation representation = new ItemFilterRepresentation();
+			ItemFilterRepresentation representation = new ItemFilterRepresentation(filterStack);
 			NBTTagCompound compound;
 
 			if ((compound = filterStack.getTagCompound()) != null)
@@ -58,7 +61,7 @@ public class ItemItemFilter extends ItemBase
 			return representation;
 		}
 
-		public void writeToItemStack(ItemStack filterStack)
+		public void writeToItemStack()
 		{
 			NBTTagCompound compound = filterStack.getTagCompound();
 			if (compound == null)
@@ -190,7 +193,7 @@ public class ItemItemFilter extends ItemBase
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
-		if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
+		if (!worldIn.isRemote)
 		{
 			playerIn.openGui(RandomThings.instance, GuiIds.ITEM_FILTER, worldIn, 0, 0, 0);
 		}

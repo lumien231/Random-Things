@@ -23,7 +23,7 @@ public class ContainerEnderLetter extends Container
 	public ContainerEnderLetter(EntityPlayer player, World world, int x, int y, int z)
 	{
 		enderLetterStack = player.inventory.getCurrentItem();
-		inventory = new InventoryItem(player,"EnderLetterContent", 9, enderLetterStack);
+		inventory = new InventoryItem("EnderLetterContent", 9, enderLetterStack);
 
 		NBTTagCompound compound;
 
