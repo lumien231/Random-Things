@@ -145,65 +145,71 @@ public class AsmHandler
 	@SideOnly(Side.CLIENT)
 	public static int renderBlock(BlockRendererDispatcher dispatcher, IBlockState state, BlockPos pos, IBlockAccess blockAccess, VertexBuffer worldRendererIn)
 	{
-		blockAccess = Minecraft.getMinecraft().theWorld;
-
-		BlockPos changedPos = getSwitchedPosition(blockAccess, pos);
-
-		posSet.clear();
-
-		if (!changedPos.equals(pos))
+		synchronized (TileEntityLightRedirector.redirectorSet)
 		{
-			state = blockAccess.getBlockState(changedPos);
-
-			try
+			if (!TileEntityLightRedirector.redirectorSet.isEmpty())
 			{
-				EnumBlockRenderType enumblockrendertype = state.getRenderType();
+				blockAccess = Minecraft.getMinecraft().theWorld;
 
-				if (enumblockrendertype == EnumBlockRenderType.INVISIBLE)
-				{
+				BlockPos changedPos = getSwitchedPosition(blockAccess, pos);
 
-				}
-				else
+				posSet.clear();
+
+				if (!changedPos.equals(pos))
 				{
-					if (blockAccess.getWorldType() != WorldType.DEBUG_WORLD)
+					state = blockAccess.getBlockState(changedPos);
+
+					try
 					{
-						try
+						EnumBlockRenderType enumblockrendertype = state.getRenderType();
+
+						if (enumblockrendertype == EnumBlockRenderType.INVISIBLE)
 						{
-							state = state.getActualState(blockAccess, changedPos);
+
 						}
-						catch (Exception var8)
+						else
 						{
-							;
+							if (blockAccess.getWorldType() != WorldType.DEBUG_WORLD)
+							{
+								try
+								{
+									state = state.getActualState(blockAccess, changedPos);
+								}
+								catch (Exception var8)
+								{
+									;
+								}
+							}
+
+							switch (enumblockrendertype)
+							{
+								case MODEL:
+									IBakedModel model = dispatcher.getModelForState(state);
+									state = state.getBlock().getExtendedState(state, blockAccess, changedPos);
+									return dispatcher.getBlockModelRenderer().renderModel(blockAccess, model, state, pos, worldRendererIn, true) ? 1 : 0;
+								case ENTITYBLOCK_ANIMATED:
+									return 0;
+								case LIQUID:
+									return 2;
+								default:
+									return 0;
+							}
 						}
 					}
-
-					switch (enumblockrendertype)
+					catch (Throwable throwable)
 					{
-						case MODEL:
-							IBakedModel model = dispatcher.getModelForState(state);
-							state = state.getBlock().getExtendedState(state, blockAccess, changedPos);
-							return dispatcher.getBlockModelRenderer().renderModel(blockAccess, model, state, pos, worldRendererIn, true) ? 1 : 0;
-						case ENTITYBLOCK_ANIMATED:
-							return 0;
-						case LIQUID:
-							return 2;
-						default:
-							return 0;
+						CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Tesselating block in world");
+						CrashReportCategory crashreportcategory = crashreport.makeCategory("Block being tesselated");
+						CrashReportCategory.addBlockInfo(crashreportcategory, pos, state.getBlock(), state.getBlock().getMetaFromState(state));
+						throw new ReportedException(crashreport);
 					}
+
+					return 0;
 				}
 			}
-			catch (Throwable throwable)
-			{
-				CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Tesselating block in world");
-				CrashReportCategory crashreportcategory = crashreport.makeCategory("Block being tesselated");
-				CrashReportCategory.addBlockInfo(crashreportcategory, pos, state.getBlock(), state.getBlock().getMetaFromState(state));
-				throw new ReportedException(crashreport);
-			}
 
-			return 0;
+			return 2;
 		}
-
-		return 2;
 	}
 
 	static HashSet<BlockPos> posSet = new HashSet<BlockPos>();
@@ -212,41 +218,35 @@ public class AsmHandler
 	{
 		if (pos != null && access != null)
 		{
-			synchronized (TileEntityLightRedirector.redirectorSet)
+			Iterator<TileEntityLightRedirector> iterator = TileEntityLightRedirector.redirectorSet.iterator();
+			while (iterator.hasNext())
 			{
-				if (!TileEntityLightRedirector.redirectorSet.isEmpty())
+				TileEntityLightRedirector redirector = iterator.next();
+				if (redirector.isInvalid())
 				{
-					Iterator<TileEntityLightRedirector> iterator = TileEntityLightRedirector.redirectorSet.iterator();
-					while (iterator.hasNext())
+					iterator.remove();
+				}
+				else
+				{
+					if (redirector.established && !posSet.contains(redirector.getPos()))
 					{
-						TileEntityLightRedirector redirector = iterator.next();
-						if (redirector.isInvalid())
+						posSet.add(redirector.getPos());
+
+						if (redirector.targets.isEmpty())
 						{
-							iterator.remove();
-						}
-						else
-						{
-							if (redirector.established && !posSet.contains(redirector.getPos()))
+							for (EnumFacing facing : EnumFacing.values())
 							{
-								posSet.add(redirector.getPos());
+								redirector.targets.put(redirector.getPos().offset(facing), redirector.getPos().offset(facing.getOpposite()));
+							}
+						}
 
-								if (redirector.targets.isEmpty())
-								{
-									for (EnumFacing facing : EnumFacing.values())
-									{
-										redirector.targets.put(redirector.getPos().offset(facing), redirector.getPos().offset(facing.getOpposite()));
-									}
-								}
+						if (redirector.targets.containsKey(pos))
+						{
+							BlockPos switched = redirector.targets.get(pos);
 
-								if (redirector.targets.containsKey(pos))
-								{
-									BlockPos switched = redirector.targets.get(pos);
-
-									if (!access.isAirBlock(switched))
-									{
-										return getSwitchedPosition(access, switched);
-									}
-								}
+							if (!access.isAirBlock(switched))
+							{
+								return getSwitchedPosition(access, switched);
 							}
 						}
 					}
