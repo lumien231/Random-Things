@@ -28,12 +28,12 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 	TileEntityVoxelProjector te;
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/voxelProjector.png");
 	final ResourceLocation buttons = new ResourceLocation("randomthings:textures/gui/voxelProjectorButtons.png");
-	
+
 	GuiCustomButton toggleAmbientLight;
 	GuiCustomButton toggleRandomizer;
-	
+
 	GuiStringList availableModels;
-	
+
 	int oldRotation;
 	int oldScale;
 	int oldRotationSpeed;
@@ -55,7 +55,7 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 	public void initGui()
 	{
 		super.initGui();
-		
+
 		this.buttonList.add(new GuiSlider(0, this.guiLeft + 5, 90, 120, 20, "Model Rotation: ", "", 0, 360, this.te.getModelRotation(), false, true, new GuiSlider.ISlider()
 		{
 			@Override
@@ -75,13 +75,13 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 				}
 			}
 		}));
-		
-		this.buttonList.add(new GuiSlider(1, this.guiLeft + 5, 60, 120, 20, "Scale: ", "",1, 20, this.te.getScale(), false, true, new GuiSlider.ISlider()
+
+		this.buttonList.add(new GuiSlider(1, this.guiLeft + 5, 60, 120, 20, "Scale: ", "", 1, 20, this.te.getScale(), false, true, new GuiSlider.ISlider()
 		{
 			@Override
 			public void onChangeSliderValue(GuiSlider slider)
 			{
-				int scale = Math.min(20, (int) Math.floor((slider.sliderValue+1F/20f) * 20));
+				int scale = Math.min(20, (int) Math.floor((slider.sliderValue + 1F / 20f) * 20));
 				GuiVoxelProjector.this.te.setScale(scale);
 
 				if (scale != GuiVoxelProjector.this.oldScale)
@@ -95,13 +95,13 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 				}
 			}
 		}));
-		
-		this.buttonList.add(new GuiSlider(2, this.guiLeft + 5, 120, 120, 20, "Rotation Speed: ", "",0, 40, this.te.getRotationSpeed(), false, true, new GuiSlider.ISlider()
+
+		this.buttonList.add(new GuiSlider(2, this.guiLeft + 5, 120, 120, 20, "Rotation Speed: ", "", 0, 40, this.te.getRotationSpeed(), false, true, new GuiSlider.ISlider()
 		{
 			@Override
 			public void onChangeSliderValue(GuiSlider slider)
 			{
-				int rotationSpeed = (int)Math.floor(slider.sliderValue * 40);
+				int rotationSpeed = (int) Math.floor(slider.sliderValue * 40);
 				GuiVoxelProjector.this.te.setRotationSpeed(rotationSpeed);
 
 				if (rotationSpeed != GuiVoxelProjector.this.oldRotationSpeed)
@@ -115,14 +115,14 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 				}
 			}
 		}));
-		
-		toggleAmbientLight = new GuiCustomButton(3, te.ambientLight(), this.guiLeft + xSize - 25, 60, 20, 20, "", buttons, 0, 0);
-		toggleRandomizer = new GuiCustomButton(4, te.randomize(), this.guiLeft + xSize - 25, 85, 20, 20, "", buttons, 42, 0);;
-		
+
+		toggleAmbientLight = new GuiCustomButton(this, 3, te.ambientLight(), this.guiLeft + xSize - 25, 60, 20, 20, "", buttons, 0, 0);
+		toggleRandomizer = new GuiCustomButton(this, 4, te.randomize(), this.guiLeft + xSize - 25, 85, 20, 20, "", buttons, 42, 0);
+
 		this.buttonList.add(toggleAmbientLight);
 		this.buttonList.add(toggleRandomizer);
-		
-		availableModels = new GuiStringList(this, Minecraft.getMinecraft(), 120, 50, this.guiLeft + 5, 150,width , height, new ArrayList<String>(RandomThings.instance.modelHandler.getModels()));
+
+		availableModels = new GuiStringList(this, Minecraft.getMinecraft(), 120, 50, this.guiLeft + 5, 150, width, height, new ArrayList<String>(RandomThings.instance.modelHandler.getModels()));
 	}
 
 	@Override
@@ -141,12 +141,12 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		fontRendererObj.drawString(I18n.format("tile.voxelProjector.name", new Object[0]), 3, 6, 4210752);
 	}
-	
+
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		
+
 		availableModels.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
@@ -157,12 +157,12 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 		message.setModel(string);
 		PacketHandler.INSTANCE.sendToServer(message);
 	}
-	
+
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
-		
+
 		if (button == toggleAmbientLight)
 		{
 			toggleAmbientLight.toggle();
@@ -170,7 +170,7 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 			message.setAmbientLight(toggleAmbientLight.getValue());
 			PacketHandler.INSTANCE.sendToServer(message);
 		}
-		
+
 		if (button == toggleRandomizer)
 		{
 			toggleRandomizer.toggle();

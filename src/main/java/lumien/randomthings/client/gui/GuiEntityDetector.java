@@ -75,7 +75,7 @@ public class GuiEntityDetector extends GuiContainer
 
 		filter = new GuiButton(6, this.guiLeft + 15 + 14, this.guiTop + 95, 85, 20, "");
 
-		invert = new GuiCustomButton(7, entityDetector.invert(), this.guiLeft + 15 + 90 + 14, this.guiTop + 95, 20, 20, "", background, 176, 0);
+		invert = new GuiCustomButton(this, 7, entityDetector.invert(), this.guiLeft + 15 + 90 + 14, this.guiTop + 95, 20, 20, "", background, 176, 0);
 
 		this.buttonList.add(minusX);
 		this.buttonList.add(plusX);
