@@ -214,35 +214,38 @@ public class AsmHandler
 		{
 			synchronized (TileEntityLightRedirector.redirectorSet)
 			{
-				Iterator<TileEntityLightRedirector> iterator = TileEntityLightRedirector.redirectorSet.iterator();
-				while (iterator.hasNext())
+				if (!TileEntityLightRedirector.redirectorSet.isEmpty())
 				{
-					TileEntityLightRedirector redirector = iterator.next();
-					if (redirector.isInvalid())
+					Iterator<TileEntityLightRedirector> iterator = TileEntityLightRedirector.redirectorSet.iterator();
+					while (iterator.hasNext())
 					{
-						iterator.remove();
-					}
-					else
-					{
-						if (redirector.established && !posSet.contains(redirector.getPos()))
+						TileEntityLightRedirector redirector = iterator.next();
+						if (redirector.isInvalid())
 						{
-							posSet.add(redirector.getPos());
-
-							if (redirector.targets.isEmpty())
+							iterator.remove();
+						}
+						else
+						{
+							if (redirector.established && !posSet.contains(redirector.getPos()))
 							{
-								for (EnumFacing facing : EnumFacing.values())
+								posSet.add(redirector.getPos());
+
+								if (redirector.targets.isEmpty())
 								{
-									redirector.targets.put(redirector.getPos().offset(facing), redirector.getPos().offset(facing.getOpposite()));
+									for (EnumFacing facing : EnumFacing.values())
+									{
+										redirector.targets.put(redirector.getPos().offset(facing), redirector.getPos().offset(facing.getOpposite()));
+									}
 								}
-							}
 
-							if (redirector.targets.containsKey(pos))
-							{
-								BlockPos switched = redirector.targets.get(pos);
-
-								if (!access.isAirBlock(switched))
+								if (redirector.targets.containsKey(pos))
 								{
-									return getSwitchedPosition(access, switched);
+									BlockPos switched = redirector.targets.get(pos);
+
+									if (!access.isAirBlock(switched))
+									{
+										return getSwitchedPosition(access, switched);
+									}
 								}
 							}
 						}
