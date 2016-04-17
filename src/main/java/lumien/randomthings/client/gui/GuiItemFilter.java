@@ -18,8 +18,6 @@ import net.minecraft.world.World;
 public class GuiItemFilter extends GuiContainer
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/itemFilter.png");
-	EntityPlayer player;
-	ItemStack itemFilter;
 
 	GuiCustomButton metadataButton;
 	GuiCustomButton oreDictButton;
@@ -34,10 +32,6 @@ public class GuiItemFilter extends GuiContainer
 
 		xSize = 220;
 		ySize = 133;
-
-
-		this.player = player;
-		this.itemFilter = player.getHeldItemMainhand();
 
 		repres = ((ContainerItemFilter) this.inventorySlots).repres;
 	}

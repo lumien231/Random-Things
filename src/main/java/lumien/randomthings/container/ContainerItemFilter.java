@@ -80,7 +80,7 @@ public class ContainerItemFilter extends Container
 
 		for (int i = 0; i < 9; i++)
 		{
-			if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getHeldItemMainhand())
+			if (inventoryPlayer.getStackInSlot(i) == filterStack)
 			{
 				addSlotToContainer(new SlotDisplay(inventoryPlayer, i, 8 + i * 18, 109));
 			}

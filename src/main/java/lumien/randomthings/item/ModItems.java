@@ -31,6 +31,7 @@ public class ModItems
 	public static ItemSpectreKey spectreKey;
 	public static ItemSoundRecorder soundRecorder;
 	public static ItemRedstoneActivator redstoneActivator;
+	public static ItemRedstoneRemote redstoneRemote;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -59,6 +60,7 @@ public class ModItems
 		spectreKey = new ItemSpectreKey();
 		//soundRecorder = new ItemSoundRecorder(); REMOVE FOR NOW
 		redstoneActivator = new ItemRedstoneActivator();
+		redstoneRemote = new ItemRedstoneRemote();
 
 		grassSeeds = new ItemGrassSeeds();
 	}
