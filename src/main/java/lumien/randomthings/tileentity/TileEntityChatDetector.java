@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
@@ -134,11 +135,9 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable,
 			UUID sendUUID = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(user).getGameProfile().getId();
 			if (sendUUID.equals(this.playerUUID))
 			{
-				if (this instanceof Environment)
+				if (Loader.isModLoaded("OpenComputers"))
 				{
-					Environment environment = (Environment) this;
-
-					environment.node().sendToReachable("computer.signal", "chatMessage", user, sendMessage);
+					ocSignal(user, sendMessage);
 				}
 
 				if (this.chatMessage.equals(sendMessage))
@@ -157,6 +156,16 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable,
 			}
 		}
 		return false;
+	}
+
+	private void ocSignal(String user, String sendMessage)
+	{
+		if (this instanceof Environment)
+		{
+			Environment environment = (Environment) this;
+
+			environment.node().sendToReachable("computer.signal", "chatMessage", user, sendMessage);
+		}
 	}
 
 	@Override
