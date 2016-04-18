@@ -3,6 +3,7 @@ package lumien.randomthings.tileentity;
 import java.util.List;
 
 import lumien.randomthings.block.BlockItemCollector;
+import lumien.randomthings.config.Numbers;
 import lumien.randomthings.item.ItemItemFilter;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.block.state.IBlockState;
@@ -26,8 +27,6 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 	int rangeX = 5;
 	int rangeY = 5;
 	int rangeZ = 5;
-
-	static final int MAX_RANGE = 10;
 
 	InventoryBasic filterInventory;
 
@@ -140,9 +139,9 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 		{
 			this.rangeX = 0;
 		}
-		else if (this.rangeX > MAX_RANGE)
+		else if (this.rangeX > Numbers.ADVANCED_ITEM_COLLECTOR_MAX_RANGE)
 		{
-			this.rangeX = MAX_RANGE;
+			this.rangeX = Numbers.ADVANCED_ITEM_COLLECTOR_MAX_RANGE;
 		}
 
 		IBlockState state = this.worldObj.getBlockState(this.pos);
@@ -162,9 +161,9 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 		{
 			this.rangeY = 0;
 		}
-		else if (this.rangeY > MAX_RANGE)
+		else if (this.rangeY > Numbers.ADVANCED_ITEM_COLLECTOR_MAX_RANGE)
 		{
-			this.rangeY = MAX_RANGE;
+			this.rangeY = Numbers.ADVANCED_ITEM_COLLECTOR_MAX_RANGE;
 		}
 
 		IBlockState state = this.worldObj.getBlockState(this.pos);
@@ -184,9 +183,9 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 		{
 			this.rangeZ = 0;
 		}
-		else if (this.rangeZ > MAX_RANGE)
+		else if (this.rangeZ > Numbers.ADVANCED_ITEM_COLLECTOR_MAX_RANGE)
 		{
-			this.rangeZ = MAX_RANGE;
+			this.rangeZ = Numbers.ADVANCED_ITEM_COLLECTOR_MAX_RANGE;
 		}
 
 		IBlockState state = this.worldObj.getBlockState(this.pos);

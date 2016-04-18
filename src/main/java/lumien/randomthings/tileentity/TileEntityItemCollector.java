@@ -3,6 +3,7 @@ package lumien.randomthings.tileentity;
 import java.util.List;
 
 import lumien.randomthings.block.BlockItemCollector;
+import lumien.randomthings.config.Numbers;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -17,8 +18,6 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 {
 	int currentTickRate = 20;
 	int counter = 0;
-
-	static int RANGE = 3;
 
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)
@@ -42,7 +41,7 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 			{
 				counter = 0;
 
-				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-RANGE, -RANGE, -RANGE), this.pos.add(RANGE + 1, RANGE + 1, RANGE + 1)));
+				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE), this.pos.add(Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1)));
 
 				if (entityItemList.isEmpty())
 				{

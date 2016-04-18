@@ -18,4 +18,10 @@ public class Numbers
 
 	@ConfigOption(category = "Numbers", name = "SpiritChanceEndIncrease", comment = "How much does the chance of a spirit spawning increase after the ender dragon is defeated? (0.07 = 7%)")
 	public static double SPIRIT_CHANCE_END_INCREASE = 0.07;
+
+	@ConfigOption(category = "Numbers",name = "AdvancedItemCollectorMaxRange",comment = "The maximum radius an advanced item collector can be configured to have")
+	public static int ADVANCED_ITEM_COLLECTOR_MAX_RANGE = 10;
+	
+	@ConfigOption(category = "Numbers",name = "ItemCollectorRange",comment = "The radius of a normal item collector")
+	public static int ITEM_COLLECTOR_RANGE = 3;
 }
