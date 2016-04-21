@@ -104,12 +104,12 @@ public class BlockBeanStalk extends BlockBase
 			{
 				if (!worldIn.isAirBlock(pos.up()))
 				{
-					worldIn.playSound(null,pos, worldIn.getBlockState(pos.up()).getBlock().getSoundType().getBreakSound(),SoundCategory.BLOCKS, 1, 1f);
+					worldIn.playAuxSFX(2001, pos.up(), Block.getStateId(upState));
 				}
 				else
 				{
-					worldIn.playSound(null,pos, this.getSoundType().getBreakSound(),SoundCategory.BLOCKS, 1, 2);
-				}
+					worldIn.playAuxSFX(2001, pos, Block.getStateId(this.getDefaultState()));
+					worldIn.playSound(null,pos, this.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 2);				}
 				
 				worldIn.playAuxSFX(2005, pos.up(), 0);
 				worldIn.setBlockState(pos.up(), this.getDefaultState());
