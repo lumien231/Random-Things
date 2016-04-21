@@ -119,6 +119,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemSealer), "ala","ccc","ccc",'c',"cobblestone",'a',"gemLapis",'l',ModBlocks.superLubricentIce));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemRejuvenator), "wlw","ccc","ccc",'c',"cobblestone",'w',Blocks.WOOL,'l',ModBlocks.superLubricentIce));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.superLubricentPlatform, 6), "iii", "xex", 'i', ModBlocks.superLubricentIce, 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.filteredItemRedirector), "xpx","xrx","xsx",'p',paper,'r',ModBlocks.itemRedirector,'s',Items.STRING));
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.HOPPER, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));

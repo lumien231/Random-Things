@@ -49,6 +49,7 @@ public class ModBlocks
 	public static BlockItemRedirector itemRedirector;
 	public static BlockItemRejuvenator itemRejuvenator;
 	public static BlockSuperLubricentPlatform superLubricentPlatform;
+	public static BlockFilteredItemRedirector filteredItemRedirector;
 	
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
@@ -113,6 +114,7 @@ public class ModBlocks
 		itemRedirector = new BlockItemRedirector();
 		itemRejuvenator = new BlockItemRejuvenator();
 		superLubricentPlatform = new BlockSuperLubricentPlatform();
+		filteredItemRedirector = new BlockFilteredItemRedirector();
 		
 		itemCollector = new BlockItemCollector();
 		advancedItemCollector = new BlockAdvancedItemCollector();

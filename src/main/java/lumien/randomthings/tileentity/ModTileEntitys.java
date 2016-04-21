@@ -35,7 +35,8 @@ public class ModTileEntitys
 		registerTE(TileEntityLightRedirector.class, "lightRedirector");
 		registerTE(TileEntityItemSealer.class, "itemSealer");
 		registerTE(TileEntityItemCorrector.class, "itemCorrector");
-		registerTE(TileEntityItemRejuvenator.class,"itemRejuvenator");
+		registerTE(TileEntityItemRejuvenator.class, "itemRejuvenator");
+		registerTE(TileEntityFilteredItemRedirector.class, "filteredItemRedirector");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

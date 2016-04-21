@@ -3,11 +3,11 @@
     "textures": {
             "particle": "minecraft:blocks/obsidian",
             "down": "minecraft:blocks/obsidian",
-            "up": "minecraft:blocks/obsidian",
+            "up": "randomthings:blocks/filteredItemRedirector/up",
             "north": "randomthings:blocks/itemRedirectorInput",
-            "east": "minecraft:blocks/obsidian",
-            "south": "minecraft:blocks/obsidian",
-            "west": "minecraft:blocks/obsidian"
+            "south" : "randomthings:blocks/itemRedirectorOutput",
+            "east" : "randomthings:blocks/filteredItemRedirector/left",
+            "west" : "randomthings:blocks/filteredItemRedirector/right"
         },
     "display": {
         "thirdperson": {
