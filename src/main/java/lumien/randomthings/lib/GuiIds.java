@@ -19,7 +19,7 @@ public class GuiIds
 	public static final int ADVANCED_ITEM_COLLECTOR = 15;
 	public static final int ADVANCED_REDSTONE_INTERFACE = 16;
 	public static final int FILTERED_ITEM_REDIRECTOR = 17;
-	
 	public static final int REDSTONE_REMOTE_EDIT = 17;
 	public static final int REDSTONE_REMOTE_USE = 18;
+	public static final int FILTERED_SUPERLUBRICENT_PLATFORM = 19;
 }

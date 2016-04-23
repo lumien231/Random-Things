@@ -8,18 +8,18 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityFilteredItemRedirector extends TileEntityBase implements IInvBasic
+public class TileEntityFilteredSuperLubricentPlatform extends TileEntityBase implements IInvBasic
 {
-	ItemFilterRepresentation[] repres;
+	ItemFilterRepresentation repres;
 
 	InventoryBasic filterInventory;
 
 	boolean reading;
-
-	public TileEntityFilteredItemRedirector()
+	
+	public TileEntityFilteredSuperLubricentPlatform()
 	{
-		filterInventory = new InventoryBasic("FilteredItemRedirector", false, 2);
-		repres = new ItemFilterRepresentation[2];
+		filterInventory = new InventoryBasic("FilteredSuperLubricentPlatform", false, 1);
+		repres = null;
 		filterInventory.addInventoryChangeListener(this);
 	}
 
@@ -47,7 +47,7 @@ public class TileEntityFilteredItemRedirector extends TileEntityBase implements 
 		reading = false;
 	}
 
-	public ItemFilterRepresentation[] getRepres()
+	public ItemFilterRepresentation getRepres()
 	{
 		return repres;
 	}
@@ -55,25 +55,15 @@ public class TileEntityFilteredItemRedirector extends TileEntityBase implements 
 	@Override
 	public void onInventoryChanged(InventoryBasic inventory)
 	{
-		ItemStack f1 = inventory.getStackInSlot(0);
-		ItemStack f2 = inventory.getStackInSlot(1);
+		ItemStack filter = inventory.getStackInSlot(0);
 
-		if (f1 != null)
+		if (filter != null)
 		{
-			repres[0] = ItemFilterRepresentation.readFromItemStack(f1);
+			repres = ItemFilterRepresentation.readFromItemStack(filter);
 		}
 		else
 		{
-			repres[0] = null;
-		}
-
-		if (f2 != null)
-		{
-			repres[1] = ItemFilterRepresentation.readFromItemStack(f2);
-		}
-		else
-		{
-			repres[1] = null;
+			repres = null;
 		}
 		
 		if (!reading)

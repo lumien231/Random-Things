@@ -63,6 +63,7 @@ public class ItemModels
 		registerBlock(ModBlocks.itemRejuvenator);
 		registerBlock(ModBlocks.superLubricentPlatform);
 		registerBlock(ModBlocks.filteredItemRedirector);
+		registerBlock(ModBlocks.filteredSuperLubricentPlatform);
 		
 		registerBlock(ModBlocks.itemCollector);
 		registerBlock(ModBlocks.advancedItemCollector);

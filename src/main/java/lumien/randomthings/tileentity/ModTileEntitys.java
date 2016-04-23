@@ -37,6 +37,7 @@ public class ModTileEntitys
 		registerTE(TileEntityItemCorrector.class, "itemCorrector");
 		registerTE(TileEntityItemRejuvenator.class, "itemRejuvenator");
 		registerTE(TileEntityFilteredItemRedirector.class, "filteredItemRedirector");
+		registerTE(TileEntityFilteredSuperLubricentPlatform.class,"filteredSuperLubricentPlatform");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

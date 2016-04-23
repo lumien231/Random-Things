@@ -29,7 +29,6 @@ public class ContainerItemFilter extends Container
 			using = EnumHand.OFF_HAND;
 		}
 
-
 		if (filterStack != null && filterStack.getItem() == ModItems.itemFilter)
 		{
 			repres = ItemItemFilter.ItemFilterRepresentation.readFromItemStack(filterStack);
