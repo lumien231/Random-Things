@@ -99,6 +99,10 @@ public class BlockSuperLubricentPlatform extends BlockBase
 				}
 			}
 		}
+		else
+		{
+			return;
+		}
 
 		super.addCollisionBoxToList(state, worldIn, pos, mask, list, collidingEntity);
 	}
