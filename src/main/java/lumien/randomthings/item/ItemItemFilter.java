@@ -52,10 +52,10 @@ public class ItemItemFilter extends ItemBase
 					InventoryUtil.readInventoryFromCompound(inventoryCompound, representation.filterInventory);
 				}
 
-				representation.metadata = compound.getBoolean("metadata");
-				representation.oreDict = compound.getBoolean("oreDict");
-				representation.nbt = compound.getBoolean("nbt");
-				representation.listType = compound.getInteger("listType");
+				representation.metadata = compound.hasKey("metadata") ? compound.getBoolean("metadata") : representation.metadata;
+				representation.oreDict = compound.hasKey("oreDict") ?compound.getBoolean("oreDict") : representation.oreDict;
+				representation.nbt = compound.hasKey("nbt") ?compound.getBoolean("nbt") : representation.nbt;
+				representation.listType = compound.hasKey("listType") ? compound.getInteger("listType") : representation.listType;
 			}
 
 			return representation;
