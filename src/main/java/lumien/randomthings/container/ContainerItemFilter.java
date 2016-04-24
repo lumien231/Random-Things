@@ -48,10 +48,46 @@ public class ContainerItemFilter extends Container
 
 		bindPlayerInventory(player.inventory);
 	}
+	
+	@Override
+	public boolean canMergeSlot(ItemStack stack, Slot slotIn)
+	{
+		return false;
+	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
+		ItemStack itemstack = null;
+		Slot slot = this.inventorySlots.get(par2);
+
+		if (slot != null && slot.getHasStack())
+		{
+			ItemStack itemstack1 = slot.getStack();
+
+			if (par2 < 9)
+			{
+				return null;
+			}
+			else
+			{
+				for (int i = 0; i < 9; i++)
+				{
+					Slot s = this.inventorySlots.get(i);
+					ItemStack ghostItem = s.getStack();
+					
+					if (ghostItem == null)
+					{
+						itemstack = itemstack1.copy();
+						itemstack.stackSize = 1;
+						
+						s.putStack(itemstack);
+						return null;
+					}
+				}
+			}
+		}
+
 		return null;
 	}
 

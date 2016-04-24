@@ -113,11 +113,8 @@ public class BlockFilteredSuperLubricentPlatform extends BlockContainerBase
 
 				if (repres != null && repres.matchesItemStack(ei.getEntityItem()))
 				{
-					System.out.println("Matches");
 					return;
 				}
-				
-				System.out.println("No Matches");
 			}
 			
 			if (collidingEntity.posY < pos.getY() + 14F / 16F)
