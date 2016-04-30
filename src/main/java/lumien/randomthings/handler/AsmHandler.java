@@ -40,6 +40,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -72,6 +73,11 @@ public class AsmHandler
 		{
 			getFields();
 		}
+	}
+
+	public static boolean shouldPlayerDrop(InventoryPlayer inventory, int slot, ItemStack item)
+	{
+		return !(item.hasTagCompound() && item.getTagCompound().hasKey("spectreAnchor"));
 	}
 
 	@SideOnly(Side.CLIENT)

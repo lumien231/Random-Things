@@ -98,7 +98,71 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchEntityRenderer(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.entity.player.InventoryPlayer"))
+		{
+			return patchInventoryPlayer(basicClass);
+		}
+
 		return basicClass;
+	}
+
+	private byte[] patchInventoryPlayer(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found InventoryPlayer Class: " + classNode.name);
+
+		MethodNode dropAllItems = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_70436_m")))
+			{
+				dropAllItems = mn;
+				break;
+			}
+		}
+
+		if (dropAllItems != null)
+		{
+			logger.log(Level.DEBUG, " - Found dropAllItems (1/2)");
+			for (int i = 0; i < dropAllItems.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = dropAllItems.instructions.get(i);
+
+				if (ain instanceof JumpInsnNode)
+				{
+					JumpInsnNode jin = (JumpInsnNode) ain;
+
+					if (jin.getOpcode()==Opcodes.IFNULL)
+					{
+						LabelNode l0 = jin.label;
+						
+						InsnList toInsert = new InsnList();
+
+						toInsert.add(new VarInsnNode(ALOAD, 0));
+						toInsert.add(new VarInsnNode(ILOAD, 5));
+						toInsert.add(new VarInsnNode(ALOAD, 4));
+						toInsert.add(new VarInsnNode(ILOAD, 5));
+						toInsert.add(new InsnNode(AALOAD));
+						toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "shouldPlayerDrop", "(Lnet/minecraft/entity/player/InventoryPlayer;ILnet/minecraft/item/ItemStack;)Z"));
+						toInsert.add(new JumpInsnNode(IFEQ, l0));
+						
+						dropAllItems.instructions.insert(jin, toInsert);
+						
+						i+=7;
+						
+						logger.log(Level.DEBUG, " - Patched dropAllItems (2/2)");
+					}
+				}
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchLiquidBlock(byte[] basicClass)

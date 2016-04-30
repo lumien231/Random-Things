@@ -7,6 +7,8 @@ import java.util.Set;
 
 import org.apache.logging.log4j.Level;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
+
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockContactButton;
 import lumien.randomthings.block.BlockContactLever;
@@ -45,8 +47,11 @@ import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -67,6 +72,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfo.Overlay;
@@ -85,6 +91,9 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
@@ -116,6 +125,31 @@ public class RTEventHandler
 			MessageSoundRecorder message = new MessageSoundRecorder(event.getName());
 
 			PacketHandler.INSTANCE.sendToServer(message);
+		}
+	}
+
+	@SubscribeEvent
+	public void playerClone(PlayerEvent.Clone event)
+	{
+		if (event.isWasDeath() && !event.getEntityPlayer().worldObj.getGameRules().getBoolean("keepInventory"))
+		{
+			EntityPlayer oldPlayer = event.getOriginal();
+			EntityPlayer newPlayer = event.getEntityPlayer();
+
+			for (int i = 0; i < oldPlayer.inventory.getSizeInventory(); i++)
+			{
+				ItemStack is = oldPlayer.inventory.getStackInSlot(i);
+
+				if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("spectreAnchor"))
+				{
+					ItemStack newIs = newPlayer.inventory.getStackInSlot(i);
+
+					if (newIs == null)
+					{
+						newPlayer.inventory.setInventorySlotContents(i, is.copy());
+					}
+				}
+			}
 		}
 	}
 
@@ -322,6 +356,16 @@ public class RTEventHandler
 					event.setCanceled(true);
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void itemTooltip(ItemTooltipEvent event)
+	{
+		if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("spectreAnchor"))
+		{
+			event.getToolTip().add(1, TextFormatting.DARK_AQUA.toString() + I18n.format("tooltip.spectreAnchor.item") + TextFormatting.RESET.toString());
 		}
 	}
 

@@ -132,6 +132,7 @@ item.spectreKey.name=Spectre Key
 item.soundRecorder.name=Sound Recorder
 item.redstoneActivator.name=Redstone Activator
 item.redstoneRemote.name=Redstone Remote
+item.spectreAnchor.name=Spectre Anchor
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -185,6 +186,8 @@ tooltip.itemFilter.nbt=Check NBT
 tooltip.itemFilter.nonbt=Ignore NBT
 tooltip.itemFilter.whitelist=Whitelist
 tooltip.itemFilter.blacklist=Blacklist
+
+tooltip.spectreAnchor.item=Anchored
 
 gui.basicRedstoneInterface.notarget=No Target
 gui.basicRedstoneInterface.targetX=Target-X: %s
