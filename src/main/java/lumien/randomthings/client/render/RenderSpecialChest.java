@@ -28,7 +28,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 	}
 
 	public void func_180538_a(TileEntitySpecialChest p_180538_1_, double p_180538_2_, double p_180538_4_, double p_180538_6_, float p_180538_8_, int p_180538_9_)
-	{	
+	{
 		switch (p_180538_1_.getChestType())
 		{
 			case 0:
@@ -39,7 +39,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 				break;
 		}
 		int j;
-		
+
 		if (!p_180538_1_.hasWorldObj())
 		{
 			j = 0;

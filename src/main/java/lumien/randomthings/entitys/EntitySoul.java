@@ -34,7 +34,6 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		super(worldObj);
 
 		this.setSize(0.3F, 0.3F);
-		this.setRenderDistanceWeight(5);
 		this.noClip = true;
 		this.playerName = "";
 	}
@@ -44,6 +43,21 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	public int getBrightnessForRender(float partial)
 	{
 		return 255;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean isInRangeToRenderDist(double distance)
+	{
+		double d0 = this.getEntityBoundingBox().getAverageEdgeLength();
+
+        if (Double.isNaN(d0))
+        {
+            d0 = 1.0D;
+        }
+
+        d0 = d0 * 64.0D * 5;
+        return distance < d0 * d0;
 	}
 
 	public EntitySoul(World worldObj, double posX, double posY, double posZ, String playerName)

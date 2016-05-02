@@ -10,6 +10,8 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityReviveCircle extends Entity
 {
@@ -23,7 +25,6 @@ public class EntityReviveCircle extends Entity
 
 		age = 0;
 		this.noClip = true;
-		this.setRenderDistanceWeight(5);
 		this.ignoreFrustumCheck = true;
 	}
 
@@ -34,9 +35,23 @@ public class EntityReviveCircle extends Entity
 		this.setPosition(posX, posY, posZ);
 		this.toRevive = toRevive;
 		this.noClip = true;
-		this.setRenderDistanceWeight(5);
 		this.ignoreFrustumCheck = true;
 		this.reviver = reviver;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean isInRangeToRenderDist(double distance)
+	{
+		double d0 = this.getEntityBoundingBox().getAverageEdgeLength();
+
+        if (Double.isNaN(d0))
+        {
+            d0 = 1.0D;
+        }
+
+        d0 = d0 * 64.0D * 5;
+        return distance < d0 * d0;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.apache.logging.log4j.Level;
 
@@ -76,6 +77,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfo.Overlay;
+import net.minecraft.world.BossInfoServer;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.ModelBakeEvent;
