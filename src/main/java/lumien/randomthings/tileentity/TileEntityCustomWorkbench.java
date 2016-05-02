@@ -20,6 +20,16 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 		this.woodMeta = 0;
 		this.woodState = Blocks.PLANKS.getDefaultState();
 	}
+	
+	public int getWoodMeta()
+	{
+		return woodMeta;
+	}
+	
+	public Block getWoodMaterial()
+	{
+		return woodMaterial;
+	}
 
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)

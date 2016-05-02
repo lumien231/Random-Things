@@ -1,9 +1,11 @@
 package lumien.randomthings.block;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lumien.randomthings.container.ContainerCustomWorkbench;
 import lumien.randomthings.tileentity.TileEntityCustomWorkbench;
+import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -26,6 +28,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
@@ -47,6 +50,47 @@ public class BlockCustomWorkbench extends BlockContainerBase
 
 		this.setHardness(2.5F);
 		this.setSoundType(SoundType.WOOD);
+	}
+	
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	{
+		TileEntityCustomWorkbench te = (TileEntityCustomWorkbench) world.getTileEntity(pos);
+		String woodName = te.getWoodMaterial().getRegistryName().toString();
+		int meta = te.getWoodMeta();
+
+		ItemStack pickedWorkbench = new ItemStack(this);
+		NBTTagCompound compound;
+		pickedWorkbench.setTagCompound(compound = new NBTTagCompound());
+
+		compound.setString("woodName", woodName);
+		compound.setInteger("woodMeta", meta);
+		
+		return pickedWorkbench;
+	}
+	
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	{
+		return new ArrayList<ItemStack>();
+	}
+	
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntityCustomWorkbench te = (TileEntityCustomWorkbench) worldIn.getTileEntity(pos);
+		String woodName = te.getWoodMaterial().getRegistryName().toString();
+		int meta = te.getWoodMeta();
+
+		ItemStack droppedWorkbench = new ItemStack(this);
+		NBTTagCompound compound;
+		droppedWorkbench.setTagCompound(compound = new NBTTagCompound());
+
+		compound.setString("woodName", woodName);
+		compound.setInteger("woodMeta", meta);
+		
+		WorldUtil.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), droppedWorkbench);
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
