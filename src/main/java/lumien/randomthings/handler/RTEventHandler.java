@@ -117,20 +117,6 @@ public class RTEventHandler
 	static Random rng = new Random();
 
 	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void soundSourceEvent(SoundSourceEvent event)
-	{
-		ItemStack currentlyEquipped;
-
-		if (event.getName() != null && ModItems.soundRecorder != null && Minecraft.getMinecraft().thePlayer != null && (currentlyEquipped = Minecraft.getMinecraft().thePlayer.getHeldItemMainhand()) != null && currentlyEquipped.getItem() == ModItems.soundRecorder)
-		{
-			MessageSoundRecorder message = new MessageSoundRecorder(event.getName());
-
-			PacketHandler.INSTANCE.sendToServer(message);
-		}
-	}
-
-	@SubscribeEvent
 	public void playerClone(PlayerEvent.Clone event)
 	{
 		if (event.isWasDeath() && !event.getEntityPlayer().worldObj.getGameRules().getBoolean("keepInventory"))
