@@ -29,7 +29,6 @@ public class ModItems
 	public static ItemIngredient ingredients;
 	public static ItemItemFilter itemFilter;
 	public static ItemSpectreKey spectreKey;
-	public static ItemSoundRecorder soundRecorder;
 	public static ItemRedstoneActivator redstoneActivator;
 	public static ItemRedstoneRemote redstoneRemote;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -59,7 +58,6 @@ public class ModItems
 		ingredients = new ItemIngredient();
 		itemFilter = new ItemItemFilter();
 		spectreKey = new ItemSpectreKey();
-		//soundRecorder = new ItemSoundRecorder(); REMOVE FOR NOW
 		redstoneActivator = new ItemRedstoneActivator();
 		redstoneRemote = new ItemRedstoneRemote();
 		spectreAnchor = new ItemSpectreAnchor();
