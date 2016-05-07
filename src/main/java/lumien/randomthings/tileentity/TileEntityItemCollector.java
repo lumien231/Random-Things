@@ -4,6 +4,7 @@ import java.util.List;
 
 import lumien.randomthings.block.BlockItemCollector;
 import lumien.randomthings.config.Numbers;
+import net.minecraft.command.EntitySelector;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -11,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
@@ -41,7 +43,7 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 			{
 				counter = 0;
 
-				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE), this.pos.add(Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1)));
+				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE), this.pos.add(Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1)), EntitySelectors.IS_ALIVE);
 
 				if (entityItemList.isEmpty())
 				{

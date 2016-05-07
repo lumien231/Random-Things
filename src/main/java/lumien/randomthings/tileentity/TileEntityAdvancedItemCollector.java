@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
@@ -81,7 +82,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 			{
 				counter = 0;
 
-				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-rangeX, -rangeY, -rangeZ), this.pos.add(rangeX + 1, rangeY + 1, rangeZ + 1)));
+				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-rangeX, -rangeY, -rangeZ), this.pos.add(rangeX + 1, rangeY + 1, rangeZ + 1)), EntitySelectors.IS_ALIVE);
 
 				if (entityItemList.isEmpty())
 				{
