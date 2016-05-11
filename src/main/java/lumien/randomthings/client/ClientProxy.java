@@ -25,6 +25,7 @@ import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.lib.IRTItemColor;
+import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityAdvancedRedstoneInterface;
@@ -287,6 +288,24 @@ public class ClientProxy extends CommonProxy
 								worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 								worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 							}
+						}
+					}
+				}
+			}
+
+			for (TileEntityRedstoneObserver redstoneObserver : TileEntityRedstoneObserver.observer)
+			{
+				if (!redstoneObserver.isInvalid())
+				{
+					BlockPos target = redstoneObserver.getTarget();
+					BlockPos position = redstoneObserver.getPos();
+
+					if (target != null)
+					{
+						if (target.distanceSq(player.getPosition()) < 225)
+						{
+							worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
+							worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 						}
 					}
 				}

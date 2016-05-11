@@ -47,6 +47,7 @@ tile.itemRejuvenator.name=Item Rejuvenator
 tile.superLubricentPlatform.name=Super Lubricent Platform
 tile.filteredItemRedirector.name=Filtered Item Redirector
 tile.filteredSuperLubricentPlatform.name=Filtered Super Lubricent Platform
+tile.redstoneObserver.name=Redstone Observer
 
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector

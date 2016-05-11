@@ -51,6 +51,7 @@ public class ModBlocks
 	public static BlockSuperLubricentPlatform superLubricentPlatform;
 	public static BlockFilteredItemRedirector filteredItemRedirector;
 	public static BlockFilteredSuperLubricentPlatform filteredSuperLubricentPlatform;
+	public static BlockRedstoneObserver redstoneObserver;
 	
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
@@ -117,6 +118,7 @@ public class ModBlocks
 		superLubricentPlatform = new BlockSuperLubricentPlatform();
 		filteredItemRedirector = new BlockFilteredItemRedirector();
 		filteredSuperLubricentPlatform = new BlockFilteredSuperLubricentPlatform();
+		redstoneObserver = new BlockRedstoneObserver();
 		
 		itemCollector = new BlockItemCollector();
 		advancedItemCollector = new BlockAdvancedItemCollector();

@@ -1,6 +1,7 @@
 package lumien.randomthings.item;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -51,7 +52,7 @@ public class ItemRedstoneTool extends ItemBase
 
 		if (!stack.hasTagCompound())
 		{
-			if (state.getBlock() == ModBlocks.basicRedstoneInterface)
+			if (state.getBlock() == ModBlocks.basicRedstoneInterface || state.getBlock() == ModBlocks.redstoneObserver)
 			{
 				stack.setTagCompound(new NBTTagCompound());
 			}
@@ -70,12 +71,18 @@ public class ItemRedstoneTool extends ItemBase
 			BlockPos linkingTo = new BlockPos(compound.getInteger("oX"), compound.getInteger("oY"), compound.getInteger("oZ"));
 			if (!linkingTo.equals(pos))
 			{
-				IBlockState redstoneInterfaceState = worldIn.getBlockState(linkingTo);
-				if (redstoneInterfaceState.getBlock() == ModBlocks.basicRedstoneInterface)
+				IBlockState linkingState = worldIn.getBlockState(linkingTo);
+				if (linkingState.getBlock() == ModBlocks.basicRedstoneInterface)
 				{
 					TileEntityBasicRedstoneInterface redstoneInterface = (TileEntityBasicRedstoneInterface) worldIn.getTileEntity(linkingTo);
 
 					redstoneInterface.setTarget(pos);
+				}
+				else if (linkingState.getBlock() == ModBlocks.redstoneObserver)
+				{
+					TileEntityRedstoneObserver redstoneObserver = (TileEntityRedstoneObserver) worldIn.getTileEntity(linkingTo);
+
+					redstoneObserver.setTarget(pos);
 				}
 			}
 			compound.setBoolean("linking", false);
@@ -83,16 +90,16 @@ public class ItemRedstoneTool extends ItemBase
 		}
 		else
 		{
-			if (state.getBlock() == ModBlocks.basicRedstoneInterface)
+			if (state.getBlock() == ModBlocks.basicRedstoneInterface || state.getBlock() == ModBlocks.redstoneObserver)
 			{
 				compound.setBoolean("linking", true);
 				compound.setInteger("oX", pos.getX());
 				compound.setInteger("oY", pos.getY());
 				compound.setInteger("oZ", pos.getZ());
-				return EnumActionResult.SUCCESS.SUCCESS;
+				return EnumActionResult.SUCCESS;
 			}
 		}
 
-		return EnumActionResult.SUCCESS.FAIL;
+		return EnumActionResult.FAIL;
 	}
 }

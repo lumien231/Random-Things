@@ -4,11 +4,8 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 import org.apache.logging.log4j.Level;
-
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockContactButton;
@@ -26,13 +23,12 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.lib.IExplosionImmune;
-import lumien.randomthings.network.PacketHandler;
-import lumien.randomthings.network.messages.MessageSoundRecorder;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.anvil.AnvilRecipe;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
+import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.client.RenderUtils;
@@ -51,8 +47,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -77,7 +71,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfo.Overlay;
-import net.minecraft.world.BossInfoServer;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -85,7 +78,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.client.event.sound.SoundEvent.SoundSourceEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.ServerChatEvent;
@@ -94,12 +86,12 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
@@ -205,6 +197,12 @@ public class RTEventHandler
 
 			// BossStatus.setBossStatus(displayData, false); TODO
 		}
+	}
+	
+	@SubscribeEvent
+	public void notifyNeighbors(NeighborNotifyEvent event)
+	{
+		TileEntityRedstoneObserver.notifyNeighbor(event);
 	}
 
 	@SubscribeEvent
