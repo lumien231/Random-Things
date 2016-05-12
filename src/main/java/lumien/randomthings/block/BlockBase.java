@@ -4,6 +4,7 @@ import lumien.randomthings.RandomThings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public abstract class BlockBase extends Block
@@ -13,9 +14,10 @@ public abstract class BlockBase extends Block
 		super(materialIn);
 
 		this.setUnlocalizedName(name);
+		this.setRegistryName(new ResourceLocation(name));
 		this.setCreativeTab(RandomThings.instance.creativeTab);
 
-		GameRegistry.registerBlock(this, name);
+		GameRegistry.register(this);
 		
 		RandomThings.proxy.scheduleColor(this);
 	}
@@ -25,8 +27,10 @@ public abstract class BlockBase extends Block
 		super(materialIn);
 
 		this.setUnlocalizedName(name);
+		this.setRegistryName(new ResourceLocation(name));
 		this.setCreativeTab(RandomThings.instance.creativeTab);
-		GameRegistry.registerBlock(this, itemBlock, name);
+		
+		GameRegistry.register(this);
 		
 		RandomThings.proxy.scheduleColor(this);
 	}
