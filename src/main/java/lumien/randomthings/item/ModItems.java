@@ -32,6 +32,7 @@ public class ModItems
 	public static ItemRedstoneActivator redstoneActivator;
 	public static ItemRedstoneRemote redstoneRemote;
 	public static ItemSpectreAnchor spectreAnchor;
+	public static ItemSpectreSword spectreSword;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -61,6 +62,7 @@ public class ModItems
 		redstoneActivator = new ItemRedstoneActivator();
 		redstoneRemote = new ItemRedstoneRemote();
 		spectreAnchor = new ItemSpectreAnchor();
+		spectreSword = new ItemSpectreSword();
 
 		grassSeeds = new ItemGrassSeeds();
 	}

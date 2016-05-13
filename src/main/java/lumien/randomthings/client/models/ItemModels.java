@@ -92,6 +92,7 @@ public class ItemModels
 		registerItem(ModItems.redstoneActivator);
 		registerItem(ModItems.redstoneRemote);
 		registerItem(ModItems.spectreAnchor);
+		registerItem(ModItems.spectreSword);
 
 		registerBricks();
 		registerBiomeStone();

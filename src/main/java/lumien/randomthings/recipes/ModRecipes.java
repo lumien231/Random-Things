@@ -149,6 +149,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneActivator), "iri", "iti", "iii", 'i', "ingotIron", 'r', "dustRedstone", 't', redstoneTorch));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneRemote), "aaa", "oso", "ooo", 'a', ModItems.redstoneActivator, 'o', Blocks.OBSIDIAN, 's', stableEnderpearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAnchor), "xix","iei","iii",'i',"ingotIron",'e',ectoPlasm));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx","xsx","xox",'s',spectreIngot,'o',obsidian));
 		
 		// Ingredients
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.EVIL_TEAR.id), "xsx", "xtx", "xex", 's', witherSkull, 't', ghastTear, 'e', enderPearl));

@@ -19,6 +19,7 @@ import lumien.randomthings.config.Features;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
+import lumien.randomthings.item.ItemSpectreSword;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
@@ -324,6 +325,11 @@ public class AsmHandler
 				{
 					return compound.getInteger("enchantmentColor") | -16777216;
 				}
+			}
+			
+			if (currentlyRendering.getItem() instanceof ItemSpectreSword)
+			{
+				return Color.WHITE.darker().darker().getRGB() | -16777216;
 			}
 
 			currentlyRendering = null;

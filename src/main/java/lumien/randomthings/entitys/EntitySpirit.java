@@ -9,9 +9,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -75,6 +77,20 @@ public class EntitySpirit extends EntityFlying
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount)
 	{
+		if (source instanceof EntityDamageSource)
+		{
+			EntityDamageSource eds = (EntityDamageSource) source;
+			if (eds.getDamageType().equals("player") && eds.getEntity() instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) eds.getEntity();
+				
+				ItemStack equipped;
+				if ((equipped = player.getHeldItemMainhand())!=null && equipped.getItem() == ModItems.spectreSword)
+				{
+					return super.attackEntityFrom(source, amount);
+				}
+			}
+		}
 		if (!source.isMagicDamage() && source != DamageSource.outOfWorld && !source.isCreativePlayer())
 		{
 			return false;

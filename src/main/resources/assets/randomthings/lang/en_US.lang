@@ -134,6 +134,7 @@ item.soundRecorder.name=Sound Recorder
 item.redstoneActivator.name=Redstone Activator
 item.redstoneRemote.name=Redstone Remote
 item.spectreAnchor.name=Spectre Anchor
+item.spectreSword.name=Spectre Sword
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
