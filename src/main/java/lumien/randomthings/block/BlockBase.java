@@ -14,11 +14,12 @@ public abstract class BlockBase extends Block
 		super(materialIn);
 
 		this.setUnlocalizedName(name);
-		this.setRegistryName(new ResourceLocation(name));
+		this.setRegistryName(new ResourceLocation("randomthings", name));
 		this.setCreativeTab(RandomThings.instance.creativeTab);
 
 		GameRegistry.register(this);
-		
+		GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+
 		RandomThings.proxy.scheduleColor(this);
 	}
 
@@ -27,11 +28,19 @@ public abstract class BlockBase extends Block
 		super(materialIn);
 
 		this.setUnlocalizedName(name);
-		this.setRegistryName(new ResourceLocation(name));
+		this.setRegistryName(new ResourceLocation("randomthings", name));
 		this.setCreativeTab(RandomThings.instance.creativeTab);
-		
+
 		GameRegistry.register(this);
-		
+		try
+		{
+			GameRegistry.register(itemBlock.getConstructor(Block.class).newInstance(this).setRegistryName(this.getRegistryName()));
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error Registering ItemBlock for " + name);
+			e.printStackTrace();
+		}
 		RandomThings.proxy.scheduleColor(this);
 	}
 }
