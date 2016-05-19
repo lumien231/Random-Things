@@ -195,7 +195,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 		NBTTagList nbttaglist = new NBTTagList();
@@ -219,6 +219,8 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 		}
 
 		compound.setInteger("chestType", chestType);
+		
+		return compound;
 	}
 
 	/**
@@ -491,7 +493,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 	}
 
 	@Override
-	public final Packet getDescriptionPacket()
+	public SPacketUpdateTileEntity getUpdatePacket()
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);

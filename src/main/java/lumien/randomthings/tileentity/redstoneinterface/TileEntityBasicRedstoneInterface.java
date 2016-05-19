@@ -1,21 +1,14 @@
 package lumien.randomthings.tileentity.redstoneinterface;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.WeakHashMap;
-
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.SimpleComponent;
-import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 
@@ -57,25 +50,25 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 			if (oldTarget != null)
 			{
 				IBlockState targetState = worldObj.getBlockState(oldTarget);
-				targetState.getBlock().onNeighborBlockChange(worldObj, oldTarget, targetState, Blocks.REDSTONE_BLOCK);
+				targetState.neighborChanged(worldObj, oldTarget, Blocks.REDSTONE_BLOCK);
 				worldObj.notifyNeighborsOfStateChange(oldTarget, Blocks.REDSTONE_BLOCK);
 			}
 
 			if (this.target != null)
 			{
 				IBlockState targetState = worldObj.getBlockState(target);
-				targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.REDSTONE_BLOCK);
+				targetState.neighborChanged(worldObj, target, Blocks.REDSTONE_BLOCK);
 				worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK);
 			}
 		}
 	}
 
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		if (this.target != null)
 		{
 			IBlockState targetState = worldIn.getBlockState(target);
-			targetState.getBlock().onNeighborBlockChange(worldIn, target, targetState, neighborBlock);
+			targetState.neighborChanged(worldIn, target, neighborBlock);
 			worldIn.notifyNeighborsOfStateChange(target, neighborBlock);
 		}
 	}
@@ -87,7 +80,7 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 		if (this.target != null)
 		{
 			IBlockState targetState = worldObj.getBlockState(target);
-			targetState.getBlock().onNeighborBlockChange(worldObj, target, targetState, Blocks.REDSTONE_BLOCK);
+			targetState.neighborChanged(worldObj, target, Blocks.REDSTONE_BLOCK);
 			worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK);
 		}
 	}

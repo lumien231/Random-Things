@@ -4,17 +4,16 @@ import java.util.List;
 
 import lumien.randomthings.block.BlockItemCollector;
 import lumien.randomthings.config.Numbers;
-import net.minecraft.command.EntitySelector;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 
 public class TileEntityItemCollector extends TileEntityBase implements ITickable
 {

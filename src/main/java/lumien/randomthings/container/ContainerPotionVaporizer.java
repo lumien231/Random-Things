@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnaceFuel;
@@ -279,28 +279,28 @@ public class ContainerPotionVaporizer extends Container
 
 		for (int i = 0; i < this.listeners.size(); ++i)
 		{
-			ICrafting icrafting = this.listeners.get(i);
+			IContainerListener listener = this.listeners.get(i);
 
 			if (lastDurationLeft != potionVaporizer.getDurationLeft())
-				icrafting.sendProgressBarUpdate(this, 0, this.potionVaporizer.getDurationLeft());
+				listener.sendProgressBarUpdate(this, 0, this.potionVaporizer.getDurationLeft());
 
 			if (lastDuration != potionVaporizer.getDuration())
-				icrafting.sendProgressBarUpdate(this, 1, this.potionVaporizer.getDuration());
+				listener.sendProgressBarUpdate(this, 1, this.potionVaporizer.getDuration());
 
 			if (lastColor != potionVaporizer.getColor())
-				icrafting.sendProgressBarUpdate(this, 2, this.potionVaporizer.getColor());
+				listener.sendProgressBarUpdate(this, 2, this.potionVaporizer.getColor());
 
 			if (lastPotionID != potionVaporizer.getPotionID())
-				icrafting.sendProgressBarUpdate(this, 3, this.potionVaporizer.getPotionID());
+				listener.sendProgressBarUpdate(this, 3, this.potionVaporizer.getPotionID());
 
 			if (lastAmplifier != potionVaporizer.getAmplifier())
-				icrafting.sendProgressBarUpdate(this, 4, this.potionVaporizer.getAmplifier());
+				listener.sendProgressBarUpdate(this, 4, this.potionVaporizer.getAmplifier());
 
 			if (lastFuelBurnTime != potionVaporizer.getFuelBurnTime())
-				icrafting.sendProgressBarUpdate(this, 5, this.potionVaporizer.getFuelBurnTime());
+				listener.sendProgressBarUpdate(this, 5, this.potionVaporizer.getFuelBurnTime());
 
 			if (lastFuelBurn != potionVaporizer.getFuelBurn())
-				icrafting.sendProgressBarUpdate(this, 6, this.potionVaporizer.getFuelBurn());
+				listener.sendProgressBarUpdate(this, 6, this.potionVaporizer.getFuelBurn());
 		}
 
 		this.lastDurationLeft = this.potionVaporizer.getDurationLeft();

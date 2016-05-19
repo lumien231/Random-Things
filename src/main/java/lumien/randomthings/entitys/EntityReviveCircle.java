@@ -92,12 +92,12 @@ public class EntityReviveCircle extends Entity
 				{
 					if (player.getHealth() <= 0)
 					{
-						EntityPlayerMP revived = player.playerNetServerHandler.playerEntity = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().recreatePlayerEntity(player, 0, false);
+						EntityPlayerMP revived = player.connection.playerEntity = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().recreatePlayerEntity(player, 0, false);
 						if (revived.worldObj.provider.getDimension() != this.dimension)
 						{
 							FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(revived, this.worldObj.provider.getDimension(), new Teleporter((WorldServer) this.worldObj));
 						}
-						revived.playerNetServerHandler.setPlayerLocation(posX, posY, posZ, revived.rotationYaw, revived.rotationPitch);
+						revived.connection.setPlayerLocation(posX, posY, posZ, revived.rotationYaw, revived.rotationPitch);
 						revived.setPositionAndUpdate(posX, posY, posZ);
 					}
 				}

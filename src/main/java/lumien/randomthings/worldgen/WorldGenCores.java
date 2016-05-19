@@ -13,17 +13,15 @@ import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.BiomeDictionary;
@@ -89,7 +87,7 @@ public class WorldGenCores implements IWorldGenerator
 
 				if (target != null && target.getY() >= 0)
 				{
-					BiomeGenBase biome = world.getBiomeGenForCoords(target);
+					Biome biome = world.getBiomeGenForCoords(target);
 
 					int natureMult = 30;
 					if (BiomeDictionary.isBiomeOfType(biome, Type.DENSE))

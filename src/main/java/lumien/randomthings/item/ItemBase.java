@@ -2,7 +2,6 @@ package lumien.randomthings.item;
 
 import lumien.randomthings.RandomThings;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBase extends Item

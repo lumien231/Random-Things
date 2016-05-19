@@ -1,5 +1,7 @@
 package lumien.randomthings.recipes;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
@@ -13,16 +15,13 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagByte;
-import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import net.minecraftforge.oredict.RecipeSorter.Category;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 public class ModRecipes
 {

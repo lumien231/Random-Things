@@ -29,10 +29,10 @@ public abstract class BlockContainerBase extends BlockBase
 	public abstract TileEntity createTileEntity(World world, IBlockState state);
 
 	@Override
-	public boolean onBlockEventReceived(World worldIn, BlockPos pos, IBlockState state, int eventID, int eventParam)
+	public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)
 	{
-		super.onBlockEventReceived(worldIn, pos, state, eventID, eventParam);
-		TileEntity tileentity = worldIn.getTileEntity(pos);
-		return tileentity == null ? false : tileentity.receiveClientEvent(eventID, eventParam);
+        super.eventReceived(state, worldIn, pos, id, param);
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        return tileentity == null ? false : tileentity.receiveClientEvent(id, param);
 	}
 }

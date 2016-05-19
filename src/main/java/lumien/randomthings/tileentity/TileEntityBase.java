@@ -10,11 +10,13 @@ import net.minecraft.tileentity.TileEntity;
 public abstract class TileEntityBase extends TileEntity
 {
 	@Override
-	public void writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 
 		writeDataToNBT(compound);
+		
+		return compound;
 	}
 
 	@Override
@@ -39,9 +41,22 @@ public abstract class TileEntityBase extends TileEntity
 			this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 		}
 	}
+	
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		NBTTagCompound baseCompound = super.getUpdateTag();
+		
+		if (writeNBTToDescriptionPacket())
+		{
+			this.writeDataToNBT(baseCompound);
+		}
+		
+		return baseCompound;
+	}
 
 	@Override
-	public final Packet getDescriptionPacket()
+	public SPacketUpdateTileEntity getUpdatePacket()
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		if (writeNBTToDescriptionPacket())

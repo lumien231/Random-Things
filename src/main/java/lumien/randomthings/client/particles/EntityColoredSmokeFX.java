@@ -1,6 +1,6 @@
 package lumien.randomthings.client.particles;
 
-import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class EntityColoredSmokeFX extends EntityFX
+public class EntityColoredSmokeFX extends Particle
 {
 	float smokeParticleScale;
 
@@ -21,12 +21,12 @@ public class EntityColoredSmokeFX extends EntityFX
 	public EntityColoredSmokeFX(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double p_i46348_8_, double p_i46348_10_, double p_i46348_12_, float p_i46348_14_)
 	{
 		super(worldIn, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
-		this.xSpeed *= 0.10000000149011612D;
-		this.ySpeed *= 0.10000000149011612D;
-		this.zSpeed *= 0.10000000149011612D;
-		this.xSpeed += p_i46348_8_;
-		this.ySpeed += p_i46348_10_;
-		this.zSpeed += p_i46348_12_;
+		this.motionX *= 0.10000000149011612D;
+		this.motionY *= 0.10000000149011612D;
+		this.motionZ *= 0.10000000149011612D;
+		this.motionX += p_i46348_8_;
+		this.motionY += p_i46348_10_;
+		this.motionZ += p_i46348_12_;
 		this.particleRed = this.particleGreen = this.particleBlue = (float) (Math.random() * 0.30000001192092896D);
 		this.particleScale *= 0.75F;
 		this.particleScale *= p_i46348_14_;
@@ -58,23 +58,23 @@ public class EntityColoredSmokeFX extends EntityFX
 		}
 
 		this.setParticleTextureIndex(7 - this.particleAge * 8 / this.particleMaxAge);
-		this.ySpeed += 0.004D;
-		this.moveEntity(this.xSpeed, this.ySpeed, this.zSpeed);
+		this.motionY += 0.004D;
+		this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
 		if (this.posY == this.prevPosY)
 		{
-			this.xSpeed *= 1.1D;
-			this.zSpeed *= 1.1D;
+			this.motionX *= 1.1D;
+			this.motionZ *= 1.1D;
 		}
 
-		this.xSpeed *= 0.9599999785423279D;
-		this.ySpeed *= 0.9599999785423279D;
-		this.zSpeed *= 0.9599999785423279D;
+		this.motionX *= 0.9599999785423279D;
+		this.motionY *= 0.9599999785423279D;
+		this.motionZ *= 0.9599999785423279D;
 
 		if (this.isCollided)
 		{
-			this.xSpeed *= 0.699999988079071D;
-			this.zSpeed *= 0.699999988079071D;
+			this.motionX *= 0.699999988079071D;
+			this.motionZ *= 0.699999988079071D;
 		}
 	}
 }

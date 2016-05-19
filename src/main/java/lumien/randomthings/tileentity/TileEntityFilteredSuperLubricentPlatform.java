@@ -2,13 +2,13 @@ package lumien.randomthings.tileentity;
 
 import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.util.InventoryUtil;
-import net.minecraft.inventory.IInvBasic;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityFilteredSuperLubricentPlatform extends TileEntityBase implements IInvBasic
+public class TileEntityFilteredSuperLubricentPlatform extends TileEntityBase implements IInventoryChangedListener
 {
 	ItemFilterRepresentation repres;
 

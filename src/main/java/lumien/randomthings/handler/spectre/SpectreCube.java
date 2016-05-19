@@ -7,10 +7,9 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.NBTUtil;
-import lumien.randomthings.util.Size;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInvBasic;
+import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,7 +18,7 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class SpectreCube implements IInvBasic
+public class SpectreCube implements IInventoryChangedListener
 {
 	UUID owner;
 	ArrayList<UUID> guests;

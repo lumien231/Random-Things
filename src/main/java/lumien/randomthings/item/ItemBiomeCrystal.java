@@ -5,8 +5,8 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeColorHelper;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -53,7 +53,7 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 		WorldClient theWorld = FMLClientHandler.instance().getWorldClient();
 		BlockPos pos = new BlockPos(thePlayer.posX, thePlayer.posY, thePlayer.posZ);
 
-		BiomeGenBase biome = theWorld.getBiomeGenForCoords(pos);
+		Biome biome = theWorld.getBiomeGenForCoords(pos);
 		return BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL);
 	}
 }

@@ -89,7 +89,7 @@ public class EnderLetterHandler extends WorldSavedData
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound modNBT)
+	public NBTTagCompound writeToNBT(NBTTagCompound modNBT)
 	{
 		NBTTagCompound compound = modNBT.getCompoundTag("enderLetters");
 
@@ -113,6 +113,8 @@ public class EnderLetterHandler extends WorldSavedData
 		compound.setTag("entryList", nbtList);
 
 		modNBT.setTag("enderLetters", compound);
+		
+		return modNBT;
 	}
 
 	public static class EnderMailboxInventory implements IInventory

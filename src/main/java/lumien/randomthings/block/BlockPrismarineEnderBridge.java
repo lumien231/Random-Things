@@ -38,9 +38,9 @@ public class BlockPrismarineEnderBridge extends BlockContainerBase
 	}
 
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
-		((TileEntityPrismarineEnderBridge) worldIn.getTileEntity(pos)).onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+		((TileEntityPrismarineEnderBridge) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, neighborBlock);
 	}
 
 	@Override

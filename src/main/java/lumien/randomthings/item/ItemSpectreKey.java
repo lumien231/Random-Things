@@ -4,8 +4,8 @@ import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.handler.spectre.SpectreWorldProvider;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -82,10 +82,10 @@ public class ItemSpectreKey extends ItemBase
 	{
 		if (livingEntity.worldObj.isRemote && count < 60)
 		{
-			EntityFX particle;
+			Particle particle;
 			float t = 1F / 255F;
 
-			EntitySmokeFX.Factory factory = new EntitySmokeFX.Factory();
+			ParticleSmokeNormal.Factory factory = new ParticleSmokeNormal.Factory();
 
 			for (int i = 0; i < (60 - count) * 2; i++)
 			{

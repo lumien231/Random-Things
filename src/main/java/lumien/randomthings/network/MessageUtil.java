@@ -1,12 +1,8 @@
 package lumien.randomthings.network;
 
-import java.lang.reflect.Method;
-
 import io.netty.buffer.ByteBuf;
-import lumien.randomthings.asm.MCPNames;
-import net.minecraft.network.Packet;
-import net.minecraft.server.management.PlayerManager;
-import net.minecraft.server.management.PlayerManager.PlayerInstance;
+import net.minecraft.server.management.PlayerChunkMap;
+import net.minecraft.server.management.PlayerChunkMapEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -39,9 +35,9 @@ public class MessageUtil
 			{
 				Chunk c = worldObj.getChunkFromBlockCoords(pos);
 
-				PlayerManager playerManager = ((WorldServer) worldObj).getPlayerChunkMap();
+				PlayerChunkMap playerManager = ((WorldServer) worldObj).getPlayerChunkMap();
 
-				PlayerInstance playerInstance = playerManager.getEntry(c.xPosition, c.zPosition);
+				PlayerChunkMapEntry playerInstance = playerManager.getEntry(c.xPosition, c.zPosition);
 				playerInstance.sendPacket(PacketHandler.INSTANCE.getPacketFrom(message));
 			}
 			catch (Exception e)

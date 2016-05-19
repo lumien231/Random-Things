@@ -99,7 +99,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 		return totalPower;
 	}
 
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 
 	}

@@ -126,7 +126,7 @@ public class BlockFertilizedDirt extends BlockBase
 			Block toBoost = plantState.getBlock();
 			if (plantState != null && toBoost != null && toBoost != Blocks.AIR && toBoost instanceof IPlantable)
 			{
-				worldObj.playAuxSFX(2005, pos.up(), 0);
+				worldObj.playEvent(2005, pos.up(), 0);
 			}
 			for (int i = 0; i < 3; i++)
 			{

@@ -45,7 +45,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 	{
 		World overWorld = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
 
-		RedstoneSignalHandler handler = (RedstoneSignalHandler) overWorld.getMapStorage().loadData(RedstoneSignalHandler.class, ID);
+		RedstoneSignalHandler handler = (RedstoneSignalHandler) overWorld.getMapStorage().getOrLoadData(RedstoneSignalHandler.class, ID);
 
 		if (handler == null)
 		{
@@ -60,7 +60,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 	private void updatePosition(World worldObj, BlockPos pos)
 	{
 		IBlockState targetState = worldObj.getBlockState(pos);
-		targetState.getBlock().onNeighborBlockChange(worldObj, pos, targetState, Blocks.REDSTONE_BLOCK);
+		targetState.neighborChanged(worldObj, pos,  Blocks.REDSTONE_BLOCK);
 		worldObj.notifyNeighborsOfStateChange(pos, Blocks.REDSTONE_BLOCK);
 	}
 
@@ -135,7 +135,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 	}
 
 	@Override
-	public synchronized void writeToNBT(NBTTagCompound nbt)
+	public synchronized NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		NBTTagList nbtSignalList = new NBTTagList();
 
@@ -149,6 +149,8 @@ public class RedstoneSignalHandler extends WorldSavedData
 		}
 
 		nbt.setTag("redstoneSignals", nbtSignalList);
+		
+		return nbt;
 	}
 
 }

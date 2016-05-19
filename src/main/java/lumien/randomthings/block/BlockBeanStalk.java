@@ -104,14 +104,14 @@ public class BlockBeanStalk extends BlockBase
 			{
 				if (!worldIn.isAirBlock(pos.up()))
 				{
-					worldIn.playAuxSFX(2001, pos.up(), Block.getStateId(upState));
+					worldIn.playEvent(2001, pos.up(), Block.getStateId(upState));
 				}
 				else
 				{
-					worldIn.playAuxSFX(2001, pos, Block.getStateId(this.getDefaultState()));
+					worldIn.playEvent(2001, pos, Block.getStateId(this.getDefaultState()));
 					worldIn.playSound(null,pos, this.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 2);				}
 				
-				worldIn.playAuxSFX(2005, pos.up(), 0);
+				worldIn.playEvent(2005, pos.up(), 0);
 				worldIn.setBlockState(pos.up(), this.getDefaultState());
 				worldIn.scheduleUpdate(pos.up(), this, strongMagic ? 1 : 5);
 			}
@@ -129,7 +129,7 @@ public class BlockBeanStalk extends BlockBase
 	}
 
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		this.checkForDrop(worldIn, pos, state);
 	}

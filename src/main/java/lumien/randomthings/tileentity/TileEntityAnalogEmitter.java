@@ -5,8 +5,8 @@ import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileEntityAnalogEmitter extends TileEntityBase
@@ -38,7 +38,7 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 		this.emitLevel = compound.getInteger("emitLevel");
 	}
 
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		EnumFacing facing = state.getValue(BlockAnalogEmitter.FACING);
 		boolean input = worldIn.getRedstonePower(pos.offset(facing), facing.getOpposite()) > 0;

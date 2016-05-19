@@ -68,7 +68,7 @@ public class ItemStableEnderpearl extends ItemBase
 				if (player != null)
 				{
 					player.worldObj.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
-					player.playerNetServerHandler.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, player.rotationYaw, player.rotationPitch);
+					player.connection.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, player.rotationYaw, player.rotationPitch);
 				}
 				else
 				{
@@ -81,7 +81,7 @@ public class ItemStableEnderpearl extends ItemBase
 						{
 							EntityPlayerMP targetPlayer = (EntityPlayerMP) target;
 							targetPlayer.worldObj.playSound(null, targetPlayer.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
-							targetPlayer.playerNetServerHandler.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, targetPlayer.rotationYaw, targetPlayer.rotationPitch);
+							targetPlayer.connection.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, targetPlayer.rotationYaw, targetPlayer.rotationPitch);
 						}
 						else
 						{

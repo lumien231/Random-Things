@@ -6,20 +6,16 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import lumien.randomthings.block.ModBlocks;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 
 public class TileEntityRedstoneObserver extends TileEntityBase
 {
-	public static Set<TileEntityRedstoneObserver> observer = Collections.newSetFromMap(new WeakHashMap());
+	public static Set<TileEntityRedstoneObserver> loadedObservers = Collections.newSetFromMap(new WeakHashMap());
 	BlockPos target;
 
 	HashMap<EnumFacing, Integer> weakPower;
@@ -27,7 +23,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase
 
 	public TileEntityRedstoneObserver()
 	{
-		observer.add(this);
+		loadedObservers.add(this);
 
 		weakPower = new HashMap<EnumFacing, Integer>();
 		strongPower = new HashMap<EnumFacing, Integer>();
@@ -68,8 +64,6 @@ public class TileEntityRedstoneObserver extends TileEntityBase
 		NBTTagCompound weakPowerCompound = compound.getCompoundTag("weakPowerCompound");
 		NBTTagCompound strongPowerCompound = compound.getCompoundTag("strongPowerCompound");
 
-
-
 		for (EnumFacing facing : EnumFacing.values())
 		{
 			weakPower.put(facing, weakPowerCompound.getInteger(facing.ordinal() + ""));
@@ -89,7 +83,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase
 
 	public static void notifyNeighbor(NeighborNotifyEvent event)
 	{
-		for (TileEntityRedstoneObserver observer : observer)
+		for (TileEntityRedstoneObserver observer : loadedObservers)
 		{
 			if (observer.getWorld() == event.getWorld() && !observer.isInvalid() && observer.getTarget() != null && observer.getTarget().equals(event.getPos()))
 			{

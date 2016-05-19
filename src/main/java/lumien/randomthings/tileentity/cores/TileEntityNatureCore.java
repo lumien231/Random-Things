@@ -16,12 +16,12 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
 public class TileEntityNatureCore extends TileEntityBase implements ITickable
 {
@@ -64,7 +64,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 					int rY = this.pos.getY() + rand.nextInt(5) - 2;
 					int rZ = this.pos.getZ() + rand.nextInt(11) - 5;
 
-					BiomeGenBase.SpawnListEntry entry = ((WorldServer) worldObj).getSpawnListEntryForTypeAt(EnumCreatureType.CREATURE, new BlockPos(rX, rY, rZ));
+					Biome.SpawnListEntry entry = ((WorldServer) worldObj).getSpawnListEntryForTypeAt(EnumCreatureType.CREATURE, new BlockPos(rX, rY, rZ));
 					if (entry != null)
 					{
 						EntityLiving entityliving = null;
@@ -103,7 +103,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 					IGrowable growable = (IGrowable) state.getBlock();
 					if (growable.canGrow(worldObj, target, state, worldObj.isRemote))
 					{
-						worldObj.playAuxSFX(2005, target, 0);
+						worldObj.playEvent(2005, target, 0);
 						growable.grow(worldObj, rand, target, state);
 					}
 				}
@@ -120,7 +120,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 				IBlockState state = worldObj.getBlockState(target);
 				if (Blocks.SAPLING.canPlaceBlockAt(worldObj, target.up()))
 				{
-					worldObj.playAuxSFX(2005, target, 0);
+					worldObj.playEvent(2005, target, 0);
 					worldObj.setBlockState(target.up(), Blocks.SAPLING.getDefaultState());
 				}
 			}

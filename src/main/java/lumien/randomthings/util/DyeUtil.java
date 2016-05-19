@@ -3,12 +3,12 @@ package lumien.randomthings.util;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import lumien.randomthings.recipes.ModRecipes;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 public class DyeUtil
 {

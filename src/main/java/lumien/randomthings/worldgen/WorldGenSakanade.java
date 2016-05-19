@@ -8,7 +8,7 @@ import lumien.randomthings.util.WorldUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.BiomeDictionary;
@@ -30,7 +30,7 @@ public class WorldGenSakanade implements IWorldGenerator
 
 			if (target != null)
 			{
-				BiomeGenBase biome = world.getBiomeGenForCoords(target);
+				Biome biome = world.getBiomeGenForCoords(target);
 				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM))
 				{
 					if (world.getBlockState(target).getBlock() == Blocks.BROWN_MUSHROOM_BLOCK && world.isAirBlock(target.down()))

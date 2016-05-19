@@ -1,11 +1,8 @@
 package lumien.randomthings.handler;
 
-import lumien.randomthings.handler.spectre.SpectreHandler;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class RTWorldInformation extends WorldSavedData
@@ -31,9 +28,11 @@ public class RTWorldInformation extends WorldSavedData
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		nbt.setBoolean("enderDragonDefeated", enderDragonDefeated);
+		
+		return nbt;
 	}
 	
 	public boolean isDragonDefeated()
@@ -55,7 +54,7 @@ public class RTWorldInformation extends WorldSavedData
 		WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
 		if (world != null)
 		{
-			WorldSavedData handler = world.getMapStorage().loadData(RTWorldInformation.class, ID);
+			WorldSavedData handler = world.getMapStorage().getOrLoadData(RTWorldInformation.class, ID);
 			if (handler == null)
 			{
 				handler = new RTWorldInformation();

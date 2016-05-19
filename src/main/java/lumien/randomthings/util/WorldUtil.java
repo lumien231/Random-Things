@@ -29,7 +29,7 @@ public class WorldUtil
 		if (e instanceof EntityPlayerMP)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) e;
-			player.playerNetServerHandler.setPlayerLocation(posX, posY, posZ, player.rotationYaw, player.rotationPitch);
+			player.connection.setPlayerLocation(posX, posY, posZ, player.rotationYaw, player.rotationPitch);
 		}
 		else
 		{

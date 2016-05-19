@@ -54,7 +54,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		fakePlayer.get().setHeldItem(EnumHand.MAIN_HAND, unbreakingIronPickaxe);
 		fakePlayer.get().onGround = true;
 
-		fakePlayer.get().playerNetServerHandler = new NetHandlerPlayServer(FMLCommonHandler.instance().getMinecraftServerInstance(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
+		fakePlayer.get().connection = new NetHandlerPlayServer(FMLCommonHandler.instance().getMinecraftServerInstance(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
 		{
 			@Override
 			public void sendPacket(Packet packetIn)
@@ -74,7 +74,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 				firstTick = false;
 				initFakePlayer();
 				
-				onNeighborBlockChange(worldObj, pos, this.worldObj.getBlockState(pos), null);
+				neighborChanged(this.worldObj.getBlockState(pos), worldObj, pos, null);
 			}
 
 			if (mining)
@@ -130,7 +130,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		curBlockDamage = compound.getFloat("curBlockDamage");
 	}
 
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		BlockPos targetPos = pos.offset(state.getValue(BlockBlockBreaker.FACING));
 

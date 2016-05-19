@@ -1,11 +1,5 @@
 package lumien.randomthings.potion;
 
-import java.lang.reflect.Field;
-
-import org.apache.logging.log4j.Level;
-
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.potion.effects.EffectBoss;
 import lumien.randomthings.potion.effects.EffectCollapse;
 import lumien.randomthings.potion.imbues.ImbueCollapse;
@@ -13,8 +7,6 @@ import lumien.randomthings.potion.imbues.ImbueExperience;
 import lumien.randomthings.potion.imbues.ImbueFire;
 import lumien.randomthings.potion.imbues.ImbuePoison;
 import lumien.randomthings.potion.imbues.ImbueWither;
-import lumien.randomthings.util.ReflectionUtil;
-import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModPotions

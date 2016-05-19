@@ -26,7 +26,7 @@ public abstract class BlockRedstoneInterface extends BlockContainerBase
 	static HashSet<BlockPos> notifiedPositions = new HashSet<BlockPos>();
 	
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		if (notifiedPositions.contains(pos))
 		{
@@ -34,7 +34,7 @@ public abstract class BlockRedstoneInterface extends BlockContainerBase
 		}
 		notifiedPositions.add(pos);
 		TileEntityRedstoneInterface te = (TileEntityRedstoneInterface) worldIn.getTileEntity(pos);
-		te.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+		te.neighborChanged(state, worldIn, pos, neighborBlock);
 
 		notifiedPositions.remove(pos);
 	}

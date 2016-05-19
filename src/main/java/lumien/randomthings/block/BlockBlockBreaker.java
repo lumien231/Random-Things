@@ -44,9 +44,9 @@ public class BlockBlockBreaker extends BlockContainerBase
 	}
 	
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
-		((TileEntityBlockBreaker) worldIn.getTileEntity(pos)).onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+		((TileEntityBlockBreaker) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, neighborBlock);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class BlockBlockBreaker extends BlockContainerBase
 		super.onBlockAdded(worldIn, pos, state);
 		this.setDefaultFacing(worldIn, pos, state);
 		
-		((TileEntityBlockBreaker) worldIn.getTileEntity(pos)).onNeighborBlockChange(worldIn, pos, state, null);
+		((TileEntityBlockBreaker) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, null);
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)

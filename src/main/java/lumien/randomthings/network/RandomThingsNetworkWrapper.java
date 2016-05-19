@@ -1,9 +1,8 @@
 package lumien.randomthings.network;
 
-import io.netty.channel.ChannelFutureListener;
-
 import java.util.EnumMap;
 
+import io.netty.channel.ChannelFutureListener;
 import lumien.randomthings.lib.Reference;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;

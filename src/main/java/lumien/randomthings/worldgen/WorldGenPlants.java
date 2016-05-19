@@ -7,7 +7,7 @@ import lumien.randomthings.config.Worldgen;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
@@ -43,7 +43,7 @@ public class WorldGenPlants implements IWorldGenerator
 
 				if (target != null && target.getY() >= 0)
 				{
-					BiomeGenBase biome = world.getBiomeGenForCoords(target);
+					Biome biome = world.getBiomeGenForCoords(target);
 
 					if (world.isAirBlock(target) && biome.getFloatTemperature(target) >= 0.8F && ModBlocks.pitcherPlant.canBlockStay(world, target, ModBlocks.pitcherPlant.getDefaultState()))
 					{

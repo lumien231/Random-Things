@@ -2,14 +2,12 @@ package lumien.randomthings.tileentity;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.network.messages.MessageLightRedirector;
-import lumien.randomthings.tileentity.TileEntityRainShield.STATE;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

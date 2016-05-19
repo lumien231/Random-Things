@@ -1,20 +1,15 @@
 package lumien.randomthings.handler.spectre;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import com.google.common.collect.ImmutableList;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.IProgressUpdate;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.chunk.IChunkProvider;
 
 public class SpectreChunkProvider implements IChunkGenerator
 {

@@ -5,7 +5,7 @@ import lumien.randomthings.tileentity.TileEntityImbuingStation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -212,9 +212,9 @@ public class ContainerImbuingStation extends Container
 	}
 
 	@Override
-	public void onCraftGuiOpened(ICrafting listener)
+	public void addListener(IContainerListener listener)
 	{
-		super.onCraftGuiOpened(listener);
+		super.addListener(listener);
 		listener.sendProgressBarUpdate(this, 0, this.te.imbuingProgress);
 	}
 
@@ -225,7 +225,7 @@ public class ContainerImbuingStation extends Container
 
 		for (int i = 0; i < this.listeners.size(); ++i)
 		{
-			ICrafting icrafting = this.listeners.get(i);
+			IContainerListener icrafting = this.listeners.get(i);
 
 			if (this.lastImbuingProgress != this.te.imbuingProgress)
 			{

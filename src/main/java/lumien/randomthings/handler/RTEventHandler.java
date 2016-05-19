@@ -41,7 +41,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
-import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
@@ -698,8 +698,8 @@ public class RTEventHandler
 			{
 				for (int i = 0; i < 1; ++i)
 				{
-					EntityFX fx = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
-					fx.setRBGColorF(0.2F, 0.2F, 1);
+					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
+					particle.setRBGColorF(0.2F, 0.2F, 1);
 				}
 			}
 		}

@@ -8,19 +8,19 @@ import lumien.randomthings.item.ItemItemFilter;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.inventory.IInvBasic;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 
-public class TileEntityAdvancedItemCollector extends TileEntityBase implements ITickable, IInvBasic
+public class TileEntityAdvancedItemCollector extends TileEntityBase implements ITickable, IInventoryChangedListener
 {
 	int currentTickRate = 20;
 	int counter = 0;

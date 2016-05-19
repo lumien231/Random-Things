@@ -111,7 +111,6 @@ public class BlockEnderMailbox extends BlockContainerBase
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		System.out.println(worldIn.isRemote);
 		if (!worldIn.isRemote)
 		{
 			if (playerIn.isSneaking() && heldItem != null)

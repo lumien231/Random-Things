@@ -5,12 +5,9 @@ import java.util.UUID;
 
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.util.PlayerUtil;
-import lumien.randomthings.util.Size;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
@@ -112,7 +109,7 @@ public class SpectreHandler extends WorldSavedData
 		{
 			PlayerUtil.teleportPlayerToDimension(player, ModDimensions.SPECTRE_ID);
 		}
-		player.playerNetServerHandler.setPlayerLocation(spawn.getX() + 0.5, spawn.getY() + 1, spawn.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
+		player.connection.setPlayerLocation(spawn.getX() + 0.5, spawn.getY() + 1, spawn.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
 	}
 
 	private SpectreCube generateSpectreCube(UUID uuid)
@@ -149,7 +146,7 @@ public class SpectreHandler extends WorldSavedData
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		NBTTagList cubeTags = new NBTTagList();
 
@@ -163,6 +160,8 @@ public class SpectreHandler extends WorldSavedData
 		nbt.setTag("cubes", cubeTags);
 
 		nbt.setInteger("positionCounter", positionCounter);
+		
+		return nbt;
 	}
 
 	public static SpectreHandler getInstance()
@@ -170,7 +169,7 @@ public class SpectreHandler extends WorldSavedData
 		WorldServer world = DimensionManager.getWorld(ModDimensions.SPECTRE_ID);
 		if (world != null)
 		{
-			WorldSavedData handler = world.getPerWorldStorage().loadData(SpectreHandler.class, ID);
+			WorldSavedData handler = world.getPerWorldStorage().getOrLoadData(SpectreHandler.class, ID);
 			if (handler == null)
 			{
 				handler = new SpectreHandler();
@@ -207,7 +206,7 @@ public class SpectreHandler extends WorldSavedData
 			{
 				PlayerUtil.teleportPlayerToDimension(player, spectreDimension);
 			}
-			player.playerNetServerHandler.setPlayerLocation(spectrePosX, spectrePosY, spectrePosZ, player.rotationYaw, player.rotationPitch);
+			player.connection.setPlayerLocation(spectrePosX, spectrePosY, spectrePosZ, player.rotationYaw, player.rotationPitch);
 		}
 		else
 		{
@@ -226,7 +225,7 @@ public class SpectreHandler extends WorldSavedData
 			if (playerCube != null)
 			{
 				BlockPos spawn = playerCube.getSpawnBlock();
-				player.playerNetServerHandler.setPlayerLocation(spawn.getX() + 0.5, spawn.getY() + 1, spawn.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
+				player.connection.setPlayerLocation(spawn.getX() + 0.5, spawn.getY() + 1, spawn.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
 			}
 			else
 			{

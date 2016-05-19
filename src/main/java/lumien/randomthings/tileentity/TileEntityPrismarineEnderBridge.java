@@ -85,7 +85,7 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 		}
 	}
 
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState blockState, Block neighborBlock)
+	public void neighborChanged(IBlockState blockState, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		if (!worldIn.isRemote)
 		{

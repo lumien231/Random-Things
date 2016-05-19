@@ -61,11 +61,11 @@ public class BlockAnalogEmitter extends BlockContainerBase
 	}
 
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		TileEntityAnalogEmitter te = (TileEntityAnalogEmitter) worldIn.getTileEntity(pos);
 
-		te.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+		te.neighborChanged(state, worldIn, pos, neighborBlock);
 	}
 
 	@Override

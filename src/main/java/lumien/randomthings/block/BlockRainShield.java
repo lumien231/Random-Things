@@ -94,9 +94,9 @@ public class BlockRainShield extends BlockContainerBase
 	}
 
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
-		((TileEntityRainShield) worldIn.getTileEntity(pos)).onNeighborBlockChange(worldIn, pos, state, neighborBlock);
+		((TileEntityRainShield) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, neighborBlock);
 		checkForDrop(worldIn, pos, state);
 	}
 
