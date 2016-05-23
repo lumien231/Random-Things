@@ -26,7 +26,7 @@ repositories {
 dependencies {
     compile "li.cil.oc:OpenComputers:MC1.8-1.5.+:api"
     compile fileTree(dir: 'libs', include: ['*.*'])
-    deobfCompile "mezz.jei:jei_1.9:3.2.8.182"
+    deobfCompile "mezz.jei:jei_1.9.4:3.4.0.204"
 }
 
 version = "3.7.1"
