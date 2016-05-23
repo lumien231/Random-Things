@@ -2,6 +2,10 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.block.redstoneinterface.BlockAdvancedRedstoneInterface;
 import lumien.randomthings.block.redstoneinterface.BlockBasicRedstoneInterface;
+import lumien.randomthings.block.spectretree.BlockSpectreLeaf;
+import lumien.randomthings.block.spectretree.BlockSpectreLog;
+import lumien.randomthings.block.spectretree.BlockSpectrePlank;
+import lumien.randomthings.block.spectretree.BlockSpectreSapling;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModBlocks
@@ -52,6 +56,11 @@ public class ModBlocks
 	public static BlockFilteredItemRedirector filteredItemRedirector;
 	public static BlockFilteredSuperLubricentPlatform filteredSuperLubricentPlatform;
 	public static BlockRedstoneObserver redstoneObserver;
+	
+	public static BlockSpectrePlank spectrePlank;
+	public static BlockSpectreSapling spectreSapling;
+	public static BlockSpectreLog spectreLog;
+	public static BlockSpectreLeaf spectreLeaf;
 	
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
@@ -119,6 +128,11 @@ public class ModBlocks
 		filteredItemRedirector = new BlockFilteredItemRedirector();
 		filteredSuperLubricentPlatform = new BlockFilteredSuperLubricentPlatform();
 		redstoneObserver = new BlockRedstoneObserver();
+		
+		spectrePlank = new BlockSpectrePlank();
+		spectreSapling = new BlockSpectreSapling();
+		spectreLog = new BlockSpectreLog();
+		spectreLeaf = new BlockSpectreLeaf();
 		
 		itemCollector = new BlockItemCollector();
 		advancedItemCollector = new BlockAdvancedItemCollector();

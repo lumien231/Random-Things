@@ -12,6 +12,9 @@ public class BlockModels
 	{
 		ModelLoader.setCustomStateMapper(ModBlocks.coloredGrass, new FocusStateMapper(new ModelResourceLocation("randomthings:coloredGrass", "normal")));
 		ModelLoader.setCustomStateMapper(ModBlocks.specialChest, new EmptyStateMapper());
+		
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreSapling, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreSapling","normal")));
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreLeaf, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreLeaf","normal")));
 	}
 
 }

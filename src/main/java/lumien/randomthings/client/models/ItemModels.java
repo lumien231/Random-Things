@@ -66,6 +66,11 @@ public class ItemModels
 		registerBlock(ModBlocks.filteredSuperLubricentPlatform);
 		registerBlock(ModBlocks.redstoneObserver);
 		
+		registerBlock(ModBlocks.spectreLeaf);
+		registerBlock(ModBlocks.spectreLog);
+		registerBlock(ModBlocks.spectrePlank);
+		registerBlock(ModBlocks.spectreSapling);
+		
 		registerBlock(ModBlocks.itemCollector);
 		registerBlock(ModBlocks.advancedItemCollector);
 

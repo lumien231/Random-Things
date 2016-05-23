@@ -172,6 +172,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 5), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 5), 'e', enderPearl));
 
 		GameRegistry.addRecipe(new RecipeWorkbench());
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.spectrePlank,4), ModBlocks.spectreLog);
 
 		createDyeRecipes(new ItemStack(Blocks.BRICK_BLOCK), ModBlocks.stainedBrick);
 		createGrassSeedsRecipes();

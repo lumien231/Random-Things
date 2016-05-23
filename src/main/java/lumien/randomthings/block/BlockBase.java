@@ -43,4 +43,16 @@ public abstract class BlockBase extends Block
 		}
 		RandomThings.proxy.scheduleColor(this);
 	}
+	
+	public static void registerBlock(String name,Block block)
+	{
+		block.setRegistryName(name);
+		block.setCreativeTab(RandomThings.instance.creativeTab);
+		block.setUnlocalizedName(name);
+
+		GameRegistry.register(block);
+		
+		GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+		RandomThings.proxy.scheduleColor(block);
+	}
 }

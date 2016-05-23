@@ -1,25 +1,30 @@
-package lumien.randomthings.block;
+package lumien.randomthings.block.spectretree;
 
+import lumien.randomthings.block.BlockBase;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
-public class BlockSuperLubricentIce extends BlockBase
+public class BlockSpectrePlank extends BlockBase
 {
-	protected BlockSuperLubricentIce()
+	public BlockSpectrePlank()
 	{
-		super("superLubricentIce", Material.ICE);
+		super("spectrePlank", Material.WOOD);
 
-		this.slipperiness = 1F / 0.98F;
-		this.setHardness(0.5F).setLightOpacity(3);
+		this.setLightOpacity(3);
+		this.setHardness(2.0F).setResistance(5.0F);
+		this.setSoundType(SoundType.WOOD);
+		
+		OreDictionary.registerOre("plankWood", this);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -59,3 +64,4 @@ public class BlockSuperLubricentIce extends BlockBase
 		return EnumPushReaction.NORMAL;
 	}
 }
+

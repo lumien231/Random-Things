@@ -49,6 +49,11 @@ tile.filteredItemRedirector.name=Filtered Item Redirector
 tile.filteredSuperLubricentPlatform.name=Filtered Super Lubricent Platform
 tile.redstoneObserver.name=Redstone Observer
 
+tile.spectrePlank.name=Spectre Planks
+tile.spectreSapling.name=Spectre Sapling
+tile.spectreLeaf.name=Spectre Leaves
+tile.spectreLog.name=Spectre Wood
+
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector
 
