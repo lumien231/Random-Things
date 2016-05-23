@@ -245,7 +245,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	 */
 	public int quantityDropped(Random random)
 	{
-		return random.nextInt(20) == 0 ? 1 : 0;
+		return random.nextInt(50) == 0 ? 1 : 0;
 	}
 
 	/**
@@ -267,7 +267,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 
 	protected void dropApple(World worldIn, BlockPos pos, IBlockState state)
 	{
-		if (worldIn.rand.nextInt(50) == 0)
+		if (worldIn.rand.nextInt(55) == 0)
 		{
 			spawnAsEntity(worldIn, pos, new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.ECTO_PLASM.ordinal()));
 		}
@@ -275,7 +275,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 
 	protected int getSaplingDropChance(IBlockState state)
 	{
-		return 40;
+		return 50;
 	}
 
 	@Override
