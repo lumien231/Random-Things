@@ -52,7 +52,7 @@ public class BlockSpectreSapling extends BlockBush
 		{
 			super.updateTick(worldIn, pos, state, rand);
 
-			if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
+			if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(14) == 0)
 			{
 				this.grow(worldIn, pos, state, rand);
 			}
