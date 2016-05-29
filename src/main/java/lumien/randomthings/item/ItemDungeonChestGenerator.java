@@ -1,12 +1,16 @@
 package lumien.randomthings.item;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import lumien.randomthings.lib.ChestCategory;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,9 +19,15 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTableManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,14 +43,6 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
-	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_)
-	{
-		ItemStack is = new ItemStack(p_150895_1_, 1, 0);
-		is.setTagCompound(new NBTTagCompound());
-		p_150895_3_.add(is);
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
@@ -49,9 +51,24 @@ public class ItemDungeonChestGenerator extends ItemBase
 		NBTTagCompound nbt = par1ItemStack.getTagCompound();
 		if (nbt != null)
 		{
-			ChestCategory selectedCategory = ChestCategory.values()[nbt.getInteger("category")];
-			par3List.add(net.minecraft.client.resources.I18n.format("item.dungeonChestGenerator.category", selectedCategory.getName()));
-			par3List.add(net.minecraft.client.resources.I18n.format("item.dungeonChestGenerator.shiftCategory"));
+			Set<ResourceLocation> lootTableSet = LootTableList.getAll();
+			List<ResourceLocation> sortedList = new ArrayList<ResourceLocation>(lootTableSet);
+			sortedList.sort(new Comparator<ResourceLocation>()
+			{
+				@Override
+				public int compare(ResourceLocation rl1, ResourceLocation rl2)
+				{
+					return rl1.toString().compareTo(rl2.toString());
+				}
+			});
+
+			int tableIndex = nbt.getInteger("tableIndex");
+			if (tableIndex > 0 && tableIndex < sortedList.size())
+			{
+				ResourceLocation tableLocation = sortedList.get(tableIndex);
+				par3List.add(net.minecraft.client.resources.I18n.format("item.dungeonChestGenerator.category", tableLocation.toString()));
+				par3List.add(net.minecraft.client.resources.I18n.format("item.dungeonChestGenerator.shiftCategory"));
+			}
 		}
 	}
 
@@ -62,13 +79,27 @@ public class ItemDungeonChestGenerator extends ItemBase
 
 		if (nbt != null)
 		{
-			ChestCategory selectedCategory = ChestCategory.values()[nbt.getInteger("category")];
-			return ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim() + " (" + selectedCategory.getName() + ")";
+			Set<ResourceLocation> lootTableSet = LootTableList.getAll();
+			List<ResourceLocation> sortedList = new ArrayList<ResourceLocation>(lootTableSet);
+			sortedList.sort(new Comparator<ResourceLocation>()
+			{
+				@Override
+				public int compare(ResourceLocation rl1, ResourceLocation rl2)
+				{
+					return rl1.toString().compareTo(rl2.toString());
+				}
+			});
+
+			int tableIndex = nbt.getInteger("tableIndex");
+			if (tableIndex > 0 && tableIndex < sortedList.size())
+			{
+				ResourceLocation tableLocation = sortedList.get(tableIndex);
+				return ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim() + " (" + tableLocation.toString() + ")";
+			}
 		}
-		else
-		{
-			return ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim();
-		}
+
+		return ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim();
+
 	}
 
 	@Override
@@ -80,12 +111,12 @@ public class ItemDungeonChestGenerator extends ItemBase
 			if (nbt == null)
 			{
 				par1ItemStack.setTagCompound(new NBTTagCompound());
-				par1ItemStack.getTagCompound().setInteger("category", 0);
+				par1ItemStack.getTagCompound().setInteger("tableIndex", 0);
 			}
 			else
 			{
-				int currentCategory = par1ItemStack.getTagCompound().getInteger("category");
-				if (currentCategory + 1 < ChestCategory.values().length)
+				int currentCategory = par1ItemStack.getTagCompound().getInteger("tableIndex");
+				if (currentCategory + 1 < LootTableList.getAll().size())
 				{
 					currentCategory++;
 				}
@@ -93,7 +124,8 @@ public class ItemDungeonChestGenerator extends ItemBase
 				{
 					currentCategory = 0;
 				}
-				par1ItemStack.getTagCompound().setInteger("category", currentCategory);
+
+				par1ItemStack.getTagCompound().setInteger("tableIndex", currentCategory);
 			}
 
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, par1ItemStack);
@@ -119,14 +151,42 @@ public class ItemDungeonChestGenerator extends ItemBase
 					if (Blocks.CHEST.canPlaceBlockAt(worldIn, pos))
 					{
 						NBTTagCompound nbt = stack.getTagCompound();
-						if (nbt == null)
+
+						if (nbt != null)
 						{
-							stack.setTagCompound(new NBTTagCompound());
-							stack.getTagCompound().setInteger("category", 0);
+							int currentCategory = nbt.getInteger("tableIndex");
+
+							Set<ResourceLocation> lootTableSet = LootTableList.getAll();
+							List<ResourceLocation> sortedList = new ArrayList<ResourceLocation>(lootTableSet);
+							sortedList.sort(new Comparator<ResourceLocation>()
+							{
+								@Override
+								public int compare(ResourceLocation rl1, ResourceLocation rl2)
+								{
+									return rl1.toString().compareTo(rl2.toString());
+								}
+							});
+
+							if (currentCategory > 0 && currentCategory < sortedList.size())
+							{
+								ResourceLocation currentTableLocation = sortedList.get(currentCategory);
+
+								LootTable lootTable = worldIn.getLootTableManager().getLootTableFromLocation(currentTableLocation);
+
+								if (lootTable != null)
+								{
+									worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState());
+
+									IInventory chestInventory = (IInventory) worldIn.getTileEntity(pos);
+
+									LootContext.Builder builder = new LootContext.Builder((WorldServer) worldIn).withPlayer(playerIn);
+
+									lootTable.fillInventory(chestInventory, worldIn.rand, builder.build());
+								}
+
+
+							}
 						}
-						ChestCategory category = ChestCategory.values()[stack.getTagCompound().getInteger("category")];
-						worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState());
-						//WeightedRandomChestContent.generateChestContents(rng, ChestGenHooks.getItems(category.getName(), rng), (IInventory) worldIn.getTileEntity(pos), ChestGenHooks.getCount(category.getName(), rng));
 					}
 				}
 				return EnumActionResult.SUCCESS;
