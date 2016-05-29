@@ -12,13 +12,6 @@ public class ItemMagicHood extends ItemArmor
 	{
 		super(ItemArmor.ArmorMaterial.CHAIN, 0, EntityEquipmentSlot.HEAD);
 		ItemBase.registerItem("magicHood", this);
-
-		/*
-		 * ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new
-		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 2));
-		 * ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new
-		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 5)); TODO
-		 */
 	}
 
 	@Override

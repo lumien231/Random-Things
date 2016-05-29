@@ -19,16 +19,6 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 		super("lavaCharm");
 
 		this.setMaxStackSize(1);
-
-		/*
-		 * ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new
-		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 1));
-		 * ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new
-		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 1));
-		 * ChestGenHooks.addItem(ChestGenHooks.NETHER_FORTRESS, new
-		 * SingleRandomChestContent(new ItemStack(this), 1, 1, 5));
-		 * TODO
-		 */
 	}
 
 	@Override

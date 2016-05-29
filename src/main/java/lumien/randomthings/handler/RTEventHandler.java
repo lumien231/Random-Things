@@ -71,6 +71,15 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfo.Overlay;
+import net.minecraft.world.storage.loot.LootEntry;
+import net.minecraft.world.storage.loot.LootEntryItem;
+import net.minecraft.world.storage.loot.LootPool;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.RandomValueRange;
+import net.minecraft.world.storage.loot.conditions.LootCondition;
+import net.minecraft.world.storage.loot.conditions.RandomChance;
+import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -80,6 +89,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -108,6 +118,36 @@ public class RTEventHandler
 {
 	static Random rng = new Random();
 
+	@SubscribeEvent
+	public void loadLootTable(LootTableLoadEvent event)
+	{
+		LootTable table = event.getTable();
+		if (event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON))
+		{
+			addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.02f);
+			addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.02f);
+			addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.03f);
+		}
+		else if (event.getName().equals(LootTableList.CHESTS_NETHER_BRIDGE))
+		{
+			addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.2f);
+		}
+		else if (event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH))
+		{
+			addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.02f);
+		}
+		else if (event.getName().equals(LootTableList.CHESTS_STRONGHOLD_CORRIDOR))
+		{
+			addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.5f);
+		}
+	}
+	
+	private void addSingleItemWithChance(String name,LootTable table,Item item,float chance)
+	{
+		table.addPool(new LootPool(new LootEntry[]{new LootEntryItem(item,1,0,new LootFunction[]{},new LootCondition[]{},name)},new LootCondition[]{new RandomChance(chance)},new RandomValueRange(1,1),new RandomValueRange(0,0),name));
+
+	}
+	
 	@SubscribeEvent
 	public void playerClone(PlayerEvent.Clone event)
 	{
