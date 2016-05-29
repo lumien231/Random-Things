@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.lib.ChestCategory;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -17,7 +16,10 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemDungeonChestGenerator extends ItemBase
 {
@@ -39,6 +41,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
@@ -47,8 +50,8 @@ public class ItemDungeonChestGenerator extends ItemBase
 		if (nbt != null)
 		{
 			ChestCategory selectedCategory = ChestCategory.values()[nbt.getInteger("category")];
-			par3List.add(I18n.format("item.dungeonChestGenerator.category", selectedCategory.getName()));
-			par3List.add(I18n.format("item.dungeonChestGenerator.shiftCategory"));
+			par3List.add(net.minecraft.client.resources.I18n.format("item.dungeonChestGenerator.category", selectedCategory.getName()));
+			par3List.add(net.minecraft.client.resources.I18n.format("item.dungeonChestGenerator.shiftCategory"));
 		}
 	}
 
@@ -60,11 +63,11 @@ public class ItemDungeonChestGenerator extends ItemBase
 		if (nbt != null)
 		{
 			ChestCategory selectedCategory = ChestCategory.values()[nbt.getInteger("category")];
-			return ("" + I18n.format(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim() + " (" + selectedCategory.getName() + ")";
+			return ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim() + " (" + selectedCategory.getName() + ")";
 		}
 		else
 		{
-			return ("" + I18n.format(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim();
+			return ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim();
 		}
 	}
 

@@ -30,7 +30,6 @@ public class RenderVoxelProjector extends TileEntitySpecialRenderer<TileEntityVo
 		MagicaVoxelModel model = RandomThings.instance.modelHandler.getModel(voxelProjector.getModel());
 		if (model != null)
 		{
-
 			GlStateManager.translate(0.5, 0, 0.5);
 			int scale = voxelProjector.getScale();
 			GlStateManager.scale(scale, scale, scale);
