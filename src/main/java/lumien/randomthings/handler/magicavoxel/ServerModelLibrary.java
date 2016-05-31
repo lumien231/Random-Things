@@ -47,7 +47,7 @@ public class ServerModelLibrary
 
 		return INSTANCE;
 	}
-	
+
 	public List<String> getModelList()
 	{
 		return new ArrayList<String>(loadedModels.keySet());
@@ -134,40 +134,43 @@ public class ServerModelLibrary
 	{
 		File modelFolder = new File(FMLCommonHandler.instance().getMinecraftServerInstance().getDataDirectory(), "voxmodels");
 
-		File[] modelFiles = modelFolder.listFiles(new FilenameFilter()
+		if (modelFolder.isDirectory())
 		{
-			@Override
-			public boolean accept(File dir, String name)
+			File[] modelFiles = modelFolder.listFiles(new FilenameFilter()
 			{
-				return name.endsWith(".vox") && new File(dir, name.substring(0, name.length() - 3) + "act").isFile();
-			}
-		});
-
-		for (File modelFile : modelFiles)
-		{
-			String modelName = modelFile.getName().substring(0, modelFile.getName().length() - 4);
-			File paletteFile = new File(modelFolder, modelName + ".act");
-
-			if (modelFile.length() <= 2000 * 1000 && paletteFile.length() <= 2000 * 1000)
-			{
-				try
+				@Override
+				public boolean accept(File dir, String name)
 				{
-					FileInputStream modelInputStream = new FileInputStream(modelFile);
-					FileInputStream paletteInputStream = new FileInputStream(paletteFile);
-
-					LoadedModelFile loadedFile = new LoadedModelFile(IOUtils.toByteArray(modelInputStream), IOUtils.toByteArray(paletteInputStream));
-
-					loadedModels.put(modelName, loadedFile);
+					return name.endsWith(".vox") && new File(dir, name.substring(0, name.length() - 3) + "act").isFile();
 				}
-				catch (Exception e)
-				{
-					RandomThings.instance.logger.log(Level.ERROR, "Error loading magica voxel model " + modelFile.getName());
-					e.printStackTrace();
-				}
-			}
-			else
+			});
+
+			for (File modelFile : modelFiles)
 			{
-				RandomThings.instance.logger.log(Level.ERROR, "Model file too large (Has to be smaller than 2mb) " + modelFile.getName());
+				String modelName = modelFile.getName().substring(0, modelFile.getName().length() - 4);
+				File paletteFile = new File(modelFolder, modelName + ".act");
+
+				if (modelFile.length() <= 2000 * 1000 && paletteFile.length() <= 2000 * 1000)
+				{
+					try
+					{
+						FileInputStream modelInputStream = new FileInputStream(modelFile);
+						FileInputStream paletteInputStream = new FileInputStream(paletteFile);
+
+						LoadedModelFile loadedFile = new LoadedModelFile(IOUtils.toByteArray(modelInputStream), IOUtils.toByteArray(paletteInputStream));
+
+						loadedModels.put(modelName, loadedFile);
+					}
+					catch (Exception e)
+					{
+						RandomThings.instance.logger.log(Level.ERROR, "Error loading magica voxel model " + modelFile.getName());
+						e.printStackTrace();
+					}
+				}
+				else
+				{
+					RandomThings.instance.logger.log(Level.ERROR, "Model file too large (Has to be smaller than 2mb) " + modelFile.getName());
+				}
 			}
 		}
 	}

@@ -1,7 +1,5 @@
 package lumien.randomthings.network.messages.magicavoxel;
 
-import com.sun.security.ntlm.Client;
-
 import io.netty.buffer.ByteBuf;
 import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.network.IRTMessage;
