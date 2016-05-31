@@ -1,6 +1,7 @@
 package lumien.randomthings.item;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -53,7 +54,8 @@ public class ItemDungeonChestGenerator extends ItemBase
 		{
 			Set<ResourceLocation> lootTableSet = LootTableList.getAll();
 			List<ResourceLocation> sortedList = new ArrayList<ResourceLocation>(lootTableSet);
-			sortedList.sort(new Comparator<ResourceLocation>()
+			
+			Collections.sort(sortedList, new Comparator<ResourceLocation>()
 			{
 				@Override
 				public int compare(ResourceLocation rl1, ResourceLocation rl2)
