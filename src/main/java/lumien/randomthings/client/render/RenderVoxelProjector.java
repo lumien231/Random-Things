@@ -2,6 +2,7 @@ package lumien.randomthings.client.render;
 
 import org.lwjgl.opengl.GL11;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.handler.magicavoxel.MagicaVoxelModel;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import net.minecraft.client.renderer.GlStateManager;
@@ -27,13 +28,13 @@ public class RenderVoxelProjector extends TileEntitySpecialRenderer<TileEntityVo
 
 		GlStateManager.translate((float) p_180538_2_, (float) p_180538_4_ + 2.0F, (float) p_180538_6_);
 
-		MagicaVoxelModel model = RandomThings.instance.modelHandler.getModel(voxelProjector.getModel());
+		MagicaVoxelModel model = ClientModelLibrary.getInstance().getModel(voxelProjector.getModel());
 		if (model != null)
 		{
 			GlStateManager.translate(0.5, 0, 0.5);
 			int scale = voxelProjector.getScale();
 			GlStateManager.scale(scale, scale, scale);
-			GL11.glRotated(voxelProjector.getRenderModelRotation(p_180538_8_), 0, 1, 0);
+			GlStateManager.rotate(voxelProjector.getRenderModelRotation(p_180538_8_), 0, 1, 0);
 			GlStateManager.translate(-model.getSizeX() * 1F / 20F / 2f, 0, -model.getSizeZ() * 1F / 20F / 2f);
 
 			model.getRenderModel(voxelProjector.randomize()).draw(voxelProjector.ambientLight());

@@ -16,6 +16,8 @@ import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
+import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
+import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.ItemEntityFilter;
@@ -110,7 +112,9 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -118,6 +122,21 @@ public class RTEventHandler
 {
 	static Random rng = new Random();
 
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void clientConnectingToServer(ClientConnectedToServerEvent event)
+	{
+		Minecraft.getMinecraft().addScheduledTask(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ClientModelLibrary.getInstance().reset();
+			}
+		});
+		
+	}
+	
 	@SubscribeEvent
 	public void loadLootTable(LootTableLoadEvent event)
 	{
@@ -210,6 +229,11 @@ public class RTEventHandler
 			TileEntityRainShield.rainCache.clear();
 		}
 
+		if (tickEvent instanceof ServerTickEvent)
+		{
+			ServerModelLibrary.getInstance().tick();
+		}
+		
 		if (tickEvent instanceof WorldTickEvent)
 		{
 			WorldTickEvent worldTickEvent = (WorldTickEvent) tickEvent;

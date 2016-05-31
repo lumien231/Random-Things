@@ -10,7 +10,7 @@ import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.entitys.ModEntitys;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.RTEventHandler;
-import lumien.randomthings.handler.magicavoxel.ModelHandler;
+import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.RTCreativeTab;
 import lumien.randomthings.lib.Reference;
@@ -57,15 +57,12 @@ public class RandomThings implements LoadingCallback
 
 	public ModConfiguration configuration;
 
-	public ModelHandler modelHandler;
-
 	ASMDataTable asmDataTable;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		asmDataTable = event.getAsmData();
-		modelHandler = new ModelHandler(event.getSide());
 
 		creativeTab = new RTCreativeTab();
 		logger = event.getModLog();
@@ -104,14 +101,13 @@ public class RandomThings implements LoadingCallback
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		modelHandler.load();
 		proxy.registerRenderers();
 	}
 
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event)
 	{
-		// event.registerServerCommand(new RTCommand()); DEBUG
+		ServerModelLibrary.getInstance().refresh();
 	}
 
 	public ASMDataTable getASMData()

@@ -22,6 +22,8 @@ public class MagicaVoxelModel
 	Palette palette;
 
 	int sizeX, sizeY, sizeZ;
+	
+	boolean build;
 
 	MagicaVoxelRenderModel renderModel;
 	MagicaVoxelRenderModel randomizedRenderModel;
@@ -30,6 +32,18 @@ public class MagicaVoxelModel
 	{
 		voxels = new ArrayList<Voxel>();
 		this.palette = palette;
+		this.build = false;
+	}
+	
+	public void build()
+	{
+		this.randomizedRenderModel = new MagicaVoxelRenderModel(this, true);
+		this.randomizedRenderModel.build();
+		
+		this.renderModel = new MagicaVoxelRenderModel(this, false);
+		this.renderModel.build();
+		
+		this.build = true;
 	}
 
 	public void addVoxel(int x, int y, int z, int colorIndex)
@@ -58,22 +72,10 @@ public class MagicaVoxelModel
 	{
 		if (randomized)
 		{
-			if (randomizedRenderModel == null)
-			{
-				this.randomizedRenderModel = new MagicaVoxelRenderModel(this, true);
-				this.randomizedRenderModel.build();
-			}
-
 			return randomizedRenderModel;
 		}
 		else
 		{
-			if (renderModel == null)
-			{
-				this.renderModel = new MagicaVoxelRenderModel(this, false);
-				this.renderModel.build();
-			}
-
 			return renderModel;
 		}
 	}
@@ -91,5 +93,11 @@ public class MagicaVoxelModel
 	public int getSizeZ()
 	{
 		return sizeZ;
+	}
+
+	public void cleanUp()
+	{
+		renderModel.cleanUp();
+		randomizedRenderModel.cleanUp();
 	}
 }

@@ -5,6 +5,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
 import org.apache.logging.log4j.Level;
 
 import com.google.common.primitives.Ints;
@@ -13,43 +15,41 @@ import lumien.randomthings.RandomThings;
 
 public class MagicaVoxelLoader
 {
-	public static MagicaVoxelModel getModel(File modelFile, File paletteFile) throws Exception
+	public static MagicaVoxelModel getModel(InputStream modelInputStream, InputStream paletteInputStream) throws Exception
 	{
-		Palette palette = getPalette(paletteFile);
-		
-		FileInputStream fileInputStream = new FileInputStream(modelFile);
+		Palette palette = getPalette(paletteInputStream);
 
 		for (int i = 0; i < 4; i++)
 		{
-			int b = fileInputStream.read();
+			int b = modelInputStream.read();
 
 			switch (i)
 			{
 				case 0:
 					if (b != 'V')
 					{
-						fileInputStream.close();
+						modelInputStream.close();
 						throw new Exception("Invalid VOX Header");
 					}
 					break;
 				case 1:
 					if (b != 'O')
 					{
-						fileInputStream.close();
+						modelInputStream.close();
 						throw new Exception("Invalid VOX Header");
 					}
 					break;
 				case 2:
 					if (b != 'X')
 					{
-						fileInputStream.close();
+						modelInputStream.close();
 						throw new Exception("Invalid VOX Header");
 					}
 					break;
 				case 3:
 					if (b != ' ')
 					{
-						fileInputStream.close();
+						modelInputStream.close();
 						throw new Exception("Invalid VOX Header");
 					}
 					break;
@@ -57,7 +57,7 @@ public class MagicaVoxelLoader
 		}
 
 		byte[] versionBytes = new byte[4];
-		fileInputStream.read(versionBytes);
+		modelInputStream.read(versionBytes);
 
 		int voxVersion = Ints.fromBytes(versionBytes[3], versionBytes[2], versionBytes[1], versionBytes[0]);
 
@@ -69,13 +69,13 @@ public class MagicaVoxelLoader
 		byte[] contentSizeBytes = new byte[4];
 		byte[] childrenSizeBytes = new byte[4];
 
-		while (fileInputStream.read(chunkIDBytes) > 0)
+		while (modelInputStream.read(chunkIDBytes) > 0)
 		{
 			String chunkID = "" + (char) chunkIDBytes[0] + (char) chunkIDBytes[1] + (char) chunkIDBytes[2] + (char) chunkIDBytes[3];
 
 			RandomThings.instance.logger.log(Level.DEBUG, " - CHUNK: " + chunkID);
-			fileInputStream.read(contentSizeBytes);
-			fileInputStream.read(childrenSizeBytes);
+			modelInputStream.read(contentSizeBytes);
+			modelInputStream.read(childrenSizeBytes);
 
 			int contentSize = Ints.fromBytes(contentSizeBytes[3], contentSizeBytes[2], contentSizeBytes[1], contentSizeBytes[0]);
 			int childrenSize = Ints.fromBytes(childrenSizeBytes[3], childrenSizeBytes[2], childrenSizeBytes[1], childrenSizeBytes[0]);
@@ -83,7 +83,7 @@ public class MagicaVoxelLoader
 			if (contentSize > 0)
 			{
 				byte[] chunkContent = new byte[contentSize];
-				fileInputStream.read(chunkContent);
+				modelInputStream.read(chunkContent);
 				ByteArrayInputStream contentStream = new ByteArrayInputStream(chunkContent);
 
 				if (chunkID.equals("SIZE"))
@@ -125,23 +125,28 @@ public class MagicaVoxelLoader
 			}
 		}
 
-		fileInputStream.close();
+		modelInputStream.close();
 
+		model.build();
+		
 		return model;
 	}
 
-	public static Palette getPalette(File paletteFile) throws IOException
+	public static MagicaVoxelModel getModel(File modelFile, File paletteFile) throws Exception
 	{
-		FileInputStream fileInputStream = new FileInputStream(paletteFile);
-		
+		return getModel(new FileInputStream(modelFile),new FileInputStream(paletteFile));
+	}
+
+	public static Palette getPalette(InputStream paletteInputStream) throws IOException
+	{
 		Color[] colorTable = new Color[256];
 
 		for (int i = 0; i < colorTable.length; i++)
 		{
-			colorTable[i] = new Color(fileInputStream.read(), fileInputStream.read(), fileInputStream.read());
+			colorTable[i] = new Color(paletteInputStream.read(), paletteInputStream.read(), paletteInputStream.read());
 		}
 		
-		fileInputStream.close();
+		paletteInputStream.close();
 
 		return new Palette(colorTable);
 	}

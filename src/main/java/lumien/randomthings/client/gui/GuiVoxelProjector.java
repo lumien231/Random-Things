@@ -2,8 +2,11 @@ package lumien.randomthings.client.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Lists;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
@@ -122,7 +125,7 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 		this.buttonList.add(toggleAmbientLight);
 		this.buttonList.add(toggleRandomizer);
 
-		availableModels = new GuiStringList(this, Minecraft.getMinecraft(), 120, 50, this.guiLeft + 5, 150, width, height, new ArrayList<String>(RandomThings.instance.modelHandler.getModels()));
+		availableModels = new GuiStringList(this, Minecraft.getMinecraft(), 120, 50, this.guiLeft + 5, 150, width, height, Lists.<String>newArrayList());
 	}
 
 	@Override
@@ -178,5 +181,10 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 			message.setRandomize(toggleRandomizer.getValue());
 			PacketHandler.INSTANCE.sendToServer(message);
 		}
+	}
+
+	public void setModelList(List<String> modelList)
+	{
+		this.availableModels.setList(modelList);
 	}
 }

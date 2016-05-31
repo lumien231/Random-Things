@@ -1,6 +1,7 @@
 package lumien.randomthings.client.gui.elements;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.client.GuiScrollingList;
 
 public class GuiStringList extends GuiScrollingList
 {
-	private ArrayList<String> stringList;
+	private List<String> stringList;
 	private IStringCallback parent;
 
 	public GuiStringList(IStringCallback parent, Minecraft client, int width, int height, int posX, int posY,int screenWidth,int screenHeight, ArrayList<String> stringList)
@@ -76,4 +77,8 @@ public class GuiStringList extends GuiScrollingList
 		GlStateManager.enableLighting();
 	}
 
+	public void setList(List<String> newList)
+	{
+		this.stringList = newList;
+	}
 }
