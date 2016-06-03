@@ -88,8 +88,17 @@ public class BlockRainShield extends BlockContainerBase
 
 		if (worldIn.isRaining())
 		{
-			worldIn.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5, pos.getY() + 1.1f, pos.getZ() + 0.5, 0, 0, 0);
-			worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0, 0);
+			for (double mod = 0; mod < 1; mod += 0.1f)
+			{
+				for (double a = 0; a <= Math.PI*2D; a += (Math.PI*2D)/3D)
+				{
+					double x = pos.getX() + 0.5 + (1-mod) * Math.cos(a);
+					double z = pos.getZ() + 0.5 + (1-mod) * Math.sin(a);
+
+					worldIn.spawnParticle(EnumParticleTypes.FLAME, x, pos.getY() + 0.7f + mod, z, 0, 0, 0);
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, pos.getY() + 0.6f + mod, z, 0, 0, 0);
+				}
+			}
 		}
 	}
 
