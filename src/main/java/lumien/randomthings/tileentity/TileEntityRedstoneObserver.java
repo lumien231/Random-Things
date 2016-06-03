@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Callback;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.SimpleComponent;
 import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,8 +16,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
+import net.minecraftforge.fml.common.Optional;
 
-public class TileEntityRedstoneObserver extends TileEntityBase
+@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
+public class TileEntityRedstoneObserver extends TileEntityBase implements SimpleComponent
 {
 	public static Set<TileEntityRedstoneObserver> loadedObservers = Collections.newSetFromMap(new WeakHashMap());
 	BlockPos target;
@@ -145,5 +151,35 @@ public class TileEntityRedstoneObserver extends TileEntityBase
 	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
 		return strongPower.get(side);
+	}
+	
+	// OC - Comp
+	@Override
+	@Optional.Method(modid = "OpenComputers")
+	public String getComponentName()
+	{
+		return "redstoneObserver";
+	}
+
+	@Callback
+	@Optional.Method(modid = "OpenComputers")
+	public Object[] setTarget(Context context, Arguments args)
+	{
+		this.setTarget(new BlockPos(args.checkInteger(0), args.checkInteger(1), args.checkInteger(2)));
+		return new Object[] {};
+	}
+
+	@Callback
+	@Optional.Method(modid = "OpenComputers")
+	public Object[] getTarget(Context context, Arguments args)
+	{
+		if (this.target == null)
+		{
+			return new Object[] {};
+		}
+		else
+		{
+			return new Object[] { target.getX(), target.getY(), target.getZ() };
+		}
 	}
 }
