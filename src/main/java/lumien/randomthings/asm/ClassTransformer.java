@@ -135,10 +135,10 @@ public class ClassTransformer implements IClassTransformer
 				{
 					JumpInsnNode jin = (JumpInsnNode) ain;
 
-					if (jin.getOpcode()==Opcodes.IFNULL)
+					if (jin.getOpcode() == Opcodes.IFNULL)
 					{
 						LabelNode l0 = jin.label;
-						
+
 						InsnList toInsert = new InsnList();
 
 						toInsert.add(new VarInsnNode(ALOAD, 0));
@@ -148,11 +148,11 @@ public class ClassTransformer implements IClassTransformer
 						toInsert.add(new InsnNode(AALOAD));
 						toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "shouldPlayerDrop", "(Lnet/minecraft/entity/player/InventoryPlayer;ILnet/minecraft/item/ItemStack;)Z"));
 						toInsert.add(new JumpInsnNode(IFEQ, l0));
-						
+
 						dropAllItems.instructions.insert(jin, toInsert);
-						
-						i+=7;
-						
+
+						i += 7;
+
 						logger.log(Level.DEBUG, " - Patched dropAllItems (2/2)");
 					}
 				}
@@ -542,10 +542,9 @@ public class ClassTransformer implements IClassTransformer
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(MCPNames.method("func_185477_a")))
+			if (mn.name.equals(MCPNames.method("func_185477_a")) && mn.desc.equals("(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;)V"))
 			{
 				addCollisionBoxesToList = mn;
-				break;
 			}
 		}
 
