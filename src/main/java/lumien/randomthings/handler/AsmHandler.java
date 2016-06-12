@@ -17,6 +17,7 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -39,6 +40,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -312,7 +314,7 @@ public class AsmHandler
 					return compound.getInteger("enchantmentColor") | -16777216;
 				}
 			}
-			
+
 			if (currentlyRendering.getItem() instanceof ItemSpectreSword)
 			{
 				return Color.WHITE.darker().darker().getRGB() | -16777216;

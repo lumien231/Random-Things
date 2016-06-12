@@ -55,6 +55,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemEnderPearl;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -69,6 +70,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
@@ -84,11 +86,13 @@ import net.minecraft.world.storage.loot.conditions.RandomChance;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
+import net.minecraftforge.client.event.EntityViewRenderEvent.RenderFogEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -101,11 +105,13 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -134,9 +140,9 @@ public class RTEventHandler
 				ClientModelLibrary.getInstance().reset();
 			}
 		});
-		
+
 	}
-	
+
 	@SubscribeEvent
 	public void loadLootTable(LootTableLoadEvent event)
 	{
@@ -160,13 +166,13 @@ public class RTEventHandler
 			addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.5f);
 		}
 	}
-	
-	private void addSingleItemWithChance(String name,LootTable table,Item item,float chance)
+
+	private void addSingleItemWithChance(String name, LootTable table, Item item, float chance)
 	{
-		table.addPool(new LootPool(new LootEntry[]{new LootEntryItem(item,1,0,new LootFunction[]{},new LootCondition[]{},name)},new LootCondition[]{new RandomChance(chance)},new RandomValueRange(1,1),new RandomValueRange(0,0),name));
+		table.addPool(new LootPool(new LootEntry[] { new LootEntryItem(item, 1, 0, new LootFunction[] {}, new LootCondition[] {}, name) }, new LootCondition[] { new RandomChance(chance) }, new RandomValueRange(1, 1), new RandomValueRange(0, 0), name));
 
 	}
-	
+
 	@SubscribeEvent
 	public void playerClone(PlayerEvent.Clone event)
 	{
@@ -233,7 +239,7 @@ public class RTEventHandler
 		{
 			ServerModelLibrary.getInstance().tick();
 		}
-		
+
 		if (tickEvent instanceof WorldTickEvent)
 		{
 			WorldTickEvent worldTickEvent = (WorldTickEvent) tickEvent;
@@ -245,24 +251,6 @@ public class RTEventHandler
 		}
 	}
 
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void renderLiving(RenderLivingEvent.Pre<EntityLivingBase> event)
-	{
-		final EntityLivingBase entity = event.getEntity();
-
-		if (event.getEntity().isPotionActive(ModPotions.boss))
-		{
-			BossInfo displayData = new BossInfo(entity.getUniqueID(), entity.getDisplayName(), Color.PURPLE, Overlay.PROGRESS)
-			{
-
-
-			};
-
-			// BossStatus.setBossStatus(displayData, false); TODO
-		}
-	}
-	
 	@SubscribeEvent
 	public void notifyNeighbors(NeighborNotifyEvent event)
 	{

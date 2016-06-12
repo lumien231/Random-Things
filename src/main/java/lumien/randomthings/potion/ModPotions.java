@@ -18,7 +18,6 @@ public class ModPotions
 	public static ImbueCollapse imbueCollapse;
 	
 	public static EffectCollapse collapse;
-	public static EffectBoss boss;
 
 	public static void preInit(FMLPreInitializationEvent event)
 	{
@@ -29,6 +28,5 @@ public class ModPotions
 		imbueCollapse = new ImbueCollapse();
 		
 		collapse = new EffectCollapse();
-		boss = new EffectBoss();
 	}
 }

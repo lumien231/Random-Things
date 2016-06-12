@@ -1,12 +1,17 @@
 package lumien.randomthings.item;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import lumien.randomthings.potion.ModPotions;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +22,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -83,7 +89,7 @@ public class ItemIngredient extends ItemBase
 			IBlockState state = worldIn.getBlockState(pos);
 
 			int saplingID = OreDictionary.getOreID("treeSapling");
-			
+
 			if (state.getBlock() != ModBlocks.spectreSapling)
 			{
 				for (int id : OreDictionary.getOreIDs(new ItemStack(state.getBlock())))
@@ -101,30 +107,26 @@ public class ItemIngredient extends ItemBase
 				}
 			}
 		}
-
-		return EnumActionResult.PASS;
-	}
-
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
-	{
-		if (!worldIn.isRemote)
+		else if (getIngredient(stack) == INGREDIENT.EVIL_TEAR)
 		{
-			if (getIngredient(itemStackIn) == INGREDIENT.EVIL_TEAR && !playerIn.isPotionActive(ModPotions.boss))
+			IBlockState state = worldIn.getBlockState(pos);
+
+			if (state.getBlock() == Blocks.END_ROD)
 			{
-				playerIn.addPotionEffect(new PotionEffect(ModPotions.boss, 20 * 60 * 20));
-				worldIn.playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.4F);
-
-				ItemStack reduce = itemStackIn.copy();
-				if (!playerIn.capabilities.isCreativeMode)
+				if (EntityArtificialEndPortal.isValidPosition(worldIn, pos.down(3), true))
 				{
-					reduce.stackSize--;
+					if (!worldIn.isRemote)
+					{
+						BlockPos portalCenter = pos.down(3);
+						worldIn.spawnEntityInWorld(new EntityArtificialEndPortal(worldIn, portalCenter.getX()+0.5, portalCenter.getY(), portalCenter.getZ()+0.5));
+						stack.stackSize--;
+					}
+					
+					return EnumActionResult.SUCCESS;
 				}
-
-				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, reduce);
 			}
 		}
 
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		return EnumActionResult.PASS;
 	}
 }
