@@ -92,6 +92,7 @@ public class ItemIngredient extends ItemBase
 					{
 						if (!worldIn.isRemote)
 						{
+							stack.stackSize--;
 							worldIn.setBlockState(pos, ModBlocks.spectreSapling.getDefaultState());
 						}
 
