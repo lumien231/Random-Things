@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.config.Features;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import lumien.randomthings.potion.ModPotions;
 import net.minecraft.block.state.IBlockState;
@@ -107,7 +108,7 @@ public class ItemIngredient extends ItemBase
 				}
 			}
 		}
-		else if (getIngredient(stack) == INGREDIENT.EVIL_TEAR)
+		else if (getIngredient(stack) == INGREDIENT.EVIL_TEAR && Features.ARTIFICIAL_END_PORTAL)
 		{
 			IBlockState state = worldIn.getBlockState(pos);
 
