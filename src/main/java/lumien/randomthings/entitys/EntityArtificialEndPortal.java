@@ -24,6 +24,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.sound.SoundSetupEvent;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
@@ -69,6 +70,13 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 				{
 					this.setDead();
 				}
+			}
+		}
+		else
+		{
+			if (this.actionTimer == 85)
+			{
+				this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS, 0.2F, 1, false);
 			}
 		}
 	}
