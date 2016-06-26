@@ -3,6 +3,7 @@ package lumien.randomthings.tileentity;
 import java.lang.ref.WeakReference;
 import java.util.UUID;
 
+import com.google.common.base.Charsets;
 import com.mojang.authlib.GameProfile;
 
 import lumien.randomthings.block.BlockBlockBreaker;
@@ -26,6 +27,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 {
+	public static final GameProfile breakerProfile = new GameProfile(UUID.nameUUIDFromBytes("RTBlockBreaker".getBytes(Charsets.UTF_8)), "RTBlockBreaker");
+
 	UUID uuid;
 
 	boolean mining;
@@ -45,7 +48,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 			syncTE();
 		}
 
-		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) worldObj, new GameProfile(null, "RTBlockBreaker")));
+		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) worldObj, breakerProfile));
 
 		ItemStack unbreakingIronPickaxe = new ItemStack(Items.IRON_PICKAXE, 1);
 		unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
