@@ -66,7 +66,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 				for (int i = 0; i < 5; i++)
 				{
 					BlockPos testPos = getPos(searchCounter);
-					Biome testBiome = this.worldObj.getBiomeGenForCoords(testPos);
+					Biome testBiome = this.worldObj.getBiome(testPos);
 					ResourceLocation registryName = testBiome.getRegistryName();
 
 					boolean exist = false;

@@ -87,7 +87,7 @@ public class WorldGenCores implements IWorldGenerator
 
 				if (target != null && target.getY() >= 0)
 				{
-					Biome biome = world.getBiomeGenForCoords(target);
+					Biome biome = world.getBiome(target);
 
 					int natureMult = 30;
 					if (BiomeDictionary.isBiomeOfType(biome, Type.DENSE))

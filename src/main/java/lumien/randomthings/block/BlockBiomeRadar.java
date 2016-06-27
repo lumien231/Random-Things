@@ -50,7 +50,7 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 			return Color.WHITE.getRGB();
 		}
 
-		return new Color(RenderUtils.getBiomeColor(worldIn, worldIn.getBiomeGenForCoords(pos), pos)).brighter().getRGB();
+		return new Color(RenderUtils.getBiomeColor(worldIn, worldIn.getBiome(pos), pos)).brighter().getRGB();
 	}
 
 	@Override

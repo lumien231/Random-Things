@@ -47,7 +47,7 @@ public class RenderUtils
 
 	        for (final BlockPos.MutableBlockPos blockpos$mutableblockpos : BlockPos.getAllInBoxMutable(pos.add(-1, 0, -1), pos.add(1, 0, 1)))
 	        {
-	        	final Biome biomeA = worldIn.getBiomeGenForCoords(blockpos$mutableblockpos);
+	        	final Biome biomeA = worldIn.getBiome(blockpos$mutableblockpos);
 	        	int l = Color.WHITE.getRGB();
 				try
 				{

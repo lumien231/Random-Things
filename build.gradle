@@ -31,7 +31,6 @@ dependencies {
 
 version = "3.7.3"
 group= "lumien.randomthings"
-archivesBaseName = "RandomThings-MC1.9.4"
 
 jar {
     manifest {
@@ -40,7 +39,7 @@ jar {
 }
 
 minecraft {
-    version = "1.9.4-12.17.0.1931-1.9.4"
+    version = "1.10-12.18.0.2000-1.10.0"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -48,13 +47,15 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20160518"
+    mappings = "snapshot_20160627"
     
     replaceIn "lib/Reference.java"
     replace "@VERSION@",project.version
     
     useDepAts = true
 }
+
+archivesBaseName = "RandomThings-MC" + minecraft.version
 
 dependencies {
     // you may put jars on which you depend on in ./libs

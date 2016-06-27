@@ -53,7 +53,7 @@ public class BlockBiomeGlass extends BlockBase implements IRTBlockColor
 			return Color.WHITE.getRGB();
 		}
 
-		return RenderUtils.getBiomeColor(access, access.getBiomeGenForCoords(pos), pos);
+		return RenderUtils.getBiomeColor(access, access.getBiome(pos), pos);
 	}
 
 	@Override

@@ -57,7 +57,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(FACING, BlockDispenser.getFacing(meta));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7));
 	}
 
 	@Override

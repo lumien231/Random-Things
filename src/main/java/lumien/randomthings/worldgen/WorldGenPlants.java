@@ -43,7 +43,7 @@ public class WorldGenPlants implements IWorldGenerator
 
 				if (target != null && target.getY() >= 0)
 				{
-					Biome biome = world.getBiomeGenForCoords(target);
+					Biome biome = world.getBiome(target);
 
 					if (world.isAirBlock(target) && biome.getFloatTemperature(target) >= 0.8F && ModBlocks.pitcherPlant.canBlockStay(world, target, ModBlocks.pitcherPlant.getDefaultState()))
 					{

@@ -87,7 +87,7 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 			return Color.WHITE.getRGB();
 		}
 
-		return RenderUtils.getBiomeColor(worldIn, worldIn.getBiomeGenForCoords(pos), pos);
+		return RenderUtils.getBiomeColor(worldIn, worldIn.getBiome(pos), pos);
 	}
 
 	public static enum EnumType implements IStringSerializable
