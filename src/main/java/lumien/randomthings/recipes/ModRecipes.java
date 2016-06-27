@@ -4,6 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ItemIngredient;
+import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler;
@@ -15,6 +16,8 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagByte;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -125,9 +128,9 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.superLubricentPlatform, 6), "iii", "xex", 'i', ModBlocks.superLubricentIce, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.filteredItemRedirector), "xpx", "xrx", "xsx", 'p', paper, 'r', ModBlocks.itemRedirector, 's', Items.STRING));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.filteredSuperLubricentPlatform), "xpx", "xrx", "xsx", 'p', paper, 'r', ModBlocks.superLubricentPlatform, 's', Items.STRING));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.redstoneObserver), "rqr","qeq","rqr",'r',redstoneDust,'q',Items.QUARTZ,'e',Items.ENDER_EYE));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeRadar), "iii","bxb","iii",'i',"ingotIron",'b',ModBlocks.biomeGlass));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.redstoneObserver), "rqr", "qeq", "rqr", 'r', redstoneDust, 'q', Items.QUARTZ, 'e', Items.ENDER_EYE));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeRadar), "iii", "bxb", "iii", 'i', "ingotIron", 'b', ModBlocks.biomeGlass));
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.HOPPER, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));
 
@@ -148,9 +151,9 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreKey), "ixx", "ipx", "xxi", 'i', spectreIngot, 'p', stableEnderpearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneActivator), "iri", "iti", "iii", 'i', "ingotIron", 'r', "dustRedstone", 't', redstoneTorch));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneRemote), "aaa", "oso", "ooo", 'a', ModItems.redstoneActivator, 'o', Blocks.OBSIDIAN, 's', stableEnderpearl));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAnchor), "xix","iei","iii",'i',"ingotIron",'e',ectoPlasm));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx","xsx","xox",'s',spectreIngot,'o',obsidian));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAnchor), "xix", "iei", "iii", 'i', "ingotIron", 'e', ectoPlasm));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx", "xsx", "xox", 's', spectreIngot, 'o', obsidian));
+
 		// Ingredients
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.EVIL_TEAR.id), "xsx", "xtx", "xex", 's', witherSkull, 't', ghastTear, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id), "xlx", "xix", "xex", 'l', lapis, 'i', "ingotGold", 'e', ectoPlasm));
@@ -173,8 +176,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.platform, 6, 5), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 5), 'e', enderPearl));
 
 		GameRegistry.addRecipe(new RecipeWorkbench());
-		
-		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.spectrePlank,4), ModBlocks.spectreLog);
+
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.spectrePlank, 4), ModBlocks.spectreLog);
 
 		createDyeRecipes(new ItemStack(Blocks.BRICK_BLOCK), ModBlocks.stainedBrick);
 		createGrassSeedsRecipes();
@@ -253,7 +256,7 @@ public class ModRecipes
 			{
 				ItemStack[] aitemstack = new ItemStack[inv.getSizeInventory()];
 
-		        return aitemstack;
+				return aitemstack;
 			}
 
 			@Override
@@ -290,15 +293,138 @@ public class ModRecipes
 						}
 					}
 				}
-				
+
 				ItemStack result = target.copy();
-				
+
 				result.setTagInfo("spectreAnchor", new NBTTagByte((byte) 0));
-				
+
 				return result;
 			}
 		});
 
+		// Golden Compass
+		GameRegistry.addRecipe(new IRecipe()
+		{
+			@Override
+			public boolean matches(InventoryCrafting inv, World worldIn)
+			{
+				ItemStack compass = null;
+				ItemStack target = null;
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (is != null)
+					{
+						if (is.getItem() == ModItems.goldenCompass)
+						{
+							if (compass == null)
+							{
+								compass = is;
+							}
+							else
+							{
+								return false;
+							}
+						}
+						else
+						{
+							if (target == null)
+							{
+								if (is.getItem() == ModItems.positionFilter)
+								{
+									target = is;
+								}
+								else
+								{
+									return false;
+								}
+							}
+							else
+							{
+								return false;
+							}
+						}
+					}
+				}
+				return compass != null && target != null && (!target.hasTagCompound() || !target.getTagCompound().hasKey("spectreAnchor"));
+			}
+
+			@Override
+			public ItemStack[] getRemainingItems(InventoryCrafting inv)
+			{
+				ItemStack[] aitemstack = new ItemStack[inv.getSizeInventory()];
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (is != null)
+					{
+						if (is.getItem() == ModItems.positionFilter)
+						{
+							aitemstack[i] = is.copy();
+						}
+					}
+				}
+				
+				return aitemstack;
+			}
+
+			@Override
+			public int getRecipeSize()
+			{
+				return 2;
+			}
+
+			@Override
+			public ItemStack getRecipeOutput()
+			{
+				return new ItemStack(ModItems.goldenCompass);
+			}
+
+			@Override
+			public ItemStack getCraftingResult(InventoryCrafting inv)
+			{
+				ItemStack compass = null;
+				ItemStack target = null;
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (is != null)
+					{
+						if (is.getItem() == ModItems.goldenCompass)
+						{
+							compass = is;
+						}
+						else
+						{
+							target = is;
+						}
+					}
+				}
+
+				ItemStack result = compass.copy();
+
+				BlockPos pos = ItemPositionFilter.getPosition(target);
+
+				if (pos != null)
+				{
+					if (result.getTagCompound() == null)
+					{
+						result.setTagCompound(new NBTTagCompound());
+					}
+					NBTTagCompound compound = result.getTagCompound();
+
+					compound.setInteger("targetX", pos.getX());
+					compound.setInteger("targetZ", pos.getZ());
+				}
+				return result;
+			}
+		});
 	}
 
 	private static void createGrassSeedsRecipes()
