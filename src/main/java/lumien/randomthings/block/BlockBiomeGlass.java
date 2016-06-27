@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import lumien.randomthings.item.block.ItemBlockColored;
 import lumien.randomthings.lib.IRTBlockColor;
+import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -51,11 +52,8 @@ public class BlockBiomeGlass extends BlockBase implements IRTBlockColor
 		{
 			return Color.WHITE.getRGB();
 		}
-		int foliageColor = BiomeColorHelper.getFoliageColorAtPos(access, pos);
-		int waterColor = BiomeColorHelper.getWaterColorAtPos(access, pos);
-		int grassColor = BiomeColorHelper.getGrassColorAtPos(access, pos);
 
-		return foliageColor;
+		return RenderUtils.getBiomeColor(access, access.getBiomeGenForCoords(pos), pos);
 	}
 
 	@Override

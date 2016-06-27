@@ -15,6 +15,7 @@ import lumien.randomthings.network.messages.magicavoxel.MessageModelData;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelList;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelRequest;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelRequestUpdate;
+import lumien.randomthings.network.messages.sync.MessageBiomeRadarAntenna;
 
 public class PacketHandler
 {
@@ -37,5 +38,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageModelRequest.class);
 		INSTANCE.registerMessage(MessageModelRequestUpdate.class);
 		INSTANCE.registerMessage(MessageModelList.class);
+		INSTANCE.registerMessage(MessageBiomeRadarAntenna.class);
 	}
 }

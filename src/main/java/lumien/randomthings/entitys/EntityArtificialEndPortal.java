@@ -195,7 +195,6 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 
 			if (!portalList.isEmpty())
 			{
-				System.out.println("Other Portal");
 				return false;
 			}
 		}

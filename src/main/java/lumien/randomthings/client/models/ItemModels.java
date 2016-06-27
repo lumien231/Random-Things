@@ -65,6 +65,7 @@ public class ItemModels
 		registerBlock(ModBlocks.filteredItemRedirector);
 		registerBlock(ModBlocks.filteredSuperLubricentPlatform);
 		registerBlock(ModBlocks.redstoneObserver);
+		registerBlock(ModBlocks.biomeRadar);
 		
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import lumien.randomthings.item.block.ItemBlockBiomeStone;
 import lumien.randomthings.lib.IRTBlockColor;
+import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -79,18 +80,14 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockState state,IBlockAccess worldIn, BlockPos pos, int renderPass)
+	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int renderPass)
 	{
 		if (pos == null)
 		{
 			return Color.WHITE.getRGB();
 		}
-		
-		int foliageColor = BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
-		int waterColor = BiomeColorHelper.getWaterColorAtPos(worldIn, pos);
-		int grassColor = BiomeColorHelper.getGrassColorAtPos(worldIn, pos);
 
-		return foliageColor;
+		return RenderUtils.getBiomeColor(worldIn, worldIn.getBiomeGenForCoords(pos), pos);
 	}
 
 	public static enum EnumType implements IStringSerializable

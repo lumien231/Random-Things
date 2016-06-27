@@ -126,6 +126,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.filteredItemRedirector), "xpx", "xrx", "xsx", 'p', paper, 'r', ModBlocks.itemRedirector, 's', Items.STRING));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.filteredSuperLubricentPlatform), "xpx", "xrx", "xsx", 'p', paper, 'r', ModBlocks.superLubricentPlatform, 's', Items.STRING));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.redstoneObserver), "rqr","qeq","rqr",'r',redstoneDust,'q',Items.QUARTZ,'e',Items.ENDER_EYE));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeRadar), "iii","bxb","iii",'i',"ingotIron",'b',ModBlocks.biomeGlass));
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.HOPPER, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));

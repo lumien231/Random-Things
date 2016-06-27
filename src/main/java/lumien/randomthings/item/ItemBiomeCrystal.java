@@ -1,9 +1,17 @@
 package lumien.randomthings.item;
 
+import java.awt.Color;
+import java.util.List;
+
 import lumien.randomthings.lib.IRTItemColor;
+import lumien.randomthings.util.client.RenderUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeColorHelper;
@@ -19,41 +27,79 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 	{
 		super("biomeCrystal");
 
-		/*
-		 * ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new
-		 * WeightedRandomChestContent(new ItemStack(this), 1, 15, 20));
-		 * ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new
-		 * WeightedRandomChestContent(new ItemStack(this), 1, 15, 20));
-		 * ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new
-		 * WeightedRandomChestContent(new ItemStack(this), 1, 1, 1));
-		 * TODO
-		 */
+		this.setMaxStackSize(1);
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack stack)
+	{
+		String myName = super.getItemStackDisplayName(stack);
+
+		Biome biome;
+
+		if ((biome = getBiome(stack)) != null)
+		{
+			myName = myName + " (" + biome.getBiomeName() + ")";
+		}
+
+		return myName;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	{
+		super.addInformation(stack, playerIn, tooltip, advanced);
+
+		Biome biome;
+
+		if ((biome = getBiome(stack)) != null)
+		{
+			tooltip.add(biome.getBiomeName());
+		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
-		EntityPlayerSP thePlayer = FMLClientHandler.instance().getClientPlayerEntity();
-		WorldClient theWorld = FMLClientHandler.instance().getWorldClient();
-		BlockPos pos = new BlockPos(thePlayer.posX, thePlayer.posY, thePlayer.posZ);
+		Biome biome;
 
-		int foliageColor = BiomeColorHelper.getFoliageColorAtPos(theWorld, pos);
-		int waterColor = BiomeColorHelper.getWaterColorAtPos(theWorld, pos);
-		int grassColor = BiomeColorHelper.getGrassColorAtPos(theWorld, pos);
+		if ((biome = getBiome(stack)) != null)
+		{
+			return RenderUtils.getBiomeColor(null, biome, Minecraft.getMinecraft().thePlayer.getPosition());
+		}
 
-		return foliageColor;
+		return Color.WHITE.getRGB();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack)
 	{
-		EntityPlayerSP thePlayer = FMLClientHandler.instance().getClientPlayerEntity();
-		WorldClient theWorld = FMLClientHandler.instance().getWorldClient();
-		BlockPos pos = new BlockPos(thePlayer.posX, thePlayer.posY, thePlayer.posZ);
+		Biome biome;
 
-		Biome biome = theWorld.getBiomeGenForCoords(pos);
-		return BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL);
+		if ((biome = getBiome(stack)) != null)
+		{
+			return BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL);
+		}
+
+		return false;
+	}
+
+	public static Biome getBiome(ItemStack stack)
+	{
+		NBTTagCompound compound;
+
+		if ((compound = stack.getTagCompound()) != null && compound.hasKey("biomeName"))
+		{
+			String biomeName = compound.getString("biomeName");
+
+			Biome biome = Biome.REGISTRY.getObject(new ResourceLocation(biomeName));
+
+			return biome;
+		}
+
+		return null;
 	}
 }

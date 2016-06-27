@@ -75,6 +75,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfo.Overlay;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootEntry;
 import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.LootPool;
@@ -127,6 +129,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RTEventHandler
 {
 	static Random rng = new Random();
+	
+	
+	public static int clientAnimationCounter;
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
@@ -165,11 +170,32 @@ public class RTEventHandler
 		{
 			addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.5f);
 		}
+
+		if (event.getName().toString().startsWith("minecraft:chests/"))
+		{
+			LootEntry crystalEntry = new LootEntryItem(ModItems.biomeCrystal, 1, 0, new LootFunction[] { new LootFunction(new LootCondition[] {})
+			{
+				@Override
+				public ItemStack apply(ItemStack stack, Random rand, LootContext context)
+				{
+					Object[] locationArray =  Biome.REGISTRY.getKeys().toArray();
+					ResourceLocation randomLocation = (ResourceLocation) locationArray[rand.nextInt(locationArray.length)];
+
+					stack.setTagCompound(new NBTTagCompound());
+					stack.getTagCompound().setString("biomeName", randomLocation.toString());
+
+					return stack;
+				}
+			} }, new LootCondition[] {}, "randomthings:biomeCrystal");
+
+			LootPool crystalPool = new LootPool(new LootEntry[] { crystalEntry }, new LootCondition[] { new RandomChance(0.2f) }, new RandomValueRange(1, 1), new RandomValueRange(0, 0), "randomthings:biomeCrystal");
+			table.addPool(crystalPool);
+		}
 	}
 
 	private void addSingleItemWithChance(String name, LootTable table, Item item, float chance)
 	{
-		table.addPool(new LootPool(new LootEntry[] { new LootEntryItem(item, 1, 0, new LootFunction[] {}, new LootCondition[] {}, name) }, new LootCondition[] { new RandomChance(chance) }, new RandomValueRange(1, 1), new RandomValueRange(0, 0), name));
+		table.addPool(new LootPool(new LootEntry[] { new LootEntryItem(item, 1, 0, new LootFunction[] {}, new LootCondition[] {}, "randomthings:" + name) }, new LootCondition[] { new RandomChance(chance) }, new RandomValueRange(1, 1), new RandomValueRange(0, 0), "randomthings:" + name));
 
 	}
 
@@ -233,6 +259,11 @@ public class RTEventHandler
 		if ((tickEvent.type == TickEvent.Type.CLIENT || tickEvent.type == TickEvent.Type.SERVER) && tickEvent.phase == TickEvent.Phase.END)
 		{
 			TileEntityRainShield.rainCache.clear();
+		}
+		
+		if ((tickEvent.type == TickEvent.Type.CLIENT))
+		{
+			clientAnimationCounter++;
 		}
 
 		if (tickEvent instanceof ServerTickEvent)

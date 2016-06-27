@@ -56,6 +56,7 @@ public class ModBlocks
 	public static BlockFilteredItemRedirector filteredItemRedirector;
 	public static BlockFilteredSuperLubricentPlatform filteredSuperLubricentPlatform;
 	public static BlockRedstoneObserver redstoneObserver;
+	public static BlockBiomeRadar biomeRadar;
 	
 	public static BlockSpectrePlank spectrePlank;
 	public static BlockSpectreSapling spectreSapling;
@@ -128,6 +129,7 @@ public class ModBlocks
 		filteredItemRedirector = new BlockFilteredItemRedirector();
 		filteredSuperLubricentPlatform = new BlockFilteredSuperLubricentPlatform();
 		redstoneObserver = new BlockRedstoneObserver();
+		biomeRadar = new BlockBiomeRadar();
 		
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();

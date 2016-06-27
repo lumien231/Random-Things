@@ -14,6 +14,7 @@ import lumien.randomthings.block.BlockBase;
 import lumien.randomthings.client.models.ItemModels;
 import lumien.randomthings.client.models.blocks.BlockModels;
 import lumien.randomthings.client.render.RenderArtificialEndPortal;
+import lumien.randomthings.client.render.RenderBiomeRadar;
 import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
 import lumien.randomthings.client.render.RenderSpecialChest;
@@ -27,6 +28,7 @@ import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.lib.IRTItemColor;
+import lumien.randomthings.tileentity.TileEntityBiomeRadar;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
@@ -184,6 +186,7 @@ public class ClientProxy extends CommonProxy
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBiomeRadar.class, new RenderBiomeRadar());
 
 		registerColors();
 	}

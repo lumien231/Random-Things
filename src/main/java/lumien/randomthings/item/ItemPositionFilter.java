@@ -51,20 +51,25 @@ public class ItemPositionFilter extends ItemBase
 	{
 		if (!worldIn.isRemote)
 		{
-			NBTTagCompound compound;
-			compound = stack.getTagCompound();
-			if (compound == null)
-			{
-				stack.setTagCompound(compound = new NBTTagCompound());
-			}
-
-			compound.setBoolean("hasPosition", true);
-			compound.setInteger("dimension", worldIn.provider.getDimension());
-			compound.setInteger("filterX", pos.getX());
-			compound.setInteger("filterY", pos.getY());
-			compound.setInteger("filterZ", pos.getZ());
+			setPosition(stack, worldIn.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ());
 		}
 		return EnumActionResult.SUCCESS;
+	}
+
+	public static void setPosition(ItemStack positionFilter, int dimension, int posX, int posY, int posZ)
+	{
+		NBTTagCompound compound;
+		compound = positionFilter.getTagCompound();
+		if (compound == null)
+		{
+			positionFilter.setTagCompound(compound = new NBTTagCompound());
+		}
+
+		compound.setBoolean("hasPosition", true);
+		compound.setInteger("dimension", dimension);
+		compound.setInteger("filterX", posX);
+		compound.setInteger("filterY", posY);
+		compound.setInteger("filterZ", posZ);
 	}
 
 	public static int getDimension(ItemStack positionFilter)

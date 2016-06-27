@@ -48,6 +48,7 @@ tile.superLubricentPlatform.name=Super Lubricent Platform
 tile.filteredItemRedirector.name=Filtered Item Redirector
 tile.filteredSuperLubricentPlatform.name=Filtered Super Lubricent Platform
 tile.redstoneObserver.name=Redstone Observer
+tile.biomeRadar.name=Biome Radar
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
