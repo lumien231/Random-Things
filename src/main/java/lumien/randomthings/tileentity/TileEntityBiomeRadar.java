@@ -248,9 +248,9 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 		this.state = STATE.values()[compound.getInteger("state")];
 		this.powered = compound.getBoolean("powered");
 
-		if (biomeToSearch != null)
+		if (compound.hasKey("biomeToSearch"))
 		{
-			compound.setString("biomeToSearch", biomeToSearch.getRegistryName().toString());
+			this.biomeToSearch = Biome.REGISTRY.getObject(new ResourceLocation(compound.getString("biomeToSearch")));
 		}
 
 		this.searchCounter = compound.getInteger("searchCounter");

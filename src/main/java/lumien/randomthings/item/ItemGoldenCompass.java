@@ -34,7 +34,6 @@ public class ItemGoldenCompass extends ItemBase
 			long lastUpdateTick;
 
 			@SideOnly(Side.CLIENT)
-
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
 				if (entityIn == null && !stack.isOnItemFrame())
