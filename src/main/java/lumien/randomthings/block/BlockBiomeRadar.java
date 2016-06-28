@@ -42,6 +42,19 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 	}
 	
 	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntityBiomeRadar radar = (TileEntityBiomeRadar) worldIn.getTileEntity(pos);
+		
+		if (radar.getCurrentCrystal()!=null)
+		{
+			WorldUtil.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), radar.getCurrentCrystal());
+		}
+		
+		super.breakBlock(worldIn, pos, state);
+	}
+	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int renderPass)
 	{
