@@ -85,7 +85,7 @@ public class EntitySpirit extends EntityFlying
 				EntityPlayer player = (EntityPlayer) eds.getEntity();
 				
 				ItemStack equipped;
-				if ((equipped = player.getHeldItemMainhand())!=null && equipped.getItem() == ModItems.spectreSword)
+				if ((equipped = player.getHeldItemMainhand()) != null && equipped.getItem() == ModItems.spectreSword)
 				{
 					return super.attackEntityFrom(source, amount);
 				}
