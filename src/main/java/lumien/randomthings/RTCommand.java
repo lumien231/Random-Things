@@ -46,7 +46,7 @@ public class RTCommand extends CommandBase
 	{
 		if (args.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(args, new String[] { "setBiomeCrystal", "generateBiomeCrystalChests","tpFilter" });
+			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter" });
 		}
 		else if (args.length == 2)
 		{
@@ -121,8 +121,8 @@ public class RTCommand extends CommandBase
 				if ((held = player.getHeldItemMainhand()) != null && held.getItem() == ModItems.positionFilter)
 				{
 					BlockPos pos = ItemPositionFilter.getPosition(held);
-					
-					player.connection.setPlayerLocation(pos.getX(), pos.getY()+150, pos.getZ(), player.rotationYaw, player.rotationPitch);
+
+					player.connection.setPlayerLocation(pos.getX(), pos.getY() + 150, pos.getZ(), player.rotationYaw, player.rotationPitch);
 				}
 			}
 		}

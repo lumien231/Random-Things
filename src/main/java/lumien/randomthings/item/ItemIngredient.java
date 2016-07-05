@@ -8,8 +8,10 @@ import java.util.Set;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
+import lumien.randomthings.lib.IRTItemColor;
 import lumien.randomthings.potion.ModPotions;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -25,15 +27,17 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemIngredient extends ItemBase
+public class ItemIngredient extends ItemBase implements IRTItemColor
 {
 	static int counter = 0;
 
 	public enum INGREDIENT
 	{
-		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot");
+		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor");
 
 		public String name;
 
@@ -119,15 +123,31 @@ public class ItemIngredient extends ItemBase
 					if (!worldIn.isRemote)
 					{
 						BlockPos portalCenter = pos.down(3);
-						worldIn.spawnEntityInWorld(new EntityArtificialEndPortal(worldIn, portalCenter.getX()+0.5, portalCenter.getY(), portalCenter.getZ()+0.5));
+						worldIn.spawnEntityInWorld(new EntityArtificialEndPortal(worldIn, portalCenter.getX() + 0.5, portalCenter.getY(), portalCenter.getZ() + 0.5));
 						stack.stackSize--;
 					}
-					
+
 					return EnumActionResult.SUCCESS;
 				}
 			}
 		}
 
 		return EnumActionResult.PASS;
+	}
+
+	@Override
+	public int getColorFromItemstack(ItemStack stack, int tintIndex)
+	{
+		if (stack.getItemDamage() == INGREDIENT.BIOME_SENSOR.id && tintIndex == 1)
+		{
+			EntityPlayer player = FMLClientHandler.instance().getClientPlayerEntity();
+
+			if (player != null)
+			{
+				return ModBlocks.biomeStone.colorMultiplier(null, player.worldObj, player.getPosition(), 0);
+			}
+		}
+
+		return -1;
 	}
 }

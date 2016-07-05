@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "randomthings:items/biomeSensor",
+        "layer1": "randomthings:items/biomeSensor_overlay"
+    }
+}

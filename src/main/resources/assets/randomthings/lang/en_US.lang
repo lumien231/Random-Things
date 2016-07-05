@@ -176,6 +176,7 @@ item.ingredient.sakanadeSpores.name=Sakanade Spores
 item.ingredient.evilTear.name=Evil Tear
 item.ingredient.ectoPlasm.name=Ectoplasm
 item.ingredient.spectreIngot.name=Spectre Ingot
+item.ingredient.biomeSensor.name=Biome Sensor
 
 tooltip.general.shift=Hold §6Shift§7 for more information
 tooltip.positionFilter.dimension=Dimension: %d
