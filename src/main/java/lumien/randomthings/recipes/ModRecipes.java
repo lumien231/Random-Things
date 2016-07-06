@@ -206,7 +206,7 @@ public class ModRecipes
 		AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.obsidianWaterWalkingBoots), new ItemStack(ModItems.lavaCharm), new ItemStack(ModItems.lavaWader), 15);
 
 		// Spectre Anchor
-		GameRegistry.addRecipe(new IRecipe()
+		IRecipe anchorRecipe = new IRecipe()
 		{
 			@Override
 			public boolean matches(InventoryCrafting inv, World worldIn)
@@ -303,10 +303,14 @@ public class ModRecipes
 
 				return result;
 			}
-		});
+		};
+		
+		RecipeSorter.register("spectreAnchor", anchorRecipe.getClass(),Category.SHAPELESS , "");
+		GameRegistry.addRecipe(anchorRecipe);
 
 		// Golden Compass
-		GameRegistry.addRecipe(new IRecipe()
+		IRecipe goldenCompassRecipe = 
+		new IRecipe()
 		{
 			@Override
 			public boolean matches(InventoryCrafting inv, World worldIn)
@@ -427,7 +431,10 @@ public class ModRecipes
 				}
 				return result;
 			}
-		});
+				};
+
+		RecipeSorter.register("goldenCompass", goldenCompassRecipe.getClass(), Category.SHAPELESS, "");
+		GameRegistry.addRecipe(goldenCompassRecipe);
 	}
 
 	private static void createGrassSeedsRecipes()

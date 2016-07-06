@@ -8,6 +8,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.entitys.ModEntitys;
+import lumien.randomthings.fluid.ModFluids;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.RTEventHandler;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
@@ -28,6 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -58,6 +60,11 @@ public class RandomThings implements LoadingCallback
 	public ModConfiguration configuration;
 
 	ASMDataTable asmDataTable;
+	
+	static
+	{
+		FluidRegistry.enableUniversalBucket();
+	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -75,6 +82,7 @@ public class RandomThings implements LoadingCallback
 		ModTileEntitys.register();
 		ModEntitys.init();
 		ModPotions.preInit(event);
+		ModFluids.load(event);
 		proxy.registerModels();
 
 		RTEventHandler eventHandler = new RTEventHandler();
