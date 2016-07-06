@@ -225,4 +225,4 @@ item.enderLetter.receiver=Receiver: %s
 item.enderLetter.noPlayer=%s does not seem to reside in this world
 item.enderLetter.noSpace=The letter appears to get rejected
 
-entity.RandomThings.spirit.name=Spirit
+entity.randomthings.spirit.name=Spirit
