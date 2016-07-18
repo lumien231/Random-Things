@@ -3,6 +3,7 @@ package lumien.randomthings.network;
 import lumien.randomthings.network.messages.MessageAdvancedItemCollector;
 import lumien.randomthings.network.messages.MessageAnalogEmitter;
 import lumien.randomthings.network.messages.MessageChatDetector;
+import lumien.randomthings.network.messages.MessageContainerSignal;
 import lumien.randomthings.network.messages.MessageEnderLetter;
 import lumien.randomthings.network.messages.MessageEntityDetector;
 import lumien.randomthings.network.messages.MessageItemFilter;
@@ -39,5 +40,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageModelRequestUpdate.class);
 		INSTANCE.registerMessage(MessageModelList.class);
 		INSTANCE.registerMessage(MessageBiomeRadarAntenna.class);
+		INSTANCE.registerMessage(MessageContainerSignal.class);
 	}
 }

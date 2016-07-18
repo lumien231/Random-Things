@@ -49,6 +49,7 @@ tile.filteredItemRedirector.name=Filtered Item Redirector
 tile.filteredSuperLubricentPlatform.name=Filtered Super Lubricent Platform
 tile.redstoneObserver.name=Redstone Observer
 tile.biomeRadar.name=Biome Radar
+tile.ironDropper.name=Iron Dropper
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -198,6 +199,19 @@ tooltip.itemFilter.whitelist=Whitelist
 tooltip.itemFilter.blacklist=Blacklist
 
 tooltip.spectreAnchor.item=Anchored
+
+tooltip.ironDropper.redstoneMode.pulse=Eject when pulsed
+tooltip.ironDropper.redstoneMode.repeatPowered=Eject continuously while powered
+tooltip.ironDropper.redstoneMode.repeat=Eject continuously
+tooltip.ironDropper.pickupDelay.none=No pickup delay
+tooltip.ironDropper.pickupDelay.5=5 Tick pickup delay
+tooltip.ironDropper.pickupDelay.20=20 Tick pickup delay
+tooltip.ironDropper.randomMotion.yes=Random Velocity
+tooltip.ironDropper.randomMotion.no=Exact Velocity
+tooltip.ironDropper.effects.none=No effects
+tooltip.ironDropper.effects.soundOnly=Sound effects
+tooltip.ironDropper.effects.particlesOnly=Particle effects
+tooltip.ironDropper.effects.both=Sound & Particle effects
 
 gui.basicRedstoneInterface.notarget=No Target
 gui.basicRedstoneInterface.targetX=Target-X: %s

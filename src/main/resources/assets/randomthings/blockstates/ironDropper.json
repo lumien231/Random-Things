@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down":  { "model": "randomthings:ironDropper_vertical", "x": 180 },
+        "facing=up":    { "model": "randomthings:ironDropper_vertical" },
+        "facing=north": { "model": "randomthings:ironDropper" },
+        "facing=south": { "model": "randomthings:ironDropper", "y": 180 },
+        "facing=west":  { "model": "randomthings:ironDropper", "y": 270 },
+        "facing=east":  { "model": "randomthings:ironDropper", "y": 90 }
+    }
+}

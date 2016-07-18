@@ -1,0 +1,7 @@
+{
+    "parent": "block/orientable_vertical",
+    "textures": {
+        "front": "randomthings:blocks/ironDropper/ironDropper_front_vertical",
+        "side": "randomthings:blocks/ironDropper/ironDropper_top"
+    }
+}

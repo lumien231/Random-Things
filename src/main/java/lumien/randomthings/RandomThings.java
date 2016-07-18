@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.ModConfiguration;
+import lumien.randomthings.container.SyncHandler;
 import lumien.randomthings.entitys.ModEntitys;
 import lumien.randomthings.fluid.ModFluids;
 import lumien.randomthings.handler.ModDimensions;
@@ -110,6 +111,7 @@ public class RandomThings implements LoadingCallback
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		proxy.registerRenderers();
+		SyncHandler.postInit(event);
 	}
 
 	@EventHandler

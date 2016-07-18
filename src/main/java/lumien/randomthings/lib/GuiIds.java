@@ -23,4 +23,5 @@ public class GuiIds
 	public static final int REDSTONE_REMOTE_USE = 18;
 	public static final int FILTERED_SUPERLUBRICENT_PLATFORM = 19;
 	public static final int REDSTONE_OBSERVER = 20;
+	public static final int IRON_DROPPER = 21;
 }

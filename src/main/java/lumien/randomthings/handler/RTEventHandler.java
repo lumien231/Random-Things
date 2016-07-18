@@ -130,7 +130,6 @@ public class RTEventHandler
 {
 	static Random rng = new Random();
 	
-	
 	public static int clientAnimationCounter;
 
 	@SubscribeEvent
