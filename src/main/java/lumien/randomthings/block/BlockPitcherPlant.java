@@ -19,6 +19,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,7 +29,7 @@ public class BlockPitcherPlant extends BlockBase
 {
 	protected static final AxisAlignedBB PITCHER_AABB = new AxisAlignedBB(0.5F - 0.2F, 0.0F, 0.5F - 0.2F, 0.5F + 0.2F, 0.2F * 4.0F, 0.5F + 0.2F);
 
-	
+
 	protected BlockPitcherPlant()
 	{
 		super("pitcherPlant", Material.PLANTS);
@@ -34,7 +37,7 @@ public class BlockPitcherPlant extends BlockBase
 		float f = 0.2F;
 		this.setSoundType(SoundType.PLANT);
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -46,30 +49,14 @@ public class BlockPitcherPlant extends BlockBase
 	{
 		ItemStack equipped = heldItem;
 
-		if (equipped != null && FluidContainerRegistry.isEmptyContainer(equipped))
+		if (equipped != null && equipped.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP))
 		{
-			int capacity = FluidContainerRegistry.getContainerCapacity(new FluidStack(FluidRegistry.WATER, 1000), equipped);
+			IFluidHandler fluidHandler = equipped.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
 
-			ItemStack filledContainer = FluidContainerRegistry.fillFluidContainer(new FluidStack(FluidRegistry.WATER, capacity), equipped);
+			int filled = fluidHandler.fill(new FluidStack(FluidRegistry.WATER, 1000), true);
 
-			if (filledContainer != null)
+			if (filled != 0)
 			{
-				if (equipped.stackSize == 1)
-				{
-					playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, filledContainer);
-				}
-				else
-				{
-					equipped.stackSize--;
-
-					boolean added = playerIn.inventory.addItemStackToInventory(filledContainer);
-
-					if (!added)
-					{
-						playerIn.dropItem(filledContainer, false);
-					}
-				}
-
 				return true;
 			}
 		}
@@ -118,21 +105,21 @@ public class BlockPitcherPlant extends BlockBase
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
-    {
-        return NULL_AABB;
-    }
+	{
+		return NULL_AABB;
+	}
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
+	{
+		return false;
+	}
 
 	@Override
-    public boolean isFullCube(IBlockState state)
-    {
-        return false;
-    }
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
