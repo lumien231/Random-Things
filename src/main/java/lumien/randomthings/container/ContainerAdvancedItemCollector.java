@@ -127,14 +127,14 @@ public class ContainerAdvancedItemCollector extends Container
 				{
 					int l = itemstack1.stackSize + par1ItemStack.stackSize;
 
-					if (l <= par1ItemStack.getMaxStackSize())
+					if (l <= par1ItemStack.getMaxStackSize() && l <= slot.getSlotStackLimit())
 					{
 						par1ItemStack.stackSize = 0;
 						itemstack1.stackSize = l;
 						slot.onSlotChanged();
 						flag1 = true;
 					}
-					else if (itemstack1.stackSize < par1ItemStack.getMaxStackSize())
+					else if (itemstack1.stackSize < par1ItemStack.getMaxStackSize() && itemstack1.stackSize < slot.getSlotStackLimit())
 					{
 						par1ItemStack.stackSize -= par1ItemStack.getMaxStackSize() - itemstack1.stackSize;
 						itemstack1.stackSize = par1ItemStack.getMaxStackSize();
