@@ -1,16 +1,11 @@
 package lumien.randomthings.client.render;
 
-import java.lang.reflect.Field;
-
-import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.handler.RTEventHandler;
 import lumien.randomthings.tileentity.TileEntityBiomeRadar;
-import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
 
 public class RenderBiomeRadar extends TileEntitySpecialRenderer<TileEntityBiomeRadar>
 {
@@ -41,7 +36,7 @@ public class RenderBiomeRadar extends TileEntitySpecialRenderer<TileEntityBiomeR
 
 			double pi2 = Math.PI / 2;
 
-			entityItem.hoverStart = (float) (pi2 - ((float) entityItem.getAge() + partialTicks) / 10.0F);
+			entityItem.hoverStart = (float) (pi2 - (entityItem.getAge() + partialTicks) / 10.0F);
 
 			Minecraft.getMinecraft().getRenderManager().doRenderEntity(entityItem, x + 0.5, y - 0.1, z + 0.5, 0, partialTicks, true);
 		}

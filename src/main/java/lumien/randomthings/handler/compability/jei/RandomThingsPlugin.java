@@ -1,7 +1,5 @@
 package lumien.randomthings.handler.compability.jei;
 
-import javax.annotation.Nonnull;
-
 import lumien.randomthings.client.gui.GuiImbuingStation;
 import lumien.randomthings.container.ContainerImbuingStation;
 import lumien.randomthings.handler.compability.jei.anvil.AnvilRecipeCategory;
@@ -14,7 +12,6 @@ import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
-import mezz.jei.api.IRecipeRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
@@ -35,7 +32,7 @@ public class RandomThingsPlugin implements IModPlugin
 	{
 		this.itemRegistry = registry.getItemRegistry();
 		this.jeiHelpers = registry.getJeiHelpers();
-		this.stackHelper = jeiHelpers.getStackHelper();
+		RandomThingsPlugin.stackHelper = jeiHelpers.getStackHelper();
 		
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		registry.addRecipeCategories(new ImbuingRecipeCategory(guiHelper), new AnvilRecipeCategory(guiHelper));

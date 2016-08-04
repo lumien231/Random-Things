@@ -1,19 +1,13 @@
 package lumien.randomthings.block.redstoneinterface;
 
-import java.util.HashSet;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockRedstoneInterface;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityAdvancedRedstoneInterface;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

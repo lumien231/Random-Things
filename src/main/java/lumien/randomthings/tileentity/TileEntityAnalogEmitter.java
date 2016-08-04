@@ -38,6 +38,7 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 		this.emitLevel = compound.getInteger("emitLevel");
 	}
 
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		EnumFacing facing = state.getValue(BlockAnalogEmitter.FACING);

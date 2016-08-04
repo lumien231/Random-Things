@@ -4,9 +4,7 @@ import lumien.randomthings.entitys.EntitySpirit;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,7 +19,8 @@ public class LayerSpiritGel implements LayerRenderer<EntitySpirit>
         this.slimeRenderer = spiritRenderer;
     }
 
-    public void doRenderLayer(EntitySpirit entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
+    @Override
+	public void doRenderLayer(EntitySpirit entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
     {
         if (!entitylivingbaseIn.isInvisible())
         {
@@ -36,7 +35,8 @@ public class LayerSpiritGel implements LayerRenderer<EntitySpirit>
         }
     }
 
-    public boolean shouldCombineTextures()
+    @Override
+	public boolean shouldCombineTextures()
     {
         return true;
     }

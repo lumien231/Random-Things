@@ -133,6 +133,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		curBlockDamage = compound.getFloat("curBlockDamage");
 	}
 
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		BlockPos targetPos = pos.offset(state.getValue(BlockBlockBreaker.FACING));

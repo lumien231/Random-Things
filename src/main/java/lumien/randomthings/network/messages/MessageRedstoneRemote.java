@@ -1,7 +1,6 @@
 package lumien.randomthings.network.messages;
 
 import io.netty.buffer.ByteBuf;
-import lumien.randomthings.container.ContainerRedstoneRemote;
 import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.ItemPositionFilter;

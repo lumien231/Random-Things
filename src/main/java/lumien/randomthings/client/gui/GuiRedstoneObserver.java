@@ -2,8 +2,6 @@ package lumien.randomthings.client.gui;
 
 import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.network.messages.MessageLightRedirector;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
-import lumien.randomthings.tileentity.TileEntityRainShield;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -4,10 +4,6 @@ import java.util.Random;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.block.spectretree.BlockSpectreLeaf;
-import lumien.randomthings.block.spectretree.BlockSpectreLog;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -24,7 +20,8 @@ public class WorldGenSpectreTree extends WorldGenAbstractTree
         super(notify);
     }
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
+    @Override
+	public boolean generate(World worldIn, Random rand, BlockPos position)
     {
         int i = rand.nextInt(3) + 5;
 

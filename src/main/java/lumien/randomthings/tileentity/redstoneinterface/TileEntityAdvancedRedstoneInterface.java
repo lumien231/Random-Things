@@ -146,6 +146,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 		return positionInventory;
 	}
 
+	@Override
 	public void broken()
 	{
 		super.broken();

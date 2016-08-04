@@ -2,10 +2,7 @@ package lumien.randomthings.container;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -44,7 +41,7 @@ public abstract class ContainerTE<E extends TileEntity> extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return te != null && playerIn.worldObj.getTileEntity(te.getPos()) == te && playerIn.getDistanceSq((double) this.te.getPos().getX() + 0.5D, (double) this.te.getPos().getY() + 0.5D, (double) this.te.getPos().getZ() + 0.5D) <= 64.0D;
+		return te != null && playerIn.worldObj.getTileEntity(te.getPos()) == te && playerIn.getDistanceSq(this.te.getPos().getX() + 0.5D, this.te.getPos().getY() + 0.5D, this.te.getPos().getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

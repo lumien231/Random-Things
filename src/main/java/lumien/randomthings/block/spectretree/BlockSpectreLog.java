@@ -2,8 +2,6 @@ package lumien.randomthings.block.spectretree;
 
 import lumien.randomthings.block.BlockBase;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,7 +9,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -42,7 +39,8 @@ public class BlockSpectreLog extends BlockRotatedPillar
         OreDictionary.registerOre("logWood", this);
     }
     
-    protected BlockStateContainer createBlockState()
+    @Override
+	protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] { LOG_AXIS});
     }
@@ -59,7 +57,8 @@ public class BlockSpectreLog extends BlockRotatedPillar
     	return this.getDefaultState().withProperty(LOG_AXIS, EnumAxis.values()[meta]);
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    @Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         int i = 4;
         int j = i + 1;
@@ -82,7 +81,8 @@ public class BlockSpectreLog extends BlockRotatedPillar
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    @Override
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getStateFromMeta(meta).withProperty(LOG_AXIS, BlockSpectreLog.EnumAxis.fromFacingAxis(facing.getAxis()));
     }
@@ -91,14 +91,15 @@ public class BlockSpectreLog extends BlockRotatedPillar
      * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
      * blockstate.
      */
-    public IBlockState withRotation(IBlockState state, Rotation rot)
+    @Override
+	public IBlockState withRotation(IBlockState state, Rotation rot)
     {
         switch (rot)
         {
             case COUNTERCLOCKWISE_90:
             case CLOCKWISE_90:
 
-                switch ((BlockSpectreLog.EnumAxis)state.getValue(LOG_AXIS))
+                switch (state.getValue(LOG_AXIS))
                 {
                     case X:
                         return state.withProperty(LOG_AXIS, BlockSpectreLog.EnumAxis.Z);
@@ -130,7 +131,8 @@ public class BlockSpectreLog extends BlockRotatedPillar
             this.name = name;
         }
 
-        public String toString()
+        @Override
+		public String toString()
         {
             return this.name;
         }
@@ -150,13 +152,15 @@ public class BlockSpectreLog extends BlockRotatedPillar
             }
         }
 
-        public String getName()
+        @Override
+		public String getName()
         {
             return this.name;
         }
     }
     
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
@@ -181,6 +185,7 @@ public class BlockSpectreLog extends BlockRotatedPillar
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{

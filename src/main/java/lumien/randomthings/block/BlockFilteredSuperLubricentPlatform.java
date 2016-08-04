@@ -3,10 +3,8 @@ package lumien.randomthings.block;
 import java.util.List;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.item.ItemItemFilter;
 import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.lib.GuiIds;
-import lumien.randomthings.tileentity.TileEntityFilteredItemRedirector;
 import lumien.randomthings.tileentity.TileEntityFilteredSuperLubricentPlatform;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,7 +12,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;

@@ -1,16 +1,11 @@
 package lumien.randomthings.handler.compability.jei.anvil;
 
-import com.google.common.base.Objects;
-
-import javax.annotation.Nonnull;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 

@@ -1,7 +1,5 @@
 package lumien.randomthings.network.messages.magicavoxel;
 
-import java.security.MessageDigest;
-
 import io.netty.buffer.ByteBuf;
 import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.network.IRTMessage;

@@ -5,8 +5,6 @@ import lumien.randomthings.entitys.EntityProjectedItem;
 import lumien.randomthings.lib.ContainerSynced;
 import lumien.randomthings.util.RandomUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -14,7 +12,6 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import sun.swing.SwingUtilities2.Section;
 
 public class TileEntityItemProjector extends TileEntityBase implements ITickable
 {

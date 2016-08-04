@@ -163,7 +163,7 @@ public class WorldUtil
 
 			if (stack.hasTagCompound())
 			{
-				entityitem.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
+				entityitem.getEntityItem().setTagCompound(stack.getTagCompound().copy());
 			}
 
 			float f3 = 0.05F;

@@ -128,6 +128,7 @@ public class EntitySpirit extends EntityFlying
 		return false;
 	}
 
+	@Override
 	protected void updateAITasks()
 	{
 		super.updateAITasks();
@@ -213,6 +214,7 @@ public class EntitySpirit extends EntityFlying
 			this.parentEntity = parentEntity;
 		}
 
+		@Override
 		public void onUpdateMoveHelper()
 		{
 			if (this.action == Action.MOVE_TO)
@@ -222,7 +224,7 @@ public class EntitySpirit extends EntityFlying
 				double d2 = this.posZ - this.parentEntity.posZ;
 				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
-				d3 = (double) MathHelper.sqrt_double(d3);
+				d3 = MathHelper.sqrt_double(d3);
 
 				if (this.isNotColliding(this.posX, this.posY, this.posZ, d3) && d3 > 0.2)
 				{
@@ -247,7 +249,7 @@ public class EntitySpirit extends EntityFlying
 			double d2 = (p_179926_5_ - this.parentEntity.posZ) / p_179926_7_;
 			AxisAlignedBB axisalignedbb = this.parentEntity.getEntityBoundingBox();
 
-			for (int i = 1; (double) i < p_179926_7_; ++i)
+			for (int i = 1; i < p_179926_7_; ++i)
 			{
 				axisalignedbb = axisalignedbb.offset(d0, d1, d2);
 

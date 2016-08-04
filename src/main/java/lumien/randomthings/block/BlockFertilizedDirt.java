@@ -68,6 +68,7 @@ public class BlockFertilizedDirt extends BlockBase
 		return "tile.fertilizedDirt";
 	}
 	
+	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
     {
         return FULL_BLOCK_AABB;

@@ -10,7 +10,6 @@ import java.util.Set;
 
 import lumien.randomthings.CommonProxy;
 import lumien.randomthings.asm.MCPNames;
-import lumien.randomthings.block.BlockBase;
 import lumien.randomthings.client.models.ItemModels;
 import lumien.randomthings.client.models.blocks.BlockModels;
 import lumien.randomthings.client.render.RenderArtificialEndPortal;
@@ -28,7 +27,6 @@ import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
-import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.lib.IRTItemColor;
 import lumien.randomthings.tileentity.TileEntityBiomeRadar;
@@ -52,7 +50,6 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -61,8 +58,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.network.internal.EntitySpawnHandler;
-
 import org.lwjgl.opengl.GL11;
 
 public class ClientProxy extends CommonProxy

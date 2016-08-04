@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.elements.GuiBoolButton;
 import lumien.randomthings.client.gui.elements.GuiEnumButton;
-import lumien.randomthings.container.ContainerCraftingRecipe;
 import lumien.randomthings.container.ContainerIronDropper;
 import lumien.randomthings.tileentity.TileEntityIronDropper;
 import lumien.randomthings.tileentity.TileEntityIronDropper.EFFECTS;
@@ -14,7 +13,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

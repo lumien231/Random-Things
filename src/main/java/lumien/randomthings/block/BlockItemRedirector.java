@@ -1,6 +1,5 @@
 package lumien.randomthings.block;
 
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -55,11 +54,13 @@ public class BlockItemRedirector extends BlockBase
 		return (currentInput.ordinal() - 2) + (currentOutput.ordinal() - 2) * 4;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
@@ -68,11 +69,12 @@ public class BlockItemRedirector extends BlockBase
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing output = EnumFacing.values()[((int) (meta / 4)) + 2];
+		EnumFacing output = EnumFacing.values()[(meta / 4) + 2];
 		EnumFacing input = EnumFacing.values()[meta - (output.ordinal() - 2) * 4 + 2];
 		return this.getDefaultState().withProperty(INPUT_FACING, input).withProperty(OUTPUT_FACING, output);
 	}
 
+	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[] { INPUT_FACING, OUTPUT_FACING });
@@ -132,11 +134,13 @@ public class BlockItemRedirector extends BlockBase
 		return false;
 	}
 
+	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		this.setDefaultFacing(worldIn, pos, state);
 	}
 
+	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(INPUT_FACING, placer.getHorizontalFacing().getOpposite()).withProperty(OUTPUT_FACING, placer.getHorizontalFacing());
@@ -150,7 +154,7 @@ public class BlockItemRedirector extends BlockBase
 			IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
 			IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
 			IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-			EnumFacing enumfacing = (EnumFacing) state.getValue(INPUT_FACING);
+			EnumFacing enumfacing = state.getValue(INPUT_FACING);
 
 			if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
 			{

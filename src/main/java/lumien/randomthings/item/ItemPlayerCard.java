@@ -2,7 +2,6 @@ package lumien.randomthings.item;
 
 import java.util.List;
 
-import javafx.scene.control.TextFormatter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

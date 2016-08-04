@@ -67,11 +67,13 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 		return currentInput.ordinal();
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
@@ -84,6 +86,7 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 		return this.getDefaultState().withProperty(INPUT_FACING, input);
 	}
 
+	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[] { INPUT_FACING });
@@ -150,11 +153,13 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 		}
 	}
 
+	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		this.setDefaultFacing(worldIn, pos, state);
 	}
 
+	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(INPUT_FACING, placer.getHorizontalFacing().getOpposite());
@@ -168,7 +173,7 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 			IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
 			IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
 			IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-			EnumFacing enumfacing = (EnumFacing) state.getValue(INPUT_FACING);
+			EnumFacing enumfacing = state.getValue(INPUT_FACING);
 
 			if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
 			{

@@ -5,7 +5,6 @@ import java.util.List;
 
 import io.netty.buffer.ByteBuf;
 import lumien.randomthings.client.gui.GuiVoxelProjector;
-import lumien.randomthings.container.ContainerVoxelProjector;
 import lumien.randomthings.network.IRTMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;

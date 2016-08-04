@@ -23,8 +23,8 @@ public class PlayerUtil
 		// If a player is teleported from the end certain logic elements are ignored in transferPlayerToDimension
 		if (comingFromEnd)
 		{
-			double d0 = (double) MathHelper.clamp_int((int) player.posX, -29999872, 29999872);
-			double d1 = (double) MathHelper.clamp_int((int) player.posZ, -29999872, 29999872);
+			double d0 = MathHelper.clamp_int((int) player.posX, -29999872, 29999872);
+			double d1 = MathHelper.clamp_int((int) player.posZ, -29999872, 29999872);
 
 			if (player.isEntityAlive())
 			{

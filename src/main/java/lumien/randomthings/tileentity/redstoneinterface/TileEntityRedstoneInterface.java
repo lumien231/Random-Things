@@ -105,6 +105,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 		}
 	}
 
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 

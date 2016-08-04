@@ -96,6 +96,7 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 		}
 	}
 
+	@Override
 	public void neighborChanged(IBlockState blockState, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		if (!worldIn.isRemote)

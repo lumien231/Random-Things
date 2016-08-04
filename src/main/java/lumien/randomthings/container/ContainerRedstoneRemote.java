@@ -6,7 +6,6 @@ import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.container.slots.SlotDisplay;
 import lumien.randomthings.container.slots.SlotFiltered;
 import lumien.randomthings.container.slots.SlotGhost;
-import lumien.randomthings.item.ItemItemFilter;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

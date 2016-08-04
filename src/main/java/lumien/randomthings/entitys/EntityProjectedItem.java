@@ -5,30 +5,23 @@ import javax.annotation.Nullable;
 import com.google.common.base.Optional;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SPacketCollectItem;
-import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.datafix.DataFixer;
-import net.minecraft.util.datafix.FixTypes;
-import net.minecraft.util.datafix.walkers.ItemStackData;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
@@ -89,6 +82,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	 * returns if this entity triggers Block.onEntityWalking on the blocks they
 	 * walk on. used for spiders and wolves to prevent them from trampling crops
 	 */
+	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
@@ -113,6 +107,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 		this.enterInventories = enterInventories;
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		this.getDataManager().register(ITEM, Optional.<ItemStack> absent());
@@ -121,6 +116,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate()
 	{
 		if (this.getEntityItem() == null)
@@ -224,14 +220,16 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	 * Will deal the specified amount of fire damage to the entity if the entity
 	 * isn't immune to fire damage.
 	 */
+	@Override
 	protected void dealFireDamage(int amount)
 	{
-		this.attackEntityFrom(DamageSource.inFire, (float) amount);
+		this.attackEntityFrom(DamageSource.inFire, amount);
 	}
 
 	/**
 	 * Called when the entity is attacked.
 	 */
+	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount)
 	{
 		if (this.isEntityInvulnerable(source))
@@ -241,7 +239,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 		else
 		{
 			this.setBeenAttacked();
-			this.health = (int) ((float) this.health - amount);
+			this.health = (int) (this.health - amount);
 
 			if (this.health <= 0)
 			{
@@ -255,6 +253,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound compound)
 	{
 		compound.setShort("Health", (short) this.health);
@@ -272,6 +271,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound compound)
 	{
 		this.health = compound.getShort("Health");
@@ -292,6 +292,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	/**
 	 * Called by a player entity when they collide with an entity
 	 */
+	@Override
 	public void onCollideWithPlayer(EntityPlayer entityIn)
 	{
 		if (!this.worldObj.isRemote && this.canBePickedUp)
@@ -327,6 +328,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	/**
 	 * Get the name of this object. For players this returns their username
 	 */
+	@Override
 	public String getName()
 	{
 		return this.hasCustomName() ? this.getCustomNameTag() : I18n.translateToLocal("item." + this.getEntityItem().getUnlocalizedName());
@@ -335,11 +337,13 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	/**
 	 * Returns true if it's possible to attack this entity with an item.
 	 */
+	@Override
 	public boolean canBeAttackedWithItem()
 	{
 		return false;
 	}
 
+	@Override
 	@Nullable
 	public Entity changeDimension(int dimensionIn)
 	{

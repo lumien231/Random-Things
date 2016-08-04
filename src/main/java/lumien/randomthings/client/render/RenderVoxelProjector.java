@@ -1,13 +1,10 @@
 package lumien.randomthings.client.render;
 
-import org.lwjgl.opengl.GL11;
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.handler.magicavoxel.MagicaVoxelModel;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -58,7 +55,7 @@ public class RenderVoxelProjector extends TileEntitySpecialRenderer<TileEntityVo
 	@Override
 	public void renderTileEntityAt(TileEntityVoxelProjector te, double x, double y, double z, float p_180535_8_, int p_180535_9_)
 	{
-		this.func_180538_a((TileEntityVoxelProjector) te, x, y, z, p_180535_8_, p_180535_9_);
+		this.func_180538_a(te, x, y, z, p_180535_8_, p_180535_9_);
 	}
 
 	@Override

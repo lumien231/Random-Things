@@ -63,6 +63,7 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 		}
 	}
 
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
 		if (this.target != null)
@@ -73,6 +74,7 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 		}
 	}
 
+	@Override
 	public void broken()
 	{
 		super.broken();

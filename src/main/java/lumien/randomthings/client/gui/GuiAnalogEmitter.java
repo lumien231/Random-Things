@@ -7,7 +7,6 @@ import lumien.randomthings.lib.Colors;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageAnalogEmitter;
 import lumien.randomthings.tileentity.TileEntityAnalogEmitter;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;

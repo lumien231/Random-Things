@@ -2,7 +2,6 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockDirt;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,21 +28,25 @@ public class BlockCompressedSlimeBlock extends BlockBase
 		this.slipperiness = 1F / 0.98F;
 	}
 
+	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(Blocks.SLIME_BLOCK);
 	}
 
+	@Override
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
 		return new ItemStack(Blocks.SLIME_BLOCK);
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;

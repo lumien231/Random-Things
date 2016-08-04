@@ -1,34 +1,18 @@
 package lumien.randomthings.tileentity;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import lumien.randomthings.block.BlockIronDropper;
 import lumien.randomthings.lib.ContainerSynced;
 import lumien.randomthings.lib.IRedstoneSensitive;
 import lumien.randomthings.util.RandomUtil;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerDispenser;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.datafix.DataFixer;
-import net.minecraft.util.datafix.FixTypes;
-import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -93,7 +77,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 	{
 		IItemHandler itemHandler = this.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-		EnumFacing facing = (EnumFacing) worldObj.getBlockState(pos).getValue(BlockIronDropper.FACING);
+		EnumFacing facing = worldObj.getBlockState(pos).getValue(BlockIronDropper.FACING);
 		BlockPos blockpos = pos.offset(facing);
 		TileEntity tileEntity = worldObj.getTileEntity(blockpos);
 
@@ -130,9 +114,9 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 
 				double speed = 6;
 
-				double posX = pos.getX() + 0.5 + 0.7D * (double) facing.getFrontOffsetX();
-				double posY = pos.getY() + 0.5 + 0.7D * (double) facing.getFrontOffsetY();
-				double posZ = pos.getZ() + 0.5 + 0.7D * (double) facing.getFrontOffsetZ();
+				double posX = pos.getX() + 0.5 + 0.7D * facing.getFrontOffsetX();
+				double posY = pos.getY() + 0.5 + 0.7D * facing.getFrontOffsetY();
+				double posZ = pos.getZ() + 0.5 + 0.7D * facing.getFrontOffsetZ();
 
 				if (facing.getAxis() == EnumFacing.Axis.Y)
 				{
@@ -176,21 +160,21 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 					d3 = 0.25D;
 				}
 
-				entityItem.motionX = (double) facing.getFrontOffsetX() * d3;
+				entityItem.motionX = facing.getFrontOffsetX() * d3;
 				entityItem.motionY = 0.20000000298023224D;
-				entityItem.motionZ = (double) facing.getFrontOffsetZ() * d3;
+				entityItem.motionZ = facing.getFrontOffsetZ() * d3;
 
 				if (randomMotion)
 				{
-					entityItem.motionX += worldObj.rand.nextGaussian() * 0.007499999832361937D * (double) speed;
-					entityItem.motionY += worldObj.rand.nextGaussian() * 0.007499999832361937D * (double) speed;
-					entityItem.motionZ += worldObj.rand.nextGaussian() * 0.007499999832361937D * (double) speed;
+					entityItem.motionX += worldObj.rand.nextGaussian() * 0.007499999832361937D * speed;
+					entityItem.motionY += worldObj.rand.nextGaussian() * 0.007499999832361937D * speed;
+					entityItem.motionZ += worldObj.rand.nextGaussian() * 0.007499999832361937D * speed;
 				}
 				else
 				{
-					entityItem.motionX += (double) facing.getFrontOffsetX() * 0.5 * 0.007499999832361937D * (double) speed;
-					entityItem.motionY += (double) facing.getFrontOffsetY() * 0.5 * 0.007499999832361937D * (double) speed;
-					entityItem.motionZ += (double) facing.getFrontOffsetZ() * 0.5 * 0.007499999832361937D * (double) speed;
+					entityItem.motionX += facing.getFrontOffsetX() * 0.5 * 0.007499999832361937D * speed;
+					entityItem.motionY += facing.getFrontOffsetY() * 0.5 * 0.007499999832361937D * speed;
+					entityItem.motionZ += facing.getFrontOffsetZ() * 0.5 * 0.007499999832361937D * speed;
 				}
 
 				worldObj.spawnEntityInWorld(entityItem);

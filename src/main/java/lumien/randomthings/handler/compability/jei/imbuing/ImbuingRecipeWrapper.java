@@ -2,12 +2,10 @@ package lumien.randomthings.handler.compability.jei.imbuing;
 
 import com.google.common.base.Objects;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 

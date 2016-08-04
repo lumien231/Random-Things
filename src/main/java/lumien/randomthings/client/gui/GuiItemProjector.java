@@ -4,9 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.elements.GuiEnumButton;
 import lumien.randomthings.container.ContainerItemProjector;
-import lumien.randomthings.tileentity.TileEntityIronDropper;
 import lumien.randomthings.tileentity.TileEntityItemProjector;
-import lumien.randomthings.tileentity.TileEntityIronDropper.REDSTONE_MODE;
 import lumien.randomthings.tileentity.TileEntityItemProjector.SELECTION_MODE;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;

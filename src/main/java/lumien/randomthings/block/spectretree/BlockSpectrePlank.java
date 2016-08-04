@@ -27,6 +27,7 @@ public class BlockSpectrePlank extends BlockBase
 		OreDictionary.registerOre("plankWood", this);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
@@ -52,6 +53,7 @@ public class BlockSpectrePlank extends BlockBase
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{

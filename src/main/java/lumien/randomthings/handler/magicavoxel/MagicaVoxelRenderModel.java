@@ -11,7 +11,6 @@ import org.lwjgl.opengl.Util;
 import lumien.randomthings.handler.magicavoxel.MagicaVoxelModel.Voxel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 
 public class MagicaVoxelRenderModel
 {

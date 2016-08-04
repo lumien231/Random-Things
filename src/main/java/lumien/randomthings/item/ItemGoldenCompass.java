@@ -33,6 +33,7 @@ public class ItemGoldenCompass extends ItemBase
 			@SideOnly(Side.CLIENT)
 			long lastUpdateTick;
 
+			@Override
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
@@ -43,7 +44,7 @@ public class ItemGoldenCompass extends ItemBase
 				else
 				{
 					boolean flag = entityIn != null;
-					Entity entity = (Entity) (flag ? entityIn : stack.getItemFrame());
+					Entity entity = flag ? entityIn : stack.getItemFrame();
 
 					if (worldIn == null)
 					{
@@ -97,13 +98,13 @@ public class ItemGoldenCompass extends ItemBase
 			@SideOnly(Side.CLIENT)
 			private double getFrameRotation(EntityItemFrame p_185094_1_)
 			{
-				return (double) MathHelper.clampAngle(180 + p_185094_1_.facingDirection.getHorizontalIndex() * 90);
+				return MathHelper.clampAngle(180 + p_185094_1_.facingDirection.getHorizontalIndex() * 90);
 			}
 
 			@SideOnly(Side.CLIENT)
 			private double getAngleToPos(World p_185092_1_, Entity p_185092_2_, BlockPos pos)
 			{
-				return Math.atan2((double) pos.getZ() - p_185092_2_.posZ, (double) pos.getX() - p_185092_2_.posX);
+				return Math.atan2(pos.getZ() - p_185092_2_.posZ, pos.getX() - p_185092_2_.posX);
 			}
 		});
 	}

@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.WeakHashMap;
 
 import org.apache.commons.io.IOUtils;
@@ -22,7 +20,6 @@ import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelData;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelRequestUpdate;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ServerModelLibrary

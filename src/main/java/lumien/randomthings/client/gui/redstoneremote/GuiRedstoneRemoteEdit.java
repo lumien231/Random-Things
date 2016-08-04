@@ -1,20 +1,9 @@
 package lumien.randomthings.client.gui.redstoneremote;
 
-import java.io.IOException;
-
-import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.container.ContainerRedstoneRemote;
-import lumien.randomthings.lib.Colors;
-import lumien.randomthings.network.PacketHandler;
-import lumien.randomthings.network.messages.MessageAnalogEmitter;
-import lumien.randomthings.tileentity.TileEntityAnalogEmitter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 

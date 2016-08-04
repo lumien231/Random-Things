@@ -1,21 +1,11 @@
 package lumien.randomthings.client.gui;
 
-import java.io.IOException;
-
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.container.ContainerAdvancedItemCollector;
 import lumien.randomthings.container.ContainerFilteredItemRedirector;
-import lumien.randomthings.network.PacketHandler;
-import lumien.randomthings.network.messages.MessageAdvancedItemCollector;
-import lumien.randomthings.tileentity.TileEntityAdvancedItemCollector;
-import lumien.randomthings.tileentity.TileEntityFilteredItemRedirector;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 

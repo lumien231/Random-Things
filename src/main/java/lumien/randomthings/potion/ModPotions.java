@@ -1,6 +1,5 @@
 package lumien.randomthings.potion;
 
-import lumien.randomthings.potion.effects.EffectBoss;
 import lumien.randomthings.potion.effects.EffectCollapse;
 import lumien.randomthings.potion.imbues.ImbueCollapse;
 import lumien.randomthings.potion.imbues.ImbueExperience;

@@ -6,8 +6,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerSlimeGel;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,6 +24,7 @@ public class RenderSpirit extends RenderLiving<EntitySpirit>
 	/**
 	 * Renders the desired {@code T} type Entity.
 	 */
+	@Override
 	public void doRender(EntitySpirit entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		this.shadowSize = 0.25F * (float) 0.5;
@@ -39,6 +38,7 @@ public class RenderSpirit extends RenderLiving<EntitySpirit>
 	 * Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime
 	 */
+	@Override
 	protected void preRenderCallback(EntitySpirit entitylivingbaseIn, float partialTickTime)
 	{
 		float f = 0.5f;
@@ -51,6 +51,7 @@ public class RenderSpirit extends RenderLiving<EntitySpirit>
 	 * Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture.
 	 */
+	@Override
 	protected ResourceLocation getEntityTexture(EntitySpirit entity)
 	{
 		return slimeTextures;

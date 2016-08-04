@@ -2,9 +2,7 @@ package lumien.randomthings.container.redstoneinterface;
 
 import com.google.common.base.Predicate;
 
-import lumien.randomthings.container.slots.SlotDisplay;
 import lumien.randomthings.container.slots.SlotFiltered;
-import lumien.randomthings.container.slots.SlotOutputOnly;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityAdvancedRedstoneInterface;
 import net.minecraft.entity.player.EntityPlayer;

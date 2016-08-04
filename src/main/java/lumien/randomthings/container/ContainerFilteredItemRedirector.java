@@ -2,7 +2,6 @@ package lumien.randomthings.container;
 
 import com.google.common.base.Predicate;
 
-import lumien.randomthings.container.slots.SlotDisplay;
 import lumien.randomthings.container.slots.SlotFiltered;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityFilteredItemRedirector;

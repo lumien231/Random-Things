@@ -1,9 +1,7 @@
 package lumien.randomthings.client.gui.redstoneinterface;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.container.ContainerEnderMailbox;
 import lumien.randomthings.container.redstoneinterface.ContainerAdvancedRedstoneInterface;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;

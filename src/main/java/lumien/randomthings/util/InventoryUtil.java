@@ -17,7 +17,7 @@ public class InventoryUtil
 {
 	public static void dropItemHandlerItems(World worldIn, BlockPos pos, IItemHandler itemHandler)
 	{
-		dropItemHandlerItems(worldIn, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), itemHandler);
+		dropItemHandlerItems(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemHandler);
 	}
 	
     private static void dropItemHandlerItems(World worldIn, double x, double y, double z, IItemHandler itemHandler)

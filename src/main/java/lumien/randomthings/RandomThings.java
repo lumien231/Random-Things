@@ -3,7 +3,6 @@ package lumien.randomthings;
 import java.util.List;
 
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.opengl.GLContext;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
@@ -30,8 +29,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;

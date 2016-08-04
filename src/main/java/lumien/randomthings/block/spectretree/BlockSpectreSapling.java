@@ -6,7 +6,6 @@ import lumien.randomthings.block.BlockBase;
 import lumien.randomthings.worldgen.WorldGenSpectreTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -41,11 +40,13 @@ public class BlockSpectreSapling extends BlockBush
 		OreDictionary.registerOre("treeSapling", this);
 	}
 
+	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return SAPLING_AABB;
 	}
 
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if (!worldIn.isRemote)
@@ -61,7 +62,7 @@ public class BlockSpectreSapling extends BlockBush
 
 	public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (((Integer) state.getValue(STAGE)).intValue() == 0)
+		if (state.getValue(STAGE).intValue() == 0)
 		{
 			worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
 		}
@@ -110,6 +111,7 @@ public class BlockSpectreSapling extends BlockBush
 		}
 	}
 
+	@Override
 	public int damageDropped(IBlockState state)
 	{
 		return 0;
@@ -118,6 +120,7 @@ public class BlockSpectreSapling extends BlockBush
 	/**
 	 * Convert the given metadata into a BlockState for this Block
 	 */
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
@@ -126,18 +129,21 @@ public class BlockSpectreSapling extends BlockBush
 	/**
 	 * Convert the BlockState into the correct metadata value
 	 */
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		int i = 0;
-		i = i | ((Integer) state.getValue(STAGE)).intValue() << 3;
+		i = i | state.getValue(STAGE).intValue() << 3;
 		return i;
 	}
 
+	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[] { STAGE });
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
@@ -163,6 +169,7 @@ public class BlockSpectreSapling extends BlockBush
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{

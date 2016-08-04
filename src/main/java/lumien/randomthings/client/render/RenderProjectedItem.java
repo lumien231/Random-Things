@@ -15,7 +15,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -64,7 +63,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 
 			if (flag || this.renderManager.options != null)
 			{
-				float f3 = (((float) itemIn.getAge() + p_177077_8_) / 20.0F + itemIn.hoverStart) * (180F / (float) Math.PI);
+				float f3 = ((itemIn.getAge() + p_177077_8_) / 20.0F + itemIn.hoverStart) * (180F / (float) Math.PI);
 				GlStateManager.rotate(f3, 0.0F, 1.0F, 0.0F);
 			}
 
@@ -100,6 +99,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 	/**
 	 * Renders the desired {@code T} type Entity.
 	 */
+	@Override
 	public void doRender(EntityProjectedItem entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		ItemStack itemstack = entity.getEntityItem();
@@ -114,7 +114,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 			i = 187;
 		}
 
-		this.random.setSeed((long) i);
+		this.random.setSeed(i);
 		boolean flag = false;
 
 		if (this.bindEntityTexture(entity))
@@ -135,9 +135,9 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 
 		if (!flag1)
 		{
-			float f3 = -0.0F * (float) (j - 1) * 0.5F;
-			float f4 = -0.0F * (float) (j - 1) * 0.5F;
-			float f5 = -0.09375F * (float) (j - 1) * 0.5F;
+			float f3 = -0.0F * (j - 1) * 0.5F;
+			float f4 = -0.0F * (j - 1) * 0.5F;
+			float f5 = -0.09375F * (j - 1) * 0.5F;
 			GlStateManager.translate(f3, f4, f5);
 		}
 
@@ -206,6 +206,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 	 * Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture.
 	 */
+	@Override
 	protected ResourceLocation getEntityTexture(EntityProjectedItem entity)
 	{
 		return TextureMap.LOCATION_BLOCKS_TEXTURE;

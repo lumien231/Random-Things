@@ -6,9 +6,7 @@ import java.util.Set;
 import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.ConfigOption;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;

@@ -4,15 +4,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import akka.io.Tcp.Message;
 import lumien.randomthings.client.particles.EntityColoredSmokeFX;
 import lumien.randomthings.item.ItemBiomeCrystal;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.network.messages.sync.MessageBiomeRadarAntenna;
-import lumien.randomthings.tileentity.TileEntityBiomeRadar.STATE;
-import lumien.randomthings.util.WorldUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

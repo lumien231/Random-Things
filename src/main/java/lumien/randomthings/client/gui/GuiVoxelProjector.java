@@ -1,14 +1,12 @@
 package lumien.randomthings.client.gui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
 import lumien.randomthings.client.gui.elements.GuiStringList;
 import lumien.randomthings.container.ContainerVoxelProjector;

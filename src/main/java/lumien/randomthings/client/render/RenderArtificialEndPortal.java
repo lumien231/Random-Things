@@ -5,7 +5,6 @@ import java.util.Random;
 
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,7 +14,6 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntityEndPortal;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderArtificialEndPortal extends Render
@@ -30,14 +28,15 @@ public class RenderArtificialEndPortal extends Render
 		super(renderManager);
 	}
 
+	@Override
 	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		RenderManager renderManager = mc.getRenderManager();
 
-		float f = (float) (mc.thePlayer.lastTickPosX + (mc.thePlayer.posX - mc.thePlayer.lastTickPosX) * (double) partialTicks);
-		float f1 = (float) (mc.thePlayer.lastTickPosY + (mc.thePlayer.posY - mc.thePlayer.lastTickPosY) * (double) partialTicks);
-		float f2 = (float) (mc.thePlayer.lastTickPosZ + (mc.thePlayer.posZ - mc.thePlayer.lastTickPosZ) * (double) partialTicks);
+		float f = (float) (mc.thePlayer.lastTickPosX + (mc.thePlayer.posX - mc.thePlayer.lastTickPosX) * partialTicks);
+		float f1 = (float) (mc.thePlayer.lastTickPosY + (mc.thePlayer.posY - mc.thePlayer.lastTickPosY) * partialTicks);
+		float f2 = (float) (mc.thePlayer.lastTickPosZ + (mc.thePlayer.posZ - mc.thePlayer.lastTickPosZ) * partialTicks);
 
 		EntityArtificialEndPortal portalEntity = (EntityArtificialEndPortal) entity;
 
@@ -53,7 +52,7 @@ public class RenderArtificialEndPortal extends Render
 			for (int i = 0; i < 16; ++i)
 			{
 				GlStateManager.pushMatrix();
-				float f4 = (float) (16 - i);
+				float f4 = 16 - i;
 				float f5 = 0.0625F;
 				float f6 = 1F / (f4 + 1.0F); // 2 instead of 1 For more color
 
@@ -79,11 +78,11 @@ public class RenderArtificialEndPortal extends Render
 					f5 = 0.5F;
 				}
 
-				float f7 = (float) (-(y + (double) f3));
+				float f7 = (float) (-(y + f3));
 				float f8 = f7 + (float) ActiveRenderInfo.getPosition().yCoord;
 				float f9 = f7 + f4 + (float) ActiveRenderInfo.getPosition().yCoord;
 				float f10 = f8 / f9;
-				f10 = (float) (y + (double) f3) + f10;
+				f10 = (float) (y + f3) + f10;
 				GlStateManager.translate(f, f10, f2);
 				GlStateManager.texGen(GlStateManager.TexGen.S, 9217);
 				GlStateManager.texGen(GlStateManager.TexGen.T, 9217);
@@ -101,10 +100,10 @@ public class RenderArtificialEndPortal extends Render
 				GlStateManager.matrixMode(5890);
 				GlStateManager.pushMatrix();
 				GlStateManager.loadIdentity();
-				GlStateManager.translate(0.0F, (float) (Minecraft.getSystemTime() % 700000L) / 700000.0F, 0.0F);
+				GlStateManager.translate(0.0F, Minecraft.getSystemTime() % 700000L / 700000.0F, 0.0F);
 				GlStateManager.scale(f5, f5, f5);
 				GlStateManager.translate(0.5F, 0.5F, 0.0F);
-				GlStateManager.rotate((float) (i * i * 4321 + i * 9) * 2.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.rotate((i * i * 4321 + i * 9) * 2.0F, 0.0F, 0.0F, 1.0F);
 				GlStateManager.translate(-0.5F, -0.5F, 0.0F);
 				GlStateManager.translate(-f, -f2, -f1);
 				f8 = f7 + (float) ActiveRenderInfo.getPosition().yCoord;
@@ -121,10 +120,10 @@ public class RenderArtificialEndPortal extends Render
 					f11 = f12 = f13 = 1.0F * f6;
 				}
 
-				vertexbuffer.pos(x - (size / 2), y + (double) f3, z - (size / 2)).color(f11, f12, f13, 1.0F).endVertex();
-				vertexbuffer.pos(x - (size / 2), y + (double) f3, z + (size / 2)).color(f11, f12, f13, 1.0F).endVertex();
-				vertexbuffer.pos(x + (size / 2), y + (double) f3, z + (size / 2)).color(f11, f12, f13, 1.0F).endVertex();
-				vertexbuffer.pos(x + (size / 2), y + (double) f3, z - (size / 2)).color(f11, f12, f13, 1.0F).endVertex();
+				vertexbuffer.pos(x - (size / 2), y + f3, z - (size / 2)).color(f11, f12, f13, 1.0F).endVertex();
+				vertexbuffer.pos(x - (size / 2), y + f3, z + (size / 2)).color(f11, f12, f13, 1.0F).endVertex();
+				vertexbuffer.pos(x + (size / 2), y + f3, z + (size / 2)).color(f11, f12, f13, 1.0F).endVertex();
+				vertexbuffer.pos(x + (size / 2), y + f3, z - (size / 2)).color(f11, f12, f13, 1.0F).endVertex();
 				tessellator.draw();
 				GlStateManager.popMatrix();
 				GlStateManager.matrixMode(5888);
