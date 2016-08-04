@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "randomthings:blocks/itemProjector/side",
+        "front": "randomthings:blocks/itemProjector/front",
+        "side": "randomthings:blocks/itemProjector/side"
+    }
+}

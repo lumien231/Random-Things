@@ -67,6 +67,7 @@ public class ItemModels
 		registerBlock(ModBlocks.redstoneObserver);
 		registerBlock(ModBlocks.biomeRadar);
 		registerBlock(ModBlocks.ironDropper);
+		registerBlock(ModBlocks.itemProjector);
 		
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);

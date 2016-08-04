@@ -11,15 +11,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.CapabilityDispatcher;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileEntityBase extends TileEntity
 {
-	private ItemStackHandler inventoryHandler;
+	private IItemHandler inventoryHandler;
 	private boolean redstonePowered;
 
-	protected void setItemHandler(ItemStackHandler handler)
+	protected void setItemHandler(IItemHandler handler)
 	{
 		this.inventoryHandler = handler;
 	}
@@ -31,9 +32,9 @@ public abstract class TileEntityBase extends TileEntity
 
 		writeDataToNBT(compound);
 
-		if (inventoryHandler != null)
+		if (this.inventoryHandler instanceof ItemStackHandler)
 		{
-			NBTTagCompound inventoryCompound = inventoryHandler.serializeNBT();
+			NBTTagCompound inventoryCompound = ((ItemStackHandler)inventoryHandler).serializeNBT();
 			compound.setTag("inventory", inventoryCompound);
 		}
 
@@ -52,9 +53,9 @@ public abstract class TileEntityBase extends TileEntity
 
 		readDataFromNBT(compound);
 
-		if (inventoryHandler != null)
+		if (this.inventoryHandler instanceof ItemStackHandler)
 		{
-			this.inventoryHandler.deserializeNBT(compound.getCompoundTag("inventory"));
+			((ItemStackHandler)inventoryHandler).deserializeNBT(compound.getCompoundTag("inventory"));
 		}
 
 		if (this instanceof IRedstoneSensitive)

@@ -8,10 +8,31 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.items.IItemHandler;
 
 public class InventoryUtil
 {
+	public static void dropItemHandlerItems(World worldIn, BlockPos pos, IItemHandler itemHandler)
+	{
+		dropItemHandlerItems(worldIn, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), itemHandler);
+	}
+	
+    private static void dropItemHandlerItems(World worldIn, double x, double y, double z, IItemHandler itemHandler)
+    {
+        for (int i = 0; i < itemHandler.getSlots(); ++i)
+        {
+            ItemStack itemstack = itemHandler.getStackInSlot(i);
+
+            if (itemstack != null)
+            {
+                WorldUtil.spawnItemStack(worldIn, x, y, z, itemstack);
+            }
+        }
+    }
+	
 	public static void shuffleInventory(IInventory inventory)
 	{
 		Random rgen = new Random();

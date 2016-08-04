@@ -3,13 +3,13 @@ package lumien.randomthings;
 import java.util.List;
 
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.opengl.GLContext;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.container.SyncHandler;
 import lumien.randomthings.entitys.ModEntitys;
-import lumien.randomthings.fluid.ModFluids;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.RTEventHandler;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
@@ -83,7 +83,6 @@ public class RandomThings implements LoadingCallback
 		ModTileEntitys.register();
 		ModEntitys.init();
 		ModPotions.preInit(event);
-		ModFluids.load(event);
 		proxy.registerModels();
 
 		RTEventHandler eventHandler = new RTEventHandler();

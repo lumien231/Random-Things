@@ -29,10 +29,15 @@ public abstract class ContainerTE<E extends TileEntity> extends Container
 		this.fieldList = new ArrayList<Field>();
 		this.valueList = new ArrayList<Object>();
 
-		for (Field f : SyncHandler.fieldMap.get(te.getClass()))
+		ArrayList<Field> classFieldList = SyncHandler.fieldMap.get(te.getClass());
+
+		if (classFieldList != null)
 		{
-			fieldList.add(f);
-			valueList.add(null);
+			for (Field f : classFieldList)
+			{
+				fieldList.add(f);
+				valueList.add(null);
+			}
 		}
 	}
 
@@ -153,6 +158,6 @@ public abstract class ContainerTE<E extends TileEntity> extends Container
 			}
 		}
 	}
-	
+
 	public abstract void signal(int signal);
 }

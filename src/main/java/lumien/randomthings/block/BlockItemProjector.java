@@ -1,70 +1,37 @@
 package lumien.randomthings.block;
 
-import javax.annotation.Nullable;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
-import lumien.randomthings.tileentity.TileEntityIronDropper;
-import lumien.randomthings.util.InventoryUtil;
+import lumien.randomthings.tileentity.TileEntityItemProjector;
 import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.BlockPistonBase;
-import net.minecraft.block.BlockSourceImpl;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
-import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityDispenser;
-import net.minecraft.tileentity.TileEntityDropper;
-import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
 
-public class BlockIronDropper extends BlockContainerBase
+public class BlockItemProjector extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = BlockDirectional.FACING;
-    
-    public BlockIronDropper()
+
+	protected BlockItemProjector()
 	{
-    	super("ironDropper",Material.IRON);
-    	
-    	this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-    	this.setHardness(3.5F);
-    	this.blockSoundType = SoundType.METAL;
-	}
-    
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-
-        if (tileentity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP))
-        {
-            InventoryUtil.dropItemHandlerItems(worldIn, pos, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP));
-        }
-
-        super.breakBlock(worldIn, pos, state);
-    }
-
-	@Override
-	public TileEntity createTileEntity(World world, IBlockState state)
-	{
-		return new TileEntityIronDropper();
+		super("itemProjector", Material.ROCK);
+		
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setHardness(3.5f);
 	}
 	
 	@Override
@@ -72,11 +39,17 @@ public class BlockIronDropper extends BlockContainerBase
 	{
 		if (!worldIn.isRemote)
 		{
-			playerIn.openGui(RandomThings.instance, GuiIds.IRON_DROPPER, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(RandomThings.instance, GuiIds.ITEM_PROJECTOR, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
-	
+
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state)
+	{
+		return new TileEntityItemProjector();
+	}
+
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         super.onBlockAdded(worldIn, pos, state);

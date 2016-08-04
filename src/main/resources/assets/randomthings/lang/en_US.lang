@@ -50,6 +50,7 @@ tile.filteredSuperLubricentPlatform.name=Filtered Super Lubricent Platform
 tile.redstoneObserver.name=Redstone Observer
 tile.biomeRadar.name=Biome Radar
 tile.ironDropper.name=Iron Dropper
+tile.itemProjector.name=[WIP] Item Projector
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -213,6 +214,10 @@ tooltip.ironDropper.effects.soundOnly=Sound effects
 tooltip.ironDropper.effects.particlesOnly=Particle effects
 tooltip.ironDropper.effects.both=Sound & Particle effects
 
+tooltip.itemProjector.selectionMode.first=Start from first slot
+tooltip.itemProjector.selectionMode.last=Start from last slot
+tooltip.itemProjector.selectionMode.biggest=Select biggest stack
+
 gui.basicRedstoneInterface.notarget=No Target
 gui.basicRedstoneInterface.targetX=Target-X: %s
 gui.basicRedstoneInterface.targetY=Target-Y: %s
@@ -240,3 +245,5 @@ item.enderLetter.noPlayer=%s does not seem to reside in this world
 item.enderLetter.noSpace=The letter appears to get rejected
 
 entity.randomthings.spirit.name=Spirit
+
+fluid.biomeEssence=Biome Essence

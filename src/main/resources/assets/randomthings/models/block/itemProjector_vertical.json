@@ -1,0 +1,7 @@
+{
+    "parent": "block/orientable_vertical",
+    "textures": {
+        "front": "randomthings:blocks/itemProjector/front",
+        "side": "randomthings:blocks/itemProjector/side"
+    }
+}

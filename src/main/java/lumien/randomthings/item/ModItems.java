@@ -34,6 +34,7 @@ public class ModItems
 	public static ItemSpectreAnchor spectreAnchor;
 	public static ItemSpectreSword spectreSword;
 	public static ItemGoldenCompass goldenCompass;
+	//public static ItemPlayerCard playerCard;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -65,6 +66,7 @@ public class ModItems
 		spectreAnchor = new ItemSpectreAnchor();
 		spectreSword = new ItemSpectreSword();
 		goldenCompass = new ItemGoldenCompass();
+		//playerCard = new ItemPlayerCard();
 
 		grassSeeds = new ItemGrassSeeds();
 	}

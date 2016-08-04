@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down":  { "model": "randomthings:itemProjector_vertical", "x": 180 },
+        "facing=up":    { "model": "randomthings:itemProjector_vertical" },
+        "facing=north": { "model": "randomthings:itemProjector" },
+        "facing=south": { "model": "randomthings:itemProjector", "y": 180 },
+        "facing=west":  { "model": "randomthings:itemProjector", "y": 270 },
+        "facing=east":  { "model": "randomthings:itemProjector", "y": 90 }
+    }
+}
