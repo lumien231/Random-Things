@@ -2,6 +2,7 @@ package lumien.randomthings.container;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +40,11 @@ public class SyncHandler
 				{
 					fieldMap.put(clazz, classFieldList = new ArrayList<Field>());
 				}
-				
-				classFieldList.add(f);
-				
-				classFieldList.sort(new Comparator<Field>()
-				{
 
+				classFieldList.add(f);
+
+				Collections.sort(classFieldList, new Comparator<Field>()
+				{
 					@Override
 					public int compare(Field field1, Field field2)
 					{
