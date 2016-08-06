@@ -1,0 +1,249 @@
+itemGroup.rt.name=Random Things
+
+tile.fertilizedDirt.name=Gedüngte Erde
+tile.playerInterface.name=Spielerschnittstelle
+tile.creativePlayerInterface.name=Kreativ-Spielerschnittstelle
+tile.lapisGlass.name=Lapisglas
+tile.portalGenerator.name=Portalgenerator
+tile.biomeGlass.name=Biomglas
+tile.lapisLamp.name=Lapislampe
+tile.dyeingMachine.name=Färbemaschine
+tile.onlineDetector.name=Onlinedetektor
+tile.enderAnchor.name=Enderanker
+tile.enderBridge.name=Enderbrücke
+tile.prismarineEnderBridge.name=Prismarin-Enderbrücke
+tile.beanStalk.name=Magische Bohnenstange
+tile.lesserBeanStalk.name=Kleine Bohnenstange
+tile.beanPod.name=Bohnenhülse
+tile.beanSprout.name=Bohnensprosse
+tile.chatDetector.name=Chatdetektor
+tile.globalChatDetector.name=Globaler Chatdetektor
+tile.lightRedirector.name=Lichtumleiter
+tile.imbuingStation.name=Permeationsstation
+tile.spectreBlock.name=Schemenblock
+tile.analogEmitter.name=Analogsender
+tile.fluidDisplay.name=Flüssigkeitsanzeige
+tile.customWorkbench.name=Werkbank
+tile.enderMailbox.name=Enderbriefkasten
+tile.pitcherPlant.name=Kannenpflanze
+tile.entityDetector.name=Wesensdetektor
+tile.quartzLamp.name=Quarzlampe
+tile.quartzGlass.name=Quarzglas
+tile.potionVaporizer.name=Trankvaporisator
+tile.voxelProjector.name=[WIP] Voxelprojektor
+tile.contactButton.name=Kontaktknopf
+tile.contactLever.name=Kontakthebel
+tile.sakanade.name=Sakanade
+tile.rainShield.name=Regenschild
+tile.blockBreaker.name=Blockbrecher
+tile.spectreCore.name=Schemenkern
+tile.rainbowLamp.name=Regenbogenlampe
+tile.itemSealer.name=Itemversiegeler
+tile.superLubricentIce.name=Superschmier-Eis
+tile.compressedSlimeBlock.name=Komprimierter Schleimblock
+tile.itemRedirector.name=Gegenstandsumleiter
+tile.itemCorrector.name=Gegenstandskorrektor
+tile.itemRejuvenator.name=Gegenstandserneuerer
+tile.superLubricentPlatform.name=Superschmier-Plattform
+tile.filteredItemRedirector.name=Gefilterter Gegenstandsumleiter
+tile.filteredSuperLubricentPlatform.name=Gefilterte Superschmier-Plattform
+tile.redstoneObserver.name=Redstonebeobachter
+tile.biomeRadar.name=Biomradar
+tile.ironDropper.name=Eisenspender
+tile.itemProjector.name=[WIP] Gegenstandsprojektor
+
+tile.spectrePlank.name=Schemenbretter
+tile.spectreSapling.name=Schemensetzling
+tile.spectreLeaf.name=Schemenblätter
+tile.spectreLog.name=Schemenholz
+
+tile.itemCollector.name=Gegenstandssammler
+tile.advancedItemCollector.name=Erweiterter Gegenstandssammler
+
+tile.natureCore.name=Naturkern
+tile.netherCore.name=Netherkern
+tile.enderCore.name=Enderkern
+
+tile.stainedBrick.black.name=Schwarz gefärbter Ziegelstein
+tile.stainedBrick.red.name=Rot gefärbter Ziegelstein
+tile.stainedBrick.green.name=Grün gefärbter Ziegelstein
+tile.stainedBrick.brown.name=Braun gefärbter Ziegelstein
+tile.stainedBrick.blue.name=Blau gefärbter Ziegelstein
+tile.stainedBrick.purple.name=Violett gefärbter Ziegelstein
+tile.stainedBrick.cyan.name=Türkis gefärbter Ziegelstein
+tile.stainedBrick.silver.name=Hellgrau gefärbter Ziegelstein
+tile.stainedBrick.gray.name=Grau gefärbter Ziegelstein
+tile.stainedBrick.pink.name=Rosa gefärbter Ziegelstein
+tile.stainedBrick.lime.name=Hellgrün gefärbter Ziegelstein
+tile.stainedBrick.yellow.name=Gelb gefärbter Ziegelstein
+tile.stainedBrick.lightBlue.name=Hellblau gefärbter Ziegelstein
+tile.stainedBrick.magenta.name=Magenta gefärbter Ziegelstein
+tile.stainedBrick.orange.name=Orange gefärbter Ziegelstein
+tile.stainedBrick.white.name=Weiß gefärbter Ziegelstein
+
+tile.coloredGrass.black.name=Schwarzes Gras
+tile.coloredGrass.red.name=Rotes Gras
+tile.coloredGrass.green.name=Grünes Gras
+tile.coloredGrass.brown.name=Braunes Gras
+tile.coloredGrass.blue.name=Blaues Gras
+tile.coloredGrass.purple.name=Violettes Gras
+tile.coloredGrass.cyan.name=Türkises Gras
+tile.coloredGrass.silver.name=Hellgraues Gras
+tile.coloredGrass.gray.name=Graues Gras
+tile.coloredGrass.pink.name=Rosa Gras
+tile.coloredGrass.lime.name=Hellgrünes Gras
+tile.coloredGrass.yellow.name=Gelbes Gras
+tile.coloredGrass.lightBlue.name=Hellblaues Gras
+tile.coloredGrass.magenta.name=Magenta Gras
+tile.coloredGrass.orange.name=Oranges Gras
+tile.coloredGrass.white.name=Weißes Gras
+
+tile.biomeStone.cobble.name=Biompflasterstein
+tile.biomeStone.smooth.name=Biomstein
+tile.biomeStone.brick.name=Biomsteinziegel
+tile.biomeStone.cracked.name=Rissige Biomsteinziegel
+tile.biomeStone.chiseled.name=Gemeißelte Biomsteinziegel
+
+tile.specialChest.nature.name=Naturtruhe
+tile.specialChest.water.name=Wassertruhe
+
+tile.platform.oak.name=Eicheplattform
+tile.platform.spruce.name=Fichtenplattform
+tile.platform.birch.name=Birkenplattform
+tile.platform.acacia.name=Akazienplattform
+tile.platform.jungle.name=Tropenplattform
+tile.platform.darkoak.name=Schwarzeichenplattform
+
+tile.basicRedstoneInterface.name=Einfache Redstoneschnittstelle
+tile.advancedRedstoneInterface.name=Erweiterte Redstoneschnittstelle
+
+item.chaliceOfImmortality.name=Kelch der Unsterblichkeit
+item.positionFilter.name=Positionsfilter
+item.biomeCrystal.name=Biomkristall
+item.summoningPendulum.name=Beschwörungspendel
+item.stableEnderpearl.name=Stabile Enderperle
+item.craftingRecipe.name=Craftingrezept
+item.redstoneTool.name=Redstonewerkzeug
+item.waterWalkingBoots.name=Wasserwanderschuhe
+item.dungeonChestGenerator.name=Lootgenerator
+item.lavaCharm.name=Lavaanhänger
+item.lavaWader.name=Lavawanderschuhe
+item.obsidianSkull.name=Obsidianschädel
+item.obsidianSkullRing.name=Obsidianschädelring
+item.obsidianWaterWalkingBoots.name=Obsidian-Wasserwanderschuhe
+item.magicHood.name=Tarnkappe
+item.bottleOfAir.name=Luftflasche
+item.rezStone.name=Blutstein
+item.enderLetter.name=Enderbrief
+item.entityFilter.name=Wesensfilter
+item.itemFilter.name=Gegenstandsfilter
+item.spectreKey.name=Schemenschlüssel
+item.soundRecorder.name=Tonaufnahmegerät
+item.redstoneActivator.name=Redstoneaktivator
+item.redstoneRemote.name=Redstonefernbedienung
+item.spectreAnchor.name=Schemenanker
+item.spectreSword.name=Schemenschwert
+item.goldenCompass.name=Goldener Kompass
+
+item.bean.name=Bohne
+item.lesserMagicBean.name=Kleine magische Bohne
+item.magicBean.name=Magische Bohne
+item.beanStew.name=Bohneneintopf
+
+item.grassSeeds.normal.name=Grassamen
+item.grassSeeds.black.name=Schwarze Grassamen
+item.grassSeeds.red.name=Rote Grassamen
+item.grassSeeds.green.name=Grüne Grassamen
+item.grassSeeds.brown.name=Braune Grassamen
+item.grassSeeds.blue.name=Blaue Grassamen
+item.grassSeeds.purple.name=Violette Grassamen
+item.grassSeeds.cyan.name=Türkise Grassamen
+item.grassSeeds.silver.name=Hellgraue Grassamen
+item.grassSeeds.gray.name=Graue Grassamen
+item.grassSeeds.pink.name=Rosa Grassamen
+item.grassSeeds.lime.name=Hellgrüne Grassamen
+item.grassSeeds.yellow.name=Gelbe Grassamen
+item.grassSeeds.lightBlue.name=Hellblaue Grassamen
+item.grassSeeds.magenta.name=Magenta Grassamen
+item.grassSeeds.orange.name=Orange Grassamen
+item.grassSeeds.white.name=Weiße Grassamen
+
+item.imbue.fire.name=Feuer-Permeationstrank
+item.imbue.poison.name=Gift-Permeationstrank
+item.imbue.experience.name=Erfahrungs-Permeationstrank
+item.imbue.wither.name=Wither-Permeationstrank
+item.imbue.collapse.name=Einsturz-Permeationstrank
+
+item.ingredient.sakanadeSpores.name=Sakanadesporen
+item.ingredient.evilTear.name=Böse Träne
+item.ingredient.ectoPlasm.name=Ektoplasma
+item.ingredient.spectreIngot.name=Schemenbarren
+item.ingredient.biomeSensor.name=Biomsensor
+
+tooltip.general.shift=§6Shift§7 drücken für mehr Informationen
+tooltip.positionFilter.dimension=Dimension: %d
+tooltip.positionFilter.x=Position-X: %d
+tooltip.positionFilter.y=Position-Y: %d
+tooltip.positionFilter.z=Position-Z: %d
+tooltip.summoningPendulum.entityCount.singular=§5Hält Wesen %d
+tooltip.summoningPendulum.entityCount.plural=§5Hält Wesen %d
+tooltip.stableEnderpearl.boundto=§5Gebunden an %s
+tooltip.entityFilter.invalidEntity=Ungültiges Wesen
+
+tooltip.itemFilter.metadata=Metadaten prüfen
+tooltip.itemFilter.nometadata=Metadaten ignorieren
+tooltip.itemFilter.oredict=OreDictionary prüfen
+tooltip.itemFilter.nooredict=OreDictionary ignorieren
+tooltip.itemFilter.nbt=NBT prüfen
+tooltip.itemFilter.nonbt=NBT ignorieren
+tooltip.itemFilter.whitelist=Whitelist
+tooltip.itemFilter.blacklist=Blacklist
+
+tooltip.spectreAnchor.item=Verankert
+
+tooltip.ironDropper.redstoneMode.pulse=Auswerfen bei Puls
+tooltip.ironDropper.redstoneMode.repeatPowered=Kontinuierlich auswerfen bei Signal
+tooltip.ironDropper.redstoneMode.repeat=Kontinuierlich auswerfen
+tooltip.ironDropper.pickupDelay.none=Keine Einschaltverzögerung
+tooltip.ironDropper.pickupDelay.5=5 Tick Einschaltverzögerung
+tooltip.ironDropper.pickupDelay.20=20 Tick Einschaltverzögerung
+tooltip.ironDropper.randomMotion.yes=Zufällige Geschwindigkeit
+tooltip.ironDropper.randomMotion.no=Genaue Geschwindigkeit
+tooltip.ironDropper.effects.none=Keine Effekte
+tooltip.ironDropper.effects.soundOnly=Soundeffekte
+tooltip.ironDropper.effects.particlesOnly=Partikeleffekte
+tooltip.ironDropper.effects.both=Sound- & Partikeleffekte
+
+tooltip.itemProjector.selectionMode.first=Vom ersten Platz beginnen
+tooltip.itemProjector.selectionMode.last=Vom letzten Platz beginnen
+tooltip.itemProjector.selectionMode.biggest=Größten Stapel auswählen
+
+gui.basicRedstoneInterface.notarget=Kein Ziel
+gui.basicRedstoneInterface.targetX=Ziel-X: %s
+gui.basicRedstoneInterface.targetY=Ziel-Y: %s
+gui.basicRedstoneInterface.targetZ=Ziel-Z: %s
+
+gui.entityDetector.radiusX=Radius X: %s
+gui.entityDetector.radiusY=Radius Y: %s
+gui.entityDetector.radiusZ=Radius Z: %s
+gui.entityDetector.filter.all=Alle Wesen
+gui.entityDetector.filter.living=Lebende Wesen
+gui.entityDetector.filter.animal=Tiere
+gui.entityDetector.filter.monster=Monster
+gui.entityDetector.filter.player=Spieler
+gui.entityDetector.filter.item=Gegenstände
+gui.entityDetector.filter.custom=Benutzerdefiniert
+
+block.enderMailbox.owner=Du besitzt diesen Briefkasten nicht
+
+item.dungeonChestGenerator.category=Kategorie: %s
+item.dungeonChestGenerator.shiftCategory=Shift-Klick zum Auswählen der Kategorie
+
+item.enderLetter.sender=Sender: %s
+item.enderLetter.receiver=Empfänger: %s
+item.enderLetter.noPlayer=%s scheint nicht in dieser Welt zu leben
+item.enderLetter.noSpace=Der Brief scheint abgelehnt worden zu sein
+
+entity.randomthings.spirit.name=Geist
+
+fluid.biomeEssence=Biomessenz
