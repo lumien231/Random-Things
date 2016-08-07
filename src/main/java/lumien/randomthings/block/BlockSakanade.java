@@ -36,7 +36,6 @@ public class BlockSakanade extends BlockBase implements IShearable
 		this.setTickRandomly(true);
 
 		this.setCreativeTab(null);
-		// this.setCreativeTab(null)
 	}
 
 	@Override
@@ -85,7 +84,6 @@ public class BlockSakanade extends BlockBase implements IShearable
 				entity.addPotionEffect(new PotionEffect(ModPotions.collapse, 200));
 			}
 
-
 			this.checkAndDropBlock(worldIn, pos, state);
 		}
 	}
@@ -104,6 +102,12 @@ public class BlockSakanade extends BlockBase implements IShearable
 
 	@Override
 	public boolean isFullBlock(IBlockState state)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
