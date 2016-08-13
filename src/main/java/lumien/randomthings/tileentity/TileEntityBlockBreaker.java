@@ -3,9 +3,12 @@ package lumien.randomthings.tileentity;
 import java.lang.ref.WeakReference;
 import java.util.UUID;
 
+import org.apache.logging.log4j.Level;
+
 import com.google.common.base.Charsets;
 import com.mojang.authlib.GameProfile;
 
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockBlockBreaker;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -28,7 +31,12 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 {
 	public static final GameProfile breakerProfile = new GameProfile(UUID.nameUUIDFromBytes("RTBlockBreaker".getBytes(Charsets.UTF_8)), "RTBlockBreaker");
-
+	
+	static
+	{
+		RandomThings.instance.logger.log(Level.DEBUG, "BlockBreakerUUID: "+breakerProfile.getId().toString());
+	}
+	
 	UUID uuid;
 
 	boolean mining;
