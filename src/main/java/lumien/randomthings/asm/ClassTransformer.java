@@ -83,13 +83,7 @@ public class ClassTransformer implements IClassTransformer
 		}
 		else if (transformedName.equals("net.minecraft.world.gen.structure.StructureOceanMonumentPieces$MonumentCoreRoom"))
 		{
-			// return patchOceanCoreRoom(basicClass); TODO Reimplement Without
-			// asm?
-		}
-		else if (transformedName.equals("net.minecraft.block.BlockLiquid"))
-		{
-			// return patchLiquidBlock(basicClass); TODO Ehhhh, was this fixed
-			// by vanilla?
+			return patchOceanMonument(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer"))
 		{
@@ -820,6 +814,62 @@ public class ClassTransformer implements IClassTransformer
 						addRainParticles.instructions.insert(jin, toInsert);
 
 						break;
+					}
+				}
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
+	}
+
+	private byte[] patchOceanMonument(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found MonumentCoreRoom Class: " + classNode.name);
+
+		MethodNode addComponentParts = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_74875_a")))
+			{
+				addComponentParts = mn;
+			}
+		}
+
+		if (addComponentParts != null)
+		{
+			logger.log(Level.DEBUG, " - Found addComponentParts");
+
+			for (int i = 0; i < addComponentParts.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = addComponentParts.instructions.get(i);
+
+				if (ain instanceof InsnNode)
+				{
+					InsnNode in = (InsnNode) ain;
+
+					if (in.getOpcode() == Opcodes.IRETURN)
+					{
+						logger.log(Level.DEBUG, " - Patched addComponentParts");
+
+						AbstractInsnNode before = addComponentParts.instructions.get(i - 1);
+
+						InsnList toInsert = new InsnList();
+
+						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 1));
+						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 2));
+						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 3));
+						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 0));
+						toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "lumien/randomthings/worldgen/WorldGenOceanChest", "addComponentParts", "(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;Lnet/minecraft/world/gen/structure/StructureOceanMonumentPieces$MonumentCoreRoom;)V", false));
+					
+						i+=5;
+						addComponentParts.instructions.insertBefore(before, toInsert);
 					}
 				}
 			}

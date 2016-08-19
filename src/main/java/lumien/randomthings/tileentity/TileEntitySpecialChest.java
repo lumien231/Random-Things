@@ -22,6 +22,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -173,7 +174,7 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 		super.readFromNBT(compound);
 		NBTTagList nbttaglist = compound.getTagList("Items", 10);
 		this.chestContents = new ItemStack[this.getSizeInventory()];
-
+		
 		if (compound.hasKey("CustomName", 8))
 		{
 			this.customName = compound.getString("CustomName");
@@ -216,9 +217,9 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 		{
 			compound.setString("CustomName", this.customName);
 		}
-
-		compound.setInteger("chestType", chestType);
 		
+		compound.setInteger("chestType", chestType);
+
 		return compound;
 	}
 
@@ -396,6 +397,16 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 	{
 		return this.chestType;
 	}
+	
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		NBTTagCompound baseCompound = super.getUpdateTag();
+		
+		baseCompound.setInteger("chestType", this.chestType);
+		
+		return baseCompound;
+	}
 
 	@Override
 	public String getGuiID()
@@ -482,7 +493,11 @@ public class TileEntitySpecialChest extends TileEntityLockable implements ITicka
 
 	public void setChestType(int chestType)
 	{
-		this.chestType = chestType;
+		if (chestType != this.chestType)
+		{
+			this.chestType = chestType;
+			this.markDirty();
+		}
 	}
 
 	@Override
