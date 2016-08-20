@@ -7,6 +7,7 @@ import java.util.Random;
 import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.block.BlockSpecialChest;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import net.minecraft.block.state.IBlockState;
@@ -42,51 +43,54 @@ public class WorldGenOceanChest
 
 	public static void addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn, MonumentCoreRoom coreRoom)
 	{
-		BlockPos blockpos = new BlockPos(getXWithOffset(6, 6, coreRoom, coreRoom.getBoundingBox()), getYWithOffset(1, coreRoom, coreRoom.getBoundingBox()), getZWithOffset(6, 6, coreRoom, coreRoom.getBoundingBox()));
-		
-		if (structureBoundingBoxIn.isVecInside(blockpos))
+		if (Worldgen.WATER_CHEST)
 		{
-			try
-			{
-				setBlockState.invoke(coreRoom, worldIn, ModBlocks.specialChest.getDefaultState().withProperty(BlockSpecialChest.FACING, EnumFacing.SOUTH), 6, 1, 6, structureBoundingBoxIn);
-			}
-			catch (IllegalAccessException e)
-			{
-				e.printStackTrace();
-			}
-			catch (IllegalArgumentException e)
-			{
-				e.printStackTrace();
-			}
-			catch (InvocationTargetException e)
-			{
-				e.printStackTrace();
-			}
+			BlockPos blockpos = new BlockPos(getXWithOffset(6, 6, coreRoom, coreRoom.getBoundingBox()), getYWithOffset(1, coreRoom, coreRoom.getBoundingBox()), getZWithOffset(6, 6, coreRoom, coreRoom.getBoundingBox()));
 
-			TileEntity te = worldIn.getTileEntity(blockpos);
-			
-			if (te != null && te instanceof TileEntitySpecialChest)
+			if (structureBoundingBoxIn.isVecInside(blockpos))
 			{
-				System.out.println(te.getPos());
-				TileEntitySpecialChest chestTE = (TileEntitySpecialChest) te;
-				chestTE.setChestType(1);
-				
-				ItemStack rareLoot = null;
-				if (rng.nextBoolean())
+				try
 				{
-					rareLoot = new ItemStack(ModItems.bottleOfAir);
+					setBlockState.invoke(coreRoom, worldIn, ModBlocks.specialChest.getDefaultState().withProperty(BlockSpecialChest.FACING, EnumFacing.SOUTH), 6, 1, 6, structureBoundingBoxIn);
 				}
-				else
+				catch (IllegalAccessException e)
 				{
-					rareLoot = new ItemStack(ModItems.waterWalkingBoots);
+					e.printStackTrace();
+				}
+				catch (IllegalArgumentException e)
+				{
+					e.printStackTrace();
+				}
+				catch (InvocationTargetException e)
+				{
+					e.printStackTrace();
 				}
 
-				LootTable lootTable = worldIn.getLootTableManager().getLootTableFromLocation(LootTableList.CHESTS_JUNGLE_TEMPLE);
-				
-				LootContext.Builder builder = new LootContext.Builder((WorldServer) worldIn);
-				lootTable.fillInventory(chestTE, rng, builder.build());
-				
-				chestTE.setInventorySlotContents(0, rareLoot);
+				TileEntity te = worldIn.getTileEntity(blockpos);
+
+				if (te != null && te instanceof TileEntitySpecialChest)
+				{
+					System.out.println(te.getPos());
+					TileEntitySpecialChest chestTE = (TileEntitySpecialChest) te;
+					chestTE.setChestType(1);
+
+					ItemStack rareLoot = null;
+					if (rng.nextBoolean())
+					{
+						rareLoot = new ItemStack(ModItems.bottleOfAir);
+					}
+					else
+					{
+						rareLoot = new ItemStack(ModItems.waterWalkingBoots);
+					}
+
+					LootTable lootTable = worldIn.getLootTableManager().getLootTableFromLocation(LootTableList.CHESTS_JUNGLE_TEMPLE);
+
+					LootContext.Builder builder = new LootContext.Builder((WorldServer) worldIn);
+					lootTable.fillInventory(chestTE, rng, builder.build());
+
+					chestTE.setInventorySlotContents(0, rareLoot);
+				}
 			}
 		}
 	}
