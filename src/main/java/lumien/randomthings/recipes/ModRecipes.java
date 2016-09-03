@@ -130,9 +130,10 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.filteredItemRedirector), "xpx", "xrx", "xsx", 'p', paper, 'r', ModBlocks.itemRedirector, 's', Items.STRING));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.filteredSuperLubricentPlatform), "xpx", "xrx", "xsx", 'p', paper, 'r', ModBlocks.superLubricentPlatform, 's', Items.STRING));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.redstoneObserver), "rqr", "qeq", "rqr", 'r', redstoneDust, 'q', Items.QUARTZ, 'e', Items.ENDER_EYE));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeRadar), "iii", "gsg", "iii", 'i', "ingotIron", 'g', "blockGlass",'s',biomeSensor));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.ironDropper), "iii","ixi","iri",'i',"ingotIron",'r',redstoneDust));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeRadar), "iii", "gsg", "iii", 'i', "ingotIron", 'g', "blockGlass", 's', biomeSensor));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.ironDropper), "iii", "ixi", "iri", 'i', "ingotIron", 'r', redstoneDust));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockOfSticks, 16), "sss", "sas", "sss", 's', "stickWood"));
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.HOPPER, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));
 
@@ -155,14 +156,14 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneRemote), "aaa", "oso", "ooo", 'a', ModItems.redstoneActivator, 'o', Blocks.OBSIDIAN, 's', stableEnderpearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAnchor), "xix", "iei", "iii", 'i', "ingotIron", 'e', ectoPlasm));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx", "xsx", "xox", 's', spectreIngot, 'o', obsidian));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.goldenCompass), "xgx","gcg","xgx",'g',"ingotGold",'c',Items.COMPASS));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.goldenCompass), "xgx", "gcg", "xgx", 'g', "ingotGold", 'c', Items.COMPASS));
+
 		// Ingredients
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.EVIL_TEAR.id), "xsx", "xtx", "xex", 's', witherSkull, 't', ghastTear, 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id), "xlx", "xix", "xex", 'l', lapis, 'i', "ingotGold", 'e', ectoPlasm));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 9, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id), "ele", "eie", "eee", 'l', lapisBlock, 'i', "blockGold", 'e', ectoPlasm));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.BIOME_SENSOR.id), "iii","rci","iri",'i',"ingotIron",'r',redstoneDust,'c',ModItems.biomeCrystal));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.BIOME_SENSOR.id), "iii", "rci", "iri", 'i', "ingotIron", 'r', redstoneDust, 'c', ModItems.biomeCrystal));
+
 		// Biome Blocks
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 0), "ccc", "cbc", "ccc", 'c', cobblestone, 'b', biomeCrystal));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 1), "sss", "sbs", "sss", 's', stone, 'b', biomeCrystal));
@@ -305,13 +306,12 @@ public class ModRecipes
 				return result;
 			}
 		};
-		
-		RecipeSorter.register("spectreAnchor", anchorRecipe.getClass(),Category.SHAPELESS , "");
+
+		RecipeSorter.register("spectreAnchor", anchorRecipe.getClass(), Category.SHAPELESS, "");
 		GameRegistry.addRecipe(anchorRecipe);
 
 		// Golden Compass
-		IRecipe goldenCompassRecipe = 
-		new IRecipe()
+		IRecipe goldenCompassRecipe = new IRecipe()
 		{
 			@Override
 			public boolean matches(InventoryCrafting inv, World worldIn)
@@ -376,7 +376,7 @@ public class ModRecipes
 						}
 					}
 				}
-				
+
 				return aitemstack;
 			}
 
@@ -432,7 +432,7 @@ public class ModRecipes
 				}
 				return result;
 			}
-				};
+		};
 
 		RecipeSorter.register("goldenCompass", goldenCompassRecipe.getClass(), Category.SHAPELESS, "");
 		GameRegistry.addRecipe(goldenCompassRecipe);

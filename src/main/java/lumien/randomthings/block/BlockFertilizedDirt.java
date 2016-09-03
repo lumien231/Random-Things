@@ -25,7 +25,6 @@ public class BlockFertilizedDirt extends BlockBase
 	
 	protected static final AxisAlignedBB TILLED_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 
-
 	protected BlockFertilizedDirt(boolean tilled)
 	{
 		super("fertilizedDirt" + (tilled ? "Tilled" : ""), Material.GROUND);
