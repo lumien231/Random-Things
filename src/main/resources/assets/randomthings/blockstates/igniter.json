@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down":  { "model": "randomthings:igniter", "x" : 90, "y" : 90 },
+        "facing=up":    { "model": "randomthings:igniter" , "x" : 270, "y" : 90},
+        "facing=north": { "model": "randomthings:igniter" },
+        "facing=south": { "model": "randomthings:igniter", "y": 180 },
+        "facing=west":  { "model": "randomthings:igniter", "y": 270 },
+        "facing=east":  { "model": "randomthings:igniter", "y": 90 }
+    }
+}

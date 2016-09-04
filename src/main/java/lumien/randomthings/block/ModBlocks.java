@@ -59,6 +59,7 @@ public class ModBlocks
 	public static BlockBiomeRadar biomeRadar;
 	public static BlockIronDropper ironDropper;
 	public static BlockItemProjector itemProjector;
+	public static BlockIgniter igniter;
 	public static BlockBlockOfSticks blockOfSticks;
 	
 	public static BlockSpectrePlank spectrePlank;
@@ -135,6 +136,7 @@ public class ModBlocks
 		biomeRadar = new BlockBiomeRadar();
 		ironDropper = new BlockIronDropper();
 		itemProjector = new BlockItemProjector();
+		igniter = new BlockIgniter();
 		blockOfSticks = new BlockBlockOfSticks();
 		
 		spectrePlank = new BlockSpectrePlank();

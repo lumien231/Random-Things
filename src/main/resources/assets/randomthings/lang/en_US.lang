@@ -52,6 +52,7 @@ tile.biomeRadar.name=Biome Radar
 tile.ironDropper.name=Iron Dropper
 tile.itemProjector.name=[WIP] Item Projector
 tile.blockOfSticks.name=Block of Sticks
+tile.igniter.name=Igniter
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling

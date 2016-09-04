@@ -1,9 +1,13 @@
 package lumien.randomthings.client.models.blocks;
 
+import lumien.randomthings.block.BlockIgniter;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.EmptyStateMapper;
 import lumien.randomthings.client.models.FocusStateMapper;
+import net.minecraft.block.BlockHopper;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockModels
@@ -15,6 +19,8 @@ public class BlockModels
 		
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreSapling, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreSapling","normal")));
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreLeaf, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreLeaf","normal")));
+	
+		ModelLoader.setCustomStateMapper(ModBlocks.igniter, (new StateMap.Builder()).ignore(new IProperty[] {BlockIgniter.POWERED}).build());
 	}
 
 }

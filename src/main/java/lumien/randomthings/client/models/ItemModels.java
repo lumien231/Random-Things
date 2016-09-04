@@ -68,6 +68,7 @@ public class ItemModels
 		registerBlock(ModBlocks.ironDropper);
 		registerBlock(ModBlocks.itemProjector);
 		registerBlock(ModBlocks.blockOfSticks);
+		registerBlock(ModBlocks.igniter);
 		
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);
