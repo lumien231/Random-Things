@@ -252,7 +252,7 @@ public class ClientProxy extends CommonProxy
 		GlStateManager.pushMatrix();
 		{
 			worldRenderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
-			synchronized (TileEntityRedstoneInterface.interfaces)
+			synchronized (TileEntityRedstoneInterface.lock)
 			{
 				for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
 				{

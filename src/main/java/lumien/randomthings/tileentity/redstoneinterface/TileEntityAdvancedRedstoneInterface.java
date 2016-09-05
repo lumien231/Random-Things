@@ -39,10 +39,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	@Override
 	protected boolean isTargeting(BlockPos pos)
 	{
-		synchronized (targets)
-		{
-			return targets.contains(pos);
-		}
+		return targets.contains(pos);
 	}
 
 	@Override
@@ -50,12 +47,15 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	{
 		NBTTagList nbtTargetList = new NBTTagList();
 
-		for (BlockPos pos : targets)
+		synchronized (TileEntityRedstoneInterface.lock)
 		{
-			NBTTagCompound targetCompound = new NBTTagCompound();
+			for (BlockPos pos : targets)
+			{
+				NBTTagCompound targetCompound = new NBTTagCompound();
 
-			NBTUtil.writeBlockPosToNBT(targetCompound, "target", pos);
-			nbtTargetList.appendTag(targetCompound);
+				NBTUtil.writeBlockPosToNBT(targetCompound, "target", pos);
+				nbtTargetList.appendTag(targetCompound);
+			}
 		}
 
 		compound.setTag("targets", nbtTargetList);
@@ -70,13 +70,16 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	{
 		NBTTagList nbtTargetList = compound.getTagList("targets", 10);
 
-		if (nbtTargetList != null)
+		synchronized (TileEntityRedstoneInterface.lock)
 		{
-			for (int i = 0; i < nbtTargetList.tagCount(); i++)
+			if (nbtTargetList != null)
 			{
-				NBTTagCompound targetCompound = nbtTargetList.getCompoundTagAt(i);
+				for (int i = 0; i < nbtTargetList.tagCount(); i++)
+				{
+					NBTTagCompound targetCompound = nbtTargetList.getCompoundTagAt(i);
 
-				this.targets.add(NBTUtil.readBlockPosFromNBT(targetCompound, "target"));
+					this.targets.add(NBTUtil.readBlockPosFromNBT(targetCompound, "target"));
+				}
 			}
 		}
 
@@ -108,35 +111,35 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 
 			HashSet<BlockPos> changedPositions = new HashSet<BlockPos>();
 
-			for (BlockPos target : newTargets)
+			synchronized (TileEntityRedstoneInterface.lock)
 			{
-				if (!targets.contains(target))
+				for (BlockPos target : newTargets)
 				{
-					changedPositions.add(target); // Added
+					if (!targets.contains(target))
+					{
+						changedPositions.add(target); // Added
+					}
 				}
-			}
 
-			for (BlockPos oldTarget : targets)
-			{
-				if (!newTargets.contains(oldTarget))
+				for (BlockPos oldTarget : targets)
 				{
-					changedPositions.add(oldTarget); // Added
+					if (!newTargets.contains(oldTarget))
+					{
+						changedPositions.add(oldTarget); // Added
+					}
 				}
-			}
 
-			synchronized (targets)
-			{
 				this.targets = newTargets;
-			}
 
-			IBlockState state = this.worldObj.getBlockState(this.pos);
-			this.worldObj.notifyBlockUpdate(pos, state, state, 3);
+				IBlockState state = this.worldObj.getBlockState(this.pos);
+				this.worldObj.notifyBlockUpdate(pos, state, state, 3);
 
-			for (BlockPos changedPos : changedPositions)
-			{
-				IBlockState targetState = worldObj.getBlockState(changedPos);
-				targetState.neighborChanged(worldObj, changedPos, Blocks.REDSTONE_BLOCK);
-				worldObj.notifyNeighborsOfStateChange(changedPos, Blocks.REDSTONE_BLOCK);
+				for (BlockPos changedPos : changedPositions)
+				{
+					IBlockState targetState = worldObj.getBlockState(changedPos);
+					targetState.neighborChanged(worldObj, changedPos, Blocks.REDSTONE_BLOCK);
+					worldObj.notifyNeighborsOfStateChange(changedPos, Blocks.REDSTONE_BLOCK);
+				}
 			}
 		}
 	}
@@ -151,13 +154,16 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	{
 		super.broken();
 
-		for (BlockPos target : targets)
+		synchronized (TileEntityRedstoneInterface.lock)
 		{
-			if (target != null)
+			for (BlockPos target : targets)
 			{
-				IBlockState targetState = worldObj.getBlockState(target);
-				targetState.neighborChanged(worldObj, target,  Blocks.REDSTONE_BLOCK);
-				worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK);
+				if (target != null)
+				{
+					IBlockState targetState = worldObj.getBlockState(target);
+					targetState.neighborChanged(worldObj, target, Blocks.REDSTONE_BLOCK);
+					worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK);
+				}
 			}
 		}
 	}
@@ -165,13 +171,16 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
-		for (BlockPos target : targets)
+		synchronized (TileEntityRedstoneInterface.lock)
 		{
-			if (target != null)
+			for (BlockPos target : targets)
 			{
-				IBlockState targetState = worldObj.getBlockState(target);
-				targetState.neighborChanged(worldObj, target, neighborBlock);
-				worldObj.notifyNeighborsOfStateChange(target, neighborBlock);
+				if (target != null)
+				{
+					IBlockState targetState = worldObj.getBlockState(target);
+					targetState.neighborChanged(worldObj, target, neighborBlock);
+					worldObj.notifyNeighborsOfStateChange(target, neighborBlock);
+				}
 			}
 		}
 	}

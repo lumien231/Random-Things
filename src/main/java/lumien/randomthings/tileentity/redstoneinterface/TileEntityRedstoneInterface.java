@@ -16,9 +16,11 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 {
 	public static Set<TileEntityRedstoneInterface> interfaces = Collections.newSetFromMap(new WeakHashMap());
 
+	public static Object lock = new Object();
+
 	public TileEntityRedstoneInterface()
 	{
-		synchronized (interfaces)
+		synchronized (lock)
 		{
 			interfaces.add(this);
 		}
@@ -34,7 +36,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 
 	public static int getRedstonePower(World blockWorld, BlockPos pos, EnumFacing facing)
 	{
-		synchronized (checkedWeakPositions)
+		synchronized (lock)
 		{
 			if (checkedWeakPositions.contains(pos))
 			{
@@ -45,19 +47,17 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 			int totalPower = 0;
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
-			synchronized (interfaces)
-			{
-				for (TileEntityRedstoneInterface redstoneInterface : interfaces)
-				{
-					if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.isTargeting(checkingBlock))
-					{
-						int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos.offset(facing), facing);
-						checkedWeakPositions.remove(pos);
 
-						if (remotePower > totalPower)
-						{
-							totalPower = remotePower;
-						}
+			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
+			{
+				if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.isTargeting(checkingBlock))
+				{
+					int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos.offset(facing), facing);
+					checkedWeakPositions.remove(pos);
+
+					if (remotePower > totalPower)
+					{
+						totalPower = remotePower;
 					}
 				}
 			}
@@ -71,7 +71,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 
 	public static int getStrongPower(World blockWorld, BlockPos pos, EnumFacing facing)
 	{
-		synchronized (checkedStrongPositions)
+		synchronized (lock)
 		{
 			if (checkedStrongPositions.contains(pos))
 			{
@@ -83,19 +83,16 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
 
-			synchronized (interfaces)
+			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
 			{
-				for (TileEntityRedstoneInterface redstoneInterface : interfaces)
+				if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.isTargeting(checkingBlock))
 				{
-					if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.isTargeting(checkingBlock))
-					{
-						int remotePower = redstoneInterface.worldObj.getStrongPower(redstoneInterface.pos.offset(facing), facing);
-						checkedStrongPositions.remove(pos);
+					int remotePower = redstoneInterface.worldObj.getStrongPower(redstoneInterface.pos.offset(facing), facing);
+					checkedStrongPositions.remove(pos);
 
-						if (remotePower > totalPower)
-						{
-							totalPower = remotePower;
-						}
+					if (remotePower > totalPower)
+					{
+						totalPower = remotePower;
 					}
 				}
 			}
