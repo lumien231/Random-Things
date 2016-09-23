@@ -67,7 +67,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
-		return false;
+		return true;
 	}
 
 	@Override
