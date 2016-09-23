@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemBean extends ItemBase
 {
@@ -24,6 +25,9 @@ public class ItemBean extends ItemBase
 		super("beans");
 
 		this.setHasSubtypes(true);
+
+		OreDictionary.registerOre("cropBean", new ItemStack(this, 1, 0));
+		OreDictionary.registerOre("listAllveggie", new ItemStack(this, 1, 0));
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class ItemBean extends ItemBase
 			{
 				worldIn.setBlockState(pos.up(), ModBlocks.beanSprout.getDefaultState());
 
-				worldIn.playSound(null,pos.up(), ModBlocks.beanSprout.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 1);
+				worldIn.playSound(null, pos.up(), ModBlocks.beanSprout.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
 				--stack.stackSize;
 				return EnumActionResult.SUCCESS;
@@ -78,7 +82,7 @@ public class ItemBean extends ItemBase
 				worldIn.setBlockState(pos.up(), ModBlocks.lesserBeanStalk.getDefaultState());
 				worldIn.scheduleUpdate(pos.up(), ModBlocks.lesserBeanStalk, 20);
 
-				worldIn.playSound(null,pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 1);
+				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
 				--stack.stackSize;
 				return EnumActionResult.SUCCESS;
@@ -88,7 +92,7 @@ public class ItemBean extends ItemBase
 				worldIn.setBlockState(pos.up(), ModBlocks.beanStalk.getDefaultState());
 				worldIn.scheduleUpdate(pos.up(), ModBlocks.beanStalk, 20);
 
-				worldIn.playSound(null,pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 1);
+				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
 				--stack.stackSize;
 				return EnumActionResult.SUCCESS;

@@ -143,7 +143,7 @@ public class ModRecipes
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.grassSeeds), Blocks.GRASS));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stableEnderpearl), "olo", "lel", "olo", 'o', obsidian, 'l', lapis, 'e', enderPearl));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', bean, 'n', "nuggetGold"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beans, 1, 1), "nnn", "nbn", "nnn", 'b', "cropBean", 'n', "nuggetGold"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beanStew, 1, 0), "xwx", "bbb", "xox", 'b', bean, 'w', wheat, 'o', bowl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.beanStew, 1, 0), "bbb", "xwx", "xox", 'b', bean, 'w', wheat, 'o', bowl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.positionFilter, 1, 0), "xdx", "dpd", "xdx", 'd', "dyePurple", 'p', paper));
