@@ -8,6 +8,9 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
+import lumien.randomthings.network.MessageUtil;
+import lumien.randomthings.network.messages.MessageSetBiome;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -20,10 +23,34 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 
 public class WorldUtil
 {
+	public static void setBiome(World worldObj, BlockPos pos, Biome biome)
+	{
+		Chunk c = worldObj.getChunkFromBlockCoords(new BlockPos(pos.getX(), 0, pos.getZ()));
+		int biomeID = Biome.getIdForBiome(biome);
+		byte[] biomeArray = c.getBiomeArray();
+		if ((biomeArray[(pos.getZ() & 15) << 4 | (pos.getX() & 15)] & 255) != biomeID)
+		{
+			biomeArray[(pos.getZ() & 15) << 4 | (pos.getX() & 15)] = (byte) (biomeID & 255);
+			c.setBiomeArray(biomeArray);
+		}
+
+		if (!worldObj.isRemote)
+		{
+			c.setChunkModified();
+			MessageUtil.sendToAllWatchingPos(worldObj, pos, new MessageSetBiome(pos, biome.getIdForBiome(biome)));
+		}
+		else
+		{
+			IBlockState state = worldObj.getBlockState(pos);
+			worldObj.notifyBlockUpdate(pos, state, state, 3);
+		}
+	}
+
 	public static void setEntityPosition(Entity e, double posX, double posY, double posZ)
 	{
 		if (e instanceof EntityPlayerMP)
@@ -36,7 +63,7 @@ public class WorldUtil
 			e.setPositionAndUpdate(posX, posY, posZ);
 		}
 	}
-	
+
 	public static boolean isValidPosition(BlockPos pos)
 	{
 		return pos.getX() >= -30000000 && pos.getZ() >= -30000000 && pos.getX() < 30000000 && pos.getZ() < 30000000 && pos.getY() >= 0 && pos.getY() < 256;
