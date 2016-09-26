@@ -89,7 +89,7 @@ public class ItemSpectreKey extends ItemBase
 
 			for (int i = 0; i < (60 - count) * 2; i++)
 			{
-				particle = factory.getEntityFX(0, livingEntity.worldObj, livingEntity.posX + Math.random() * 1.8 - 0.9, livingEntity.posY + Math.random() * 1.8f, livingEntity.posZ + Math.random() * 1.8 - 0.9, 0, 0, 0);
+				particle = factory.createParticle(0, livingEntity.worldObj, livingEntity.posX + Math.random() * 1.8 - 0.9, livingEntity.posY + Math.random() * 1.8f, livingEntity.posZ + Math.random() * 1.8 - 0.9, 0, 0, 0);
 				particle.setRBGColorF(t * 122F, t * 197F, t * 205F);
 				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 			}

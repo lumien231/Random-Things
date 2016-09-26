@@ -80,7 +80,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 			double modX = Math.random() * 0.05f - 0.025f;
 			double modZ = Math.random() * 0.05f - 0.025f;
 
-			Particle particle = builder.getEntityFX(0, worldObj, this.posX + modX, this.posY + 2, this.posZ + modZ, modX * 2, 1, modZ * 2);
+			Particle particle = builder.createParticle(0, worldObj, this.posX + modX, this.posY + 2, this.posZ + modZ, modX * 2, 1, modZ * 2);
 			particle.setRBGColorF(0.2F + (float) Math.random() * 0.1f, 0, 0.3F + (float) Math.random() * 0.1f);
 
 			Minecraft.getMinecraft().effectRenderer.addEffect(particle);
