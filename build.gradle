@@ -29,7 +29,7 @@ dependencies {
     deobfCompile "mezz.jei:jei_1.9.4:3.4.0.204"
 }
 
-version = "3.7.5"
+version = "3.7.6"
 group= "lumien.randomthings"
 
 jar {
