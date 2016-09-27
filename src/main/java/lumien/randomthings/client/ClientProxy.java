@@ -254,7 +254,9 @@ public class ClientProxy extends CommonProxy
 			worldRenderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
 			synchronized (TileEntityRedstoneInterface.lock)
 			{
-				for (TileEntityRedstoneInterface redstoneInterface : TileEntityRedstoneInterface.interfaces)
+				ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<TileEntityRedstoneInterface>();
+				interfaces.addAll(TileEntityRedstoneInterface.interfaces);
+				for (TileEntityRedstoneInterface redstoneInterface : interfaces)
 				{
 					if (!redstoneInterface.isInvalid() && redstoneInterface.getWorld().isRemote)
 					{

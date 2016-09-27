@@ -1,5 +1,6 @@
 package lumien.randomthings.tileentity.redstoneinterface;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,6 +48,9 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 			int totalPower = 0;
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
+			
+			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<TileEntityRedstoneInterface>();
+			interfaces.addAll(TileEntityRedstoneInterface.interfaces);
 
 			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
 			{
@@ -83,6 +87,9 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
 
+			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<TileEntityRedstoneInterface>();
+			interfaces.addAll(TileEntityRedstoneInterface.interfaces);
+			
 			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
 			{
 				if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.isTargeting(checkingBlock))
