@@ -48,7 +48,7 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 	{
 		return AABB;
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
@@ -83,7 +83,15 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 	public IBlockState getStateFromMeta(int meta)
 	{
 		EnumFacing input = EnumFacing.values()[meta];
-		return this.getDefaultState().withProperty(INPUT_FACING, input);
+
+		if (INPUT_FACING.getAllowedValues().contains(input))
+		{
+			return this.getDefaultState().withProperty(INPUT_FACING, input);
+		}
+		else
+		{
+			return this.getDefaultState();
+		}
 	}
 
 	@Override
