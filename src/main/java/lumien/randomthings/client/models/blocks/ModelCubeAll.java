@@ -38,7 +38,7 @@ public class ModelCubeAll implements IBakedModel
 		{
 			List<BakedQuad> faceQuadList;
 			faceQuads.put(f, faceQuadList = new ArrayList<BakedQuad>());
-			BakedQuad quad = createSidedBakedQuad(0, 1, 0, 1, 1, getParticleTexture(), f);
+			BakedQuad quad = createSidedBakedQuad(0, 1, 0, 1, 1, texture, f);
 
 			generalQuads.add(quad);
 			faceQuadList.add(quad);

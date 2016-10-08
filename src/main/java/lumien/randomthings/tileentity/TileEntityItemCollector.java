@@ -14,6 +14,9 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 public class TileEntityItemCollector extends TileEntityBase implements ITickable
 {
@@ -61,20 +64,23 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 					EnumFacing facing = this.worldObj.getBlockState(this.pos).getValue(BlockItemCollector.FACING);
 					TileEntity te = this.worldObj.getTileEntity(this.pos.offset(facing.getOpposite()));
 
-					if (te != null && te instanceof IInventory)
+					if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
 					{
-						IInventory inventory = (IInventory) te;
+						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
 						for (EntityItem ei : entityItemList)
 						{
-							ItemStack left = TileEntityHopper.putStackInInventoryAllSlots(inventory, ei.getEntityItem(), facing);
-
-							if (left == null || left.stackSize == 0)
+							if (!ei.isDead)
 							{
-								ei.setDead();
-							}
-							else
-							{
-								ei.setEntityItemStack(left);
+								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, ei.getEntityItem().copy(), false);
+								
+								if (left == null || left.stackSize == 0)
+								{
+									ei.setDead();
+								}
+								else
+								{
+									ei.setEntityItemStack(left);
+								}
 							}
 						}
 					}

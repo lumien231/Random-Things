@@ -358,7 +358,6 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void modelBake(ModelBakeEvent event)
 	{
-
 		ModelFluidDisplay modelFluidDisplay = new ModelFluidDisplay();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:fluidDisplay", "normal"), modelFluidDisplay);
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:fluidDisplay", "inventory"), modelFluidDisplay);

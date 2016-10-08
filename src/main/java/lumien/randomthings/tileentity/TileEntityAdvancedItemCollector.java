@@ -14,11 +14,13 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 public class TileEntityAdvancedItemCollector extends TileEntityBase implements ITickable, IInventoryChangedListener
 {
@@ -108,15 +110,15 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 					EnumFacing facing = this.worldObj.getBlockState(this.pos).getValue(BlockItemCollector.FACING);
 					TileEntity te = this.worldObj.getTileEntity(this.pos.offset(facing.getOpposite()));
 
-					if (te != null && te instanceof IInventory)
+					if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
 					{
-						IInventory inventory = (IInventory) te;
+						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
+						
 						for (EntityItem ei : entityItemList)
 						{
-							if (filterRepres == null || filterRepres.matchesItemStack(ei.getEntityItem()))
+							if (!ei.isDead && (filterRepres == null || filterRepres.matchesItemStack(ei.getEntityItem())))
 							{
-								ItemStack left = TileEntityHopper.putStackInInventoryAllSlots(inventory, ei.getEntityItem(), facing);
-
+								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, ei.getEntityItem().copy(), false);
 								if (left == null || left.stackSize == 0)
 								{
 									ei.setDead();

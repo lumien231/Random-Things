@@ -21,6 +21,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 public class BlockAdvancedItemCollector extends BlockContainerBase
 {
@@ -99,10 +100,10 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 
 	protected static boolean func_181088_a(World p_181088_0_, BlockPos p_181088_1_, EnumFacing p_181088_2_)
 	{
-		return p_181088_2_ == EnumFacing.DOWN && isBlockInventory(p_181088_0_, p_181088_1_.down()) ? true : isBlockInventory(p_181088_0_,p_181088_1_.offset(p_181088_2_));
+		return p_181088_2_ == EnumFacing.DOWN && isBlockInventory(p_181088_0_, p_181088_1_.down(),p_181088_2_) ? true : isBlockInventory(p_181088_0_,p_181088_1_.offset(p_181088_2_),p_181088_2_);
 	}
 
-	private static boolean isBlockInventory(World worldObj, BlockPos pos)
+	private static boolean isBlockInventory(World worldObj, BlockPos pos,EnumFacing facing)
 	{
 		TileEntity te = worldObj.getTileEntity(pos);
 
@@ -111,7 +112,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 			return false;
 		}
 		
-		return te instanceof IInventory;
+		return te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
 	}
 
 	/**
