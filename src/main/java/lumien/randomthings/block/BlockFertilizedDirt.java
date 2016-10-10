@@ -1,13 +1,11 @@
 package lumien.randomthings.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -18,6 +16,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+
+import java.util.Collections;
+import java.util.Random;
 
 public class BlockFertilizedDirt extends BlockBase
 {
@@ -124,15 +125,17 @@ public class BlockFertilizedDirt extends BlockBase
 		{
 			IBlockState plantState = worldObj.getBlockState(pos.up());
 			Block toBoost = plantState.getBlock();
-			if (plantState != null && toBoost != null && toBoost != Blocks.AIR && toBoost instanceof IPlantable)
+			if (toBoost instanceof IPlantable)
 			{
+				for (IProperty property : plantState.getPropertyNames())
+				{
+					if (property.getName().toLowerCase().equals("age") && property.getValueClass() == Integer.class && plantState.getValue(property).equals(Collections.max(property.getAllowedValues())))
+					{
+						return;
+					}
+				}
 				worldObj.playEvent(2005, pos.up(), 0);
-			}
-			for (int i = 0; i < 3; i++)
-			{
-				plantState = worldObj.getBlockState(pos.up());
-				toBoost = plantState.getBlock();
-				if (plantState != null && toBoost != null && toBoost != Blocks.AIR && toBoost instanceof IPlantable)
+				for (int i = 0; i < 3; i++)
 				{
 					toBoost.updateTick(worldObj, pos.up(), plantState, rand);
 				}
