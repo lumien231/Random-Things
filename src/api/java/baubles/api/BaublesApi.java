@@ -1,41 +1,31 @@
 package baubles.api;
 
-import java.lang.reflect.Method;
-
+import baubles.api.cap.BaublesCapabilities;
+import baubles.api.cap.IBaublesItemHandler;
+import baubles.api.inv.BaublesInventoryWrapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * @author Azanor
  */
 public class BaublesApi 
 {
-	static Method getBaubles;
 	
 	/**
-	 * Retrieves the baubles inventory for the supplied player
+	 * Retrieves the baubles inventory capability handler for the supplied player
 	 */
+	public static IBaublesItemHandler getBaublesHandler(EntityPlayer player)
+	{
+		return player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
+	}
+		
+	/**
+	 * Retrieves the baubles capability handler wrapped as a IInventory for the supplied player
+	 */
+	@Deprecated
 	public static IInventory getBaubles(EntityPlayer player)
 	{
-		IInventory ot = null;
-		
-	    try
-	    {
-	        if(getBaubles == null) 
-	        {
-	            Class<?> fake = Class.forName("baubles.common.lib.PlayerHandler");
-	            getBaubles = fake.getMethod("getPlayerBaubles", EntityPlayer.class);
-	        }
-	        
-	        ot = (IInventory) getBaubles.invoke(null, player);
-	    } 
-	    catch(Exception ex) 
-	    { 
-	    	FMLLog.warning("[Baubles API] Could not invoke baubles.common.lib.PlayerHandler method getPlayerBaubles");
-	    }
-	    
-		return ot;
+		return new BaublesInventoryWrapper(player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null));
 	}
-	
 }
