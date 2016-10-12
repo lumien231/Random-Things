@@ -2,6 +2,7 @@ package lumien.randomthings.handler;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.asm.MCPNames;
+import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
@@ -27,13 +29,16 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.management.PlayerInteractionManager;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ReportedException;
@@ -42,10 +47,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 public class AsmHandler
 {
@@ -59,6 +66,47 @@ public class AsmHandler
 		if (FMLCommonHandler.instance().getSide().isClient())
 		{
 			getFields();
+		}
+	}
+
+	static boolean catchingDrops;
+	static List<ItemStack> catchedDrops = new ArrayList<ItemStack>();
+	static PlayerInteractionManager interactionManager;
+
+	public static void preHarvest(PlayerInteractionManager manager)
+	{
+		ItemStack tool = manager.thisPlayerMP.getHeldItemMainhand();
+
+		if (tool != null && EnchantmentHelper.getEnchantmentLevel(ModEnchantments.magnetic, tool) > 0)
+		{
+			interactionManager = manager;
+			catchingDrops = true;
+		}
+	}
+
+	public static void postHarvest()
+	{
+		if (catchingDrops)
+		{
+			catchingDrops = false;
+
+			for (ItemStack is : catchedDrops)
+			{
+				ItemHandlerHelper.giveItemToPlayer(interactionManager.thisPlayerMP, is.copy());
+			}
+
+			interactionManager = null;
+
+			catchedDrops.clear();
+		}
+	}
+
+	public static void itemJoin(EntityJoinWorldEvent event)
+	{
+		if (catchingDrops)
+		{
+			catchedDrops.add(((EntityItem) event.getEntity()).getEntityItem());
+			event.setCanceled(true);
 		}
 	}
 

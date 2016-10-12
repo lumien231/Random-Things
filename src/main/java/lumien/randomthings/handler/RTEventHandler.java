@@ -49,6 +49,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -91,6 +92,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.ServerChatEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -134,7 +136,15 @@ public class RTEventHandler
 				ClientModelLibrary.getInstance().reset();
 			}
 		});
-
+	}
+	
+	@SubscribeEvent
+	public void entityJoinWorld(EntityJoinWorldEvent event)
+	{
+		if (!event.getWorld().isRemote && event.getEntity() instanceof EntityItem)
+		{
+			AsmHandler.itemJoin(event);
+		}
 	}
 
 	@SubscribeEvent

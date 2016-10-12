@@ -93,8 +93,61 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchInventoryPlayer(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.server.management.PlayerInteractionManager"))
+		{
+			return patchPlayerInteractionManager(basicClass);
+		}
 
 		return basicClass;
+	}
+
+	private byte[] patchPlayerInteractionManager(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found PlayerInteractionManager Class: " + classNode.name);
+
+		MethodNode tryHarvestBlock = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_180237_b")))
+			{
+				tryHarvestBlock = mn;
+				break;
+			}
+		}
+
+		if (tryHarvestBlock != null)
+		{
+			logger.log(Level.DEBUG, " - Found tryHarvestBlock");
+
+			InsnList startInsert = new InsnList();
+			startInsert.add(new VarInsnNode(ALOAD, 0));
+			startInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "preHarvest", "(Lnet/minecraft/server/management/PlayerInteractionManager;)V", false));
+
+			tryHarvestBlock.instructions.insert(startInsert);
+
+			for (int i = 0; i < tryHarvestBlock.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = tryHarvestBlock.instructions.get(i);
+
+				if (ain.getOpcode() == Opcodes.IRETURN)
+				{
+					InsnList endInsert = new InsnList();
+					endInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "postHarvest", "()V", false));
+					
+					tryHarvestBlock.instructions.insertBefore(ain, endInsert);
+					i += 1;
+				}
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchInventoryPlayer(byte[] basicClass)
@@ -867,8 +920,8 @@ public class ClassTransformer implements IClassTransformer
 						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 3));
 						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 0));
 						toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "lumien/randomthings/worldgen/WorldGenOceanChest", "addComponentParts", "(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;Lnet/minecraft/world/gen/structure/StructureOceanMonumentPieces$MonumentCoreRoom;)V", false));
-					
-						i+=5;
+
+						i += 5;
 						addComponentParts.instructions.insertBefore(before, toInsert);
 					}
 				}

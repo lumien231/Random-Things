@@ -8,6 +8,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.container.SyncHandler;
+import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.entitys.ModEntitys;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.RTEventHandler;
@@ -82,6 +83,7 @@ public class RandomThings implements LoadingCallback
 		ModTileEntitys.register();
 		ModEntitys.init();
 		ModPotions.preInit(event);
+		ModEnchantments.preInit(event);
 		proxy.registerModels();
 
 		RTEventHandler eventHandler = new RTEventHandler();

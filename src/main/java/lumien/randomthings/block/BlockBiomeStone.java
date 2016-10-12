@@ -33,6 +33,8 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 		this.setResistance(10.0F);
 		this.setSoundType(SoundType.STONE);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockBiomeStone.EnumType.COBBLE));
+		
+		
 	}
 
 	@Override
