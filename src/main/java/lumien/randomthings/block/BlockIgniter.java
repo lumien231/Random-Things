@@ -48,6 +48,7 @@ public class BlockIgniter extends BlockBase
 		boolean powered = state.getValue(POWERED);
 
 		boolean newPowered = worldIn.isBlockIndirectlyGettingPowered(pos) > 0;
+		worldIn.setBlockState(pos, state.withProperty(POWERED, newPowered));
 		
 		if (powered && !newPowered)
 		{
@@ -70,8 +71,6 @@ public class BlockIgniter extends BlockBase
 		{
 			return;
 		}
-
-		worldIn.setBlockState(pos, state.withProperty(POWERED, newPowered));
 	}
 
 	@Override
