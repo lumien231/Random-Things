@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockBeanStalk extends BlockBase
 {
 	boolean strongMagic;
-	
+
 	protected static final AxisAlignedBB STALK_AABB = new AxisAlignedBB(0.4f, 0, 0.4f, 0.6f, 1, 0.6f);
 
 	protected BlockBeanStalk(boolean strongMagic)
@@ -38,7 +38,7 @@ public class BlockBeanStalk extends BlockBase
 
 		this.strongMagic = strongMagic;
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -53,12 +53,14 @@ public class BlockBeanStalk extends BlockBase
 			return;
 		}
 
+		double speed = strongMagic ? 0.5 : 0.2;
+
 		if (entityIn.motionY >= 0.1)
 		{
 			Block top = entityIn.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(entityIn.posX), MathHelper.floor_double(entityIn.posY) + 3, MathHelper.floor_double(entityIn.posZ))).getBlock();
 			if (top == this)
 			{
-				entityIn.setPosition(entityIn.posX, entityIn.posY + 0.5, entityIn.posZ);
+				entityIn.setPosition(entityIn.posX, entityIn.posY + speed, entityIn.posZ);
 			}
 		}
 		else if (entityIn.motionY <= -0.1)
@@ -66,7 +68,7 @@ public class BlockBeanStalk extends BlockBase
 			Block bottom = entityIn.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(entityIn.posX), MathHelper.floor_double(entityIn.posY) - 3, MathHelper.floor_double(entityIn.posZ))).getBlock();
 			if (bottom == null || bottom == this)
 			{ // prevent clipping into block
-				entityIn.setPosition(entityIn.posX, entityIn.posY - 0.5, entityIn.posZ);
+				entityIn.setPosition(entityIn.posX, entityIn.posY - speed, entityIn.posZ);
 			}
 		}
 	}
@@ -100,7 +102,7 @@ public class BlockBeanStalk extends BlockBase
 			}
 
 			IBlockState upState = worldIn.getBlockState(pos.up());
-			if (upState.getBlock().getBlockHardness(upState,worldIn, pos.up()) != -1)
+			if (upState.getBlock().getBlockHardness(upState, worldIn, pos.up()) != -1)
 			{
 				if (!worldIn.isAirBlock(pos.up()))
 				{
@@ -109,8 +111,9 @@ public class BlockBeanStalk extends BlockBase
 				else
 				{
 					worldIn.playEvent(2001, pos, Block.getStateId(this.getDefaultState()));
-					worldIn.playSound(null,pos, this.getSoundType().getPlaceSound(),SoundCategory.BLOCKS, 1, 2);				}
-				
+					worldIn.playSound(null, pos, this.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 2);
+				}
+
 				worldIn.playEvent(2005, pos.up(), 0);
 				worldIn.setBlockState(pos.up(), this.getDefaultState());
 				worldIn.scheduleUpdate(pos.up(), this, strongMagic ? 1 : 5);
@@ -171,15 +174,15 @@ public class BlockBeanStalk extends BlockBase
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
+	{
+		return false;
+	}
 
 	@Override
-    public boolean isFullCube(IBlockState state)
-    {
-        return false;
-    }
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
