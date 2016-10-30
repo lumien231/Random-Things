@@ -80,7 +80,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 						{
 							entityliving.setLocationAndAngles(rX, rY, rZ, rand.nextFloat() * 360.0F, 0.0F);
 
-							if (entityliving.getCanSpawnHere())
+							if (entityliving.getCanSpawnHere() && entityliving.isNotColliding())
 							{
 								worldObj.spawnEntityInWorld(entityliving);
 							}
