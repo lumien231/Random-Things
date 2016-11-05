@@ -105,10 +105,12 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.WorldEvent.PotentialSpawns;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -121,7 +123,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RTEventHandler
 {
 	static Random rng = new Random();
-	
+
 	public static int clientAnimationCounter;
 
 	@SubscribeEvent
@@ -137,7 +139,7 @@ public class RTEventHandler
 			}
 		});
 	}
-	
+
 	@SubscribeEvent
 	public void entityJoinWorld(EntityJoinWorldEvent event)
 	{
@@ -177,7 +179,7 @@ public class RTEventHandler
 				@Override
 				public ItemStack apply(ItemStack stack, Random rand, LootContext context)
 				{
-					Object[] locationArray =  Biome.REGISTRY.getKeys().toArray();
+					Object[] locationArray = Biome.REGISTRY.getKeys().toArray();
 					ResourceLocation randomLocation = (ResourceLocation) locationArray[rand.nextInt(locationArray.length)];
 
 					stack.setTagCompound(new NBTTagCompound());
@@ -259,7 +261,7 @@ public class RTEventHandler
 		{
 			TileEntityRainShield.rainCache.clear();
 		}
-		
+
 		if ((tickEvent.type == TickEvent.Type.CLIENT))
 		{
 			clientAnimationCounter++;
@@ -837,6 +839,15 @@ public class RTEventHandler
 					}
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void potentialSpawns(PotentialSpawns event)
+	{
+		if (event.getWorld().provider.getDimension() == ModDimensions.SPECTRE_ID)
+		{
+			event.getList().clear();
 		}
 	}
 
