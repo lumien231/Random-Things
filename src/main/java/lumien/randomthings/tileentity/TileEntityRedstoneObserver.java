@@ -29,7 +29,10 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements Simple
 
 	public TileEntityRedstoneObserver()
 	{
-		loadedObservers.add(this);
+		synchronized (TileEntityRedstoneObserver.loadedObservers)
+		{
+			loadedObservers.add(this);
+		}
 
 		weakPower = new HashMap<EnumFacing, Integer>();
 		strongPower = new HashMap<EnumFacing, Integer>();
@@ -89,16 +92,20 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements Simple
 
 	public static void notifyNeighbor(NeighborNotifyEvent event)
 	{
-		for (TileEntityRedstoneObserver observer : loadedObservers)
+		synchronized (TileEntityRedstoneObserver.loadedObservers)
 		{
-			if (observer.getWorld() == event.getWorld() && !observer.isInvalid() && observer.getTarget() != null && observer.getTarget().equals(event.getPos()))
+			for (TileEntityRedstoneObserver observer : loadedObservers)
 			{
-				observer.updateRedstoneState();
+				if (observer.getWorld() == event.getWorld() && !observer.isInvalid() && observer.getTarget() != null && observer.getTarget().equals(event.getPos()))
+				{
+					observer.updateRedstoneState();
+				}
 			}
 		}
 	}
 
 	static Set<TileEntityRedstoneObserver> observerSet = Collections.newSetFromMap(new WeakHashMap<TileEntityRedstoneObserver, Boolean>());
+
 	private void updateRedstoneState()
 	{
 		if (observerSet.contains(this))
@@ -129,7 +136,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements Simple
 
 			this.worldObj.notifyNeighborsOfStateChange(this.pos, ModBlocks.redstoneObserver);
 		}
-		
+
 		observerSet.remove(this);
 	}
 
@@ -152,7 +159,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements Simple
 	{
 		return strongPower.get(side);
 	}
-	
+
 	// OC - Comp
 	@Override
 	@Optional.Method(modid = "OpenComputers")

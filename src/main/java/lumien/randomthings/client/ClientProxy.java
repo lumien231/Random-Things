@@ -252,56 +252,63 @@ public class ClientProxy extends CommonProxy
 		GlStateManager.pushMatrix();
 		{
 			worldRenderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
+			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<TileEntityRedstoneInterface>();
 			synchronized (TileEntityRedstoneInterface.lock)
 			{
-				ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<TileEntityRedstoneInterface>();
 				interfaces.addAll(TileEntityRedstoneInterface.interfaces);
-				for (TileEntityRedstoneInterface redstoneInterface : interfaces)
+			}
+			
+			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
+			{
+				if (!redstoneInterface.isInvalid() && redstoneInterface.getWorld().isRemote)
 				{
-					if (!redstoneInterface.isInvalid() && redstoneInterface.getWorld().isRemote)
+					ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
+
+					if (redstoneInterface instanceof TileEntityBasicRedstoneInterface)
 					{
-						ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
-
-						if (redstoneInterface instanceof TileEntityBasicRedstoneInterface)
+						TileEntityBasicRedstoneInterface simpleRedstoneInterface = (TileEntityBasicRedstoneInterface) redstoneInterface;
+						BlockPos position = simpleRedstoneInterface.getPos();
+						BlockPos target = simpleRedstoneInterface.getTarget();
+						if (target != null)
 						{
-							TileEntityBasicRedstoneInterface simpleRedstoneInterface = (TileEntityBasicRedstoneInterface) redstoneInterface;
-							BlockPos position = simpleRedstoneInterface.getPos();
-							BlockPos target = simpleRedstoneInterface.getTarget();
-							if (target != null)
-							{
-								positions.add(target);
-								positions.add(position);
-							}
+							positions.add(target);
+							positions.add(position);
 						}
-						else if (redstoneInterface instanceof TileEntityAdvancedRedstoneInterface)
-						{
-							TileEntityAdvancedRedstoneInterface advancedRedstoneInterface = (TileEntityAdvancedRedstoneInterface) redstoneInterface;
-							BlockPos position = advancedRedstoneInterface.getPos();
-							Set<BlockPos> targets = advancedRedstoneInterface.getTargets();
+					}
+					else if (redstoneInterface instanceof TileEntityAdvancedRedstoneInterface)
+					{
+						TileEntityAdvancedRedstoneInterface advancedRedstoneInterface = (TileEntityAdvancedRedstoneInterface) redstoneInterface;
+						BlockPos position = advancedRedstoneInterface.getPos();
+						Set<BlockPos> targets = advancedRedstoneInterface.getTargets();
 
-							for (BlockPos target : targets)
-							{
-								positions.add(target);
-								positions.add(position);
-							}
+						for (BlockPos target : targets)
+						{
+							positions.add(target);
+							positions.add(position);
 						}
+					}
 
-						for (int i = 0; i < positions.size(); i += 2)
+					for (int i = 0; i < positions.size(); i += 2)
+					{
+						BlockPos target = positions.get(i);
+						BlockPos position = positions.get(i + 1);
+
+						if (position.distanceSq(player.getPosition()) < 225)
 						{
-							BlockPos target = positions.get(i);
-							BlockPos position = positions.get(i + 1);
-
-							if (position.distanceSq(player.getPosition()) < 225)
-							{
-								worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
-								worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
-							}
+							worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
+							worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 						}
 					}
 				}
 			}
 
-			for (TileEntityRedstoneObserver redstoneObserver : TileEntityRedstoneObserver.loadedObservers)
+			ArrayList<TileEntityRedstoneObserver> observers = new ArrayList<TileEntityRedstoneObserver>();
+			synchronized (TileEntityRedstoneObserver.loadedObservers)
+			{
+				observers.addAll(TileEntityRedstoneObserver.loadedObservers);
+			}
+
+			for (TileEntityRedstoneObserver redstoneObserver : observers)
 			{
 				if (!redstoneObserver.isInvalid())
 				{
