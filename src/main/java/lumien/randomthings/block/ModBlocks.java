@@ -61,6 +61,7 @@ public class ModBlocks
 	public static BlockItemProjector itemProjector;
 	public static BlockIgniter igniter;
 	public static BlockBlockOfSticks blockOfSticks;
+	public static BlockBlazingFire blazingFire;
 	
 	public static BlockSpectrePlank spectrePlank;
 	public static BlockSpectreSapling spectreSapling;
@@ -138,6 +139,7 @@ public class ModBlocks
 		itemProjector = new BlockItemProjector();
 		igniter = new BlockIgniter();
 		blockOfSticks = new BlockBlockOfSticks();
+		blazingFire = new BlockBlazingFire();
 		
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();

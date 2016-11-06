@@ -103,6 +103,7 @@ public class ItemModels
 		registerItem(ModItems.spectreAnchor);
 		registerItem(ModItems.spectreSword);
 		registerItem(ModItems.goldenCompass);
+		registerItem(ModItems.blazeAndSteel);
 
 		registerBricks();
 		registerBiomeStone();
