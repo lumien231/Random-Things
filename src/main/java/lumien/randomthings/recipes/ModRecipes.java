@@ -133,8 +133,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeRadar), "iii", "gsg", "iii", 'i', "ingotIron", 'g', "blockGlass", 's', biomeSensor));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.ironDropper), "iii", "ixi", "iri", 'i', "ingotIron", 'r', redstoneDust));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockOfSticks, 16), "sss", "sas", "sss", 's', "stickWood"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.igniter), "ncc","nfc","ncc",'n',Blocks.NETHERRACK,'c',"cobblestone",'f',Items.FLINT_AND_STEEL));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.igniter), "ncc", "nfc", "ncc", 'n', Blocks.NETHERRACK, 'c', "cobblestone", 'f', Items.FLINT_AND_STEEL));
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.HOPPER, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));
 
@@ -158,6 +158,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAnchor), "xix", "iei", "iii", 'i', "ingotIron", 'e', ectoPlasm));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx", "xsx", "xox", 's', spectreIngot, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.goldenCompass), "xgx", "gcg", "xgx", 'g', "ingotGold", 'c', Items.COMPASS));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.blazeAndSteel), "ib", 'b', Items.BLAZE_POWDER, 'i', Items.IRON_INGOT));
 
 		// Ingredients
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.EVIL_TEAR.id), "xsx", "xtx", "xex", 's', witherSkull, 't', ghastTear, 'e', enderPearl));
