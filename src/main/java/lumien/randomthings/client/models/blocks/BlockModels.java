@@ -4,7 +4,6 @@ import lumien.randomthings.block.BlockIgniter;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.EmptyStateMapper;
 import lumien.randomthings.client.models.FocusStateMapper;
-import net.minecraft.block.BlockHopper;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;

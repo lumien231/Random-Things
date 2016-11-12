@@ -2,7 +2,6 @@ package lumien.randomthings.item;
 
 import lumien.randomthings.block.ModBlocks;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -23,6 +22,7 @@ public class ItemBlazeAndSteel extends ItemBase
 		this.setMaxDamage(64);
 	}
 
+	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		pos = pos.offset(facing);

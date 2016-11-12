@@ -15,7 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ClassInheritanceMultiMap;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -42,7 +41,7 @@ public class WorldUtil
 		if (!worldObj.isRemote)
 		{
 			c.setChunkModified();
-			MessageUtil.sendToAllWatchingPos(worldObj, pos, new MessageSetBiome(pos, biome.getIdForBiome(biome)));
+			MessageUtil.sendToAllWatchingPos(worldObj, pos, new MessageSetBiome(pos, Biome.getIdForBiome(biome)));
 		}
 		else
 		{

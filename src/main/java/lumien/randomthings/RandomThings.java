@@ -61,7 +61,7 @@ public class RandomThings implements LoadingCallback
 	public ModConfiguration configuration;
 
 	ASMDataTable asmDataTable;
-	
+
 	static
 	{
 		FluidRegistry.enableUniversalBucket();
@@ -112,6 +112,8 @@ public class RandomThings implements LoadingCallback
 	{
 		proxy.registerRenderers();
 		SyncHandler.postInit(event);
+		
+		
 	}
 
 	@EventHandler

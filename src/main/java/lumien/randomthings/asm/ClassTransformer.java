@@ -137,7 +137,7 @@ public class ClassTransformer implements IClassTransformer
 				{
 					InsnList endInsert = new InsnList();
 					endInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "postHarvest", "()V", false));
-					
+
 					tryHarvestBlock.instructions.insertBefore(ain, endInsert);
 					i += 1;
 				}
