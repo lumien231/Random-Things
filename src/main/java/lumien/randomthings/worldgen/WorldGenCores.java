@@ -181,39 +181,42 @@ public class WorldGenCores implements IWorldGenerator
 					world.setBlockState(check, ModBlocks.specialChest.getDefaultState(), 2);
 					TileEntitySpecialChest te = (TileEntitySpecialChest) world.getTileEntity(check);
 
-					if (Worldgen.beans)
+					if (te != null)
 					{
-						te.setInventorySlotContents(0, new ItemStack(ModItems.beans, random.nextInt(2) + 1, 2));
-					}
-					if (random.nextBoolean() && Worldgen.beans)
-						te.setInventorySlotContents(1, new ItemStack(ModItems.beans, random.nextInt(20) + 5));
-					if (random.nextBoolean())
-						te.setInventorySlotContents(2, new ItemStack(Items.WHEAT, random.nextInt(20) + 5));
-					if (random.nextBoolean())
-						te.setInventorySlotContents(3, new ItemStack(Items.WHEAT_SEEDS, random.nextInt(20) + 5));
-					if (random.nextBoolean())
-						te.setInventorySlotContents(4, new ItemStack(Items.PUMPKIN_SEEDS, random.nextInt(15) + 2));
-					if (random.nextBoolean())
-						te.setInventorySlotContents(5, new ItemStack(Items.MELON_SEEDS, random.nextInt(15) + 2));
-					if (random.nextBoolean())
-						te.setInventorySlotContents(6, new ItemStack(Items.REEDS, random.nextInt(20) + 5));
-					if (random.nextBoolean())
-						te.setInventorySlotContents(7, new ItemStack(Items.POTATO, random.nextInt(20) + 5));
-					if (random.nextBoolean())
-						te.setInventorySlotContents(8, new ItemStack(Items.CARROT, random.nextInt(20) + 1));
-					if (random.nextBoolean())
-					{
-						te.setInventorySlotContents(9, new ItemStack(Blocks.SAPLING, random.nextInt(20) + 1, random.nextInt(6)));
+						if (Worldgen.beans)
+						{
+							te.setInventorySlotContents(0, new ItemStack(ModItems.beans, random.nextInt(2) + 1, 2));
+						}
+						if (random.nextBoolean() && Worldgen.beans)
+							te.setInventorySlotContents(1, new ItemStack(ModItems.beans, random.nextInt(20) + 5));
 						if (random.nextBoolean())
-							te.setInventorySlotContents(10, new ItemStack(Blocks.SAPLING, random.nextInt(20) + 1, random.nextInt(6)));
+							te.setInventorySlotContents(2, new ItemStack(Items.WHEAT, random.nextInt(20) + 5));
+						if (random.nextBoolean())
+							te.setInventorySlotContents(3, new ItemStack(Items.WHEAT_SEEDS, random.nextInt(20) + 5));
+						if (random.nextBoolean())
+							te.setInventorySlotContents(4, new ItemStack(Items.PUMPKIN_SEEDS, random.nextInt(15) + 2));
+						if (random.nextBoolean())
+							te.setInventorySlotContents(5, new ItemStack(Items.MELON_SEEDS, random.nextInt(15) + 2));
+						if (random.nextBoolean())
+							te.setInventorySlotContents(6, new ItemStack(Items.REEDS, random.nextInt(20) + 5));
+						if (random.nextBoolean())
+							te.setInventorySlotContents(7, new ItemStack(Items.POTATO, random.nextInt(20) + 5));
+						if (random.nextBoolean())
+							te.setInventorySlotContents(8, new ItemStack(Items.CARROT, random.nextInt(20) + 1));
+						if (random.nextBoolean())
+						{
+							te.setInventorySlotContents(9, new ItemStack(Blocks.SAPLING, random.nextInt(20) + 1, random.nextInt(6)));
+							if (random.nextBoolean())
+								te.setInventorySlotContents(10, new ItemStack(Blocks.SAPLING, random.nextInt(20) + 1, random.nextInt(6)));
+						}
+						if (random.nextBoolean())
+							te.setInventorySlotContents(11, new ItemStack(Blocks.VINE, random.nextInt(20) + 1));
+						if (random.nextBoolean())
+							te.setInventorySlotContents(12, new ItemStack(Blocks.RED_FLOWER, random.nextInt(20) + 1, random.nextInt(9)));
+
+						InventoryUtil.shuffleInventory(te);
 					}
-					if (random.nextBoolean())
-						te.setInventorySlotContents(11, new ItemStack(Blocks.VINE, random.nextInt(20) + 1));
-					if (random.nextBoolean())
-						te.setInventorySlotContents(12, new ItemStack(Blocks.RED_FLOWER, random.nextInt(20) + 1, random.nextInt(9)));
-
-					InventoryUtil.shuffleInventory(te);
-
+					
 					placed = true;
 				}
 				if (placed)
