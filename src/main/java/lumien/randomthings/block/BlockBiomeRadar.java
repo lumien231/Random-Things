@@ -29,7 +29,7 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 	protected BlockBiomeRadar()
 	{
 		super("biomeRadar", Material.IRON);
-		
+
 		this.setHardness(5.0F);
 	}
 
@@ -38,20 +38,20 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 	{
 		return new TileEntityBiomeRadar();
 	}
-	
+
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		TileEntityBiomeRadar radar = (TileEntityBiomeRadar) worldIn.getTileEntity(pos);
-		
-		if (radar.getCurrentCrystal()!=null)
+
+		if (radar.getCurrentCrystal() != null)
 		{
 			WorldUtil.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), radar.getCurrentCrystal());
 		}
-		
+
 		super.breakBlock(worldIn, pos, state);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int renderPass)
@@ -67,7 +67,12 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
-		((TileEntityBiomeRadar) worldIn.getTileEntity(pos)).neighborChanged(neighborBlock);
+		TileEntity te;
+
+		if ((te = worldIn.getTileEntity(pos)) instanceof TileEntityBiomeRadar)
+		{
+			((TileEntityBiomeRadar) te).neighborChanged(neighborBlock);
+		}
 	}
 
 	@Override
@@ -122,7 +127,7 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 				if (!worldIn.isRemote)
 				{
 					ItemStack positionFilter = biomeRadar.generatePositionFilter();
-					
+
 					equipped.stackSize--;
 					playerIn.inventory.addItemStackToInventory(positionFilter);
 				}

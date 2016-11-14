@@ -90,10 +90,10 @@ public class BlockRainShield extends BlockContainerBase
 		{
 			for (double mod = 0; mod < 1; mod += 0.1f)
 			{
-				for (double a = 0; a <= Math.PI*2D; a += (Math.PI*2D)/3D)
+				for (double a = 0; a <= Math.PI * 2D; a += (Math.PI * 2D) / 3D)
 				{
-					double x = pos.getX() + 0.5 + (1-mod) * Math.cos(a);
-					double z = pos.getZ() + 0.5 + (1-mod) * Math.sin(a);
+					double x = pos.getX() + 0.5 + (1 - mod) * Math.cos(a);
+					double z = pos.getZ() + 0.5 + (1 - mod) * Math.sin(a);
 
 					worldIn.spawnParticle(EnumParticleTypes.FLAME, x, pos.getY() + 0.7f + mod, z, 0, 0, 0);
 					worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, pos.getY() + 0.6f + mod, z, 0, 0, 0);
@@ -105,7 +105,12 @@ public class BlockRainShield extends BlockContainerBase
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
-		((TileEntityRainShield) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, neighborBlock);
+		TileEntity te;
+		if ((te = worldIn.getTileEntity(pos)) instanceof TileEntityRainShield)
+		{
+			((TileEntityRainShield) te).neighborChanged(state, worldIn, pos, neighborBlock);
+		}
+		
 		checkForDrop(worldIn, pos, state);
 	}
 
