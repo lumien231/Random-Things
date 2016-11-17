@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "randomthings:blockOfSticks" }
+        "returning=false": { "model": "randomthings:blockOfSticks" },
+        "returning=true": { "model": "randomthings:returningBlockOfSticks" }
     }
 }

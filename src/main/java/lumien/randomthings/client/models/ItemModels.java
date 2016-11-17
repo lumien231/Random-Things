@@ -67,7 +67,6 @@ public class ItemModels
 		registerBlock(ModBlocks.biomeRadar);
 		registerBlock(ModBlocks.ironDropper);
 		registerBlock(ModBlocks.itemProjector);
-		registerBlock(ModBlocks.blockOfSticks);
 		registerBlock(ModBlocks.igniter);
 		
 		registerBlock(ModBlocks.spectreLeaf);
@@ -114,6 +113,7 @@ public class ItemModels
 		registerChests();
 		registerPlatforms();
 		registerIngredients();
+		registerBlockOfSticks();
 	}
 
 	private static void registerIngredients()
@@ -199,5 +199,11 @@ public class ItemModels
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 3, new ModelResourceLocation("randomthings:platform/jungle", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 4, new ModelResourceLocation("randomthings:platform/acacia", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 5, new ModelResourceLocation("randomthings:platform/darkOak", "inventory"));
+	}
+	
+	private static void registerBlockOfSticks()
+	{
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.blockOfSticks), 0, new ModelResourceLocation("randomthings:blockOfSticks", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.blockOfSticks), 1, new ModelResourceLocation("randomthings:returningBlockOfSticks", "inventory"));
 	}
 }
