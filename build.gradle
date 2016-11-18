@@ -29,8 +29,10 @@ dependencies {
     deobfCompile "mezz.jei:jei_1.9.4:3.4.0.204"
 }
 
-version = "3.7.6"
+version = "3.7.7"
 group= "lumien.randomthings"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 jar {
     manifest {

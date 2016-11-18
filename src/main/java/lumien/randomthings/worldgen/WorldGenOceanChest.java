@@ -70,7 +70,6 @@ public class WorldGenOceanChest
 
 				if (te != null && te instanceof TileEntitySpecialChest)
 				{
-					System.out.println(te.getPos());
 					TileEntitySpecialChest chestTE = (TileEntitySpecialChest) te;
 					chestTE.setChestType(1);
 
