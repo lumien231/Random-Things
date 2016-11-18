@@ -85,6 +85,9 @@ public class ModBlocks
 	
 	public static BlockBasicRedstoneInterface basicRedstoneInterface;
 	public static BlockAdvancedRedstoneInterface advancedRedstoneInterface;
+	
+	// Experimental
+	public static BlockSpecialBeanStalk specialBeanStalk;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -140,6 +143,7 @@ public class ModBlocks
 		igniter = new BlockIgniter();
 		blockOfSticks = new BlockBlockOfSticks();
 		blazingFire = new BlockBlazingFire();
+		specialBeanStalk = new BlockSpecialBeanStalk();
 		
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();
