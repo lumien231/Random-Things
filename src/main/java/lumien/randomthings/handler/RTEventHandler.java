@@ -479,8 +479,10 @@ public class RTEventHandler
 
 						int power = hitState.getValue(BlockRedstoneWire.POWER);
 
+						GlStateManager.disableBlend();
 						Minecraft.getMinecraft().fontRendererObj.drawString(power + "", width / 2 + 5, height / 2 + 5, Colors.RED_INT);
 						GlStateManager.color(1, 1, 1, 1);
+						GlStateManager.enableBlend();
 					}
 				}
 			}
