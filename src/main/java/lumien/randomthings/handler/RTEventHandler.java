@@ -21,6 +21,7 @@ import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.ItemEntityFilter;
+import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
@@ -485,6 +486,17 @@ public class RTEventHandler
 						GlStateManager.enableBlend();
 					}
 				}
+			}
+			else if (equippedItem.getItem() == ModItems.ingredients && equippedItem.getItemDamage() == ItemIngredient.INGREDIENT.BIOME_SENSOR.id)
+			{
+				Biome b = minecraft.theWorld.getBiome(minecraft.thePlayer.getPosition());
+				int width = event.getResolution().getScaledWidth();
+				int height = event.getResolution().getScaledHeight();
+				
+				GlStateManager.disableBlend();
+				Minecraft.getMinecraft().fontRendererObj.drawString(b.getBiomeName(), width / 2 + 5, height / 2 + 5, Colors.WHITE_INT);
+				GlStateManager.color(1, 1, 1, 1);
+				GlStateManager.enableBlend();
 			}
 		}
 	}
