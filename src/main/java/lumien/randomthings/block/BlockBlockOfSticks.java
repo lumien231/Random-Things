@@ -109,7 +109,7 @@ public class BlockBlockOfSticks extends BlockBase
 						}
 					});
 
-					EntityPlayer closes = playerList.get(playerList.size() - 1);
+					EntityPlayer closes = playerList.get(0);
 
 					if (!closes.capabilities.isCreativeMode)
 					{
