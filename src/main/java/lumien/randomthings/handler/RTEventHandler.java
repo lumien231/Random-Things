@@ -49,6 +49,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -213,11 +214,11 @@ public class RTEventHandler
 			{
 				ItemStack is = oldPlayer.inventory.getStackInSlot(i);
 
-				if (is != null && is.hasTagCompound() && is.getTagCompound().hasKey("spectreAnchor"))
+				if (!is.func_190926_b() && is.hasTagCompound() && is.getTagCompound().hasKey("spectreAnchor"))
 				{
 					ItemStack newIs = newPlayer.inventory.getStackInSlot(i);
 
-					if (newIs == null)
+					if (newIs == ItemStack.field_190927_a)
 					{
 						newPlayer.inventory.setInventorySlotContents(i, is.copy());
 					}
@@ -492,7 +493,7 @@ public class RTEventHandler
 				Biome b = minecraft.theWorld.getBiome(minecraft.thePlayer.getPosition());
 				int width = event.getResolution().getScaledWidth();
 				int height = event.getResolution().getScaledHeight();
-				
+
 				GlStateManager.disableBlend();
 				Minecraft.getMinecraft().fontRendererObj.drawString(b.getBiomeName(), width / 2 + 5, height / 2 + 5, Colors.WHITE_INT);
 				GlStateManager.color(1, 1, 1, 1);
@@ -763,7 +764,7 @@ public class RTEventHandler
 				EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 				if (!player.isSneaking())
 				{
-					ItemStack boots = player.inventory.armorInventory[0];
+					ItemStack boots = player.inventory.armorInventory.get(0);
 					if (boots != null && ((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader))
 					{
 						BlockPos liquid = new BlockPos(Math.floor(player.posX), Math.floor(player.posY), Math.floor(player.posZ));
@@ -773,7 +774,7 @@ public class RTEventHandler
 
 						if ((liquidMaterial == Material.WATER || (boots.getItem() == ModItems.lavaWader && liquidMaterial == Material.LAVA)) && player.worldObj.getBlockState(air).getBlock().isAir(player.worldObj.getBlockState(air), player.worldObj, air) && EntityUtil.isJumping(player))
 						{
-							player.moveEntity(0, 0.22, 0);
+							player.moveEntity(MoverType.SELF, 0, 0.22, 0);
 						}
 					}
 				}

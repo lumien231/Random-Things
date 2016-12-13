@@ -1,12 +1,9 @@
 package lumien.randomthings.block;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
-
-import com.google.common.collect.Ordering;
 
 import lumien.randomthings.item.block.ItemBlockOfSticks;
 import net.minecraft.block.Block;
@@ -22,6 +19,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -42,7 +40,7 @@ public class BlockBlockOfSticks extends BlockBase
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -126,7 +124,7 @@ public class BlockBlockOfSticks extends BlockBase
 	}
 
 	@Override
-	public boolean isVisuallyOpaque()
+	public boolean isVisuallyOpaque(IBlockState state)
 	{
 		return false;
 	}

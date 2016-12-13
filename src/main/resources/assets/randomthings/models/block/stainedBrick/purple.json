@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "randomthings:blocks/stainedBrick/purple"
+        "all": "randomthings:blocks/stainedbrick/purple"
     }
 }

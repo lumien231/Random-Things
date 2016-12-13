@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 
 public class ImbuingRecipeWrapper extends BlankRecipeWrapper
@@ -34,20 +35,15 @@ public class ImbuingRecipeWrapper extends BlankRecipeWrapper
 	}
 
 	@Override
-	public List getInputs()
-	{
-		return inputs;
-	}
-
-	@Override
-	public List<ItemStack> getOutputs()
-	{
-		return Collections.singletonList(result);
-	}
-
-	@Override
 	public String toString()
 	{
 		return ingredients + " + " + toImbue + " = " + result;
+	}
+
+	@Override
+	public void getIngredients(IIngredients ingredients)
+	{
+		ingredients.setInputs(ItemStack.class, inputs);
+		ingredients.setOutputs(ItemStack.class, Collections.singletonList(result));
 	}
 }

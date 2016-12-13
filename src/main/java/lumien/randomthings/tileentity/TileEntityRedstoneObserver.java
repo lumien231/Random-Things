@@ -134,7 +134,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements Simple
 				weakPower.put(facing, targetState.getWeakPower(this.worldObj, target, facing));
 			}
 
-			this.worldObj.notifyNeighborsOfStateChange(this.pos, ModBlocks.redstoneObserver);
+			this.worldObj.notifyNeighborsOfStateChange(this.pos, ModBlocks.redstoneObserver, false);
 		}
 
 		observerSet.remove(this);

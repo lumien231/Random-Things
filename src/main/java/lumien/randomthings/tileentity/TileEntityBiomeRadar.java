@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 {
-	ItemStack currentCrystal;
+	ItemStack currentCrystal = ItemStack.field_190927_a;
 
 	boolean powered;
 	STATE state = STATE.IDLE;
@@ -244,7 +244,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 	@Override
 	public void readDataFromNBT(NBTTagCompound compound)
 	{
-		this.currentCrystal = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("currentCrystal"));
+		this.currentCrystal = new ItemStack(compound.getCompoundTag("currentCrystal"));
 		this.state = STATE.values()[compound.getInteger("state")];
 		this.powered = compound.getBoolean("powered");
 
@@ -287,7 +287,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 		boolean newPowered = this.worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0;
 		boolean changed = false;
 
-		if (!this.powered && newPowered && this.state == STATE.IDLE && this.currentCrystal != null && isValid())
+		if (!this.powered && newPowered && this.state == STATE.IDLE && !this.currentCrystal.func_190926_b() && isValid())
 		{
 			Biome biome = ItemBiomeCrystal.getBiome(this.currentCrystal);
 

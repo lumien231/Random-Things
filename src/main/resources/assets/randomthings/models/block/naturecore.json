@@ -1,0 +1,33 @@
+{
+    "parent": "block/block",
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#water", "cullface": "down", "tintindex": 0 },
+                "up":    { "texture": "#water", "cullface": "up", "tintindex": 0 },
+                "north": { "texture": "#water", "cullface": "north", "tintindex": 0 },
+                "south": { "texture": "#water", "cullface": "south", "tintindex": 0 },
+                "west":  { "texture": "#water", "cullface": "west", "tintindex": 0 },
+                "east":  { "texture": "#water", "cullface": "east", "tintindex": 0 }
+            }
+        },
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#core", "cullface": "down"},
+                "up":    { "texture": "#core", "cullface": "up"},
+                "north": { "texture": "#core", "cullface": "north"},
+                "south": { "texture": "#core", "cullface": "south"},
+                "west":  { "texture": "#core", "cullface": "west"},
+                "east":  { "texture": "#core", "cullface": "east"}
+            }
+        }
+    ],
+
+    "textures": {
+        "water": "randomthings:blocks/naturewater",
+        "core": "randomthings:blocks/naturecore",
+        "particle" : "randomthings:blocks/naturecore"
+    }
+}

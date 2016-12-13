@@ -9,10 +9,10 @@
             "east": "minecraft:blocks/obsidian",
             "south": "minecraft:blocks/obsidian",
             "west": "minecraft:blocks/obsidian",
-            "input" : "randomthings:blocks/itemRedirectorInput",
-            "output" : "randomthings:blocks/itemRedirectorOutput"
+            "input" : "randomthings:blocks/itemredirectorinput",
+            "output" : "randomthings:blocks/itemredirectoroutput"
         },
-        "model": "randomthings:itemRedirectorBase",
+        "model": "randomthings:itemredirectorbase",
         "uvlock": true
     },
     "variants": {

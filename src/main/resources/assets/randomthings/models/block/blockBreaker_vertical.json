@@ -1,7 +1,7 @@
 {
     "parent": "block/orientable_vertical",
     "textures": {
-        "front": "randomthings:blocks/blockBreaker/front",
-        "side": "randomthings:blocks/blockBreaker/side"
+        "front": "randomthings:blocks/blockbreaker/front",
+        "side": "randomthings:blocks/blockbreaker/side"
     }
 }

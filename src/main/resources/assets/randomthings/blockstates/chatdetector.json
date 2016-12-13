@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=true": { "model": "randomthings:chatdetectoron" },
+        "powered=false": { "model": "randomthings:chatdetectoroff" }
+    }
+}

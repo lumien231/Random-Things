@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -41,7 +40,7 @@ public class BlockIgniter extends BlockBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,BlockPos changedPos)
 	{
 		EnumFacing facing = state.getValue(FACING);
 		boolean powered = state.getValue(POWERED);
@@ -115,13 +114,13 @@ public class BlockIgniter extends BlockBase
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(FACING, BlockPistonBase.getFacingFromEntity(pos, placer));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.func_190914_a(pos, placer));
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		worldIn.setBlockState(pos, state.withProperty(FACING, BlockPistonBase.getFacingFromEntity(pos, placer)), 2);
+		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.func_190914_a(pos, placer)), 2);
 	}
 
 	@Override

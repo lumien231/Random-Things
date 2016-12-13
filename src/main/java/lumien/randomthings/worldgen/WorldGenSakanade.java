@@ -31,7 +31,7 @@ public class WorldGenSakanade implements IWorldGenerator
 			if (target != null)
 			{
 				Biome biome = world.getBiome(target);
-				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM))
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MUSHROOM))
 				{
 					if (world.getBlockState(target).getBlock() == Blocks.BROWN_MUSHROOM_BLOCK && world.isAirBlock(target.down()))
 					{

@@ -1,6 +1,6 @@
 {
     "variants": {
-        "returning=false": { "model": "randomthings:blockOfSticks" },
-        "returning=true": { "model": "randomthings:returningBlockOfSticks" }
+        "returning=false": { "model": "randomthings:blockofsticks" },
+        "returning=true": { "model": "randomthings:returningblockofsticks" }
     }
 }

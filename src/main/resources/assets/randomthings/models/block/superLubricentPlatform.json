@@ -17,7 +17,7 @@
 
     "textures":
     {
-        "texture" : "randomthings:blocks/superLubricentIce",
-        "particle" : "randomthings:blocks/superLubricentIce"
+        "texture" : "randomthings:blocks/superlubricentice",
+        "particle" : "randomthings:blocks/superlubricentice"
     }
 }

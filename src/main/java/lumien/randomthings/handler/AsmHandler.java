@@ -136,7 +136,7 @@ public class AsmHandler
 	@SideOnly(Side.CLIENT)
 	public static int getColorFromItemStack(ItemStack is, int originalColor)
 	{
-		if (is != null)
+		if (!is.func_190926_b())
 		{
 			NBTTagCompound compound;
 			if ((compound = is.getTagCompound()) != null)
@@ -319,7 +319,7 @@ public class AsmHandler
 			{
 				if (!player.isSneaking())
 				{
-					ItemStack boots = player.inventory.armorInventory[0];
+					ItemStack boots = player.inventory.armorInventory.get(0);
 					if (boots != null && ((((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader) && state.getBlock().getMaterial(state) == Material.WATER) || (boots.getItem() == ModItems.lavaWader && state.getBlock().getMaterial(state) == Material.LAVA)))
 					{
 						AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), (double) pos.getX() + 1, (double) pos.getY() + 1, (double) pos.getZ() + 1);

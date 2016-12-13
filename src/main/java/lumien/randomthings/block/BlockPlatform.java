@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -61,7 +62,7 @@ public class BlockPlatform extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
 	{
 		BlockPlatform.EnumType[] aenumtype = BlockPlatform.EnumType.values();
 		int i = aenumtype.length;

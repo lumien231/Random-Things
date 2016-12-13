@@ -1,7 +1,7 @@
 {
     "parent": "block/orientable_vertical",
     "textures": {
-        "front": "randomthings:blocks/enderBridge/pfront",
-        "side": "randomthings:blocks/enderBridge/pside"
+        "front": "randomthings:blocks/enderbridge/pfront",
+        "side": "randomthings:blocks/enderbridge/pside"
     }
 }

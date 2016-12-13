@@ -31,7 +31,7 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 			@Override
 			public boolean apply(ItemStack input)
 			{
-				return input != null && input.getItem() == ModItems.itemFilter;
+				return !input.func_190926_b() && input.getItem() == ModItems.itemFilter;
 			}
 		}));
 		
@@ -41,7 +41,7 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.field_190927_a;
 		Slot slot = this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
@@ -53,29 +53,29 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 			{
 				if (!this.mergeItemStack(itemstack1, 1, 37, true))
 				{
-					return null;
+					return ItemStack.field_190927_a;
 				}
 			}
 			else if (!this.mergeItemStack(itemstack1, 0, 1, false))
 			{
-				return null;
+				return ItemStack.field_190927_a;
 			}
 
-			if (itemstack1.stackSize == 0)
+			if (itemstack1.func_190916_E() == 0)
 			{
-				slot.putStack((ItemStack) null);
+				slot.putStack(ItemStack.field_190927_a);
 			}
 			else
 			{
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize)
+			if (itemstack1.func_190916_E() == itemstack.func_190916_E())
 			{
-				return null;
+				return ItemStack.field_190927_a;
 			}
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.func_190901_a(par1EntityPlayer, itemstack1);
 		}
 
 		return itemstack;
@@ -97,26 +97,26 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 
 		if (par1ItemStack.isStackable())
 		{
-			while (par1ItemStack.stackSize > 0 && (!par4 && k < par3 || par4 && k >= par2))
+			while (par1ItemStack.func_190916_E() > 0 && (!par4 && k < par3 || par4 && k >= par2))
 			{
 				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
-				if (itemstack1 != null && itemstack1.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1) && slot.isItemValid(par1ItemStack))
+				if (!itemstack1.func_190926_b() && itemstack1.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1) && slot.isItemValid(par1ItemStack))
 				{
-					int l = itemstack1.stackSize + par1ItemStack.stackSize;
+					int l = itemstack1.func_190916_E() + par1ItemStack.func_190916_E();
 
 					if (l <= par1ItemStack.getMaxStackSize())
 					{
-						par1ItemStack.stackSize = 0;
-						itemstack1.stackSize = l;
+						par1ItemStack.func_190920_e(0);
+						itemstack1.func_190920_e(l);
 						slot.onSlotChanged();
 						flag1 = true;
 					}
-					else if (itemstack1.stackSize < par1ItemStack.getMaxStackSize())
+					else if (itemstack1.func_190916_E() < par1ItemStack.getMaxStackSize())
 					{
-						par1ItemStack.stackSize -= par1ItemStack.getMaxStackSize() - itemstack1.stackSize;
-						itemstack1.stackSize = par1ItemStack.getMaxStackSize();
+						par1ItemStack.func_190918_g(par1ItemStack.getMaxStackSize() - itemstack1.func_190916_E());
+						itemstack1.func_190920_e(par1ItemStack.getMaxStackSize());
 						slot.onSlotChanged();
 						flag1 = true;
 					}
@@ -133,7 +133,7 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 			}
 		}
 
-		if (par1ItemStack.stackSize > 0)
+		if (par1ItemStack.func_190916_E() > 0)
 		{
 			if (par4)
 			{
@@ -149,15 +149,15 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
-				if (itemstack1 == null && slot.isItemValid(par1ItemStack))
+				if (itemstack1.func_190926_b() && slot.isItemValid(par1ItemStack))
 				{
-					if (1 < par1ItemStack.stackSize)
+					if (1 < par1ItemStack.func_190916_E())
 					{
 						ItemStack copy = par1ItemStack.copy();
-						copy.stackSize = 1;
+						copy.func_190920_e(1);
 						slot.putStack(copy);
 
-						par1ItemStack.stackSize -= 1;
+						par1ItemStack.func_190918_g(1);
 						flag1 = true;
 						break;
 					}
@@ -165,7 +165,7 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 					{
 						slot.putStack(par1ItemStack.copy());
 						slot.onSlotChanged();
-						par1ItemStack.stackSize = 0;
+						par1ItemStack.func_190920_e(0);
 						flag1 = true;
 						break;
 					}

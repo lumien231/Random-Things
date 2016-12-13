@@ -26,7 +26,7 @@ public class InventoryUtil
         {
             ItemStack itemstack = itemHandler.getStackInSlot(i);
 
-            if (itemstack != null)
+            if (!itemstack.func_190926_b())
             {
                 WorldUtil.spawnItemStack(worldIn, x, y, z, itemstack);
             }
@@ -66,7 +66,7 @@ public class InventoryUtil
 			ItemStack is = inventory.getStackInSlot(i);
 			NBTTagCompound stackNBT = new NBTTagCompound();
 
-			if (is != null)
+			if (!is.func_190926_b())
 			{
 				is.writeToNBT(stackNBT);
 			}
@@ -89,11 +89,11 @@ public class InventoryUtil
 			{
 				if (stackNBT.hasKey("empty"))
 				{
-					inventory.setInventorySlotContents(i, null);
+					inventory.setInventorySlotContents(i, ItemStack.field_190927_a);
 				}
 				else
 				{
-					inventory.setInventorySlotContents(i, ItemStack.loadItemStackFromNBT(stackNBT));
+					inventory.setInventorySlotContents(i, new ItemStack(stackNBT));
 				}
 			}
 		}
@@ -104,7 +104,7 @@ public class InventoryUtil
 		for (int i = 0; i < player.inventory.getSizeInventory(); i++)
 		{
 			ItemStack is = player.inventory.getStackInSlot(i);
-			if (is != null && is.getItem() == item)
+			if (!is.func_190926_b() && is.getItem() == item)
 			{
 				return is;
 			}
@@ -119,7 +119,7 @@ public class InventoryUtil
 		for (int i = 0; i < baublesInventory.getSizeInventory(); i++)
 		{
 			ItemStack is = baublesInventory.getStackInSlot(i);
-			if (is != null && is.getItem() == item)
+			if (!is.func_190926_b() && is.getItem() == item)
 			{
 				return is;
 			}
@@ -144,7 +144,7 @@ public class InventoryUtil
 	{
 		for (int i = 0; i < inventory.getSizeInventory(); i++)
 		{
-			if (inventory.getStackInSlot(i) != null)
+			if (!inventory.getStackInSlot(i).func_190926_b())
 			{
 				return false;
 			}

@@ -97,10 +97,10 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	}
 
 	@Override
-	public final boolean processInitialInteract(EntityPlayer player, ItemStack stack, EnumHand hand)
+	public final boolean processInitialInteract(EntityPlayer player, EnumHand hand)
 	{
 		ItemStack equipped = player.getHeldItemMainhand();
-		if (!worldObj.isRemote && equipped.getItem() instanceof ItemRezStone && this.worldObj.getMinecraftServer().getPlayerList().getPlayerByUsername(playerName) != null)
+		if (!worldObj.isRemote && !equipped.func_190926_b() && equipped.getItem() instanceof ItemRezStone && this.worldObj.getMinecraftServer().getPlayerList().getPlayerByUsername(playerName) != null)
 		{
 			List<EntityReviveCircle> circles = this.worldObj.getEntitiesWithinAABB(EntityReviveCircle.class, new AxisAlignedBB(this.posX - 2, this.posY - 2, this.posZ - 2, this.posX + 2, this.posZ + 2, this.posZ + 2));
 

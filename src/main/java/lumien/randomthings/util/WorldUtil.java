@@ -175,16 +175,16 @@ public class WorldUtil
 		float f1 = rng.nextFloat() * 0.8F + 0.1F;
 		float f2 = rng.nextFloat() * 0.8F + 0.1F;
 
-		while (stack.stackSize > 0)
+		while (stack.func_190916_E() > 0)
 		{
 			int i = rng.nextInt(21) + 10;
 
-			if (i > stack.stackSize)
+			if (i > stack.func_190916_E())
 			{
-				i = stack.stackSize;
+				i = stack.func_190916_E();
 			}
 
-			stack.stackSize -= i;
+			stack.func_190918_g(i);
 			EntityItem entityitem = new EntityItem(worldIn, x + f, y + f1, z + f2, new ItemStack(stack.getItem(), i, stack.getMetadata()));
 
 			if (stack.hasTagCompound())

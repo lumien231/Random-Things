@@ -85,9 +85,9 @@ public class TileEntityItemProjector extends TileEntityBase implements ITickable
 					ItemStack is;
 					if ((is = itemHandler.getStackInSlot(i)) != null)
 					{
-						if (is.stackSize > maxSize)
+						if (is.func_190916_E() > maxSize)
 						{
-							maxSize = is.stackSize;
+							maxSize = is.func_190916_E();
 							maxSlot = i;
 						}
 					}
@@ -123,7 +123,7 @@ public class TileEntityItemProjector extends TileEntityBase implements ITickable
 		{
 			ItemStack stack = itemHandler.extractItem(projectedSlot, 64, false);
 
-			if (stack != null)
+			if (!stack.func_190926_b())
 			{
 				IBlockState state = TileEntityItemProjector.this.worldObj.getBlockState(TileEntityItemProjector.this.pos);
 

@@ -18,13 +18,14 @@ public class ItemBlazeAndSteel extends ItemBase
 	{
 		super("blazeAndSteel");
 
-		this.maxStackSize = 1;
+		this.setMaxStackSize(1);
 		this.setMaxDamage(64);
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		pos = pos.offset(facing);
 
 		if (!playerIn.canPlayerEdit(pos, facing, stack))

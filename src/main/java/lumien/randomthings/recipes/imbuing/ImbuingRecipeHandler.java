@@ -18,7 +18,7 @@ public class ImbuingRecipeHandler
 				return ir.result;
 			}
 		}
-		return null;
+		return ItemStack.field_190927_a;
 	}
 
 	public static void addRecipe(ItemStack ingredient1, ItemStack ingredient2, ItemStack ingredient3, ItemStack toImbue, ItemStack result)

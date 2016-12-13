@@ -76,19 +76,19 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 	{
 		int i = 1;
 
-		if (stack.stackSize > 48)
+		if (stack.func_190916_E() > 48)
 		{
 			i = 5;
 		}
-		else if (stack.stackSize > 32)
+		else if (stack.func_190916_E() > 32)
 		{
 			i = 4;
 		}
-		else if (stack.stackSize > 16)
+		else if (stack.func_190916_E() > 16)
 		{
 			i = 3;
 		}
-		else if (stack.stackSize > 1)
+		else if (stack.func_190916_E() > 1)
 		{
 			i = 2;
 		}
@@ -105,7 +105,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 		ItemStack itemstack = entity.getEntityItem();
 		int i;
 
-		if (itemstack != null && itemstack.getItem() != null)
+		if (!itemstack.func_190926_b() && itemstack.getItem() != null)
 		{
 			i = Item.getIdFromItem(itemstack.getItem()) + itemstack.getMetadata();
 		}

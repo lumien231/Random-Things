@@ -76,7 +76,7 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 
 		if ((biome = getBiome(stack)) != null)
 		{
-			return BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL);
+			return BiomeDictionary.hasType(biome, Type.MAGICAL);
 		}
 
 		return false;

@@ -1,5 +1,5 @@
 {
-     "parent": "randomthings:block/spectreBlock",
+     "parent": "randomthings:block/spectreblock",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

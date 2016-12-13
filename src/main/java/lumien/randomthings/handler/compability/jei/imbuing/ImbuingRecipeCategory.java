@@ -14,6 +14,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.util.Translator;
@@ -76,14 +77,7 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	}
 
 	@Override
-	public void drawAnimations(Minecraft minecraft)
-	{
-		//bubbles.draw(minecraft, 10, 0);
-		//arrow.draw(minecraft, 189, 13);
-	}
-
-	@Override
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper)
+	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper,IIngredients ingredients)
 	{
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 
@@ -95,17 +89,23 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 
 		if (recipeWrapper instanceof ImbuingRecipeWrapper)
 		{
-			List inputs = recipeWrapper.getInputs();
+			List inputs = ingredients.getInputs(ItemStack.class);
 			List<ItemStack> inputStacks1 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(ingredientSlot1));
 			List<ItemStack> inputStacks2 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(ingredientSlot2));
 			List<ItemStack> inputStacks3 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(ingredientSlot3));
 			List<ItemStack> toImbueStacks = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(toImbueSlot));
 
-			itemStacks.setFromRecipe(ingredientSlot1, inputStacks1);
-			itemStacks.setFromRecipe(ingredientSlot2, inputStacks2);
-			itemStacks.setFromRecipe(ingredientSlot3, inputStacks3);
-			itemStacks.setFromRecipe(toImbueSlot, toImbueStacks);
-			itemStacks.setFromRecipe(outputSlot, recipeWrapper.getOutputs());
+			itemStacks.set(ingredientSlot1, inputStacks1);
+			itemStacks.set(ingredientSlot2, inputStacks2);
+			itemStacks.set(ingredientSlot3, inputStacks3);
+			itemStacks.set(toImbueSlot, toImbueStacks);
+			itemStacks.set(outputSlot, ingredients.getOutputs(ItemStack.class).get(0));
 		}
+	}
+
+	@Override
+	public IDrawable getIcon()
+	{
+		return null;
 	}
 }

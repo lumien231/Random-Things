@@ -40,7 +40,7 @@ public class BlockLightRedirector extends BlockContainerBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		if (!worldIn.isRemote)
 		{

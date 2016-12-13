@@ -2,7 +2,6 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.tileentity.TileEntityBlockBreaker;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -41,7 +40,7 @@ public class BlockBlockBreaker extends BlockContainerBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		TileEntity te;
 		if ((te = worldIn.getTileEntity(pos)) instanceof TileEntityBlockBreaker)
@@ -93,13 +92,13 @@ public class BlockBlockBreaker extends BlockContainerBase
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(FACING, BlockPistonBase.getFacingFromEntity(pos, placer));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.func_190914_a(pos, placer));
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		worldIn.setBlockState(pos, state.withProperty(FACING, BlockPistonBase.getFacingFromEntity(pos, placer)), 2);
+		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.func_190914_a(pos, placer)), 2);
 	}
 
 	@Override

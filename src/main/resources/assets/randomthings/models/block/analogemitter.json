@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "randomthings:blocks/analogemitter/side",
+        "front": "randomthings:blocks/analogemitter/front",
+        "side": "randomthings:blocks/analogemitter/side"
+    }
+}

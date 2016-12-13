@@ -1,7 +1,7 @@
 {
     "parent": "block/orientable_vertical",
     "textures": {
-        "front": "randomthings:blocks/contactButton/front",
-        "side": "randomthings:blocks/contactButton/side"
+        "front": "randomthings:blocks/contactbutton/front",
+        "side": "randomthings:blocks/contactbutton/side"
     }
 }

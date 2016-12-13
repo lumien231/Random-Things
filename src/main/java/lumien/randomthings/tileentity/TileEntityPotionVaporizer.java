@@ -183,7 +183,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		}
 		else if (currentPotionEffect != null && affectedBlocks.size() > 0)
 		{
-			if (getStackInSlot(0) != null && durationLeft > 0)
+			if (!getStackInSlot(0).func_190926_b() && durationLeft > 0)
 			{
 				fuelBurnTime = fuelBurn = TileEntityFurnace.getItemBurnTime(getStackInSlot(0));
 
@@ -198,11 +198,11 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		{
 			ItemStack newPotion = inventory.getStackInSlot(1);
 
-			if (newPotion != null)
+			if (!newPotion.func_190926_b())
 			{
 				ItemStack output = getStackInSlot(2);
 
-				if (output == null || output.stackSize < 64)
+				if (output.func_190926_b() || output.func_190916_E() < 64)
 				{
 					List<PotionEffect> effects = PotionUtils.getEffectsFromStack((newPotion));
 
@@ -211,15 +211,15 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 						currentPotionEffect = new PotionEffect(effects.get(0));
 						durationLeft = currentPotionEffect.getDuration();
 
-						inventory.setInventorySlotContents(1, null);
+						inventory.setInventorySlotContents(1, ItemStack.field_190927_a);
 
-						if (output != null)
+						if (!output.func_190926_b())
 						{
-							output.stackSize++;
+							output.func_190917_f(1);
 						}
 						else
 						{
-							setInventorySlotContents(2, new ItemStack(Items.GLASS_BOTTLE,1,0));
+							setInventorySlotContents(2, new ItemStack(Items.GLASS_BOTTLE, 1, 0));
 						}
 					}
 				}
@@ -512,5 +512,11 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	public boolean writeNBTToDescriptionPacket()
 	{
 		return false;
+	}
+
+	@Override
+	public boolean func_191420_l()
+	{
+		return inventory.func_191420_l();
 	}
 }

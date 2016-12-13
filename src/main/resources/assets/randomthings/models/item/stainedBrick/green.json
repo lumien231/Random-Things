@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/stainedBrick/green",
+    "parent": "randomthings:block/stainedbrick/green",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

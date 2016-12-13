@@ -7,12 +7,13 @@ import lumien.randomthings.handler.compability.jei.anvil.AnvilRecipeHandler;
 import lumien.randomthings.handler.compability.jei.imbuing.ImbuingRecipeCategory;
 import lumien.randomthings.handler.compability.jei.imbuing.ImbuingRecipeHandler;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.IItemRegistry;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
+import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.inventory.ContainerRepair;
@@ -20,7 +21,6 @@ import net.minecraft.inventory.ContainerRepair;
 @JEIPlugin
 public class RandomThingsPlugin implements IModPlugin
 {
-	private IItemRegistry itemRegistry;
 	private IJeiHelpers jeiHelpers;
 	public static IStackHelper stackHelper;
 
@@ -30,7 +30,6 @@ public class RandomThingsPlugin implements IModPlugin
 	@Override
 	public void register(IModRegistry registry)
 	{
-		this.itemRegistry = registry.getItemRegistry();
 		this.jeiHelpers = registry.getJeiHelpers();
 		RandomThingsPlugin.stackHelper = jeiHelpers.getStackHelper();
 		
@@ -54,5 +53,15 @@ public class RandomThingsPlugin implements IModPlugin
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
 	{
 		
+	}
+
+	@Override
+	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry)
+	{
+	}
+
+	@Override
+	public void registerIngredients(IModIngredientRegistration registry)
+	{
 	}
 }

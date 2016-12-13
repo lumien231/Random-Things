@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/quartzLamp",
+    "parent": "randomthings:block/quartzlamp",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

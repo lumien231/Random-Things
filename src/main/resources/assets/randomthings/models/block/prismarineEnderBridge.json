@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "randomthings:blocks/enderBridge/pside",
-        "front": "randomthings:blocks/enderBridge/pfront",
-        "side": "randomthings:blocks/enderBridge/pside"
-    }
-}

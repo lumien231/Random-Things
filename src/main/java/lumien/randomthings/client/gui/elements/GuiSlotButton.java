@@ -49,7 +49,7 @@ public class GuiSlotButton extends GuiButton
 		this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 0 + (i - 1) * 18, this.width, this.height);
 		this.mouseDragged(mc, mouseX, mouseY);
 
-		if (stack != null)
+		if (!stack.func_190926_b())
 		{
 			RenderHelper.enableGUIStandardItemLighting();
 

@@ -22,6 +22,9 @@ public class RenderArtificialEndPortal extends Render
 	private static final ResourceLocation END_PORTAL_TEXTURE = new ResourceLocation("textures/entity/end_portal.png");
 	private static final Random RANDOM = new Random(31100L);
 	FloatBuffer buffer = GLAllocation.createDirectFloatBuffer(16);
+	
+    private static final FloatBuffer MODELVIEW = GLAllocation.createDirectFloatBuffer(16);
+    private static final FloatBuffer PROJECTION = GLAllocation.createDirectFloatBuffer(16);
 
 	public RenderArtificialEndPortal(RenderManager renderManager)
 	{
@@ -78,39 +81,30 @@ public class RenderArtificialEndPortal extends Render
 					f5 = 0.5F;
 				}
 
-				float f7 = (float) (-(y + f3));
-				float f8 = f7 + (float) ActiveRenderInfo.getPosition().yCoord;
-				float f9 = f7 + f4 + (float) ActiveRenderInfo.getPosition().yCoord;
-				float f10 = f8 / f9;
-				f10 = (float) (y + f3) + f10;
-				GlStateManager.translate(f, f10, f2);
-				GlStateManager.texGen(GlStateManager.TexGen.S, 9217);
-				GlStateManager.texGen(GlStateManager.TexGen.T, 9217);
-				GlStateManager.texGen(GlStateManager.TexGen.R, 9217);
-				GlStateManager.texGen(GlStateManager.TexGen.Q, 9216);
-				GlStateManager.texGen(GlStateManager.TexGen.S, 9473, this.getBuffer(1.0F, 0.0F, 0.0F, 0.0F));
-				GlStateManager.texGen(GlStateManager.TexGen.T, 9473, this.getBuffer(0.0F, 0.0F, 1.0F, 0.0F));
-				GlStateManager.texGen(GlStateManager.TexGen.R, 9473, this.getBuffer(0.0F, 0.0F, 0.0F, 1.0F));
-				GlStateManager.texGen(GlStateManager.TexGen.Q, 9474, this.getBuffer(0.0F, 1.0F, 0.0F, 0.0F));
-				GlStateManager.enableTexGenCoord(GlStateManager.TexGen.S);
-				GlStateManager.enableTexGenCoord(GlStateManager.TexGen.T);
-				GlStateManager.enableTexGenCoord(GlStateManager.TexGen.R);
-				GlStateManager.enableTexGenCoord(GlStateManager.TexGen.Q);
-				GlStateManager.popMatrix();
-				GlStateManager.matrixMode(5890);
-				GlStateManager.pushMatrix();
-				GlStateManager.loadIdentity();
-				GlStateManager.translate(0.0F, Minecraft.getSystemTime() % 700000L / 700000.0F, 0.0F);
-				GlStateManager.scale(f5, f5, f5);
-				GlStateManager.translate(0.5F, 0.5F, 0.0F);
-				GlStateManager.rotate((i * i * 4321 + i * 9) * 2.0F, 0.0F, 0.0F, 1.0F);
-				GlStateManager.translate(-0.5F, -0.5F, 0.0F);
-				GlStateManager.translate(-f, -f2, -f1);
-				f8 = f7 + (float) ActiveRenderInfo.getPosition().yCoord;
-				GlStateManager.translate((float) ActiveRenderInfo.getPosition().xCoord * f4 / f8, (float) ActiveRenderInfo.getPosition().zCoord * f4 / f8, -f1);
-				Tessellator tessellator = Tessellator.getInstance();
-				VertexBuffer vertexbuffer = tessellator.getBuffer();
-				vertexbuffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+				GlStateManager.texGen(GlStateManager.TexGen.S, 9216);
+	            GlStateManager.texGen(GlStateManager.TexGen.T, 9216);
+	            GlStateManager.texGen(GlStateManager.TexGen.R, 9216);
+	            GlStateManager.texGen(GlStateManager.TexGen.S, 9474, this.getBuffer(1.0F, 0.0F, 0.0F, 0.0F));
+	            GlStateManager.texGen(GlStateManager.TexGen.T, 9474, this.getBuffer(0.0F, 1.0F, 0.0F, 0.0F));
+	            GlStateManager.texGen(GlStateManager.TexGen.R, 9474, this.getBuffer(0.0F, 0.0F, 1.0F, 0.0F));
+	            GlStateManager.enableTexGenCoord(GlStateManager.TexGen.S);
+	            GlStateManager.enableTexGenCoord(GlStateManager.TexGen.T);
+	            GlStateManager.enableTexGenCoord(GlStateManager.TexGen.R);
+	            GlStateManager.popMatrix();
+	            GlStateManager.matrixMode(5890);
+	            GlStateManager.pushMatrix();
+	            GlStateManager.loadIdentity();
+	            GlStateManager.translate(0.5F, 0.5F, 0.0F);
+	            GlStateManager.scale(0.5F, 0.5F, 1.0F);
+	            float f10 = (float)(i + 1);
+	            GlStateManager.translate(17.0F / f10, (2.0F + f10 / 1.5F) * ((float)Minecraft.getSystemTime() % 800000.0F / 800000.0F), 0.0F);
+	            GlStateManager.rotate((f10 * f10 * 4321.0F + f10 * 9.0F) * 2.0F, 0.0F, 0.0F, 1.0F);
+	            GlStateManager.scale(4.5F - f10 / 4.0F, 4.5F - f10 / 4.0F, 1.0F);
+	            GlStateManager.multMatrix(PROJECTION);
+	            GlStateManager.multMatrix(MODELVIEW);
+	            Tessellator tessellator = Tessellator.getInstance();
+	            VertexBuffer vertexbuffer = tessellator.getBuffer();
+	            vertexbuffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
 				float f11 = (RANDOM.nextFloat() * 0.5F + 0.1F) * f6;
 				float f12 = (RANDOM.nextFloat() * 0.5F + 0.4F) * f6;
 				float f13 = (RANDOM.nextFloat() * 0.5F + 0.5F) * f6;

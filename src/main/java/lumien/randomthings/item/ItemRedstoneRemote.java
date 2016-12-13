@@ -19,8 +19,9 @@ public class ItemRedstoneRemote extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick( World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
+		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
 		{
 			if (playerIn.isSneaking())

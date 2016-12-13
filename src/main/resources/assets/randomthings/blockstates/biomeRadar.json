@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "randomthings:biomeRadar" }
+        "normal": { "model": "randomthings:biomeradar" }
     }
 }

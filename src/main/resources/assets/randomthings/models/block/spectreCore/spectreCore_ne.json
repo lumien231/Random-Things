@@ -1,8 +1,8 @@
 {
 "textures": {
-    "spectreBlock": "randomthings:blocks/spectreBlock",
-    "spectreCore": "randomthings:blocks/spectreCore",
-    "particle": "randomthings:blocks/spectreBlock"
+    "spectreBlock": "randomthings:blocks/spectreblock",
+    "spectreCore": "randomthings:blocks/spectrecore",
+    "particle": "randomthings:blocks/spectreblock"
 },
 "elements": [ 
 {

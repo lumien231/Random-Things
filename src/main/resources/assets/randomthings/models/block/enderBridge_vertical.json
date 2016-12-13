@@ -1,7 +1,0 @@
-{
-    "parent": "block/orientable_vertical",
-    "textures": {
-        "front": "randomthings:blocks/enderBridge/front",
-        "side": "randomthings:blocks/enderBridge/side"
-    }
-}

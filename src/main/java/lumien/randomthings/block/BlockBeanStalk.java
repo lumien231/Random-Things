@@ -1,6 +1,5 @@
 package lumien.randomthings.block;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -15,6 +14,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -75,7 +75,7 @@ public class BlockBeanStalk extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
 	{
 		return;
 	}
@@ -132,7 +132,7 @@ public class BlockBeanStalk extends BlockBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		this.checkForDrop(worldIn, pos, state);
 	}

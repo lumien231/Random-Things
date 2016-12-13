@@ -29,7 +29,7 @@ public class ContainerAdvancedRedstoneInterface extends Container
 				@Override
 				public boolean apply(ItemStack input)
 				{
-					return input != null && input.getItem() == ModItems.positionFilter;
+					return !input.func_190926_b() && input.getItem() == ModItems.positionFilter;
 				}
 			}));
 		}
@@ -40,7 +40,7 @@ public class ContainerAdvancedRedstoneInterface extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.field_190927_a;
 		Slot slot = this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
@@ -52,29 +52,29 @@ public class ContainerAdvancedRedstoneInterface extends Container
 			{
 				if (!this.mergeItemStack(itemstack1, 9, 45, true))
 				{
-					return null;
+					return ItemStack.field_190927_a;
 				}
 			}
 			else if (!this.mergeItemStack(itemstack1, 0, 9, false))
 			{
-				return null;
+				return ItemStack.field_190927_a;
 			}
 
-			if (itemstack1.stackSize == 0)
+			if (itemstack1.func_190916_E() == 0)
 			{
-				slot.putStack((ItemStack) null);
+				slot.putStack(ItemStack.field_190927_a);
 			}
 			else
 			{
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize)
+			if (itemstack1.func_190916_E() == itemstack.func_190916_E())
 			{
-				return null;
+				return ItemStack.field_190927_a;
 			}
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.func_190901_a(par1EntityPlayer, itemstack1);
 		}
 
 		return itemstack;

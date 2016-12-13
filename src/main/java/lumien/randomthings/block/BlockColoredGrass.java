@@ -1,6 +1,5 @@
 package lumien.randomthings.block;
 
-import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.item.block.ItemBlockColoredGrass;
@@ -21,6 +20,7 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -128,7 +128,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;

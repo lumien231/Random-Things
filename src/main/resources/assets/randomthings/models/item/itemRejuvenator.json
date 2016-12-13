@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/itemRejuvenator",
+    "parent": "randomthings:block/itemrejuvenator",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

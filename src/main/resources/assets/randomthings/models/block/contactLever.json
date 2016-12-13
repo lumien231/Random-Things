@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "randomthings:blocks/contactLever/side",
-        "front": "randomthings:blocks/contactLever/front",
-        "side": "randomthings:blocks/contactLever/side"
-    }
-}

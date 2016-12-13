@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/biomeStone/chiseled",
+    "parent": "randomthings:block/biomestone/chiseled",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

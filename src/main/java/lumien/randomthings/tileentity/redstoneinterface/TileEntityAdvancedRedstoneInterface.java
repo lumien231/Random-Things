@@ -92,7 +92,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	}
 
 	@Override
-	public void onInventoryChanged(InventoryBasic inventory)
+	public void onInventoryChanged(IInventory inventory)
 	{
 		if (this.worldObj != null && this.pos != null)
 		{
@@ -103,7 +103,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 				ItemStack stack = inventory.getStackInSlot(i);
 
 				BlockPos target;
-				if (stack != null && stack.getItem() == ModItems.positionFilter && (target = ItemPositionFilter.getPosition(stack)) != null)
+				if (!stack.func_190926_b() && stack.getItem() == ModItems.positionFilter && (target = ItemPositionFilter.getPosition(stack)) != null)
 				{
 					newTargets.add(target);
 				}
@@ -137,8 +137,9 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 				for (BlockPos changedPos : changedPositions)
 				{
 					IBlockState targetState = worldObj.getBlockState(changedPos);
-					targetState.neighborChanged(worldObj, changedPos, Blocks.REDSTONE_BLOCK);
-					worldObj.notifyNeighborsOfStateChange(changedPos, Blocks.REDSTONE_BLOCK);
+					targetState.neighborChanged(worldObj, changedPos, Blocks.REDSTONE_BLOCK, this.pos); // TODO
+																										// DANGEROUS
+					worldObj.notifyNeighborsOfStateChange(changedPos, Blocks.REDSTONE_BLOCK, false);
 				}
 			}
 		}
@@ -161,8 +162,9 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 				if (target != null)
 				{
 					IBlockState targetState = worldObj.getBlockState(target);
-					targetState.neighborChanged(worldObj, target, Blocks.REDSTONE_BLOCK);
-					worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK);
+					targetState.neighborChanged(worldObj, target, Blocks.REDSTONE_BLOCK, this.pos); // TODO
+																									// DANGEROUS
+					worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK, false);
 				}
 			}
 		}
@@ -178,8 +180,9 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 				if (target != null)
 				{
 					IBlockState targetState = worldObj.getBlockState(target);
-					targetState.neighborChanged(worldObj, target, neighborBlock);
-					worldObj.notifyNeighborsOfStateChange(target, neighborBlock);
+					targetState.neighborChanged(worldObj, target, neighborBlock, this.pos);// TODO
+																							// DANGEROUS
+					worldObj.notifyNeighborsOfStateChange(target, neighborBlock, false);
 				}
 			}
 		}

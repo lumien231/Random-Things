@@ -1,7 +1,5 @@
 package lumien.randomthings.block;
 
-import java.util.List;
-
 import lumien.randomthings.RandomThings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -15,26 +13,24 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockStainedBrick extends Block
+public class BlockStainedBrick extends BlockBase
 {
 	public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
 	public BlockStainedBrick()
 	{
-		super(Material.ROCK);
+		super("stainedBrick", Material.ROCK, ItemCloth.class);
 
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
 		this.setSoundType(SoundType.STONE);
-		this.setCreativeTab(RandomThings.instance.creativeTab);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(COLOR, EnumDyeColor.WHITE));
-		this.setUnlocalizedName("stainedBrick");
-
-		GameRegistry.registerBlock(this, ItemCloth.class, "stainedBrick");
 	}
 
 	@Override
@@ -45,7 +41,7 @@ public class BlockStainedBrick extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;

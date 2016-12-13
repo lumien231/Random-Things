@@ -68,7 +68,7 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 					if (tempPlayer != null)
 					{
 						playerEntity = tempPlayer;
-						this.worldObj.notifyBlockOfStateChange(this.pos, ModBlocks.playerInterface);
+						this.worldObj.notifyNeighborsOfStateChange(this.pos, ModBlocks.playerInterface, false);
 					}
 				}
 				else
@@ -77,7 +77,7 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 					if (tempPlayer != playerEntity)
 					{
 						this.playerEntity = null;
-						this.worldObj.notifyBlockOfStateChange(this.pos, ModBlocks.playerInterface);
+						this.worldObj.notifyNeighborsOfStateChange(this.pos, ModBlocks.playerInterface, false);
 					}
 				}
 			}
@@ -327,5 +327,17 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 	public String getName()
 	{
 		return "container.playerinterface";
+	}
+
+	@Override
+	public boolean func_191420_l()
+	{
+		checkPlayerEntity();
+		if (this.playerEntity != null)
+		{
+			return this.playerEntity.inventory.func_191420_l();
+		}
+
+		return true;
 	}
 }

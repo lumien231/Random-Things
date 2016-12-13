@@ -139,8 +139,9 @@ public class ItemSummoningPendulum extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse( EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		pos = pos.offset(side);
 		if (!worldIn.isRemote)
 		{

@@ -1,7 +1,6 @@
 package lumien.randomthings.block;
 
 import java.awt.Color;
-import java.util.List;
 
 import lumien.randomthings.item.block.ItemBlockBiomeStone;
 import lumien.randomthings.lib.IRTBlockColor;
@@ -16,6 +15,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
@@ -45,7 +45,7 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
 	{
 		BlockBiomeStone.EnumType[] aenumtype = BlockBiomeStone.EnumType.values();
 		int i = aenumtype.length;

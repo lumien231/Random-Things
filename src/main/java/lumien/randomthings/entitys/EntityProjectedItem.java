@@ -7,6 +7,7 @@ import com.google.common.base.Optional;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityTracker;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -36,7 +37,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 public class EntityProjectedItem extends Entity implements IEntityAdditionalSpawnData
 {
-	private static final DataParameter<Optional<ItemStack>> ITEM = EntityDataManager.<Optional<ItemStack>> createKey(EntityProjectedItem.class, DataSerializers.OPTIONAL_ITEM_STACK);
+	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack> createKey(EntityProjectedItem.class, DataSerializers.OPTIONAL_ITEM_STACK);
 	/**
 	 * The age of this EntityItem (used to animate it up and down as well as
 	 * expire it)
@@ -110,7 +111,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	@Override
 	protected void entityInit()
 	{
-		this.getDataManager().register(ITEM, Optional.<ItemStack> absent());
+		this.getDataManager().register(ITEM, ItemStack.field_190927_a);
 	}
 
 	/**
@@ -142,20 +143,20 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 			this.motionY = direction.getFrontOffsetY() / 10D;
 			this.motionZ = direction.getFrontOffsetZ() / 10D;
 
-			this.moveEntity(motionX, motionY, motionZ);
+			this.moveEntity(MoverType.SELF, motionX, motionY, motionZ);
 
 			if (this.motionX == 0 && this.motionY == 0 && this.motionZ == 0 && !this.worldObj.isRemote)
 			{
 				if (this.enterInventories)
 				{
 					TileEntity nextTileEntity = this.worldObj.getTileEntity(new BlockPos(this.posX, this.posY, this.posZ).offset(this.direction));
-					if (this.getEntityItem() != null && this.getEntityItem().stackSize > 0 && nextTileEntity != null && nextTileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite()))
+					if (this.getEntityItem() != null && this.getEntityItem().func_190916_E() > 0 && nextTileEntity != null && nextTileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite()))
 					{
 						IItemHandler itemHandler = nextTileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite());
 
 						ItemStack remaining = ItemHandlerHelper.insertItemStacked(itemHandler, this.getEntityItem(), false);
 
-						if (remaining != null && remaining.stackSize > 0)
+						if (remaining != null && remaining.func_190916_E() > 0)
 						{
 							this.dropAsItem();
 						}
@@ -183,7 +184,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 				++this.age;
 			}
 
-			ItemStack item = this.getDataManager().get(ITEM).orNull();
+			ItemStack item = this.getDataManager().get(ITEM);
 
 			if (!this.worldObj.isRemote && this.age >= lifespan)
 			{
@@ -191,7 +192,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 				this.dropAsItem();
 			}
 
-			if (item != null && item.stackSize <= 0)
+			if (item != ItemStack.field_190927_a && item.func_190916_E() <= 0)
 			{
 				this.setDead();
 			}
@@ -200,7 +201,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 
 	private void dropAsItem()
 	{
-		if (this.getEntityItem() != null && this.getEntityItem().stackSize > 0)
+		if (this.getEntityItem() != null && this.getEntityItem().func_190916_E() > 0)
 		{
 			EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getEntityItem());
 			this.worldObj.spawnEntityInWorld(ei);
@@ -280,10 +281,10 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 		this.canBePickedUp = compound.getBoolean("canBePickedUp");
 
 		NBTTagCompound nbttagcompound = compound.getCompoundTag("Item");
-		this.setEntityItemStack(ItemStack.loadItemStackFromNBT(nbttagcompound));
+		this.setEntityItemStack(new ItemStack(nbttagcompound));
 
-		ItemStack item = this.getDataManager().get(ITEM).orNull();
-		if (item == null || item.stackSize <= 0)
+		ItemStack item = this.getDataManager().get(ITEM);
+		if (item.func_190926_b() || item.func_190916_E() <= 0)
 			this.setDead();
 		if (compound.hasKey("Lifespan"))
 			lifespan = compound.getInteger("Lifespan");
@@ -298,7 +299,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 		if (!this.worldObj.isRemote && this.canBePickedUp)
 		{
 			ItemStack itemstack = this.getEntityItem();
-			int i = itemstack.stackSize;
+			int i = itemstack.func_190916_E();
 
 			if (i <= 0 || entityIn.inventory.addItemStackToInventory(itemstack))
 			{
@@ -313,9 +314,9 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 				{
 					EntityTracker entitytracker = ((WorldServer) this.worldObj).getEntityTracker();
 
-					entitytracker.sendToAllTrackingEntity(this, new SPacketCollectItem(this.getEntityId(), entityIn.getEntityId()));
+					entitytracker.sendToAllTrackingEntity(this, new SPacketCollectItem(this.getEntityId(), entityIn.getEntityId(), this.getEntityItem().func_190916_E()));
 				}
-				if (itemstack.stackSize <= 0)
+				if (itemstack.func_190916_E() <= 0)
 				{
 					this.setDead();
 				}
@@ -359,9 +360,9 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	 */
 	public ItemStack getEntityItem()
 	{
-		ItemStack itemstack = (ItemStack) ((Optional) this.getDataManager().get(ITEM)).orNull();
+		ItemStack itemstack = this.getDataManager().get(ITEM);
 
-		if (itemstack == null)
+		if (itemstack.func_190926_b())
 		{
 			return new ItemStack(Blocks.STONE);
 		}
@@ -376,7 +377,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	 */
 	public void setEntityItemStack(@Nullable ItemStack stack)
 	{
-		this.getDataManager().set(ITEM, Optional.fromNullable(stack));
+		this.getDataManager().set(ITEM, stack);
 		this.getDataManager().setDirty(ITEM);
 	}
 

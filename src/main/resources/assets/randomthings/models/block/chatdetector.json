@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "#side",
+        "down": "randomthings:blocks/chatdetector/down",
+        "up": "randomthings:blocks/chatdetector/top",
+        "north": "#side",
+        "east": "#side",
+        "south": "#side",
+        "west": "#side"
+    }
+}

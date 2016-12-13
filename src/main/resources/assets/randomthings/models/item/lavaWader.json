@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "randomthings:items/lavaWader"
+        "layer0": "randomthings:items/lavawader"
     }
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "randomthings:block/globalChatDetector",
+    "parent": "randomthings:block/globalchatdetector",
     "textures": {
-        "side": "randomthings:blocks/globalChatDetector/sideOff"
+        "side": "randomthings:blocks/globalchatdetector/sideoff"
     }
 }

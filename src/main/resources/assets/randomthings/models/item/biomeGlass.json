@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/biomeGlass",
+    "parent": "randomthings:block/biomeglass",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

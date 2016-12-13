@@ -101,8 +101,9 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
+		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
 		if (!par2World.isRemote && par3EntityPlayer.isSneaking())
 		{
 			NBTTagCompound nbt = par1ItemStack.getTagCompound();
@@ -132,8 +133,9 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote && !playerIn.isSneaking())
 		{
 			pos = pos.offset(side);

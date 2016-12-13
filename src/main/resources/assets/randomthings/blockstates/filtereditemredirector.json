@@ -1,0 +1,60 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "particle": "minecraft:blocks/obsidian",
+            "down": "minecraft:blocks/obsidian",
+            "up": "randomthings:blocks/filtereditemredirector/up",
+            "north": "minecraft:blocks/obsidian",
+            "east": "minecraft:blocks/obsidian",
+            "south": "minecraft:blocks/obsidian",
+            "west": "minecraft:blocks/obsidian",
+            "input" : "randomthings:blocks/itemredirectorinput",
+            "output" : "randomthings:blocks/itemredirectoroutput",
+            "left" : "randomthings:blocks/filtereditemredirector/left",
+            "right" : "randomthings:blocks/filtereditemredirector/right"
+        },
+        "model": "randomthings:itemredirectorbase",
+        "uvlock": true
+    },
+    "variants": {
+        "inputfacing": {
+            "north" :
+            {
+                "textures": {
+                    "north": "#input",
+                    "south" : "#output",
+                    "east" : "#left",
+                    "west" : "#right"
+                }
+            },
+            "south" :
+            {
+                "textures": {
+                    "south": "#input",
+                    "north": "#output",
+                    "east" : "#right",
+                    "west" : "#left"
+                }
+            },
+            "west" :
+            {
+                "textures": {
+                    "west": "#input",
+                    "south": "#right",
+                    "north": "#left",
+                    "east" : "#output"
+                }
+            },
+            "east" :
+            {
+                "textures": {
+                    "east": "#input",
+                    "south": "#left",
+                    "north": "#right",
+                    "west" : "#output"
+                }
+            }
+        }
+    }
+}

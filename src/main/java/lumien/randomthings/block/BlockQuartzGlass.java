@@ -47,7 +47,7 @@ public class BlockQuartzGlass extends BlockBase
 	}
 
 	@Override
-	public boolean isVisuallyOpaque()
+	public boolean isVisuallyOpaque(IBlockState state)
 	{
 		return false;
 	}

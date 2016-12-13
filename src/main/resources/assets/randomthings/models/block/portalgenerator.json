@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "blocks/end_stone",
+        "down": "blocks/end_stone",
+        "up": "randomthings:blocks/portalgenerator",
+        "north": "blocks/end_stone",
+        "east": "blocks/end_stone",
+        "south": "blocks/end_stone",
+        "west": "blocks/end_stone"
+    }
+}

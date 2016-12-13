@@ -1,20 +1,20 @@
 {
     "variants": {
-        "color=white": { "model": "randomthings:rainbowLamp/white" },
-        "color=orange": { "model": "randomthings:rainbowLamp/orange" },
-        "color=magenta": { "model": "randomthings:rainbowLamp/magenta" },
-        "color=light_blue": { "model": "randomthings:rainbowLamp/lightBlue" },
-        "color=yellow": { "model": "randomthings:rainbowLamp/yellow" },
-        "color=lime": { "model": "randomthings:rainbowLamp/lime" },
-        "color=pink": { "model": "randomthings:rainbowLamp/pink" },
-        "color=gray": { "model": "randomthings:rainbowLamp/gray" },
-        "color=silver": { "model": "randomthings:rainbowLamp/silver" },
-        "color=cyan": { "model": "randomthings:rainbowLamp/cyan" },
-        "color=purple": { "model": "randomthings:rainbowLamp/purple" },
-        "color=blue": { "model": "randomthings:rainbowLamp/blue" },
-        "color=brown": { "model": "randomthings:rainbowLamp/brown" },
-        "color=green": { "model": "randomthings:rainbowLamp/green" },
-        "color=red": { "model": "randomthings:rainbowLamp/red" },
-        "color=black": { "model": "randomthings:rainbowLamp/black" }
+        "color=white": { "model": "randomthings:rainbowlamp/white" },
+        "color=orange": { "model": "randomthings:rainbowlamp/orange" },
+        "color=magenta": { "model": "randomthings:rainbowlamp/magenta" },
+        "color=light_blue": { "model": "randomthings:rainbowlamp/lightblue" },
+        "color=yellow": { "model": "randomthings:rainbowlamp/yellow" },
+        "color=lime": { "model": "randomthings:rainbowlamp/lime" },
+        "color=pink": { "model": "randomthings:rainbowlamp/pink" },
+        "color=gray": { "model": "randomthings:rainbowlamp/gray" },
+        "color=silver": { "model": "randomthings:rainbowlamp/silver" },
+        "color=cyan": { "model": "randomthings:rainbowlamp/cyan" },
+        "color=purple": { "model": "randomthings:rainbowlamp/purple" },
+        "color=blue": { "model": "randomthings:rainbowlamp/blue" },
+        "color=brown": { "model": "randomthings:rainbowlamp/brown" },
+        "color=green": { "model": "randomthings:rainbowlamp/green" },
+        "color=red": { "model": "randomthings:rainbowlamp/red" },
+        "color=black": { "model": "randomthings:rainbowlamp/black" }
     }
 }

@@ -1,6 +1,0 @@
-{
-    "parent": "randomthings:block/biomeStone/parent",
-    "textures": {
-        "all": "blocks/cobblestone"
-    }
-}

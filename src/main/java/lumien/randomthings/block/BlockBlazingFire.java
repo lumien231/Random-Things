@@ -23,6 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -46,14 +47,14 @@ public class BlockBlazingFire extends BlockBase
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(UPPER, Boolean.valueOf(false)));
 		this.setTickRandomly(true);
-		
+
 		this.setSoundType(SoundType.CLOTH);
 		this.disableStats();
 		this.setHardness(0.0F).setLightLevel(1.0F);
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		return;
 	}
@@ -70,7 +71,7 @@ public class BlockBlazingFire extends BlockBase
 
 	@Override
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
 		return NULL_AABB;
 	}
@@ -132,7 +133,9 @@ public class BlockBlazingFire extends BlockBase
 			{
 				if (i < 15)
 				{
-					state = state.withProperty(AGE, Math.min(15, Integer.valueOf(i + rand.nextInt(3) / 2))); // 3 -> 10
+					state = state.withProperty(AGE, Math.min(15, Integer.valueOf(i + rand.nextInt(3) / 2))); // 3
+																												// ->
+																												// 10
 					worldIn.setBlockState(pos, state, 4);
 				}
 
@@ -239,7 +242,7 @@ public class BlockBlazingFire extends BlockBase
 			IBlockState iblockstate = worldIn.getBlockState(pos);
 
 			// MOD age + 10 -> age + 2
-			if (random.nextInt(age/2 + 1) < 5 && !worldIn.isRainingAt(pos))
+			if (random.nextInt(age / 2 + 1) < 5 && !worldIn.isRainingAt(pos))
 			{
 				int j = age + random.nextInt(2);
 
@@ -327,7 +330,7 @@ public class BlockBlazingFire extends BlockBase
 	 * neighboring solid block, etc.
 	 */
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos changedPos)
 	{
 		if (!worldIn.getBlockState(pos.down()).isFullyOpaque() && !this.canNeighborCatchFire(worldIn, pos))
 		{
@@ -448,7 +451,7 @@ public class BlockBlazingFire extends BlockBase
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
-	
+
 	@Override
 	public boolean isBurning(IBlockAccess world, BlockPos pos)
 	{

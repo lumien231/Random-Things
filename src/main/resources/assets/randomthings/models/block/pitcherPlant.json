@@ -1,6 +1,0 @@
-{
-    "parent": "block/tall_grass",
-    "textures": {
-        "cross": "randomthings:blocks/pitcherPlant"
-    }
-}

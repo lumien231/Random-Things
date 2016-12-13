@@ -44,7 +44,7 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 	{
 		TileEntityBiomeRadar radar = (TileEntityBiomeRadar) worldIn.getTileEntity(pos);
 
-		if (radar.getCurrentCrystal() != null)
+		if (!radar.getCurrentCrystal().func_190926_b())
 		{
 			WorldUtil.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), radar.getCurrentCrystal());
 		}
@@ -65,7 +65,7 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		TileEntity te;
 
@@ -82,22 +82,22 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack equipped = playerIn.getHeldItemMainhand();
 		TileEntityBiomeRadar biomeRadar = (TileEntityBiomeRadar) worldIn.getTileEntity(pos);
 
 		if (biomeRadar.getState() == STATE.IDLE)
 		{
-			if (biomeRadar.getCurrentCrystal() == null)
+			if (biomeRadar.getCurrentCrystal().func_190926_b())
 			{
-				if (equipped != null && equipped.getItem() == ModItems.biomeCrystal)
+				if (!equipped.func_190926_b() && equipped.getItem() == ModItems.biomeCrystal)
 				{
 					if (!worldIn.isRemote)
 					{
 						biomeRadar.setCrystal(equipped.copy());
 
-						equipped.stackSize--;
+						equipped.func_190918_g(1);
 						worldIn.playEvent(null, 1037, pos, 0);
 					}
 
@@ -107,12 +107,12 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 			else
 			{
 				ItemStack currentCrystal;
-				if (equipped == null && (currentCrystal = biomeRadar.getCurrentCrystal()) != null)
+				if (equipped.func_190926_b() && !(currentCrystal = biomeRadar.getCurrentCrystal()).func_190926_b())
 				{
 					if (!worldIn.isRemote)
 					{
 						playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, currentCrystal);
-						biomeRadar.setCrystal(null);
+						biomeRadar.setCrystal(ItemStack.field_190927_a);
 
 						worldIn.playEvent(null, 1036, pos, 0);
 					}
@@ -122,13 +122,13 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 		}
 		else if (biomeRadar.getState() == STATE.FINISHED)
 		{
-			if (equipped != null && equipped.getItem() == Items.PAPER)
+			if (!equipped.func_190926_b() && equipped.getItem() == Items.PAPER)
 			{
 				if (!worldIn.isRemote)
 				{
 					ItemStack positionFilter = biomeRadar.generatePositionFilter();
 
-					equipped.stackSize--;
+					equipped.func_190918_g(1);
 					playerIn.inventory.addItemStackToInventory(positionFilter);
 				}
 				return true;

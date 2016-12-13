@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -32,7 +33,7 @@ public class ItemBean extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item itemIn, CreativeTabs tab, List subItems)
+	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -56,8 +57,9 @@ public class ItemBean extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		if (side != EnumFacing.UP)
 		{
 			return EnumActionResult.FAIL;
@@ -74,7 +76,7 @@ public class ItemBean extends ItemBase
 
 				worldIn.playSound(null, pos.up(), ModBlocks.beanSprout.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
-				--stack.stackSize;
+				stack.func_190918_g(1);
 				return EnumActionResult.SUCCESS;
 			}
 			else if (stack.getItemDamage() == 1 && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up()))
@@ -84,7 +86,7 @@ public class ItemBean extends ItemBase
 
 				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
-				--stack.stackSize;
+				stack.func_190918_g(1);
 				return EnumActionResult.SUCCESS;
 			}
 			else if (stack.getItemDamage() == 2 && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up()))
@@ -94,7 +96,7 @@ public class ItemBean extends ItemBase
 
 				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
-				--stack.stackSize;
+				stack.func_190918_g(1);
 				return EnumActionResult.SUCCESS;
 			}
 			return EnumActionResult.FAIL;

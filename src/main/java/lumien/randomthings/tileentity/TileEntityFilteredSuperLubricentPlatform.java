@@ -53,7 +53,7 @@ public class TileEntityFilteredSuperLubricentPlatform extends TileEntityBase imp
 	}
 
 	@Override
-	public void onInventoryChanged(InventoryBasic inventory)
+	public void onInventoryChanged(IInventory inventory)
 	{
 		ItemStack filter = inventory.getStackInSlot(0);
 

@@ -82,28 +82,28 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 		TileEntity tileEntity = worldObj.getTileEntity(blockpos);
 
 		int slot = 0;
-		ItemStack stack = null;
+		ItemStack stack = ItemStack.field_190927_a;
 		for (int i = 0; i < itemHandler.getSlots(); i++)
 		{
 			stack = itemHandler.getStackInSlot(i);
 
-			if (stack != null)
+			if (!stack.func_190926_b())
 			{
 				slot = i;
 				break;
 			}
 		}
 
-		if (stack != null)
+		if (!stack.func_190926_b())
 		{
 			ItemStack toDrop = stack.copy();
-			toDrop.stackSize = 1;
+			toDrop.func_190920_e(1);
 
 			if (tileEntity != null && tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
 			{
 				ItemStack result = ItemHandlerHelper.insertItemStacked(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()), toDrop, false);
 
-				if (result == null || result.stackSize == 0)
+				if (result == null || result.func_190916_E() == 0)
 				{
 					itemHandler.extractItem(slot, 1, false);
 				}

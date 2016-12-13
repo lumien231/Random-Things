@@ -14,6 +14,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -55,7 +56,7 @@ public class ItemImbue extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item itemIn, CreativeTabs tab, List subItems)
+	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (int i = 0; i < 5; i++)
 		{
@@ -76,8 +77,9 @@ public class ItemImbue extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
+		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		playerIn.setActiveHand(hand);
 		return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
 	}
@@ -90,7 +92,7 @@ public class ItemImbue extends ItemBase
 			EntityPlayer playerIn = (EntityPlayer) livingEntity;
 			if (!playerIn.capabilities.isCreativeMode)
 			{
-				--stack.stackSize;
+				stack.func_190918_g(1);
 			}
 
 			if (!worldIn.isRemote)
@@ -119,7 +121,7 @@ public class ItemImbue extends ItemBase
 
 			if (!playerIn.capabilities.isCreativeMode)
 			{
-				if (stack.stackSize <= 0)
+				if (stack.func_190916_E() <= 0)
 				{
 					return new ItemStack(Items.GLASS_BOTTLE);
 				}

@@ -19,8 +19,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public class BlockFluidDisplay extends BlockContainerBase
 {
@@ -36,22 +39,33 @@ public class BlockFluidDisplay extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		TileEntityFluidDisplay te = (TileEntityFluidDisplay) worldIn.getTileEntity(pos);
 
-		if (heldItem != null)
+		ItemStack heldItem = playerIn.getHeldItemMainhand();
+
+		if (!heldItem.func_190926_b() && heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
 		{
-			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(heldItem);
-			if (liquid != null)
+			IFluidHandlerItem handler = heldItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+
+			IFluidTankProperties[] tanks = handler.getTankProperties();
+
+			if (tanks.length > 0)
 			{
-				if (!worldIn.isRemote)
+				FluidStack liquid = tanks[0].getContents();
+				if (liquid != null)
 				{
-					te.setFluidName(liquid.getFluid().getName());
-					te.syncTE();
+					if (!worldIn.isRemote)
+					{
+						te.setFluidName(liquid.getFluid().getName());
+						te.syncTE();
+					}
+					return true;
 				}
-				return true;
 			}
+
+
 		}
 		else
 		{

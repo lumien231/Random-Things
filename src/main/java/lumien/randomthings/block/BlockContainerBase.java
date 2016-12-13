@@ -23,7 +23,7 @@ public abstract class BlockContainerBase extends BlockBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock,BlockPos changedPos)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 

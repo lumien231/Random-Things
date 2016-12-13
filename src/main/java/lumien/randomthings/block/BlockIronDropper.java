@@ -5,7 +5,6 @@ import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.TileEntityIronDropper;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -58,7 +57,7 @@ public class BlockIronDropper extends BlockContainerBase
 	}
 	
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -112,14 +111,14 @@ public class BlockIronDropper extends BlockContainerBase
     @Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
-        return this.getDefaultState().withProperty(FACING, BlockPistonBase.getFacingFromEntity(pos, placer));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.func_190914_a(pos, placer));
     }
 
 
     @Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
-        worldIn.setBlockState(pos, state.withProperty(FACING, BlockPistonBase.getFacingFromEntity(pos, placer)), 2);
+        worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.func_190914_a(pos, placer)), 2);
 
         if (stack.hasDisplayName())
         {
@@ -127,7 +126,7 @@ public class BlockIronDropper extends BlockContainerBase
 
             if (tileentity instanceof TileEntityDispenser)
             {
-                ((TileEntityDispenser)tileentity).setCustomName(stack.getDisplayName());
+                ((TileEntityDispenser)tileentity).func_190575_a(stack.getDisplayName());
             }
         }
     }

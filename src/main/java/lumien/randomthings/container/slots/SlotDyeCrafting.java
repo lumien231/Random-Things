@@ -27,18 +27,20 @@ public class SlotDyeCrafting extends SlotCrafting
 	}
 
 	@Override
-	public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+	public ItemStack func_190901_a(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
 	{
 		for (int i = 0; i < this.craftMatrix.getSizeInventory(); ++i)
 		{
 			ItemStack itemstack1 = this.craftMatrix.getStackInSlot(i);
 
-			if (itemstack1 != null)
+			if (!itemstack1.func_190926_b())
 			{
 				this.craftMatrix.decrStackSize(i, 1);
 			}
 		}
 
 		this.containerDyeingMachine.onCraftMatrixChanged(craftMatrix);
+		
+		return par2ItemStack;
 	}
 }

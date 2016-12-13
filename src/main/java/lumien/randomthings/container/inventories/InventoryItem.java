@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -12,8 +13,10 @@ public class InventoryItem implements IInventory
 {
 	String name;
 	int size;
-	ItemStack itemStack;
-	ItemStack[] cacheInventory;
+
+	ItemStack itemStack = ItemStack.field_190927_a;
+	NonNullList<ItemStack> cacheInventory;
+
 	boolean reading;
 
 	public InventoryItem(String name, int size, ItemStack itemStack)
@@ -21,7 +24,7 @@ public class InventoryItem implements IInventory
 		this.name = name;
 		this.size = size;
 		this.itemStack = itemStack;
-		this.cacheInventory = new ItemStack[size];
+		this.cacheInventory = NonNullList.func_191197_a(size, ItemStack.field_190927_a);
 		this.reading = false;
 
 		loadInventory();
@@ -73,30 +76,30 @@ public class InventoryItem implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
-		return cacheInventory[index];
+		return cacheInventory.get(index);
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		if (this.cacheInventory[index] != null)
+		if (!this.cacheInventory.get(index).func_190926_b())
 		{
 			ItemStack itemstack;
 
-			if (this.cacheInventory[index].stackSize <= count)
+			if (this.cacheInventory.get(index).func_190916_E() <= count)
 			{
-				itemstack = this.cacheInventory[index];
-				this.cacheInventory[index] = null;
+				itemstack = this.cacheInventory.get(index);
+				this.cacheInventory.set(index, ItemStack.field_190927_a);
 				this.markDirty();
 				return itemstack;
 			}
 			else
 			{
-				itemstack = this.cacheInventory[index].splitStack(count);
+				itemstack = this.cacheInventory.get(index).splitStack(count);
 
-				if (this.cacheInventory[index].stackSize == 0)
+				if (this.cacheInventory.get(index).func_190916_E() == 0)
 				{
-					this.cacheInventory[index] = null;
+					this.cacheInventory.set(index, ItemStack.field_190927_a);
 				}
 
 				this.markDirty();
@@ -105,33 +108,33 @@ public class InventoryItem implements IInventory
 		}
 		else
 		{
-			return null;
+			return ItemStack.field_190927_a;
 		}
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
-		if (this.cacheInventory[index] != null)
+		if (!this.cacheInventory.get(index).func_190926_b())
 		{
-			ItemStack itemstack = this.cacheInventory[index];
-			this.cacheInventory[index] = null;
+			ItemStack itemstack = this.cacheInventory.get(index);
+			this.cacheInventory.set(index, ItemStack.field_190927_a);
 			return itemstack;
 		}
 		else
 		{
-			return null;
+			return ItemStack.field_190927_a;
 		}
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		this.cacheInventory[index] = stack;
+		this.cacheInventory.set(index, stack);
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+		if (!stack.func_190926_b() && stack.func_190916_E() > this.getInventoryStackLimit())
 		{
-			stack.stackSize = this.getInventoryStackLimit();
+			stack.func_190920_e(this.getInventoryStackLimit());
 		}
 
 		if (!reading)
@@ -203,15 +206,29 @@ public class InventoryItem implements IInventory
 	@Override
 	public void clear()
 	{
-		for (int i = 0; i < this.cacheInventory.length; ++i)
+		for (int i = 0; i < this.cacheInventory.size(); ++i)
 		{
-			this.cacheInventory[i] = null;
+			this.cacheInventory.set(i, ItemStack.field_190927_a);
 		}
 	}
 
 	public ItemStack getItemStack()
 	{
 		return itemStack;
+	}
+
+	@Override
+	public boolean func_191420_l()
+	{
+		for (ItemStack itemstack : this.cacheInventory)
+		{
+			if (!itemstack.func_190926_b())
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

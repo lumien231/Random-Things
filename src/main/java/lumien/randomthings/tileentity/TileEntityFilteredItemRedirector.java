@@ -53,7 +53,7 @@ public class TileEntityFilteredItemRedirector extends TileEntityBase implements 
 	}
 
 	@Override
-	public void onInventoryChanged(InventoryBasic inventory)
+	public void onInventoryChanged(IInventory inventory)
 	{
 		ItemStack f1 = inventory.getStackInSlot(0);
 		ItemStack f2 = inventory.getStackInSlot(1);

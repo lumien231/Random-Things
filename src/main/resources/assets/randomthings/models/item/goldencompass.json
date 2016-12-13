@@ -1,0 +1,41 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "randomthings:items/goldencompass/goldencompass_16"
+    },
+    "overrides": [
+        { "predicate": { "angle": 0.000000 }, "model": "randomthings:item/goldencompass" },
+        { "predicate": { "angle": 0.015625 }, "model": "randomthings:item/goldencompass/goldencompass_17" },
+        { "predicate": { "angle": 0.046875 }, "model": "randomthings:item/goldencompass/goldencompass_18" },
+        { "predicate": { "angle": 0.078125 }, "model": "randomthings:item/goldencompass/goldencompass_19" },
+        { "predicate": { "angle": 0.109375 }, "model": "randomthings:item/goldencompass/goldencompass_20" },
+        { "predicate": { "angle": 0.140625 }, "model": "randomthings:item/goldencompass/goldencompass_21" },
+        { "predicate": { "angle": 0.171875 }, "model": "randomthings:item/goldencompass/goldencompass_22" },
+        { "predicate": { "angle": 0.203125 }, "model": "randomthings:item/goldencompass/goldencompass_23" },
+        { "predicate": { "angle": 0.234375 }, "model": "randomthings:item/goldencompass/goldencompass_24" },
+        { "predicate": { "angle": 0.265625 }, "model": "randomthings:item/goldencompass/goldencompass_25" },
+        { "predicate": { "angle": 0.296875 }, "model": "randomthings:item/goldencompass/goldencompass_26" },
+        { "predicate": { "angle": 0.328125 }, "model": "randomthings:item/goldencompass/goldencompass_27" },
+        { "predicate": { "angle": 0.359375 }, "model": "randomthings:item/goldencompass/goldencompass_28" },
+        { "predicate": { "angle": 0.390625 }, "model": "randomthings:item/goldencompass/goldencompass_29" },
+        { "predicate": { "angle": 0.421875 }, "model": "randomthings:item/goldencompass/goldencompass_30" },
+        { "predicate": { "angle": 0.453125 }, "model": "randomthings:item/goldencompass/goldencompass_31" },
+        { "predicate": { "angle": 0.484375 }, "model": "randomthings:item/goldencompass/goldencompass_00" },
+        { "predicate": { "angle": 0.515625 }, "model": "randomthings:item/goldencompass/goldencompass_01" },
+        { "predicate": { "angle": 0.546875 }, "model": "randomthings:item/goldencompass/goldencompass_02" },
+        { "predicate": { "angle": 0.578125 }, "model": "randomthings:item/goldencompass/goldencompass_03" },
+        { "predicate": { "angle": 0.609375 }, "model": "randomthings:item/goldencompass/goldencompass_04" },
+        { "predicate": { "angle": 0.640625 }, "model": "randomthings:item/goldencompass/goldencompass_05" },
+        { "predicate": { "angle": 0.671875 }, "model": "randomthings:item/goldencompass/goldencompass_06" },
+        { "predicate": { "angle": 0.703125 }, "model": "randomthings:item/goldencompass/goldencompass_07" },
+        { "predicate": { "angle": 0.734375 }, "model": "randomthings:item/goldencompass/goldencompass_08" },
+        { "predicate": { "angle": 0.765625 }, "model": "randomthings:item/goldencompass/goldencompass_09" },
+        { "predicate": { "angle": 0.796875 }, "model": "randomthings:item/goldencompass/goldencompass_10" },
+        { "predicate": { "angle": 0.828125 }, "model": "randomthings:item/goldencompass/goldencompass_11" },
+        { "predicate": { "angle": 0.859375 }, "model": "randomthings:item/goldencompass/goldencompass_12" },
+        { "predicate": { "angle": 0.890625 }, "model": "randomthings:item/goldencompass/goldencompass_13" },
+        { "predicate": { "angle": 0.921875 }, "model": "randomthings:item/goldencompass/goldencompass_14" },
+        { "predicate": { "angle": 0.953125 }, "model": "randomthings:item/goldencompass/goldencompass_15" },
+        { "predicate": { "angle": 0.984375 }, "model": "randomthings:item/goldencompass" }
+    ]
+}

@@ -71,7 +71,7 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 							{
 								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, ei.getEntityItem().copy(), false);
 								
-								if (left == null || left.stackSize == 0)
+								if (left == null || left.func_190916_E() == 0)
 								{
 									ei.setDead();
 								}

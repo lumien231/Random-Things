@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/contactLever",
+    "parent": "randomthings:block/contactlever",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

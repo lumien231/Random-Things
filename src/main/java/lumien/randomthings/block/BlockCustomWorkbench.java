@@ -27,6 +27,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
@@ -51,7 +52,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		this.setHardness(2.5F);
 		this.setSoundType(SoundType.WOOD);
 	}
-	
+
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
@@ -65,16 +66,16 @@ public class BlockCustomWorkbench extends BlockContainerBase
 
 		compound.setString("woodName", woodName);
 		compound.setInteger("woodMeta", meta);
-		
+
 		return pickedWorkbench;
 	}
-	
+
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return new ArrayList<ItemStack>();
 	}
-	
+
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
@@ -88,14 +89,14 @@ public class BlockCustomWorkbench extends BlockContainerBase
 
 		compound.setString("woodName", woodName);
 		compound.setInteger("woodMeta", meta);
-		
+
 		WorldUtil.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), droppedWorkbench);
 		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
 	{
 		for (BlockPlanks.EnumType type : BlockPlanks.EnumType.values())
 		{
@@ -113,7 +114,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public boolean canRenderInLayer(BlockRenderLayer layer)
+	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer)
 	{
 		return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.TRANSLUCENT;
 	}
@@ -212,7 +213,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{

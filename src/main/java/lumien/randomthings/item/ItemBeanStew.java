@@ -23,7 +23,7 @@ public class ItemBeanStew extends ItemFood
 	{
 		super.onItemUseFinish(stack, worldIn, livingEntity);
 
-		if (stack.stackSize == 0)
+		if (stack.func_190916_E() == 0)
 		{
 			return new ItemStack(Items.BOWL);
 		}

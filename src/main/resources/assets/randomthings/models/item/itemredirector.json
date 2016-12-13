@@ -1,0 +1,19 @@
+{
+    "parent": "randomthings:block/itemredirectorbase",
+    "textures": {
+            "particle": "minecraft:blocks/obsidian",
+            "down": "minecraft:blocks/obsidian",
+            "up": "minecraft:blocks/obsidian",
+            "north": "randomthings:blocks/itemredirectorinput",
+            "east": "minecraft:blocks/obsidian",
+            "south": "minecraft:blocks/obsidian",
+            "west": "minecraft:blocks/obsidian"
+        },
+    "display": {
+        "thirdperson": {
+            "rotation": [ 10, -45, 170 ],
+            "translation": [ 0, 1.5, -2.75 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    }
+}

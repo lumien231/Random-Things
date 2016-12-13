@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures": {
-        "end": "randomthings:blocks/spectreLogTop",
-        "side": "randomthings:blocks/spectreLog"
-    }
-}

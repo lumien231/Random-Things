@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,7 +32,7 @@ public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item itemIn, CreativeTabs tab, List subItems)
+	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (int i = 0; i < 17; i++)
 		{
@@ -67,13 +68,14 @@ public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse( EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
 		{
 			if (worldIn.getBlockState(pos).getBlock() instanceof BlockDirt && worldIn.getBlockState(pos).getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT)
 			{
-				--stack.stackSize;
+				stack.func_190918_g(1);
 				if (stack.getItemDamage() == 0)
 				{
 					worldIn.setBlockState(pos, Blocks.GRASS.getDefaultState());

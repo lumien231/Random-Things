@@ -49,7 +49,7 @@ public class ContainerDyeingMachine extends Container
 		ItemStack toDye = par1IInventory.getStackInSlot(0);
 		ItemStack dye = par1IInventory.getStackInSlot(1);
 
-		if (toDye != null && dye != null)
+		if (!toDye.func_190926_b() && !dye.func_190926_b())
 		{
 			int dyeColor = DyeUtil.getDyeColor(dye);
 			ItemStack copy = toDye.copy();
@@ -60,13 +60,13 @@ public class ContainerDyeingMachine extends Container
 			}
 
 			NBTTagCompound compound = copy.getTagCompound();
-			copy.stackSize = 1;
+			copy.func_190920_e(1);
 			compound.setInteger("rtDye", dyeColor);
 			this.dyeResult.setInventorySlotContents(0, copy);
 
 			// Enchantment Color
 			ItemStack enchantmentCopy = toDye.copy();
-			enchantmentCopy.stackSize = 1;
+			enchantmentCopy.func_190920_e(1);
 			if (enchantmentCopy.getTagCompound() == null)
 			{
 				enchantmentCopy.setTagCompound(new NBTTagCompound());
@@ -76,17 +76,22 @@ public class ContainerDyeingMachine extends Container
 
 			enchantmentResult.setInventorySlotContents(0, enchantmentCopy);
 		}
-		else if (toDye != null && dye == null)
+		else if ( !toDye.func_190926_b() && dye.func_190926_b())
 		{
-			this.enchantmentResult.setInventorySlotContents(0, null);
+			this.enchantmentResult.setInventorySlotContents(0, ItemStack.field_190927_a);
 			ItemStack copy = toDye.copy();
-			copy.stackSize = 1;
+			copy.func_190920_e(1);
 			if (copy.getTagCompound() != null)
 			{
 				NBTTagCompound compound = copy.getTagCompound();
 				if (compound.hasKey("rtDye"))
 				{
 					compound.removeTag("rtDye");
+				}
+				
+				if (compound.hasKey("enchantmentColor"))
+				{
+					compound.removeTag("enchantmentColor");
 				}
 
 				if (compound.hasNoTags())
@@ -97,13 +102,13 @@ public class ContainerDyeingMachine extends Container
 			}
 			else
 			{
-				this.dyeResult.setInventorySlotContents(0, null);
+				this.dyeResult.setInventorySlotContents(0, ItemStack.field_190927_a);
 			}
 		}
 		else
 		{
-			this.dyeResult.setInventorySlotContents(0, null);
-			this.enchantmentResult.setInventorySlotContents(0, null);
+			this.dyeResult.setInventorySlotContents(0, ItemStack.field_190927_a);
+			this.enchantmentResult.setInventorySlotContents(0, ItemStack.field_190927_a);
 		}
 	}
 
@@ -118,7 +123,7 @@ public class ContainerDyeingMachine extends Container
 			{
 				ItemStack itemstack = this.ingredients.removeStackFromSlot(i);
 
-				if (itemstack != null)
+				if (!itemstack.func_190926_b())
 				{
 					par1EntityPlayer.dropItem(itemstack, false);
 				}
@@ -151,7 +156,7 @@ public class ContainerDyeingMachine extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.field_190927_a;
 		Slot slot = this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
@@ -163,29 +168,29 @@ public class ContainerDyeingMachine extends Container
 			{
 				if (!this.mergeItemStack(itemstack1, 4, 37, true))
 				{
-					return null;
+					return ItemStack.field_190927_a;
 				}
 			}
 			else if (!this.mergeItemStack(itemstack1, 0, 2, false))
 			{
-				return null;
+				return ItemStack.field_190927_a;
 			}
 
-			if (itemstack1.stackSize == 0)
+			if (itemstack1.func_190916_E() == 0)
 			{
-				slot.putStack((ItemStack) null);
+				slot.putStack(ItemStack.field_190927_a);
 			}
 			else
 			{
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize)
+			if (itemstack1.func_190916_E() == itemstack.func_190916_E())
 			{
-				return null;
+				return ItemStack.field_190927_a;
 			}
 
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.func_190901_a(par1EntityPlayer, itemstack1);
 		}
 
 		return itemstack;
@@ -207,26 +212,26 @@ public class ContainerDyeingMachine extends Container
 
 		if (par1ItemStack.isStackable())
 		{
-			while (par1ItemStack.stackSize > 0 && (!par4 && k < par3 || par4 && k >= par2))
+			while (par1ItemStack.func_190916_E() > 0 && (!par4 && k < par3 || par4 && k >= par2))
 			{
 				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
-				if (itemstack1 != null && itemstack1.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1) && slot.isItemValid(par1ItemStack))
+				if (!itemstack1.func_190926_b() && itemstack1.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1) && slot.isItemValid(par1ItemStack))
 				{
-					int l = itemstack1.stackSize + par1ItemStack.stackSize;
+					int l = itemstack1.func_190916_E() + par1ItemStack.func_190916_E();
 
 					if (l <= par1ItemStack.getMaxStackSize())
 					{
-						par1ItemStack.stackSize = 0;
-						itemstack1.stackSize = l;
+						par1ItemStack.func_190920_e(0);
+						itemstack1.func_190920_e(l);
 						slot.onSlotChanged();
 						flag1 = true;
 					}
-					else if (itemstack1.stackSize < par1ItemStack.getMaxStackSize())
+					else if (itemstack1.func_190916_E() < par1ItemStack.getMaxStackSize())
 					{
-						par1ItemStack.stackSize -= par1ItemStack.getMaxStackSize() - itemstack1.stackSize;
-						itemstack1.stackSize = par1ItemStack.getMaxStackSize();
+						par1ItemStack.func_190918_g(par1ItemStack.getMaxStackSize() - itemstack1.func_190916_E());
+						itemstack1.func_190920_e(par1ItemStack.getMaxStackSize());
 						slot.onSlotChanged();
 						flag1 = true;
 					}
@@ -243,7 +248,7 @@ public class ContainerDyeingMachine extends Container
 			}
 		}
 
-		if (par1ItemStack.stackSize > 0)
+		if (par1ItemStack.func_190916_E() > 0)
 		{
 			if (par4)
 			{
@@ -259,15 +264,15 @@ public class ContainerDyeingMachine extends Container
 				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
-				if (itemstack1 == null && slot.isItemValid(par1ItemStack))
+				if (itemstack1.func_190926_b() && slot.isItemValid(par1ItemStack))
 				{
-					if (1 < par1ItemStack.stackSize)
+					if (1 < par1ItemStack.func_190916_E())
 					{
 						ItemStack copy = par1ItemStack.copy();
-						copy.stackSize = 1;
+						copy.func_190920_e(1);
 						slot.putStack(copy);
 
-						par1ItemStack.stackSize -= 1;
+						par1ItemStack.func_190918_g(1);
 						flag1 = true;
 						break;
 					}
@@ -275,7 +280,7 @@ public class ContainerDyeingMachine extends Container
 					{
 						slot.putStack(par1ItemStack.copy());
 						slot.onSlotChanged();
-						par1ItemStack.stackSize = 0;
+						par1ItemStack.func_190920_e(0);
 						flag1 = true;
 						break;
 					}

@@ -19,7 +19,6 @@ public class ModTileEntitys
 		registerTE(TileEntityChatDetector.class, "chatDetector");
 		registerTE(TileEntityBasicRedstoneInterface.class, "basicRedstoneInterface");
 		registerTE(TileEntityAdvancedRedstoneInterface.class, "advancedRedstoneInterface");
-		registerTE(TileEntityBasicRedstoneInterface.class, "redstoneInterface");
 		registerTE(TileEntityImbuingStation.class, "imbuingStation");
 		registerTE(TileEntitySpecialChest.class, "specialChest");
 		registerTE(TileEntityAnalogEmitter.class, "analogEmitter");

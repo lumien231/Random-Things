@@ -53,8 +53,9 @@ public class ItemBottleOfAir extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World worldObj, EntityPlayer player, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldObj, EntityPlayer player, EnumHand hand)
 	{
+		ItemStack itemStack = player.getHeldItem(hand);
 		if (player.isInsideOfMaterial(Material.WATER))
 		{
 			player.setActiveHand(hand);

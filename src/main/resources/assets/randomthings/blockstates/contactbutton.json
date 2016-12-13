@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "facing=down,powered=false":  { "model": "randomthings:contactbutton_vertical", "x": 180 },
+        "facing=up,powered=false":    { "model": "randomthings:contactbutton_vertical" },
+        "facing=north,powered=false": { "model": "randomthings:contactbutton" },
+        "facing=south,powered=false": { "model": "randomthings:contactbutton", "y": 180 },
+        "facing=west,powered=false":  { "model": "randomthings:contactbutton", "y": 270 },
+        "facing=east,powered=false":  { "model": "randomthings:contactbutton", "y": 90 },
+        
+        "facing=down,powered=true":  { "model": "randomthings:contactbuttonactive_vertical", "x": 180 },
+        "facing=up,powered=true":    { "model": "randomthings:contactbuttonactive_vertical" },
+        "facing=north,powered=true": { "model": "randomthings:contactbuttonactive" },
+        "facing=south,powered=true": { "model": "randomthings:contactbuttonactive", "y": 180 },
+        "facing=west,powered=true":  { "model": "randomthings:contactbuttonactive", "y": 270 },
+        "facing=east,powered=true":  { "model": "randomthings:contactbuttonactive", "y": 90 }
+    }
+}

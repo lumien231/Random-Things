@@ -43,7 +43,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 
 	protected static final AxisAlignedBB MAILBOX_SN_AABB = new AxisAlignedBB(0.3125F, 0F, 0.0625F, 1 - 0.3125F, 1.375F, 1 - 0.0625F);
 	protected static final AxisAlignedBB MAILBOX_WE_AABB = new AxisAlignedBB(0.0625F, 0F, 0.3125F, 1 - 0.0625F, 1.375F, 1 - 0.3125F);
-	
+
 	protected BlockEnderMailbox()
 	{
 		super("enderMailbox", Material.ROCK);
@@ -53,7 +53,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 		this.setSoundType(SoundType.STONE);
 		this.setTickRandomly(true);
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -107,54 +107,53 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
-			if (playerIn.isSneaking() && heldItem != null)
+			ItemStack heldItem = playerIn.getHeldItemMainhand();
+
+			if (playerIn.isSneaking() && heldItem.getItem() == ModItems.enderLetter)
 			{
-				if (heldItem.getItem() == ModItems.enderLetter)
+				NBTTagCompound compound;
+
+				if ((compound = heldItem.getTagCompound()) != null)
 				{
-					NBTTagCompound compound;
-
-					if ((compound = heldItem.getTagCompound()) != null)
+					if (compound.hasKey("receiver") && !compound.getBoolean("received"))
 					{
-						if (compound.hasKey("receiver") && !compound.getBoolean("received"))
+						GameProfile playerProfile = worldIn.getMinecraftServer().getPlayerProfileCache().getGameProfileForUsername(compound.getString("receiver"));
+
+						if (playerProfile != null && playerProfile.getId() != null)
 						{
-							GameProfile playerProfile = worldIn.getMinecraftServer().getPlayerProfileCache().getGameProfileForUsername(compound.getString("receiver"));
+							EnderMailboxInventory mailboxInventory = EnderLetterHandler.get(worldIn).getOrCreateInventoryForPlayer(playerProfile.getId());
 
-							if (playerProfile != null && playerProfile.getId() != null)
+							for (int slot = 0; slot < mailboxInventory.getSizeInventory(); slot++)
 							{
-								EnderMailboxInventory mailboxInventory = EnderLetterHandler.get(worldIn).getOrCreateInventoryForPlayer(playerProfile.getId());
-
-								for (int slot = 0; slot < mailboxInventory.getSizeInventory(); slot++)
+								if (mailboxInventory.getStackInSlot(slot).func_190926_b())
 								{
-									if (mailboxInventory.getStackInSlot(slot) == null)
-									{
-										ItemStack sendingLetter = heldItem.copy();
-										heldItem.stackSize = 0;
-										sendingLetter.getTagCompound().setBoolean("received", true);
-										sendingLetter.getTagCompound().setString("sender", playerIn.getGameProfile().getName());
+									ItemStack sendingLetter = heldItem.copy();
+									heldItem.func_190918_g(1);
+									sendingLetter.getTagCompound().setBoolean("received", true);
+									sendingLetter.getTagCompound().setString("sender", playerIn.getGameProfile().getName());
 
-										mailboxInventory.setInventorySlotContents(slot, sendingLetter);
+									mailboxInventory.setInventorySlotContents(slot, sendingLetter);
 
-										playerIn.worldObj.playSound(null,pos,SoundEvents.ENTITY_ENDERMEN_TELEPORT,SoundCategory.BLOCKS , 1, 1);
+									playerIn.worldObj.playSound(null, pos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 1, 1);
 
-										return true;
-									}
+									return true;
 								}
+							}
 
-								playerIn.addChatComponentMessage(new TextComponentTranslation("item.enderLetter.noSpace").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
-							}
-							else
-							{
-								playerIn.addChatComponentMessage(new TextComponentTranslation("item.enderLetter.noPlayer", compound.getString("receiver")).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
-							}
+							playerIn.addChatMessage(new TextComponentTranslation("item.enderLetter.noSpace").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+						}
+						else
+						{
+							playerIn.addChatMessage(new TextComponentTranslation("item.enderLetter.noPlayer", compound.getString("receiver")).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 						}
 					}
-
-					return true;
 				}
+
+				return true;
 			}
 
 			TileEntityEnderMailbox te = (TileEntityEnderMailbox) worldIn.getTileEntity(pos);
@@ -167,7 +166,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 				}
 				else
 				{
-					playerIn.addChatComponentMessage(new TextComponentTranslation("block.enderMailbox.owner").setStyle(new Style().setColor(TextFormatting.RED)));
+					playerIn.addChatMessage(new TextComponentTranslation("block.enderMailbox.owner").setStyle(new Style().setColor(TextFormatting.RED)));
 				}
 			}
 		}

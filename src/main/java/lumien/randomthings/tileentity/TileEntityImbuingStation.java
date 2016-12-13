@@ -15,7 +15,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	InventoryBasic inventory;
 	public int imbuingProgress;
 
-	ItemStack currentOutput;
+	ItemStack currentOutput = ItemStack.field_190927_a;
 
 	public final static int IMBUING_LENGTH = 200;
 
@@ -45,13 +45,14 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 		if (!worldObj.isRemote)
 		{
 			ItemStack validOutput = ImbuingRecipeHandler.getRecipeOutput(inventory);
-			if (validOutput != currentOutput && canHandleOutput(validOutput))
+			if (!ItemStack.areItemStacksEqual(validOutput, currentOutput) && canHandleOutput(validOutput))
 			{
 				this.imbuingProgress = 0;
 				currentOutput = validOutput;
 			}
 
-			if (this.currentOutput != null)
+			
+			if (!this.currentOutput.func_190926_b())
 			{
 				this.imbuingProgress++;
 				if (this.imbuingProgress >= IMBUING_LENGTH)
@@ -69,7 +70,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 
 	private boolean canHandleOutput(ItemStack validOutput)
 	{
-		if (validOutput == null || inventory.getStackInSlot(4) == null)
+		if (validOutput.func_190926_b() || inventory.getStackInSlot(4).func_190926_b())
 		{
 			return true;
 		}
@@ -84,7 +85,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 			}
 			else
 			{
-				if (currentInOutput.stackSize + requiredOutput.stackSize > currentInOutput.getMaxStackSize())
+				if (currentInOutput.func_190916_E() + requiredOutput.func_190916_E() > currentInOutput.getMaxStackSize())
 				{
 					return false;
 				}
@@ -96,13 +97,13 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	private void imbue()
 	{
 		// Set Output
-		if (this.inventory.getStackInSlot(4) == null)
+		if (this.inventory.getStackInSlot(4).func_190926_b())
 		{
 			this.inventory.setInventorySlotContents(4, currentOutput.copy());
 		}
 		else
 		{
-			this.inventory.decrStackSize(4, -currentOutput.stackSize);
+			this.inventory.getStackInSlot(4).func_190917_f(currentOutput.func_190916_E());
 		}
 
 		// Decrease Ingredients
@@ -208,5 +209,11 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	public String getName()
 	{
 		return "Imbuing Station";
+	}
+
+	@Override
+	public boolean func_191420_l()
+	{
+		return this.inventory.func_191420_l();
 	}
 }

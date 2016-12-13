@@ -1,6 +1,6 @@
 {
     "parent": "block/tall_grass",
     "textures": {
-        "cross": "randomthings:blocks/beanSprout0"
+        "cross": "randomthings:blocks/beansprout0"
     }
 }

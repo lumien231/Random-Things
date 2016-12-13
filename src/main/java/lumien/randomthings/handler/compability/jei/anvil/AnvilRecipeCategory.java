@@ -14,6 +14,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.util.Translator;
@@ -74,13 +75,7 @@ public class AnvilRecipeCategory implements IRecipeCategory
 	}
 
 	@Override
-	public void drawAnimations(Minecraft minecraft)
-	{
-
-	}
-
-	@Override
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper)
+	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper, IIngredients ingredients)
 	{
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 
@@ -90,13 +85,19 @@ public class AnvilRecipeCategory implements IRecipeCategory
 
 		if (recipeWrapper instanceof AnvilRecipeWrapper)
 		{
-			List inputs = recipeWrapper.getInputs();
+			List inputs = ingredients.getInputs(ItemStack.class);
 			List<ItemStack> inputStacks1 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(input1));
 			List<ItemStack> inputStacks2 = RandomThingsPlugin.stackHelper.toItemStackList(inputs.get(input2));
 
-			itemStacks.setFromRecipe(input1, inputStacks1);
-			itemStacks.setFromRecipe(input2, inputStacks2);
-			itemStacks.setFromRecipe(outputSlot, recipeWrapper.getOutputs());
+			itemStacks.set(input1, inputStacks1);
+			itemStacks.set(input2, inputStacks2);
+			itemStacks.set(outputSlot, ingredients.getOutputs(ItemStack.class).get(0));
 		}
+	}
+
+	@Override
+	public IDrawable getIcon()
+	{
+		return null;
 	}
 }

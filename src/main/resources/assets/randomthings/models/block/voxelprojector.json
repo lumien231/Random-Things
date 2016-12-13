@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "randomthings:blocks/voxelprojector/up",
+        "down": "randomthings:blocks/voxelprojector/down",
+        "up": "randomthings:blocks/voxelprojector/up",
+        "north": "randomthings:blocks/voxelprojector/side",
+        "east": "randomthings:blocks/voxelprojector/side",
+        "south": "randomthings:blocks/voxelprojector/side",
+        "west": "randomthings:blocks/voxelprojector/side"
+    }
+}

@@ -1,7 +1,7 @@
 {
     "parent": "block/orientable_vertical",
     "textures": {
-        "front": "randomthings:blocks/potionVaporizer/front",
-        "side": "randomthings:blocks/potionVaporizer/side"
+        "front": "randomthings:blocks/potionvaporizer/front",
+        "side": "randomthings:blocks/potionvaporizer/side"
     }
 }

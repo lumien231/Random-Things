@@ -1,10 +1,10 @@
 {
     "parent": "block/block",
 "textures": {
-    "particle" : "randomthings:blocks/enderMailboxTop",
+    "particle" : "randomthings:blocks/endermailboxtop",
     "wood": "blocks/planks_oak",
     "redstone_block": "blocks/redstone_block",
-    "iron_block": "randomthings:blocks/enderMailboxTop"
+    "iron_block": "randomthings:blocks/endermailboxtop"
 },
 "elements": [ 
 {

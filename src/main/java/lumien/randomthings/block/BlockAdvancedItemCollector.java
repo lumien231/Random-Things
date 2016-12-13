@@ -11,7 +11,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -25,7 +24,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 public class BlockAdvancedItemCollector extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	
+
 	protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 1.0F - 5 / 16.0F, 0.625F, 0.625F, 1.0F);
 	protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 0.0F, 0.625F, 0.625F, 5 / 16.0F);
 	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(1.0F - 5 / 16.0F, 0.375F, 0.375F, 1.0F, 0.625F, 0.625F);
@@ -99,10 +98,10 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 
 	protected static boolean func_181088_a(World p_181088_0_, BlockPos p_181088_1_, EnumFacing p_181088_2_)
 	{
-		return p_181088_2_ == EnumFacing.DOWN && isBlockInventory(p_181088_0_, p_181088_1_.down(),p_181088_2_) ? true : isBlockInventory(p_181088_0_,p_181088_1_.offset(p_181088_2_),p_181088_2_);
+		return p_181088_2_ == EnumFacing.DOWN && isBlockInventory(p_181088_0_, p_181088_1_.down(), p_181088_2_) ? true : isBlockInventory(p_181088_0_, p_181088_1_.offset(p_181088_2_), p_181088_2_);
 	}
 
-	private static boolean isBlockInventory(World worldObj, BlockPos pos,EnumFacing facing)
+	private static boolean isBlockInventory(World worldObj, BlockPos pos, EnumFacing facing)
 	{
 		TileEntity te = worldObj.getTileEntity(pos);
 
@@ -110,7 +109,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 		{
 			return false;
 		}
-		
+
 		return te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
 	}
 
@@ -128,7 +127,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 	 * Called when a neighboring block changes.
 	 */
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		if (this.checkForDrop(worldIn, pos, state) && !func_181088_a(worldIn, pos, state.getValue(FACING).getOpposite()))
 		{
@@ -170,12 +169,12 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 			case DOWN:
 				return DOWN_AABB;
 		}
-		
+
 		return UP_AABB;
 	}
-	
+
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{

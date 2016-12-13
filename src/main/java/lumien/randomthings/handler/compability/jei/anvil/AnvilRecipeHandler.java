@@ -18,7 +18,7 @@ public class AnvilRecipeHandler implements IRecipeHandler<AnvilRecipe>
 
 	@Nonnull
 	@Override
-	public String getRecipeCategoryUid()
+	public String getRecipeCategoryUid(AnvilRecipe recipe)
 	{
 		return RandomThingsPlugin.ANVIL_ID;
 	}

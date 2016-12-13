@@ -90,27 +90,27 @@ public class WorldGenCores implements IWorldGenerator
 					Biome biome = world.getBiome(target);
 
 					int natureMult = 30;
-					if (BiomeDictionary.isBiomeOfType(biome, Type.DENSE))
+					if (BiomeDictionary.hasType(biome, Type.DENSE))
 					{
 						natureMult -= 8;
 					}
-					if (BiomeDictionary.isBiomeOfType(biome, Type.SPARSE))
+					if (BiomeDictionary.hasType(biome, Type.SPARSE))
 					{
 						natureMult += 4;
 					}
-					if (BiomeDictionary.isBiomeOfType(biome, Type.WET))
+					if (BiomeDictionary.hasType(biome, Type.WET))
 					{
 						natureMult -= 4;
 					}
-					if (BiomeDictionary.isBiomeOfType(biome, Type.DRY))
+					if (BiomeDictionary.hasType(biome, Type.DRY))
 					{
 						natureMult += 2;
 					}
-					if (BiomeDictionary.isBiomeOfType(biome, Type.DEAD))
+					if (BiomeDictionary.hasType(biome, Type.DEAD))
 					{
 						natureMult += 10;
 					}
-					if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
+					if (BiomeDictionary.hasType(biome, Type.MAGICAL))
 					{
 						natureMult -= 8;
 					}

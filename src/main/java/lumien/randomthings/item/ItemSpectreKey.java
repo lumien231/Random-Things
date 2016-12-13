@@ -41,8 +41,9 @@ public class ItemSpectreKey extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer,EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick( World par2World, EntityPlayer par3EntityPlayer,EnumHand hand)
 	{
+		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
 		par3EntityPlayer.setActiveHand(hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, par1ItemStack);
 	}

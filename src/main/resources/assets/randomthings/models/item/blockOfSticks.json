@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/blockOfSticks",
+    "parent": "randomthings:block/blockofsticks",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

@@ -9,6 +9,7 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.NBTUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -176,7 +177,7 @@ public class SpectreCube implements IInventoryChangedListener
 	}
 
 	@Override
-	public void onInventoryChanged(InventoryBasic inventory)
+	public void onInventoryChanged(IInventory inventory)
 	{
 		ItemStack spawnPosStack = inventory.getStackInSlot(0);
 

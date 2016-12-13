@@ -45,7 +45,7 @@ public class BlockRainbowLamp extends BlockBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		if (!worldIn.isRemote)
 		{

@@ -126,7 +126,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 		{
 			return false;
 		}
-		
+
 		if (state != iblockstate)
 		{
 			return true;
@@ -136,29 +136,27 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.provider.getDimension() == ModDimensions.SPECTRE_ID)
 		{
-			ItemStack holding;
-			if ((holding = heldItem) != null)
-			{
-				if (holding.getItem() == ModItems.ingredients && holding.getItemDamage() == ItemIngredient.INGREDIENT.ECTO_PLASM.id)
-				{
-					if (!worldIn.isRemote)
-					{
-						SpectreCube cube = SpectreHandler.getInstance().getSpectreCubeFromPos(worldIn, pos.up());
+			ItemStack holding = playerIn.getHeldItemMainhand();
 
-						if (cube != null)
-						{
-							holding.stackSize -= cube.increaseHeight(holding.stackSize);
-						}
+			if (holding.getItem() == ModItems.ingredients && holding.getItemDamage() == ItemIngredient.INGREDIENT.ECTO_PLASM.id)
+			{
+				if (!worldIn.isRemote)
+				{
+					SpectreCube cube = SpectreHandler.getInstance().getSpectreCubeFromPos(worldIn, pos.up());
+
+					if (cube != null)
+					{
+						holding.func_190918_g(cube.increaseHeight(holding.func_190916_E()));
 					}
-					return true;
 				}
+				return true;
 			}
 		}
 
-		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, side, hitX, hitY, hitZ);
 	}
 }

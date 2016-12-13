@@ -83,7 +83,7 @@ public class ItemEntityFilter extends ItemBase
 			{
 				int entityID = compound.getInteger("entityID");
 
-				return entityID == EntityList.getEntityID(entity);
+				return entityID == EntityList.getID(entity.getClass());
 			}
 		}
 
@@ -102,7 +102,7 @@ public class ItemEntityFilter extends ItemBase
 			}
 			NBTTagCompound compound = stack.getTagCompound();
 
-			int vanillaEntityID = EntityList.getEntityID(target);
+			int vanillaEntityID = EntityList.getID(target.getClass());
 
 			if (vanillaEntityID > 0)
 			{
@@ -155,7 +155,7 @@ public class ItemEntityFilter extends ItemBase
 			{
 				int entityID = compound.getInteger("entityID");
 
-				entityName = EntityList.getEntityStringFromClass((EntityList.getClassFromID(entityID)));
+				entityName = EntityList.func_191302_a(EntityList.func_191306_a((EntityList.getClassFromID(entityID))));
 			}
 
 			if (entityName != null)

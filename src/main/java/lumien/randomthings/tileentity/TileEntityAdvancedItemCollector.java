@@ -119,7 +119,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 							if (!ei.isDead && (filterRepres == null || filterRepres.matchesItemStack(ei.getEntityItem())))
 							{
 								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, ei.getEntityItem().copy(), false);
-								if (left == null || left.stackSize == 0)
+								if (left == null || left.func_190916_E() == 0)
 								{
 									ei.setDead();
 								}
@@ -204,7 +204,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 
 
 	@Override
-	public void onInventoryChanged(InventoryBasic p_76316_1_)
+	public void onInventoryChanged(IInventory p_76316_1_)
 	{
 		ItemStack filterStack = p_76316_1_.getStackInSlot(0);
 

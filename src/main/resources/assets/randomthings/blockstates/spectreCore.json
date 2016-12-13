@@ -1,8 +1,8 @@
 {
     "variants": {
-        "orientation=nw": { "model": "randomthings:spectreCore/spectreCore_nw" },
-        "orientation=ne": { "model": "randomthings:spectreCore/spectreCore_ne" },
-        "orientation=es": { "model": "randomthings:spectreCore/spectreCore_es" },
-        "orientation=sw": { "model": "randomthings:spectreCore/spectreCore_sw" }
+        "orientation=nw": { "model": "randomthings:spectrecore/spectrecore_nw" },
+        "orientation=ne": { "model": "randomthings:spectrecore/spectrecore_ne" },
+        "orientation=es": { "model": "randomthings:spectrecore/spectrecore_es" },
+        "orientation=sw": { "model": "randomthings:spectrecore/spectrecore_sw" }
     }
 }

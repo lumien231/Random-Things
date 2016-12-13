@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up":    { "model": "randomthings:advanceditemcollector" },
+        "facing=down":  { "model": "randomthings:advanceditemcollector", "x": 180 },
+        "facing=east":  { "model": "randomthings:advanceditemcollector", "x": 90, "y": 90 },
+        "facing=west":  { "model": "randomthings:advanceditemcollector", "x": 90, "y": 270 },
+        "facing=south": { "model": "randomthings:advanceditemcollector", "x": 90, "y": 180 },
+        "facing=north": { "model": "randomthings:advanceditemcollector", "x": 90 }
+    }
+}

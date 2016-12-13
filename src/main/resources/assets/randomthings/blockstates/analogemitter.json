@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down":  { "model": "randomthings:analogemitter_vertical", "x": 180 },
+        "facing=up":    { "model": "randomthings:analogemitter_vertical" },
+        "facing=north": { "model": "randomthings:analogemitter" },
+        "facing=south": { "model": "randomthings:analogemitter", "y": 180 },
+        "facing=west":  { "model": "randomthings:analogemitter", "y": 270 },
+        "facing=east":  { "model": "randomthings:analogemitter", "y": 90 }
+    }
+}

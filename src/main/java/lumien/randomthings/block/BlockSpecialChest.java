@@ -23,6 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -56,7 +57,7 @@ public class BlockSpecialChest extends BlockContainerBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -131,7 +132,7 @@ public class BlockSpecialChest extends BlockContainerBase
 		{
 			if (stack.hasDisplayName())
 			{
-				((TileEntitySpecialChest) tileentity).setCustomName(stack.getDisplayName());
+				((TileEntitySpecialChest) tileentity).func_190575_a(stack.getDisplayName());
 			}
 
 			((TileEntitySpecialChest) tileentity).setChestType(stack.getItemDamage());
@@ -153,7 +154,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{

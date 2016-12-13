@@ -2,7 +2,6 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -90,11 +89,11 @@ public class BlockContactButton extends BlockBase
 
 	private void notifyNeighbors(World worldIn, BlockPos pos, EnumFacing facing)
 	{
-		worldIn.notifyNeighborsOfStateChange(pos, this);
+		worldIn.notifyNeighborsOfStateChange(pos, this, false);
 
 		for (EnumFacing f : EnumFacing.values())
 		{
-			worldIn.notifyNeighborsOfStateChange(pos.offset(f), this);
+			worldIn.notifyNeighborsOfStateChange(pos.offset(f), this, false);
 		}
 	}
 
@@ -172,13 +171,13 @@ public class BlockContactButton extends BlockBase
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(FACING, BlockPistonBase.getFacingFromEntity(pos, placer));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.func_190914_a(pos, placer));
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		worldIn.setBlockState(pos, state.withProperty(FACING, BlockPistonBase.getFacingFromEntity(pos, placer)), 2);
+		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.func_190914_a(pos, placer)), 2);
 	}
 
 	@Override

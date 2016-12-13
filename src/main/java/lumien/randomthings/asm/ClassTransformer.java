@@ -179,23 +179,21 @@ public class ClassTransformer implements IClassTransformer
 				{
 					JumpInsnNode jin = (JumpInsnNode) ain;
 
-					if (jin.getOpcode() == Opcodes.IFNULL)
+					if (jin.getOpcode() == Opcodes.IFNE)
 					{
 						LabelNode l0 = jin.label;
 
 						InsnList toInsert = new InsnList();
 
 						toInsert.add(new VarInsnNode(ALOAD, 0));
-						toInsert.add(new VarInsnNode(ILOAD, 5));
+						toInsert.add(new VarInsnNode(ILOAD, 3));
 						toInsert.add(new VarInsnNode(ALOAD, 4));
-						toInsert.add(new VarInsnNode(ILOAD, 5));
-						toInsert.add(new InsnNode(AALOAD));
-						toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "shouldPlayerDrop", "(Lnet/minecraft/entity/player/InventoryPlayer;ILnet/minecraft/item/ItemStack;)Z"));
+						toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "shouldPlayerDrop", "(Lnet/minecraft/entity/player/InventoryPlayer;ILnet/minecraft/item/ItemStack;)Z", false));
 						toInsert.add(new JumpInsnNode(IFEQ, l0));
 
 						dropAllItems.instructions.insert(jin, toInsert);
 
-						i += 7;
+						i += 5;
 
 						logger.log(Level.DEBUG, " - Patched dropAllItems (2/2)");
 					}
@@ -308,7 +306,7 @@ public class ClassTransformer implements IClassTransformer
 				{
 					MethodInsnNode min = (MethodInsnNode) ain;
 
-					if (min.name.equals("func_188364_a"))
+					if (min.name.equals(MCPNames.method("func_188364_a")))
 					{
 						logger.log(Level.DEBUG, "- Set currentlyRendering");
 						InsnList toInsert = new InsnList();

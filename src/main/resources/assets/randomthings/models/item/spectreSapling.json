@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "randomthings:blocks/spectreSapling"
+        "layer0": "randomthings:blocks/spectresapling"
     }
 }

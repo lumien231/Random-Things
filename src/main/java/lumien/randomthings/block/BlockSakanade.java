@@ -89,7 +89,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return null;
 	}
@@ -105,7 +105,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
@@ -120,9 +120,9 @@ public class BlockSakanade extends BlockBase implements IShearable
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
-		super.neighborChanged(state, worldIn, pos, neighborBlock);
+		super.neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 		this.checkAndDropBlock(worldIn, pos, state);
 	}
 

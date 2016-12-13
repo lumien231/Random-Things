@@ -1,0 +1,59 @@
+{
+    "parent": "block/block",
+"textures": {
+    "particle" : "randomthings:blocks/endermailboxtop",
+    "wood": "blocks/planks_oak",
+    "redstone_block": "blocks/redstone_block",
+    "iron_block": "randomthings:blocks/endermailboxtop"
+},
+"elements": [ 
+{
+    "from": [ 6, 0, 6 ],
+    "to": [ 10, 16, 10 ],
+    "faces": {
+        "down":  { "uv": [ 9, 9, 7, 7 ], "rotation": 180, "texture": "#wood" },
+        "up":    { "uv": [ 7, 7, 9, 9 ], "rotation": 180, "texture": "#wood" },
+        "north": { "uv": [ 7, 8, 9, 16 ], "texture": "#wood" },
+        "south": { "uv": [ 7, 8, 9, 16 ], "texture": "#wood" },
+        "west":  { "uv": [ 7, 8, 9, 16 ], "texture": "#wood" },
+        "east":  { "uv": [ 7, 8, 9, 16 ], "texture": "#wood" }
+    }
+},
+{
+    "from": [ 4, 18, 7 ],
+    "to": [ 5, 19, 9 ],
+    "faces": {
+        "down":  { "uv": [ 6, 3.5, 6.5, 4.5 ], "texture": "#redstone_block" },
+        "up":    { "uv": [ 9.5, 3.5, 10, 4.5 ], "rotation": 180, "texture": "#redstone_block" },
+        "north": { "uv": [ 6.5, 10, 6, 9.5 ], "texture": "#redstone_block" },
+        "south": { "uv": [ 9.5, 9.5, 10, 10 ], "rotation": 180, "texture": "#redstone_block" },
+        "west":  { "uv": [ 6, 3.5, 6.5, 4.5 ], "texture": "#redstone_block" },
+        "east":  { "uv": [ 9.5, 3.5, 10, 4.5 ], "rotation": 270, "texture": "#redstone_block" }
+    }
+},
+{
+    "from": [ 5, 15, 1 ],
+    "to": [ 11, 22, 15 ],
+    "faces": {
+        "down":  { "uv": [ 9.5, 11.5, 6.5, 4.5 ], "rotation": 180, "texture": "#iron_block" },
+        "up":    { "uv": [ 6.5, 4.5, 9.5, 11.5 ], "rotation": 180, "texture": "#iron_block" },
+        "north": { "uv": [ 6.5, 5, 9.5, 8.5 ], "texture": "#iron_block" },
+        "south": { "uv": [ 6.5, 5, 9.5, 8.5 ], "texture": "#iron_block" },
+        "west":  { "uv": [ 4.5, 5, 11.5, 8.5 ], "texture": "#iron_block" },
+        "east":  { "uv": [ 4.5, 5, 11.5, 8.5 ], "texture": "#iron_block" }
+    }
+},
+{
+    "from": [ 4, 19, 3 ],
+    "to": [ 5, 20, 9 ],
+    "faces": {
+        "down":  { "uv": [ 6, 3.5, 6.5, 6.5 ], "texture": "#redstone_block" },
+        "up":    { "uv": [ 9.5, 3.5, 10, 6.5 ], "rotation": 180, "texture": "#redstone_block" },
+        "north": { "uv": [ 6.5, 10.5, 6, 10 ], "texture": "#redstone_block" },
+        "south": { "uv": [ 9.5, 10, 10, 10.5 ], "rotation": 180, "texture": "#redstone_block" },
+        "west":  { "uv": [ 5.5, 3.5, 6, 6.5 ], "texture": "#redstone_block" },
+        "east":  { "uv": [ 10, 3.5, 10.5, 6.5 ], "rotation": 270, "texture": "#redstone_block" }
+    }
+}
+]
+}

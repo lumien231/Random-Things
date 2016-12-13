@@ -18,7 +18,7 @@ public class ImbuingRecipeHandler implements IRecipeHandler<ImbuingRecipe>
 
 	@Nonnull
 	@Override
-	public String getRecipeCategoryUid()
+	public String getRecipeCategoryUid(ImbuingRecipe recipe)
 	{
 		return RandomThingsPlugin.IMBUE_ID;
 	}

@@ -11,12 +11,15 @@ import lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
@@ -67,7 +70,7 @@ public class ModRecipes
 		final ItemStack paper = new ItemStack(Items.PAPER);
 		final ItemStack stick = new ItemStack(Items.STICK);
 		final ItemStack vine = new ItemStack(Blocks.VINE);
-		final ItemStack waterBottle = new ItemStack(Items.POTIONITEM);
+		final ItemStack waterBottle = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER);
 		final ItemStack mossyCobblestone = new ItemStack(Blocks.MOSSY_COBBLESTONE);
 		final ItemStack netherBrick = new ItemStack(Blocks.NETHER_BRICK);
 		final ItemStack netherRack = new ItemStack(Blocks.NETHERRACK);
@@ -223,7 +226,7 @@ public class ModRecipes
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (is != null)
+					if (!is.func_190926_b())
 					{
 						if (is.getItem() == ModItems.spectreAnchor)
 						{
@@ -260,11 +263,9 @@ public class ModRecipes
 			}
 
 			@Override
-			public ItemStack[] getRemainingItems(InventoryCrafting inv)
+			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
 			{
-				ItemStack[] aitemstack = new ItemStack[inv.getSizeInventory()];
-
-				return aitemstack;
+				return NonNullList.func_191197_a(inv.getSizeInventory(), ItemStack.field_190927_a);
 			}
 
 			@Override
@@ -289,7 +290,7 @@ public class ModRecipes
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (is != null)
+					if (!is.func_190926_b())
 					{
 						if (is.getItem() == ModItems.spectreAnchor)
 						{
@@ -326,7 +327,7 @@ public class ModRecipes
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (is != null)
+					if (!is.func_190926_b())
 					{
 						if (is.getItem() == ModItems.goldenCompass)
 						{
@@ -363,19 +364,19 @@ public class ModRecipes
 			}
 
 			@Override
-			public ItemStack[] getRemainingItems(InventoryCrafting inv)
+			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
 			{
-				ItemStack[] aitemstack = new ItemStack[inv.getSizeInventory()];
+				NonNullList aitemstack = NonNullList.func_191197_a(inv.getSizeInventory(), ItemStack.field_190927_a);
 
 				for (int i = 0; i < inv.getSizeInventory(); i++)
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (is != null)
+					if (!is.func_190926_b())
 					{
 						if (is.getItem() == ModItems.positionFilter)
 						{
-							aitemstack[i] = is.copy();
+							aitemstack.set(i, is.copy());
 						}
 					}
 				}
@@ -405,7 +406,7 @@ public class ModRecipes
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (is != null)
+					if (!is.func_190926_b())
 					{
 						if (is.getItem() == ModItems.goldenCompass)
 						{

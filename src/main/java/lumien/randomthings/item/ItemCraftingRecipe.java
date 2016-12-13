@@ -42,14 +42,15 @@ public class ItemCraftingRecipe extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
+		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
 		{
 			playerIn.openGui(RandomThings.instance, GuiIds.CRAFTING_RECIPE, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
 		}
 
-		return new ActionResult(EnumActionResult.SUCCESS,itemStackIn);
+		return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
 	}
 
 	public static void save(ItemStack toSave, InventoryCrafting craftMatrix, IInventory craftResult)

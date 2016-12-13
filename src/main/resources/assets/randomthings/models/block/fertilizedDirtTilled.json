@@ -14,8 +14,8 @@
     ],
     
     "textures": {
-        "particle": "randomthings:blocks/fertilizedDirt",
-        "dirt": "randomthings:blocks/fertilizedDirt",
-        "top": "randomthings:blocks/fertilizedDirt"
+        "particle": "randomthings:blocks/fertilizeddirt",
+        "dirt": "randomthings:blocks/fertilizeddirt",
+        "top": "randomthings:blocks/fertilizeddirt"
     }
 }

@@ -76,7 +76,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			{
 				powered = newPowered;
 				this.syncTE();
-				this.worldObj.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector);
+				this.worldObj.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector, false);
 			}
 		}
 	}

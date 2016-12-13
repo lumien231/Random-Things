@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/lapisLamp",
+    "parent": "randomthings:block/lapislamp",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/biomeStone/parent",
+    "parent": "randomthings:block/biomestone/parent",
     "textures": {
         "all": "blocks/stonebrick_cracked"
     }

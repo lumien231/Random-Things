@@ -2,13 +2,18 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -16,10 +21,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,20 +52,37 @@ public class BlockPitcherPlant extends BlockBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		ItemStack equipped = heldItem;
+		ItemStack equipped = playerIn.getHeldItemMainhand();
 
-		if (equipped != null && equipped.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP))
+		if (equipped.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
 		{
-			IFluidHandler fluidHandler = equipped.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
+			IFluidHandler fluidHandler = equipped.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 
-			int filled = fluidHandler.fill(new FluidStack(FluidRegistry.WATER, 1000), true);
+			FluidTank waterTank = new FluidTank(new FluidStack(FluidRegistry.WATER, 1000), 1000);
 
-			if (filled != 0)
+			FluidActionResult result = FluidUtil.tryFillContainer(equipped, waterTank, 1000, playerIn, true);
+
+			if (result.success)
 			{
+				playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, result.result);
 				return true;
 			}
+		}
+		else if (equipped.getItem() == Items.GLASS_BOTTLE)
+		{
+			if (!playerIn.capabilities.isCreativeMode)
+			{
+				equipped.func_190918_g(1);
+			}
+			
+			if (!playerIn.inventory.addItemStackToInventory(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER)))
+			{
+				equipped.func_190917_f(1);
+			}
+
+			return true;
 		}
 
 		return false;
@@ -84,9 +110,9 @@ public class BlockPitcherPlant extends BlockBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
-		super.neighborChanged(state, worldIn, pos, neighborBlock);
+		super.neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 		this.checkAndDropBlock(worldIn, pos, state);
 	}
 
@@ -102,7 +128,7 @@ public class BlockPitcherPlant extends BlockBase
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
 		return NULL_AABB;
 	}

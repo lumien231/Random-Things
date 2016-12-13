@@ -117,7 +117,7 @@ public class GuiEntityDetector extends GuiContainer
 		fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2 - 3, 76, 4210752);
 
 		ItemStack filter;
-		if ((filter = this.entityDetector.getInventory().getStackInSlot(0)) != null)
+		if (!(filter = this.entityDetector.getInventory().getStackInSlot(0)).func_190926_b())
 		{
 			Class clazz = ItemEntityFilter.getEntityClass(filter);
 

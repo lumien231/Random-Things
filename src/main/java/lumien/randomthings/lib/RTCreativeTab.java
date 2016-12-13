@@ -3,6 +3,7 @@ package lumien.randomthings.lib;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -15,9 +16,9 @@ public class RTCreativeTab extends CreativeTabs
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getTabIconItem()
+	public ItemStack getTabIconItem()
 	{
-		return ModItems.magicHood;
+		return new ItemStack(ModItems.magicHood);
 	}
 
 }

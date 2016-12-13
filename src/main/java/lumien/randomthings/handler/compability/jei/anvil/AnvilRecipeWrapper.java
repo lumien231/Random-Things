@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 
 public class AnvilRecipeWrapper extends BlankRecipeWrapper
@@ -33,14 +34,9 @@ public class AnvilRecipeWrapper extends BlankRecipeWrapper
 	}
 
 	@Override
-	public List getInputs()
+	public void getIngredients(IIngredients ingredients)
 	{
-		return inputs;
-	}
-
-	@Override
-	public List<ItemStack> getOutputs()
-	{
-		return Collections.singletonList(result);
+		ingredients.setInputs(ItemStack.class, inputs);
+		ingredients.setOutputs(ItemStack.class, Collections.singletonList(result));
 	}
 }

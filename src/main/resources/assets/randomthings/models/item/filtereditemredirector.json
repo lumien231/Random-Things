@@ -1,0 +1,19 @@
+{
+    "parent": "randomthings:block/itemredirectorbase",
+    "textures": {
+            "particle": "minecraft:blocks/obsidian",
+            "down": "minecraft:blocks/obsidian",
+            "up": "randomthings:blocks/filtereditemredirector/up",
+            "north": "randomthings:blocks/itemredirectorinput",
+            "south" : "randomthings:blocks/itemredirectoroutput",
+            "east" : "randomthings:blocks/filtereditemredirector/left",
+            "west" : "randomthings:blocks/filtereditemredirector/right"
+        },
+    "display": {
+        "thirdperson": {
+            "rotation": [ 10, -45, 170 ],
+            "translation": [ 0, 1.5, -2.75 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    }
+}

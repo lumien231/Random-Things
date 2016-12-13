@@ -4,7 +4,7 @@
     "particle" : "blocks/iron_block",
     "texture": "blocks/iron_block",
     "glass": "blocks/glass",
-    "top" : "randomthings:blocks/biomeRadarTop"
+    "top" : "randomthings:blocks/biomeradartop"
 },
 "elements": [ 
 {

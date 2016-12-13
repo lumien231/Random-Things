@@ -11,6 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -119,12 +120,12 @@ public class EnderLetterHandler extends WorldSavedData
 
 	public static class EnderMailboxInventory implements IInventory
 	{
-		ItemStack[] enderLetters;
+		NonNullList<ItemStack> enderLetters;
 		EnderLetterHandler handler;
 
 		public EnderMailboxInventory(EnderLetterHandler handler)
 		{
-			enderLetters = new ItemStack[9];
+			enderLetters = NonNullList.func_191197_a(9, ItemStack.field_190927_a);
 			this.handler = handler;
 		}
 
@@ -165,30 +166,30 @@ public class EnderLetterHandler extends WorldSavedData
 		@Override
 		public ItemStack getStackInSlot(int index)
 		{
-			return enderLetters[index];
+			return enderLetters.get(index);
 		}
 
 		@Override
 		public ItemStack decrStackSize(int index, int count)
 		{
-			if (this.enderLetters[index] != null)
+			if (!this.enderLetters.get(index).func_190926_b())
 			{
 				ItemStack itemstack;
 
-				if (this.enderLetters[index].stackSize <= count)
+				if (this.enderLetters.get(index).func_190916_E() <= count)
 				{
-					itemstack = this.enderLetters[index];
-					this.enderLetters[index] = null;
+					itemstack = this.enderLetters.get(index);
+					this.enderLetters.set(index, ItemStack.field_190927_a);
 					this.markDirty();
 					return itemstack;
 				}
 				else
 				{
-					itemstack = this.enderLetters[index].splitStack(count);
+					itemstack = this.enderLetters.get(index).splitStack(count);
 
-					if (this.enderLetters[index].stackSize == 0)
+					if (this.enderLetters.get(index).func_190916_E() == 0)
 					{
-						this.enderLetters[index] = null;
+						this.enderLetters.set(index, ItemStack.field_190927_a);
 					}
 
 					this.markDirty();
@@ -204,10 +205,10 @@ public class EnderLetterHandler extends WorldSavedData
 		@Override
 		public ItemStack removeStackFromSlot(int index)
 		{
-			if (this.enderLetters[index] != null)
+			if (!this.enderLetters.get(index).func_190926_b())
 			{
-				ItemStack itemstack = this.enderLetters[index];
-				this.enderLetters[index] = null;
+				ItemStack itemstack = this.enderLetters.get(index);
+				this.enderLetters.set(index, ItemStack.field_190927_a);
 				return itemstack;
 			}
 			else
@@ -219,11 +220,11 @@ public class EnderLetterHandler extends WorldSavedData
 		@Override
 		public void setInventorySlotContents(int index, ItemStack stack)
 		{
-			this.enderLetters[index] = stack;
+			this.enderLetters.set(index, stack);
 
-			if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+			if (!stack.func_190926_b() && stack.func_190916_E() > this.getInventoryStackLimit())
 			{
-				stack.stackSize = this.getInventoryStackLimit();
+				stack.func_190920_e(this.getInventoryStackLimit());
 			}
 
 			this.markDirty();
@@ -286,10 +287,24 @@ public class EnderLetterHandler extends WorldSavedData
 		@Override
 		public void clear()
 		{
-			for (int i = 0; i < this.enderLetters.length; ++i)
+			for (int i = 0; i < this.enderLetters.size(); ++i)
 			{
-				this.enderLetters[i] = null;
+				this.enderLetters.set(i, ItemStack.field_190927_a);
 			}
+		}
+
+		@Override
+		public boolean func_191420_l()
+		{
+			for (ItemStack itemstack : this.enderLetters)
+	        {
+	            if (!itemstack.func_190926_b())
+	            {
+	                return false;
+	            }
+	        }
+
+	        return true;
 		}
 	}
 }

@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/itemProjector",
+    "parent": "randomthings:block/itemprojector",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],
