@@ -11,4 +11,7 @@ public class Features
 	
 	@ConfigOption(category = "features",name = "ArtificialEndPortal")
 	public static boolean ARTIFICIAL_END_PORTAL = true;
+	
+	@ConfigOption(category = "features",name = "EnderAnchorChunkloading", comment = "Should Ender Anchors keep the Chunk they are in loaded")
+	public static boolean ENDER_ANCHOR_CHUNKLOADING = true;
 }

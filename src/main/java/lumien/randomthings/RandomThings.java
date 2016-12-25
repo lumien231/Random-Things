@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
+import lumien.randomthings.config.Features;
 import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.container.SyncHandler;
 import lumien.randomthings.enchantment.ModEnchantments;
@@ -112,8 +113,6 @@ public class RandomThings implements LoadingCallback
 	{
 		proxy.registerRenderers();
 		SyncHandler.postInit(event);
-		
-		
 	}
 
 	@EventHandler
@@ -135,12 +134,16 @@ public class RandomThings implements LoadingCallback
 		{
 			NBTTagCompound compound = t.getModData();
 			TileEntity te = world.getTileEntity(new BlockPos(compound.getInteger("posX"), compound.getInteger("posY"), compound.getInteger("posZ")));
-			if (te != null && te instanceof TileEntityEnderAnchor)
+			if (te != null && te instanceof TileEntityEnderAnchor && Features.ENDER_ANCHOR_CHUNKLOADING)
 			{
 				TileEntityEnderAnchor anchor = (TileEntityEnderAnchor) te;
 				anchor.setTicket(t);
 
 				ForgeChunkManager.forceChunk(t, world.getChunkFromBlockCoords(anchor.getPos()).getChunkCoordIntPair());
+			}
+			else
+			{
+				ForgeChunkManager.releaseTicket(t);
 			}
 		}
 	}

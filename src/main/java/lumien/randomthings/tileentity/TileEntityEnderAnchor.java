@@ -1,6 +1,7 @@
 package lumien.randomthings.tileentity;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.config.Features;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.ForgeChunkManager;
@@ -28,19 +29,22 @@ public class TileEntityEnderAnchor extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		if (firstTick)
+		if (!this.worldObj.isRemote)
 		{
-			firstTick = false;
-
-			if (chunkTicket == null)
+			if (firstTick)
 			{
-				chunkTicket = ForgeChunkManager.requestTicket(RandomThings.instance, this.worldObj, Type.NORMAL);
-				if (chunkTicket != null)
+				firstTick = false;
+
+				if (chunkTicket == null && Features.ENDER_ANCHOR_CHUNKLOADING)
 				{
-					ForgeChunkManager.forceChunk(chunkTicket, this.worldObj.getChunkFromBlockCoords(this.pos).getChunkCoordIntPair());
-					chunkTicket.getModData().setInteger("posX", this.pos.getX());
-					chunkTicket.getModData().setInteger("posY", this.pos.getY());
-					chunkTicket.getModData().setInteger("posZ", this.pos.getZ());
+					chunkTicket = ForgeChunkManager.requestTicket(RandomThings.instance, this.worldObj, Type.NORMAL);
+					if (chunkTicket != null)
+					{
+						ForgeChunkManager.forceChunk(chunkTicket, this.worldObj.getChunkFromBlockCoords(this.pos).getChunkCoordIntPair());
+						chunkTicket.getModData().setInteger("posX", this.pos.getX());
+						chunkTicket.getModData().setInteger("posY", this.pos.getY());
+						chunkTicket.getModData().setInteger("posZ", this.pos.getZ());
+					}
 				}
 			}
 		}

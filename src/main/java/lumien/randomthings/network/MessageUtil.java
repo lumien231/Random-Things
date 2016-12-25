@@ -1,6 +1,7 @@
 package lumien.randomthings.network;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.network.Packet;
 import net.minecraft.server.management.PlayerChunkMap;
 import net.minecraft.server.management.PlayerChunkMapEntry;
 import net.minecraft.util.math.BlockPos;
@@ -41,6 +42,29 @@ public class MessageUtil
 				if (playerInstance != null)
 				{
 					playerInstance.sendPacket(PacketHandler.INSTANCE.getPacketFrom(message));
+				}
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void sendToAllWatchingPos(World worldObj, BlockPos pos, Packet packet)
+	{
+		if (worldObj.isBlockLoaded(pos))
+		{
+			try
+			{
+				Chunk c = worldObj.getChunkFromBlockCoords(pos);
+
+				PlayerChunkMap playerManager = ((WorldServer) worldObj).getPlayerChunkMap();
+
+				PlayerChunkMapEntry playerInstance = playerManager.getEntry(c.xPosition, c.zPosition);
+				if (playerInstance != null)
+				{
+					playerInstance.sendPacket(packet);
 				}
 			}
 			catch (Exception e)
