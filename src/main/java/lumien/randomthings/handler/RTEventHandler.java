@@ -34,6 +34,7 @@ import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
+import lumien.randomthings.util.WorldUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import lumien.randomthings.worldgen.WorldGenSakanade;
 import net.minecraft.block.Block;
@@ -199,13 +200,12 @@ public class RTEventHandler
 	private void addSingleItemWithChance(String name, LootTable table, Item item, float chance)
 	{
 		table.addPool(new LootPool(new LootEntry[] { new LootEntryItem(item, 1, 0, new LootFunction[] {}, new LootCondition[] {}, "randomthings:" + name) }, new LootCondition[] { new RandomChance(chance) }, new RandomValueRange(1, 1), new RandomValueRange(0, 0), "randomthings:" + name));
-
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void playerClone(PlayerEvent.Clone event)
 	{
-		if (event.isWasDeath() && !event.getEntityPlayer().worldObj.getGameRules().getBoolean("keepInventory"))
+		if (event.isWasDeath() && !event.isCanceled() && event.getOriginal() != null && !(event.getEntityPlayer() instanceof FakePlayer) && !event.getEntityPlayer().worldObj.getGameRules().getBoolean("keepInventory"))
 		{
 			EntityPlayer oldPlayer = event.getOriginal();
 			EntityPlayer newPlayer = event.getEntityPlayer();
@@ -218,9 +218,26 @@ public class RTEventHandler
 				{
 					ItemStack newIs = newPlayer.inventory.getStackInSlot(i);
 
-					if (newIs == ItemStack.field_190927_a)
+					if (newIs.func_190926_b())
 					{
 						newPlayer.inventory.setInventorySlotContents(i, is.copy());
+					}
+					else
+					{
+						// Another mod put an ItemStack into the Slot
+						ItemStack existing = newIs;
+
+						int emptyStack = newPlayer.inventory.getFirstEmptyStack();
+						if (emptyStack != -1)
+						{
+							newPlayer.inventory.setInventorySlotContents(emptyStack, existing);
+							newPlayer.inventory.setInventorySlotContents(i, is.copy());
+						}
+						else
+						{
+							RandomThings.instance.logger.log(Level.INFO, "Couldn't keep Anchored Item in the Inventory");
+							WorldUtil.spawnItemStack(oldPlayer.worldObj, oldPlayer.posX, oldPlayer.posY, oldPlayer.posZ, is);
+						}
 					}
 				}
 			}
