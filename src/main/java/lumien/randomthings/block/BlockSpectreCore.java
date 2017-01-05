@@ -15,6 +15,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -140,7 +141,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	{
 		if (worldIn.provider.getDimension() == ModDimensions.SPECTRE_ID)
 		{
-			ItemStack holding = playerIn.getHeldItemMainhand();
+			ItemStack holding = playerIn.getHeldItem(hand);
 
 			if (holding.getItem() == ModItems.ingredients && holding.getItemDamage() == ItemIngredient.INGREDIENT.ECTO_PLASM.id)
 			{
@@ -152,6 +153,14 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 					{
 						holding.func_190918_g(cube.increaseHeight(holding.func_190916_E()));
 					}
+				}
+				return true;
+			}
+			else if (holding.func_190926_b())
+			{
+				if (!worldIn.isRemote)
+				{
+					SpectreHandler.getInstance().teleportPlayerBack((EntityPlayerMP) playerIn);
 				}
 				return true;
 			}
