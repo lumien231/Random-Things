@@ -40,6 +40,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -96,6 +97,13 @@ public class RandomThings implements LoadingCallback
 		PacketHandler.init();
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this);
+		
+		
+		// IMC
+		String enderIOMagneticMessage = "<enchantment name=\"enchantment.randomthings.magnetic\" costPerLevel=\"20\" >" +
+				"    <itemStack modID=\"minecraft\" itemName=\"iron_block\" itemMeta=\"0\" />" +
+				"</enchantment>";
+		FMLInterModComms.sendMessage("enderio", "recipe:enchanter", enderIOMagneticMessage);
 	}
 
 	@EventHandler
