@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.asm.MCPNames;
+import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.ItemRedstoneTool;
@@ -19,6 +20,7 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -67,6 +69,12 @@ public class AsmHandler
 		{
 			getFields();
 		}
+	}
+	
+	// Called when a tree tries to set the block below it to dirt, returning true prevents that from happening
+	public static boolean protectGround(Block b)
+	{
+		return b == ModBlocks.fertilizedDirt || b == ModBlocks.fertilizedDirtTilled;
 	}
 
 	static boolean catchingDrops;

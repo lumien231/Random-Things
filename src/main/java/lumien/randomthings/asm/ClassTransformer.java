@@ -97,8 +97,69 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchPlayerInteractionManager(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.world.gen.feature.WorldGenAbstractTree"))
+		{
+			return patchWorldGenTrees(basicClass);
+		}
 
 		return basicClass;
+	}
+
+	private byte[] patchWorldGenTrees(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found WorldGenAbstractTree Class: " + classNode.name);
+
+		MethodNode setDirtAt = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_175921_a")))
+			{
+				setDirtAt = mn;
+				break;
+			}
+		}
+
+		if (setDirtAt != null)
+		{
+			logger.log(Level.DEBUG, " - Patching setDirtAt");
+
+			for (int i = 0; i < setDirtAt.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = setDirtAt.instructions.get(i);
+
+				if (ain instanceof JumpInsnNode)
+				{
+					JumpInsnNode jin = (JumpInsnNode) ain;
+					if (jin.getOpcode() == Opcodes.IF_ACMPEQ)
+					{
+						LabelNode l = jin.label;
+
+						InsnList toInsert = new InsnList();
+
+						toInsert.add(new VarInsnNode(ALOAD, 1));
+						toInsert.add(new VarInsnNode(ALOAD, 2));
+						toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/world/World", "getBlockState", "(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;", false));
+						toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", "getBlock", "()Lnet/minecraft/block/Block;", true));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "protectGround", "(Lnet/minecraft/block/Block;)Z", false));
+						toInsert.add(new JumpInsnNode(IFGT, new LabelNode(l.getLabel())));
+						
+						setDirtAt.instructions.insert(jin, toInsert);
+						
+						logger.log(Level.DEBUG, " - Patched setDirtAt");
+						break;
+					}
+				}
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchPlayerInteractionManager(byte[] basicClass)
