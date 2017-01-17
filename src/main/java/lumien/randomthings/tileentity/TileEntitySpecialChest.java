@@ -29,7 +29,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class TileEntitySpecialChest extends TileEntityLockableLoot implements ITickable
 {
-	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack> func_191197_a(27, ItemStack.field_190927_a);
+	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack> withSize(27, ItemStack.EMPTY);
 
 	/** The current angle of the lid (between 0 and 1) */
 	public float lidAngle;
@@ -67,11 +67,11 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		return 27;
 	}
 
-	public boolean func_191420_l()
+	public boolean isEmpty()
 	{
 		for (ItemStack itemstack : this.chestContents)
 		{
-			if (!itemstack.func_190926_b())
+			if (!itemstack.isEmpty())
 			{
 				return false;
 			}
@@ -85,7 +85,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	 */
 	public String getName()
 	{
-		return this.hasCustomName() ? this.field_190577_o : "container.chest";
+		return this.hasCustomName() ? this.customName : "container.chest";
 	}
 
 	public static void registerFixesChest(DataFixer fixer)
@@ -96,16 +96,16 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		this.chestContents = NonNullList.<ItemStack> func_191197_a(this.getSizeInventory(), ItemStack.field_190927_a);
+		this.chestContents = NonNullList.<ItemStack> withSize(this.getSizeInventory(), ItemStack.EMPTY);
 
 		if (!this.checkLootAndRead(compound))
 		{
-			ItemStackHelper.func_191283_b(compound, this.chestContents);
+			ItemStackHelper.loadAllItems(compound, this.chestContents);
 		}
 
 		if (compound.hasKey("CustomName", 8))
 		{
-			this.field_190577_o = compound.getString("CustomName");
+			this.customName = compound.getString("CustomName");
 		}
 
 		this.chestType = compound.getInteger("chestType");
@@ -117,12 +117,12 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 
 		if (!this.checkLootAndWrite(compound))
 		{
-			ItemStackHelper.func_191282_a(compound, this.chestContents);
+			ItemStackHelper.saveAllItems(compound, this.chestContents);
 		}
 
 		if (this.hasCustomName())
 		{
-			compound.setString("CustomName", this.field_190577_o);
+			compound.setString("CustomName", this.customName);
 		}
 
 		compound.setInteger("chestType", chestType);
@@ -149,12 +149,12 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		int k = this.pos.getZ();
 		++this.ticksSinceSync;
 		
-		if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + i + j + k) % 200 == 0)
+		if (!this.world.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + i + j + k) % 200 == 0)
 		{
 			this.numPlayersUsing = 0;
 			float f = 5.0F;
 
-			for (EntityPlayer entityplayer : this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double) ((float) i - 5.0F), (double) ((float) j - 5.0F), (double) ((float) k - 5.0F), (double) ((float) (i + 1) + 5.0F), (double) ((float) (j + 1) + 5.0F), (double) ((float) (k + 1) + 5.0F))))
+			for (EntityPlayer entityplayer : this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double) ((float) i - 5.0F), (double) ((float) j - 5.0F), (double) ((float) k - 5.0F), (double) ((float) (i + 1) + 5.0F), (double) ((float) (j + 1) + 5.0F), (double) ((float) (k + 1) + 5.0F))))
 			{
 				if (entityplayer.openContainer instanceof ContainerChest)
 				{
@@ -176,7 +176,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 			double d1 = (double) i + 0.5D;
 			double d2 = (double) k + 0.5D;
 
-			this.worldObj.playSound((EntityPlayer) null, d1, (double) j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			this.world.playSound((EntityPlayer) null, d1, (double) j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
@@ -204,7 +204,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 				double d3 = (double) i + 0.5D;
 				double d0 = (double) k + 0.5D;
 
-				this.worldObj.playSound((EntityPlayer) null, d3, (double) j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+				this.world.playSound((EntityPlayer) null, d3, (double) j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 			}
 
 			if (this.lidAngle < 0.0F)
@@ -237,8 +237,8 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 			}
 
 			++this.numPlayersUsing;
-			this.worldObj.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
-			this.worldObj.notifyNeighborsOfStateChange(this.pos, this.getBlockType(), false);
+			this.world.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
+			this.world.notifyNeighborsOfStateChange(this.pos, this.getBlockType(), false);
 		}
 	}
 
@@ -247,8 +247,8 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		if (!player.isSpectator() && this.getBlockType() instanceof BlockSpecialChest)
 		{
 			--this.numPlayersUsing;
-			this.worldObj.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
-			this.worldObj.notifyNeighborsOfStateChange(this.pos, this.getBlockType(), false);
+			this.world.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
+			this.world.notifyNeighborsOfStateChange(this.pos, this.getBlockType(), false);
 		}
 	}
 
@@ -268,7 +268,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		return new ContainerChest(playerInventory, this, playerIn);
 	}
 
-	protected NonNullList<ItemStack> func_190576_q()
+	protected NonNullList<ItemStack> getItems()
 	{
 		return this.chestContents;
 	}

@@ -28,9 +28,9 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 
 	public int type;
 
-	public EntitySoul(World worldObj)
+	public EntitySoul(World world)
 	{
-		super(worldObj);
+		super(world);
 
 		this.setSize(0.3F, 0.3F);
 		this.noClip = true;
@@ -59,9 +59,9 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
         return distance < d0 * d0;
 	}
 
-	public EntitySoul(World worldObj, double posX, double posY, double posZ, String playerName)
+	public EntitySoul(World world, double posX, double posY, double posZ, String playerName)
 	{
-		super(worldObj);
+		super(world);
 		this.setSize(0.3F, 0.3F);
 		this.setPosition(posX, posY, posZ);
 		this.motionX = 0;
@@ -100,9 +100,9 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	public final boolean processInitialInteract(EntityPlayer player, EnumHand hand)
 	{
 		ItemStack equipped = player.getHeldItemMainhand();
-		if (!worldObj.isRemote && !equipped.func_190926_b() && equipped.getItem() instanceof ItemRezStone && this.worldObj.getMinecraftServer().getPlayerList().getPlayerByUsername(playerName) != null)
+		if (!world.isRemote && !equipped.isEmpty() && equipped.getItem() instanceof ItemRezStone && this.world.getMinecraftServer().getPlayerList().getPlayerByUsername(playerName) != null)
 		{
-			List<EntityReviveCircle> circles = this.worldObj.getEntitiesWithinAABB(EntityReviveCircle.class, new AxisAlignedBB(this.posX - 2, this.posY - 2, this.posZ - 2, this.posX + 2, this.posZ + 2, this.posZ + 2));
+			List<EntityReviveCircle> circles = this.world.getEntitiesWithinAABB(EntityReviveCircle.class, new AxisAlignedBB(this.posX - 2, this.posY - 2, this.posZ - 2, this.posX + 2, this.posZ + 2, this.posZ + 2));
 
 			for (EntityReviveCircle circle : circles)
 			{
@@ -112,7 +112,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 				}
 			}
 
-			worldObj.spawnEntityInWorld(new EntityReviveCircle(worldObj, player, posX, posY, posZ, this));
+			world.spawnEntity(new EntityReviveCircle(world, player, posX, posY, posZ, this));
 
 			return true;
 		}
@@ -142,11 +142,11 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	{
 		super.onUpdate();
 		counter++;
-		if (worldObj.getTotalWorldTime() % 20 == 0)
+		if (world.getTotalWorldTime() % 20 == 0)
 		{
-			if (!worldObj.isRemote)
+			if (!world.isRemote)
 			{
-				EntityPlayerMP player = this.worldObj.getMinecraftServer().getPlayerList().getPlayerByUsername(playerName);
+				EntityPlayerMP player = this.world.getMinecraftServer().getPlayerList().getPlayerByUsername(playerName);
 				if (player != null)
 				{
 					if (player.getHealth() > 0)

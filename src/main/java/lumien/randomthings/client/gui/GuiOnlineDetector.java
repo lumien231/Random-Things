@@ -62,7 +62,7 @@ public class GuiOnlineDetector extends GuiContainer
 	{
 		if (pressedKey == Keyboard.KEY_ESCAPE || (!this.usernameInput.isFocused() && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode()))
 		{
-			this.mc.thePlayer.closeScreen();
+			this.mc.player.closeScreen();
 		}
 
 		if (this.usernameInput.textboxKeyTyped(par1, pressedKey))

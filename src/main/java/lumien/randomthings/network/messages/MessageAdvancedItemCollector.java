@@ -52,7 +52,7 @@ public class MessageAdvancedItemCollector implements IRTMessage
 			{
 				NetHandlerPlayServer serverHandler = context.getServerHandler();
 
-				TileEntity te = serverHandler.playerEntity.worldObj.getTileEntity(pos);
+				TileEntity te = serverHandler.playerEntity.world.getTileEntity(pos);
 
 				if (te != null && te instanceof TileEntityAdvancedItemCollector && serverHandler.playerEntity.getDistanceSq(MessageAdvancedItemCollector.this.pos) < 64)
 				{

@@ -108,7 +108,7 @@ public class GuiEnderLetter extends GuiContainer
 	{
 		if (pressedKey == Keyboard.KEY_ESCAPE || (!this.receiverName.isFocused() && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode()))
 		{
-			this.mc.thePlayer.closeScreen();
+			this.mc.player.closeScreen();
 		}
 
 		if (receiverName.isFocused())

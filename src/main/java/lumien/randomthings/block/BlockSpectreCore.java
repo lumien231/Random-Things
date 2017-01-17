@@ -151,12 +151,12 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 
 					if (cube != null)
 					{
-						holding.func_190918_g(cube.increaseHeight(holding.func_190916_E()));
+						holding.shrink(cube.increaseHeight(holding.getCount()));
 					}
 				}
 				return true;
 			}
-			else if (holding.func_190926_b())
+			else if (holding.isEmpty())
 			{
 				if (!worldIn.isRemote)
 				{

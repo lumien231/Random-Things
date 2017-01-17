@@ -26,7 +26,7 @@ public class ContainerCraftingRecipe extends Container
 	{
 		openedWith = player.getHeldItemMainhand();
 
-		if (!openedWith.func_190926_b() && openedWith.getItem() == ModItems.craftingRecipe)
+		if (!openedWith.isEmpty() && openedWith.getItem() == ModItems.craftingRecipe)
 		{
 			ItemCraftingRecipe.load(openedWith, craftMatrix, craftResult);
 		}
@@ -65,7 +65,7 @@ public class ContainerCraftingRecipe extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{
-		return ItemStack.field_190927_a;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class ContainerCraftingRecipe extends Container
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
 		ItemStack equipped = playerIn.getHeldItemMainhand();
-		return !equipped.func_190926_b() && equipped.isItemEqual(openedWith);
+		return !equipped.isEmpty() && equipped.isItemEqual(openedWith);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class ContainerCraftingRecipe extends Container
 		super.onContainerClosed(playerIn);
 
 		ItemStack toSave = playerIn.getHeldItemMainhand();
-		if (!toSave.func_190926_b() && toSave.getItem() instanceof ItemCraftingRecipe)
+		if (!toSave.isEmpty() && toSave.getItem() instanceof ItemCraftingRecipe)
 		{
 			ItemCraftingRecipe.save(toSave, craftMatrix, craftResult);
 		}

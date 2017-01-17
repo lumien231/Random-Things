@@ -49,7 +49,7 @@ public class GuiSlotButton extends GuiButton
 		this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 0 + (i - 1) * 18, this.width, this.height);
 		this.mouseDragged(mc, mouseX, mouseY);
 
-		if (!stack.func_190926_b())
+		if (!stack.isEmpty())
 		{
 			RenderHelper.enableGUIStandardItemLighting();
 
@@ -57,7 +57,7 @@ public class GuiSlotButton extends GuiButton
 			this.itemRender.zLevel = 100.0F;
 
 			GlStateManager.enableDepth();
-			this.itemRender.renderItemAndEffectIntoGUI(this.mc.thePlayer, stack, this.xPosition + 1, this.yPosition + 1);
+			this.itemRender.renderItemAndEffectIntoGUI(this.mc.player, stack, this.xPosition + 1, this.yPosition + 1);
 			this.itemRender.renderItemOverlayIntoGUI(fontrenderer, stack, this.xPosition + 1, this.yPosition + 1, "");
 
 			this.itemRender.zLevel = 0.0F;

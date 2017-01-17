@@ -56,7 +56,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 			syncTE();
 		}
 
-		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) worldObj, breakerProfile));
+		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) world, breakerProfile));
 
 		ItemStack unbreakingIronPickaxe = new ItemStack(Items.IRON_PICKAXE, 1);
 		unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
@@ -78,23 +78,23 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			if (firstTick)
 			{
 				firstTick = false;
 				initFakePlayer();
 				
-				neighborChanged(this.worldObj.getBlockState(pos), worldObj, pos, null);
+				neighborChanged(this.world.getBlockState(pos), world, pos, null);
 			}
 
 			if (mining)
 			{
-				BlockPos targetPos = pos.offset(worldObj.getBlockState(pos).getValue(BlockBlockBreaker.FACING));
+				BlockPos targetPos = pos.offset(world.getBlockState(pos).getValue(BlockBlockBreaker.FACING));
 
-				IBlockState targetState = worldObj.getBlockState(targetPos);
+				IBlockState targetState = world.getBlockState(targetPos);
 
-				this.curBlockDamage += targetState.getBlock().getPlayerRelativeBlockHardness(targetState,fakePlayer.get(), worldObj, targetPos);
+				this.curBlockDamage += targetState.getBlock().getPlayerRelativeBlockHardness(targetState,fakePlayer.get(), world, targetPos);
 
 				if (curBlockDamage >= 1.0f)
 				{
@@ -109,7 +109,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 				}
 				else
 				{
-					worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, (int) (this.curBlockDamage * 10.0F) - 1);
+					world.sendBlockBreakProgress(uuid.hashCode(), targetPos, (int) (this.curBlockDamage * 10.0F) - 1);
 				}
 			}
 		}
@@ -183,7 +183,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 	
 	private void resetProgress()
 	{
-		resetProgress(this.worldObj.getBlockState(this.pos));
+		resetProgress(this.world.getBlockState(this.pos));
 	}
 
 	private void resetProgress(IBlockState state)
@@ -191,7 +191,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		if (uuid != null)
 		{
 			BlockPos targetPos = pos.offset(state.getValue(BlockBlockBreaker.FACING));
-			worldObj.sendBlockBreakProgress(uuid.hashCode(), targetPos, -1);
+			world.sendBlockBreakProgress(uuid.hashCode(), targetPos, -1);
 
 			curBlockDamage = 0;
 		}

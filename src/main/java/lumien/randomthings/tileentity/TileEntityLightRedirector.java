@@ -40,12 +40,12 @@ public class TileEntityLightRedirector extends TileEntityBase
 	{
 		super.onLoad();
 
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			established = true;
 			for (EnumFacing facing : EnumFacing.values())
 			{
-				this.worldObj.markChunkDirty(this.pos.offset(facing), null);
+				this.world.markChunkDirty(this.pos.offset(facing), null);
 			}
 		}
 	}
@@ -54,8 +54,8 @@ public class TileEntityLightRedirector extends TileEntityBase
 	{
 		this.invalidate();
 
-		MessageLightRedirector message = new MessageLightRedirector(this.worldObj.provider.getDimension(), pos);
-		MessageUtil.sendToAllWatchingPos(worldObj, pos, message);
+		MessageLightRedirector message = new MessageLightRedirector(this.world.provider.getDimension(), pos);
+		MessageUtil.sendToAllWatchingPos(world, pos, message);
 	}
 
 	@Override

@@ -75,7 +75,7 @@ public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 		{
 			if (worldIn.getBlockState(pos).getBlock() instanceof BlockDirt && worldIn.getBlockState(pos).getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT)
 			{
-				stack.func_190918_g(1);
+				stack.shrink(1);
 				if (stack.getItemDamage() == 0)
 				{
 					worldIn.setBlockState(pos, Blocks.GRASS.getDefaultState());

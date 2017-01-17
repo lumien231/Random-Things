@@ -28,7 +28,7 @@ public class RenderBiomeRadar extends TileEntitySpecialRenderer<TileEntityBiomeR
 	{
 		ItemStack currentCrystal;
 
-		if (!(currentCrystal = te.getCurrentCrystal()).func_190926_b())
+		if (!(currentCrystal = te.getCurrentCrystal()).isEmpty())
 		{
 			entityItem.setEntityItemStack(currentCrystal);
 			entityItem.setWorld(te.getWorld());

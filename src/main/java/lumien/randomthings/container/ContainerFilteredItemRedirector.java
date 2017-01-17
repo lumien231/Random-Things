@@ -31,7 +31,7 @@ public class ContainerFilteredItemRedirector extends Container
 			@Override
 			public boolean apply(ItemStack input)
 			{
-				return !input.func_190926_b() && input.getItem() == ModItems.itemFilter;
+				return !input.isEmpty() && input.getItem() == ModItems.itemFilter;
 			}
 		}));
 
@@ -40,7 +40,7 @@ public class ContainerFilteredItemRedirector extends Container
 			@Override
 			public boolean apply(ItemStack input)
 			{
-				return !input.func_190926_b() && input.getItem() == ModItems.itemFilter;
+				return !input.isEmpty() && input.getItem() == ModItems.itemFilter;
 			}
 		}));
 		
@@ -50,7 +50,7 @@ public class ContainerFilteredItemRedirector extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
-		ItemStack itemstack = ItemStack.field_190927_a;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
@@ -62,29 +62,29 @@ public class ContainerFilteredItemRedirector extends Container
 			{
 				if (!this.mergeItemStack(itemstack1, 2, 38, true))
 				{
-					return ItemStack.field_190927_a;
+					return ItemStack.EMPTY;
 				}
 			}
 			else if (!this.mergeItemStack(itemstack1, 0, 2, false))
 			{
-				return ItemStack.field_190927_a;
+				return ItemStack.EMPTY;
 			}
 
-			if (itemstack1.func_190916_E() == 0)
+			if (itemstack1.getCount() == 0)
 			{
-				slot.putStack(ItemStack.field_190927_a);
+				slot.putStack(ItemStack.EMPTY);
 			}
 			else
 			{
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.func_190916_E() == itemstack.func_190916_E())
+			if (itemstack1.getCount() == itemstack.getCount())
 			{
-				return ItemStack.field_190927_a;
+				return ItemStack.EMPTY;
 			}
 
-			slot.func_190901_a(par1EntityPlayer, itemstack1);
+			slot.onTake(par1EntityPlayer, itemstack1);
 		}
 
 		return itemstack;
@@ -106,26 +106,26 @@ public class ContainerFilteredItemRedirector extends Container
 
 		if (par1ItemStack.isStackable())
 		{
-			while (par1ItemStack.func_190916_E() > 0 && (!par4 && k < par3 || par4 && k >= par2))
+			while (par1ItemStack.getCount() > 0 && (!par4 && k < par3 || par4 && k >= par2))
 			{
 				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
-				if (!itemstack1.func_190926_b() && itemstack1.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1) && slot.isItemValid(par1ItemStack))
+				if (!itemstack1.isEmpty() && itemstack1.getItem() == par1ItemStack.getItem() && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1) && slot.isItemValid(par1ItemStack))
 				{
-					int l = itemstack1.func_190916_E() + par1ItemStack.func_190916_E();
+					int l = itemstack1.getCount() + par1ItemStack.getCount();
 
 					if (l <= par1ItemStack.getMaxStackSize())
 					{
-						par1ItemStack.func_190920_e(0);
-						itemstack1.func_190920_e(l);
+						par1ItemStack.setCount(0);
+						itemstack1.setCount(l);
 						slot.onSlotChanged();
 						flag1 = true;
 					}
-					else if (itemstack1.func_190916_E() < par1ItemStack.getMaxStackSize())
+					else if (itemstack1.getCount() < par1ItemStack.getMaxStackSize())
 					{
-						par1ItemStack.func_190918_g(par1ItemStack.getMaxStackSize() - itemstack1.func_190916_E());
-						itemstack1.func_190920_e(par1ItemStack.getMaxStackSize());
+						par1ItemStack.shrink(par1ItemStack.getMaxStackSize() - itemstack1.getCount());
+						itemstack1.setCount(par1ItemStack.getMaxStackSize());
 						slot.onSlotChanged();
 						flag1 = true;
 					}
@@ -142,7 +142,7 @@ public class ContainerFilteredItemRedirector extends Container
 			}
 		}
 
-		if (par1ItemStack.func_190916_E() > 0)
+		if (par1ItemStack.getCount() > 0)
 		{
 			if (par4)
 			{
@@ -158,15 +158,15 @@ public class ContainerFilteredItemRedirector extends Container
 				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
 
-				if (itemstack1.func_190926_b() && slot.isItemValid(par1ItemStack))
+				if (itemstack1.isEmpty() && slot.isItemValid(par1ItemStack))
 				{
-					if (1 < par1ItemStack.func_190916_E())
+					if (1 < par1ItemStack.getCount())
 					{
 						ItemStack copy = par1ItemStack.copy();
-						copy.func_190920_e(1);
+						copy.setCount(1);
 						slot.putStack(copy);
 
-						par1ItemStack.func_190918_g(1);
+						par1ItemStack.shrink(1);
 						flag1 = true;
 						break;
 					}
@@ -174,7 +174,7 @@ public class ContainerFilteredItemRedirector extends Container
 					{
 						slot.putStack(par1ItemStack.copy());
 						slot.onSlotChanged();
-						par1ItemStack.func_190920_e(0);
+						par1ItemStack.setCount(0);
 						flag1 = true;
 						break;
 					}

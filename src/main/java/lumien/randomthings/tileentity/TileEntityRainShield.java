@@ -75,7 +75,7 @@ public class TileEntityRainShield extends TileEntityBase
 		this.invalidate();
 	}
 
-	public static boolean shouldRain(World worldObj, BlockPos pos)
+	public static boolean shouldRain(World world, BlockPos pos)
 	{
 		Boolean cachedValue;
 		if ((cachedValue = rainCache.get(pos)) != null)
@@ -87,7 +87,7 @@ public class TileEntityRainShield extends TileEntityBase
 		{
 			for (TileEntityRainShield rainShield : shields)
 			{
-				if (rainShield.active && rainShield.worldObj == worldObj && !rainShield.isInvalid() && rainShield.getPos().add(0, -rainShield.getPos().getY(), 0).distanceSq(pos) < (Numbers.RAIN_SHIELD_RANGE) * (Numbers.RAIN_SHIELD_RANGE))
+				if (rainShield.active && rainShield.world == world && !rainShield.isInvalid() && rainShield.getPos().add(0, -rainShield.getPos().getY(), 0).distanceSq(pos) < (Numbers.RAIN_SHIELD_RANGE) * (Numbers.RAIN_SHIELD_RANGE))
 				{
 					rainCache.put(pos, Boolean.FALSE);
 					return false;

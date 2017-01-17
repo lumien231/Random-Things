@@ -58,9 +58,9 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
-			if (this.worldObj.getTotalWorldTime() % 20 == 0)
+			if (this.world.getTotalWorldTime() % 20 == 0)
 			{
 				if (this.playerEntity == null && playerUUID != null)
 				{
@@ -68,7 +68,7 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 					if (tempPlayer != null)
 					{
 						playerEntity = tempPlayer;
-						this.worldObj.notifyNeighborsOfStateChange(this.pos, ModBlocks.playerInterface, false);
+						this.world.notifyNeighborsOfStateChange(this.pos, ModBlocks.playerInterface, false);
 					}
 				}
 				else
@@ -77,7 +77,7 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 					if (tempPlayer != playerEntity)
 					{
 						this.playerEntity = null;
-						this.worldObj.notifyNeighborsOfStateChange(this.pos, ModBlocks.playerInterface, false);
+						this.world.notifyNeighborsOfStateChange(this.pos, ModBlocks.playerInterface, false);
 					}
 				}
 			}
@@ -173,9 +173,9 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return worldObj.getTileEntity(this.pos) == this && player.getDistanceSq(this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5) < 64;
+		return world.getTileEntity(this.pos) == this && player.getDistanceSq(this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5) < 64;
 	}
 
 	@Override
@@ -330,12 +330,12 @@ public class TileEntityPlayerInterface extends TileEntityBase implements ISidedI
 	}
 
 	@Override
-	public boolean func_191420_l()
+	public boolean isEmpty()
 	{
 		checkPlayerEntity();
 		if (this.playerEntity != null)
 		{
-			return this.playerEntity.inventory.func_191420_l();
+			return this.playerEntity.inventory.isEmpty();
 		}
 
 		return true;

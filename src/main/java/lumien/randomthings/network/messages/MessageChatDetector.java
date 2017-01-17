@@ -59,7 +59,7 @@ public class MessageChatDetector implements IRTMessage
 			public void run()
 			{
 				EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-				World worldObj = player.worldObj;
+				World worldObj = player.world;
 				TileEntity te = worldObj.getTileEntity(pos);
 				if (te != null && te instanceof TileEntityChatDetector && pos.distanceSq(player.getPosition()) < 100)
 				{

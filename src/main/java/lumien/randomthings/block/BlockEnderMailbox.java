@@ -129,26 +129,26 @@ public class BlockEnderMailbox extends BlockContainerBase
 
 							for (int slot = 0; slot < mailboxInventory.getSizeInventory(); slot++)
 							{
-								if (mailboxInventory.getStackInSlot(slot).func_190926_b())
+								if (mailboxInventory.getStackInSlot(slot).isEmpty())
 								{
 									ItemStack sendingLetter = heldItem.copy();
-									heldItem.func_190918_g(1);
+									heldItem.shrink(1);
 									sendingLetter.getTagCompound().setBoolean("received", true);
 									sendingLetter.getTagCompound().setString("sender", playerIn.getGameProfile().getName());
 
 									mailboxInventory.setInventorySlotContents(slot, sendingLetter);
 
-									playerIn.worldObj.playSound(null, pos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 1, 1);
+									playerIn.world.playSound(null, pos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 1, 1);
 
 									return true;
 								}
 							}
 
-							playerIn.addChatMessage(new TextComponentTranslation("item.enderLetter.noSpace").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+							playerIn.sendMessage(new TextComponentTranslation("item.enderLetter.noSpace").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 						}
 						else
 						{
-							playerIn.addChatMessage(new TextComponentTranslation("item.enderLetter.noPlayer", compound.getString("receiver")).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
+							playerIn.sendMessage(new TextComponentTranslation("item.enderLetter.noPlayer", compound.getString("receiver")).setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)));
 						}
 					}
 				}
@@ -166,7 +166,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 				}
 				else
 				{
-					playerIn.addChatMessage(new TextComponentTranslation("block.enderMailbox.owner").setStyle(new Style().setColor(TextFormatting.RED)));
+					playerIn.sendMessage(new TextComponentTranslation("block.enderMailbox.owner").setStyle(new Style().setColor(TextFormatting.RED)));
 				}
 			}
 		}
@@ -228,7 +228,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(ACTIVE, false);
 	}

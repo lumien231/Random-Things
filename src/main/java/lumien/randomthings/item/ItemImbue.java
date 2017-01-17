@@ -92,7 +92,7 @@ public class ItemImbue extends ItemBase
 			EntityPlayer playerIn = (EntityPlayer) livingEntity;
 			if (!playerIn.capabilities.isCreativeMode)
 			{
-				stack.func_190918_g(1);
+				stack.shrink(1);
 			}
 
 			if (!worldIn.isRemote)
@@ -121,7 +121,7 @@ public class ItemImbue extends ItemBase
 
 			if (!playerIn.capabilities.isCreativeMode)
 			{
-				if (stack.func_190916_E() <= 0)
+				if (stack.getCount() <= 0)
 				{
 					return new ItemStack(Items.GLASS_BOTTLE);
 				}

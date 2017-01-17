@@ -53,7 +53,7 @@ public class ItemStableEnderpearl extends ItemBase
 		int counter = data.getInteger("counter");
 		if (counter == 140)
 		{
-			if (!entityItem.worldObj.isRemote)
+			if (!entityItem.world.isRemote)
 			{
 				entityItem.setDead();
 				ItemStack itemStack = entityItem.getEntityItem();
@@ -67,35 +67,35 @@ public class ItemStableEnderpearl extends ItemBase
 
 				if (player != null)
 				{
-					player.worldObj.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
+					player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
 					player.connection.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, player.rotationYaw, player.rotationPitch);
 				}
 				else
 				{
 					// Random Teleport
-					List<EntityLivingBase> entityList = entityItem.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(entityItem.posX - 10, entityItem.posY - 10, entityItem.posZ - 10, entityItem.posX + 10, entityItem.posY + 10, entityItem.posZ + 10));
+					List<EntityLivingBase> entityList = entityItem.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(entityItem.posX - 10, entityItem.posY - 10, entityItem.posZ - 10, entityItem.posX + 10, entityItem.posY + 10, entityItem.posZ + 10));
 					if (!entityList.isEmpty())
 					{
 						EntityLivingBase target = entityList.get(rand.nextInt(entityList.size()));
 						if (target instanceof EntityPlayerMP)
 						{
 							EntityPlayerMP targetPlayer = (EntityPlayerMP) target;
-							targetPlayer.worldObj.playSound(null, targetPlayer.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
+							targetPlayer.world.playSound(null, targetPlayer.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
 							targetPlayer.connection.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, targetPlayer.rotationYaw, targetPlayer.rotationPitch);
 						}
 						else
 						{
-							target.worldObj.playSound(null, target.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
+							target.world.playSound(null, target.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
 							target.setPositionAndUpdate(entityItem.posX, entityItem.posY, entityItem.posZ);
 						}
 					}
 				}
-				entityItem.worldObj.playSound(null, entityItem.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
+				entityItem.world.playSound(null, entityItem.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
 			}
 		}
 		else
 		{
-			if (!entityItem.worldObj.isRemote)
+			if (!entityItem.world.isRemote)
 			{
 				data.setInteger("counter", counter + 1);
 			}
@@ -105,7 +105,7 @@ public class ItemStableEnderpearl extends ItemBase
 				{
 					for (int i = 0; i < 2; ++i)
 					{
-						entityItem.worldObj.spawnParticle(EnumParticleTypes.PORTAL, entityItem.posX + (this.rand.nextDouble() - 0.5D) * 1, entityItem.posY + this.rand.nextDouble() * 2 - 0.25D, entityItem.posZ + (this.rand.nextDouble() - 0.5D) * 1, (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D, new int[0]);
+						entityItem.world.spawnParticle(EnumParticleTypes.PORTAL, entityItem.posX + (this.rand.nextDouble() - 0.5D) * 1, entityItem.posY + this.rand.nextDouble() * 2 - 0.25D, entityItem.posZ + (this.rand.nextDouble() - 0.5D) * 1, (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D, new int[0]);
 					}
 				}
 			}

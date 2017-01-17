@@ -62,7 +62,7 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 
 		if ((biome = getBiome(stack)) != null)
 		{
-			return RenderUtils.getBiomeColor(null, biome, Minecraft.getMinecraft().thePlayer.getPosition());
+			return RenderUtils.getBiomeColor(null, biome, Minecraft.getMinecraft().player.getPosition());
 		}
 
 		return Color.WHITE.getRGB();

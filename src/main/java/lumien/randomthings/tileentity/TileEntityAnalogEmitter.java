@@ -66,8 +66,8 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 	{
 		this.emitLevel = level;
 
-		IBlockState state = this.worldObj.getBlockState(this.pos);
-		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
+		IBlockState state = this.world.getBlockState(this.pos);
+		this.world.notifyBlockUpdate(pos, state, state, 3);
 
 		EnumFacing[] aenumfacing = EnumFacing.values();
 		int i = aenumfacing.length;
@@ -75,9 +75,9 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 		for (int j = 0; j < i; ++j)
 		{
 			EnumFacing enumfacing = aenumfacing[j];
-			worldObj.notifyNeighborsOfStateChange(pos.offset(enumfacing), this.blockType, false);
+			world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this.blockType, false);
 		}
 
-		worldObj.notifyNeighborsOfStateChange(pos, this.blockType, false);
+		world.notifyNeighborsOfStateChange(pos, this.blockType, false);
 	}
 }

@@ -25,7 +25,7 @@ public class SpectreWorldProvider extends WorldProvider
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new SpectreChunkProvider(this.worldObj);
+		return new SpectreChunkProvider(this.world);
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class SpectreWorldProvider extends WorldProvider
 	}
 
 	@Override
-	protected void createBiomeProvider()
+	protected void init()
 	{
 		this.biomeProvider = new BiomeProviderSingle(Biomes.HELL);
 	}

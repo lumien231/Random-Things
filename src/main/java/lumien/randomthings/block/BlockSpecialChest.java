@@ -114,7 +114,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
@@ -122,7 +122,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor_double(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3).getOpposite();
+		EnumFacing enumfacing = EnumFacing.getHorizontal(MathHelper.floor(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3).getOpposite();
 		state = state.withProperty(FACING, enumfacing);
 		worldIn.setBlockState(pos, state, 3);
 
@@ -132,7 +132,7 @@ public class BlockSpecialChest extends BlockContainerBase
 		{
 			if (stack.hasDisplayName())
 			{
-				((TileEntitySpecialChest) tileentity).func_190575_a(stack.getDisplayName());
+				((TileEntitySpecialChest) tileentity).setCustomName(stack.getDisplayName());
 			}
 
 			((TileEntitySpecialChest) tileentity).setChestType(stack.getItemDamage());

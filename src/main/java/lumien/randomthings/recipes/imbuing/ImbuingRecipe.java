@@ -20,7 +20,7 @@ public class ImbuingRecipe
 		this.result = result;
 		for (ItemStack is : ingredients)
 		{
-			if (!is.func_190926_b())
+			if (!is.isEmpty())
 				this.ingredients.add(is);
 		}
 	}
@@ -52,7 +52,7 @@ public class ImbuingRecipe
 
 		for (ItemStack is : providedIngredients.keySet())
 		{
-			if (!providedIngredients.get(is) && !(is.func_190926_b()))
+			if (!providedIngredients.get(is) && !(is.isEmpty()))
 			{
 				return false;
 			}

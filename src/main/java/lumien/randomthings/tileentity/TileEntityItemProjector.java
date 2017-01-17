@@ -55,7 +55,7 @@ public class TileEntityItemProjector extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			cooldownTimer++;
 
@@ -85,9 +85,9 @@ public class TileEntityItemProjector extends TileEntityBase implements ITickable
 					ItemStack is;
 					if ((is = itemHandler.getStackInSlot(i)) != null)
 					{
-						if (is.func_190916_E() > maxSize)
+						if (is.getCount() > maxSize)
 						{
-							maxSize = is.func_190916_E();
+							maxSize = is.getCount();
 							maxSlot = i;
 						}
 					}
@@ -123,16 +123,16 @@ public class TileEntityItemProjector extends TileEntityBase implements ITickable
 		{
 			ItemStack stack = itemHandler.extractItem(projectedSlot, 64, false);
 
-			if (!stack.func_190926_b())
+			if (!stack.isEmpty())
 			{
-				IBlockState state = TileEntityItemProjector.this.worldObj.getBlockState(TileEntityItemProjector.this.pos);
+				IBlockState state = TileEntityItemProjector.this.world.getBlockState(TileEntityItemProjector.this.pos);
 
 				EnumFacing facing = state.getValue(BlockItemProjector.FACING);
 
-				EntityProjectedItem itemEntity = new EntityProjectedItem(TileEntityItemProjector.this.worldObj, TileEntityItemProjector.this.pos.getX() + 0.5 + facing.getFrontOffsetX() * 0.625, TileEntityItemProjector.this.pos.getY() + 0.5 + (facing == EnumFacing.UP ? 0.6 : (facing == EnumFacing.DOWN ? -0.75 : facing.getFrontOffsetY() * 0.625)), TileEntityItemProjector.this.pos.getZ() + 0.5 + facing.getFrontOffsetZ() * 0.625, stack.copy(), facing);
+				EntityProjectedItem itemEntity = new EntityProjectedItem(TileEntityItemProjector.this.world, TileEntityItemProjector.this.pos.getX() + 0.5 + facing.getFrontOffsetX() * 0.625, TileEntityItemProjector.this.pos.getY() + 0.5 + (facing == EnumFacing.UP ? 0.6 : (facing == EnumFacing.DOWN ? -0.75 : facing.getFrontOffsetY() * 0.625)), TileEntityItemProjector.this.pos.getZ() + 0.5 + facing.getFrontOffsetZ() * 0.625, stack.copy(), facing);
 				itemEntity.setLifeSpan(500);
 
-				TileEntityItemProjector.this.worldObj.spawnEntityInWorld(itemEntity);
+				TileEntityItemProjector.this.world.spawnEntity(itemEntity);
 			}
 		}
 	}

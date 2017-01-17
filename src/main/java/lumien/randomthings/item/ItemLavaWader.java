@@ -38,7 +38,7 @@ public class ItemLavaWader extends ItemArmor
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
 	{
-		if (!player.worldObj.isRemote)
+		if (!player.world.isRemote)
 		{
 			if (itemStack.getTagCompound() == null)
 			{

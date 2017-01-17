@@ -47,7 +47,7 @@ public class MessageSetBiome implements IRTMessage
 	@Override
 	public void onMessage(MessageContext context)
 	{
-		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		Biome b = Biome.getBiome(biome);
 
 		if (b != null && player != null && player.getEntityWorld().provider.getDimension() == dimension)

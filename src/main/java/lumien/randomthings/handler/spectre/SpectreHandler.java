@@ -216,7 +216,7 @@ public class SpectreHandler extends WorldSavedData
 
 	public void checkPosition(EntityPlayerMP player)
 	{
-		SpectreCube cube = getSpectreCubeFromPos(player.worldObj, player.getPosition());
+		SpectreCube cube = getSpectreCubeFromPos(player.world, player.getPosition());
 
 		if (!player.capabilities.isCreativeMode && (cube == null || !cube.getOwner().equals(player.getGameProfile().getId())))
 		{

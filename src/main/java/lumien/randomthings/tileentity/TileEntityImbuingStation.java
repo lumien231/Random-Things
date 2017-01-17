@@ -15,7 +15,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	InventoryBasic inventory;
 	public int imbuingProgress;
 
-	ItemStack currentOutput = ItemStack.field_190927_a;
+	ItemStack currentOutput = ItemStack.EMPTY;
 
 	public final static int IMBUING_LENGTH = 200;
 
@@ -42,7 +42,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	@Override
 	public void update()
 	{
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			ItemStack validOutput = ImbuingRecipeHandler.getRecipeOutput(inventory);
 			if (!ItemStack.areItemStacksEqual(validOutput, currentOutput) && canHandleOutput(validOutput))
@@ -52,7 +52,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 			}
 
 			
-			if (!this.currentOutput.func_190926_b())
+			if (!this.currentOutput.isEmpty())
 			{
 				this.imbuingProgress++;
 				if (this.imbuingProgress >= IMBUING_LENGTH)
@@ -70,7 +70,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 
 	private boolean canHandleOutput(ItemStack validOutput)
 	{
-		if (validOutput.func_190926_b() || inventory.getStackInSlot(4).func_190926_b())
+		if (validOutput.isEmpty() || inventory.getStackInSlot(4).isEmpty())
 		{
 			return true;
 		}
@@ -85,7 +85,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 			}
 			else
 			{
-				if (currentInOutput.func_190916_E() + requiredOutput.func_190916_E() > currentInOutput.getMaxStackSize())
+				if (currentInOutput.getCount() + requiredOutput.getCount() > currentInOutput.getMaxStackSize())
 				{
 					return false;
 				}
@@ -97,13 +97,13 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	private void imbue()
 	{
 		// Set Output
-		if (this.inventory.getStackInSlot(4).func_190926_b())
+		if (this.inventory.getStackInSlot(4).isEmpty())
 		{
 			this.inventory.setInventorySlotContents(4, currentOutput.copy());
 		}
 		else
 		{
-			this.inventory.getStackInSlot(4).func_190917_f(currentOutput.func_190916_E());
+			this.inventory.getStackInSlot(4).grow(currentOutput.getCount());
 		}
 
 		// Decrease Ingredients
@@ -150,7 +150,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
 		return player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
@@ -212,8 +212,8 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	}
 
 	@Override
-	public boolean func_191420_l()
+	public boolean isEmpty()
 	{
-		return this.inventory.func_191420_l();
+		return this.inventory.isEmpty();
 	}
 }

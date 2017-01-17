@@ -17,10 +17,10 @@ public class SlotGhost extends Slot
 	{
 		ItemStack holding = playerIn.inventory.getItemStack();
 
-		if (!holding.func_190926_b())
+		if (!holding.isEmpty())
 		{
 			holding = holding.copy();
-			holding.func_190920_e(1);
+			holding.setCount(1);
 		}
 		this.putStack(holding);
 		return false;
@@ -30,7 +30,7 @@ public class SlotGhost extends Slot
 	public boolean isItemValid(ItemStack stack)
 	{
 		ItemStack copy = stack.copy();
-		copy.func_190920_e(1);
+		copy.setCount(1);
 		this.putStack(copy);
 		return false;
 	}
@@ -38,7 +38,7 @@ public class SlotGhost extends Slot
 	@Override
 	public ItemStack decrStackSize(int amount)
 	{
-		this.putStack(ItemStack.field_190927_a);
-		return ItemStack.field_190927_a;
+		this.putStack(ItemStack.EMPTY);
+		return ItemStack.EMPTY;
 	}
 }

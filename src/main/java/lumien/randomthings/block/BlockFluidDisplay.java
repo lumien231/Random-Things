@@ -45,7 +45,7 @@ public class BlockFluidDisplay extends BlockContainerBase
 
 		ItemStack heldItem = playerIn.getHeldItemMainhand();
 
-		if (!heldItem.func_190926_b() && heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
+		if (!heldItem.isEmpty() && heldItem.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
 		{
 			IFluidHandlerItem handler = heldItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 

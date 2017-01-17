@@ -142,7 +142,7 @@ public class MessageVoxelProjector implements IRTMessage
 
 					if (player != null && player.openContainer != null && player.openContainer instanceof ContainerVoxelProjector)
 					{
-						TileEntity te = player.worldObj.getTileEntity(pos);
+						TileEntity te = player.world.getTileEntity(pos);
 
 						if (te != null && te instanceof TileEntityVoxelProjector)
 						{

@@ -55,7 +55,7 @@ public class MessageOnlineDetector implements IRTMessage
 			public void run()
 			{
 				EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-				World worldObj = player.worldObj;
+				World worldObj = player.world;
 				TileEntity te = worldObj.getTileEntity(pos);
 				if (te != null && te instanceof TileEntityOnlineDetector && pos.distanceSq(player.getPosition()) < 100)
 				{

@@ -23,7 +23,7 @@ public class ItemBeanStew extends ItemFood
 	{
 		super.onItemUseFinish(stack, worldIn, livingEntity);
 
-		if (stack.func_190916_E() == 0)
+		if (stack.getCount() == 0)
 		{
 			return new ItemStack(Items.BOWL);
 		}
@@ -35,7 +35,7 @@ public class ItemBeanStew extends ItemFood
 
 				if (!inventory && !worldIn.isRemote)
 				{
-					worldIn.spawnEntityInWorld(new EntityItem(worldIn, livingEntity.posX, livingEntity.posY, livingEntity.posZ, new ItemStack(Items.BOWL)));
+					worldIn.spawnEntity(new EntityItem(worldIn, livingEntity.posX, livingEntity.posY, livingEntity.posZ, new ItemStack(Items.BOWL)));
 				}
 			}
 			return stack;

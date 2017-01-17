@@ -298,7 +298,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	}
 
 	@Override
-	public boolean isVisuallyOpaque(IBlockState state)
+	public boolean causesSuffocation(IBlockState state)
 	{
 		return false;
 	}

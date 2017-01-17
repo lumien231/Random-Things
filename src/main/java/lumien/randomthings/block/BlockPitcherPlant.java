@@ -74,12 +74,12 @@ public class BlockPitcherPlant extends BlockBase
 		{
 			if (!playerIn.capabilities.isCreativeMode)
 			{
-				equipped.func_190918_g(1);
+				equipped.shrink(1);
 			}
 			
 			if (!playerIn.inventory.addItemStackToInventory(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER)))
 			{
-				equipped.func_190917_f(1);
+				equipped.grow(1);
 			}
 
 			return true;

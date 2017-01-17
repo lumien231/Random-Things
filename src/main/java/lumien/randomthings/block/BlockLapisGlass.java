@@ -28,7 +28,7 @@ public class BlockLapisGlass extends BlockBase
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn)
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean p_185477_7_)
 	{
 		AxisAlignedBB blockBox = state.getCollisionBoundingBox(worldIn, pos);
 		AxisAlignedBB axisalignedbb = blockBox.offset(pos);
@@ -79,7 +79,7 @@ public class BlockLapisGlass extends BlockBase
 	}
 
 	@Override
-	public boolean isVisuallyOpaque(IBlockState state)
+	public boolean causesSuffocation(IBlockState state)
 	{
 		return true;
 	}

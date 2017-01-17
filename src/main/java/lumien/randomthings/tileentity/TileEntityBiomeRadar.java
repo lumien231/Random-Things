@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 {
-	ItemStack currentCrystal = ItemStack.field_190927_a;
+	ItemStack currentCrystal = ItemStack.EMPTY;
 
 	boolean powered;
 	STATE state = STATE.IDLE;
@@ -47,7 +47,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			testCounter++;
 
@@ -63,7 +63,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 				for (int i = 0; i < 5; i++)
 				{
 					BlockPos testPos = getPos(searchCounter);
-					Biome testBiome = this.worldObj.getBiome(testPos);
+					Biome testBiome = this.world.getBiome(testPos);
 					ResourceLocation registryName = testBiome.getRegistryName();
 
 					boolean exist = false;
@@ -102,13 +102,13 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 					searchCounter++;
 				}
 
-				if (searchCounter % 100 == 0 && this.worldObj != null)
+				if (searchCounter % 100 == 0 && this.world != null)
 				{
 					if (changedColor)
 					{
 						changedColor = false;
 						MessageBiomeRadarAntenna message = new MessageBiomeRadarAntenna(antennaBiomes, this.pos);
-						MessageUtil.sendToAllWatchingPos(this.worldObj, this.pos, message);
+						MessageUtil.sendToAllWatchingPos(this.world, this.pos, message);
 					}
 				}
 			}
@@ -134,7 +134,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 					{
 						Color color = new Color(RenderUtils.getBiomeColor(null, biome, this.pos));
 
-						EntityColoredSmokeFX particle = new EntityColoredSmokeFX(this.worldObj, i < 2 ? this.pos.getX() + 1.5 - i * 2 : this.pos.getX() + 0.5, this.pos.getY() + 4.1, i > 1 ? this.pos.getZ() + 1.5 - (i - 2) * 2 : this.pos.getZ() + 0.5, 0, 0, 0);
+						EntityColoredSmokeFX particle = new EntityColoredSmokeFX(this.world, i < 2 ? this.pos.getX() + 1.5 - i * 2 : this.pos.getX() + 0.5, this.pos.getY() + 4.1, i > 1 ? this.pos.getZ() + 1.5 - (i - 2) * 2 : this.pos.getZ() + 0.5, 0, 0, 0);
 						particle.setRBGColorF(1F / 255F * color.getRed(), 1F / 255F * color.getGreen(), 1F / 255F * color.getBlue());
 
 						Minecraft.getMinecraft().effectRenderer.addEffect(particle);
@@ -151,13 +151,13 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 				Color color = new Color(RenderUtils.getBiomeColor(null, b, this.pos));
 				for (int i = 0; i < 4; i++)
 				{
-					EntityColoredSmokeFX particle = new EntityColoredSmokeFX(this.worldObj, i < 2 ? this.pos.getX() + 1.5 - i * 2 : this.pos.getX() + 0.5, this.pos.getY() + 4.1, i > 1 ? this.pos.getZ() + 1.5 - (i - 2) * 2 : this.pos.getZ() + 0.5, 0, 0, 0);
+					EntityColoredSmokeFX particle = new EntityColoredSmokeFX(this.world, i < 2 ? this.pos.getX() + 1.5 - i * 2 : this.pos.getX() + 0.5, this.pos.getY() + 4.1, i > 1 ? this.pos.getZ() + 1.5 - (i - 2) * 2 : this.pos.getZ() + 0.5, 0, 0, 0);
 					particle.setRBGColorF(1F / 255F * color.getRed(), 1F / 255F * color.getGreen(), 1F / 255F * color.getBlue());
 
 					Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 				}
 
-				EntityColoredSmokeFX particle = new EntityColoredSmokeFX(this.worldObj, this.pos.getX() + 0.5, this.pos.getY() + 3.1, this.pos.getZ() + 0.5, 0, 0, 0);
+				EntityColoredSmokeFX particle = new EntityColoredSmokeFX(this.world, this.pos.getX() + 0.5, this.pos.getY() + 3.1, this.pos.getZ() + 0.5, 0, 0, 0);
 				particle.setRBGColorF(1F / 255F * color.getRed(), 1F / 255F * color.getGreen(), 1F / 255F * color.getBlue());
 
 				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
@@ -284,10 +284,10 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 
 	public void neighborChanged(Block neighborBlock)
 	{
-		boolean newPowered = this.worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0;
+		boolean newPowered = this.world.isBlockIndirectlyGettingPowered(this.pos) > 0;
 		boolean changed = false;
 
-		if (!this.powered && newPowered && this.state == STATE.IDLE && !this.currentCrystal.func_190926_b() && isValid())
+		if (!this.powered && newPowered && this.state == STATE.IDLE && !this.currentCrystal.isEmpty() && isValid())
 		{
 			Biome biome = ItemBiomeCrystal.getBiome(this.currentCrystal);
 
@@ -327,7 +327,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 	{
 		BlockPos pos = getPos(searchCounter);
 		ItemStack positionFilter = new ItemStack(ModItems.positionFilter);
-		ItemPositionFilter.setPosition(positionFilter, this.worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ());
+		ItemPositionFilter.setPosition(positionFilter, this.world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ());
 
 		return positionFilter;
 	}
@@ -351,7 +351,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 
 		for (BlockPos pos : posToCheck)
 		{
-			if (this.worldObj.getBlockState(pos).getBlock() != Blocks.IRON_BARS)
+			if (this.world.getBlockState(pos).getBlock() != Blocks.IRON_BARS)
 			{
 				return false;
 			}

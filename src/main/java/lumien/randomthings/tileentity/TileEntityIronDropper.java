@@ -62,7 +62,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			dropCounter++;
 
@@ -77,33 +77,33 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 	{
 		IItemHandler itemHandler = this.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-		EnumFacing facing = worldObj.getBlockState(pos).getValue(BlockIronDropper.FACING);
+		EnumFacing facing = world.getBlockState(pos).getValue(BlockIronDropper.FACING);
 		BlockPos blockpos = pos.offset(facing);
-		TileEntity tileEntity = worldObj.getTileEntity(blockpos);
+		TileEntity tileEntity = world.getTileEntity(blockpos);
 
 		int slot = 0;
-		ItemStack stack = ItemStack.field_190927_a;
+		ItemStack stack = ItemStack.EMPTY;
 		for (int i = 0; i < itemHandler.getSlots(); i++)
 		{
 			stack = itemHandler.getStackInSlot(i);
 
-			if (!stack.func_190926_b())
+			if (!stack.isEmpty())
 			{
 				slot = i;
 				break;
 			}
 		}
 
-		if (!stack.func_190926_b())
+		if (!stack.isEmpty())
 		{
 			ItemStack toDrop = stack.copy();
-			toDrop.func_190920_e(1);
+			toDrop.setCount(1);
 
 			if (tileEntity != null && tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
 			{
 				ItemStack result = ItemHandlerHelper.insertItemStacked(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()), toDrop, false);
 
-				if (result == null || result.func_190916_E() == 0)
+				if (result == null || result.getCount() == 0)
 				{
 					itemHandler.extractItem(slot, 1, false);
 				}
@@ -127,7 +127,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 					posY = posY - 0.15625D;
 				}
 
-				EntityItem entityItem = new EntityItem(worldObj, posX, posY, posZ, toDrop);
+				EntityItem entityItem = new EntityItem(world, posX, posY, posZ, toDrop);
 
 				int pickupDelayInteger;
 
@@ -153,7 +153,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 
 				if (randomMotion)
 				{
-					d3 = worldObj.rand.nextDouble() * 0.1D + 0.2D;
+					d3 = world.rand.nextDouble() * 0.1D + 0.2D;
 				}
 				else
 				{
@@ -166,9 +166,9 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 
 				if (randomMotion)
 				{
-					entityItem.motionX += worldObj.rand.nextGaussian() * 0.007499999832361937D * speed;
-					entityItem.motionY += worldObj.rand.nextGaussian() * 0.007499999832361937D * speed;
-					entityItem.motionZ += worldObj.rand.nextGaussian() * 0.007499999832361937D * speed;
+					entityItem.motionX += world.rand.nextGaussian() * 0.007499999832361937D * speed;
+					entityItem.motionY += world.rand.nextGaussian() * 0.007499999832361937D * speed;
+					entityItem.motionZ += world.rand.nextGaussian() * 0.007499999832361937D * speed;
 				}
 				else
 				{
@@ -177,17 +177,17 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 					entityItem.motionZ += facing.getFrontOffsetZ() * 0.5 * 0.007499999832361937D * speed;
 				}
 
-				worldObj.spawnEntityInWorld(entityItem);
+				world.spawnEntity(entityItem);
 			}
 			
 			if (effects == EFFECTS.SOUND || effects == EFFECTS.SOUND_PARTICLE)
 			{
-				worldObj.playEvent(1000, this.pos, 0);
+				world.playEvent(1000, this.pos, 0);
 			}
 			
 			if (effects == EFFECTS.PARTICLE || effects == EFFECTS.SOUND_PARTICLE)
 			{
-				worldObj.playEvent(2000, this.pos, facing.getFrontOffsetX() + 1 + (facing.getFrontOffsetZ() + 1) * 3);
+				world.playEvent(2000, this.pos, facing.getFrontOffsetX() + 1 + (facing.getFrontOffsetZ() + 1) * 3);
 			}
 		}
 	}

@@ -61,7 +61,7 @@ public class MessageAnalogEmitter implements IRTMessage
 
 						if (player != null && player.openContainer != null && player.openContainer instanceof ContainerAnalogEmitter)
 						{
-							TileEntity te = player.worldObj.getTileEntity(pos);
+							TileEntity te = player.world.getTileEntity(pos);
 
 							if (te != null && te instanceof TileEntityAnalogEmitter)
 							{

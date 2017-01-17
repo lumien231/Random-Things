@@ -103,7 +103,7 @@ public class ItemSummoningPendulum extends ItemBase
 	@Override
 	public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity, EnumHand hand)
 	{
-		if (entity.worldObj.isRemote)
+		if (entity.world.isRemote)
 		{
 			return false;
 		}
@@ -124,11 +124,11 @@ public class ItemSummoningPendulum extends ItemBase
 				entity.writeToNBTOptional(entityNBT);
 				tagList.appendTag(entityNBT);
 				entity.setDead();
-				entity.worldObj.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1.5F);
+				entity.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1.5F);
 			}
 			else
 			{
-				entity.worldObj.playSound(null, player.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 1.5F);
+				entity.world.playSound(null, player.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 1.5F);
 			}
 
 			compound.setTag("entitys", tagList);
@@ -158,13 +158,13 @@ public class ItemSummoningPendulum extends ItemBase
 					if (entity != null)
 					{
 						entity.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-						worldIn.spawnEntityInWorld(entity);
-						playerIn.worldObj.playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 0.5F);
+						worldIn.spawnEntity(entity);
+						playerIn.world.playSound(null, playerIn.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 0.5f, 0.5F);
 					}
 				}
 				else
 				{
-					playerIn.worldObj.playSound(null, playerIn.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 0.2F);
+					playerIn.world.playSound(null, playerIn.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 0.5f, 0.2F);
 				}
 			}
 		}

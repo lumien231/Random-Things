@@ -95,7 +95,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 					{
 						if (!worldIn.isRemote)
 						{
-							stack.func_190918_g(1);
+							stack.shrink(1);
 							worldIn.setBlockState(pos, ModBlocks.spectreSapling.getDefaultState());
 						}
 
@@ -115,8 +115,8 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 					if (!worldIn.isRemote)
 					{
 						BlockPos portalCenter = pos.down(3);
-						worldIn.spawnEntityInWorld(new EntityArtificialEndPortal(worldIn, portalCenter.getX() + 0.5, portalCenter.getY(), portalCenter.getZ() + 0.5));
-						stack.func_190918_g(1);
+						worldIn.spawnEntity(new EntityArtificialEndPortal(worldIn, portalCenter.getX() + 0.5, portalCenter.getY(), portalCenter.getZ() + 0.5));
+						stack.shrink(1);
 					}
 
 					return EnumActionResult.SUCCESS;
@@ -137,7 +137,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 			if (player != null)
 			{
-				return ModBlocks.biomeStone.colorMultiplier(null, player.worldObj, player.getPosition(), 0);
+				return ModBlocks.biomeStone.colorMultiplier(null, player.world, player.getPosition(), 0);
 			}
 		}
 

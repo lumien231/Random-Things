@@ -147,7 +147,7 @@ public class RandomThings implements LoadingCallback
 				TileEntityEnderAnchor anchor = (TileEntityEnderAnchor) te;
 				anchor.setTicket(t);
 
-				ForgeChunkManager.forceChunk(t, world.getChunkFromBlockCoords(anchor.getPos()).getChunkCoordIntPair());
+				ForgeChunkManager.forceChunk(t, world.getChunkFromBlockCoords(anchor.getPos()).getPos());
 			}
 			else
 			{

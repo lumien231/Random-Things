@@ -79,7 +79,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public boolean canBeCollidedWith(EntitySoul soul)
 	{
-		ItemStack equipped = Minecraft.getMinecraft().thePlayer.getHeldItemMainhand();
+		ItemStack equipped = Minecraft.getMinecraft().player.getHeldItemMainhand();
 		if (equipped != null && equipped.getItem() instanceof ItemRezStone)
 		{
 			return true;
@@ -157,7 +157,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public boolean isPlayerOnline(String username)
 	{
-		NetHandlerPlayClient netclienthandler = Minecraft.getMinecraft().thePlayer.connection;
+		NetHandlerPlayClient netclienthandler = Minecraft.getMinecraft().player.connection;
 		Collection collection = netclienthandler.getPlayerInfoMap();
 
 		Iterator<NetworkPlayerInfo> iterator = collection.iterator();
@@ -194,7 +194,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void renderRedstoneInterfaceStuff(float partialTicks)
 	{
-		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		ItemStack itemStack = player.getHeldItemMainhand();
 		if (itemStack != null)
 		{

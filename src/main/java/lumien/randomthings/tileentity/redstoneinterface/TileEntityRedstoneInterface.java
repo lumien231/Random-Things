@@ -54,9 +54,9 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 
 			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
 			{
-				if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.isTargeting(checkingBlock))
+				if (!redstoneInterface.isInvalid() && redstoneInterface.world == blockWorld && redstoneInterface.isTargeting(checkingBlock))
 				{
-					int remotePower = redstoneInterface.worldObj.getRedstonePower(redstoneInterface.pos.offset(facing), facing);
+					int remotePower = redstoneInterface.world.getRedstonePower(redstoneInterface.pos.offset(facing), facing);
 					checkedWeakPositions.remove(pos);
 
 					if (remotePower > totalPower)
@@ -92,9 +92,9 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 			
 			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
 			{
-				if (!redstoneInterface.isInvalid() && redstoneInterface.worldObj == blockWorld && redstoneInterface.isTargeting(checkingBlock))
+				if (!redstoneInterface.isInvalid() && redstoneInterface.world == blockWorld && redstoneInterface.isTargeting(checkingBlock))
 				{
-					int remotePower = redstoneInterface.worldObj.getStrongPower(redstoneInterface.pos.offset(facing), facing);
+					int remotePower = redstoneInterface.world.getStrongPower(redstoneInterface.pos.offset(facing), facing);
 					checkedStrongPositions.remove(pos);
 
 					if (remotePower > totalPower)

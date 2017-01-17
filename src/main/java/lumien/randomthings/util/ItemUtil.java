@@ -7,7 +7,7 @@ public class ItemUtil
 {
 	public static boolean areItemStackContentEqual(ItemStack is1, ItemStack is2)
 	{
-		if (is1.func_190926_b() || is2.func_190926_b())
+		if (is1.isEmpty() || is2.isEmpty())
 		{
 			return false;
 		}
@@ -27,7 +27,7 @@ public class ItemUtil
 
 	public static boolean areOreDictionaried(ItemStack is1, ItemStack is2)
 	{
-		if (is1.func_190926_b() || is2.func_190926_b())
+		if (is1.isEmpty() || is2.isEmpty())
 		{
 			return false;
 		}

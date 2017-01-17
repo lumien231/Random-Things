@@ -67,7 +67,7 @@ public class BaublesInventoryWrapper implements IInventory {
 	public void markDirty() {	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(EntityPlayer player) {
 		return true;
 	}
 
@@ -104,7 +104,7 @@ public class BaublesInventoryWrapper implements IInventory {
 	}
 
 	@Override
-	public boolean func_191420_l()
+	public boolean isEmpty()
 	{
 		return false;
 	}

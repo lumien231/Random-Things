@@ -97,12 +97,12 @@ public class WorldUtil
 
 		for (AxisAlignedBB bb : bbs)
 		{
-			int minChunkX = MathHelper.floor_double((bb.minX - World.MAX_ENTITY_RADIUS) / 16.0D);
-			int maxChunkX = MathHelper.floor_double((bb.maxX + World.MAX_ENTITY_RADIUS) / 16.0D);
-			int minChunkZ = MathHelper.floor_double((bb.minZ - World.MAX_ENTITY_RADIUS) / 16.0D);
-			int maxChunkZ = MathHelper.floor_double((bb.maxZ + World.MAX_ENTITY_RADIUS) / 16.0D);
-			int minChunkY = MathHelper.floor_double((bb.minY - World.MAX_ENTITY_RADIUS) / 16.0D);
-			int maxChunkY = MathHelper.floor_double((bb.maxY + World.MAX_ENTITY_RADIUS) / 16.0D);
+			int minChunkX = MathHelper.floor((bb.minX - World.MAX_ENTITY_RADIUS) / 16.0D);
+			int maxChunkX = MathHelper.floor((bb.maxX + World.MAX_ENTITY_RADIUS) / 16.0D);
+			int minChunkZ = MathHelper.floor((bb.minZ - World.MAX_ENTITY_RADIUS) / 16.0D);
+			int maxChunkZ = MathHelper.floor((bb.maxZ + World.MAX_ENTITY_RADIUS) / 16.0D);
+			int minChunkY = MathHelper.floor((bb.minY - World.MAX_ENTITY_RADIUS) / 16.0D);
+			int maxChunkY = MathHelper.floor((bb.maxY + World.MAX_ENTITY_RADIUS) / 16.0D);
 
 			for (int x = minChunkX; x <= maxChunkX; x++)
 			{
@@ -175,16 +175,16 @@ public class WorldUtil
 		float f1 = rng.nextFloat() * 0.8F + 0.1F;
 		float f2 = rng.nextFloat() * 0.8F + 0.1F;
 
-		while (stack.func_190916_E() > 0)
+		while (stack.getCount() > 0)
 		{
 			int i = rng.nextInt(21) + 10;
 
-			if (i > stack.func_190916_E())
+			if (i > stack.getCount())
 			{
-				i = stack.func_190916_E();
+				i = stack.getCount();
 			}
 
-			stack.func_190918_g(i);
+			stack.shrink(i);
 			EntityItem entityitem = new EntityItem(worldIn, x + f, y + f1, z + f2, new ItemStack(stack.getItem(), i, stack.getMetadata()));
 
 			if (stack.hasTagCompound())
@@ -196,7 +196,7 @@ public class WorldUtil
 			entityitem.motionX = rng.nextGaussian() * f3;
 			entityitem.motionY = rng.nextGaussian() * f3 + 0.20000000298023224D;
 			entityitem.motionZ = rng.nextGaussian() * f3;
-			worldIn.spawnEntityInWorld(entityitem);
+			worldIn.spawnEntity(entityitem);
 		}
 	}
 }

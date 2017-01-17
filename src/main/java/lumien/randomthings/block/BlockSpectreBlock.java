@@ -52,7 +52,7 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public boolean isVisuallyOpaque(IBlockState state)
+	public boolean causesSuffocation(IBlockState state)
 	{
 		return false;
 	}

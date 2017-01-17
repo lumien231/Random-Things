@@ -83,7 +83,7 @@ public class AsmHandler
 
 	public static void preHarvest(PlayerInteractionManager manager)
 	{
-		ItemStack tool = manager.thisPlayerMP.getHeldItemMainhand();
+		ItemStack tool = manager.player.getHeldItemMainhand();
 
 		if (tool != null && EnchantmentHelper.getEnchantmentLevel(ModEnchantments.magnetic, tool) > 0)
 		{
@@ -100,7 +100,7 @@ public class AsmHandler
 
 			for (ItemStack is : catchedDrops)
 			{
-				ItemHandlerHelper.giveItemToPlayer(interactionManager.thisPlayerMP, is.copy());
+				ItemHandlerHelper.giveItemToPlayer(interactionManager.player, is.copy());
 			}
 
 			interactionManager = null;
@@ -144,7 +144,7 @@ public class AsmHandler
 	@SideOnly(Side.CLIENT)
 	public static int getColorFromItemStack(ItemStack is, int originalColor)
 	{
-		if (!is.func_190926_b())
+		if (!is.isEmpty())
 		{
 			NBTTagCompound compound;
 			if ((compound = is.getTagCompound()) != null)
@@ -198,7 +198,7 @@ public class AsmHandler
 		{
 			if (!TileEntityLightRedirector.redirectorSet.isEmpty())
 			{
-				blockAccess = Minecraft.getMinecraft().theWorld;
+				blockAccess = Minecraft.getMinecraft().world;
 
 				BlockPos changedPos = getSwitchedPosition(blockAccess, pos);
 

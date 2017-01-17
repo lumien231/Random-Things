@@ -36,6 +36,6 @@ public class ItemBlockBiomeStone extends ItemBlock implements IRTItemColor
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
-		return ModBlocks.biomeStone.colorMultiplier(null, Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer.getPosition(), 0);
+		return ModBlocks.biomeStone.colorMultiplier(null, Minecraft.getMinecraft().world, Minecraft.getMinecraft().player.getPosition(), 0);
 	}
 }

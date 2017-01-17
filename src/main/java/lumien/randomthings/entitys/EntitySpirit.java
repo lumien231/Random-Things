@@ -68,7 +68,7 @@ public class EntitySpirit extends EntityFlying
 
 		spiritAge++;
 
-		if (!this.worldObj.isRemote && spiritAge > Numbers.SPIRIT_LIFETIME)
+		if (!this.world.isRemote && spiritAge > Numbers.SPIRIT_LIFETIME)
 		{
 			this.onKillCommand();
 		}
@@ -91,7 +91,7 @@ public class EntitySpirit extends EntityFlying
 				}
 			}
 		}
-		if (!source.isMagicDamage() && source != DamageSource.outOfWorld && !source.isCreativePlayer())
+		if (!source.isMagicDamage() && source != DamageSource.OUT_OF_WORLD && !source.isCreativePlayer())
 		{
 			return false;
 		}
@@ -157,7 +157,7 @@ public class EntitySpirit extends EntityFlying
 
 				BlockPos modPos = spawnPosition.add(modX, modY, modZ);
 
-				if (worldObj.isAirBlock(modPos))
+				if (world.isAirBlock(modPos))
 				{
 					newTarget = modPos;
 				}
@@ -194,11 +194,11 @@ public class EntitySpirit extends EntityFlying
 	{
 		super.onUpdate();
 
-		if (this.worldObj.isRemote && (this.lastTickPosX != this.posX || this.lastTickPosY != this.posY || this.lastTickPosZ != this.posZ))
+		if (this.world.isRemote && (this.lastTickPosX != this.posX || this.lastTickPosY != this.posY || this.lastTickPosZ != this.posZ))
 		{
 			if (Math.random() < 0.5)
 			{
-				this.worldObj.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, this.posX, this.posY, this.posZ, Math.random() * 0.02 - 0.01, Math.random() * 0.02, Math.random() * 0.02 - 0.01);
+				this.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, this.posX, this.posY, this.posZ, Math.random() * 0.02 - 0.01, Math.random() * 0.02, Math.random() * 0.02 - 0.01);
 			}
 		}
 	}
@@ -224,7 +224,7 @@ public class EntitySpirit extends EntityFlying
 				double d2 = this.posZ - this.parentEntity.posZ;
 				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
-				d3 = MathHelper.sqrt_double(d3);
+				d3 = MathHelper.sqrt(d3);
 
 				if (this.isNotColliding(this.posX, this.posY, this.posZ, d3) && d3 > 0.2)
 				{
@@ -253,7 +253,7 @@ public class EntitySpirit extends EntityFlying
 			{
 				axisalignedbb = axisalignedbb.offset(d0, d1, d2);
 
-				if (!this.parentEntity.worldObj.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty())
+				if (!this.parentEntity.world.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty())
 				{
 					return false;
 				}

@@ -68,7 +68,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			boolean newPowered = checkSupposedPowereredState();
 
@@ -76,7 +76,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			{
 				powered = newPowered;
 				this.syncTE();
-				this.worldObj.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector, false);
+				this.world.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector, false);
 			}
 		}
 	}
@@ -115,7 +115,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 		if (filterClass != null)
 		{
 			final Class finalFilterClass = filterClass;
-			List<Entity> entityList = worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.pos, this.pos.add(1, 1, 1)).expand(rangeX, rangeY, rangeZ), new Predicate<Entity>()
+			List<Entity> entityList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.pos, this.pos.add(1, 1, 1)).expand(rangeX, rangeY, rangeZ), new Predicate<Entity>()
 			{
 				@Override
 				public boolean apply(Entity input)

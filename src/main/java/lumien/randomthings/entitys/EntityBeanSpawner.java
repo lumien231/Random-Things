@@ -36,7 +36,7 @@ public class EntityBeanSpawner extends Entity
 	{
 		super.onUpdate();
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			for (int run = 0; run < 10 && !isDead; run++)
 			{
@@ -72,11 +72,11 @@ public class EntityBeanSpawner extends Entity
 
 					if (radius == maxRadius - 5 + 1)
 					{
-						worldObj.setBlockState(pos, Blocks.GLOWSTONE.getDefaultState(), 2);
+						world.setBlockState(pos, Blocks.GLOWSTONE.getDefaultState(), 2);
 					}
 					else
 					{
-						worldObj.setBlockState(pos, ModBlocks.specialBeanStalk.getDefaultState(), 2);
+						world.setBlockState(pos, ModBlocks.specialBeanStalk.getDefaultState(), 2);
 					}
 
 					if (rng.nextBoolean())

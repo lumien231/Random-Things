@@ -122,7 +122,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	@Override
 	public void update()
 	{
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			int roomSteps = affectedBlocks.size() > 0 ? 2 : 5;
 			for (int i = 0; i < roomSteps; i++)
@@ -183,7 +183,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		}
 		else if (currentPotionEffect != null && affectedBlocks.size() > 0)
 		{
-			if (!getStackInSlot(0).func_190926_b() && durationLeft > 0)
+			if (!getStackInSlot(0).isEmpty() && durationLeft > 0)
 			{
 				fuelBurnTime = fuelBurn = TileEntityFurnace.getItemBurnTime(getStackInSlot(0));
 
@@ -198,11 +198,11 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		{
 			ItemStack newPotion = inventory.getStackInSlot(1);
 
-			if (!newPotion.func_190926_b())
+			if (!newPotion.isEmpty())
 			{
 				ItemStack output = getStackInSlot(2);
 
-				if (output.func_190926_b() || output.func_190916_E() < 64)
+				if (output.isEmpty() || output.getCount() < 64)
 				{
 					List<PotionEffect> effects = PotionUtils.getEffectsFromStack((newPotion));
 
@@ -211,11 +211,11 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 						currentPotionEffect = new PotionEffect(effects.get(0));
 						durationLeft = currentPotionEffect.getDuration();
 
-						inventory.setInventorySlotContents(1, ItemStack.field_190927_a);
+						inventory.setInventorySlotContents(1, ItemStack.EMPTY);
 
-						if (!output.func_190926_b())
+						if (!output.isEmpty())
 						{
-							output.func_190917_f(1);
+							output.grow(1);
 						}
 						else
 						{
@@ -229,7 +229,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 
 	private void stepPotionEffect()
 	{
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (currentPotionEffect != null)
 			{
@@ -245,7 +245,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 					counter++;
 				}
 
-				for (EntityLivingBase entity : (List<EntityLivingBase>) WorldUtil.getEntitiesWithinAABBs(worldObj, EntityLivingBase.class, bbs))
+				for (EntityLivingBase entity : (List<EntityLivingBase>) WorldUtil.getEntitiesWithinAABBs(world, EntityLivingBase.class, bbs))
 				{
 					PotionEffect activeEffect = entity.getActivePotionEffect(currentPotionEffect.getPotion());
 					boolean isNightVision = currentPotionEffect.getPotion() == MobEffects.NIGHT_VISION;
@@ -266,10 +266,10 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 
 	private void spawnParticles()
 	{
-		if (!worldObj.isRemote && currentPotionEffect != null && worldObj.getTotalWorldTime() % 5 == 0)
+		if (!world.isRemote && currentPotionEffect != null && world.getTotalWorldTime() % 5 == 0)
 		{
 			MessagePotionVaporizerParticles message = new MessagePotionVaporizerParticles(new ArrayList<BlockPos>(affectedBlocks), currentPotionEffect.getPotion().getLiquidColor());
-			PacketHandler.INSTANCE.sendToAllAround(message, new TargetPoint(this.worldObj.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 32));
+			PacketHandler.INSTANCE.sendToAllAround(message, new TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 32));
 		}
 	}
 
@@ -284,7 +284,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	{
 		if (firstCheck)
 		{
-			EnumFacing facing = worldObj.getBlockState(pos).getValue(BlockPotionVaporizer.FACING);
+			EnumFacing facing = world.getBlockState(pos).getValue(BlockPotionVaporizer.FACING);
 			toBeChecked.add(this.pos.offset(facing));
 			firstCheck = false;
 		}
@@ -302,7 +302,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 				if (!checkedBlocks.contains(toCheck))
 				{
 					checkedBlocks.add(toCheck);
-					if (worldObj.isBlockLoaded(toCheck) && worldObj.isAirBlock(toCheck))
+					if (world.isBlockLoaded(toCheck) && world.isAirBlock(toCheck))
 					{
 						validBlocks.add(toCheck);
 						checkCounter++;
@@ -336,7 +336,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		validBlocks.clear();
 		checkedBlocks.clear();
 
-		EnumFacing facing = worldObj.getBlockState(pos).getValue(BlockPotionVaporizer.FACING);
+		EnumFacing facing = world.getBlockState(pos).getValue(BlockPotionVaporizer.FACING);
 
 		toBeChecked.add(this.pos.offset(facing));
 	}
@@ -378,9 +378,9 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return inventory.isUseableByPlayer(player);
+		return inventory.isUsableByPlayer(player);
 	}
 
 	@Override
@@ -515,8 +515,8 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public boolean func_191420_l()
+	public boolean isEmpty()
 	{
-		return inventory.func_191420_l();
+		return inventory.isEmpty();
 	}
 }

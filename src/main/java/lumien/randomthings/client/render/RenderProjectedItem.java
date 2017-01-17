@@ -76,19 +76,19 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 	{
 		int i = 1;
 
-		if (stack.func_190916_E() > 48)
+		if (stack.getCount() > 48)
 		{
 			i = 5;
 		}
-		else if (stack.func_190916_E() > 32)
+		else if (stack.getCount() > 32)
 		{
 			i = 4;
 		}
-		else if (stack.func_190916_E() > 16)
+		else if (stack.getCount() > 16)
 		{
 			i = 3;
 		}
-		else if (stack.func_190916_E() > 1)
+		else if (stack.getCount() > 1)
 		{
 			i = 2;
 		}
@@ -105,7 +105,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 		ItemStack itemstack = entity.getEntityItem();
 		int i;
 
-		if (!itemstack.func_190926_b() && itemstack.getItem() != null)
+		if (!itemstack.isEmpty() && itemstack.getItem() != null)
 		{
 			i = Item.getIdFromItem(itemstack.getItem()) + itemstack.getMetadata();
 		}
@@ -129,7 +129,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 		RenderHelper.enableStandardItemLighting();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.pushMatrix();
-		IBakedModel ibakedmodel = this.itemRenderer.getItemModelWithOverrides(itemstack, entity.worldObj, (EntityLivingBase) null);
+		IBakedModel ibakedmodel = this.itemRenderer.getItemModelWithOverrides(itemstack, entity.world, (EntityLivingBase) null);
 		int j = this.transformModelCount(entity, x, y, z, partialTicks, ibakedmodel);
 		boolean flag1 = ibakedmodel.isGui3d();
 

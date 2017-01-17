@@ -44,7 +44,7 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 	{
 		TileEntityBiomeRadar radar = (TileEntityBiomeRadar) worldIn.getTileEntity(pos);
 
-		if (!radar.getCurrentCrystal().func_190926_b())
+		if (!radar.getCurrentCrystal().isEmpty())
 		{
 			WorldUtil.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), radar.getCurrentCrystal());
 		}
@@ -89,15 +89,15 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 
 		if (biomeRadar.getState() == STATE.IDLE)
 		{
-			if (biomeRadar.getCurrentCrystal().func_190926_b())
+			if (biomeRadar.getCurrentCrystal().isEmpty())
 			{
-				if (!equipped.func_190926_b() && equipped.getItem() == ModItems.biomeCrystal)
+				if (!equipped.isEmpty() && equipped.getItem() == ModItems.biomeCrystal)
 				{
 					if (!worldIn.isRemote)
 					{
 						biomeRadar.setCrystal(equipped.copy());
 
-						equipped.func_190918_g(1);
+						equipped.shrink(1);
 						worldIn.playEvent(null, 1037, pos, 0);
 					}
 
@@ -107,12 +107,12 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 			else
 			{
 				ItemStack currentCrystal;
-				if (equipped.func_190926_b() && !(currentCrystal = biomeRadar.getCurrentCrystal()).func_190926_b())
+				if (equipped.isEmpty() && !(currentCrystal = biomeRadar.getCurrentCrystal()).isEmpty())
 				{
 					if (!worldIn.isRemote)
 					{
 						playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, currentCrystal);
-						biomeRadar.setCrystal(ItemStack.field_190927_a);
+						biomeRadar.setCrystal(ItemStack.EMPTY);
 
 						worldIn.playEvent(null, 1036, pos, 0);
 					}
@@ -122,13 +122,13 @@ public class BlockBiomeRadar extends BlockContainerBase implements IRTBlockColor
 		}
 		else if (biomeRadar.getState() == STATE.FINISHED)
 		{
-			if (!equipped.func_190926_b() && equipped.getItem() == Items.PAPER)
+			if (!equipped.isEmpty() && equipped.getItem() == Items.PAPER)
 			{
 				if (!worldIn.isRemote)
 				{
 					ItemStack positionFilter = biomeRadar.generatePositionFilter();
 
-					equipped.func_190918_g(1);
+					equipped.shrink(1);
 					playerIn.inventory.addItemStackToInventory(positionFilter);
 				}
 				return true;

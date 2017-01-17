@@ -52,7 +52,7 @@ public class ItemSpectreKey extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack)
 	{
-		return Minecraft.getMinecraft().thePlayer.worldObj.provider instanceof SpectreWorldProvider;
+		return Minecraft.getMinecraft().player.world.provider instanceof SpectreWorldProvider;
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class ItemSpectreKey extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public void onUsingTick(ItemStack stack, EntityLivingBase livingEntity, int count)
 	{
-		if (livingEntity.worldObj.isRemote && count < 60)
+		if (livingEntity.world.isRemote && count < 60)
 		{
 			Particle particle;
 			float t = 1F / 255F;
@@ -90,7 +90,7 @@ public class ItemSpectreKey extends ItemBase
 
 			for (int i = 0; i < (60 - count) * 2; i++)
 			{
-				particle = factory.createParticle(0, livingEntity.worldObj, livingEntity.posX + Math.random() * 1.8 - 0.9, livingEntity.posY + Math.random() * 1.8f, livingEntity.posZ + Math.random() * 1.8 - 0.9, 0, 0, 0);
+				particle = factory.createParticle(0, livingEntity.world, livingEntity.posX + Math.random() * 1.8 - 0.9, livingEntity.posY + Math.random() * 1.8f, livingEntity.posZ + Math.random() * 1.8 - 0.9, 0, 0, 0);
 				particle.setRBGColorF(t * 122F, t * 197F, t * 205F);
 				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 			}

@@ -111,7 +111,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	@Override
 	protected void entityInit()
 	{
-		this.getDataManager().register(ITEM, ItemStack.field_190927_a);
+		this.getDataManager().register(ITEM, ItemStack.EMPTY);
 	}
 
 	/**
@@ -143,20 +143,20 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 			this.motionY = direction.getFrontOffsetY() / 10D;
 			this.motionZ = direction.getFrontOffsetZ() / 10D;
 
-			this.moveEntity(MoverType.SELF, motionX, motionY, motionZ);
+			this.move(MoverType.SELF, motionX, motionY, motionZ);
 
-			if (this.motionX == 0 && this.motionY == 0 && this.motionZ == 0 && !this.worldObj.isRemote)
+			if (this.motionX == 0 && this.motionY == 0 && this.motionZ == 0 && !this.world.isRemote)
 			{
 				if (this.enterInventories)
 				{
-					TileEntity nextTileEntity = this.worldObj.getTileEntity(new BlockPos(this.posX, this.posY, this.posZ).offset(this.direction));
-					if (this.getEntityItem() != null && this.getEntityItem().func_190916_E() > 0 && nextTileEntity != null && nextTileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite()))
+					TileEntity nextTileEntity = this.world.getTileEntity(new BlockPos(this.posX, this.posY, this.posZ).offset(this.direction));
+					if (this.getEntityItem() != null && this.getEntityItem().getCount() > 0 && nextTileEntity != null && nextTileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite()))
 					{
 						IItemHandler itemHandler = nextTileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite());
 
 						ItemStack remaining = ItemHandlerHelper.insertItemStacked(itemHandler, this.getEntityItem(), false);
 
-						if (remaining != null && remaining.func_190916_E() > 0)
+						if (remaining != null && remaining.getCount() > 0)
 						{
 							this.dropAsItem();
 						}
@@ -176,7 +176,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 
 			if (this.onGround)
 			{
-				f = this.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.98F;
+				f = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.98F;
 			}
 
 			if (this.age != -32768)
@@ -186,13 +186,13 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 
 			ItemStack item = this.getDataManager().get(ITEM);
 
-			if (!this.worldObj.isRemote && this.age >= lifespan)
+			if (!this.world.isRemote && this.age >= lifespan)
 			{
 				this.setDead();
 				this.dropAsItem();
 			}
 
-			if (item != ItemStack.field_190927_a && item.func_190916_E() <= 0)
+			if (item != ItemStack.EMPTY && item.getCount() <= 0)
 			{
 				this.setDead();
 			}
@@ -201,10 +201,10 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 
 	private void dropAsItem()
 	{
-		if (this.getEntityItem() != null && this.getEntityItem().func_190916_E() > 0)
+		if (this.getEntityItem() != null && this.getEntityItem().getCount() > 0)
 		{
-			EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getEntityItem());
-			this.worldObj.spawnEntityInWorld(ei);
+			EntityItem ei = new EntityItem(this.world, this.posX, this.posY, this.posZ, this.getEntityItem());
+			this.world.spawnEntity(ei);
 
 			ei.lifespan = 20 * 60;
 		}
@@ -224,7 +224,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	@Override
 	protected void dealFireDamage(int amount)
 	{
-		this.attackEntityFrom(DamageSource.inFire, amount);
+		this.attackEntityFrom(DamageSource.IN_FIRE, amount);
 	}
 
 	/**
@@ -284,7 +284,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 		this.setEntityItemStack(new ItemStack(nbttagcompound));
 
 		ItemStack item = this.getDataManager().get(ITEM);
-		if (item.func_190926_b() || item.func_190916_E() <= 0)
+		if (item.isEmpty() || item.getCount() <= 0)
 			this.setDead();
 		if (compound.hasKey("Lifespan"))
 			lifespan = compound.getInteger("Lifespan");
@@ -296,27 +296,27 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	@Override
 	public void onCollideWithPlayer(EntityPlayer entityIn)
 	{
-		if (!this.worldObj.isRemote && this.canBePickedUp)
+		if (!this.world.isRemote && this.canBePickedUp)
 		{
 			ItemStack itemstack = this.getEntityItem();
-			int i = itemstack.func_190916_E();
+			int i = itemstack.getCount();
 
 			if (i <= 0 || entityIn.inventory.addItemStackToInventory(itemstack))
 			{
 				if (!this.isSilent())
 				{
-					this.worldObj.playSound((EntityPlayer) null, entityIn.posX, entityIn.posY, entityIn.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+					this.world.playSound((EntityPlayer) null, entityIn.posX, entityIn.posY, entityIn.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				}
 
 				entityIn.onItemPickup(this, i);
 
-				if (!this.worldObj.isRemote)
+				if (!this.world.isRemote)
 				{
-					EntityTracker entitytracker = ((WorldServer) this.worldObj).getEntityTracker();
+					EntityTracker entitytracker = ((WorldServer) this.world).getEntityTracker();
 
-					entitytracker.sendToAllTrackingEntity(this, new SPacketCollectItem(this.getEntityId(), entityIn.getEntityId(), this.getEntityItem().func_190916_E()));
+					entitytracker.sendToTracking(this, new SPacketCollectItem(this.getEntityId(), entityIn.getEntityId(), this.getEntityItem().getCount()));
 				}
-				if (itemstack.func_190916_E() <= 0)
+				if (itemstack.getCount() <= 0)
 				{
 					this.setDead();
 				}
@@ -362,7 +362,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	{
 		ItemStack itemstack = this.getDataManager().get(ITEM);
 
-		if (itemstack.func_190926_b())
+		if (itemstack.isEmpty())
 		{
 			return new ItemStack(Blocks.STONE);
 		}

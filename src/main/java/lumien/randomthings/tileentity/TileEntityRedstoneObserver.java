@@ -127,14 +127,14 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements Simple
 		}
 		else
 		{
-			IBlockState targetState = this.worldObj.getBlockState(target);
+			IBlockState targetState = this.world.getBlockState(target);
 			for (EnumFacing facing : EnumFacing.values())
 			{
-				strongPower.put(facing, targetState.getStrongPower(this.worldObj, target, facing));
-				weakPower.put(facing, targetState.getWeakPower(this.worldObj, target, facing));
+				strongPower.put(facing, targetState.getStrongPower(this.world, target, facing));
+				weakPower.put(facing, targetState.getWeakPower(this.world, target, facing));
 			}
 
-			this.worldObj.notifyNeighborsOfStateChange(this.pos, ModBlocks.redstoneObserver, false);
+			this.world.notifyNeighborsOfStateChange(this.pos, ModBlocks.redstoneObserver, false);
 		}
 
 		observerSet.remove(this);

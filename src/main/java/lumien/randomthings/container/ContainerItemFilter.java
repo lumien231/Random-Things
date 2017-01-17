@@ -16,20 +16,20 @@ import net.minecraft.world.World;
 public class ContainerItemFilter extends Container
 {
 	EnumHand using;
-	ItemStack filterStack = ItemStack.field_190927_a;
+	ItemStack filterStack = ItemStack.EMPTY;
 	public ItemFilterRepresentation repres;
 
 	public ContainerItemFilter(EntityPlayer player, World world, int x, int y, int z)
 	{
 		filterStack = player.getHeldItemMainhand();
 		using = EnumHand.MAIN_HAND;
-		if (filterStack.func_190926_b())
+		if (filterStack.isEmpty())
 		{
 			filterStack = player.getHeldItemOffhand();
 			using = EnumHand.OFF_HAND;
 		}
 
-		if (!filterStack.func_190926_b() && filterStack.getItem() == ModItems.itemFilter)
+		if (!filterStack.isEmpty() && filterStack.getItem() == ModItems.itemFilter)
 		{
 			repres = ItemItemFilter.ItemFilterRepresentation.readFromItemStack(filterStack);
 
@@ -43,7 +43,7 @@ public class ContainerItemFilter extends Container
 		}
 		else
 		{
-			filterStack = ItemStack.field_190927_a;
+			filterStack = ItemStack.EMPTY;
 		}
 
 		bindPlayerInventory(player.inventory);
@@ -58,7 +58,7 @@ public class ContainerItemFilter extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
-		ItemStack itemstack = ItemStack.field_190927_a;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
 
 		if (slot != null && slot.getHasStack())
@@ -67,7 +67,7 @@ public class ContainerItemFilter extends Container
 
 			if (par2 < 9)
 			{
-				return ItemStack.field_190927_a;
+				return ItemStack.EMPTY;
 			}
 			else
 			{
@@ -76,25 +76,25 @@ public class ContainerItemFilter extends Container
 					Slot s = this.inventorySlots.get(i);
 					ItemStack ghostItem = s.getStack();
 					
-					if (ghostItem.func_190926_b())
+					if (ghostItem.isEmpty())
 					{
 						itemstack = itemstack1.copy();
-						itemstack.func_190920_e(1);
+						itemstack.setCount(1);
 						
 						s.putStack(itemstack);
-						return ItemStack.field_190927_a;
+						return ItemStack.EMPTY;
 					}
 				}
 			}
 		}
 
-		return ItemStack.field_190927_a;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return !filterStack.func_190926_b() && playerIn.getHeldItem(using) == filterStack;
+		return !filterStack.isEmpty() && playerIn.getHeldItem(using) == filterStack;
 	}
 
 	@Override

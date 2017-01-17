@@ -32,16 +32,16 @@ public class TileEntityOnlineDetector extends TileEntityBase implements SimpleCo
 	@Override
 	public void update()
 	{
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
-			if (worldObj.getTotalWorldTime() % 20 == 0)
+			if (world.getTotalWorldTime() % 20 == 0)
 			{
 				boolean playerCheck = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(username) != null;
 
 				if (playerOnline != playerCheck)
 				{
 					this.markDirty();
-					this.worldObj.setBlockState(pos, ModBlocks.onlineDetector.getDefaultState().withProperty(BlockOnlineDetector.POWERED, playerCheck));
+					this.world.setBlockState(pos, ModBlocks.onlineDetector.getDefaultState().withProperty(BlockOnlineDetector.POWERED, playerCheck));
 					this.playerOnline = playerCheck;
 				}
 			}
@@ -83,7 +83,7 @@ public class TileEntityOnlineDetector extends TileEntityBase implements SimpleCo
 	@Optional.Method(modid = "OpenComputers")
 	public Object[] getPlayerList(Context context, Arguments args)
 	{
-		return new Object[] { Arrays.asList(FMLCommonHandler.instance().getMinecraftServerInstance().getAllUsernames()) };
+		return new Object[] { Arrays.asList(FMLCommonHandler.instance().getMinecraftServerInstance().getOnlinePlayerNames()) };
 	}
 
 	@Override

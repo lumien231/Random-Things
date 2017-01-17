@@ -23,6 +23,6 @@ public class ItemBlockColored extends ItemBlock implements IRTItemColor
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
-		return ((IRTBlockColor)this.block).colorMultiplier(null, Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer.getPosition(), tintIndex);
+		return ((IRTBlockColor)this.block).colorMultiplier(null, Minecraft.getMinecraft().world, Minecraft.getMinecraft().player.getPosition(), tintIndex);
 	}
 }

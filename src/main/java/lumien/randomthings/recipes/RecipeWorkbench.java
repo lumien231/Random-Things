@@ -23,7 +23,7 @@ public class RecipeWorkbench extends ShapedOreRecipe
 	{
 		boolean recipeMatches = super.matches(inv, world);
 
-		ItemStack stack = ItemStack.field_190927_a;
+		ItemStack stack = ItemStack.EMPTY;
 
 		if (recipeMatches)
 		{
@@ -31,9 +31,9 @@ public class RecipeWorkbench extends ShapedOreRecipe
 			{
 				ItemStack is = inv.getStackInSlot(i);
 
-				if (!is.func_190926_b() && !(is.getItem() == Item.getItemFromBlock(Blocks.CRAFTING_TABLE)))
+				if (!is.isEmpty() && !(is.getItem() == Item.getItemFromBlock(Blocks.CRAFTING_TABLE)))
 				{
-					if (!stack.func_190926_b())
+					if (!stack.isEmpty())
 					{
 						if (!(ItemStack.areItemsEqual(stack, is)) || is.getMetadata() > 15 && !(is.getItem() instanceof ItemBlock))
 						{
@@ -60,17 +60,17 @@ public class RecipeWorkbench extends ShapedOreRecipe
 
 		NBTTagCompound compound = result.getTagCompound();
 
-		ItemStack plank = ItemStack.field_190927_a;
+		ItemStack plank = ItemStack.EMPTY;
 
 		for (int i = 0; i < var1.getSizeInventory(); i++)
 		{
-			if (!var1.getStackInSlot(i).func_190926_b())
+			if (!var1.getStackInSlot(i).isEmpty())
 			{
 				plank = var1.getStackInSlot(i);
 			}
 		}
 
-		if (!plank.func_190926_b())
+		if (!plank.isEmpty())
 		{
 			compound.setString("woodName", ((ItemBlock) plank.getItem()).getBlock().getRegistryName().toString());
 			compound.setInteger("woodMeta", plank.getItemDamage());

@@ -19,18 +19,18 @@ public class EntityReviveCircle extends Entity
 	EntitySoul toRevive;
 	EntityPlayer reviver;
 
-	public EntityReviveCircle(World worldObj)
+	public EntityReviveCircle(World world)
 	{
-		super(worldObj);
+		super(world);
 
 		age = 0;
 		this.noClip = true;
 		this.ignoreFrustumCheck = true;
 	}
 
-	public EntityReviveCircle(World worldObj, EntityPlayer reviver, double posX, double posY, double posZ, EntitySoul toRevive)
+	public EntityReviveCircle(World world, EntityPlayer reviver, double posX, double posY, double posZ, EntitySoul toRevive)
 	{
-		super(worldObj);
+		super(world);
 
 		this.setPosition(posX, posY, posZ);
 		this.toRevive = toRevive;
@@ -61,14 +61,14 @@ public class EntityReviveCircle extends Entity
 
 		age++;
 
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (this.reviver == null || this.reviver.isDead || this.reviver.getDistanceSq(this.getPosition()) > 25 || this.reviver.dimension != this.dimension || toRevive == null || toRevive.isDead)
 			{
 				this.kill();
 			}
 
-			if (this.worldObj.getTotalWorldTime() % 20 == 0)
+			if (this.world.getTotalWorldTime() % 20 == 0)
 			{
 				EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(toRevive.playerName);
 				if (player == null)
@@ -77,9 +77,9 @@ public class EntityReviveCircle extends Entity
 				}
 			}
 
-			if (this.age >= 220 && this.worldObj.getTotalWorldTime() % 10 == 0)
+			if (this.age >= 220 && this.world.getTotalWorldTime() % 10 == 0)
 			{
-				reviver.attackEntityFrom(DamageSource.magic, 1f);
+				reviver.attackEntityFrom(DamageSource.MAGIC, 1f);
 			}
 
 			if (this.age >= 400)
@@ -93,9 +93,9 @@ public class EntityReviveCircle extends Entity
 					if (player.getHealth() <= 0)
 					{
 						EntityPlayerMP revived = player.connection.playerEntity = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().recreatePlayerEntity(player, 0, false);
-						if (revived.worldObj.provider.getDimension() != this.dimension)
+						if (revived.world.provider.getDimension() != this.dimension)
 						{
-							FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(revived, this.worldObj.provider.getDimension(), new Teleporter((WorldServer) this.worldObj));
+							FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(revived, this.world.provider.getDimension(), new Teleporter((WorldServer) this.world));
 						}
 						revived.connection.setPlayerLocation(posX, posY, posZ, revived.rotationYaw, revived.rotationPitch);
 						revived.setPositionAndUpdate(posX, posY, posZ);
@@ -107,7 +107,7 @@ public class EntityReviveCircle extends Entity
 		{
 			if (this.age >= 200)
 			{
-				worldObj.spawnParticle(EnumParticleTypes.REDSTONE, this.posX + Math.random() - 0.5f, this.posY + Math.random(), this.posZ + Math.random() - 0.5f, 0, 0, 0, 1);
+				world.spawnParticle(EnumParticleTypes.REDSTONE, this.posX + Math.random() - 0.5f, this.posY + Math.random(), this.posZ + Math.random() - 0.5f, 0, 0, 0, 1);
 			}
 		}
 	}
@@ -117,11 +117,11 @@ public class EntityReviveCircle extends Entity
 	{
 		super.setDead();
 
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			for (int i = 0; i < 100; i++)
 			{
-				worldObj.spawnParticle(EnumParticleTypes.REDSTONE, this.posX + Math.random() * 3 - 1.5f, this.posY + Math.random(), this.posZ + Math.random() * 3 - 1.5f, 0, 0, 0, 1);
+				world.spawnParticle(EnumParticleTypes.REDSTONE, this.posX + Math.random() * 3 - 1.5f, this.posY + Math.random(), this.posZ + Math.random() * 3 - 1.5f, 0, 0, 0, 1);
 			}
 		}
 	}
@@ -136,7 +136,7 @@ public class EntityReviveCircle extends Entity
 	{
 		int soulID = nbt.getInteger("soul");
 
-		Entity entity = worldObj.getEntityByID(soulID);
+		Entity entity = world.getEntityByID(soulID);
 
 		if (entity != null && entity instanceof EntitySoul)
 		{

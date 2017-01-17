@@ -65,7 +65,7 @@ public class MessageRedstoneRemote implements IRTMessage
 
 					if (target != null)
 					{
-						RedstoneSignalHandler.getHandler().addSignal(player.worldObj, target, 20, 15);
+						RedstoneSignalHandler.getHandler().addSignal(player.world, target, 20, 15);
 					}
 				}
 			}

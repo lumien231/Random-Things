@@ -56,12 +56,12 @@ public class MessagePotionVaporizerParticles implements IRTMessage
 	@Override
 	public void onMessage(MessageContext context)
 	{
-		if (Minecraft.getMinecraft().theWorld != null)
+		if (Minecraft.getMinecraft().world != null)
 		{
 			Color c = new Color(color);
 			for (BlockPos pos : affectedBlocks)
 			{
-				Minecraft.getMinecraft().theWorld.spawnParticle(EnumParticleTypes.SPELL_MOB, pos.getX() + Math.random(), pos.getY() + Math.random(), pos.getZ() + Math.random(), 1D / 255D * c.getRed(), 1D / 255D * c.getGreen(), 1D / 255D * c.getBlue(), 0);
+				Minecraft.getMinecraft().world.spawnParticle(EnumParticleTypes.SPELL_MOB, pos.getX() + Math.random(), pos.getY() + Math.random(), pos.getZ() + Math.random(), 1D / 255D * c.getRed(), 1D / 255D * c.getGreen(), 1D / 255D * c.getBlue(), 0);
 			}
 		}
 	}

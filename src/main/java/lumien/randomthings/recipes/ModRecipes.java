@@ -226,7 +226,7 @@ public class ModRecipes
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (!is.func_190926_b())
+					if (!is.isEmpty())
 					{
 						if (is.getItem() == ModItems.spectreAnchor)
 						{
@@ -265,7 +265,7 @@ public class ModRecipes
 			@Override
 			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
 			{
-				return NonNullList.func_191197_a(inv.getSizeInventory(), ItemStack.field_190927_a);
+				return NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 			}
 
 			@Override
@@ -290,7 +290,7 @@ public class ModRecipes
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (!is.func_190926_b())
+					if (!is.isEmpty())
 					{
 						if (is.getItem() == ModItems.spectreAnchor)
 						{
@@ -327,7 +327,7 @@ public class ModRecipes
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (!is.func_190926_b())
+					if (!is.isEmpty())
 					{
 						if (is.getItem() == ModItems.goldenCompass)
 						{
@@ -366,13 +366,13 @@ public class ModRecipes
 			@Override
 			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
 			{
-				NonNullList aitemstack = NonNullList.func_191197_a(inv.getSizeInventory(), ItemStack.field_190927_a);
+				NonNullList aitemstack = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
 				for (int i = 0; i < inv.getSizeInventory(); i++)
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (!is.func_190926_b())
+					if (!is.isEmpty())
 					{
 						if (is.getItem() == ModItems.positionFilter)
 						{
@@ -406,7 +406,7 @@ public class ModRecipes
 				{
 					ItemStack is = inv.getStackInSlot(i);
 
-					if (!is.func_190926_b())
+					if (!is.isEmpty())
 					{
 						if (is.getItem() == ModItems.goldenCompass)
 						{

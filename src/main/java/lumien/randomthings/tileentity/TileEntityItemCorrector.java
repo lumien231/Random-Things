@@ -23,7 +23,7 @@ public class TileEntityItemCorrector extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		List<EntityItem> itemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.up(), this.pos.up().add(1, 1, 1)));
+		List<EntityItem> itemList = this.world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.up(), this.pos.up().add(1, 1, 1)));
 
 		for (EntityItem ei : itemList)
 		{

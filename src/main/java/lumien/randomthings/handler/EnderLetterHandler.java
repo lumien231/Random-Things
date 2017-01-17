@@ -53,12 +53,12 @@ public class EnderLetterHandler extends WorldSavedData
 	
 	public static EnderLetterHandler get(World worldObj)
 	{
-		EnderLetterHandler handler = (EnderLetterHandler) worldObj.loadItemData(EnderLetterHandler.class, ID);
+		EnderLetterHandler handler = (EnderLetterHandler) worldObj.loadData(EnderLetterHandler.class, ID);
 		
 		if (handler==null)
 		{
 			handler = new EnderLetterHandler();
-			worldObj.setItemData(ID, handler);
+			worldObj.setData(ID, handler);
 		}
 		
 		return handler;
@@ -125,7 +125,7 @@ public class EnderLetterHandler extends WorldSavedData
 
 		public EnderMailboxInventory(EnderLetterHandler handler)
 		{
-			enderLetters = NonNullList.func_191197_a(9, ItemStack.field_190927_a);
+			enderLetters = NonNullList.withSize(9, ItemStack.EMPTY);
 			this.handler = handler;
 		}
 
@@ -172,14 +172,14 @@ public class EnderLetterHandler extends WorldSavedData
 		@Override
 		public ItemStack decrStackSize(int index, int count)
 		{
-			if (!this.enderLetters.get(index).func_190926_b())
+			if (!this.enderLetters.get(index).isEmpty())
 			{
 				ItemStack itemstack;
 
-				if (this.enderLetters.get(index).func_190916_E() <= count)
+				if (this.enderLetters.get(index).getCount() <= count)
 				{
 					itemstack = this.enderLetters.get(index);
-					this.enderLetters.set(index, ItemStack.field_190927_a);
+					this.enderLetters.set(index, ItemStack.EMPTY);
 					this.markDirty();
 					return itemstack;
 				}
@@ -187,9 +187,9 @@ public class EnderLetterHandler extends WorldSavedData
 				{
 					itemstack = this.enderLetters.get(index).splitStack(count);
 
-					if (this.enderLetters.get(index).func_190916_E() == 0)
+					if (this.enderLetters.get(index).getCount() == 0)
 					{
-						this.enderLetters.set(index, ItemStack.field_190927_a);
+						this.enderLetters.set(index, ItemStack.EMPTY);
 					}
 
 					this.markDirty();
@@ -205,10 +205,10 @@ public class EnderLetterHandler extends WorldSavedData
 		@Override
 		public ItemStack removeStackFromSlot(int index)
 		{
-			if (!this.enderLetters.get(index).func_190926_b())
+			if (!this.enderLetters.get(index).isEmpty())
 			{
 				ItemStack itemstack = this.enderLetters.get(index);
-				this.enderLetters.set(index, ItemStack.field_190927_a);
+				this.enderLetters.set(index, ItemStack.EMPTY);
 				return itemstack;
 			}
 			else
@@ -222,9 +222,9 @@ public class EnderLetterHandler extends WorldSavedData
 		{
 			this.enderLetters.set(index, stack);
 
-			if (!stack.func_190926_b() && stack.func_190916_E() > this.getInventoryStackLimit())
+			if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
 			{
-				stack.func_190920_e(this.getInventoryStackLimit());
+				stack.setCount(this.getInventoryStackLimit());
 			}
 
 			this.markDirty();
@@ -246,7 +246,7 @@ public class EnderLetterHandler extends WorldSavedData
 		}
 
 		@Override
-		public boolean isUseableByPlayer(EntityPlayer player)
+		public boolean isUsableByPlayer(EntityPlayer player)
 		{
 			return true;
 		}
@@ -289,16 +289,16 @@ public class EnderLetterHandler extends WorldSavedData
 		{
 			for (int i = 0; i < this.enderLetters.size(); ++i)
 			{
-				this.enderLetters.set(i, ItemStack.field_190927_a);
+				this.enderLetters.set(i, ItemStack.EMPTY);
 			}
 		}
 
 		@Override
-		public boolean func_191420_l()
+		public boolean isEmpty()
 		{
 			for (ItemStack itemstack : this.enderLetters)
 	        {
-	            if (!itemstack.func_190926_b())
+	            if (!itemstack.isEmpty())
 	            {
 	                return false;
 	            }

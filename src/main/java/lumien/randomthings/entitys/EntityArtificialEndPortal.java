@@ -45,17 +45,17 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 		{
 			actionTimer++;
 
-			if (this.worldObj.isRemote && this.actionTimer > 40)
+			if (this.world.isRemote && this.actionTimer > 40)
 			{
 				spawnParticles();
 			}
 		}
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
-			if (this.worldObj.getTotalWorldTime() % 40 == 0)
+			if (this.world.getTotalWorldTime() % 40 == 0)
 			{
-				if (!isValidPosition(worldObj, new BlockPos(this.posX, this.posY, this.posZ), false))
+				if (!isValidPosition(world, new BlockPos(this.posX, this.posY, this.posZ), false))
 				{
 					this.setDead();
 				}
@@ -65,7 +65,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 		{
 			if (this.actionTimer == 85)
 			{
-				this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS, 0.2F, 1, false);
+				this.world.playSound(this.posX, this.posY, this.posZ, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS, 0.2F, 1, false);
 			}
 		}
 	}
@@ -80,7 +80,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 			double modX = Math.random() * 0.05f - 0.025f;
 			double modZ = Math.random() * 0.05f - 0.025f;
 
-			Particle particle = builder.createParticle(0, worldObj, this.posX + modX, this.posY + 2, this.posZ + modZ, modX * 2, 1, modZ * 2);
+			Particle particle = builder.createParticle(0, world, this.posX + modX, this.posY + 2, this.posZ + modZ, modX * 2, 1, modZ * 2);
 			particle.setRBGColorF(0.2F + (float) Math.random() * 0.1f, 0, 0.3F + (float) Math.random() * 0.1f);
 
 			Minecraft.getMinecraft().effectRenderer.addEffect(particle);
@@ -92,7 +92,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 	{
 		super.onCollideWithPlayer(entityIn);
 
-		if (!this.worldObj.isRemote && this.actionTimer >= 200 && entityIn.getEntityBoundingBox().intersectsWith(this.getEntityBoundingBox()) && !entityIn.isRiding() && !entityIn.isBeingRidden())
+		if (!this.world.isRemote && this.actionTimer >= 200 && entityIn.getEntityBoundingBox().intersectsWith(this.getEntityBoundingBox()) && !entityIn.isRiding() && !entityIn.isBeingRidden())
 		{
 			entityIn.changeDimension(1);
 		}
@@ -127,13 +127,13 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 		this.actionTimer = additionalData.readInt();
 	}
 
-	public static boolean isValidPosition(World worldObj, BlockPos center, boolean checkForOtherPortals)
+	public static boolean isValidPosition(World world, BlockPos center, boolean checkForOtherPortals)
 	{
 		for (int modX = -1; modX < 2; modX++)
 		{
 			for (int modZ = -1; modZ < 2; modZ++)
 			{
-				if (!worldObj.isAirBlock(center.add(modX, 0, modZ)))
+				if (!world.isAirBlock(center.add(modX, 0, modZ)))
 				{
 					return false;
 				}
@@ -142,13 +142,13 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 
 		for (int modY = 1; modY < 3; modY++)
 		{
-			if (!worldObj.isAirBlock(center.add(0, modY, 0)))
+			if (!world.isAirBlock(center.add(0, modY, 0)))
 			{
 				return false;
 			}
 		}
 
-		if (worldObj.getBlockState(center.add(0, 3, 0)).getBlock() != Blocks.END_ROD || worldObj.getBlockState(center.add(0, 4, 0)).getBlock() != Blocks.END_STONE)
+		if (world.getBlockState(center.add(0, 3, 0)).getBlock() != Blocks.END_ROD || world.getBlockState(center.add(0, 4, 0)).getBlock() != Blocks.END_STONE)
 		{
 			return false;
 		}
@@ -157,7 +157,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 		{
 			for (int modZ = -1; modZ < 2; modZ++)
 			{
-				if (worldObj.getBlockState(center.add(modX, -1, modZ)).getBlock() != Blocks.END_STONE)
+				if (world.getBlockState(center.add(modX, -1, modZ)).getBlock() != Blocks.END_STONE)
 				{
 					return false;
 				}
@@ -170,7 +170,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 			{
 				if (modX == -2 || modZ == -2 || modX == 2 || modZ == 2)
 				{
-					if (worldObj.getBlockState(center.add(modX, 0, modZ)).getBlock() != Blocks.OBSIDIAN)
+					if (world.getBlockState(center.add(modX, 0, modZ)).getBlock() != Blocks.OBSIDIAN)
 					{
 						return false;
 					}
@@ -180,7 +180,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 
 		if (checkForOtherPortals)
 		{
-			List<EntityArtificialEndPortal> portalList = worldObj.getEntitiesWithinAABB(EntityArtificialEndPortal.class, new AxisAlignedBB(center, center.add(1, 2, 1)));
+			List<EntityArtificialEndPortal> portalList = world.getEntitiesWithinAABB(EntityArtificialEndPortal.class, new AxisAlignedBB(center, center.add(1, 2, 1)));
 
 			if (!portalList.isEmpty())
 			{

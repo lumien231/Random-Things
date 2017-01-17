@@ -76,7 +76,7 @@ public class ItemBean extends ItemBase
 
 				worldIn.playSound(null, pos.up(), ModBlocks.beanSprout.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
-				stack.func_190918_g(1);
+				stack.shrink(1);
 				return EnumActionResult.SUCCESS;
 			}
 			else if (stack.getItemDamage() == 1 && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up()))
@@ -86,7 +86,7 @@ public class ItemBean extends ItemBase
 
 				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
-				stack.func_190918_g(1);
+				stack.shrink(1);
 				return EnumActionResult.SUCCESS;
 			}
 			else if (stack.getItemDamage() == 2 && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up()))
@@ -96,7 +96,7 @@ public class ItemBean extends ItemBase
 
 				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
 
-				stack.func_190918_g(1);
+				stack.shrink(1);
 				return EnumActionResult.SUCCESS;
 			}
 			return EnumActionResult.FAIL;

@@ -47,7 +47,7 @@ public class MessageLightRedirector implements IRTMessage
 	@Override
 	public void onMessage(MessageContext context)
 	{
-		WorldClient worldObj = Minecraft.getMinecraft().theWorld;
+		WorldClient worldObj = Minecraft.getMinecraft().world;
 
 		if (worldObj != null && worldObj.provider.getDimension() == dimension && worldObj.isBlockLoaded(pos))
 		{

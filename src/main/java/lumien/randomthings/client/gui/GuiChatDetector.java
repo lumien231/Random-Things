@@ -69,7 +69,7 @@ public class GuiChatDetector extends GuiContainer
 	{
 		if (pressedKey == Keyboard.KEY_ESCAPE || (!this.chatMessageInput.isFocused() && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode()))
 		{
-			this.mc.thePlayer.closeScreen();
+			this.mc.player.closeScreen();
 		}
 
 		if (this.chatMessageInput.textboxKeyTyped(par1, pressedKey))

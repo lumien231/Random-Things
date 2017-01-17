@@ -44,21 +44,21 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 			BlockPos oldTarget = this.target;
 
 			this.target = newTarget;
-			IBlockState state = this.worldObj.getBlockState(this.pos);
-			this.worldObj.notifyBlockUpdate(pos, state, state, 3);
+			IBlockState state = this.world.getBlockState(this.pos);
+			this.world.notifyBlockUpdate(pos, state, state, 3);
 
 			if (oldTarget != null)
 			{
-				IBlockState targetState = worldObj.getBlockState(oldTarget);
-				targetState.neighborChanged(worldObj, oldTarget, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
-				worldObj.notifyNeighborsOfStateChange(oldTarget, Blocks.REDSTONE_BLOCK,false);
+				IBlockState targetState = world.getBlockState(oldTarget);
+				targetState.neighborChanged(world, oldTarget, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
+				world.notifyNeighborsOfStateChange(oldTarget, Blocks.REDSTONE_BLOCK,false);
 			}
 
 			if (this.target != null)
 			{
-				IBlockState targetState = worldObj.getBlockState(target);
-				targetState.neighborChanged(worldObj, target, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
-				worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK,false);
+				IBlockState targetState = world.getBlockState(target);
+				targetState.neighborChanged(world, target, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
+				world.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK,false);
 			}
 		}
 	}
@@ -81,9 +81,9 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 
 		if (this.target != null)
 		{
-			IBlockState targetState = worldObj.getBlockState(target);
-			targetState.neighborChanged(worldObj, target, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
-			worldObj.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK,false);
+			IBlockState targetState = world.getBlockState(target);
+			targetState.neighborChanged(world, target, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
+			world.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK,false);
 		}
 	}
 

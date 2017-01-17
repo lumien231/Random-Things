@@ -30,7 +30,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			// Replace Sand
 			if (rand.nextInt(40) == 0)
@@ -40,16 +40,16 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 				int rZ = this.pos.getZ() + rand.nextInt(11) - 5;
 
 				BlockPos target = new BlockPos(rX, rY, rZ);
-				IBlockState state = worldObj.getBlockState(target);
+				IBlockState state = world.getBlockState(target);
 				if (state.getBlock() instanceof BlockSand)
 				{
-					if (this.worldObj.isAirBlock(target.up()))
+					if (this.world.isAirBlock(target.up()))
 					{
-						this.worldObj.setBlockState(target, Blocks.GRASS.getDefaultState());
+						this.world.setBlockState(target, Blocks.GRASS.getDefaultState());
 					}
 					else
 					{
-						this.worldObj.setBlockState(target, Blocks.DIRT.getDefaultState());
+						this.world.setBlockState(target, Blocks.DIRT.getDefaultState());
 					}
 				}
 			}
@@ -57,20 +57,20 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 			// Animal Spawning
 			if (rand.nextInt(400) == 0)
 			{
-				List<EntityAnimal> closeAnimals = worldObj.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(this.pos, this.pos).expand(5, 5, 5));
+				List<EntityAnimal> closeAnimals = world.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(this.pos, this.pos).expand(5, 5, 5));
 				if (closeAnimals.size() < 2)
 				{
 					int rX = this.pos.getX() + rand.nextInt(11) - 5;
 					int rY = this.pos.getY() + rand.nextInt(5) - 2;
 					int rZ = this.pos.getZ() + rand.nextInt(11) - 5;
 
-					Biome.SpawnListEntry entry = ((WorldServer) worldObj).getSpawnListEntryForTypeAt(EnumCreatureType.CREATURE, new BlockPos(rX, rY, rZ));
+					Biome.SpawnListEntry entry = ((WorldServer) world).getSpawnListEntryForTypeAt(EnumCreatureType.CREATURE, new BlockPos(rX, rY, rZ));
 					if (entry != null)
 					{
 						EntityLiving entityliving = null;
 						try
 						{
-							entityliving = entry.entityClass.getConstructor(new Class[] { World.class }).newInstance(new Object[] { worldObj });
+							entityliving = entry.entityClass.getConstructor(new Class[] { World.class }).newInstance(new Object[] { world });
 						}
 						catch (Exception exception)
 						{
@@ -82,7 +82,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 
 							if (entityliving.getCanSpawnHere() && entityliving.isNotColliding())
 							{
-								worldObj.spawnEntityInWorld(entityliving);
+								world.spawnEntity(entityliving);
 							}
 						}
 					}
@@ -97,14 +97,14 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 				int rZ = this.pos.getZ() + rand.nextInt(11) - 5;
 
 				BlockPos target = new BlockPos(rX, rY, rZ);
-				IBlockState state = worldObj.getBlockState(target);
+				IBlockState state = world.getBlockState(target);
 				if (state.getBlock() instanceof IGrowable)
 				{
 					IGrowable growable = (IGrowable) state.getBlock();
-					if (growable.canGrow(worldObj, target, state, worldObj.isRemote))
+					if (growable.canGrow(world, target, state, world.isRemote))
 					{
-						worldObj.playEvent(2005, target, 0);
-						growable.grow(worldObj, rand, target, state);
+						world.playEvent(2005, target, 0);
+						growable.grow(world, rand, target, state);
 					}
 				}
 			}
@@ -117,11 +117,11 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 				int rZ = this.pos.getZ() + rand.nextInt(41) - 20;
 
 				BlockPos target = new BlockPos(rX, rY, rZ);
-				IBlockState state = worldObj.getBlockState(target);
-				if (Blocks.SAPLING.canPlaceBlockAt(worldObj, target.up()))
+				IBlockState state = world.getBlockState(target);
+				if (Blocks.SAPLING.canPlaceBlockAt(world, target.up()))
 				{
-					worldObj.playEvent(2005, target, 0);
-					worldObj.setBlockState(target.up(), Blocks.SAPLING.getDefaultState());
+					world.playEvent(2005, target, 0);
+					world.setBlockState(target.up(), Blocks.SAPLING.getDefaultState());
 				}
 			}
 
@@ -133,9 +133,9 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 				BlockInfo randomInfo = patternInfo.get(rand.nextInt(patternInfo.size()));
 				if (randomInfo.getState().getBlock() != ModBlocks.natureCore)
 				{
-					if (worldObj.isAirBlock(this.pos.add(randomInfo.getMod().down())))
+					if (world.isAirBlock(this.pos.add(randomInfo.getMod().down())))
 					{
-						worldObj.setBlockState(this.pos.add(randomInfo.getMod().down()), randomInfo.getState());
+						world.setBlockState(this.pos.add(randomInfo.getMod().down()), randomInfo.getState());
 					}
 				}
 			}

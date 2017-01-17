@@ -23,9 +23,9 @@ public class TileEntityItemRejuvenator extends TileEntityBase implements ITickab
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
-			List<EntityItem> itemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.up(), this.pos.up().add(1, 1, 1)));
+			List<EntityItem> itemList = this.world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.up(), this.pos.up().add(1, 1, 1)));
 
 			for (EntityItem ei : itemList)
 			{

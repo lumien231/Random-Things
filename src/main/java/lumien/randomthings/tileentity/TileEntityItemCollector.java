@@ -36,14 +36,14 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			counter++;
 			if (counter >= currentTickRate)
 			{
 				counter = 0;
 
-				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE), this.pos.add(Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1)), EntitySelectors.IS_ALIVE);
+				List<EntityItem> entityItemList = this.world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE), this.pos.add(Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1)), EntitySelectors.IS_ALIVE);
 
 				if (entityItemList.isEmpty())
 				{
@@ -59,8 +59,8 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 						currentTickRate--;
 					}
 
-					EnumFacing facing = this.worldObj.getBlockState(this.pos).getValue(BlockItemCollector.FACING);
-					TileEntity te = this.worldObj.getTileEntity(this.pos.offset(facing.getOpposite()));
+					EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockItemCollector.FACING);
+					TileEntity te = this.world.getTileEntity(this.pos.offset(facing.getOpposite()));
 
 					if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
 					{
@@ -71,7 +71,7 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 							{
 								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, ei.getEntityItem().copy(), false);
 								
-								if (left == null || left.func_190916_E() == 0)
+								if (left == null || left.getCount() == 0)
 								{
 									ei.setDead();
 								}

@@ -71,8 +71,8 @@ public abstract class TileEntityBase extends TileEntity
 
 		if (renderAfterData())
 		{
-			IBlockState state = this.worldObj.getBlockState(this.pos);
-			this.worldObj.notifyBlockUpdate(pos, state, state, 3);
+			IBlockState state = this.world.getBlockState(this.pos);
+			this.world.notifyBlockUpdate(pos, state, state, 3);
 		}
 	}
 
@@ -102,8 +102,8 @@ public abstract class TileEntityBase extends TileEntity
 
 	public void syncTE()
 	{
-		IBlockState state = this.worldObj.getBlockState(this.pos);
-		this.worldObj.notifyBlockUpdate(pos, state, state, 3);
+		IBlockState state = this.world.getBlockState(this.pos);
+		this.world.notifyBlockUpdate(pos, state, state, 3);
 	}
 
 	public abstract void writeDataToNBT(NBTTagCompound compound);
@@ -117,7 +117,7 @@ public abstract class TileEntityBase extends TileEntity
 
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
 	{
-		boolean newPowered = this.worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0;
+		boolean newPowered = this.world.isBlockIndirectlyGettingPowered(this.pos) > 0;
 		boolean changed = redstonePowered != newPowered;
 
 		if (changed)

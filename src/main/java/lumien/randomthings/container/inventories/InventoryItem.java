@@ -14,7 +14,7 @@ public class InventoryItem implements IInventory
 	String name;
 	int size;
 
-	ItemStack itemStack = ItemStack.field_190927_a;
+	ItemStack itemStack = ItemStack.EMPTY;
 	NonNullList<ItemStack> cacheInventory;
 
 	boolean reading;
@@ -24,7 +24,7 @@ public class InventoryItem implements IInventory
 		this.name = name;
 		this.size = size;
 		this.itemStack = itemStack;
-		this.cacheInventory = NonNullList.func_191197_a(size, ItemStack.field_190927_a);
+		this.cacheInventory = NonNullList.withSize(size, ItemStack.EMPTY);
 		this.reading = false;
 
 		loadInventory();
@@ -82,14 +82,14 @@ public class InventoryItem implements IInventory
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		if (!this.cacheInventory.get(index).func_190926_b())
+		if (!this.cacheInventory.get(index).isEmpty())
 		{
 			ItemStack itemstack;
 
-			if (this.cacheInventory.get(index).func_190916_E() <= count)
+			if (this.cacheInventory.get(index).getCount() <= count)
 			{
 				itemstack = this.cacheInventory.get(index);
-				this.cacheInventory.set(index, ItemStack.field_190927_a);
+				this.cacheInventory.set(index, ItemStack.EMPTY);
 				this.markDirty();
 				return itemstack;
 			}
@@ -97,9 +97,9 @@ public class InventoryItem implements IInventory
 			{
 				itemstack = this.cacheInventory.get(index).splitStack(count);
 
-				if (this.cacheInventory.get(index).func_190916_E() == 0)
+				if (this.cacheInventory.get(index).getCount() == 0)
 				{
-					this.cacheInventory.set(index, ItemStack.field_190927_a);
+					this.cacheInventory.set(index, ItemStack.EMPTY);
 				}
 
 				this.markDirty();
@@ -108,22 +108,22 @@ public class InventoryItem implements IInventory
 		}
 		else
 		{
-			return ItemStack.field_190927_a;
+			return ItemStack.EMPTY;
 		}
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
-		if (!this.cacheInventory.get(index).func_190926_b())
+		if (!this.cacheInventory.get(index).isEmpty())
 		{
 			ItemStack itemstack = this.cacheInventory.get(index);
-			this.cacheInventory.set(index, ItemStack.field_190927_a);
+			this.cacheInventory.set(index, ItemStack.EMPTY);
 			return itemstack;
 		}
 		else
 		{
-			return ItemStack.field_190927_a;
+			return ItemStack.EMPTY;
 		}
 	}
 
@@ -132,9 +132,9 @@ public class InventoryItem implements IInventory
 	{
 		this.cacheInventory.set(index, stack);
 
-		if (!stack.func_190926_b() && stack.func_190916_E() > this.getInventoryStackLimit())
+		if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
 		{
-			stack.func_190920_e(this.getInventoryStackLimit());
+			stack.setCount(this.getInventoryStackLimit());
 		}
 
 		if (!reading)
@@ -165,7 +165,7 @@ public class InventoryItem implements IInventory
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
 		return true;
 	}
@@ -208,7 +208,7 @@ public class InventoryItem implements IInventory
 	{
 		for (int i = 0; i < this.cacheInventory.size(); ++i)
 		{
-			this.cacheInventory.set(i, ItemStack.field_190927_a);
+			this.cacheInventory.set(i, ItemStack.EMPTY);
 		}
 	}
 
@@ -218,11 +218,11 @@ public class InventoryItem implements IInventory
 	}
 
 	@Override
-	public boolean func_191420_l()
+	public boolean isEmpty()
 	{
 		for (ItemStack itemstack : this.cacheInventory)
 		{
-			if (!itemstack.func_190926_b())
+			if (!itemstack.isEmpty())
 			{
 				return false;
 			}

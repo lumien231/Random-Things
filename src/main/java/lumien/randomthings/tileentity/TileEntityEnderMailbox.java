@@ -20,17 +20,17 @@ public class TileEntityEnderMailbox extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote && this.owner != null)
+		if (!this.world.isRemote && this.owner != null)
 		{
 			tickCounter++;
 
 			if (tickCounter == 20 * 10)
 			{
 				tickCounter = 0;
-				IBlockState state = worldObj.getBlockState(this.pos);
+				IBlockState state = world.getBlockState(this.pos);
 				boolean active = state.getValue(BlockEnderMailbox.ACTIVE);
 
-				EnderLetterHandler enderLetterHandler = EnderLetterHandler.get(worldObj);
+				EnderLetterHandler enderLetterHandler = EnderLetterHandler.get(world);
 				boolean post = enderLetterHandler.hasInventoryFor(this.owner);
 
 				if (post)
@@ -40,7 +40,7 @@ public class TileEntityEnderMailbox extends TileEntityBase implements ITickable
 
 				if (post != active)
 				{
-					worldObj.setBlockState(this.pos, state.withProperty(BlockEnderMailbox.ACTIVE, post));
+					world.setBlockState(this.pos, state.withProperty(BlockEnderMailbox.ACTIVE, post));
 				}
 			}
 		}

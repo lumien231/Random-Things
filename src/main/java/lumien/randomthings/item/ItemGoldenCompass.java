@@ -48,7 +48,7 @@ public class ItemGoldenCompass extends ItemBase
 
 					if (worldIn == null)
 					{
-						worldIn = entity.worldObj;
+						worldIn = entity.world;
 					}
 
 					double d0;
@@ -86,7 +86,7 @@ public class ItemGoldenCompass extends ItemBase
 					this.lastUpdateTick = p_185093_1_.getTotalWorldTime();
 					double d0 = p_185093_2_ - this.rotation;
 					d0 = d0 % (Math.PI * 2D);
-					d0 = MathHelper.clamp_double(d0, -1.0D, 1.0D);
+					d0 = MathHelper.clamp(d0, -1.0D, 1.0D);
 					this.rota += d0 * 0.1D;
 					this.rota *= 0.8D;
 					this.rotation += this.rota;

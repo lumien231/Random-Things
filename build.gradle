@@ -29,7 +29,7 @@ dependencies {
     deobfCompile "mezz.jei:jei_1.11:4.0.5.203"
 }
 
-version = "3.7.8"
+version = "3.7.9"
 group= "lumien.randomthings"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -41,7 +41,7 @@ jar {
 }
 
 minecraft {
-    version = "1.11-13.19.1.2188"
+    version = "1.11.2-13.20.0.2216"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -49,7 +49,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20161111"
+    mappings = "snapshot_20161220"
     
     replaceIn "lib/Reference.java"
     replace "@VERSION@",project.version

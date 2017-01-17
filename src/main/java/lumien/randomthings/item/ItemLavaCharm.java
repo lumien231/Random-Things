@@ -39,7 +39,7 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 		if (entityIn != null && entityIn instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) entityIn;
-			if (!player.worldObj.isRemote)
+			if (!player.world.isRemote)
 			{
 				if (itemstack.getTagCompound() == null)
 				{
@@ -68,7 +68,7 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player)
 	{
-		if (!player.worldObj.isRemote)
+		if (!player.world.isRemote)
 		{
 			if (itemstack.getTagCompound() == null)
 			{

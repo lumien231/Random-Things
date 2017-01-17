@@ -29,7 +29,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	@Override
 	public void update()
 	{
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 		{
 			if (this.rotationSpeed != 0)
 			{
@@ -99,7 +99,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	{
 		this.modelRotation = newModelRotation;
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			syncTE();
 		}
@@ -114,7 +114,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	{
 		this.model = model;
 
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			syncTE();
 		}
@@ -139,7 +139,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	{
 		this.rotationSpeed = rotationSpeed;
 		
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			syncTE();
 		}
@@ -159,7 +159,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	{
 		this.ambientLight = newAmbientLight;
 		
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			syncTE();
 		}
@@ -169,7 +169,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	{
 		this.randomize = newRandomize;
 		
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			syncTE();
 		}

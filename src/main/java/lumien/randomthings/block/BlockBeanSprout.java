@@ -131,7 +131,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
-		int i = state.getValue(AGE).intValue() + MathHelper.getRandomIntegerInRange(worldIn.rand, 2, 5);
+		int i = state.getValue(AGE).intValue() + MathHelper.getInt(worldIn.rand, 2, 5);
 
 		if (i > 7)
 		{

@@ -205,7 +205,7 @@ public class RTEventHandler
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void playerClone(PlayerEvent.Clone event)
 	{
-		if (event.isWasDeath() && !event.isCanceled() && event.getOriginal() != null && !(event.getEntityPlayer() instanceof FakePlayer) && !event.getEntityPlayer().worldObj.getGameRules().getBoolean("keepInventory"))
+		if (event.isWasDeath() && !event.isCanceled() && event.getOriginal() != null && !(event.getEntityPlayer() instanceof FakePlayer) && !event.getEntityPlayer().world.getGameRules().getBoolean("keepInventory"))
 		{
 			EntityPlayer oldPlayer = event.getOriginal();
 			EntityPlayer newPlayer = event.getEntityPlayer();
@@ -214,11 +214,11 @@ public class RTEventHandler
 			{
 				ItemStack is = oldPlayer.inventory.getStackInSlot(i);
 
-				if (!is.func_190926_b() && is.hasTagCompound() && is.getTagCompound().hasKey("spectreAnchor"))
+				if (!is.isEmpty() && is.hasTagCompound() && is.getTagCompound().hasKey("spectreAnchor"))
 				{
 					ItemStack newIs = newPlayer.inventory.getStackInSlot(i);
 
-					if (newIs.func_190926_b())
+					if (newIs.isEmpty())
 					{
 						newPlayer.inventory.setInventorySlotContents(i, is.copy());
 					}
@@ -236,7 +236,7 @@ public class RTEventHandler
 						else
 						{
 							RandomThings.instance.logger.log(Level.INFO, "Couldn't keep Anchored Item in the Inventory");
-							WorldUtil.spawnItemStack(oldPlayer.worldObj, oldPlayer.posX, oldPlayer.posY, oldPlayer.posZ, is);
+							WorldUtil.spawnItemStack(oldPlayer.world, oldPlayer.posX, oldPlayer.posY, oldPlayer.posZ, is);
 						}
 					}
 				}
@@ -480,7 +480,7 @@ public class RTEventHandler
 
 		Minecraft minecraft = Minecraft.getMinecraft();
 
-		if ((equippedItem = minecraft.thePlayer.getHeldItemMainhand()) != null)
+		if ((equippedItem = minecraft.player.getHeldItemMainhand()) != null)
 		{
 			if (equippedItem.getItem() == ModItems.redstoneTool)
 			{
@@ -488,7 +488,7 @@ public class RTEventHandler
 
 				if (objectMouseOver != null && objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK)
 				{
-					IBlockState hitState = minecraft.theWorld.getBlockState(objectMouseOver.getBlockPos());
+					IBlockState hitState = minecraft.world.getBlockState(objectMouseOver.getBlockPos());
 					Block hitBlock = hitState.getBlock();
 
 					if (hitBlock instanceof BlockRedstoneWire)
@@ -507,7 +507,7 @@ public class RTEventHandler
 			}
 			else if (equippedItem.getItem() == ModItems.ingredients && equippedItem.getItemDamage() == ItemIngredient.INGREDIENT.BIOME_SENSOR.id)
 			{
-				Biome b = minecraft.theWorld.getBiome(minecraft.thePlayer.getPosition());
+				Biome b = minecraft.world.getBiome(minecraft.player.getPosition());
 				int width = event.getResolution().getScaledWidth();
 				int height = event.getResolution().getScaledHeight();
 
@@ -545,7 +545,7 @@ public class RTEventHandler
 		ItemStack lavaProtector = null;
 		ItemStack lavaCharm = null;
 
-		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
 
 		lavaCharm = InventoryUtil.getBauble(ModItems.lavaCharm, player);
 
@@ -652,18 +652,18 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void livingAttacked(LivingAttackEvent event)
 	{
-		if (!event.getEntityLiving().worldObj.isRemote)
+		if (!event.getEntityLiving().world.isRemote)
 		{
 			if (!event.isCanceled() && event.getAmount() > 0 && event.getEntityLiving() instanceof EntityPlayerMP)
 			{
 				EntityPlayerMP player = (EntityPlayerMP) event.getEntityLiving();
 
-				if (event.getSource() == DamageSource.lava)
+				if (event.getSource() == DamageSource.LAVA)
 				{
 					handleLavaProtection(event);
 				}
 
-				if (event.getSource().isFireDamage() && event.getSource() != DamageSource.lava)
+				if (event.getSource().isFireDamage() && event.getSource() != DamageSource.LAVA)
 				{
 					handleFireProtection(event);
 				}
@@ -756,7 +756,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void livingUpdate(LivingUpdateEvent event)
 	{
-		if (!event.getEntityLiving().worldObj.isRemote)
+		if (!event.getEntityLiving().world.isRemote)
 		{
 			if (event.getEntityLiving() instanceof EntityPlayer)
 			{
@@ -786,12 +786,12 @@ public class RTEventHandler
 					{
 						BlockPos liquid = new BlockPos(Math.floor(player.posX), Math.floor(player.posY), Math.floor(player.posZ));
 						BlockPos air = new BlockPos((int) player.posX, (int) (player.posY + player.height), (int) player.posZ);
-						Block liquidBlock = player.worldObj.getBlockState(liquid).getBlock();
-						Material liquidMaterial = liquidBlock.getMaterial(player.worldObj.getBlockState(liquid));
+						Block liquidBlock = player.world.getBlockState(liquid).getBlock();
+						Material liquidMaterial = liquidBlock.getMaterial(player.world.getBlockState(liquid));
 
-						if ((liquidMaterial == Material.WATER || (boots.getItem() == ModItems.lavaWader && liquidMaterial == Material.LAVA)) && player.worldObj.getBlockState(air).getBlock().isAir(player.worldObj.getBlockState(air), player.worldObj, air) && EntityUtil.isJumping(player))
+						if ((liquidMaterial == Material.WATER || (boots.getItem() == ModItems.lavaWader && liquidMaterial == Material.LAVA)) && player.world.getBlockState(air).getBlock().isAir(player.world.getBlockState(air), player.world, air) && EntityUtil.isJumping(player))
 						{
-							player.moveEntity(MoverType.SELF, 0, 0.22, 0);
+							player.move(MoverType.SELF, 0, 0.22, 0);
 						}
 					}
 				}
@@ -803,9 +803,9 @@ public class RTEventHandler
 	@SideOnly(Side.CLIENT)
 	private void spawnEntityFilterParticles(LivingUpdateEvent event)
 	{
-		EntityPlayer thePlayer = Minecraft.getMinecraft().thePlayer;
+		EntityPlayer player = Minecraft.getMinecraft().player;
 
-		ItemStack equipped = thePlayer.getHeldItemMainhand();
+		ItemStack equipped = player.getHeldItemMainhand();
 
 		if (equipped != null && equipped.getItem() == ModItems.entityFilter)
 		{
@@ -823,7 +823,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void livingDeath(LivingDeathEvent event)
 	{
-		if (!event.getEntityLiving().worldObj.isRemote)
+		if (!event.getEntityLiving().world.isRemote)
 		{
 			if (event.getEntityLiving() instanceof EntityDragon)
 			{
@@ -848,14 +848,14 @@ public class RTEventHandler
 					}
 				}
 
-				if (event.getEntityLiving().worldObj.canBlockSeeSky(event.getEntityLiving().getPosition()) && !event.getEntityLiving().worldObj.isDaytime())
+				if (event.getEntityLiving().world.canBlockSeeSky(event.getEntityLiving().getPosition()) && !event.getEntityLiving().world.isDaytime())
 				{
-					chance += event.getEntityLiving().worldObj.getCurrentMoonPhaseFactor() / 100f * Numbers.SPIRIT_CHANCE_MOON_MULT;
+					chance += event.getEntityLiving().world.getCurrentMoonPhaseFactor() / 100f * Numbers.SPIRIT_CHANCE_MOON_MULT;
 				}
 
 				if (Math.random() < chance)
 				{
-					event.getEntityLiving().worldObj.spawnEntityInWorld(new EntitySpirit(event.getEntityLiving().worldObj, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ));
+					event.getEntityLiving().world.spawnEntity(new EntitySpirit(event.getEntityLiving().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ));
 				}
 			}
 
@@ -867,7 +867,7 @@ public class RTEventHandler
 
 					if (!event.isCanceled())
 					{
-						player.worldObj.spawnEntityInWorld(new EntitySoul(player.worldObj, player.posX, player.posY, player.posZ, player.getGameProfile().getName()));
+						player.world.spawnEntity(new EntitySoul(player.world, player.posX, player.posY, player.posZ, player.getGameProfile().getName()));
 					}
 				}
 			}
@@ -890,7 +890,7 @@ public class RTEventHandler
 		RandomThings.proxy.renderRedstoneInterfaceStuff(event.getPartialTicks());
 
 		Minecraft mc = FMLClientHandler.instance().getClient();
-		EntityPlayer player = mc.thePlayer;
+		EntityPlayer player = mc.player;
 		if (player != null)
 		{
 			ItemStack itemStack = player.getHeldItemMainhand();

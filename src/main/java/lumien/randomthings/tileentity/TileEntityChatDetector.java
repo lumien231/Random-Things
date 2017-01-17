@@ -49,7 +49,7 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable,
 	@Override
 	public void update()
 	{
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (pulsing)
 			{
@@ -58,7 +58,7 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable,
 				if (pulsingCounter <= 0)
 				{
 					pulsing = false;
-					this.worldObj.setBlockState(pos, ModBlocks.chatDetector.getDefaultState().withProperty(BlockChatDetector.POWERED, pulsing));
+					this.world.setBlockState(pos, ModBlocks.chatDetector.getDefaultState().withProperty(BlockChatDetector.POWERED, pulsing));
 				}
 			}
 		}
@@ -118,7 +118,7 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable,
 		pulsing = true;
 		pulsingCounter = 20;
 
-		this.worldObj.setBlockState(pos, ModBlocks.chatDetector.getDefaultState().withProperty(BlockChatDetector.POWERED, pulsing));
+		this.world.setBlockState(pos, ModBlocks.chatDetector.getDefaultState().withProperty(BlockChatDetector.POWERED, pulsing));
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable,
 
 	public boolean checkMessage(String user, String sendMessage)
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.world.isRemote)
 		{
 			UUID sendUUID = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(user).getGameProfile().getId();
 			if (sendUUID.equals(this.playerUUID))

@@ -57,7 +57,7 @@ public class BlockBeanStalk extends BlockBase
 
 		if (entityIn.motionY >= 0.1)
 		{
-			Block top = entityIn.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(entityIn.posX), MathHelper.floor_double(entityIn.posY) + 3, MathHelper.floor_double(entityIn.posZ))).getBlock();
+			Block top = entityIn.world.getBlockState(new BlockPos(MathHelper.floor(entityIn.posX), MathHelper.floor(entityIn.posY) + 3, MathHelper.floor(entityIn.posZ))).getBlock();
 			if (top == this)
 			{
 				entityIn.setPosition(entityIn.posX, entityIn.posY + speed, entityIn.posZ);
@@ -65,7 +65,7 @@ public class BlockBeanStalk extends BlockBase
 		}
 		else if (entityIn.motionY <= -0.1)
 		{
-			Block bottom = entityIn.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(entityIn.posX), MathHelper.floor_double(entityIn.posY) - 3, MathHelper.floor_double(entityIn.posZ))).getBlock();
+			Block bottom = entityIn.world.getBlockState(new BlockPos(MathHelper.floor(entityIn.posX), MathHelper.floor(entityIn.posY) - 3, MathHelper.floor(entityIn.posZ))).getBlock();
 			if (bottom == null || bottom == this)
 			{ // prevent clipping into block
 				entityIn.setPosition(entityIn.posX, entityIn.posY - speed, entityIn.posZ);
@@ -122,13 +122,13 @@ public class BlockBeanStalk extends BlockBase
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		if (!worldIn.isRemote)
 		{
 			worldIn.scheduleUpdate(pos, this, 5);
 		}
-		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
+		return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
 	}
 
 	@Override

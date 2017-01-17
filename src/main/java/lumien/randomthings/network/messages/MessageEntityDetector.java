@@ -52,7 +52,7 @@ public class MessageEntityDetector implements IRTMessage
 			{
 				NetHandlerPlayServer serverHandler = context.getServerHandler();
 
-				TileEntity te = serverHandler.playerEntity.worldObj.getTileEntity(pos);
+				TileEntity te = serverHandler.playerEntity.world.getTileEntity(pos);
 
 				if (te != null && te instanceof TileEntityEntityDetector && serverHandler.playerEntity.getDistanceSq(MessageEntityDetector.this.pos) < 64)
 				{

@@ -54,21 +54,21 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 	@Override
 	public void update()
 	{
-		if (!worldObj.isRemote)
+		if (!world.isRemote)
 		{
 			if (state == SCANNING)
 			{
-				IBlockState blockState = worldObj.getBlockState(pos);
+				IBlockState blockState = world.getBlockState(pos);
 				EnumFacing facing = blockState.getValue(BlockEnderBridge.FACING);
 
 				BlockPos nextPos = new BlockPos(pos.offset(facing, scanningCounter));
 
-				if (worldObj.isBlockLoaded(nextPos))
+				if (world.isBlockLoaded(nextPos))
 				{
-					IBlockState nextState = worldObj.getBlockState(nextPos);
+					IBlockState nextState = world.getBlockState(nextPos);
 					if (nextState.getBlock() == ModBlocks.enderAnchor)
 					{
-						List<Entity> entityList = worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2), null);
+						List<Entity> entityList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2), null);
 
 						if (!entityList.isEmpty())
 						{
@@ -85,7 +85,7 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 
 						state = WAITING;
 					}
-					else if (!nextState.getBlock().isAir(nextState, worldObj, nextPos))
+					else if (!nextState.getBlock().isAir(nextState, world, nextPos))
 					{
 						state = WAITING;
 					}

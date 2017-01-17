@@ -23,17 +23,17 @@ public class BlockSuperLubricentPlatform extends BlockBase
 	protected BlockSuperLubricentPlatform()
 	{
 		super("superLubricentPlatform", Material.ICE);
-		
+
 		this.slipperiness = 1F / 0.98F;
 		this.setHardness(0.5F).setLightOpacity(3);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.TRANSLUCENT;
-    }
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.TRANSLUCENT;
+	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -52,7 +52,7 @@ public class BlockSuperLubricentPlatform extends BlockBase
 	{
 		return false;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
@@ -78,9 +78,9 @@ public class BlockSuperLubricentPlatform extends BlockBase
 	{
 		return side == EnumFacing.UP;
 	}
-	
+
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB mask, List list, Entity collidingEntity)
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB mask, List list, Entity collidingEntity, boolean p_185477_7_)
 	{
 		if (collidingEntity != null)
 		{
@@ -104,6 +104,6 @@ public class BlockSuperLubricentPlatform extends BlockBase
 			return;
 		}
 
-		super.addCollisionBoxToList(state, worldIn, pos, mask, list, collidingEntity);
+		super.addCollisionBoxToList(state, worldIn, pos, mask, list, collidingEntity, p_185477_7_);
 	}
 }

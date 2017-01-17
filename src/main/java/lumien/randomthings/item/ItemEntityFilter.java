@@ -93,7 +93,7 @@ public class ItemEntityFilter extends ItemBase
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand)
 	{
-		if (!playerIn.worldObj.isRemote)
+		if (!playerIn.world.isRemote)
 		{
 			stack = playerIn.getHeldItemMainhand();
 			if (stack.getTagCompound() == null)
@@ -155,7 +155,7 @@ public class ItemEntityFilter extends ItemBase
 			{
 				int entityID = compound.getInteger("entityID");
 
-				entityName = EntityList.func_191302_a(EntityList.func_191306_a((EntityList.getClassFromID(entityID))));
+				entityName = EntityList.getTranslationName(EntityList.getKey((EntityList.getClassFromID(entityID))));
 			}
 
 			if (entityName != null)

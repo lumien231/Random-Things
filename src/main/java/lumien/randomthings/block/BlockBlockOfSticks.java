@@ -124,7 +124,7 @@ public class BlockBlockOfSticks extends BlockBase
 	}
 
 	@Override
-	public boolean isVisuallyOpaque(IBlockState state)
+	public boolean causesSuffocation(IBlockState state)
 	{
 		return false;
 	}
