@@ -142,8 +142,8 @@ public class ClassTransformer implements IClassTransformer
 
 						toInsert.add(new VarInsnNode(ALOAD, 1));
 						toInsert.add(new VarInsnNode(ALOAD, 2));
-						toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/world/World", "getBlockState", "(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;", false));
-						toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", "getBlock", "()Lnet/minecraft/block/Block;", true));
+						toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/world/World", MCPNames.method("func_180495_p"), "(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;", false));
+						toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", MCPNames.method("func_177230_c"), "()Lnet/minecraft/block/Block;", true));
 						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "protectGround", "(Lnet/minecraft/block/Block;)Z", false));
 						toInsert.add(new JumpInsnNode(IFGT, new LabelNode(l.getLabel())));
 						
