@@ -645,7 +645,7 @@ public class ClassTransformer implements IClassTransformer
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(MCPNames.method("func_185477_a")) && mn.desc.equals("(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;)V"))
+			if (mn.name.equals(MCPNames.method("func_185477_a")) && mn.desc.equals("(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;Z)V"))
 			{
 				addCollisionBoxesToList = mn;
 			}
