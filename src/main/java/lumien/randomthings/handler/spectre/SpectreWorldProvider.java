@@ -1,5 +1,6 @@
 package lumien.randomthings.handler.spectre;
 
+import lumien.randomthings.handler.ModDimensions;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -90,6 +91,6 @@ public class SpectreWorldProvider extends WorldProvider
 	@Override
 	public DimensionType getDimensionType()
 	{
-		return DimensionType.OVERWORLD;
+		return ModDimensions.SPECTRE_TYPE;
 	}
 }
