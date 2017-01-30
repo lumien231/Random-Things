@@ -89,7 +89,12 @@ public class BlockBeanStalk extends BlockBase
 			{
 				if (pos.getY() == worldIn.getHeight() - 2)
 				{
-					worldIn.setBlockState(pos.up(), ModBlocks.beanPod.getDefaultState());
+					IBlockState podReplace = worldIn.getBlockState(pos.up());
+
+					if (podReplace.getBlock().getBlockHardness(podReplace, worldIn, pos.up()) != -1)
+					{
+						worldIn.setBlockState(pos.up(), ModBlocks.beanPod.getDefaultState());
+					}
 					return;
 				}
 			}
