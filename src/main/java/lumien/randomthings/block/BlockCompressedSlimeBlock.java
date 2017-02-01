@@ -70,9 +70,11 @@ public class BlockCompressedSlimeBlock extends BlockBase
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
 		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-
+		
 		if (entityIn.motionY < 1)
 		{
+			entityIn.onGround = false;
+			entityIn.fallDistance = 0;
 			entityIn.motionY = 1;
 		}
 	}
