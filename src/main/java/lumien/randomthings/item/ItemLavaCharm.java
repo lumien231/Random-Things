@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 
-@Optional.Interface(iface = "baubles.api.IBauble", modid = "Baubles")
+@Optional.Interface(iface = "baubles.api.IBauble", modid = "baubles")
 public class ItemLavaCharm extends ItemBase implements IBauble
 {
 	public ItemLavaCharm()
@@ -111,6 +111,12 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 
 	@Override
 	public boolean canUnequip(ItemStack itemstack, EntityLivingBase player)
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean willAutoSync(ItemStack itemstack, EntityLivingBase player)
 	{
 		return true;
 	}

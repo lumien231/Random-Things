@@ -2,6 +2,7 @@ package lumien.randomthings.block;
 
 import java.util.List;
 
+import lumien.randomthings.lib.ISuperLubricent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSuperLubricentPlatform extends BlockBase
+public class BlockSuperLubricentPlatform extends BlockBase implements ISuperLubricent
 {
 	protected static final AxisAlignedBB PLATFORM_AABB = new AxisAlignedBB(0, 14F / 16F, 0, 1, 1, 1);
 
@@ -24,7 +25,6 @@ public class BlockSuperLubricentPlatform extends BlockBase
 	{
 		super("superLubricentPlatform", Material.ICE);
 
-		this.slipperiness = 1F / 0.98F;
 		this.setHardness(0.5F).setLightOpacity(3);
 	}
 

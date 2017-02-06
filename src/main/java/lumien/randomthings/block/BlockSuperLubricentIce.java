@@ -1,5 +1,6 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.lib.ISuperLubricent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -11,13 +12,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSuperLubricentIce extends BlockBase
+public class BlockSuperLubricentIce extends BlockBase implements ISuperLubricent
 {
 	protected BlockSuperLubricentIce()
 	{
 		super("superLubricentIce", Material.ICE);
 
-		this.slipperiness = 1F / 0.98F;
 		this.setHardness(0.5F).setLightOpacity(3);
 	}
 

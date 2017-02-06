@@ -329,7 +329,7 @@ public class RTEventHandler
 		{
 			ItemStack equipped = event.getEntityPlayer().getHeldItem(event.getHand());
 
-			if (equipped != null && equipped.getItem() instanceof ItemSpade)
+			if (!equipped.isEmpty() && equipped.getItem() instanceof ItemSpade)
 			{
 				RightClickBlock rcEvent = (RightClickBlock) event;
 				IBlockState targetState = event.getWorld().getBlockState(event.getPos());
@@ -480,7 +480,7 @@ public class RTEventHandler
 
 		Minecraft minecraft = Minecraft.getMinecraft();
 
-		if ((equippedItem = minecraft.player.getHeldItemMainhand()) != null)
+		if (!(equippedItem = minecraft.player.getHeldItemMainhand()).isEmpty())
 		{
 			if (equippedItem.getItem() == ModItems.redstoneTool)
 			{
@@ -522,7 +522,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void anvilUpdate(AnvilUpdateEvent event)
 	{
-		if (event.getLeft() != null && event.getRight() != null)
+		if (!event.getLeft().isEmpty() && !event.getRight().isEmpty())
 		{
 			AnvilRecipe recipe = AnvilRecipeHandler.getRecipe(event.getLeft(), event.getRight());
 
@@ -542,25 +542,25 @@ public class RTEventHandler
 	@SideOnly(Side.CLIENT)
 	private void renderLavaCharm(RenderGameOverlayEvent event)
 	{
-		ItemStack lavaProtector = null;
-		ItemStack lavaCharm = null;
+		ItemStack lavaProtector = ItemStack.EMPTY;
+		ItemStack lavaCharm = ItemStack.EMPTY;
 
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 
 		lavaCharm = InventoryUtil.getBauble(ModItems.lavaCharm, player);
 
-		if (lavaCharm == null)
+		if (lavaCharm.isEmpty())
 		{
 			lavaCharm = InventoryUtil.getPlayerInventoryItem(ModItems.lavaCharm, player);
 		}
 
-		if (lavaCharm != null)
+		if (!lavaCharm .isEmpty())
 		{
 			lavaProtector = lavaCharm;
 		}
 
 		ItemStack boots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
-		if (boots != null)
+		if (!boots.isEmpty())
 		{
 			if (boots.getItem() == ModItems.lavaWader)
 			{
@@ -568,7 +568,7 @@ public class RTEventHandler
 			}
 		}
 
-		if (lavaProtector != null)
+		if (!lavaProtector.isEmpty())
 		{
 			NBTTagCompound compound = lavaProtector.getTagCompound();
 			if (compound != null)
@@ -609,23 +609,23 @@ public class RTEventHandler
 
 	private void handleLavaProtection(LivingAttackEvent event)
 	{
-		ItemStack lavaProtector = null;
-		ItemStack lavaCharm = null;
+		ItemStack lavaProtector = ItemStack.EMPTY;
+		ItemStack lavaCharm = ItemStack.EMPTY;
 
 		lavaCharm = InventoryUtil.getBauble(ModItems.lavaCharm, (EntityPlayer) event.getEntityLiving());
 
-		if (lavaCharm == null)
+		if (lavaCharm.isEmpty())
 		{
 			lavaCharm = InventoryUtil.getPlayerInventoryItem(ModItems.lavaCharm, (EntityPlayer) event.getEntityLiving());
 		}
 
-		if (lavaCharm != null)
+		if (!lavaCharm.isEmpty())
 		{
 			lavaProtector = lavaCharm;
 		}
 
 		ItemStack boots = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET);
-		if (boots != null)
+		if (!boots.isEmpty())
 		{
 			if (boots.getItem() == ModItems.lavaWader)
 			{
@@ -633,7 +633,7 @@ public class RTEventHandler
 			}
 		}
 
-		if (lavaProtector != null)
+		if (!lavaProtector.isEmpty())
 		{
 			NBTTagCompound compound = lavaProtector.getTagCompound();
 			if (compound != null)
@@ -708,26 +708,24 @@ public class RTEventHandler
 		ItemStack inventorySkull = InventoryUtil.getPlayerInventoryItem(ModItems.obsidianSkull, player);
 		ItemStack obsidianBoots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
 
-		if (obsidianBoots != null && !(obsidianBoots.getItem() == ModItems.obsidianWaterWalkingBoots || obsidianBoots.getItem() == ModItems.lavaWader))
+		if (!obsidianBoots.isEmpty() && !(obsidianBoots.getItem() == ModItems.obsidianWaterWalkingBoots || obsidianBoots.getItem() == ModItems.lavaWader))
 		{
-			obsidianBoots = null;
+			obsidianBoots = ItemStack.EMPTY;
 		}
 
-		ItemStack skull = null;
+		ItemStack skull = baubleSkull;
 
-		skull = baubleSkull;
-
-		if (skull == null)
+		if (skull.isEmpty())
 		{
 			skull = inventorySkull;
 		}
 
-		if (skull == null)
+		if (skull.isEmpty())
 		{
 			skull = obsidianBoots;
 		}
 
-		if (skull != null)
+		if (!skull.isEmpty())
 		{
 			float amount = event.getAmount();
 			float rngFloat = rng.nextFloat();
@@ -782,7 +780,7 @@ public class RTEventHandler
 				if (!player.isSneaking())
 				{
 					ItemStack boots = player.inventory.armorInventory.get(0);
-					if (boots != null && ((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader))
+					if (!boots.isEmpty() && ((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader))
 					{
 						BlockPos liquid = new BlockPos(Math.floor(player.posX), Math.floor(player.posY), Math.floor(player.posZ));
 						BlockPos air = new BlockPos((int) player.posX, (int) (player.posY + player.height), (int) player.posZ);
@@ -807,7 +805,7 @@ public class RTEventHandler
 
 		ItemStack equipped = player.getHeldItemMainhand();
 
-		if (equipped != null && equipped.getItem() == ModItems.entityFilter)
+		if (!equipped.isEmpty() && equipped.getItem() == ModItems.entityFilter)
 		{
 			if (ItemEntityFilter.filterAppliesTo(equipped, event.getEntityLiving()))
 			{
@@ -895,7 +893,7 @@ public class RTEventHandler
 		{
 			ItemStack itemStack = player.getHeldItemMainhand();
 
-			if (itemStack != null)
+			if (!itemStack.isEmpty())
 			{
 				Item item = itemStack.getItem();
 				if (item == ModItems.positionFilter && itemStack.getTagCompound() != null)

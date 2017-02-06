@@ -5,6 +5,7 @@ import java.util.List;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.lib.GuiIds;
+import lumien.randomthings.lib.ISuperLubricent;
 import lumien.randomthings.tileentity.TileEntityFilteredSuperLubricentPlatform;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,15 +24,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockFilteredSuperLubricentPlatform extends BlockContainerBase
+public class BlockFilteredSuperLubricentPlatform extends BlockContainerBase implements ISuperLubricent
 {
 	protected static final AxisAlignedBB PLATFORM_AABB = new AxisAlignedBB(0, 14F / 16F, 0, 1, 1, 1);
 
 	protected BlockFilteredSuperLubricentPlatform()
 	{
 		super("filteredSuperLubricentPlatform", Material.ICE);
-
-		this.slipperiness = 1F / 0.98F;
+		
 		this.setHardness(0.5F).setLightOpacity(3);
 	}
 

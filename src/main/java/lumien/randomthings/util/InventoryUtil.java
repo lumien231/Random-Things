@@ -3,6 +3,7 @@ package lumien.randomthings.util;
 import java.util.Random;
 
 import baubles.api.BaublesApi;
+import baubles.api.cap.IBaublesItemHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -109,34 +110,34 @@ public class InventoryUtil
 				return is;
 			}
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	private static ItemStack actuallyGetBauble(Item item, EntityPlayer player)
 	{
-		IInventory baublesInventory = BaublesApi.getBaubles(player);
+		IBaublesItemHandler handler = BaublesApi.getBaublesHandler(player);
 
-		for (int i = 0; i < baublesInventory.getSizeInventory(); i++)
+		for (int i = 0; i < handler.getSlots(); i++)
 		{
-			ItemStack is = baublesInventory.getStackInSlot(i);
+			ItemStack is = handler.getStackInSlot(i);
 			if (!is.isEmpty() && is.getItem() == item)
 			{
 				return is;
 			}
 		}
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public static ItemStack getBauble(Item item, EntityPlayer player)
 	{
-		if (Loader.isModLoaded("Baubles"))
+		if (Loader.isModLoaded("baubles"))
 		{
 			return actuallyGetBauble(item, player);
 		}
 		else
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
 	}
 

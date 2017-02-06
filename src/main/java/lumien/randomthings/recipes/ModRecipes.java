@@ -204,7 +204,7 @@ public class ModRecipes
 
 
 		// Anvil
-		if (Loader.isModLoaded("Baubles"))
+		if (Loader.isModLoaded("baubles"))
 		{
 			AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.obsidianSkull), new ItemStack(Items.FIRE_CHARGE), new ItemStack(ModItems.obsidianSkullRing), 3);
 		}

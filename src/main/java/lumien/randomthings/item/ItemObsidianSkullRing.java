@@ -6,7 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Optional;
 
-@Optional.Interface(iface = "baubles.api.IBauble", modid = "Baubles")
+@Optional.Interface(iface = "baubles.api.IBauble", modid = "baubles")
 public class ItemObsidianSkullRing extends ItemBase implements IBauble
 {
 	public ItemObsidianSkullRing()

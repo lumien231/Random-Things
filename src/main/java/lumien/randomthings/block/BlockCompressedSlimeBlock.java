@@ -2,6 +2,7 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import lumien.randomthings.lib.ISuperLubricent;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCompressedSlimeBlock extends BlockBase
+public class BlockCompressedSlimeBlock extends BlockBase implements ISuperLubricent
 {
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.5D, 1D);
 
@@ -25,8 +26,6 @@ public class BlockCompressedSlimeBlock extends BlockBase
 		super("compressedSlimeBlock", Material.CLAY);
 
 		this.setSoundType(SoundType.SLIME);
-
-		this.slipperiness = 1F / 0.98F;
 	}
 
 	@Override

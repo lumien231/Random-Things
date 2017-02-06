@@ -17,6 +17,7 @@ import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ItemSpectreSword;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.lib.ISuperLubricent;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
@@ -70,8 +71,9 @@ public class AsmHandler
 			getFields();
 		}
 	}
-	
-	// Called when a tree tries to set the block below it to dirt, returning true prevents that from happening
+
+	// Called when a tree tries to set the block below it to dirt, returning
+	// true prevents that from happening
 	public static boolean protectGround(Block b)
 	{
 		return b == ModBlocks.fertilizedDirt || b == ModBlocks.fertilizedDirtTilled;
@@ -403,6 +405,25 @@ public class AsmHandler
 			Color c = new Color(color);
 			c = c.darker();
 			GlStateManager.color(1F / 255F * c.getRed(), 1F / 255F * c.getGreen(), 1F / 255F * c.getBlue());
+		}
+	}
+
+	static Block changed;
+	public static void preSlipFix(Block b)
+	{
+		if (b instanceof ISuperLubricent)
+		{
+			b.slipperiness = 1F / 0.91F;
+			changed = b;
+		}
+	}
+
+	public static void postSlipFix()
+	{
+		if (changed != null)
+		{
+			changed.slipperiness = 1F / 0.98F;
+			changed = null;
 		}
 	}
 }

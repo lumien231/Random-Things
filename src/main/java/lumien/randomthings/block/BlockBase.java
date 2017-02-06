@@ -1,6 +1,7 @@
 package lumien.randomthings.block;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.lib.ISuperLubricent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
@@ -21,6 +22,11 @@ public abstract class BlockBase extends Block
 		GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 
 		RandomThings.proxy.scheduleColor(this);
+		
+		if (this instanceof ISuperLubricent)
+		{
+			this.slipperiness = 1F / 0.98F;
+		}
 	}
 
 	protected BlockBase(String name, Material materialIn, Class<? extends ItemBlock> itemBlock)
@@ -42,6 +48,11 @@ public abstract class BlockBase extends Block
 			e.printStackTrace();
 		}
 		RandomThings.proxy.scheduleColor(this);
+		
+		if (this instanceof ISuperLubricent)
+		{
+			this.slipperiness = 1F / 0.98F;
+		}
 	}
 	
 	public static void registerBlock(String name,Block block)

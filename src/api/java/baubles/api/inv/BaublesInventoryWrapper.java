@@ -10,10 +10,18 @@ import net.minecraft.util.text.TextComponentString;
 public class BaublesInventoryWrapper implements IInventory {
 	
 	final IBaublesItemHandler handler;	
-
+	final EntityPlayer player;
+	
 	public BaublesInventoryWrapper(IBaublesItemHandler handler) {
 		super();
 		this.handler = handler;
+		this.player = null;
+	}
+
+	public BaublesInventoryWrapper(IBaublesItemHandler handler, EntityPlayer player) {
+		super();
+		this.handler = handler;
+		this.player = player;
 	}
 
 	@Override
@@ -35,6 +43,11 @@ public class BaublesInventoryWrapper implements IInventory {
 	public int getSizeInventory() {
 		return handler.getSlots();
 	}
+	
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
@@ -49,7 +62,7 @@ public class BaublesInventoryWrapper implements IInventory {
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
 		ItemStack out = this.getStackInSlot(index);
-		handler.setStackInSlot(index, null);
+		handler.setStackInSlot(index, ItemStack.EMPTY);
 		return out;
 	}
 
@@ -70,7 +83,7 @@ public class BaublesInventoryWrapper implements IInventory {
 	public boolean isUsableByPlayer(EntityPlayer player) {
 		return true;
 	}
-
+	
 	@Override
 	public void openInventory(EntityPlayer player) {	}
 
@@ -79,7 +92,7 @@ public class BaublesInventoryWrapper implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return handler.isItemValidForSlot(index, stack, null);
+		return handler.isItemValidForSlot(index, stack, player);
 	}
 
 	@Override
@@ -99,14 +112,10 @@ public class BaublesInventoryWrapper implements IInventory {
 	public void clear() {	
 		for (int i = 0; i < this.getSizeInventory(); ++i)
         {
-			this.setInventorySlotContents(i, null);
+			this.setInventorySlotContents(i, ItemStack.EMPTY);
         }
 	}
 
-	@Override
-	public boolean isEmpty()
-	{
-		return false;
-	}
+	
 
 }

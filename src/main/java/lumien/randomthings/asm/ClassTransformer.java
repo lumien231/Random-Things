@@ -146,9 +146,9 @@ public class ClassTransformer implements IClassTransformer
 						toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", MCPNames.method("func_177230_c"), "()Lnet/minecraft/block/Block;", true));
 						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "protectGround", "(Lnet/minecraft/block/Block;)Z", false));
 						toInsert.add(new JumpInsnNode(IFGT, new LabelNode(l.getLabel())));
-						
+
 						setDirtAt.instructions.insert(jin, toInsert);
-						
+
 						logger.log(Level.DEBUG, " - Patched setDirtAt");
 						break;
 					}
@@ -548,6 +548,7 @@ public class ClassTransformer implements IClassTransformer
 		logger.log(Level.DEBUG, "Found EntityLivingBase Class: " + classNode.name);
 
 		MethodNode updatePotionEffects = null;
+		MethodNode moveEntityWithHeading = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
@@ -555,11 +556,15 @@ public class ClassTransformer implements IClassTransformer
 			{
 				updatePotionEffects = mn;
 			}
+			else if (mn.name.equals(MCPNames.method("func_70612_e")))
+			{
+				moveEntityWithHeading = mn;
+			}
 		}
 
 		if (updatePotionEffects != null)
 		{
-			logger.log(Level.DEBUG, "- Found updatePotionEffects (1/1)");
+			logger.log(Level.DEBUG, "- Found updatePotionEffects (1/2)");
 
 			for (int i = 0; i < updatePotionEffects.instructions.size(); i++)
 			{
@@ -586,6 +591,45 @@ public class ClassTransformer implements IClassTransformer
 					}
 				}
 			}
+		}
+
+		if (moveEntityWithHeading != null)
+		{
+			logger.log(Level.DEBUG, "- Found moveEntityWithHeading (2/2)");
+
+			for (int i = 0; i < moveEntityWithHeading.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = moveEntityWithHeading.instructions.get(i);
+				if (ain instanceof FieldInsnNode)
+				{
+					FieldInsnNode fin = (FieldInsnNode) ain;
+
+					if (fin.name.equals(MCPNames.field("field_149765_K")))
+					{
+						AbstractInsnNode next = moveEntityWithHeading.instructions.get(i + 1);
+
+						if (next instanceof LdcInsnNode)
+						{
+							LdcInsnNode lin = (LdcInsnNode) next;
+							if (lin.cst.equals(new Float("0.91")))
+							{
+								InsnList preInsert = new InsnList();
+								preInsert.add(new InsnNode(Opcodes.DUP));
+								preInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "preSlipFix", "(Lnet/minecraft/block/Block;)V", false));
+
+								InsnList postInsert = new InsnList();
+								postInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "postSlipFix", "()V", false));
+
+								moveEntityWithHeading.instructions.insertBefore(fin, preInsert);
+								moveEntityWithHeading.instructions.insert(fin, postInsert);
+
+								i += 3;
+							}
+						}
+					}
+				}
+			}
+
 		}
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
