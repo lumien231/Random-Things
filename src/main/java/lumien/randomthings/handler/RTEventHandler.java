@@ -877,7 +877,7 @@ public class RTEventHandler
 	{
 		if (event.getWorld().provider.getDimension() == ModDimensions.SPECTRE_ID)
 		{
-			event.getList().clear();
+			event.setCanceled(true);
 		}
 	}
 
