@@ -36,7 +36,7 @@ public class BlockPattern
 
 	public BlockPattern()
 	{
-		blockInfos = new ArrayList<BlockInfo>();
+		blockInfos = new ArrayList<>();
 	}
 
 	public ArrayList<BlockInfo> getBlockInfo()

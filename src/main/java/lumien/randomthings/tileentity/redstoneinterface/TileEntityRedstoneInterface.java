@@ -33,7 +33,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 		this.invalidate();
 	}
 
-	static HashSet<BlockPos> checkedWeakPositions = new HashSet<BlockPos>();
+	static HashSet<BlockPos> checkedWeakPositions = new HashSet<>();
 
 	public static int getRedstonePower(World blockWorld, BlockPos pos, EnumFacing facing)
 	{
@@ -49,7 +49,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
 			
-			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<TileEntityRedstoneInterface>();
+			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<>();
 			interfaces.addAll(TileEntityRedstoneInterface.interfaces);
 
 			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
@@ -71,7 +71,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 		}
 	}
 
-	static HashSet<BlockPos> checkedStrongPositions = new HashSet<BlockPos>();
+	static HashSet<BlockPos> checkedStrongPositions = new HashSet<>();
 
 	public static int getStrongPower(World blockWorld, BlockPos pos, EnumFacing facing)
 	{
@@ -87,7 +87,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
 
-			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<TileEntityRedstoneInterface>();
+			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<>();
 			interfaces.addAll(TileEntityRedstoneInterface.interfaces);
 			
 			for (TileEntityRedstoneInterface redstoneInterface : interfaces)

@@ -21,7 +21,7 @@ public class TileEntityRainShield extends TileEntityBase
 
 	public static Set<TileEntityRainShield> shields = Collections.newSetFromMap(new WeakHashMap());
 
-	public static ConcurrentHashMap<BlockPos, Boolean> rainCache = new ConcurrentHashMap<BlockPos, Boolean>();
+	public static ConcurrentHashMap<BlockPos, Boolean> rainCache = new ConcurrentHashMap<>();
 
 	STATE state;
 

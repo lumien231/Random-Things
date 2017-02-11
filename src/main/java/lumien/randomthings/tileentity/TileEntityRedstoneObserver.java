@@ -34,8 +34,8 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements Simple
 			loadedObservers.add(this);
 		}
 
-		weakPower = new HashMap<EnumFacing, Integer>();
-		strongPower = new HashMap<EnumFacing, Integer>();
+		weakPower = new HashMap<>();
+		strongPower = new HashMap<>();
 		updateRedstoneState();
 	}
 

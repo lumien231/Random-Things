@@ -30,7 +30,7 @@ public class MagicaVoxelModel
 
 	public MagicaVoxelModel(Palette palette)
 	{
-		voxels = new ArrayList<Voxel>();
+		voxels = new ArrayList<>();
 		this.palette = palette;
 		this.build = false;
 	}

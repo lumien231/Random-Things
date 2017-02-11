@@ -25,7 +25,7 @@ public class BlockPod extends BlockBase
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> drops = new ArrayList<>();
 		Random rng = new Random();
 		rng.setSeed(System.currentTimeMillis());
 

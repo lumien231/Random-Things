@@ -31,8 +31,8 @@ public class ServerModelLibrary
 
 	public ServerModelLibrary()
 	{
-		loadedModels = new HashMap<String, LoadedModelFile>();
-		modelRequests = new WeakHashMap<NetHandlerPlayServer, ServerModelRequest>();
+		loadedModels = new HashMap<>();
+		modelRequests = new WeakHashMap<>();
 	}
 
 	public static ServerModelLibrary getInstance()
@@ -47,7 +47,7 @@ public class ServerModelLibrary
 
 	public List<String> getModelList()
 	{
-		return new ArrayList<String>(loadedModels.keySet());
+		return new ArrayList<>(loadedModels.keySet());
 	}
 
 	public void tick()
@@ -174,8 +174,8 @@ public class ServerModelLibrary
 
 	public void refresh()
 	{
-		loadedModels = new HashMap<String, LoadedModelFile>();
-		modelRequests = new WeakHashMap<NetHandlerPlayServer, ServerModelRequest>();
+		loadedModels = new HashMap<>();
+		modelRequests = new WeakHashMap<>();
 		load();
 	}
 

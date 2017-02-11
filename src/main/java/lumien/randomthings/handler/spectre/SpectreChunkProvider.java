@@ -46,7 +46,7 @@ public class SpectreChunkProvider implements IChunkGenerator
 	@Override
 	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
 	{
-		return new ArrayList<SpawnListEntry>();
+		return new ArrayList<>();
 	}
 
 

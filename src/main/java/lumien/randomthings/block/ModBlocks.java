@@ -62,6 +62,7 @@ public class ModBlocks
 	public static BlockIgniter igniter;
 	public static BlockBlockOfSticks blockOfSticks;
 	public static BlockBlazingFire blazingFire;
+	public static BlockBlockLuminous luminousBlock;
 	
 	public static BlockSpectrePlank spectrePlank;
 	public static BlockSpectreSapling spectreSapling;
@@ -144,6 +145,7 @@ public class ModBlocks
 		blockOfSticks = new BlockBlockOfSticks();
 		blazingFire = new BlockBlazingFire();
 		specialBeanStalk = new BlockSpecialBeanStalk();
+		luminousBlock = new BlockBlockLuminous();
 		
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();

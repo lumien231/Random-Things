@@ -17,6 +17,9 @@ import static org.objectweb.asm.Opcodes.IRETURN;
 import static org.objectweb.asm.Opcodes.POP;
 import static org.objectweb.asm.Opcodes.PUTSTATIC;
 import static org.objectweb.asm.Opcodes.RETURN;
+
+import java.util.Iterator;
+
 import net.minecraft.launchwrapper.IClassTransformer;
 
 import org.apache.logging.log4j.Level;
@@ -26,9 +29,11 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
+import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
@@ -37,6 +42,7 @@ import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.TypeInsnNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
 public class ClassTransformer implements IClassTransformer
@@ -101,8 +107,181 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchWorldGenTrees(basicClass);
 		}
+		else if (transformedName.equals("net.minecraftforge.client.model.pipeline.VertexLighterFlat"))
+		{
+			return patchVertexLighterFlat(basicClass);
+		}
+
 
 		return basicClass;
+	}
+
+	private byte[] patchVertexLighterFlat(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found VertexLighterFlat Class: " + classNode.name);
+
+		MethodNode processQuad = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals("processQuad"))
+			{
+				processQuad = mn;
+				break;
+			}
+		}
+
+		if (processQuad != null)
+		{
+			logger.log(Level.DEBUG, " - Found processQuad");
+
+			InsnList resetList = new InsnList();
+			resetList.add(new VarInsnNode(ALOAD, 0));
+			resetList.add(new InsnNode(ICONST_0));
+			resetList.add(new FieldInsnNode(PUTFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "rtFullBright", "Z"));
+			processQuad.instructions.insert(resetList);
+
+			AbstractInsnNode tintTarget = null;
+			int lightMapTarget = 0;
+			AbstractInsnNode updateColorTarget = null;
+
+			LabelNode firstLabel = null;
+			LabelNode lastLabel = null;
+
+			for (int i = 0; i < processQuad.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = processQuad.instructions.get(i);
+
+				if (ain instanceof VarInsnNode)
+				{
+					VarInsnNode vin = (VarInsnNode) ain;
+					if (vin.var == 5 && (processQuad.instructions.get(i - 1) instanceof MethodInsnNode))
+					{
+						tintTarget = vin;
+					}
+				}
+				else if (ain instanceof LabelNode)
+				{
+					LabelNode ln = (LabelNode) ain;
+					if (firstLabel == null)
+					{
+						firstLabel = ln;
+					}
+
+					lastLabel = ln;
+				}
+				else if (ain instanceof MethodInsnNode)
+				{
+					MethodInsnNode min = (MethodInsnNode) ain;
+
+					if (min.name.equals(MCPNames.method("func_177369_e")))
+					{
+						lightMapTarget = i;
+					}
+					else if (min.name.equals("updateColor"))
+					{
+						updateColorTarget = min;
+					}
+
+				}
+			}
+
+			FieldNode fullBrightField = new FieldNode(ACC_PRIVATE, "rtFullBright", "Z", null, false);
+			classNode.fields.add(fullBrightField);
+
+			if (lightMapTarget != 0)
+			{
+				logger.log(Level.DEBUG, " - Found patch target (lightmap) (1/4)");
+
+				for (int i = lightMapTarget; i < processQuad.instructions.size(); i++)
+				{
+					AbstractInsnNode ain = processQuad.instructions.get(i);
+					if (ain instanceof InsnNode)
+					{
+						InsnNode in = (InsnNode) ain;
+						if (in.getOpcode() == AALOAD)
+						{
+							logger.log(Level.DEBUG, " - Found lightmap array (2/4)");
+
+							LabelNode l0 = new LabelNode(new Label());
+
+							InsnList toInsert = new InsnList();
+							toInsert.add(new VarInsnNode(ALOAD, 0));
+							toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "rtFullBright", "Z"));
+							toInsert.add(new JumpInsnNode(IFEQ, l0));
+							toInsert.add(new InsnNode(POP));
+							toInsert.add(new FieldInsnNode(GETSTATIC, "lumien/randomthings/lib/Constants", "FULLBRIGHT_OVERRIDE", "[F"));
+							toInsert.add(l0);
+
+							processQuad.instructions.insert(in, toInsert);
+							break;
+						}
+					}
+				}
+			}
+
+
+
+			if (tintTarget != null)
+			{
+				LabelNode l0 = new LabelNode(new Label());
+				LabelNode l1 = new LabelNode(new Label());
+
+				InsnList toInsert = new InsnList();
+				toInsert.add(new VarInsnNode(ALOAD, 0));
+				toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "blockInfo", "Lnet/minecraftforge/client/model/pipeline/BlockInfo;"));
+				toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraftforge/client/model/pipeline/BlockInfo", "getState", "()Lnet/minecraft/block/state/IBlockState;", false));
+				toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", "getBlock", "()Lnet/minecraft/block/Block;", true));
+				toInsert.add(new TypeInsnNode(INSTANCEOF, "lumien/randomthings/lib/ILuminous"));
+				toInsert.add(new JumpInsnNode(IFEQ, l0));
+				toInsert.add(new VarInsnNode(ALOAD, 0));
+				toInsert.add(new InsnNode(ICONST_0));
+				toInsert.add(new FieldInsnNode(PUTFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "diffuse", "Z"));
+				toInsert.add(new VarInsnNode(ALOAD, 0));
+				toInsert.add(new InsnNode(ICONST_1));
+				toInsert.add(new FieldInsnNode(PUTFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "rtFullBright", "Z"));
+				toInsert.add(l0);
+
+				processQuad.instructions.insertBefore(tintTarget, toInsert);
+			}
+
+			if (updateColorTarget != null)
+			{
+				logger.log(Level.DEBUG, " - Found updateColor target (tint) (4/4)");
+
+				LabelNode l0 = new LabelNode(new Label());
+				LabelNode l1 = new LabelNode(new Label());
+
+				InsnList toInsert = new InsnList();
+				toInsert.add(new VarInsnNode(ALOAD, 0));
+				toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "rtFullBright", "Z"));
+				toInsert.add(new JumpInsnNode(IFEQ, l1));
+				toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "updateColor", "([F[FFFFFI)V", false));
+				toInsert.add(new InsnNode(POP));
+				toInsert.add(new JumpInsnNode(GOTO, l0));
+				toInsert.add(l1);
+
+				processQuad.instructions.insertBefore(updateColorTarget, toInsert);
+				processQuad.instructions.insert(updateColorTarget, l0);
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		classNode.accept(writer);
+
+		try
+		{
+			byte[] result = writer.toByteArray();
+			return result;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return basicClass;
+		}
 	}
 
 	private byte[] patchWorldGenTrees(byte[] basicClass)
@@ -444,7 +623,6 @@ public class ClassTransformer implements IClassTransformer
 					if (lin.cst.equals(new Integer(-8372020)))
 					{
 						logger.log(Level.DEBUG, "- Found Texture Binding");
-
 						renderEffect.instructions.insert(lin, new MethodInsnNode(INVOKESTATIC, asmHandler, "enchantmentColorHook", "()I", false));
 						renderEffect.instructions.remove(lin);
 					}
@@ -1048,5 +1226,23 @@ public class ClassTransformer implements IClassTransformer
 		classNode.accept(writer);
 
 		return writer.toByteArray();
+	}
+
+	public int getNextIndex(MethodNode mn)
+	{
+		Iterator it = mn.localVariables.iterator();
+		int max = 0;
+		int next = 0;
+		while (it.hasNext())
+		{
+			LocalVariableNode var = (LocalVariableNode) it.next();
+			int index = var.index;
+			if (index >= max)
+			{
+				max = index;
+				next = max + Type.getType(var.desc).getSize();
+			}
+		}
+		return next;
 	}
 }

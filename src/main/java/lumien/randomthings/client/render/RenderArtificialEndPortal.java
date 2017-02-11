@@ -5,7 +5,6 @@ import java.util.Random;
 
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -96,8 +95,8 @@ public class RenderArtificialEndPortal extends Render
 	            GlStateManager.loadIdentity();
 	            GlStateManager.translate(0.5F, 0.5F, 0.0F);
 	            GlStateManager.scale(0.5F, 0.5F, 1.0F);
-	            float f10 = (float)(i + 1);
-	            GlStateManager.translate(17.0F / f10, (2.0F + f10 / 1.5F) * ((float)Minecraft.getSystemTime() % 800000.0F / 800000.0F), 0.0F);
+	            float f10 = i + 1;
+	            GlStateManager.translate(17.0F / f10, (2.0F + f10 / 1.5F) * (Minecraft.getSystemTime() % 800000.0F / 800000.0F), 0.0F);
 	            GlStateManager.rotate((f10 * f10 * 4321.0F + f10 * 9.0F) * 2.0F, 0.0F, 0.0F, 1.0F);
 	            GlStateManager.scale(4.5F - f10 / 4.0F, 4.5F - f10 / 4.0F, 1.0F);
 	            GlStateManager.multMatrix(PROJECTION);

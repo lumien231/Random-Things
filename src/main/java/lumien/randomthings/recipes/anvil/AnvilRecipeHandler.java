@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 public class AnvilRecipeHandler
 {
-	static List<AnvilRecipe> anvilRecipes = new ArrayList<AnvilRecipe>();
+	static List<AnvilRecipe> anvilRecipes = new ArrayList<>();
 
 	public static List<AnvilRecipe> getAllRecipes()
 	{

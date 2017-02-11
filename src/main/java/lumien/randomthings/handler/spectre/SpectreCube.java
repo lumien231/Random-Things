@@ -35,7 +35,7 @@ public class SpectreCube implements IInventoryChangedListener
 
 	public SpectreCube(SpectreHandler handler)
 	{
-		guests = new ArrayList<UUID>();
+		guests = new ArrayList<>();
 		this.handler = handler;
 		this.height = 2;
 

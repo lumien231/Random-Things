@@ -26,7 +26,7 @@ public class MessagePotionVaporizerParticles implements IRTMessage
 	
 	public MessagePotionVaporizerParticles()
 	{
-		this.affectedBlocks = new ArrayList<BlockPos>();
+		this.affectedBlocks = new ArrayList<>();
 	}
 
 	@Override

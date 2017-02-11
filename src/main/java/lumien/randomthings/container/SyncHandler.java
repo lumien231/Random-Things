@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 public class SyncHandler
 {
-	static Map<Class, ArrayList<Field>> fieldMap = new HashMap<Class, ArrayList<Field>>();
+	static Map<Class, ArrayList<Field>> fieldMap = new HashMap<>();
 
 	public static void postInit(FMLPostInitializationEvent event)
 	{
@@ -38,7 +38,7 @@ public class SyncHandler
 				}
 				else
 				{
-					fieldMap.put(clazz, classFieldList = new ArrayList<Field>());
+					fieldMap.put(clazz, classFieldList = new ArrayList<>());
 				}
 
 				classFieldList.add(f);

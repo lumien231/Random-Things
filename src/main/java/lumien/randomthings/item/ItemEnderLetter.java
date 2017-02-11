@@ -76,9 +76,9 @@ public class ItemEnderLetter extends ItemBase
 		{
 			playerIn.openGui(RandomThings.instance, GuiIds.ENDER_LETTER, worldIn, 0, 0, 0);
 			
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
+			return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 		}
 
-		return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn);
+		return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
 	}
 }

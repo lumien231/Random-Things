@@ -44,9 +44,9 @@ public class ModelCustomWorkbench implements IBakedModel
 
 	public ModelCustomWorkbench()
 	{
-		modelCache = new HashMap<IBlockState, ModelCubeOverlay>();
+		modelCache = new HashMap<>();
 
-		overlays = new HashMap<EnumFacing, TextureAtlasSprite>();
+		overlays = new HashMap<>();
 
 		overlays.put(EnumFacing.UP, overlayTop);
 

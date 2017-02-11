@@ -37,11 +37,11 @@ public class GuiIronDropper extends GuiContainer
 	{
 		super.initGui();
 
-		GuiEnumButton<REDSTONE_MODE> redstoneModeButton = new GuiEnumButton<TileEntityIronDropper.REDSTONE_MODE>(0, this.guiLeft + 125, this.guiTop + 16, 20, 20, new ResourceLocation("randomthings", "textures/gui/ironDropper/redstoneMode.png"), TileEntityIronDropper.class, "redstoneMode", te);
+		GuiEnumButton<REDSTONE_MODE> redstoneModeButton = new GuiEnumButton<>(0, this.guiLeft + 125, this.guiTop + 16, 20, 20, new ResourceLocation("randomthings", "textures/gui/ironDropper/redstoneMode.png"), TileEntityIronDropper.class, "redstoneMode", te);
 		redstoneModeButton.setTooltips(new String[] { "tooltip.ironDropper.redstoneMode.pulse", "tooltip.ironDropper.redstoneMode.repeatPowered", "tooltip.ironDropper.redstoneMode.repeat" });
 		this.buttonList.add(redstoneModeButton);
 
-		GuiEnumButton<PICKUP_DELAY> pickupDelayButton = new GuiEnumButton<TileEntityIronDropper.PICKUP_DELAY>(1, this.guiLeft + 150, this.guiTop + 16, 20, 20, new ResourceLocation("randomthings", "textures/gui/ironDropper/pickupDelay.png"), TileEntityIronDropper.class, "pickupDelay", te);
+		GuiEnumButton<PICKUP_DELAY> pickupDelayButton = new GuiEnumButton<>(1, this.guiLeft + 150, this.guiTop + 16, 20, 20, new ResourceLocation("randomthings", "textures/gui/ironDropper/pickupDelay.png"), TileEntityIronDropper.class, "pickupDelay", te);
 		pickupDelayButton.setTooltips(new String[] { "tooltip.ironDropper.pickupDelay.none", "tooltip.ironDropper.pickupDelay.5", "tooltip.ironDropper.pickupDelay.20" });
 		this.buttonList.add(pickupDelayButton);
 
@@ -49,7 +49,7 @@ public class GuiIronDropper extends GuiContainer
 		randomMotionButton.setTooltips(new String[] { "tooltip.ironDropper.randomMotion.no", "tooltip.ironDropper.randomMotion.yes" });
 		this.buttonList.add(randomMotionButton);
 
-		GuiEnumButton<EFFECTS> effectsButton = new GuiEnumButton<EFFECTS>(3, this.guiLeft + 150, this.guiTop + 41, 20, 20, new ResourceLocation("randomthings", "textures/gui/ironDropper/effects.png"), TileEntityIronDropper.class, "effects", te);
+		GuiEnumButton<EFFECTS> effectsButton = new GuiEnumButton<>(3, this.guiLeft + 150, this.guiTop + 41, 20, 20, new ResourceLocation("randomthings", "textures/gui/ironDropper/effects.png"), TileEntityIronDropper.class, "effects", te);
 		effectsButton.setTooltips(new String[] { "tooltip.ironDropper.effects.none", "tooltip.ironDropper.effects.soundOnly", "tooltip.ironDropper.effects.particlesOnly", "tooltip.ironDropper.effects.both" });
 		this.buttonList.add(effectsButton);
 	}

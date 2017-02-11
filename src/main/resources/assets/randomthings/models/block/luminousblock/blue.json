@@ -1,0 +1,6 @@
+{
+    "parent": "randomthings:block/luminousblock/luminousparent",
+    "textures": {
+        "all": "randomthings:blocks/luminousblock/blue"
+    }
+}

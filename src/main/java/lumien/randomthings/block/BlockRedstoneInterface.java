@@ -24,7 +24,7 @@ public abstract class BlockRedstoneInterface extends BlockContainerBase
 		return EnumBlockRenderType.MODEL;
 	}
 
-	static HashSet<BlockPos> notifiedPositions = new HashSet<BlockPos>();
+	static HashSet<BlockPos> notifiedPositions = new HashSet<>();
 
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)

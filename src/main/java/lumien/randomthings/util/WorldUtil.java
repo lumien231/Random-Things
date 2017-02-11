@@ -93,7 +93,7 @@ public class WorldUtil
 	{
 		ArrayList arraylist = new ArrayList();
 
-		HashMap<Vec3i, ArrayList<AxisAlignedBB>> boxMap = new HashMap<Vec3i, ArrayList<AxisAlignedBB>>();
+		HashMap<Vec3i, ArrayList<AxisAlignedBB>> boxMap = new HashMap<>();
 
 		for (AxisAlignedBB bb : bbs)
 		{
@@ -117,7 +117,7 @@ public class WorldUtil
 							ArrayList<AxisAlignedBB> boxList = boxMap.get(chunkVec);
 							if (boxList == null)
 							{
-								boxList = new ArrayList<AxisAlignedBB>();
+								boxList = new ArrayList<>();
 								boxMap.put(chunkVec, boxList);
 							}
 

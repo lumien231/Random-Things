@@ -56,7 +56,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 			syncTE();
 		}
 
-		fakePlayer = new WeakReference<FakePlayer>(FakePlayerFactory.get((WorldServer) world, breakerProfile));
+		fakePlayer = new WeakReference<>(FakePlayerFactory.get((WorldServer) world, breakerProfile));
 
 		ItemStack unbreakingIronPickaxe = new ItemStack(Items.IRON_PICKAXE, 1);
 		unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());

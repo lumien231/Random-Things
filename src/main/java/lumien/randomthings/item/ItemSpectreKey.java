@@ -45,7 +45,7 @@ public class ItemSpectreKey extends ItemBase
 	{
 		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
 		par3EntityPlayer.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, par1ItemStack);
+		return new ActionResult<>(EnumActionResult.SUCCESS, par1ItemStack);
 	}
 
 	@Override

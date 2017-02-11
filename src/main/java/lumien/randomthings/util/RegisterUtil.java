@@ -1,7 +1,6 @@
 package lumien.randomthings.util;
 
 import lumien.randomthings.RandomThings;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;

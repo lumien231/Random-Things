@@ -27,7 +27,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 
 	public TileEntityAdvancedRedstoneInterface()
 	{
-		targets = new HashSet<BlockPos>();
+		targets = new HashSet<>();
 		positionInventory.addInventoryChangeListener(this);
 	}
 
@@ -96,7 +96,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 	{
 		if (this.world != null && this.pos != null)
 		{
-			HashSet<BlockPos> newTargets = new HashSet<BlockPos>();
+			HashSet<BlockPos> newTargets = new HashSet<>();
 
 			for (int i = 0; i < inventory.getSizeInventory(); i++)
 			{
@@ -109,7 +109,7 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 				}
 			}
 
-			HashSet<BlockPos> changedPositions = new HashSet<BlockPos>();
+			HashSet<BlockPos> changedPositions = new HashSet<>();
 
 			synchronized (TileEntityRedstoneInterface.lock)
 			{

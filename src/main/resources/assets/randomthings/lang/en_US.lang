@@ -102,6 +102,23 @@ tile.coloredGrass.magenta.name=Magenta Grass
 tile.coloredGrass.orange.name=Orange Grass
 tile.coloredGrass.white.name=White Grass
 
+tile.luminousBlock.black.name=Black Luminous Block
+tile.luminousBlock.red.name=Red Luminous Block
+tile.luminousBlock.green.name=Green Luminous Block
+tile.luminousBlock.brown.name=Brown Luminous Block
+tile.luminousBlock.blue.name=Blue Luminous Block
+tile.luminousBlock.purple.name=Purple Luminous Block
+tile.luminousBlock.cyan.name=Cyan Luminous Block
+tile.luminousBlock.silver.name=Light Gray Luminous Block
+tile.luminousBlock.gray.name=Gray Luminous Block
+tile.luminousBlock.pink.name=Pink Luminous Block
+tile.luminousBlock.lime.name=Lime Luminous Block
+tile.luminousBlock.yellow.name=Yellow Luminous Block
+tile.luminousBlock.lightBlue.name=Light Blue Luminous Block
+tile.luminousBlock.magenta.name=Magenta Luminous Block
+tile.luminousBlock.orange.name=Orange Luminous Block
+tile.luminousBlock.white.name=White Luminous Block
+
 tile.biomeStone.cobble.name=Biome Cobblestone
 tile.biomeStone.smooth.name=Biome Stone
 tile.biomeStone.brick.name=Biome Stone Bricks
@@ -184,6 +201,7 @@ item.ingredient.evilTear.name=Evil Tear
 item.ingredient.ectoPlasm.name=Ectoplasm
 item.ingredient.spectreIngot.name=Spectre Ingot
 item.ingredient.biomeSensor.name=Biome Sensor
+item.ingredient.luminousPowder.name=Luminous Powder
 
 tooltip.general.shift=Hold §6Shift§7 for more information
 tooltip.positionFilter.dimension=Dimension: %d

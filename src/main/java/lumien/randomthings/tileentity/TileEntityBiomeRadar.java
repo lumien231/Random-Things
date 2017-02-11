@@ -334,7 +334,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 
 	private boolean isValid()
 	{
-		List<BlockPos> posToCheck = new ArrayList<BlockPos>();
+		List<BlockPos> posToCheck = new ArrayList<>();
 
 		posToCheck.add(this.pos.offset(EnumFacing.UP));
 		posToCheck.add(this.pos.offset(EnumFacing.UP, 2));

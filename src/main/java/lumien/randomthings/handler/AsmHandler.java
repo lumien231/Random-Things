@@ -59,7 +59,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 public class AsmHandler
 {
-	static HashMap<ModContainer, Long> loadingTimes = new HashMap<ModContainer, Long>();
+	static HashMap<ModContainer, Long> loadingTimes = new HashMap<>();
 
 	static Random rng = new Random();
 
@@ -71,6 +71,16 @@ public class AsmHandler
 			getFields();
 		}
 	}
+	
+	public static void updateColor(float[] normal, float[] color, float x, float y, float z, float tint, int multiplier)
+    {
+        if(tint != -1)
+        {
+            color[0] *= (float)(multiplier >> 0x10 & 0xFF) / 0xFF;
+            color[1] *= (float)(multiplier >> 0x8 & 0xFF) / 0xFF;
+            color[2] *= (float)(multiplier & 0xFF) / 0xFF;
+        }
+    }
 
 	// Called when a tree tries to set the block below it to dirt, returning
 	// true prevents that from happening
@@ -80,7 +90,7 @@ public class AsmHandler
 	}
 
 	static boolean catchingDrops;
-	static List<ItemStack> catchedDrops = new ArrayList<ItemStack>();
+	static List<ItemStack> catchedDrops = new ArrayList<>();
 	static PlayerInteractionManager interactionManager;
 
 	public static void preHarvest(PlayerInteractionManager manager)
@@ -263,7 +273,7 @@ public class AsmHandler
 		}
 	}
 
-	static HashSet<BlockPos> posSet = new HashSet<BlockPos>();
+	static HashSet<BlockPos> posSet = new HashSet<>();
 
 	public static BlockPos getSwitchedPosition(IBlockAccess access, BlockPos pos)
 	{
@@ -409,6 +419,7 @@ public class AsmHandler
 	}
 
 	static Block changed;
+
 	public static void preSlipFix(Block b)
 	{
 		if (b instanceof ISuperLubricent)

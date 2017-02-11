@@ -25,7 +25,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 	{
 		super(ID);
 
-		redstoneSignals = new ArrayList<RedstoneSignal>();
+		redstoneSignals = new ArrayList<>();
 	}
 
 	public RedstoneSignalHandler()

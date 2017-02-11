@@ -49,7 +49,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 		if (nbt != null)
 		{
 			Set<ResourceLocation> lootTableSet = LootTableList.getAll();
-			List<ResourceLocation> sortedList = new ArrayList<ResourceLocation>(lootTableSet);
+			List<ResourceLocation> sortedList = new ArrayList<>(lootTableSet);
 			
 			Collections.sort(sortedList, new Comparator<ResourceLocation>()
 			{
@@ -78,7 +78,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 		if (nbt != null)
 		{
 			Set<ResourceLocation> lootTableSet = LootTableList.getAll();
-			List<ResourceLocation> sortedList = new ArrayList<ResourceLocation>(lootTableSet);
+			List<ResourceLocation> sortedList = new ArrayList<>(lootTableSet);
 			Collections.sort(sortedList, new Comparator<ResourceLocation>()
 			{
 				@Override
@@ -127,9 +127,9 @@ public class ItemDungeonChestGenerator extends ItemBase
 				par1ItemStack.getTagCompound().setInteger("tableIndex", currentCategory);
 			}
 
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, par1ItemStack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, par1ItemStack);
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.FAIL, par1ItemStack);
+		return new ActionResult<>(EnumActionResult.FAIL, par1ItemStack);
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 							int currentCategory = nbt.getInteger("tableIndex");
 
 							Set<ResourceLocation> lootTableSet = LootTableList.getAll();
-							List<ResourceLocation> sortedList = new ArrayList<ResourceLocation>(lootTableSet);
+							List<ResourceLocation> sortedList = new ArrayList<>(lootTableSet);
 							Collections.sort(sortedList, new Comparator<ResourceLocation>()
 							{
 								@Override

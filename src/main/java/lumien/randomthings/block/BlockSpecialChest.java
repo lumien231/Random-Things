@@ -84,7 +84,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+		List<ItemStack> ret = new java.util.ArrayList<>();
 
 		return ret;
 	}

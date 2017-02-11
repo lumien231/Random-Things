@@ -31,7 +31,7 @@ public class GuiItemProjector extends GuiContainer
 	{
 		super.initGui();
 
-		GuiEnumButton<SELECTION_MODE> redstoneModeButton = new GuiEnumButton<SELECTION_MODE>(0, this.guiLeft + 125, this.guiTop + 16, 20, 20, new ResourceLocation("randomthings", "textures/gui/itemProjector/selectionMode.png"), TileEntityItemProjector.class, "selectionMode", te);
+		GuiEnumButton<SELECTION_MODE> redstoneModeButton = new GuiEnumButton<>(0, this.guiLeft + 125, this.guiTop + 16, 20, 20, new ResourceLocation("randomthings", "textures/gui/itemProjector/selectionMode.png"), TileEntityItemProjector.class, "selectionMode", te);
 		redstoneModeButton.setTooltips(new String[] { "tooltip.itemProjector.selectionMode.first", "tooltip.itemProjector.selectionMode.last", "tooltip.itemProjector.selectionMode.biggest" });
 		this.buttonList.add(redstoneModeButton);
 	}

@@ -39,7 +39,7 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 
 	static
 	{
-		entityWhitelist = new HashSet<Class<? extends Entity>>();
+		entityWhitelist = new HashSet<>();
 		entityWhitelist.add(EntityPlayerMP.class);
 		entityWhitelist.add(EntityItem.class);
 	}

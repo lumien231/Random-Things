@@ -25,7 +25,7 @@ public class TileEntityLightRedirector extends TileEntityBase
 		synchronized (redirectorSet)
 		{
 			redirectorSet.add(this);
-			targets = new HashMap<BlockPos, BlockPos>();
+			targets = new HashMap<>();
 		}
 	}
 

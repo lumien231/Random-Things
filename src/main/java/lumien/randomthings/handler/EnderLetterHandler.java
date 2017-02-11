@@ -27,14 +27,14 @@ public class EnderLetterHandler extends WorldSavedData
 	{
 		super(name);
 		
-		inventoryMap = new HashMap<UUID,EnderMailboxInventory>();
+		inventoryMap = new HashMap<>();
 	}
 
 	public EnderLetterHandler()
 	{
 		super(ID);
 		
-		inventoryMap = new HashMap<UUID,EnderMailboxInventory>();
+		inventoryMap = new HashMap<>();
 	}
 
 	public EnderMailboxInventory getOrCreateInventoryForPlayer(UUID playerUUID)

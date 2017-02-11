@@ -47,11 +47,11 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 
 	public TileEntityPotionVaporizer()
 	{
-		affectedBlocks = new HashSet<BlockPos>();
+		affectedBlocks = new HashSet<>();
 
-		validBlocks = new HashSet<BlockPos>();
-		checkedBlocks = new HashSet<BlockPos>();
-		toBeChecked = new ArrayList<BlockPos>();
+		validBlocks = new HashSet<>();
+		checkedBlocks = new HashSet<>();
+		toBeChecked = new ArrayList<>();
 
 		durationLeft = 1;
 		fuelBurnTime = 0;
@@ -268,7 +268,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	{
 		if (!world.isRemote && currentPotionEffect != null && world.getTotalWorldTime() % 5 == 0)
 		{
-			MessagePotionVaporizerParticles message = new MessagePotionVaporizerParticles(new ArrayList<BlockPos>(affectedBlocks), currentPotionEffect.getPotion().getLiquidColor());
+			MessagePotionVaporizerParticles message = new MessagePotionVaporizerParticles(new ArrayList<>(affectedBlocks), currentPotionEffect.getPotion().getLiquidColor());
 			PacketHandler.INSTANCE.sendToAllAround(message, new TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 32));
 		}
 	}

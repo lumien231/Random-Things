@@ -1,7 +1,5 @@
 package lumien.randomthings.item;
 
-import java.util.List;
-
 import lumien.randomthings.block.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

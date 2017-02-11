@@ -1,23 +1,16 @@
 package lumien.randomthings.tileentity;
 
-import javax.annotation.Nullable;
-
-import lumien.randomthings.block.BlockSpecialBeanStalk;
 import lumien.randomthings.block.BlockSpecialChest;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityLockableLoot;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -25,7 +18,6 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 
 public class TileEntitySpecialChest extends TileEntityLockableLoot implements ITickable
 {
@@ -62,11 +54,13 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	/**
 	 * Returns the number of slots in the inventory.
 	 */
+	@Override
 	public int getSizeInventory()
 	{
 		return 27;
 	}
 
+	@Override
 	public boolean isEmpty()
 	{
 		for (ItemStack itemstack : this.chestContents)
@@ -83,6 +77,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	/**
 	 * Get the name of this object. For players this returns their username
 	 */
+	@Override
 	public String getName()
 	{
 		return this.hasCustomName() ? this.customName : "container.chest";
@@ -93,6 +88,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEntitySpecialChest.class, new String[] { "Items" }));
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
@@ -111,6 +107,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		this.chestType = compound.getInteger("chestType");
 	}
 
+	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
@@ -134,6 +131,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	 * Returns the maximum stack size for a inventory slot. Seems to always be
 	 * 64, possibly will be extended.
 	 */
+	@Override
 	public int getInventoryStackLimit()
 	{
 		return 64;
@@ -142,6 +140,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	/**
 	 * Like the old updateEntity(), except more generic.
 	 */
+	@Override
 	public void update()
 	{
 		int i = this.pos.getX();
@@ -154,7 +153,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 			this.numPlayersUsing = 0;
 			float f = 5.0F;
 
-			for (EntityPlayer entityplayer : this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB((double) ((float) i - 5.0F), (double) ((float) j - 5.0F), (double) ((float) k - 5.0F), (double) ((float) (i + 1) + 5.0F), (double) ((float) (j + 1) + 5.0F), (double) ((float) (k + 1) + 5.0F))))
+			for (EntityPlayer entityplayer : this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(i - 5.0F, j - 5.0F, k - 5.0F, i + 1 + 5.0F, j + 1 + 5.0F, k + 1 + 5.0F)))
 			{
 				if (entityplayer.openContainer instanceof ContainerChest)
 				{
@@ -173,10 +172,10 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 
 		if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F)
 		{
-			double d1 = (double) i + 0.5D;
-			double d2 = (double) k + 0.5D;
+			double d1 = i + 0.5D;
+			double d2 = k + 0.5D;
 
-			this.world.playSound((EntityPlayer) null, d1, (double) j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+			this.world.playSound((EntityPlayer) null, d1, j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
@@ -201,10 +200,10 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 
 			if (this.lidAngle < 0.5F && f2 >= 0.5F)
 			{
-				double d3 = (double) i + 0.5D;
-				double d0 = (double) k + 0.5D;
+				double d3 = i + 0.5D;
+				double d0 = k + 0.5D;
 
-				this.world.playSound((EntityPlayer) null, d3, (double) j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+				this.world.playSound((EntityPlayer) null, d3, j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 			}
 
 			if (this.lidAngle < 0.0F)
@@ -214,6 +213,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		}
 	}
 
+	@Override
 	public boolean receiveClientEvent(int id, int type)
 	{
 		if (id == 1)
@@ -227,6 +227,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		}
 	}
 
+	@Override
 	public void openInventory(EntityPlayer player)
 	{
 		if (!player.isSpectator())
@@ -242,6 +243,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		}
 	}
 
+	@Override
 	public void closeInventory(EntityPlayer player)
 	{
 		if (!player.isSpectator() && this.getBlockType() instanceof BlockSpecialChest)
@@ -257,17 +259,20 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		return chestType;
 	}
 
+	@Override
 	public String getGuiID()
 	{
 		return "minecraft:chest";
 	}
 
+	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
 	{
 		this.fillWithLoot(playerIn);
 		return new ContainerChest(playerInventory, this, playerIn);
 	}
 
+	@Override
 	protected NonNullList<ItemStack> getItems()
 	{
 		return this.chestContents;

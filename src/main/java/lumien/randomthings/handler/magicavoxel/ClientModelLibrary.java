@@ -68,7 +68,7 @@ public class ClientModelLibrary
 		}, 1000, 10000);
 
 		modelCache = cacheBuilder.build();
-		modelRequests = new HashMap<String, ClientModelRequest>();
+		modelRequests = new HashMap<>();
 	}
 
 	private MagicaVoxelModel loadModelFromFile(String modelName)

@@ -114,6 +114,7 @@ public class ItemModels
 		registerPlatforms();
 		registerIngredients();
 		registerBlockOfSticks();
+		registerLuminousBlocks();
 	}
 
 	private static void registerIngredients()
@@ -172,6 +173,14 @@ public class ItemModels
 	private static void registerItem(Item i)
 	{
 		ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), "inventory"));
+	}
+	
+	private static void registerLuminousBlocks()
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.luminousBlock), i, new ModelResourceLocation("randomthings:luminousblock/" + EnumDyeColor.byMetadata(i).getUnlocalizedName(), "inventory"));
+		}
 	}
 
 	private static void registerBricks()

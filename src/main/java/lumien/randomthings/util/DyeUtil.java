@@ -15,7 +15,7 @@ public class DyeUtil
 	// Returns the color of a dye using ore dictionary
 	public static int getDyeColor(ItemStack dyeStack)
 	{
-		HashSet<Integer> oreDictIds = new HashSet<Integer>();
+		HashSet<Integer> oreDictIds = new HashSet<>();
 		oreDictIds.addAll(Arrays.asList(ArrayUtils.toObject(OreDictionary.getOreIDs(dyeStack))));
 
 		for (int i = 0; i < ModRecipes.oreDictDyes.length; i++)
@@ -33,7 +33,7 @@ public class DyeUtil
 
 	public static boolean isVanillaDye(ItemStack dyeStack)
 	{
-		HashSet<Integer> oreDictIds = new HashSet<Integer>();
+		HashSet<Integer> oreDictIds = new HashSet<>();
 		oreDictIds.addAll(Arrays.asList(ArrayUtils.toObject(OreDictionary.getOreIDs(dyeStack))));
 
 		for (int i = 0; i < ModRecipes.oreDictDyes.length; i++)

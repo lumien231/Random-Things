@@ -1,6 +1,5 @@
 package lumien.randomthings.item;
 
-import java.util.List;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
@@ -28,7 +27,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 	public enum INGREDIENT
 	{
-		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor");
+		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder");
 
 		public String name;
 
@@ -78,7 +77,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 	}
 
 	@Override
-	public EnumActionResult onItemUse( EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		if (getIngredient(stack) == INGREDIENT.ECTO_PLASM)

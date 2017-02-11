@@ -23,8 +23,8 @@ public abstract class ContainerTE<E extends TileEntity> extends Container
 	{
 		this.te = (E) world.getTileEntity(new BlockPos(x, y, z));
 
-		this.fieldList = new ArrayList<Field>();
-		this.valueList = new ArrayList<Object>();
+		this.fieldList = new ArrayList<>();
+		this.valueList = new ArrayList<>();
 
 		ArrayList<Field> classFieldList = SyncHandler.fieldMap.get(te.getClass());
 

@@ -169,7 +169,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id), "xlx", "xix", "xex", 'l', lapis, 'i', "ingotGold", 'e', ectoPlasm));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 9, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id), "ele", "eie", "eee", 'l', lapisBlock, 'i', "blockGold", 'e', ectoPlasm));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.BIOME_SENSOR.id), "iii", "rci", "iri", 'i', "ingotIron", 'r', redstoneDust, 'c', ModItems.biomeCrystal));
-
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients,4,ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id), "gdg",'g', "blockGlassColorless",'d',glowStone));
+		
 		// Biome Blocks
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 0), "ccc", "cbc", "ccc", 'c', cobblestone, 'b', biomeCrystal));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 1), "sss", "sbs", "sss", 's', stone, 'b', biomeCrystal));
@@ -213,6 +214,8 @@ public class ModRecipes
 		AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.waterWalkingBoots), new ItemStack(ModItems.obsidianSkullRing), new ItemStack(ModItems.obsidianWaterWalkingBoots), 10);
 		AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.obsidianWaterWalkingBoots), new ItemStack(ModItems.lavaCharm), new ItemStack(ModItems.lavaWader), 15);
 
+		createLuminousRecipes();
+		
 		// Spectre Anchor
 		IRecipe anchorRecipe = new IRecipe()
 		{
@@ -457,6 +460,15 @@ public class ModRecipes
 		{
 			EnumDyeColor color = EnumDyeColor.byMetadata(i);
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(dyedBlock, 8, i), "ttt", "tdt", "ttt", 't', original, 'd', oreDictDyes[i]));
+		}
+	}
+	
+	private static void createLuminousRecipes()
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			EnumDyeColor color = EnumDyeColor.byMetadata(i);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.luminousBlock, 1, i), "ld", "ll",  'l', new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id), 'd', oreDictDyes[i]));
 		}
 	}
 }

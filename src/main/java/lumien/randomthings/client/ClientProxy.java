@@ -90,7 +90,7 @@ public class ClientProxy extends CommonProxy
 		}
 	}
 
-	HashMap<Object, Object> scheduledColorRegister = new HashMap<Object, Object>();
+	HashMap<Object, Object> scheduledColorRegister = new HashMap<>();
 
 	@Override
 	public void scheduleColor(Object o)
@@ -252,7 +252,7 @@ public class ClientProxy extends CommonProxy
 		GlStateManager.pushMatrix();
 		{
 			worldRenderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
-			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<TileEntityRedstoneInterface>();
+			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<>();
 			synchronized (TileEntityRedstoneInterface.lock)
 			{
 				interfaces.addAll(TileEntityRedstoneInterface.interfaces);
@@ -262,7 +262,7 @@ public class ClientProxy extends CommonProxy
 			{
 				if (!redstoneInterface.isInvalid() && redstoneInterface.getWorld().isRemote)
 				{
-					ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
+					ArrayList<BlockPos> positions = new ArrayList<>();
 
 					if (redstoneInterface instanceof TileEntityBasicRedstoneInterface)
 					{
@@ -302,7 +302,7 @@ public class ClientProxy extends CommonProxy
 				}
 			}
 
-			ArrayList<TileEntityRedstoneObserver> observers = new ArrayList<TileEntityRedstoneObserver>();
+			ArrayList<TileEntityRedstoneObserver> observers = new ArrayList<>();
 			synchronized (TileEntityRedstoneObserver.loadedObservers)
 			{
 				observers.addAll(TileEntityRedstoneObserver.loadedObservers);

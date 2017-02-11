@@ -31,13 +31,13 @@ public class ModelCubeAll implements IBakedModel
 		this.texture = texture;
 		this.isAmbientOcclusion = isAmbientOcclusion;
 
-		generalQuads = new ArrayList<BakedQuad>();
-		faceQuads = new HashMap<EnumFacing, List<BakedQuad>>();
+		generalQuads = new ArrayList<>();
+		faceQuads = new HashMap<>();
 
 		for (EnumFacing f : EnumFacing.values())
 		{
 			List<BakedQuad> faceQuadList;
-			faceQuads.put(f, faceQuadList = new ArrayList<BakedQuad>());
+			faceQuads.put(f, faceQuadList = new ArrayList<>());
 			BakedQuad quad = createSidedBakedQuad(0, 1, 0, 1, 1, texture, f);
 
 			generalQuads.add(quad);

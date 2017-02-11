@@ -82,7 +82,7 @@ public class RTCommand extends CommandBase
 		{
 			if (sender instanceof EntityPlayer)
 			{
-				List<ResourceLocation> biomeIds = new ArrayList<ResourceLocation>(Biome.REGISTRY.getKeys());
+				List<ResourceLocation> biomeIds = new ArrayList<>(Biome.REGISTRY.getKeys());
 
 				int modX = 0;
 

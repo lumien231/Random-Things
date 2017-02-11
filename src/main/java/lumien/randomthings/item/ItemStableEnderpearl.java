@@ -132,6 +132,6 @@ public class ItemStableEnderpearl extends ItemBase
 			compound.setString("player-uuid", gameProfile.getId().toString());
 			compound.setString("player-name", gameProfile.getName());
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
+		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 }

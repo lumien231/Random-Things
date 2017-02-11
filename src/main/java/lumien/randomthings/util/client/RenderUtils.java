@@ -386,7 +386,7 @@ public class RenderUtils
 
 	public static Map<EnumFacing, List<BakedQuad>> getQuadFaceMapFromState(IBlockState state)
 	{
-		HashMap<EnumFacing, List<BakedQuad>> map = new HashMap<EnumFacing, List<BakedQuad>>();
+		HashMap<EnumFacing, List<BakedQuad>> map = new HashMap<>();
 
 		IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().getModelForState(state);
 

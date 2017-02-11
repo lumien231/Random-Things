@@ -30,7 +30,7 @@ public class SpectreHandler extends WorldSavedData
 	{
 		super(name);
 
-		cubes = new HashMap<UUID, SpectreCube>();
+		cubes = new HashMap<>();
 		this.worldObj = DimensionManager.getWorld(ModDimensions.SPECTRE_ID);
 
 		positionCounter = 0;
@@ -40,7 +40,7 @@ public class SpectreHandler extends WorldSavedData
 	{
 		this(ID);
 
-		cubes = new HashMap<UUID, SpectreCube>();
+		cubes = new HashMap<>();
 		this.worldObj = DimensionManager.getWorld(ModDimensions.SPECTRE_ID);
 
 		positionCounter = 0;

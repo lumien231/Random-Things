@@ -1,7 +1,5 @@
 package lumien.randomthings.item;
 
-import java.util.List;
-
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.block.BlockDirt;

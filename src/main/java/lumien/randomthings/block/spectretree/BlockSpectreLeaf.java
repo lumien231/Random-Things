@@ -328,7 +328,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	@Override
 	public java.util.List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+		java.util.List<ItemStack> ret = new java.util.ArrayList<>();
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 		int chance = this.getSaplingDropChance(state);
 

@@ -151,7 +151,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 				{
 					if (player.getHealth() > 0)
 					{
-						this.setDead();
+						//this.setDead();
 					}
 				}
 			}

@@ -36,12 +36,12 @@ public class ModelCubeOverlay implements IBakedModel
 	public ModelCubeOverlay(Map<EnumFacing, List<BakedQuad>> originalQuads, HashMap<EnumFacing, TextureAtlasSprite> overlays, TextureAtlasSprite particleTexture, boolean isAmbientOcclusion)
 	{
 		this.originalQuads = originalQuads;
-		this.itemQuads = new HashMap<EnumFacing, List<BakedQuad>>();
+		this.itemQuads = new HashMap<>();
 
 		this.particleTexture = particleTexture;
 		this.isAmbientOcclusion = isAmbientOcclusion;
 
-		overlayQuads = new HashMap<EnumFacing, List<BakedQuad>>();
+		overlayQuads = new HashMap<>();
 
 		itemQuads.put(null, originalQuads.get(null));
 
@@ -49,9 +49,9 @@ public class ModelCubeOverlay implements IBakedModel
 		{
 			List<BakedQuad> facingQuads = originalQuads.get(f);
 			
-			itemQuads.put(f, new ArrayList<BakedQuad>(originalQuads.get(f)));
+			itemQuads.put(f, new ArrayList<>(originalQuads.get(f)));
 			
-			originalQuads.put(f, new ArrayList<BakedQuad>(originalQuads.get(f)));
+			originalQuads.put(f, new ArrayList<>(originalQuads.get(f)));
 		}
 
 		for (EnumFacing f : EnumFacing.values())
@@ -61,7 +61,7 @@ public class ModelCubeOverlay implements IBakedModel
 				BakedQuad overlayQuad = createSidedBakedQuad(0F, 1F, 0F, 1F, 1F, overlays.get(f), f);
 
 				List<BakedQuad> sideQuadList;
-				overlayQuads.put(f, sideQuadList = new ArrayList<BakedQuad>());
+				overlayQuads.put(f, sideQuadList = new ArrayList<>());
 				sideQuadList.add(overlayQuad);
 
 				itemQuads.get(f).add(overlayQuad);
@@ -211,7 +211,7 @@ public class ModelCubeOverlay implements IBakedModel
 			}
 		}
 
-		return new ArrayList<BakedQuad>();
+		return new ArrayList<>();
 	}
 
 	@Override

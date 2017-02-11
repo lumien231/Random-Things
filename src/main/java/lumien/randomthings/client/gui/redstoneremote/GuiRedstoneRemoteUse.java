@@ -51,7 +51,7 @@ public class GuiRedstoneRemoteUse extends GuiContainer
 			remoteInventory = new InventoryItem("RedstoneRemote", 18, remoteStack);
 		}
 
-		slotButtons = new ArrayList<GuiSlotButton>();
+		slotButtons = new ArrayList<>();
 	}
 
 	@Override

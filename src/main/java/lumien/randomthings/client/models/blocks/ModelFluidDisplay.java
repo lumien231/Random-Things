@@ -30,8 +30,8 @@ public class ModelFluidDisplay implements IBakedModel
 
 	public ModelFluidDisplay()
 	{
-		modelCache = new HashMap<String, ModelCubeAll>();
-		modelCacheFlowing = new HashMap<String, ModelCubeAll>();
+		modelCache = new HashMap<>();
+		modelCacheFlowing = new HashMap<>();
 		defaultModel = new ModelCubeAll(defaultSprite, true);
 	}
 

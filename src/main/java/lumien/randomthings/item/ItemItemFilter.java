@@ -199,6 +199,6 @@ public class ItemItemFilter extends ItemBase
 		}
 
 
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
+		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 }
