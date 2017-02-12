@@ -3,24 +3,13 @@ package lumien.randomthings.entitys;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.util.NBTUtil;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleEnchantmentTable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityEnderConnection extends Entity
 {
@@ -30,7 +19,7 @@ public class EntityEnderConnection extends Entity
 	{
 		super(worldIn);
 
-		this.setSize(1, 2);
+		this.setSize(1, 1);
 	}
 
 	public EntityEnderConnection(World worldIn, double posX, double posY, double posZ)
@@ -50,7 +39,7 @@ public class EntityEnderConnection extends Entity
 	{
 		super.onCollideWithPlayer(entityIn);
 
-		List<Integer> list = new ArrayList<Integer>(EnumFacing.values().length);
+		List<Integer> list = new ArrayList<>(EnumFacing.values().length);
 	}
 
 	@Override

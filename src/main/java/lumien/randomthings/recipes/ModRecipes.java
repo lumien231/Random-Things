@@ -443,6 +443,107 @@ public class ModRecipes
 
 		RecipeSorter.register("goldenCompass", goldenCompassRecipe.getClass(), Category.SHAPELESS, "");
 		GameRegistry.addRecipe(goldenCompassRecipe);
+		
+		// Luminous Powder
+		IRecipe luminousPowderRecipe = new IRecipe()
+		{
+			@Override
+			public boolean matches(InventoryCrafting inv, World worldIn)
+			{
+				ItemStack powder = null;
+				ItemStack target = null;
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == ModItems.ingredients && is.getItemDamage() == ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id)
+						{
+							if (powder == null)
+							{
+								powder = is;
+							}
+							else
+							{
+								return false;
+							}
+						}
+						else
+						{
+							if (target == null)
+							{
+								if (!is.isItemEnchanted())
+								{
+									return false;
+								}
+								else
+								{
+									target = is;
+								}
+							}
+							else
+							{
+								return false;
+							}
+						}
+					}
+				}
+				return powder != null && target != null && (!target.hasTagCompound() || !target.getTagCompound().hasKey("luminousEnchantment"));
+			}
+
+			@Override
+			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
+			{
+				return NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
+			}
+
+			@Override
+			public int getRecipeSize()
+			{
+				return 2;
+			}
+
+			@Override
+			public ItemStack getRecipeOutput()
+			{
+				return new ItemStack(ModItems.spectreAnchor);
+			}
+
+			@Override
+			public ItemStack getCraftingResult(InventoryCrafting inv)
+			{
+				ItemStack powder = null;
+				ItemStack target = null;
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == ModItems.ingredients)
+						{
+							powder = is;
+						}
+						else
+						{
+							target = is;
+						}
+					}
+				}
+
+				ItemStack result = target.copy();
+
+				result.setTagInfo("luminousEnchantment", new NBTTagByte((byte) 0));
+
+				return result;
+			}
+		};
+
+		RecipeSorter.register("luminousPowder", luminousPowderRecipe.getClass(), Category.SHAPELESS, "");
+		GameRegistry.addRecipe(luminousPowderRecipe);
 	}
 
 	private static void createGrassSeedsRecipes()
@@ -469,6 +570,7 @@ public class ModRecipes
 		{
 			EnumDyeColor color = EnumDyeColor.byMetadata(i);
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.luminousBlock, 1, i), "ld", "ll",  'l', new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id), 'd', oreDictDyes[i]));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModBlocks.luminousStainedBrick, 1, i),new ItemStack(ModBlocks.stainedBrick, 1, i), new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id)));
 		}
 	}
 }

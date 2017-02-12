@@ -451,9 +451,17 @@ public class RTEventHandler
 	@SideOnly(Side.CLIENT)
 	public void itemTooltip(ItemTooltipEvent event)
 	{
-		if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("spectreAnchor"))
+		if (event.getItemStack().hasTagCompound())
 		{
-			event.getToolTip().add(1, TextFormatting.DARK_AQUA.toString() + I18n.format("tooltip.spectreAnchor.item") + TextFormatting.RESET.toString());
+			if (event.getItemStack().getTagCompound().hasKey("spectreAnchor"))
+			{
+				event.getToolTip().add(1, TextFormatting.DARK_AQUA.toString() + I18n.format("tooltip.spectreAnchor.item") + TextFormatting.RESET.toString());
+			}
+			
+			if (event.getItemStack().getTagCompound().hasKey("luminousEnchantment"))
+			{
+				event.getToolTip().add(1, TextFormatting.YELLOW.toString() + I18n.format("tooltip.luminousEnchantment") + TextFormatting.RESET.toString());
+			}
 		}
 	}
 
@@ -554,7 +562,7 @@ public class RTEventHandler
 			lavaCharm = InventoryUtil.getPlayerInventoryItem(ModItems.lavaCharm, player);
 		}
 
-		if (!lavaCharm .isEmpty())
+		if (!lavaCharm.isEmpty())
 		{
 			lavaProtector = lavaCharm;
 		}

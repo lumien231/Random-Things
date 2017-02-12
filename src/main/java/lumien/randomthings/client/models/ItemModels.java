@@ -188,6 +188,7 @@ public class ItemModels
 		for (int i = 0; i < 16; i++)
 		{
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.stainedBrick), i, new ModelResourceLocation("randomthings:stainedBrick/" + EnumDyeColor.byMetadata(i).getUnlocalizedName(), "inventory"));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.luminousStainedBrick), i, new ModelResourceLocation("randomthings:luminousStainedBrick/" + EnumDyeColor.byMetadata(i).getUnlocalizedName(), "inventory"));
 		}
 	}
 

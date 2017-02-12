@@ -17,6 +17,7 @@ import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ItemSpectreSword;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.lib.ILuminous;
 import lumien.randomthings.lib.ISuperLubricent;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
@@ -28,6 +29,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.crash.CrashReport;
@@ -51,6 +54,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent.Open;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -59,8 +63,6 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 public class AsmHandler
 {
-	static HashMap<ModContainer, Long> loadingTimes = new HashMap<>();
-
 	static Random rng = new Random();
 
 	static Field fluidRenderer;
@@ -71,16 +73,16 @@ public class AsmHandler
 			getFields();
 		}
 	}
-	
+
 	public static void updateColor(float[] normal, float[] color, float x, float y, float z, float tint, int multiplier)
-    {
-        if(tint != -1)
-        {
-            color[0] *= (float)(multiplier >> 0x10 & 0xFF) / 0xFF;
-            color[1] *= (float)(multiplier >> 0x8 & 0xFF) / 0xFF;
-            color[2] *= (float)(multiplier & 0xFF) / 0xFF;
-        }
-    }
+	{
+		if (tint != -1)
+		{
+			color[0] *= (float) (multiplier >> 0x10 & 0xFF) / 0xFF;
+			color[1] *= (float) (multiplier >> 0x8 & 0xFF) / 0xFF;
+			color[2] *= (float) (multiplier & 0xFF) / 0xFF;
+		}
+	}
 
 	// Called when a tree tries to set the block below it to dirt, returning
 	// true prevents that from happening
@@ -356,6 +358,28 @@ public class AsmHandler
 		return false;
 	}
 
+	static float enchantmentLightMapX;
+	static float enchantmentLightMapY;
+
+	public static void preEnchantment()
+	{
+		if (currentlyRendering != null && currentlyRendering.hasTagCompound() && currentlyRendering.getTagCompound().hasKey("luminousEnchantment"))
+		{
+			enchantmentLightMapX = OpenGlHelper.lastBrightnessX;
+			enchantmentLightMapY = OpenGlHelper.lastBrightnessY;
+
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
+		}
+	}
+
+	public static void postEnchantment()
+	{
+		if (currentlyRendering != null && currentlyRendering.hasTagCompound() && currentlyRendering.getTagCompound().hasKey("luminousEnchantment"))
+		{
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, enchantmentLightMapX, enchantmentLightMapY);
+		}
+	}
+
 	public static ItemStack currentlyRendering = null;
 
 	public static int enchantmentColorHook()
@@ -385,8 +409,6 @@ public class AsmHandler
 			{
 				return Color.WHITE.darker().darker().getRGB() | -16777216;
 			}
-
-			currentlyRendering = null;
 		}
 
 		return -8372020;

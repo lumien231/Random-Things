@@ -84,6 +84,23 @@ tile.stainedBrick.magenta.name=Magenta Stained Bricks
 tile.stainedBrick.orange.name=Orange Stained Bricks
 tile.stainedBrick.white.name=White Stained Bricks
 
+tile.luminousStainedBrick.black.name=Luminous Black Stained Bricks
+tile.luminousStainedBrick.red.name=Luminous Red Stained Bricks
+tile.luminousStainedBrick.green.name=Luminous Green Stained Bricks
+tile.luminousStainedBrick.brown.name=Luminous Brown Stained Bricks
+tile.luminousStainedBrick.blue.name=Luminous Blue Stained Bricks
+tile.luminousStainedBrick.purple.name=Luminous Purple Stained Bricks
+tile.luminousStainedBrick.cyan.name=Luminous Cyan Stained Bricks
+tile.luminousStainedBrick.silver.name=Luminous Light Gray Stained Bricks
+tile.luminousStainedBrick.gray.name=Luminous Gray Stained Bricks
+tile.luminousStainedBrick.pink.name=Luminous Pink Stained Bricks
+tile.luminousStainedBrick.lime.name=Luminous Lime Stained Bricks
+tile.luminousStainedBrick.yellow.name=Luminous Yellow Stained Bricks
+tile.luminousStainedBrick.lightBlue.name=Luminous Light Blue Stained Bricks
+tile.luminousStainedBrick.magenta.name=Luminous Magenta Stained Bricks
+tile.luminousStainedBrick.orange.name=Luminous Orange Stained Bricks
+tile.luminousStainedBrick.white.name=Luminous White Stained Bricks
+
 tile.coloredGrass.black.name=Black Grass
 tile.coloredGrass.red.name=Red Grass
 tile.coloredGrass.green.name=Green Grass
@@ -223,6 +240,7 @@ tooltip.itemFilter.whitelist=Whitelist
 tooltip.itemFilter.blacklist=Blacklist
 
 tooltip.spectreAnchor.item=Anchored
+tooltip.luminousEnchantment=Luminous
 
 tooltip.ironDropper.redstoneMode.pulse=Eject when pulsed
 tooltip.ironDropper.redstoneMode.repeatPowered=Eject continuously while powered

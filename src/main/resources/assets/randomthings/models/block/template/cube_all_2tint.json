@@ -1,0 +1,33 @@
+{
+    "parent": "block/block",
+    "elements": [
+        {   
+            "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#allbase", "cullface": "down" },
+                "up":    { "texture": "#allbase", "cullface": "up" },
+                "north": { "texture": "#allbase", "cullface": "north" },
+                "south": { "texture": "#allbase", "cullface": "south" },
+                "west":  { "texture": "#allbase", "cullface": "west" },
+                "east":  { "texture": "#allbase", "cullface": "east" }
+           }
+        },
+        {
+            "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "texture": "#alltint", "cullface": "down" , "tintindex": 0},
+                "up":    { "texture": "#alltint", "cullface": "up" , "tintindex": 0},
+                "north": { "texture": "#alltint", "cullface": "north" , "tintindex": 0},
+                "south": { "texture": "#alltint", "cullface": "south" , "tintindex": 0},
+                "west":  { "texture": "#alltint", "cullface": "west" , "tintindex": 0},
+                "east":  { "texture": "#alltint", "cullface": "east" , "tintindex": 0}
+            }
+        }
+    ],
+    
+    "textures": {
+        "particle": "#alltint"
+    }
+}

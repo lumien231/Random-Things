@@ -1,5 +1,8 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.item.block.ItemBlockClothLuminous;
+import lumien.randomthings.lib.ILuminous;
+import lumien.randomthings.lib.IRTBlockColor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -11,22 +14,42 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockStainedBrick extends BlockBase
+public class BlockStainedBrick extends BlockBase implements IRTBlockColor, ILuminous
 {
 	public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
-	public BlockStainedBrick()
+	boolean luminous;
+
+	public BlockStainedBrick(boolean luminous)
 	{
-		super("stainedBrick", Material.ROCK, ItemCloth.class);
+		super(luminous ? "luminousStainedBrick" : "stainedBrick", Material.ROCK, luminous ? ItemBlockClothLuminous.class : ItemCloth.class);
 
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
 		this.setSoundType(SoundType.STONE);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(COLOR, EnumDyeColor.WHITE));
+
+		this.luminous = luminous;
+	}
+
+	@Override
+	public BlockRenderLayer getBlockLayer()
+	{
+		if (luminous)
+		{
+			return BlockRenderLayer.CUTOUT_MIPPED;
+		}
+		else
+		{
+			return super.getBlockLayer();
+		}
 	}
 
 	@Override
@@ -65,5 +88,11 @@ public class BlockStainedBrick extends BlockBase
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[] { COLOR });
+	}
+
+	@Override
+	public int colorMultiplier(IBlockState state, IBlockAccess p_186720_2_, BlockPos pos, int tintIndex)
+	{
+		return luminous ? -2 : -1;
 	}
 }

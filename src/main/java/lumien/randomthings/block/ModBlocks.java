@@ -23,7 +23,6 @@ public class ModBlocks
 	public static BlockEnderAnchor enderAnchor;
 	public static BlockBiomeStone biomeStone;
 	public static BlockBiomeGlass biomeGlass;
-	public static BlockStainedBrick stainedBrick;
 	public static BlockColoredGrass coloredGrass;
 	public static BlockPrismarineEnderBridge prismarineEnderBridge;
 	public static BlockPod beanPod;
@@ -86,6 +85,9 @@ public class ModBlocks
 	
 	public static BlockBasicRedstoneInterface basicRedstoneInterface;
 	public static BlockAdvancedRedstoneInterface advancedRedstoneInterface;
+	
+	public static BlockStainedBrick stainedBrick;
+	public static BlockStainedBrick luminousStainedBrick;
 	
 	// Experimental
 	public static BlockSpecialBeanStalk specialBeanStalk;
@@ -159,7 +161,6 @@ public class ModBlocks
 
 		biomeStone = new BlockBiomeStone();
 		biomeGlass = new BlockBiomeGlass();
-		stainedBrick = new BlockStainedBrick();
 		coloredGrass = new BlockColoredGrass();
 		
 		spectreCore = new BlockSpectreCore();
@@ -168,5 +169,8 @@ public class ModBlocks
 		
 		basicRedstoneInterface = new BlockBasicRedstoneInterface();
 		advancedRedstoneInterface = new BlockAdvancedRedstoneInterface();
+		
+		stainedBrick = new BlockStainedBrick(false);
+		luminousStainedBrick = new BlockStainedBrick(true);
 	}
 }

@@ -1,0 +1,7 @@
+{
+    "parent": "randomthings:block/template/cube_all_2tint",
+    "textures": {
+        "allbase": "randomthings:blocks/luminousstainedbrick/purple_base",
+        "alltint": "randomthings:blocks/luminousstainedbrick/purple_tint"
+    }
+}

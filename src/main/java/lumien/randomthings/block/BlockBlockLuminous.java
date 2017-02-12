@@ -1,5 +1,6 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.item.block.ItemBlockClothLuminous;
 import lumien.randomthings.lib.ILuminous;
 import lumien.randomthings.lib.IRTBlockColor;
 import net.minecraft.block.SoundType;
@@ -25,7 +26,7 @@ public class BlockBlockLuminous extends BlockBase implements IRTBlockColor, ILum
 
 	protected BlockBlockLuminous()
 	{
-		super("luminousBlock", Material.GROUND, ItemCloth.class);
+		super("luminousBlock", Material.GROUND, ItemBlockClothLuminous.class);
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3F);
