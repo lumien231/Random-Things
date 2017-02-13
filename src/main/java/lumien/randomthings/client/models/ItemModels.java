@@ -41,7 +41,6 @@ public class ItemModels
 		registerBlock(ModBlocks.enderMailbox);
 		registerBlock(ModBlocks.pitcherPlant);
 		registerBlock(ModBlocks.specialChest);
-		registerBlock(ModBlocks.platform);
 		registerBlock(ModBlocks.entityDetector);
 		registerBlock(ModBlocks.quartzLamp);
 		registerBlock(ModBlocks.quartzGlass);

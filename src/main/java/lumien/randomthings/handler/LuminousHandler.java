@@ -20,7 +20,7 @@ public class LuminousHandler
 	public static void luminousHookStart(ItemStack stack, VertexBuffer buffer)
 	{
 		luminousItem = stack.getItem() instanceof ILuminous;
-
+		
 		if (luminousItem)
 		{
 			backUpX = OpenGlHelper.lastBrightnessX;

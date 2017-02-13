@@ -88,9 +88,6 @@ public class ModBlocks
 	
 	public static BlockStainedBrick stainedBrick;
 	public static BlockStainedBrick luminousStainedBrick;
-	
-	// Experimental
-	public static BlockSpecialBeanStalk specialBeanStalk;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -146,7 +143,6 @@ public class ModBlocks
 		igniter = new BlockIgniter();
 		blockOfSticks = new BlockBlockOfSticks();
 		blazingFire = new BlockBlazingFire();
-		specialBeanStalk = new BlockSpecialBeanStalk();
 		luminousBlock = new BlockBlockLuminous();
 		
 		spectrePlank = new BlockSpectrePlank();

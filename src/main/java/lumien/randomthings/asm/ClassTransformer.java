@@ -113,7 +113,6 @@ public class ClassTransformer implements IClassTransformer
 			return patchVertexLighterFlat(basicClass);
 		}
 
-
 		return basicClass;
 	}
 
