@@ -1,13 +1,53 @@
 package lumien.randomthings.util;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.asm.MCPNames;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class PlayerUtil
 {
+	static Method capturePosition;
+	
+	static 
+	{
+		try
+		{
+			capturePosition = NetHandlerPlayServer.class.getDeclaredMethod(MCPNames.method("func_184342_d"));
+			capturePosition.setAccessible(true);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void capturePosition(NetHandlerPlayServer connection)
+	{
+		try
+		{
+			capturePosition.invoke(connection);
+		}
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e)
+		{
+			e.printStackTrace();
+		}
+		catch (InvocationTargetException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public static boolean isPlayerOnline(String username)
 	{
 		return RandomThings.proxy.isPlayerOnline(username);
@@ -16,7 +56,6 @@ public class PlayerUtil
 	public static void teleportPlayerToDimension(EntityPlayerMP player, int dimension)
 	{
 		boolean comingFromEnd = player.dimension == 1;
-
 
 		FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(player, dimension, new SimpleTeleporter(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(dimension)));
 
