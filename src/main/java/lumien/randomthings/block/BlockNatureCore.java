@@ -2,11 +2,13 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import lumien.randomthings.block.material.MaterialHardWood;
 import lumien.randomthings.item.block.ItemBlockLuminous;
 import lumien.randomthings.lib.ILuminous;
 import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.tileentity.cores.TileEntityNatureCore;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -24,16 +26,24 @@ public class BlockNatureCore extends BlockContainerBase implements ILuminous, IR
 
 	protected BlockNatureCore()
 	{
-		super("natureCore", Material.ROCK, ItemBlockLuminous.class);
+		super("natureCore", MaterialHardWood.HARD_WOOD, ItemBlockLuminous.class);
 
 		this.setSoundType(SoundType.WOOD);
-		this.setBlockUnbreakable().setResistance(6000000.0F);
+		this.setHarvestLevel("axe", 3);
+		
+		this.setHardness(25.0F).setResistance(2000.0F);
+	}
+	
+	@Override
+	public int getHarvestLevel(IBlockState state)
+	{
+		return super.getHarvestLevel(state);
 	}
 
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random)
 	{
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -58,7 +68,7 @@ public class BlockNatureCore extends BlockContainerBase implements ILuminous, IR
 	@Override
 	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{
-		return false;
+		return true;
 	}
 
 	@Override
