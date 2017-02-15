@@ -208,7 +208,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 	{
 		ItemStack filterStack = p_76316_1_.getStackInSlot(0);
 
-		if (filterStack == null)
+		if (filterStack.isEmpty())
 		{
 			this.filterRepres = null;
 		}
