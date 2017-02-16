@@ -16,6 +16,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -90,7 +91,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 			}
 
 			// Bonemealing
-			if (rand.nextInt(300) == 0)
+			if (rand.nextInt(100) == 0)
 			{
 				int rX = this.pos.getX() + rand.nextInt(11) - 5;
 				int rY = this.pos.getY() + rand.nextInt(4) - 3;
@@ -112,13 +113,30 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 			// Trees
 			if (rand.nextInt(600) == 0)
 			{
-				int rX = this.pos.getX() + rand.nextInt(41) - 20;
-				int rY = this.pos.getY() + rand.nextInt(6) - 3;
-				int rZ = this.pos.getZ() + rand.nextInt(41) - 20;
+				double radius = rand.nextInt(20) + 10;
+				double angle = Math.random() * Math.PI * 2;
 
-				BlockPos target = new BlockPos(rX, rY, rZ);
+				int x = (int) Math.floor(this.pos.getX() + radius * Math.cos(angle));
+				int z = (int) Math.floor(this.pos.getZ() + radius * Math.sin(angle));
+				int y = this.pos.getY() + rand.nextInt(4) - 3;
+
+				BlockPos target = new BlockPos(x, y, z);
 				IBlockState state = world.getBlockState(target);
-				if (Blocks.SAPLING.canPlaceBlockAt(world, target.up()))
+
+				boolean space = true;
+				for (EnumFacing facing : EnumFacing.HORIZONTALS)
+				{
+					BlockPos log = target.up().offset(facing);
+					IBlockState there = world.getBlockState(log);
+
+					if (!(world.isAirBlock(log) || there.getBlock().isReplaceable(world, log)))
+					{
+						space = false;
+						break;
+					}
+				}
+
+				if (space && Blocks.SAPLING.canPlaceBlockAt(world, target.up()))
 				{
 					world.playEvent(2005, target, 0);
 					world.setBlockState(target.up(), Blocks.SAPLING.getDefaultState());
@@ -133,7 +151,9 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 				BlockInfo randomInfo = patternInfo.get(rand.nextInt(patternInfo.size()));
 				if (randomInfo.getState().getBlock() != ModBlocks.natureCore)
 				{
-					if (world.isAirBlock(this.pos.add(randomInfo.getMod().down())))
+					BlockPos targetPlace = this.pos.add(randomInfo.getMod().down());
+					IBlockState original = world.getBlockState(targetPlace);
+					if (world.isAirBlock(this.pos.add(randomInfo.getMod().down())) || original.getBlock().isReplaceable(world, targetPlace))
 					{
 						world.setBlockState(this.pos.add(randomInfo.getMod().down()), randomInfo.getState());
 					}
