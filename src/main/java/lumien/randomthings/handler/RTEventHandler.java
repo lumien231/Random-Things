@@ -14,6 +14,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
 import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.config.Numbers;
+import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
@@ -158,24 +159,29 @@ public class RTEventHandler
 		LootTable table = event.getTable();
 		if (event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON))
 		{
-			addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.02f);
-			addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.02f);
-			addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.03f);
+			if (Worldgen.LAVA_CHARM)
+				addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.02f);
+			
+			if (Worldgen.SUMMONING_PENDULUM)
+				addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.02f);
+			
+			if (Worldgen.MAGIC_HOOD)
+				addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.03f);
 		}
-		else if (event.getName().equals(LootTableList.CHESTS_NETHER_BRIDGE))
+		else if (Worldgen.LAVA_CHARM && event.getName().equals(LootTableList.CHESTS_NETHER_BRIDGE))
 		{
 			addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.2f);
 		}
-		else if (event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH))
+		else if (Worldgen.MAGIC_HOOD && event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH))
 		{
 			addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.02f);
 		}
-		else if (event.getName().equals(LootTableList.CHESTS_STRONGHOLD_CORRIDOR))
+		else if (Worldgen.SUMMONING_PENDULUM && event.getName().equals(LootTableList.CHESTS_STRONGHOLD_CORRIDOR))
 		{
 			addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.5f);
 		}
 
-		if (event.getName().toString().startsWith("minecraft:chests/"))
+		if (Worldgen.BIOME_CRYSTAL && event.getName().toString().startsWith("minecraft:chests/"))
 		{
 			LootEntry crystalEntry = new LootEntryItem(ModItems.biomeCrystal, 1, 0, new LootFunction[] { new LootFunction(new LootCondition[] {})
 			{

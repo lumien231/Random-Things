@@ -18,6 +18,7 @@ public class ItemBlockBiomeStone extends ItemBlock implements IRTItemColor
 		super(block);
 		
 		RandomThings.proxy.scheduleColor(this);
+		this.setHasSubtypes(true);
 	}
 
 	@Override

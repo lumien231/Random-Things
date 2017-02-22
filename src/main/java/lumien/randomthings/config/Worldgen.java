@@ -13,5 +13,18 @@ public class Worldgen
 	
 	@ConfigOption(category = "worldgen",name = "WaterChest")
 	public static boolean WATER_CHEST = true;
+	
+	// Loot Chances
+	@ConfigOption(category = "worldgen",name = "MagicHood")
+	public static boolean MAGIC_HOOD = true;
+	
+	@ConfigOption(category = "worldgen",name = "SummoningPendulum")
+	public static boolean SUMMONING_PENDULUM = true;
+	
+	@ConfigOption(category = "worldgen",name = "BiomeCrystal")
+	public static boolean BIOME_CRYSTAL = true;
+	
+	@ConfigOption(category = "worldgen",name = "LavaCharm")
+	public static boolean LAVA_CHARM = true;
 }
 

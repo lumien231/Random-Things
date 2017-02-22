@@ -17,7 +17,7 @@ import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ItemSpectreSword;
 import lumien.randomthings.item.ModItems;
-import lumien.randomthings.lib.ILuminous;
+import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.lib.ISuperLubricent;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
@@ -125,7 +125,7 @@ public class AsmHandler
 
 	public static void itemJoin(EntityJoinWorldEvent event)
 	{
-		if (catchingDrops)
+		if (catchingDrops && !event.isCanceled())
 		{
 			catchedDrops.add(((EntityItem) event.getEntity()).getEntityItem());
 			event.setCanceled(true);
