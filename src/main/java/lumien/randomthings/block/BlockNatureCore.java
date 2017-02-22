@@ -4,7 +4,7 @@ import java.util.Random;
 
 import lumien.randomthings.block.material.MaterialHardWood;
 import lumien.randomthings.item.block.ItemBlockLuminous;
-import lumien.randomthings.lib.ILuminous;
+import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.tileentity.cores.TileEntityNatureCore;
 import net.minecraft.block.SoundType;
@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockNatureCore extends BlockContainerBase implements ILuminous, IRTBlockColor
+public class BlockNatureCore extends BlockContainerBase implements ILuminousBlock
 {
 
 	protected BlockNatureCore()
@@ -72,8 +72,8 @@ public class BlockNatureCore extends BlockContainerBase implements ILuminous, IR
 	}
 
 	@Override
-	public int colorMultiplier(IBlockState state, IBlockAccess p_186720_2_, BlockPos pos, int tintIndex)
+	public boolean shouldGlow(IBlockState state, int tintIndex)
 	{
-		return -2;
+		return tintIndex == 0;
 	}
 }

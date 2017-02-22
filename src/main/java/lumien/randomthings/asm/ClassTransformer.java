@@ -235,13 +235,18 @@ public class ClassTransformer implements IClassTransformer
 				toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "blockInfo", "Lnet/minecraftforge/client/model/pipeline/BlockInfo;"));
 				toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraftforge/client/model/pipeline/BlockInfo", "getState", "()Lnet/minecraft/block/state/IBlockState;", false));
 				toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", MCPNames.method("func_177230_c"), "()Lnet/minecraft/block/Block;", true));
-				toInsert.add(new TypeInsnNode(INSTANCEOF, "lumien/randomthings/lib/ILuminous"));
+				toInsert.add(new TypeInsnNode(INSTANCEOF, "lumien/randomthings/lib/ILuminousBlock"));
 				toInsert.add(new JumpInsnNode(IFEQ, l0));
+				toInsert.add(new VarInsnNode(ALOAD, 0));
+				toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "blockInfo", "Lnet/minecraftforge/client/model/pipeline/BlockInfo;"));
+				toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraftforge/client/model/pipeline/BlockInfo", "getState", "()Lnet/minecraft/block/state/IBlockState;", false));
 				toInsert.add(new InsnNode(DUP));
-				toInsert.add(new IntInsnNode(BIPUSH, -2));
-				toInsert.add(new JumpInsnNode(IF_ICMPNE, l0));
-				toInsert.add(new InsnNode(POP));
-				toInsert.add(new InsnNode(ICONST_M1));
+				toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", MCPNames.method("func_177230_c"), "()Lnet/minecraft/block/Block;", true));
+				toInsert.add(new InsnNode(SWAP));
+				toInsert.add(new VarInsnNode(ALOAD, 0));
+				toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "tint", "I"));
+				toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "lumien/randomthings/lib/ILuminousBlock", "shouldGlow", "(Lnet/minecraft/block/state/IBlockState;I)Z", true));
+				toInsert.add(new JumpInsnNode(IFEQ, l0));
 				toInsert.add(new VarInsnNode(ALOAD, 0));
 				toInsert.add(new InsnNode(ICONST_0));
 				toInsert.add(new FieldInsnNode(PUTFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "diffuse", "Z"));
@@ -524,7 +529,7 @@ public class ClassTransformer implements IClassTransformer
 			logger.log(Level.DEBUG, "- Found renderEnchantedGlint (Effect Rendering 1/2)");
 
 			renderEnchantedGlint.instructions.insert(new MethodInsnNode(INVOKESTATIC, asmHandler, "preEnchantment", "()V", false));
-			
+
 			for (int i = 0; i < renderEnchantedGlint.instructions.size(); i++)
 			{
 				AbstractInsnNode ain = renderEnchantedGlint.instructions.get(i);
@@ -569,9 +574,9 @@ public class ClassTransformer implements IClassTransformer
 						toInsert = new InsnList();
 						toInsert.add(new InsnNode(ACONST_NULL));
 						toInsert.add(new FieldInsnNode(PUTSTATIC, asmHandler, "currentlyRendering", "Lnet/minecraft/item/ItemStack;"));
-						
+
 						renderArmorLayer.instructions.insert(min, toInsert);
-						
+
 						i += 2;
 					}
 
@@ -678,12 +683,12 @@ public class ClassTransformer implements IClassTransformer
 							toInsert.add(new VarInsnNode(ALOAD, 1));
 							toInsert.add(new FieldInsnNode(PUTSTATIC, asmHandler, "currentlyRendering", "Lnet/minecraft/item/ItemStack;"));
 							renderItem.instructions.insertBefore(min, toInsert);
-							
+
 							toInsert = new InsnList();
 							toInsert.add(new InsnNode(ACONST_NULL));
 							toInsert.add(new FieldInsnNode(PUTSTATIC, asmHandler, "currentlyRendering", "Lnet/minecraft/item/ItemStack;"));
 							renderItem.instructions.insert(min, toInsert);
-							
+
 							found = true;
 						}
 					}
@@ -741,22 +746,24 @@ public class ClassTransformer implements IClassTransformer
 					{
 						InsnList toInsert = new InsnList();
 
-						toInsert.add(new MethodInsnNode(INVOKESTATIC, luminousHandler, "luminousHookPre", "(I)I", false));
+						toInsert.add(new VarInsnNode(ALOAD, 8));
+						toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/client/renderer/block/model/BakedQuad", MCPNames.method("func_178211_c"), "()I", false));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, luminousHandler, "luminousHookPre", "(I)V", false));
 						toInsert.add(new InsnNode(POP));
 						toInsert.add(new VarInsnNode(ALOAD, 4));
 						toInsert.add(new VarInsnNode(ILOAD, 9));
 						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getColorFromItemStack", "(Lnet/minecraft/item/ItemStack;I)I", false));
 
 						renderQuads.instructions.insertBefore(min, toInsert);
-						i += 5;
+						i += 7;
 
 						renderQuads.instructions.insert(min, new MethodInsnNode(INVOKESTATIC, luminousHandler, "luminousHookPost", "()V", false));
 					}
-					else if (min.getOpcode() == RETURN)
-					{
-						renderQuads.instructions.insertBefore(min, new MethodInsnNode(INVOKESTATIC, luminousHandler, "luminousHookEnd", "()V", false));
-						i++;
-					}
+				}
+				else if (ain.getOpcode() == RETURN)
+				{
+					renderQuads.instructions.insertBefore(ain, new MethodInsnNode(INVOKESTATIC, luminousHandler, "luminousHookEnd", "()V", false));
+					i++;
 				}
 
 			}

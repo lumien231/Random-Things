@@ -1,7 +1,7 @@
 package lumien.randomthings.block;
 
 import lumien.randomthings.item.block.ItemBlockClothLuminous;
-import lumien.randomthings.lib.ILuminous;
+import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.lib.IRTBlockColor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,7 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBlockLuminous extends BlockBase implements IRTBlockColor, ILuminous
+public class BlockBlockLuminous extends BlockBase implements  ILuminousBlock
 {
 	public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
@@ -71,8 +71,8 @@ public class BlockBlockLuminous extends BlockBase implements IRTBlockColor, ILum
 	}
 
 	@Override
-	public int colorMultiplier(IBlockState state, IBlockAccess p_186720_2_, BlockPos pos, int tintIndex)
+	public boolean shouldGlow(IBlockState state, int tintIndex)
 	{
-		return -2;
+		return true;
 	}
 }
