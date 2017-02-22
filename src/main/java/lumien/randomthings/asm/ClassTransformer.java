@@ -234,7 +234,7 @@ public class ClassTransformer implements IClassTransformer
 				toInsert.add(new VarInsnNode(ALOAD, 0));
 				toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraftforge/client/model/pipeline/VertexLighterFlat", "blockInfo", "Lnet/minecraftforge/client/model/pipeline/BlockInfo;"));
 				toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraftforge/client/model/pipeline/BlockInfo", "getState", "()Lnet/minecraft/block/state/IBlockState;", false));
-				toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", "getBlock", "()Lnet/minecraft/block/Block;", true));
+				toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", MCPNames.method("func_177230_c"), "()Lnet/minecraft/block/Block;", true));
 				toInsert.add(new TypeInsnNode(INSTANCEOF, "lumien/randomthings/lib/ILuminous"));
 				toInsert.add(new JumpInsnNode(IFEQ, l0));
 				toInsert.add(new InsnNode(DUP));
@@ -762,7 +762,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
