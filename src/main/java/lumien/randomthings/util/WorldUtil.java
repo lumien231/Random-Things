@@ -168,6 +168,11 @@ public class WorldUtil
 		return arraylist;
 	}
 
+	public static void spawnItemStack(World worldIn, BlockPos pos, ItemStack stack)
+	{
+		spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
+	}
+
 	public static void spawnItemStack(World worldIn, double x, double y, double z, ItemStack stack)
 	{
 		Random rng = new Random();
@@ -175,7 +180,7 @@ public class WorldUtil
 		float f1 = rng.nextFloat() * 0.8F + 0.1F;
 		float f2 = rng.nextFloat() * 0.8F + 0.1F;
 
-		while (stack.getCount() > 0)
+		while (!stack.isEmpty())
 		{
 			int i = rng.nextInt(21) + 10;
 
@@ -184,13 +189,7 @@ public class WorldUtil
 				i = stack.getCount();
 			}
 
-			stack.shrink(i);
-			EntityItem entityitem = new EntityItem(worldIn, x + f, y + f1, z + f2, new ItemStack(stack.getItem(), i, stack.getMetadata()));
-
-			if (stack.hasTagCompound())
-			{
-				entityitem.getEntityItem().setTagCompound(stack.getTagCompound().copy());
-			}
+			EntityItem entityitem = new EntityItem(worldIn, x + f, y + f1, z + f2, stack.splitStack(i));
 
 			float f3 = 0.05F;
 			entityitem.motionX = rng.nextGaussian() * f3;
