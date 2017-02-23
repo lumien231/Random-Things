@@ -53,7 +53,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -143,14 +142,11 @@ public class RTEventHandler
 			}
 		});
 	}
-
+	
 	@SubscribeEvent
 	public void entityJoinWorld(EntityJoinWorldEvent event)
 	{
-		if (!event.getWorld().isRemote && event.getEntity() instanceof EntityItem)
-		{
-			AsmHandler.itemJoin(event);
-		}
+		ItemCatcher.entityJoinWorld(event);
 	}
 
 	@SubscribeEvent

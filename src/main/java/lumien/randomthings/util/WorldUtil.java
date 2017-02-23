@@ -175,27 +175,12 @@ public class WorldUtil
 
 	public static void spawnItemStack(World worldIn, double x, double y, double z, ItemStack stack)
 	{
-		Random rng = new Random();
-		float f = rng.nextFloat() * 0.8F + 0.1F;
-		float f1 = rng.nextFloat() * 0.8F + 0.1F;
-		float f2 = rng.nextFloat() * 0.8F + 0.1F;
-
-		while (!stack.isEmpty())
-		{
-			int i = rng.nextInt(21) + 10;
-
-			if (i > stack.getCount())
-			{
-				i = stack.getCount();
-			}
-
-			EntityItem entityitem = new EntityItem(worldIn, x + f, y + f1, z + f2, stack.splitStack(i));
-
-			float f3 = 0.05F;
-			entityitem.motionX = rng.nextGaussian() * f3;
-			entityitem.motionY = rng.nextGaussian() * f3 + 0.20000000298023224D;
-			entityitem.motionZ = rng.nextGaussian() * f3;
-			worldIn.spawnEntity(entityitem);
-		}
+        float f = 0.5F;
+        double d0 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
+        double d1 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
+        double d2 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
+        EntityItem entityitem = new EntityItem(worldIn, (double)x + d0, (double)y+ d1, (double)z + d2, stack);
+        entityitem.setDefaultPickupDelay();
+        worldIn.spawnEntity(entityitem);
 	}
 }

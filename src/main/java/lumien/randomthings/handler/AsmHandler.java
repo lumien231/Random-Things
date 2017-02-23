@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.enchantment.ModEnchantments;
@@ -91,8 +92,6 @@ public class AsmHandler
 		return b == ModBlocks.fertilizedDirt || b == ModBlocks.fertilizedDirtTilled;
 	}
 
-	static boolean catchingDrops;
-	static List<ItemStack> catchedDrops = new ArrayList<>();
 	static PlayerInteractionManager interactionManager;
 
 	public static void preHarvest(PlayerInteractionManager manager)
@@ -101,34 +100,21 @@ public class AsmHandler
 
 		if (tool != null && EnchantmentHelper.getEnchantmentLevel(ModEnchantments.magnetic, tool) > 0)
 		{
+			ItemCatcher.startCatching();
 			interactionManager = manager;
-			catchingDrops = true;
 		}
 	}
 
 	public static void postHarvest()
 	{
-		if (catchingDrops)
+		if (ItemCatcher.isCatching() && interactionManager != null)
 		{
-			catchingDrops = false;
-
-			for (ItemStack is : catchedDrops)
+			for (ItemStack is : ItemCatcher.stopCatching())
 			{
 				ItemHandlerHelper.giveItemToPlayer(interactionManager.player, is.copy());
 			}
 
 			interactionManager = null;
-
-			catchedDrops.clear();
-		}
-	}
-
-	public static void itemJoin(EntityJoinWorldEvent event)
-	{
-		if (catchingDrops && !event.isCanceled())
-		{
-			catchedDrops.add(((EntityItem) event.getEntity()).getEntityItem());
-			event.setCanceled(true);
 		}
 	}
 
