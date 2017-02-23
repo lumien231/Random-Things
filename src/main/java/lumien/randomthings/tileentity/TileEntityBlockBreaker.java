@@ -1,6 +1,7 @@
 package lumien.randomthings.tileentity;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.apache.logging.log4j.Level;
@@ -10,8 +11,15 @@ import com.mojang.authlib.GameProfile;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockBlockBreaker;
+import lumien.randomthings.enchantment.ModEnchantments;
+import lumien.randomthings.handler.ItemCatcher;
+import lumien.randomthings.handler.RTEventHandler;
+import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +27,8 @@ import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -27,16 +37,19 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 {
 	public static final GameProfile breakerProfile = new GameProfile(UUID.nameUUIDFromBytes("RTBlockBreaker".getBytes(Charsets.UTF_8)), "RTBlockBreaker");
-	
+
 	static
 	{
-		RandomThings.instance.logger.log(Level.DEBUG, "BlockBreakerUUID: "+breakerProfile.getId().toString());
+		RandomThings.instance.logger.log(Level.DEBUG, "BlockBreakerUUID: " + breakerProfile.getId().toString());
 	}
-	
+
 	UUID uuid;
 
 	boolean mining;
@@ -62,6 +75,10 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
 		unbreakingIronPickaxe.getTagCompound().setBoolean("Unbreakable", true);
 
+		HashMap<Enchantment, Integer> enchantmentMap = new HashMap<Enchantment, Integer>();
+		enchantmentMap.put(ModEnchantments.magnetic, 1);
+		EnchantmentHelper.setEnchantments(enchantmentMap, unbreakingIronPickaxe);
+
 		fakePlayer.get().setHeldItem(EnumHand.MAIN_HAND, unbreakingIronPickaxe);
 		fakePlayer.get().onGround = true;
 
@@ -84,17 +101,18 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 			{
 				firstTick = false;
 				initFakePlayer();
-				
+
 				neighborChanged(this.world.getBlockState(pos), world, pos, null);
 			}
 
 			if (mining)
 			{
-				BlockPos targetPos = pos.offset(world.getBlockState(pos).getValue(BlockBlockBreaker.FACING));
+				EnumFacing facing = world.getBlockState(pos).getValue(BlockBlockBreaker.FACING);
+				BlockPos targetPos = pos.offset(facing);
 
 				IBlockState targetState = world.getBlockState(targetPos);
 
-				this.curBlockDamage += targetState.getBlock().getPlayerRelativeBlockHardness(targetState,fakePlayer.get(), world, targetPos);
+				this.curBlockDamage += targetState.getPlayerRelativeBlockHardness(fakePlayer.get(), world, targetPos);
 
 				if (curBlockDamage >= 1.0f)
 				{
@@ -102,9 +120,44 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 
 					resetProgress();
 
-					if (fakePlayer.get() != null)
+					FakePlayer player;
+					if ((player = fakePlayer.get()) != null)
 					{
-						fakePlayer.get().interactionManager.tryHarvestBlock(targetPos);
+						boolean catching = false;
+
+						TileEntity te;
+						if ((te = world.getTileEntity(this.pos.offset(facing.getOpposite()))) != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing))
+						{
+							catching = true;
+						}
+
+						player.interactionManager.tryHarvestBlock(targetPos);
+
+						IItemHandler itemHandler = null;
+						if (catching)
+						{
+							itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
+						}
+
+						for (int i = 1; i < player.inventory.getSizeInventory(); i++)
+						{
+							ItemStack stack = player.inventory.getStackInSlot(i);
+							player.inventory.setInventorySlotContents(i, ItemStack.EMPTY);
+
+							if (!stack.isEmpty())
+							{
+								ItemStack remainder = stack;
+								if (catching)
+								{
+									remainder = ItemHandlerHelper.insertItemStacked(itemHandler, stack, false);
+								}
+
+								if (!remainder.isEmpty())
+								{
+									WorldUtil.spawnItemStack(world, pos.offset(facing), stack);
+								}
+							}
+						}
 					}
 				}
 				else
@@ -154,8 +207,11 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		{
 			if (!worldIn.isAirBlock(targetPos))
 			{
-				mining = true;
-				curBlockDamage = 0;
+				if (!mining)
+				{
+					mining = true;
+					curBlockDamage = 0;
+				}
 			}
 			else
 			{
@@ -180,7 +236,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 			resetProgress(state);
 		}
 	}
-	
+
 	private void resetProgress()
 	{
 		resetProgress(this.world.getBlockState(this.pos));
