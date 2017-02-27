@@ -53,7 +53,7 @@ public class BlockCompressedSlimeBlock extends BlockBase implements ISuperLubric
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
 		return AABB;
 	}
