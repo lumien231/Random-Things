@@ -20,6 +20,8 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)
 	{
+		super.writeDataToNBT(compound);
+		
 		if (target != null)
 		{
 			compound.setInteger("targetX", target.getX());
@@ -31,6 +33,8 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 	@Override
 	public void readDataFromNBT(NBTTagCompound compound)
 	{
+		super.readDataFromNBT(compound);
+		
 		if (compound.hasKey("targetX"))
 		{
 			target = new BlockPos(compound.getInteger("targetX"), compound.getInteger("targetY"), compound.getInteger("targetZ"));
@@ -50,40 +54,18 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 			if (oldTarget != null)
 			{
 				IBlockState targetState = world.getBlockState(oldTarget);
-				targetState.neighborChanged(world, oldTarget, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
-				world.notifyNeighborsOfStateChange(oldTarget, Blocks.REDSTONE_BLOCK,false);
+				targetState.neighborChanged(world, oldTarget, Blocks.REDSTONE_BLOCK, this.pos); // TODO
+																								// DANGEROUS
+				world.notifyNeighborsOfStateChange(oldTarget, Blocks.REDSTONE_BLOCK, false);
 			}
 
 			if (this.target != null)
 			{
 				IBlockState targetState = world.getBlockState(target);
-				targetState.neighborChanged(world, target, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
-				world.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK,false);
+				targetState.neighborChanged(world, target, Blocks.REDSTONE_BLOCK, this.pos); // TODO
+																								// DANGEROUS
+				world.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK, false);
 			}
-		}
-	}
-
-	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
-	{
-		if (this.target != null)
-		{
-			IBlockState targetState = worldIn.getBlockState(target);
-			targetState.neighborChanged(worldIn, target, neighborBlock,this.pos); // TODO DANGEROUS
-			worldIn.notifyNeighborsOfStateChange(target, neighborBlock,false);
-		}
-	}
-
-	@Override
-	public void broken()
-	{
-		super.broken();
-
-		if (this.target != null)
-		{
-			IBlockState targetState = world.getBlockState(target);
-			targetState.neighborChanged(world, target, Blocks.REDSTONE_BLOCK,this.pos); // TODO DANGEROUS
-			world.notifyNeighborsOfStateChange(target, Blocks.REDSTONE_BLOCK,false);
 		}
 	}
 
@@ -124,5 +106,16 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 	protected boolean isTargeting(BlockPos pos)
 	{
 		return this.target != null && this.target.equals(pos);
+	}
+
+	@Override
+	protected void notifyTargets(Block neighborBlock)
+	{
+		if (this.target != null)
+		{
+			IBlockState targetState = world.getBlockState(target);
+			targetState.neighborChanged(world, target, neighborBlock, this.pos); 
+			world.notifyNeighborsOfStateChange(target, neighborBlock, false);
+		}
 	}
 }

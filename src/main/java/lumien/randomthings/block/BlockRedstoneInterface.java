@@ -24,26 +24,6 @@ public abstract class BlockRedstoneInterface extends BlockContainerBase
 		return EnumBlockRenderType.MODEL;
 	}
 
-	static HashSet<BlockPos> notifiedPositions = new HashSet<>();
-
-	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
-	{
-		if (notifiedPositions.contains(pos))
-		{
-			return;
-		}
-
-		TileEntity te;
-		if ((te = worldIn.getTileEntity(pos)) instanceof TileEntityRedstoneInterface)
-		{
-			notifiedPositions.add(pos);
-			TileEntityRedstoneInterface teInterface = (TileEntityRedstoneInterface) te;
-			teInterface.neighborChanged(state, worldIn, pos, neighborBlock);
-			notifiedPositions.remove(pos);
-		}
-	}
-
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{

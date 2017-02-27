@@ -31,7 +31,7 @@ public abstract class TileEntityBase extends TileEntity
 
 		if (this.inventoryHandler instanceof ItemStackHandler)
 		{
-			NBTTagCompound inventoryCompound = ((ItemStackHandler)inventoryHandler).serializeNBT();
+			NBTTagCompound inventoryCompound = ((ItemStackHandler) inventoryHandler).serializeNBT();
 			compound.setTag("inventory", inventoryCompound);
 		}
 
@@ -52,7 +52,7 @@ public abstract class TileEntityBase extends TileEntity
 
 		if (this.inventoryHandler instanceof ItemStackHandler)
 		{
-			((ItemStackHandler)inventoryHandler).deserializeNBT(compound.getCompoundTag("inventory"));
+			((ItemStackHandler) inventoryHandler).deserializeNBT(compound.getCompoundTag("inventory"));
 		}
 
 		if (this instanceof IRedstoneSensitive)
@@ -115,18 +115,21 @@ public abstract class TileEntityBase extends TileEntity
 		return false;
 	}
 
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
-		boolean newPowered = this.world.isBlockIndirectlyGettingPowered(this.pos) > 0;
-		boolean changed = redstonePowered != newPowered;
-
-		if (changed)
+		if (this instanceof IRedstoneSensitive)
 		{
-			((IRedstoneSensitive)this).redstoneChange(redstonePowered, newPowered);
-			
-			this.redstonePowered = newPowered;
-			
-			this.markDirty();
+			boolean newPowered = this.world.isBlockIndirectlyGettingPowered(this.pos) > 0;
+			boolean changed = redstonePowered != newPowered;
+
+			if (changed)
+			{
+				((IRedstoneSensitive) this).redstoneChange(redstonePowered, newPowered);
+
+				this.redstonePowered = newPowered;
+
+				this.markDirty();
+			}
 		}
 	}
 

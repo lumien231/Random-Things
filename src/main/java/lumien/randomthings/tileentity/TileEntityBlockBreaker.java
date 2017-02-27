@@ -102,7 +102,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 				firstTick = false;
 				initFakePlayer();
 
-				neighborChanged(this.world.getBlockState(pos), world, pos, null);
+				neighborChanged(this.world.getBlockState(pos), world, pos, null, null);
 			}
 
 			if (mining)
@@ -195,7 +195,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		BlockPos targetPos = pos.offset(state.getValue(BlockBlockBreaker.FACING));
 
