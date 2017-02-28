@@ -14,10 +14,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class TileEntityRedstoneInterface extends TileEntityBase
+public abstract class TileEntityRedstoneInterface extends TileEntityBase implements ITickable
 {
 	public static Set<TileEntityRedstoneInterface> interfaces = Collections.newSetFromMap(new WeakHashMap());
 
@@ -25,6 +26,8 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 
 	HashMap<EnumFacing, Integer> weakPower;
 	HashMap<EnumFacing, Integer> strongPower;
+	
+	boolean firstTick = true;
 
 	public TileEntityRedstoneInterface()
 	{
@@ -48,13 +51,16 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase
 	}
 	
 	@Override
-	public void onLoad()
+	public void update()
 	{
-		super.onLoad();
-		
-		if (weakPower.get(EnumFacing.DOWN) == -1)
+		if (firstTick)
 		{
-			updateRedstoneState(Blocks.REDSTONE_BLOCK);
+			firstTick = false;
+
+			if (weakPower.get(EnumFacing.DOWN) == -1)
+			{
+				updateRedstoneState(Blocks.REDSTONE_BLOCK);
+			}
 		}
 	}
 

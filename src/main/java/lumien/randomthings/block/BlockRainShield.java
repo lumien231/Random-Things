@@ -108,7 +108,7 @@ public class BlockRainShield extends BlockContainerBase
 		TileEntity te;
 		if ((te = worldIn.getTileEntity(pos)) instanceof TileEntityRainShield)
 		{
-			((TileEntityRainShield) te).neighborChanged(state, worldIn, pos, neighborBlock);
+			((TileEntityRainShield) te).neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 		}
 		
 		checkForDrop(worldIn, pos, state);

@@ -112,8 +112,59 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchVertexLighterFlat(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.client.multiplayer.PlayerControllerMP"))
+		{
+			return patchPlayerController(basicClass);
+		}
 
 		return basicClass;
+	}
+
+	private byte[] patchPlayerController(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found PlayerControllerMP Class: " + classNode.name);
+
+		MethodNode getBlockReachDistance = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_78757_d")))
+			{
+				getBlockReachDistance = mn;
+				break;
+			}
+		}
+
+		if (getBlockReachDistance != null)
+		{
+			logger.log(Level.DEBUG, " - Found getBlockReachDistance");
+
+			for (int i = 0; i < getBlockReachDistance.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = getBlockReachDistance.instructions.get(i);
+
+				if (ain.getOpcode() == FRETURN)
+				{
+					InsnList toInsert = new InsnList();
+					toInsert.add(new VarInsnNode(ALOAD, 0));
+					toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/client/multiplayer/PlayerControllerMP", MCPNames.field("field_78776_a"), "Lnet/minecraft/client/Minecraft;"));
+					toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/client/Minecraft", MCPNames.field("field_71439_g"), "Lnet/minecraft/client/entity/EntityPlayerSP;"));
+					toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getPlayerRange", "(FLnet/minecraft/entity/player/EntityPlayer;)F", false));
+					getBlockReachDistance.instructions.insertBefore(ain, toInsert);
+					i += 4;
+					break;
+				}
+			}
+		}
+
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchVertexLighterFlat(byte[] basicClass)
@@ -359,13 +410,17 @@ public class ClassTransformer implements IClassTransformer
 		logger.log(Level.DEBUG, "Found PlayerInteractionManager Class: " + classNode.name);
 
 		MethodNode tryHarvestBlock = null;
+		MethodNode getBlockReachDistance = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
 			if (mn.name.equals(MCPNames.method("func_180237_b")))
 			{
 				tryHarvestBlock = mn;
-				break;
+			}
+			else if (mn.name.equals("getBlockReachDistance"))
+			{
+				getBlockReachDistance = mn;
 			}
 		}
 
@@ -390,6 +445,27 @@ public class ClassTransformer implements IClassTransformer
 
 					tryHarvestBlock.instructions.insertBefore(ain, endInsert);
 					i += 1;
+				}
+			}
+		}
+
+		if (getBlockReachDistance != null)
+		{
+			logger.log(Level.DEBUG, " - Found getBlockReachDistance");
+
+			for (int i = 0; i < getBlockReachDistance.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = getBlockReachDistance.instructions.get(i);
+
+				if (ain.getOpcode() == DRETURN)
+				{
+					InsnList toInsert = new InsnList();
+					toInsert.add(new VarInsnNode(ALOAD, 0));
+					toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/server/management/PlayerInteractionManager", MCPNames.field("field_73090_b"), "Lnet/minecraft/entity/player/EntityPlayerMP;"));
+					toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "getPlayerRange", "(DLnet/minecraft/entity/player/EntityPlayer;)D", false));
+					getBlockReachDistance.instructions.insertBefore(ain, toInsert);
+
+					i += 3;
 				}
 			}
 		}

@@ -220,6 +220,10 @@ item.ingredient.spectreIngot.name=Spectre Ingot
 item.ingredient.biomeSensor.name=Biome Sensor
 item.ingredient.luminousPowder.name=Luminous Powder
 
+item.spectrePickaxe.name=Spectre Pickaxe
+item.spectreAxe.name=Spectre Axe
+item.spectreShovel.name=Spectre Shovel
+
 tooltip.general.shift=Hold §6Shift§7 for more information
 tooltip.positionFilter.dimension=Dimension: %d
 tooltip.positionFilter.x=Position-X: %d

@@ -45,7 +45,7 @@ public class BlockBlockBreaker extends BlockContainerBase
 		TileEntity te;
 		if ((te = worldIn.getTileEntity(pos)) instanceof TileEntityBlockBreaker)
 		{
-			((TileEntityBlockBreaker) te).neighborChanged(state, worldIn, pos, neighborBlock);
+			((TileEntityBlockBreaker) te).neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class BlockBlockBreaker extends BlockContainerBase
 		super.onBlockAdded(worldIn, pos, state);
 		this.setDefaultFacing(worldIn, pos, state);
 
-		((TileEntityBlockBreaker) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, null);
+		((TileEntityBlockBreaker) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, null, null);
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)

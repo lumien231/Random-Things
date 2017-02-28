@@ -63,7 +63,7 @@ public class BlockAnalogEmitter extends BlockContainerBase
 
 		if (te instanceof TileEntityAnalogEmitter)
 		{
-			((TileEntityAnalogEmitter) te).neighborChanged(state, worldIn, pos, neighborBlock);
+			((TileEntityAnalogEmitter) te).neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 		}
 	}
 

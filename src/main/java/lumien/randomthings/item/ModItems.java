@@ -1,5 +1,9 @@
 package lumien.randomthings.item;
 
+import lumien.randomthings.item.spectretools.ItemSpectreAxe;
+import lumien.randomthings.item.spectretools.ItemSpectrePickaxe;
+import lumien.randomthings.item.spectretools.ItemSpectreShovel;
+import lumien.randomthings.item.spectretools.ItemSpectreSword;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModItems
@@ -28,13 +32,17 @@ public class ModItems
 	public static ItemEntityFilter entityFilter;
 	public static ItemIngredient ingredients;
 	public static ItemItemFilter itemFilter;
-	public static ItemSpectreKey spectreKey;
 	public static ItemRedstoneActivator redstoneActivator;
 	public static ItemRedstoneRemote redstoneRemote;
-	public static ItemSpectreAnchor spectreAnchor;
-	public static ItemSpectreSword spectreSword;
 	public static ItemGoldenCompass goldenCompass;
 	public static ItemBlazeAndSteel blazeAndSteel;
+	
+	public static ItemSpectreKey spectreKey;
+	public static ItemSpectreAnchor spectreAnchor;
+	public static ItemSpectreSword spectreSword;
+	public static ItemSpectrePickaxe spectrePickaxe;
+	public static ItemSpectreAxe spectreAxe;
+	public static ItemSpectreShovel spectreShovel;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -60,14 +68,19 @@ public class ModItems
 		entityFilter = new ItemEntityFilter();
 		ingredients = new ItemIngredient();
 		itemFilter = new ItemItemFilter();
-		spectreKey = new ItemSpectreKey();
 		redstoneActivator = new ItemRedstoneActivator();
 		redstoneRemote = new ItemRedstoneRemote();
-		spectreAnchor = new ItemSpectreAnchor();
-		spectreSword = new ItemSpectreSword();
 		goldenCompass = new ItemGoldenCompass();
 		blazeAndSteel = new ItemBlazeAndSteel();
 
 		grassSeeds = new ItemGrassSeeds();
+		
+		spectreKey = new ItemSpectreKey();
+		spectreAnchor = new ItemSpectreAnchor();
+		spectreSword = new ItemSpectreSword();
+		spectrePickaxe = new ItemSpectrePickaxe();
+		spectreAxe = new ItemSpectreAxe();
+		spectreShovel = new ItemSpectreShovel();
+		
 	}
 }

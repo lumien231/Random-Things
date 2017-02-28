@@ -39,7 +39,7 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		EnumFacing facing = state.getValue(BlockAnalogEmitter.FACING);
 		boolean input = worldIn.getRedstonePower(pos.offset(facing), facing.getOpposite()) > 0;

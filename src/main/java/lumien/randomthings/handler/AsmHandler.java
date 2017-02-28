@@ -16,8 +16,8 @@ import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
-import lumien.randomthings.item.ItemSpectreSword;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.item.spectretools.ItemSpectreSword;
 import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.lib.ISuperLubricent;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
@@ -42,6 +42,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -73,6 +74,26 @@ public class AsmHandler
 		{
 			getFields();
 		}
+	}
+	
+	public static double getPlayerRange(double original,EntityPlayer player)
+	{
+		return getPlayerRange((float) original, player);
+	}
+
+	public static float getPlayerRange(float original, EntityPlayer player)
+	{
+		if (player != null)
+		{
+			ItemStack holding = player.getHeldItemMainhand();
+
+			if (holding.getItem() == ModItems.spectrePickaxe || holding.getItem() == ModItems.spectreAxe || holding.getItem() == ModItems.spectreShovel)
+			{
+				return original + 3;
+			}
+		}
+
+		return original;
 	}
 
 	public static void updateColor(float[] normal, float[] color, float x, float y, float z, float tint, int multiplier)

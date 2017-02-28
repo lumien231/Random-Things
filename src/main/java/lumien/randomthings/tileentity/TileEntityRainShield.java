@@ -105,7 +105,7 @@ public class TileEntityRainShield extends TileEntityBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state2, World worldIn, BlockPos pos, Block neighborBlock)
+	public void neighborChanged(IBlockState state2, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		boolean desiredState = !(worldIn.isBlockIndirectlyGettingPowered(pos) > 0);
 

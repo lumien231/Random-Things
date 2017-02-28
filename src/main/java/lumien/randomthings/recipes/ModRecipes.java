@@ -160,9 +160,14 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneActivator), "iri", "iti", "iii", 'i', "ingotIron", 'r', "dustRedstone", 't', redstoneTorch));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.redstoneRemote), "aaa", "oso", "ooo", 'a', ModItems.redstoneActivator, 'o', Blocks.OBSIDIAN, 's', stableEnderpearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAnchor), "xix", "iei", "iii", 'i', "ingotIron", 'e', ectoPlasm));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx", "xsx", "xox", 's', spectreIngot, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.goldenCompass), "xgx", "gcg", "xgx", 'g', "ingotGold", 'c', Items.COMPASS));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.blazeAndSteel), "ib", 'b', Items.BLAZE_POWDER, 'i', Items.IRON_INGOT));
+		
+		// Spectre Tools
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx", "xsx", "xox", 's', spectreIngot, 'o', obsidian));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAxe), "ssx", "sox", "xox", 's', spectreIngot, 'o', obsidian));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectrePickaxe), "sss", "xox", "xox", 's', spectreIngot, 'o', obsidian));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreShovel), "xsx", "xox", "xox", 's', spectreIngot, 'o', obsidian));
 
 		// Ingredients
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.EVIL_TEAR.id), "xsx", "xtx", "xex", 's', witherSkull, 't', ghastTear, 'e', enderPearl));

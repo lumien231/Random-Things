@@ -40,7 +40,7 @@ public class BlockPrismarineEnderBridge extends BlockContainerBase
 
 		if ((te = worldIn.getTileEntity(pos)) instanceof TileEntityPrismarineEnderBridge)
 		{
-			((TileEntityPrismarineEnderBridge) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, neighborBlock);
+			((TileEntityPrismarineEnderBridge) worldIn.getTileEntity(pos)).neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 		}
 	}
 
