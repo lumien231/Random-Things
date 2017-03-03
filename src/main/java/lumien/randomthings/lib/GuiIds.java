@@ -19,10 +19,10 @@ public class GuiIds
 	public static final int ADVANCED_ITEM_COLLECTOR = 15;
 	public static final int ADVANCED_REDSTONE_INTERFACE = 16;
 	public static final int FILTERED_ITEM_REDIRECTOR = 17;
-	public static final int REDSTONE_REMOTE_EDIT = 17;
-	public static final int REDSTONE_REMOTE_USE = 18;
-	public static final int FILTERED_SUPERLUBRICENT_PLATFORM = 19;
-	public static final int REDSTONE_OBSERVER = 20;
-	public static final int IRON_DROPPER = 21;
-	public static final int ITEM_PROJECTOR = 22;
+	public static final int REDSTONE_REMOTE_EDIT = 18;
+	public static final int REDSTONE_REMOTE_USE = 19;
+	public static final int FILTERED_SUPERLUBRICENT_PLATFORM = 20;
+	public static final int REDSTONE_OBSERVER = 21;
+	public static final int IRON_DROPPER = 22;
+	public static final int ITEM_PROJECTOR = 23;
 }

@@ -110,7 +110,6 @@ public class GuiHandler implements IGuiHandler
 
 				if (guiClass != null)
 				{
-
 					Constructor constructor = null;
 					try
 					{
