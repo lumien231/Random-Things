@@ -64,7 +64,7 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 
 					if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
 					{
-						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
+						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
 						for (EntityItem ei : entityItemList)
 						{
 							if (!ei.isDead)

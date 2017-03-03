@@ -112,7 +112,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 
 					if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
 					{
-						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
+						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
 						
 						for (EntityItem ei : entityItemList)
 						{
