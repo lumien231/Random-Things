@@ -54,6 +54,7 @@ tile.itemProjector.name=[WIP] Item Projector
 tile.blockOfSticks.normal.name=Block of Sticks
 tile.blockOfSticks.returning.name=Returning Block of Sticks
 tile.igniter.name=Igniter
+tile.inventoryRerouter.name=Inventory Rerouter
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling

@@ -1,0 +1,19 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "randomthings:blocks/inventoryrerouter/side",
+        "down": "randomthings:blocks/inventoryrerouter/side",
+        "up": "randomthings:blocks/inventoryrerouter/side",
+        "north": "randomthings:blocks/inventoryrerouter/side_con",
+        "east": "randomthings:blocks/inventoryrerouter/side",
+        "south": "randomthings:blocks/inventoryrerouter/side",
+        "west": "randomthings:blocks/inventoryrerouter/side"
+    },
+    "display": {
+        "thirdperson": {
+            "rotation": [ 10, -45, 170 ],
+            "translation": [ 0, 1.5, -2.75 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    }
+}

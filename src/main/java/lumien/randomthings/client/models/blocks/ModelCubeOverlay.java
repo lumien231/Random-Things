@@ -26,7 +26,6 @@ public class ModelCubeOverlay implements IBakedModel
 
 	TextureAtlasSprite particleTexture;
 
-
 	HashMap<EnumFacing, List<BakedQuad>> itemQuads;
 
 	Map<EnumFacing, List<BakedQuad>> originalQuads;

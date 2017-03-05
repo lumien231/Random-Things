@@ -20,6 +20,8 @@ public class BlockModels
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreLeaf, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreLeaf","normal")));
 	
 		ModelLoader.setCustomStateMapper(ModBlocks.igniter, (new StateMap.Builder()).ignore(new IProperty[] {BlockIgniter.POWERED}).build());
+		
+		ModelLoader.setCustomStateMapper(ModBlocks.inventoryRerouter, new FocusStateMapper(new ModelResourceLocation("randomthings:inventoryrerouter", "normal")));
 	}
 
 }

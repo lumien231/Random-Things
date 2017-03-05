@@ -137,8 +137,9 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.ironDropper), "iii", "ixi", "iri", 'i', "ingotIron", 'r', redstoneDust));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockOfSticks, 16), "sss", "sas", "sss", 's', "stickWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.igniter), "ncc", "nfc", "ncc", 'n', Blocks.NETHERRACK, 'c', "cobblestone", 'f', Items.FLINT_AND_STEEL));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockOfSticks,8,1), "sss","ses","sss",'s',new ItemStack(ModBlocks.blockOfSticks),'e',enderPearl));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockOfSticks, 8, 1), "sss", "ses", "sss", 's', new ItemStack(ModBlocks.blockOfSticks), 'e', enderPearl));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.inventoryRerouter), "sbs", "bhb", "sbs", 's', "stone", 'b', Blocks.IRON_BARS, 'h', Blocks.HOPPER));
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.HOPPER, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));
 
@@ -162,7 +163,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAnchor), "xix", "iei", "iii", 'i', "ingotIron", 'e', ectoPlasm));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.goldenCompass), "xgx", "gcg", "xgx", 'g', "ingotGold", 'c', Items.COMPASS));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.blazeAndSteel), "ib", 'b', Items.BLAZE_POWDER, 'i', Items.IRON_INGOT));
-		
+
 		// Spectre Tools
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword), "xsx", "xsx", "xox", 's', spectreIngot, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreAxe), "ssx", "sox", "xox", 's', spectreIngot, 'o', obsidian));
@@ -174,8 +175,8 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id), "xlx", "xix", "xex", 'l', lapis, 'i', "ingotGold", 'e', ectoPlasm));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 9, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id), "ele", "eie", "eee", 'l', lapisBlock, 'i', "blockGold", 'e', ectoPlasm));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.BIOME_SENSOR.id), "iii", "rci", "iri", 'i', "ingotIron", 'r', redstoneDust, 'c', ModItems.biomeCrystal));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients,4,ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id), "gdg",'g', "blockGlassColorless",'d',glowStone));
-		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 4, ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id), "gdg", 'g', "blockGlassColorless", 'd', glowStone));
+
 		// Biome Blocks
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 0), "ccc", "cbc", "ccc", 'c', cobblestone, 'b', biomeCrystal));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.biomeStone, 16, 1), "sss", "sbs", "sss", 's', stone, 'b', biomeCrystal));
@@ -220,7 +221,7 @@ public class ModRecipes
 		AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.obsidianWaterWalkingBoots), new ItemStack(ModItems.lavaCharm), new ItemStack(ModItems.lavaWader), 15);
 
 		createLuminousRecipes();
-		
+
 		// Spectre Anchor
 		IRecipe anchorRecipe = new IRecipe()
 		{
@@ -448,7 +449,7 @@ public class ModRecipes
 
 		RecipeSorter.register("goldenCompass", goldenCompassRecipe.getClass(), Category.SHAPELESS, "");
 		GameRegistry.addRecipe(goldenCompassRecipe);
-		
+
 		// Luminous Powder
 		IRecipe luminousPowderRecipe = new IRecipe()
 		{
@@ -568,14 +569,14 @@ public class ModRecipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(dyedBlock, 8, i), "ttt", "tdt", "ttt", 't', original, 'd', oreDictDyes[i]));
 		}
 	}
-	
+
 	private static void createLuminousRecipes()
 	{
 		for (int i = 0; i < 16; i++)
 		{
 			EnumDyeColor color = EnumDyeColor.byMetadata(i);
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.luminousBlock, 1, i), "ld", "ll",  'l', new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id), 'd', oreDictDyes[i]));
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModBlocks.luminousStainedBrick, 1, i),new ItemStack(ModBlocks.stainedBrick, 1, i), new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id)));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.luminousBlock, 1, i), "ld", "ll", 'l', new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id), 'd', oreDictDyes[i]));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModBlocks.luminousStainedBrick, 1, i), new ItemStack(ModBlocks.stainedBrick, 1, i), new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id)));
 		}
 	}
 }

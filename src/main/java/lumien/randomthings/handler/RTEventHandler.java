@@ -13,6 +13,7 @@ import lumien.randomthings.block.BlockContactLever;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
 import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
+import lumien.randomthings.client.models.blocks.ModelInventoryRerouter;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.entitys.EntitySoul;
@@ -398,6 +399,8 @@ public class RTEventHandler
 		ModelCustomWorkbench modelCustomWorkbench = new ModelCustomWorkbench();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "normal"), modelCustomWorkbench);
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "inventory"), modelCustomWorkbench);
+		ModelInventoryRerouter inventoryRerouterModel = new ModelInventoryRerouter();
+		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:inventoryRerouter", "normal"), inventoryRerouterModel);
 	}
 
 	@SideOnly(Side.CLIENT)
