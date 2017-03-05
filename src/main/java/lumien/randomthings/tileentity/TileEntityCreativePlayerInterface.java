@@ -73,6 +73,6 @@ public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface
 	@Optional.Method(modid = "OpenComputers")
 	public Object[] isCurrentlyConnected(Context context, Arguments args)
 	{
-		return new Object[] { this.playerEntity != null };
+		return new Object[] { getPlayerInventory() != null };
 	}
 }

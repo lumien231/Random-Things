@@ -4,7 +4,7 @@
         "particle": "randomthings:blocks/playerinterface/side",
         "down": "randomthings:blocks/playerinterface/bottom",
         "up": "randomthings:blocks/playerinterface/top",
-        "north": "randomthings:blocks/playerinterface/side",
+        "north": "randomthings:blocks/playerinterface/side_shield",
         "east": "randomthings:blocks/playerinterface/side",
         "south": "randomthings:blocks/playerinterface/side",
         "west": "randomthings:blocks/playerinterface/side"
