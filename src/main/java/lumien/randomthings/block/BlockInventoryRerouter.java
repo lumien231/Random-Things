@@ -1,12 +1,14 @@
 package lumien.randomthings.block;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import lumien.randomthings.tileentity.TileEntityBlockBreaker;
 import lumien.randomthings.tileentity.TileEntityInventoryRerouter;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -78,6 +80,30 @@ public class BlockInventoryRerouter extends BlockContainerBase
 	{
 		super.onBlockAdded(worldIn, pos, state);
 		this.setDefaultFacing(worldIn, pos, state);
+	}
+	
+	
+	HashSet<BlockPos> circleSet = new HashSet<BlockPos>();
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
+	{
+		if (circleSet.contains(pos))
+		{
+			return;
+		}
+		
+		EnumFacing facing = state.getValue(FACING);
+		BlockPos offset = pos.offset(facing);
+		
+		if (offset.equals(changedPos))
+		{
+			circleSet.add(pos);
+			worldIn.notifyNeighborsOfStateChange(pos, this, false);
+			circleSet.remove(pos);
+		}
+		
+		super.neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
