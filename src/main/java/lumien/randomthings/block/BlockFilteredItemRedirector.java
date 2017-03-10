@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -34,6 +35,15 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 
 		this.setHardness(2.0F);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(INPUT_FACING, EnumFacing.NORTH));
+	}
+	
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntityFilteredItemRedirector tileentity = (TileEntityFilteredItemRedirector) worldIn.getTileEntity(pos);
+		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity.getInventory());
+
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
