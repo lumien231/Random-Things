@@ -124,7 +124,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockBreaker), "cpc", "crc", "ccc", 'c', "cobblestone", 'p', Items.IRON_PICKAXE, 'r', redstoneTorch));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rainbowLamp), "xgx", "rlb", 'g', "dyeGreen", 'r', "dyeRed", 'b', "dyeBlue", 'l', redstoneLamp));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedRedstoneInterface), "ror", "oio", "ror", 'r', "blockRedstone", 'o', obsidian, 'i', ModBlocks.basicRedstoneInterface));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemRedirector), "ooo", "ger", "olo", 'o', Blocks.OBSIDIAN, 'g', "dyeGreen", 'e', enderPearl, 'l', ModBlocks.superLubricentIce, 'r', "dyeRed"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemRedirector, 2), "ooo", "xhx", "olo", 'o', Blocks.OBSIDIAN, 'h', Blocks.HOPPER, 'l', ModBlocks.superLubricentIce));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCorrector), "ili", "ccc", "ccc", 'c', "cobblestone", 'i', "ingotIron", 'l', ModBlocks.superLubricentIce));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.superLubricentIce, 16), "s", "i", "w", 's', "slimeball", 'i', Blocks.ICE, 'w', Items.WATER_BUCKET));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemSealer), "ala", "ccc", "ccc", 'c', "cobblestone", 'a', "gemLapis", 'l', ModBlocks.superLubricentIce));
