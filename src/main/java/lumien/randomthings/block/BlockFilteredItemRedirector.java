@@ -3,6 +3,7 @@ package lumien.randomthings.block;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.lib.GuiIds;
+import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import lumien.randomthings.tileentity.TileEntityFilteredItemRedirector;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -121,21 +122,23 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 			if (ei.getEntityItem() != null)
 			{
 				Vec3d motionVec = new Vec3d(entityIn.posX, entityIn.posY, entityIn.posZ).subtract(new Vec3d(entityIn.lastTickPosX, entityIn.lastTickPosY, entityIn.lastTickPosZ));
-
+				
+				EnumFacing roughMovingFacing = EnumFacing.getFacingFromVector((float)motionVec.xCoord, (float)motionVec.yCoord, (float)motionVec.zCoord).getOpposite();
+				
 				Vec3d center = new Vec3d(pos).addVector(0.5, 0, 0.5);
 				Vec3d difVec = center.subtract(entityIn.getPositionVector());
 
 				EnumFacing facing = EnumFacing.getFacingFromVector((float) difVec.xCoord, (float) difVec.yCoord, (float) difVec.zCoord).getOpposite();
 
 				EnumFacing inputSide = state.getValue(INPUT_FACING);
-
-				if (facing == inputSide)
+				
+				if ((facing == inputSide || facing == inputSide.getOpposite()) && facing == roughMovingFacing)
 				{
 					TileEntityFilteredItemRedirector te = (TileEntityFilteredItemRedirector) worldIn.getTileEntity(pos);
 
 					ItemFilterRepresentation[] repres = te.getRepres();
 
-					EnumFacing output = inputSide.getOpposite();
+					EnumFacing output = facing.getOpposite();
 
 					if (repres[0] != null)
 					{
@@ -152,8 +155,6 @@ public class BlockFilteredItemRedirector extends BlockContainerBase
 							output = inputSide.rotateYCCW();
 						}
 					}
-
-
 
 					Vec3d facingVec = new Vec3d(output.getDirectionVec()).scale(0.4).add(center);
 

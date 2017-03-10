@@ -9,8 +9,7 @@
             "east": "minecraft:blocks/obsidian",
             "south": "minecraft:blocks/obsidian",
             "west": "minecraft:blocks/obsidian",
-            "input" : "randomthings:blocks/itemredirectorinput",
-            "output" : "randomthings:blocks/itemredirectoroutput"
+            "input" : "randomthings:blocks/itemredirectorinput"
         },
         "model": "randomthings:itemredirectorbase",
         "uvlock": true
@@ -46,25 +45,25 @@
             "north" :
             {
                 "textures": {
-                    "north": "#output"
+                    "north": "#input"
                 }
             },
             "south" :
             {
                 "textures": {
-                    "south": "#output"
+                    "south": "#input"
                 }
             },
             "west" :
             {
                 "textures": {
-                    "west": "#output"
+                    "west": "#input"
                 }
             },
             "east" :
             {
                 "textures": {
-                    "east": "#output"
+                    "east": "#input"
                 }
             }
         }
