@@ -81,8 +81,8 @@ public class WorldGenCores implements IWorldGenerator
 		{
 			if (world.provider.getDimension() == 0)
 			{
-				int x = chunkX * 16 + random.nextInt(16);
-				int z = chunkZ * 16 + random.nextInt(16);
+				int x = chunkX * 16 + 8 + random.nextInt(16);
+				int z = chunkZ * 16 + 8 + random.nextInt(16);
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
 				if (target != null && target.getY() >= 0)
