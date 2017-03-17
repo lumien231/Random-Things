@@ -1,20 +1,15 @@
 package lumien.randomthings.block;
 
-import java.awt.Color;
-import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.lib.IRTBlockColor;
-import lumien.randomthings.tileentity.TileEntityCustomWorkbench;
 import lumien.randomthings.tileentity.TileEntityRuneBase;
-import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
@@ -22,7 +17,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,7 +25,6 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -114,7 +107,7 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 					{
 						ItemStack dustStack = new ItemStack(ModItems.runeDust, 1, rune);
 
-						EntityItem entityitem = new EntityItem(worldIn, (double) pos.getX() + x / 4F, (double) pos.getY() + 0.1, (double) pos.getZ() + y / 4F, dustStack);
+						EntityItem entityitem = new EntityItem(worldIn, (double) pos.getX() + x / 4F, pos.getY() + 0.1, (double) pos.getZ() + y / 4F, dustStack);
 						entityitem.setNoPickupDelay();
 						worldIn.spawnEntity(entityitem);
 					}
@@ -156,7 +149,7 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 
 					if (runeData[x][y] != -1)
 					{
-						EntityItem entityitem = new EntityItem(worldIn, (double) pos.getX() + hitVec.xCoord, (double) pos.getY() + 0.1, (double) pos.getZ() + hitVec.zCoord, new ItemStack(ModItems.runeDust, 1, runeData[x][y]));
+						EntityItem entityitem = new EntityItem(worldIn, pos.getX() + hitVec.xCoord, pos.getY() + 0.1, pos.getZ() + hitVec.zCoord, new ItemStack(ModItems.runeDust, 1, runeData[x][y]));
 						entityitem.setNoPickupDelay();
 						worldIn.spawnEntity(entityitem);
 

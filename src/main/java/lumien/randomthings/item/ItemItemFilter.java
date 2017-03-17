@@ -20,7 +20,7 @@ public class ItemItemFilter extends ItemBase
 	{
 		InventoryItem filterInventory;
 		ItemStack filterStack;
-		
+
 		boolean metadata = true;
 		boolean nbt = true;
 		boolean oreDict = false;
@@ -52,8 +52,8 @@ public class ItemItemFilter extends ItemBase
 				}
 
 				representation.metadata = compound.hasKey("metadata") ? compound.getBoolean("metadata") : representation.metadata;
-				representation.oreDict = compound.hasKey("oreDict") ?compound.getBoolean("oreDict") : representation.oreDict;
-				representation.nbt = compound.hasKey("nbt") ?compound.getBoolean("nbt") : representation.nbt;
+				representation.oreDict = compound.hasKey("oreDict") ? compound.getBoolean("oreDict") : representation.oreDict;
+				representation.nbt = compound.hasKey("nbt") ? compound.getBoolean("nbt") : representation.nbt;
 				representation.listType = compound.hasKey("listType") ? compound.getInteger("listType") : representation.listType;
 			}
 
@@ -190,7 +190,7 @@ public class ItemItemFilter extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick( World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)

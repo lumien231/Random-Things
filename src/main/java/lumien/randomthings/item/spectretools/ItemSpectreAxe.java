@@ -25,6 +25,7 @@ public class ItemSpectreAxe extends ItemTool
 		ItemBase.registerItem("spectreAxe", this);
 	}
 
+	@Override
 	public float getStrVsBlock(ItemStack stack, IBlockState state)
 	{
 		Material material = state.getMaterial();

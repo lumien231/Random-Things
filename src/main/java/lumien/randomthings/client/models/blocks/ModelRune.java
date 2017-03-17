@@ -56,7 +56,7 @@ public class ModelRune implements IBakedModel
 			else
 			{
 				Random rng = new Random(rand);
-				quadList = new ArrayList<BakedQuad>();
+				quadList = new ArrayList<>();
 
 				for (int x = 0; x < runeData.length; x++)
 				{
@@ -111,7 +111,7 @@ public class ModelRune implements IBakedModel
 		}
 		else
 		{
-			return new ArrayList<BakedQuad>();
+			return new ArrayList<>();
 		}
 	}
 

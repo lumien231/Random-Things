@@ -2,7 +2,6 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.item.block.ItemBlockClothLuminous;
 import lumien.randomthings.lib.ILuminousBlock;
-import lumien.randomthings.lib.IRTBlockColor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -16,8 +15,6 @@ import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

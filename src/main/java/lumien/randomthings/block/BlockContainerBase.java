@@ -1,6 +1,5 @@
 package lumien.randomthings.block;
 
-import lumien.randomthings.lib.IRedstoneSensitive;
 import lumien.randomthings.tileentity.TileEntityBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

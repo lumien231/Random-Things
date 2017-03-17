@@ -4,15 +4,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
-
-import lumien.randomthings.tileentity.TileEntityBlockBreaker;
 import lumien.randomthings.tileentity.TileEntityInventoryRerouter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -83,7 +78,7 @@ public class BlockInventoryRerouter extends BlockContainerBase
 	}
 	
 	
-	HashSet<BlockPos> circleSet = new HashSet<BlockPos>();
+	HashSet<BlockPos> circleSet = new HashSet<>();
 	
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
@@ -182,7 +177,7 @@ public class BlockInventoryRerouter extends BlockContainerBase
 
 			Map<EnumFacing, EnumFacing> facingMap = rerouter.getFacingMap();
 
-			return extendedState.withProperty(OVERRIDE_DATA, new HashMap<EnumFacing, EnumFacing>(facingMap));
+			return extendedState.withProperty(OVERRIDE_DATA, new HashMap<>(facingMap));
 		}
 
 		return super.getActualState(state, worldIn, pos);

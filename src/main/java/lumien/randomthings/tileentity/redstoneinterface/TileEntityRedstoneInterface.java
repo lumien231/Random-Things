@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.tileentity.TileEntityBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -177,7 +176,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 	
 	protected abstract void notifyTargets(Block neighborBlock);
 	
-	static HashSet<BlockPos> notifiedPositions = new HashSet<BlockPos>();
+	static HashSet<BlockPos> notifiedPositions = new HashSet<>();
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{

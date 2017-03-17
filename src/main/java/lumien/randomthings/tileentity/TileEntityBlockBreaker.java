@@ -12,14 +12,11 @@ import com.mojang.authlib.GameProfile;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockBlockBreaker;
 import lumien.randomthings.enchantment.ModEnchantments;
-import lumien.randomthings.handler.ItemCatcher;
-import lumien.randomthings.handler.RTEventHandler;
 import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -75,7 +72,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		unbreakingIronPickaxe.setTagCompound(new NBTTagCompound());
 		unbreakingIronPickaxe.getTagCompound().setBoolean("Unbreakable", true);
 
-		HashMap<Enchantment, Integer> enchantmentMap = new HashMap<Enchantment, Integer>();
+		HashMap<Enchantment, Integer> enchantmentMap = new HashMap<>();
 		enchantmentMap.put(ModEnchantments.magnetic, 1);
 		EnchantmentHelper.setEnchantments(enchantmentMap, unbreakingIronPickaxe);
 

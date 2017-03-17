@@ -20,7 +20,7 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 
 	public TileEntityInventoryRerouter()
 	{
-		facingMap = new HashMap<EnumFacing, EnumFacing>();
+		facingMap = new HashMap<>();
 
 		for (EnumFacing f : EnumFacing.VALUES)
 		{
@@ -60,7 +60,7 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 		}
 	}
 	
-	static HashSet<TileEntityInventoryRerouter> circleSet = new HashSet<TileEntityInventoryRerouter>();
+	static HashSet<TileEntityInventoryRerouter> circleSet = new HashSet<>();
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)

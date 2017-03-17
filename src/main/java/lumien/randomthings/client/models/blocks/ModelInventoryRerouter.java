@@ -10,7 +10,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.primitives.Ints;
 
 import lumien.randomthings.block.BlockInventoryRerouter;
-import lumien.randomthings.block.BlockRuneBase;
 import lumien.randomthings.lib.AtlasSprite;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -61,7 +60,7 @@ public class ModelInventoryRerouter implements IBakedModel
 	public ModelInventoryRerouter()
 	{
 		modelCache = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(120, TimeUnit.SECONDS).build();
-		emptyList = new ArrayList<BakedQuad>();
+		emptyList = new ArrayList<>();
 	}
 
 	@Override
@@ -84,11 +83,11 @@ public class ModelInventoryRerouter implements IBakedModel
 		}
 		else
 		{
-			quadMap = new HashMap<EnumFacing, List<BakedQuad>>();
+			quadMap = new HashMap<>();
 
 			for (EnumFacing facing : EnumFacing.VALUES)
 			{
-				List<BakedQuad> quadList = new ArrayList<BakedQuad>();
+				List<BakedQuad> quadList = new ArrayList<>();
 				quadMap.put(facing, quadList);
 
 

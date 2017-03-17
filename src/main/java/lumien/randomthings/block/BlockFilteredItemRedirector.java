@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.lib.GuiIds;
-import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import lumien.randomthings.tileentity.TileEntityFilteredItemRedirector;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

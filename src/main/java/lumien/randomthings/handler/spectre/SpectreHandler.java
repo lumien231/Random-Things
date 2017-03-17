@@ -1,17 +1,13 @@
 package lumien.randomthings.handler.spectre;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.UUID;
 
-import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;

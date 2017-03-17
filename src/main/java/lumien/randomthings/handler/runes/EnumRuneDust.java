@@ -1,10 +1,6 @@
 package lumien.randomthings.handler.runes;
 
-import java.awt.Color;
-
-import net.minecraft.block.material.MapColor;
 import net.minecraft.item.ItemDye;
-import net.minecraft.util.text.TextFormatting;
 
 public enum EnumRuneDust
 {

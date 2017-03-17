@@ -1,10 +1,7 @@
 package lumien.randomthings.item.block;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.lib.ILuminousItem;
-import lumien.randomthings.lib.IRTBlockColor;
-import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

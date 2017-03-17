@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 
 import lumien.randomthings.network.MessageUtil;
@@ -176,10 +174,10 @@ public class WorldUtil
 	public static void spawnItemStack(World worldIn, double x, double y, double z, ItemStack stack)
 	{
         float f = 0.5F;
-        double d0 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
-        double d1 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
-        double d2 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
-        EntityItem entityitem = new EntityItem(worldIn, (double)x + d0, (double)y+ d1, (double)z + d2, stack);
+        double d0 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
+        double d1 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
+        double d2 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
+        EntityItem entityitem = new EntityItem(worldIn, x + d0, y+ d1, z + d2, stack);
         entityitem.setDefaultPickupDelay();
         worldIn.spawnEntity(entityitem);
 	}

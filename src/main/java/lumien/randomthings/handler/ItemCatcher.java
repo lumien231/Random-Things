@@ -9,7 +9,6 @@ import lumien.randomthings.RandomThings;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemCatcher
 {
@@ -45,7 +44,7 @@ public class ItemCatcher
 			RandomThings.instance.logger.log(Level.WARN, "Not catching drops, unexpected!");
 		}
 		
-		ArrayList<ItemStack> copy = new ArrayList<ItemStack>(catchedDrops);
+		ArrayList<ItemStack> copy = new ArrayList<>(catchedDrops);
 		catchedDrops.clear();
 		
 		catchingDrops = false;
