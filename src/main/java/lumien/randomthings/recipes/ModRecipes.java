@@ -14,6 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagByte;
@@ -221,6 +222,7 @@ public class ModRecipes
 		AnvilRecipeHandler.addAnvilRecipe(new ItemStack(ModItems.obsidianWaterWalkingBoots), new ItemStack(ModItems.lavaCharm), new ItemStack(ModItems.lavaWader), 15);
 
 		createLuminousRecipes();
+		createRunicDustRecipes();
 
 		// Spectre Anchor
 		IRecipe anchorRecipe = new IRecipe()
@@ -550,6 +552,14 @@ public class ModRecipes
 
 		RecipeSorter.register("luminousPowder", luminousPowderRecipe.getClass(), Category.SHAPELESS, "");
 		GameRegistry.addRecipe(luminousPowderRecipe);
+	}
+
+	private static void createRunicDustRecipes()
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.runeDust, 8, i), Items.CLAY_BALL, new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.LUMINOUS_POWDER.id), oreDictDyes[i]));
+		}
 	}
 
 	private static void createGrassSeedsRecipes()

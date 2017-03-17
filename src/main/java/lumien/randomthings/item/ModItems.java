@@ -43,6 +43,8 @@ public class ModItems
 	public static ItemSpectrePickaxe spectrePickaxe;
 	public static ItemSpectreAxe spectreAxe;
 	public static ItemSpectreShovel spectreShovel;
+	
+	public static ItemRuneDust runeDust;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -82,5 +84,6 @@ public class ModItems
 		spectreAxe = new ItemSpectreAxe();
 		spectreShovel = new ItemSpectreShovel();
 		
+		runeDust = new ItemRuneDust();
 	}
 }

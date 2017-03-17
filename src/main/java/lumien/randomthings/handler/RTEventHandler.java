@@ -14,6 +14,7 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
 import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.client.models.blocks.ModelInventoryRerouter;
+import lumien.randomthings.client.models.blocks.ModelRune;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.entitys.EntitySoul;
@@ -143,7 +144,7 @@ public class RTEventHandler
 			}
 		});
 	}
-	
+
 	@SubscribeEvent
 	public void entityJoinWorld(EntityJoinWorldEvent event)
 	{
@@ -158,10 +159,10 @@ public class RTEventHandler
 		{
 			if (Worldgen.LAVA_CHARM)
 				addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.02f);
-			
+
 			if (Worldgen.SUMMONING_PENDULUM)
 				addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.02f);
-			
+
 			if (Worldgen.MAGIC_HOOD)
 				addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.03f);
 		}
@@ -399,6 +400,10 @@ public class RTEventHandler
 		ModelCustomWorkbench modelCustomWorkbench = new ModelCustomWorkbench();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "normal"), modelCustomWorkbench);
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "inventory"), modelCustomWorkbench);
+
+		ModelRune runeBaseModel = new ModelRune();
+		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:runeBase", "normal"), runeBaseModel);
+
 		ModelInventoryRerouter inventoryRerouterModel = new ModelInventoryRerouter();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:inventoryRerouter", "normal"), inventoryRerouterModel);
 	}
@@ -462,7 +467,7 @@ public class RTEventHandler
 			{
 				event.getToolTip().add(1, TextFormatting.DARK_AQUA.toString() + I18n.format("tooltip.spectreAnchor.item") + TextFormatting.RESET.toString());
 			}
-			
+
 			if (event.getItemStack().getTagCompound().hasKey("luminousEnchantment"))
 			{
 				event.getToolTip().add(1, TextFormatting.YELLOW.toString() + I18n.format("tooltip.luminousEnchantment") + TextFormatting.RESET.toString());

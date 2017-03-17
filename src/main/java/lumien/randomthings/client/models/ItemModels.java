@@ -1,6 +1,7 @@
 package lumien.randomthings.client.models;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
@@ -68,12 +69,12 @@ public class ItemModels
 		registerBlock(ModBlocks.itemProjector);
 		registerBlock(ModBlocks.igniter);
 		registerBlock(ModBlocks.inventoryRerouter);
-		
+
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);
 		registerBlock(ModBlocks.spectrePlank);
 		registerBlock(ModBlocks.spectreSapling);
-		
+
 		registerBlock(ModBlocks.itemCollector);
 		registerBlock(ModBlocks.advancedItemCollector);
 
@@ -103,7 +104,7 @@ public class ItemModels
 		registerItem(ModItems.spectreSword);
 		registerItem(ModItems.goldenCompass);
 		registerItem(ModItems.blazeAndSteel);
-		
+
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);
 		registerItem(ModItems.spectreAxe);
@@ -119,6 +120,18 @@ public class ItemModels
 		registerIngredients();
 		registerBlockOfSticks();
 		registerLuminousBlocks();
+
+		registerRuneDust();
+	}
+
+	private static void registerRuneDust()
+	{
+		for (EnumRuneDust runeType : EnumRuneDust.values())
+		{
+			String name = runeType.getName();
+
+			ModelLoader.setCustomModelResourceLocation(ModItems.runeDust, runeType.ordinal(), new ModelResourceLocation("randomthings:runedust", "inventory"));
+		}
 	}
 
 	private static void registerIngredients()
@@ -178,7 +191,7 @@ public class ItemModels
 	{
 		ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation(i.getRegistryName(), "inventory"));
 	}
-	
+
 	private static void registerLuminousBlocks()
 	{
 		for (int i = 0; i < 16; i++)
@@ -214,7 +227,7 @@ public class ItemModels
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 4, new ModelResourceLocation("randomthings:platform/acacia", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.platform), 5, new ModelResourceLocation("randomthings:platform/darkOak", "inventory"));
 	}
-	
+
 	private static void registerBlockOfSticks()
 	{
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.blockOfSticks), 0, new ModelResourceLocation("randomthings:blockOfSticks", "inventory"));

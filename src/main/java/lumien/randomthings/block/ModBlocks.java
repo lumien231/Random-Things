@@ -63,6 +63,7 @@ public class ModBlocks
 	public static BlockBlazingFire blazingFire;
 	public static BlockBlockLuminous luminousBlock;
 	public static BlockInventoryRerouter inventoryRerouter;
+	public static BlockRuneBase runeBase;
 	
 	public static BlockSpectrePlank spectrePlank;
 	public static BlockSpectreSapling spectreSapling;
@@ -146,6 +147,7 @@ public class ModBlocks
 		blazingFire = new BlockBlazingFire();
 		luminousBlock = new BlockBlockLuminous();
 		inventoryRerouter = new BlockInventoryRerouter();
+		runeBase = new BlockRuneBase();
 		
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();

@@ -42,6 +42,7 @@ public class ModTileEntitys
 		registerTE(TileEntityIronDropper.class, "ironDropper");
 		registerTE(TileEntityItemProjector.class, "itemProjector");
 		registerTE(TileEntityInventoryRerouter.class,"inventoryRerouter");
+		registerTE(TileEntityRuneBase.class, "runeBase");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

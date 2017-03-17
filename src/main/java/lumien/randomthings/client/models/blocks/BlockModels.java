@@ -15,13 +15,15 @@ public class BlockModels
 	{
 		ModelLoader.setCustomStateMapper(ModBlocks.coloredGrass, new FocusStateMapper(new ModelResourceLocation("randomthings:coloredGrass", "normal")));
 		ModelLoader.setCustomStateMapper(ModBlocks.specialChest, new EmptyStateMapper());
-		
-		ModelLoader.setCustomStateMapper(ModBlocks.spectreSapling, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreSapling","normal")));
-		ModelLoader.setCustomStateMapper(ModBlocks.spectreLeaf, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreLeaf","normal")));
-	
-		ModelLoader.setCustomStateMapper(ModBlocks.igniter, (new StateMap.Builder()).ignore(new IProperty[] {BlockIgniter.POWERED}).build());
-		
+
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreSapling, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreSapling", "normal")));
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreLeaf, new FocusStateMapper(new ModelResourceLocation("randomthings:spectreLeaf", "normal")));
+
+		ModelLoader.setCustomStateMapper(ModBlocks.igniter, (new StateMap.Builder()).ignore(new IProperty[] { BlockIgniter.POWERED }).build());
+
 		ModelLoader.setCustomStateMapper(ModBlocks.inventoryRerouter, new FocusStateMapper(new ModelResourceLocation("randomthings:inventoryrerouter", "normal")));
+
+		ModelLoader.setCustomStateMapper(ModBlocks.runeBase, new FocusStateMapper(new ModelResourceLocation("randomthings:runeBase", "normal")));
 	}
 
 }
