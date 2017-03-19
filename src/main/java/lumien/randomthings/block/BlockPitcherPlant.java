@@ -34,7 +34,6 @@ public class BlockPitcherPlant extends BlockBase
 {
 	protected static final AxisAlignedBB PITCHER_AABB = new AxisAlignedBB(0.5F - 0.2F, 0.0F, 0.5F - 0.2F, 0.5F + 0.2F, 0.2F * 4.0F, 0.5F + 0.2F);
 
-
 	protected BlockPitcherPlant()
 	{
 		super("pitcherPlant", Material.PLANTS);
@@ -64,7 +63,18 @@ public class BlockPitcherPlant extends BlockBase
 
 			if (result.success)
 			{
-				playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, result.result);
+				if (equipped.getCount() == 1)
+				{
+					playerIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, result.result);
+				}
+				else
+				{
+					if (!playerIn.capabilities.isCreativeMode)
+					{
+						equipped.shrink(1);
+					}
+					playerIn.inventory.addItemStackToInventory(result.result);
+				}
 				return true;
 			}
 		}
@@ -74,7 +84,7 @@ public class BlockPitcherPlant extends BlockBase
 			{
 				equipped.shrink(1);
 			}
-			
+
 			if (!playerIn.inventory.addItemStackToInventory(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER)))
 			{
 				equipped.grow(1);
