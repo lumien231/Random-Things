@@ -2,6 +2,9 @@ package lumien.randomthings.item;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
+import lumien.randomthings.util.EntityUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -16,6 +19,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -97,6 +101,19 @@ public class ItemSummoningPendulum extends ItemBase
 			entityCount = tagList.tagCount();
 		}
 
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && entityCount != 0)
+		{
+			NBTTagList tagList = compound.getTagList("entitys", 10);
+
+			for (int i = 0; i < tagList.tagCount(); i++)
+			{
+				Class entityClass = EntityList.getClass(new ResourceLocation(tagList.getCompoundTagAt(i).getString("id")));
+				String name = EntityUtil.getEntityName(entityClass);
+
+				tooltip.add("- " + name);
+			}
+			return;
+		}
 		tooltip.add(I18n.format(entityCount == 1 ? "tooltip.summoningPendulum.entityCount.singular" : "tooltip.summoningPendulum.entityCount.plural", entityCount));
 	}
 
@@ -139,7 +156,7 @@ public class ItemSummoningPendulum extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUse( EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		pos = pos.offset(side);

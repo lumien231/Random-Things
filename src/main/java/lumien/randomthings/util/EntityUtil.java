@@ -90,4 +90,22 @@ public class EntityUtil
 
 		return entityName;
 	}
+	
+	public static String getEntityName(Class entityClass)
+	{
+		String entityName = "NO_NAME";
+		entityName = EntityRegistry.getEntry(entityClass).getName();
+
+		if (entityName == null)
+		{
+			EntityRegistration registration = EntityRegistry.instance().lookupModSpawn(entityClass, false);
+
+			if (registration != null)
+			{
+				entityName = registration.getEntityName();
+			}
+		}
+
+		return entityName;
+	}
 }
