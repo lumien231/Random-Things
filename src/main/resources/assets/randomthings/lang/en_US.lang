@@ -246,7 +246,7 @@ tooltip.positionFilter.x=Position-X: %d
 tooltip.positionFilter.y=Position-Y: %d
 tooltip.positionFilter.z=Position-Z: %d
 tooltip.summoningPendulum.entityCount.singular=§5Holding %d Entity
-tooltip.summoningPendulum.entityCount.plural=§5Holding %d Entitys
+tooltip.summoningPendulum.entityCount.plural=§5Holding %d Entities
 tooltip.stableEnderpearl.boundto=§5Bound to %s
 tooltip.entityFilter.invalidEntity=Invalid Entity
 
