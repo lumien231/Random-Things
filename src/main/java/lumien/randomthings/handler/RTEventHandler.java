@@ -404,6 +404,8 @@ public class RTEventHandler
 		ModelRune runeBaseModel = new ModelRune();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:runeBase", "normal"), runeBaseModel);
 
+		
+
 		ModelInventoryRerouter inventoryRerouterModel = new ModelInventoryRerouter();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:inventoryRerouter", "normal"), inventoryRerouterModel);
 	}

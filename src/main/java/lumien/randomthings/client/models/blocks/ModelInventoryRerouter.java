@@ -32,9 +32,6 @@ public class ModelInventoryRerouter implements IBakedModel
 	@AtlasSprite(resource = "randomthings:blocks/inventoryrerouter/side_con")
 	public static TextureAtlasSprite interfaceCon;
 
-	@AtlasSprite(resource = "randomthings:blocks/inventoryrerouter/facing")
-	public static TextureAtlasSprite overlays;
-
 	@AtlasSprite(resource = "randomthings:blocks/inventoryrerouter/overlay_down")
 	public static TextureAtlasSprite overlay_down;
 

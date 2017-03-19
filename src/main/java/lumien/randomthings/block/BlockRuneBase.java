@@ -53,6 +53,12 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 	
 	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	{
+		return ItemStack.EMPTY;
+	}
+	
+	@Override
 	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager)
 	{
 		return true;
