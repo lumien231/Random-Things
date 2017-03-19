@@ -1,11 +1,16 @@
 package lumien.randomthings.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lumien.randomthings.RandomThings;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBase extends Item
 {
+	public static List<Item> rtItemList = new ArrayList<Item>(30);
+	
 	public ItemBase(String name)
 	{
 		registerItem(name, this);
@@ -20,5 +25,7 @@ public class ItemBase extends Item
 		item.setUnlocalizedName(name);
 
 		GameRegistry.register(item);
+		
+		rtItemList.add(item);
 	}
 }

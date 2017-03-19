@@ -47,6 +47,8 @@ public class RandomThingsPlugin implements IModPlugin
 		registry.addRecipes(lumien.randomthings.recipes.anvil.AnvilRecipeHandler.getAllRecipes());
 
 		registry.addRecipeClickArea(GuiImbuingStation.class, 99, 54, 22, 16, IMBUE_ID);
+		
+		DescriptionHandler.addDescriptions(registry);
 	}
 
 	@Override

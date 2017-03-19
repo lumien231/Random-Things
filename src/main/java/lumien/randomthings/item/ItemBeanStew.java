@@ -15,7 +15,7 @@ public class ItemBeanStew extends ItemFood
 	{
 		super(8, false);
 
-		RegisterUtil.registerItem(this, "beanStew");
+		ItemBase.registerItem("beanStew", this);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class ItemBeanStew extends ItemFood
 		{
 			if (livingEntity instanceof EntityPlayer)
 			{
-				boolean inventory = ((EntityPlayer)livingEntity).inventory.addItemStackToInventory(new ItemStack(Items.BOWL));
+				boolean inventory = ((EntityPlayer) livingEntity).inventory.addItemStackToInventory(new ItemStack(Items.BOWL));
 
 				if (!inventory && !worldIn.isRemote)
 				{

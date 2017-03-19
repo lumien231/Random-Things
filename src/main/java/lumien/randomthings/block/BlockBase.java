@@ -1,5 +1,8 @@
 package lumien.randomthings.block;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.ISuperLubricent;
 import net.minecraft.block.Block;
@@ -10,6 +13,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public abstract class BlockBase extends Block
 {
+	public static List<Block> rtBlockList = new ArrayList<Block>(20);
+
 	protected BlockBase(String name, Material materialIn)
 	{
 		super(materialIn);
@@ -22,11 +27,13 @@ public abstract class BlockBase extends Block
 		GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 
 		RandomThings.proxy.scheduleColor(this);
-		
+
 		if (this instanceof ISuperLubricent)
 		{
 			this.slipperiness = 1F / 0.98F;
 		}
+
+		rtBlockList.add(this);
 	}
 
 	protected BlockBase(String name, Material materialIn, Class<? extends ItemBlock> itemBlock)
@@ -48,22 +55,26 @@ public abstract class BlockBase extends Block
 			e.printStackTrace();
 		}
 		RandomThings.proxy.scheduleColor(this);
-		
+
 		if (this instanceof ISuperLubricent)
 		{
 			this.slipperiness = 1F / 0.98F;
 		}
+
+		rtBlockList.add(this);
 	}
-	
-	public static void registerBlock(String name,Block block)
+
+	public static void registerBlock(String name, Block block)
 	{
 		block.setRegistryName(name);
 		block.setCreativeTab(RandomThings.instance.creativeTab);
 		block.setUnlocalizedName(name);
 
 		GameRegistry.register(block);
-		
+
 		GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
 		RandomThings.proxy.scheduleColor(block);
+
+		rtBlockList.add(block);
 	}
 }
