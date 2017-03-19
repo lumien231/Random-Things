@@ -47,14 +47,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
-		if (plantable.getPlantType(world, pos.offset(direction)) == EnumPlantType.Plains)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return Blocks.GRASS.canSustainPlant(Blocks.GRASS.getDefaultState(), world, pos, direction, plantable);
 	}
 	
 	@Override
