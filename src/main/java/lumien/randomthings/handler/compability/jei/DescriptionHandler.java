@@ -19,7 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
-import scala.actors.threadpool.Arrays;
 
 public class DescriptionHandler
 {
@@ -29,7 +28,7 @@ public class DescriptionHandler
 	{
 		DescriptionHandler.registry = registry;
 
-		Map<Object, String> overrideMap = new HashMap<Object, String>();
+		Map<Object, String> overrideMap = new HashMap<>();
 		overrideMap.put(ModBlocks.customWorkbench, "tile.customWorkbench.info");
 		overrideMap.put(ModBlocks.specialChest, null);
 		overrideMap.put(ModBlocks.platform, "tile.platform.info");
@@ -42,7 +41,7 @@ public class DescriptionHandler
 		overrideMap.put(ModItems.grassSeeds,"item.grassSeeds.info");
 		overrideMap.put(ModItems.runeDust, "item.runeDust.info");
 
-		List<ItemStack> stackBlackList = new ArrayList<ItemStack>();
+		List<ItemStack> stackBlackList = new ArrayList<>();
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.BIOME_SENSOR.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.EVIL_TEAR.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id));

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public abstract class BlockBase extends Block
 {
-	public static List<Block> rtBlockList = new ArrayList<Block>(20);
+	public static List<Block> rtBlockList = new ArrayList<>(20);
 
 	protected BlockBase(String name, Material materialIn)
 	{

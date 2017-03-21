@@ -63,12 +63,18 @@ public class ModelInventoryRerouter implements IBakedModel
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
 	{
-		if (side == null)
+		if (side == null || state == null) 
 		{
 			return emptyList;
 		}
 
 		HashMap<EnumFacing, EnumFacing> overrideData = ((IExtendedBlockState) state).getValue(BlockInventoryRerouter.OVERRIDE_DATA);
+		
+		if (overrideData == null)
+		{
+			return emptyList;
+		}
+		
 		EnumFacing blockFacing = state.getValue(BlockInventoryRerouter.FACING);
 
 		CacheEntry entry = new CacheEntry(overrideData, blockFacing);
@@ -86,7 +92,6 @@ public class ModelInventoryRerouter implements IBakedModel
 			{
 				List<BakedQuad> quadList = new ArrayList<>();
 				quadMap.put(facing, quadList);
-
 
 				if (facing == blockFacing)
 				{
