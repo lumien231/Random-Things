@@ -2,6 +2,7 @@ package lumien.randomthings.asm;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -13,6 +14,8 @@ import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
 
+import net.minecraftforge.gradle.GradleStartCommon;
+
 public class MCPNames
 {
 	private static Map<String, String> fields;
@@ -22,12 +25,24 @@ public class MCPNames
 	{
 		if (mcp())
 		{
-			String mappingDir;
+			try
+			{
+				Field dirField = GradleStartCommon.class.getDeclaredField("CSV_DIR");
+				dirField.setAccessible(true);
+				File mappingDir = (File) dirField.get(null);
+				
+				fields = readMappings(new File(mappingDir , "fields.csv"));
+				methods = readMappings(new File(mappingDir , "methods.csv"));
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
 
-			mappingDir = "./../mcp/";
-
-			fields = readMappings(new File(mappingDir + "fields.csv"));
-			methods = readMappings(new File(mappingDir + "methods.csv"));
+				System.out.println("[RT] [ERROR] Error getting mappings from Gradlew SRG, falling back to mcp folder.");
+				fields = readMappings(new File("./../mcp/fields.csv"));
+				methods = readMappings(new File("./../mcp/methods.csv"));
+			}
+			
 		}
 		else
 		{
