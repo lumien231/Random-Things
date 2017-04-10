@@ -25,7 +25,7 @@ public class ContainerEntityDetector extends Container
 		this.pos = new BlockPos(x, y, z);
 		this.entityDetector = (TileEntityEntityDetector) world.getTileEntity(pos);
 
-		this.addSlotToContainer(new SlotFiltered(entityDetector.getInventory(), 0, 77, 122, new Predicate<ItemStack>()
+		this.addSlotToContainer(new SlotFiltered(entityDetector.getInventory(), 0, 131, 95, new Predicate<ItemStack>()
 		{
 			@Override
 			public boolean apply(ItemStack input)
@@ -43,13 +43,13 @@ public class ContainerEntityDetector extends Container
 		{
 			for (int j = 0; j < 9; j++)
 			{
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 153 + i * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 122 + i * 18));
 			}
 		}
 
 		for (int i = 0; i < 9; i++)
 		{
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 211));
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 180));
 		}
 	}
 

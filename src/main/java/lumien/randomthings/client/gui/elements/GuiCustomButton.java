@@ -23,7 +23,10 @@ public class GuiCustomButton extends GuiButton
 
 	Pair<String, String> tooltips;
 
-	public GuiCustomButton(GuiScreen parent, int buttonId, boolean value, int x, int y, int widthIn, int heightIn, String buttonText, ResourceLocation buttonTextures, int uX, int uY)
+	int textureWidth;
+	int textureHeight;
+
+	public GuiCustomButton(GuiScreen parent, int buttonId, boolean value, int x, int y, int widthIn, int heightIn, String buttonText, ResourceLocation buttonTextures, int uX, int uY, int textureWidth, int textureHeight)
 	{
 		super(buttonId, x, y, widthIn, heightIn, buttonText);
 
@@ -33,7 +36,15 @@ public class GuiCustomButton extends GuiButton
 		this.uY = uY;
 		this.value = value;
 
+		this.textureWidth = textureWidth;
+		this.textureHeight = textureHeight;
+		
 		this.tooltips = Pair.of(null, null);
+	}
+	
+	public GuiCustomButton(GuiScreen parent, int buttonId, boolean value, int x, int y, int widthIn, int heightIn, String buttonText, ResourceLocation buttonTextures, int uX, int uY)
+	{
+		this(parent, buttonId, value, x, y, widthIn, heightIn, buttonText, buttonTextures, uX, uY, widthIn, heightIn);
 	}
 
 	public void toggle()
@@ -54,24 +65,35 @@ public class GuiCustomButton extends GuiButton
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 			GlStateManager.blendFunc(770, 771);
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, uX + (value ? 20 : 0), uY + (k - 1) * 20, this.width, this.height);
+
+			GuiUtils.drawContinuousTexturedBox(buttonTextures, this.xPosition, this.yPosition, uX + (value ? 20 : 0), uY + (k - 1) * 20, this.width, this.height, this.textureWidth, this.textureHeight, 2, 3, 2, 2, this.zLevel);
+			// this.drawTexturedModalRect(this.xPosition, this.yPosition, uX +
+			// (value ? 20 : 0), uY + (k - 1) * 20, this.width, this.height);
 			this.mouseDragged(mc, mouseX, mouseY);
-			int l = 14737632;
+			int color = 14737632;
 
 			if (packedFGColour != 0)
 			{
-				l = packedFGColour;
+				color = packedFGColour;
 			}
 			else if (!this.enabled)
 			{
-				l = 10526880;
+				color = 10526880;
 			}
 			else if (this.hovered)
 			{
-				l = 16777120;
+				color = 16777120;
 			}
 
-			this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
+
+			String buttonText = this.displayString;
+			int strWidth = mc.fontRendererObj.getStringWidth(buttonText);
+			int ellipsisWidth = mc.fontRendererObj.getStringWidth("...");
+
+			if (strWidth > width - 6 && strWidth > ellipsisWidth)
+				buttonText = mc.fontRendererObj.trimStringToWidth(buttonText, width - 6 - ellipsisWidth).trim() + "...";
+
+			this.drawCenteredString(mc.fontRendererObj, buttonText, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, color);
 		}
 	}
 
@@ -87,18 +109,18 @@ public class GuiCustomButton extends GuiButton
 		{
 			toolTip = tooltips.getLeft();
 		}
-		
+
 		if (toolTip != null)
 		{
 			toolTip = I18n.format(toolTip);
 			GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { toolTip }), mouseX, mouseY, parent.mc.displayWidth, parent.mc.displayHeight, -1, parent.mc.fontRendererObj);
 		}
 	}
-	
-	public GuiCustomButton setToolTips(String falseTooltip,String trueTooltip)
+
+	public GuiCustomButton setToolTips(String falseTooltip, String trueTooltip)
 	{
 		tooltips = Pair.of(falseTooltip, trueTooltip);
-		
+
 		return this;
 	}
 

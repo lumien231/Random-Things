@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.config.GuiButtonExt;
 
 public class GuiEntityDetector extends GuiContainer
 {
@@ -45,7 +46,7 @@ public class GuiEntityDetector extends GuiContainer
 		super(new ContainerEntityDetector(player, world, x, y, z));
 
 		this.xSize = 176;
-		this.ySize = 235;
+		this.ySize = 204;
 		this.entityDetector = (TileEntityEntityDetector) world.getTileEntity(new BlockPos(x, y, z));
 	}
 
@@ -64,19 +65,19 @@ public class GuiEntityDetector extends GuiContainer
 	{
 		super.initGui();
 
-		minusX = new GuiButton(0, this.guiLeft + 15 + 14, this.guiTop + 20, 20, 20, "-");
-		plusX = new GuiButton(1, this.guiLeft + 15 + 90 + 14, this.guiTop + 20, 20, 20, "+");
+		minusX = new GuiButtonExt(0, this.guiLeft + 15 + 24, this.guiTop + 25, 10, 10, "-");
+		plusX = new GuiButtonExt(1, this.guiLeft + 15 + 90 + 14, this.guiTop + 25, 10, 10, "+");
 
-		minusY = new GuiButton(2, this.guiLeft + 15 + 14, this.guiTop + 45, 20, 20, "-");
-		plusY = new GuiButton(3, this.guiLeft + 15 + 90 + 14, this.guiTop + 45, 20, 20, "+");
+		minusY = new GuiButtonExt(2, this.guiLeft + 15 + 24, this.guiTop + 45, 10, 10, "-");
+		plusY = new GuiButtonExt(3, this.guiLeft + 15 + 90 + 14, this.guiTop + 45, 10, 10, "+");
 
-		minusZ = new GuiButton(4, this.guiLeft + 15 + 14, this.guiTop + 70, 20, 20, "-");
-		plusZ = new GuiButton(5, this.guiLeft + 15 + 90 + 14, this.guiTop + 70, 20, 20, "+");
+		minusZ = new GuiButtonExt(4, this.guiLeft + 15 + 24, this.guiTop + 65, 10, 10, "-");
+		plusZ = new GuiButtonExt(5, this.guiLeft + 15 + 90 + 14, this.guiTop + 65, 10, 10, "+");
 
-		filter = new GuiButton(6, this.guiLeft + 15 + 14, this.guiTop + 95, 85, 20, "");
+		filter = new GuiButtonExt(6, this.guiLeft + 15 + 14, this.guiTop + 95, 70, 16, "");
 
-		invert = new GuiCustomButton(this, 7, entityDetector.invert(), this.guiLeft + 15 + 90 + 14, this.guiTop + 95, 20, 20, "", background, 176, 0);
-
+		invert = new GuiCustomButton(this, 7, entityDetector.invert(), this.guiLeft + 15 + 90, this.guiTop + 93, 20, 20, "", background, 176, 0, 20, 20);
+		
 		this.buttonList.add(minusX);
 		this.buttonList.add(plusX);
 
@@ -111,10 +112,10 @@ public class GuiEntityDetector extends GuiContainer
 		fontRendererObj.drawString(radiusX, xSize / 2 - fontRendererObj.getStringWidth(radiusX) / 2 - 3, 26, 4210752);
 
 		String radiusY = I18n.format("gui.entityDetector.radiusY", entityDetector.getRangeY());
-		fontRendererObj.drawString(radiusY, xSize / 2 - fontRendererObj.getStringWidth(radiusY) / 2 - 3, 51, 4210752);
+		fontRendererObj.drawString(radiusY, xSize / 2 - fontRendererObj.getStringWidth(radiusY) / 2 - 3, 46, 4210752);
 
 		String radiusZ = I18n.format("gui.entityDetector.radiusZ", entityDetector.getRangeZ());
-		fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2 - 3, 76, 4210752);
+		fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2 - 3, 66, 4210752);
 
 		ItemStack filter;
 		if (!(filter = this.entityDetector.getInventory().getStackInSlot(0)).isEmpty())
@@ -137,7 +138,7 @@ public class GuiEntityDetector extends GuiContainer
 		{
 			this.mc.renderEngine.bindTexture(background);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.drawTexturedModalRect(75, 120, 176, 40, 20, 20);
+			this.drawTexturedModalRect(129, 93, 176, 40, 20, 20);
 		}
 
 		// this.fontRendererObj.drawString(I18n.format("container.inventory",
@@ -149,7 +150,7 @@ public class GuiEntityDetector extends GuiContainer
 	{
 		super.updateScreen();
 
-		if (displayedFilter != entityDetector.getFilter())
+		if (filter.displayString.isEmpty() || displayedFilter != entityDetector.getFilter())
 		{
 			displayedFilter = entityDetector.getFilter();
 
