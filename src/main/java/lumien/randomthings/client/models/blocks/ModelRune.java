@@ -41,7 +41,7 @@ public class ModelRune implements IBakedModel
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
 	{
-		if (side == EnumFacing.UP)
+		if (side == EnumFacing.UP && state instanceof IExtendedBlockState)
 		{
 			int[][] runeData = ((IExtendedBlockState) state).getValue(BlockRuneBase.RUNE_DATA);
 			boolean[] connectionData = ((IExtendedBlockState) state).getValue(BlockRuneBase.CONNECTION_DATA);

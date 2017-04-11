@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.lib.INoItem;
 import lumien.randomthings.lib.ISuperLubricent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -24,7 +25,11 @@ public abstract class BlockBase extends Block
 		this.setCreativeTab(RandomThings.instance.creativeTab);
 
 		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+
+		if (!(this instanceof INoItem))
+		{
+			GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		}
 
 		RandomThings.proxy.scheduleColor(this);
 
@@ -72,7 +77,10 @@ public abstract class BlockBase extends Block
 
 		GameRegistry.register(block);
 
-		GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+		if (!(block instanceof INoItem))
+		{
+			GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+		}
 		RandomThings.proxy.scheduleColor(block);
 
 		rtBlockList.add(block);

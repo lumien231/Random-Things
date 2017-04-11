@@ -5,6 +5,7 @@ import java.util.Random;
 import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.ILuminousBlock;
+import lumien.randomthings.lib.INoItem;
 import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.tileentity.TileEntityRuneBase;
 import net.minecraft.block.Block;
@@ -38,7 +39,7 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, ILuminousBlock
+public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, ILuminousBlock, INoItem
 {
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.005D, 1D);
 
