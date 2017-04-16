@@ -44,8 +44,42 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 				counter = 0;
 
 				List<EntityItem> entityItemList = this.world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE), this.pos.add(Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1)), EntitySelectors.IS_ALIVE);
+				boolean didSomething = false;
 
-				if (entityItemList.isEmpty())
+				if (!entityItemList.isEmpty())
+				{
+					EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockItemCollector.FACING);
+					TileEntity te = this.world.getTileEntity(this.pos.offset(facing.getOpposite()));
+
+					if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
+					{
+						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
+						for (EntityItem ei : entityItemList)
+						{
+							if (!ei.isDead)
+							{
+								ItemStack original = ei.getEntityItem().copy();
+								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, original, false);
+
+								if (left.getCount() < original.getCount())
+								{
+									didSomething = true;
+								}
+								
+								if (left.isEmpty() || left.getCount() == 0)
+								{
+									ei.setDead();
+								}
+								else
+								{
+									ei.setEntityItemStack(left);
+								}
+							}
+						}
+					}
+				}
+
+				if (!didSomething)
 				{
 					if (currentTickRate < 20)
 					{
@@ -57,30 +91,6 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 					if (currentTickRate > 1)
 					{
 						currentTickRate--;
-					}
-
-					EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockItemCollector.FACING);
-					TileEntity te = this.world.getTileEntity(this.pos.offset(facing.getOpposite()));
-
-					if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
-					{
-						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
-						for (EntityItem ei : entityItemList)
-						{
-							if (!ei.isDead)
-							{
-								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, ei.getEntityItem().copy(), false);
-								
-								if (left == null || left.getCount() == 0)
-								{
-									ei.setDead();
-								}
-								else
-								{
-									ei.setEntityItemStack(left);
-								}
-							}
-						}
 					}
 				}
 			}
