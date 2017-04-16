@@ -42,23 +42,12 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 			if (counter >= currentTickRate)
 			{
 				counter = 0;
-
 				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE, -Numbers.ITEM_COLLECTOR_RANGE), this.pos.add(Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1, Numbers.ITEM_COLLECTOR_RANGE + 1)), EntitySelectors.IS_ALIVE);
 
-				if (entityItemList.isEmpty())
-				{
-					if (currentTickRate < 20)
-					{
-						currentTickRate++;
-					}
-				}
-				else
-				{
-					if (currentTickRate > 1)
-					{
-						currentTickRate--;
-					}
+				boolean didSomething = false;
 
+				if (!entityItemList.isEmpty())
+				{
 					EnumFacing facing = this.worldObj.getBlockState(this.pos).getValue(BlockItemCollector.FACING);
 					TileEntity te = this.worldObj.getTileEntity(this.pos.offset(facing.getOpposite()));
 
@@ -69,7 +58,13 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 						{
 							if (!ei.isDead)
 							{
-								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, ei.getEntityItem().copy(), false);
+								ItemStack original = ei.getEntityItem().copy();
+								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, original, false);
+
+								if (left == null || left.stackSize < original.stackSize)
+								{
+									didSomething = true;
+								}
 								
 								if (left == null || left.stackSize == 0)
 								{
@@ -81,6 +76,21 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 								}
 							}
 						}
+					}
+				}
+
+				if (!didSomething)
+				{
+					if (currentTickRate < 20)
+					{
+						currentTickRate++;
+					}
+				}
+				else
+				{
+					if (currentTickRate > 1)
+					{
+						currentTickRate--;
 					}
 				}
 			}

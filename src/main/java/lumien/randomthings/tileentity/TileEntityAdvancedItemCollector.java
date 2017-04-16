@@ -93,20 +93,9 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 
 				List<EntityItem> entityItemList = this.worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(this.pos.add(-rangeX, -rangeY, -rangeZ), this.pos.add(rangeX + 1, rangeY + 1, rangeZ + 1)), EntitySelectors.IS_ALIVE);
 
-				if (entityItemList.isEmpty())
+				boolean didSomething = false;
+				if (!entityItemList.isEmpty())
 				{
-					if (currentTickRate < 20)
-					{
-						currentTickRate++;
-					}
-				}
-				else
-				{
-					if (currentTickRate > 1)
-					{
-						currentTickRate--;
-					}
-
 					EnumFacing facing = this.worldObj.getBlockState(this.pos).getValue(BlockItemCollector.FACING);
 					TileEntity te = this.worldObj.getTileEntity(this.pos.offset(facing.getOpposite()));
 
@@ -118,7 +107,14 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 						{
 							if (!ei.isDead && (filterRepres == null || filterRepres.matchesItemStack(ei.getEntityItem())))
 							{
-								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, ei.getEntityItem().copy(), false);
+								ItemStack original = ei.getEntityItem().copy();
+								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, original, false);
+
+								if (left == null || left.stackSize < original.stackSize)
+								{
+									didSomething = true;
+								}
+
 								if (left == null || left.stackSize == 0)
 								{
 									ei.setDead();
@@ -129,6 +125,21 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 								}
 							}
 						}
+					}
+				}
+
+				if (!didSomething)
+				{
+					if (currentTickRate < 20)
+					{
+						currentTickRate++;
+					}
+				}
+				else
+				{
+					if (currentTickRate > 1)
+					{
+						currentTickRate--;
 					}
 				}
 			}
