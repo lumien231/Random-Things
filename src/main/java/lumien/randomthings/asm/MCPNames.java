@@ -14,8 +14,6 @@ import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
 
-import net.minecraftforge.gradle.GradleStartCommon;
-
 public class MCPNames
 {
 	private static Map<String, String> fields;
@@ -27,7 +25,8 @@ public class MCPNames
 		{
 			try
 			{
-				Field dirField = GradleStartCommon.class.getDeclaredField("CSV_DIR");
+				Class gradleClass = Class.forName("net.minecraftforge.gradle.GradleStartCommon");
+				Field dirField = gradleClass.getDeclaredField("CSV_DIR");
 				dirField.setAccessible(true);
 				File mappingDir = (File) dirField.get(null);
 				
