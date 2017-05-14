@@ -23,20 +23,17 @@ public class WorldGenSakanade implements IWorldGenerator
 	{
 		if (Worldgen.sakanade)
 		{
-			int x = chunkX * 16 + random.nextInt(16);
-			int z = chunkZ * 16 + random.nextInt(16);
+			int x = chunkX * 16 + 8 + random.nextInt(16);
+			int z = chunkZ * 16 + 8 + random.nextInt(16);
 
 			BlockPos target = WorldUtil.getHeighestPos(world, x, z);
 
 			if (target != null)
 			{
 				Biome biome = world.getBiome(target);
-				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MUSHROOM))
+				if (world.getBlockState(target).getBlock() == Blocks.BROWN_MUSHROOM_BLOCK && world.isAirBlock(target.down()))
 				{
-					if (world.getBlockState(target).getBlock() == Blocks.BROWN_MUSHROOM_BLOCK && world.isAirBlock(target.down()))
-					{
-						world.setBlockState(target.down(), ModBlocks.sakanade.getDefaultState());
-					}
+					world.setBlockState(target.down(), ModBlocks.sakanade.getDefaultState());
 				}
 			}
 		}
