@@ -1,10 +1,7 @@
 package lumien.randomthings.potion;
 
-import java.lang.reflect.Method;
-
 import com.google.common.base.Predicate;
 
-import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.potion.effects.EffectCollapse;
 import lumien.randomthings.potion.imbues.ImbueCollapse;
@@ -16,10 +13,8 @@ import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHealth;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.PotionType;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameData;
