@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
@@ -98,6 +99,7 @@ public class GuiPotionVaporizer extends GuiContainer
 						int l = potion.getStatusIconIndex();
 						this.drawTexturedModalRect(i + 6, j + 7, 0 + l % 8 * 18, 198 + l / 8 * 18, 18, 18);
 					}
+					potion.renderInventoryEffect(i, j, new PotionEffect(potion,container.durationLeft), mc);
 
 					String s1 = I18n.format(potion.getName(), new Object[0]);
 

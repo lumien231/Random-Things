@@ -13,24 +13,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EffectCollapse extends PotionBase
 {
-	ResourceLocation icon = new ResourceLocation("randomthings:textures/gui/effects/collapse.png");
-	
 	public EffectCollapse()
 	{
 		super("collapse", false, Color.PINK.getRGB());
 		
+		this.setIcon(new ResourceLocation("randomthings:textures/gui/effects/collapse.png"));
 		this.setPotionName("Collapse");
 	}
 	
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc)
+	public boolean isBadEffect()
 	{
-		super.renderInventoryEffect(x, y, effect, mc);
-
-		mc.renderEngine.bindTexture(icon);
-
-		GlStateManager.enableBlend();
-		Gui.drawModalRectWithCustomSizedTexture(x + 6, y + 7, 0, 0, 18, 18, 18, 18);
+		return true;
 	}
 }

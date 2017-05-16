@@ -2,6 +2,8 @@ package lumien.randomthings.handler.compability.jei.imbuing;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.Lists;
+
 import lumien.randomthings.handler.compability.jei.RandomThingsPlugin;
 
 import java.util.List;
@@ -107,5 +109,11 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	public IDrawable getIcon()
 	{
 		return null;
+	}
+
+	@Override
+	public List getTooltipStrings(int mouseX, int mouseY)
+	{
+		return Lists.newArrayList();
 	}
 }

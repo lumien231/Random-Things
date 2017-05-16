@@ -16,6 +16,7 @@ import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.spectretools.ItemSpectreSword;
 import lumien.randomthings.lib.ISuperLubricent;
+import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
@@ -24,6 +25,7 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -39,9 +41,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.management.PlayerInteractionManager;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MovementInputFromOptions;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -65,8 +70,8 @@ public class AsmHandler
 			getFields();
 		}
 	}
-	
-	public static double getPlayerRange(double original,EntityPlayer player)
+
+	public static double getPlayerRange(double original, EntityPlayer player)
 	{
 		return getPlayerRange((float) original, player);
 	}
@@ -454,6 +459,49 @@ public class AsmHandler
 		{
 			changed.slipperiness = 1F / 0.98F;
 			changed = null;
+		}
+	}
+
+	public static void modifyInput(MovementInputFromOptions input)
+	{
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
+
+		PotionEffect effect;
+		if (player != null && (effect = player.getActivePotionEffect(ModPotions.collapse)) != null && effect.getAmplifier() == 0)
+		{
+			boolean left = input.leftKeyDown;
+			boolean right = input.rightKeyDown;
+
+			boolean forward = input.forwardKeyDown;
+			boolean backwards = input.backKeyDown;
+
+			if (left)
+			{
+				input.moveStrafe -= 2;
+				input.leftKeyDown = false;
+				input.rightKeyDown = true;
+			}
+
+			if (right)
+			{
+				input.moveStrafe += 2;
+				input.rightKeyDown = false;
+				input.leftKeyDown = true;
+			}
+
+			if (forward)
+			{
+				input.moveForward -= 2;
+				input.forwardKeyDown = false;
+				input.backKeyDown = true;
+			}
+
+			if (backwards)
+			{
+				input.moveForward += 2;
+				input.backKeyDown = false;
+				input.forwardKeyDown = true;
+			}
 		}
 	}
 }

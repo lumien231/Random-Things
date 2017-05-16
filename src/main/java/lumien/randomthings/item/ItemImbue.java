@@ -56,7 +56,7 @@ public class ItemImbue extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			subItems.add(new ItemStack(this, 1, i));
 		}

@@ -13,24 +13,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ImbueFire extends PotionBase
 {
-	ResourceLocation icon = new ResourceLocation("randomthings:textures/gui/imbues/fire.png");
-
 	public ImbueFire()
 	{
 		super("imbue_fire", false, Color.ORANGE.getRGB());
 
+		this.setIcon(new ResourceLocation("randomthings:textures/gui/imbues/fire.png"));
 		this.setPotionName("Fire Imbue");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc)
-	{
-		super.renderInventoryEffect(x, y, effect, mc);
-
-		mc.renderEngine.bindTexture(icon);
-
-		GlStateManager.enableBlend();
-		Gui.drawModalRectWithCustomSizedTexture(x + 6, y + 7, 0, 0, 18, 18, 18, 18);
 	}
 }

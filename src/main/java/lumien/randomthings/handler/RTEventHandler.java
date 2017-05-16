@@ -318,7 +318,8 @@ public class RTEventHandler
 	{
 		if (event.getEntity() instanceof EntityLivingBase)
 		{
-			if (((EntityLivingBase) event.getEntity()).isPotionActive(ModPotions.collapse))
+			PotionEffect effect = ((EntityLivingBase)event.getEntity()).getActivePotionEffect(ModPotions.collapse);
+			if (effect != null && effect.getAmplifier() == 1)
 			{
 				event.setRoll(180);
 			}
@@ -708,13 +709,6 @@ public class RTEventHandler
 					else if (livingEntity.isPotionActive(ModPotions.imbuePoison))
 					{
 						event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.POISON, 10 * 20, 1));
-					}
-					else if (livingEntity.isPotionActive(ModPotions.imbueCollapse))
-					{
-						if (Math.random() < 0.2f)
-						{
-							event.getEntityLiving().addPotionEffect(new PotionEffect(ModPotions.collapse, 10 * 20, 1));
-						}
 					}
 				}
 			}

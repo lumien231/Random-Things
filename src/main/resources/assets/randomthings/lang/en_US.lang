@@ -210,7 +210,12 @@ item.imbue.fire.name=Fire Imbue
 item.imbue.poison.name=Poison Imbue
 item.imbue.experience.name=Experience Imbue
 item.imbue.wither.name=Wither Imbue
-item.imbue.collapse.name=Collapse Imbue
+item.imbue.collapse.name=(REMOVED) Collapse Imbue
+
+potion.effect.rtcollapse=Potion of Collapse
+splash_potion.effect.rtcollapse=Splash Potion of Collapse
+lingering_potion.effect.rtcollapse=Lingering Potion of Collapse
+tipped_arrow.effect.rtcollapse=Arrow of Collapse
 
 item.ingredient.sakanadeSpores.name=Sakanade Spores
 item.ingredient.evilTear.name=Evil Tear
@@ -401,6 +406,6 @@ item.spectrePickaxe.info=A Spectre Pickaxe has more durability & enchantibility 
 item.spectreAxe.info=A Spectre Axe has more durability & enchantibility than a diamond axe and also increases the block range of the player holding it by 3 blocks.
 item.spectreShovel.info=A Spectre Shovel has more durability & enchantibility than a diamond shovel and also increases the block range of the player holding it by 3 blocks.
 item.runeDust.info=Decorative Colored dust that can be placed on top of other blocks.
-item.ingredient.sakanadeSpores.info=Sakande Spores can be found on the bottom of huge mushrooms in mushroom biomes (E.g. Mushroom Islands)
+item.ingredient.sakanadeSpores.info=Sakande Spores can be found on the bottom of huge brown mushrooms.
 item.ingredient.ectoPlasm.info=Whenever an entity dies there's a small chance a Spirit will spawn, killing that Spirit using Magic (For Example Potions) yields 1-2 Ectoplasm.
 item.ingredient.luminousPowder.info=Besides being a crafting ingredient you can also combine luminous powder and enchanted items in a crafting table to make the enchantment glint glow in the dark.
