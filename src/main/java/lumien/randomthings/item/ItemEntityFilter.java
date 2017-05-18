@@ -11,8 +11,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry.EntityRegistration;
+import net.minecraftforge.fml.common.registry.GameData;
 
 public class ItemEntityFilter extends ItemBase
 {
@@ -49,7 +51,12 @@ public class ItemEntityFilter extends ItemBase
 			{
 				int entityID = compound.getInteger("entityID");
 
-				return EntityList.getClassFromID(entityID);
+				EntityEntry entry = GameData.getEntityRegistry().getObjectById(entityID);
+
+				if (entry != null)
+				{
+					return entry.getEntityClass();
+				}
 			}
 		}
 
@@ -58,33 +65,11 @@ public class ItemEntityFilter extends ItemBase
 
 	public static boolean filterAppliesTo(ItemStack filter, EntityLivingBase entity)
 	{
-		NBTTagCompound compound;
-		if ((compound = filter.getTagCompound()) != null)
+		Class filterClass = getEntityClass(filter);
+		
+		if (filterClass != null)
 		{
-			if (compound.getBoolean("modded"))
-			{
-				String modID = compound.getString("modID");
-				int entityID = compound.getInteger("entityID");
-
-				ModContainer modContainer = Loader.instance().getIndexedModList().get(modID);
-
-				if (modContainer != null)
-				{
-					EntityRegistration registration = EntityRegistry.instance().lookupModSpawn(modContainer, entityID);
-
-					if (registration != null)
-					{
-						return registration.getEntityClass().isAssignableFrom(entity.getClass());
-					}
-				}
-
-			}
-			else
-			{
-				int entityID = compound.getInteger("entityID");
-
-				return entityID == EntityList.getID(entity.getClass());
-			}
+			return filterClass.isAssignableFrom(entity.getClass());
 		}
 
 		return false;
