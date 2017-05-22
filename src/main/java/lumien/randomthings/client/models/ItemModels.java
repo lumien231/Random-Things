@@ -1,10 +1,12 @@
 package lumien.randomthings.client.models;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.mesh.RedstoneActivatorMesh;
 import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -99,7 +101,6 @@ public class ItemModels
 		registerItem(ModItems.entityFilter);
 		registerItem(ModItems.itemFilter);
 		registerItem(ModItems.spectreKey);
-		registerItem(ModItems.redstoneActivator);
 		registerItem(ModItems.redstoneRemote);
 		registerItem(ModItems.spectreAnchor);
 		registerItem(ModItems.spectreSword);
@@ -123,6 +124,9 @@ public class ItemModels
 		registerLuminousBlocks();
 
 		registerRuneDust();
+		
+		ModelLoader.setCustomMeshDefinition(ModItems.redstoneActivator, new RedstoneActivatorMesh());
+		ModelBakery.registerItemVariants(ModItems.redstoneActivator, new ModelResourceLocation[]{new ModelResourceLocation("randomthings:redstoneactivator_0"),new ModelResourceLocation("randomthings:redstoneactivator_1"),new ModelResourceLocation("randomthings:redstoneactivator_2")});
 	}
 
 	private static void registerRuneDust()

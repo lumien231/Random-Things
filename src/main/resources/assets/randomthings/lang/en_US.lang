@@ -254,6 +254,7 @@ tooltip.summoningPendulum.entityCount.singular=§5Holding %d Entity
 tooltip.summoningPendulum.entityCount.plural=§5Holding %d Entities
 tooltip.stableEnderpearl.boundto=§5Bound to %s
 tooltip.entityFilter.invalidEntity=Invalid Entity
+tooltip.redstoneactivator.duration=Duration: %d ticks
 
 tooltip.itemFilter.metadata=Check Metadata
 tooltip.itemFilter.nometadata=Ignore Metadata
