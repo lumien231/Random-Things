@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.primitives.Ints;
 
 import lumien.randomthings.client.RenderReference;
@@ -16,7 +18,9 @@ import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.Vec3d;
+import scala.actors.threadpool.Arrays;
 
 public class ModelCubeAll implements IBakedModel
 {
@@ -26,11 +30,25 @@ public class ModelCubeAll implements IBakedModel
 	List<BakedQuad> generalQuads;
 	Map<EnumFacing, List<BakedQuad>> faceQuads;
 
-	public ModelCubeAll(TextureAtlasSprite texture, boolean isAmbientOcclusion)
+	Rotation rotation;
+	
+	static int[][][] uvArrays;
+	static 
+	{
+		uvArrays = new int[][][]{
+			{{0,0},{0,16},{16,16},{16,0}},
+			{{0,16},{16,16},{16,0},{0,0}},
+			{{16,16},{16,0},{0,0},{0,16}},
+			{{16,0},{0,0},{0,16},{16,16}}
+		};
+	}
+
+	public ModelCubeAll(TextureAtlasSprite texture, boolean isAmbientOcclusion, Rotation rotation)
 	{
 		this.texture = texture;
 		this.isAmbientOcclusion = isAmbientOcclusion;
-
+		this.rotation = rotation;
+		
 		generalQuads = new ArrayList<>();
 		faceQuads = new HashMap<>();
 
@@ -43,6 +61,11 @@ public class ModelCubeAll implements IBakedModel
 			generalQuads.add(quad);
 			faceQuadList.add(quad);
 		}
+	}
+
+	public ModelCubeAll(TextureAtlasSprite texture, boolean isAmbientOcclusion)
+	{
+		this(texture, isAmbientOcclusion, Rotation.NONE);
 	}
 
 	private int[] vertexToInts(float x, float y, float z, int color, TextureAtlasSprite texture, float u, float v, EnumFacing side)
@@ -60,12 +83,37 @@ public class ModelCubeAll implements IBakedModel
 
 	private BakedQuad createSidedBakedQuad(float x1, float x2, float z1, float z2, float y, TextureAtlasSprite texture, EnumFacing side)
 	{
-		Vec3d v1 = rotate(new Vec3d(x1 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
-		Vec3d v2 = rotate(new Vec3d(x1 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
-		Vec3d v3 = rotate(new Vec3d(x2 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
-		Vec3d v4 = rotate(new Vec3d(x2 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
+		int[][] uvs = uvArrays[rotation.ordinal()];
+		
+		Vec3d v1 = rotate(new Vec3d(x1 - .5, y - .5, z1 - .5), side).addVector(.5, 0.5, .5);
+		Vec3d v2 = rotate(new Vec3d(x1 - .5, y - .5, z2 - .5), side).addVector(.5, 0.5, .5);
+		Vec3d v3 = rotate(new Vec3d(x2 - .5, y - .5, z2 - .5), side).addVector(.5, 0.5, .5);
+		Vec3d v4 = rotate(new Vec3d(x2 - .5, y - .5, z1 - .5), side).addVector(.5, 0.5, .5);
 
-		return new BakedQuad(Ints.concat(vertexToInts((float) v1.xCoord, (float) v1.yCoord, (float) v1.zCoord, -1, texture, 0, 0, side), vertexToInts((float) v2.xCoord, (float) v2.yCoord, (float) v2.zCoord, -1, texture, 0, 16, side), vertexToInts((float) v3.xCoord, (float) v3.yCoord, (float) v3.zCoord, -1, texture, 16, 16, side), vertexToInts((float) v4.xCoord, (float) v4.yCoord, (float) v4.zCoord, -1, texture, 16, 0, side)), -1, side, texture, false, DefaultVertexFormats.ITEM);
+		EnumFacing currentRotation = EnumFacing.SOUTH;
+
+		if (side == EnumFacing.WEST || side == EnumFacing.EAST || side == EnumFacing.SOUTH)
+		{
+			currentRotation = EnumFacing.SOUTH;
+		}
+		else if (side == EnumFacing.NORTH)
+		{
+			currentRotation = EnumFacing.WEST;
+			v1 = rotate(v1.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
+			v2 = rotate(v2.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
+			v3 = rotate(v3.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
+			v4 = rotate(v4.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
+		}
+
+		if (side != EnumFacing.UP && side != EnumFacing.SOUTH && side != EnumFacing.DOWN)
+		{
+			v1 = rotate(v1.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
+			v2 = rotate(v2.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
+			v3 = rotate(v3.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
+			v4 = rotate(v4.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
+		}
+
+		return new BakedQuad(Ints.concat(vertexToInts((float) v1.xCoord, (float) v1.yCoord, (float) v1.zCoord, -1, texture, uvs[0][0], uvs[0][1], side), vertexToInts((float) v2.xCoord, (float) v2.yCoord, (float) v2.zCoord, -1, texture, uvs[1][0], uvs[1][1], side), vertexToInts((float) v3.xCoord, (float) v3.yCoord, (float) v3.zCoord, -1, texture, uvs[2][0], uvs[2][1], side), vertexToInts((float) v4.xCoord, (float) v4.yCoord, (float) v4.zCoord, -1, texture, uvs[3][0], uvs[3][1], side)), 0, side, texture, false, DefaultVertexFormats.ITEM);
 	}
 
 	@Override
