@@ -1,5 +1,6 @@
 package lumien.randomthings.handler.spectre;
 
+import lumien.randomthings.biomes.ModBiomes;
 import lumien.randomthings.handler.ModDimensions;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.Vec3d;
@@ -72,7 +73,7 @@ public class SpectreWorldProvider extends WorldProvider
 	@Override
 	protected void init()
 	{
-		this.biomeProvider = new BiomeProviderSingle(Biomes.HELL);
+		this.biomeProvider = new BiomeProviderSingle(ModBiomes.spectralBiome);
 	}
 
 	@Override

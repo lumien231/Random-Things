@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
+import lumien.randomthings.biomes.ModBiomes;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
 import lumien.randomthings.config.Features;
@@ -86,6 +87,7 @@ public class RandomThings implements LoadingCallback
 		ModEntitys.init();
 		ModPotions.preInit(event);
 		ModEnchantments.preInit(event);
+		ModBiomes.preInit(event);
 		proxy.registerModels();
 
 		RTEventHandler eventHandler = new RTEventHandler();
