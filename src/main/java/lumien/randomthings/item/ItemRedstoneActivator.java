@@ -38,7 +38,7 @@ public class ItemRedstoneActivator extends ItemBase
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
 	{
-		return !ItemStack.areItemsEqual(oldStack, newStack);
+		return !ItemStack.areItemStacksEqual(oldStack, newStack);
 	}
 
 	@Override
