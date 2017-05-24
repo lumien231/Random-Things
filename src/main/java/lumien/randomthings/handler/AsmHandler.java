@@ -79,12 +79,15 @@ public class AsmHandler
 	{
 		if (player != null)
 		{
-			ItemStack holding = player.getHeldItemMainhand();
-
-			if (holding.getItem() == ModItems.spectrePickaxe || holding.getItem() == ModItems.spectreAxe || holding.getItem() == ModItems.spectreShovel)
+			ItemStack holdingMain = player.getHeldItemMainhand();
+			ItemStack holdingOff = player.getHeldItemOffhand();
+			
+			if (holdingMain.getItem() == ModItems.spectrePickaxe || holdingMain.getItem() == ModItems.spectreAxe || holdingMain.getItem() == ModItems.spectreShovel)
 			{
 				return original + 3;
 			}
+			
+			
 		}
 
 		return original;

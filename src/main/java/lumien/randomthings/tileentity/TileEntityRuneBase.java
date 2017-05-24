@@ -50,6 +50,11 @@ public class TileEntityRuneBase extends TileEntityBase
 		return runeData;
 	}
 	
+	public void setRuneData(int[][] newData)
+	{
+		this.runeData = newData;
+	}
+	
 	@Override
 	public boolean renderAfterData()
 	{

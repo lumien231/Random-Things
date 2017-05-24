@@ -35,6 +35,7 @@ import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
+import lumien.randomthings.tileentity.TileEntityRuneBase;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.WorldUtil;
@@ -58,6 +59,7 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -318,7 +320,7 @@ public class RTEventHandler
 	{
 		if (event.getEntity() instanceof EntityLivingBase)
 		{
-			PotionEffect effect = ((EntityLivingBase)event.getEntity()).getActivePotionEffect(ModPotions.collapse);
+			PotionEffect effect = ((EntityLivingBase) event.getEntity()).getActivePotionEffect(ModPotions.collapse);
 			if (effect != null && effect.getAmplifier() == 1)
 			{
 				event.setRoll(180);
@@ -350,6 +352,56 @@ public class RTEventHandler
 							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.SLIME_BLOCK.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 1);
 							equipped.damageItem(1, event.getEntityPlayer());
 						}
+					}
+				}
+			}
+
+			if (!event.getWorld().isRemote && !equipped.isEmpty() && equipped.getItem() == Items.PAPER)
+			{
+				RightClickBlock rcEvent = (RightClickBlock) event;
+				IBlockState targetState = event.getWorld().getBlockState(event.getPos());
+
+				if (targetState.getBlock() == ModBlocks.runeBase)
+				{
+					TileEntityRuneBase te = (TileEntityRuneBase) event.getWorld().getTileEntity(rcEvent.getPos());
+					int[][] runeData = te.getRuneData();
+
+					int[] savedData = new int[16];
+
+					int counter = 0;
+					for (int y = 0; y < runeData[0].length; y++)
+					{
+						for (int x = 0; x < runeData.length; x++)
+						{
+							savedData[counter] = runeData[x][y];
+							counter++;
+						}
+					}
+
+					ItemStack patternStack = new ItemStack(ModItems.runePattern);
+					patternStack.setTagCompound(new NBTTagCompound());
+					patternStack.getTagCompound().setIntArray("runeData", savedData);
+
+					((RightClickBlock) event).setUseItem(Result.ALLOW);
+
+					if (equipped.getCount() == 1)
+					{
+						int slot;
+						if (event.getHand() == EnumHand.MAIN_HAND)
+						{
+							slot = event.getEntityPlayer().inventory.currentItem;
+						}
+						else
+						{
+							slot = 40;
+						}
+
+						event.getEntityPlayer().inventory.setInventorySlotContents(slot, patternStack);
+					}
+					else
+					{
+						equipped.shrink(1);
+						event.getEntityPlayer().inventory.addItemStackToInventory(patternStack);
 					}
 				}
 			}
@@ -405,7 +457,7 @@ public class RTEventHandler
 		ModelRune runeBaseModel = new ModelRune();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:runeBase", "normal"), runeBaseModel);
 
-		
+
 
 		ModelInventoryRerouter inventoryRerouterModel = new ModelInventoryRerouter();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:inventoryRerouter", "normal"), inventoryRerouterModel);

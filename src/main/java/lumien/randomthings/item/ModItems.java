@@ -36,6 +36,7 @@ public class ModItems
 	public static ItemRedstoneRemote redstoneRemote;
 	public static ItemGoldenCompass goldenCompass;
 	public static ItemBlazeAndSteel blazeAndSteel;
+	public static ItemRunePattern runePattern;
 	
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -74,6 +75,7 @@ public class ModItems
 		redstoneRemote = new ItemRedstoneRemote();
 		goldenCompass = new ItemGoldenCompass();
 		blazeAndSteel = new ItemBlazeAndSteel();
+		runePattern = new ItemRunePattern();
 
 		grassSeeds = new ItemGrassSeeds();
 		
