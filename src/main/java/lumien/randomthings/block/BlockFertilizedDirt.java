@@ -118,7 +118,7 @@ public class BlockFertilizedDirt extends BlockBase
 			case Cave:
 				return !tilled;
 			case Plains:
-				return !tilled;
+				return !tilled || tilled && world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
 			case Water:
 				return false;
 			case Beach:

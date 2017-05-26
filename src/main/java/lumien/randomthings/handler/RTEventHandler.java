@@ -809,7 +809,9 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void useHoe(UseHoeEvent event)
 	{
-		if (event.getWorld().getBlockState(event.getPos()).getBlock() == ModBlocks.fertilizedDirt)
+		IBlockState state = event.getWorld().getBlockState(event.getPos());
+		Block block = state.getBlock();
+		if (block == ModBlocks.fertilizedDirt)
 		{
 			event.setResult(Result.ALLOW);
 			event.getWorld().setBlockState(event.getPos(), ModBlocks.fertilizedDirtTilled.getDefaultState());
