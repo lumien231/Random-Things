@@ -70,8 +70,11 @@ public class TileEntityRainShield extends TileEntityBase
 		this.invalidate();
 	}
 
-	public void broken()
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
+		super.breakBlock(worldIn, pos, state);
+
 		this.invalidate();
 	}
 

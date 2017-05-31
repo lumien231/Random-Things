@@ -66,7 +66,7 @@ public abstract class TileEntityBase extends TileEntity
 	{
 		if (writeNBTToDescriptionPacket())
 		{
-			readDataFromNBT(packet.getNbtCompound());
+			readFromNBT(packet.getNbtCompound());
 		}
 
 		if (renderAfterData())
@@ -95,7 +95,7 @@ public abstract class TileEntityBase extends TileEntity
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		if (writeNBTToDescriptionPacket())
 		{
-			this.writeDataToNBT(nbtTag);
+			this.writeToNBT(nbtTag);
 		}
 		return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
@@ -129,6 +129,7 @@ public abstract class TileEntityBase extends TileEntity
 				this.redstonePowered = newPowered;
 
 				this.markDirty();
+				this.syncTE();
 			}
 		}
 	}
@@ -157,5 +158,14 @@ public abstract class TileEntityBase extends TileEntity
 	public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, net.minecraft.util.EnumFacing facing)
 	{
 		return (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryHandler != null) || super.hasCapability(capability, facing);
+	}
+
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+	}
+	
+	public boolean isRedstonePowered()
+	{
+		return redstonePowered;
 	}
 }

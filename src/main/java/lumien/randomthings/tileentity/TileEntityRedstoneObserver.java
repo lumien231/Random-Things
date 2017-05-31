@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.fml.common.Optional;
 
@@ -140,8 +141,11 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements Simple
 		observerSet.remove(this);
 	}
 
-	public void broken()
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
+		super.breakBlock(worldIn, pos, state);
+		
 		this.invalidate();
 	}
 

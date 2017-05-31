@@ -19,11 +19,4 @@ public abstract class BlockRedstoneInterface extends BlockContainerBase
 	{
 		return EnumBlockRenderType.MODEL;
 	}
-
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-	{
-		((TileEntityRedstoneInterface) worldIn.getTileEntity(pos)).broken();
-		super.breakBlock(worldIn, pos, state);
-	}
 }

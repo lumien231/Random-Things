@@ -26,5 +26,8 @@ public class Worldgen
 	
 	@ConfigOption(category = "worldgen",name = "LavaCharm")
 	public static boolean LAVA_CHARM = true;
+	
+	@ConfigOption(category = "worldgen", name = "SlimeCube")
+	public static boolean SLIME_CUBE = true;
 }
 

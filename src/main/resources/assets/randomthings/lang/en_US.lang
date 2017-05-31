@@ -53,6 +53,7 @@ tile.blockOfSticks.normal.name=Block of Sticks
 tile.blockOfSticks.returning.name=Returning Block of Sticks
 tile.igniter.name=Igniter
 tile.inventoryRerouter.name=Inventory Rerouter
+tile.slimeCube.name=§aSlime Cube§7
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -370,6 +371,7 @@ tile.platform.info=Pressing shift while standing on these platforms will make yo
 tile.basicRedstoneInterface.info=You can bind the Redstone Interface to a Block. Whenever the Redstone Interface receives a redstone signal the block bound to it also does. (Wirelessly)
 tile.advancedRedstoneInterface.info=A Redstone Interface which can be bound to multiple blocks using Position Filters.
 tile.spectreSapling.info=Created by right clicking a vanilla sapling with ectoplasm this sapling grows into a spectre tree that drops ectoplasm when cut down.
+tile.slimeCube.info=This block allows Slimes to spawn in the Chunk it's in. Unlike Vanilla Slime Chunks Slimes can spawn at any height & do so at a significantly increased rate. Powered by Redstone this block instead prevents slimes from spawning through vanilla spawning mechanics (Slime Chunk / Swampland 
 
 item.positionFilter.info=This filter represents a block position (x/y/z), you set it by right clicking a block with it in your hand.
 item.biomeCrystal.info=You find Biome Crystals in dungeon chests, they can be used to find the biome they represent using a Biome Radar.

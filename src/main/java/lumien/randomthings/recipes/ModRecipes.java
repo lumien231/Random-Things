@@ -139,6 +139,7 @@ public class ModRecipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.igniter), "ncc", "nfc", "ncc", 'n', Blocks.NETHERRACK, 'c', "cobblestone", 'f', Items.FLINT_AND_STEEL));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.blockOfSticks, 8, 1), "sss", "ses", "sss", 's', new ItemStack(ModBlocks.blockOfSticks), 'e', enderPearl));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.inventoryRerouter), "sbs", "bhb", "sbs", 's', "stone", 'b', Blocks.IRON_BARS, 'h', Blocks.HOPPER));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.slimeCube), "xsx", "sns", "xsx", 's', Items.SLIME_BALL, 'n', Items.NETHER_STAR));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector), "xex", "xhx", "ooo", 'e', enderPearl, 'h', Blocks.HOPPER, 'o', obsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector), "xrx", "gig", 'r', redstoneTorch, 'g', glowStone, 'i', ModBlocks.itemCollector));

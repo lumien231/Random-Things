@@ -30,13 +30,6 @@ public class BlockRedstoneObserver extends BlockContainerBase
 	{
 		return new TileEntityRedstoneObserver();
 	}
-
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-	{
-		((TileEntityRedstoneObserver) worldIn.getTileEntity(pos)).broken();
-		super.breakBlock(worldIn, pos, state);
-	}
 	
 	@Override
     public boolean canProvidePower(IBlockState state)

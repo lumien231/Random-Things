@@ -167,6 +167,9 @@ public class RTEventHandler
 
 			if (Worldgen.MAGIC_HOOD)
 				addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.03f);
+			
+			if (Worldgen.SLIME_CUBE)
+				addSingleItemWithChance("slimeCube", table, Item.getItemFromBlock(ModBlocks.slimeCube) , 0.03f);
 		}
 		else if (Worldgen.LAVA_CHARM && event.getName().equals(LootTableList.CHESTS_NETHER_BRIDGE))
 		{

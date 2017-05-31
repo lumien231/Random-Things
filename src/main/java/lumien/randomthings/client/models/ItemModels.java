@@ -72,6 +72,7 @@ public class ItemModels
 		registerBlock(ModBlocks.igniter);
 		registerBlock(ModBlocks.inventoryRerouter);
 		registerBlock(ModBlocks.runeBase);
+		registerBlock(ModBlocks.slimeCube);
 
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);

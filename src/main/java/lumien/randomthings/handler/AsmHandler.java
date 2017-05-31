@@ -19,6 +19,7 @@ import lumien.randomthings.lib.ISuperLubricent;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
+import lumien.randomthings.tileentity.TileEntitySlimeCube;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -52,6 +53,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -70,6 +72,29 @@ public class AsmHandler
 		}
 	}
 
+	// -1 = vanilla, 0 = NO, 1 = YES
+	public static int overrideSlimeChunk(World worldObj, Chunk chunk)
+	{
+		synchronized (TileEntitySlimeCube.cubes)
+		{
+			for (TileEntitySlimeCube core : TileEntitySlimeCube.cubes)
+			{
+				if (!core.isInvalid() && core.getWorld() == worldObj)
+				{
+					BlockPos pos = core.getPos();
+					int chunkX = pos.getX() >> 4;
+					int chunkZ = pos.getZ() >> 4;
+					
+					if (chunk.xPosition == chunkX && chunk.zPosition == chunkZ)
+					{
+						return core.isRedstonePowered() ? 0 : 1;
+					}
+				}
+			}
+		}
+		return -1;
+	}
+
 	public static double getPlayerRange(double original, EntityPlayer player)
 	{
 		return getPlayerRange((float) original, player);
@@ -81,13 +106,13 @@ public class AsmHandler
 		{
 			ItemStack holdingMain = player.getHeldItemMainhand();
 			ItemStack holdingOff = player.getHeldItemOffhand();
-			
+
 			if (holdingMain.getItem() == ModItems.spectrePickaxe || holdingMain.getItem() == ModItems.spectreAxe || holdingMain.getItem() == ModItems.spectreShovel)
 			{
 				return original + 3;
 			}
-			
-			
+
+
 		}
 
 		return original;

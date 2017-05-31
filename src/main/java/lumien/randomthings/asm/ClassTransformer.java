@@ -119,8 +119,72 @@ public class ClassTransformer implements IClassTransformer
 		{
 			return patchMovementInput(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.entity.monster.EntitySlime"))
+		{
+			return patchEntitySlime(basicClass);
+		}
 
 		return basicClass;
+	}
+
+	private byte[] patchEntitySlime(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found EntitySlime Class: " + classNode.name);
+
+		MethodNode getCanSpawnHere = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_70601_bi")))
+			{
+				getCanSpawnHere = mn;
+				break;
+			}
+		}
+
+		if (getCanSpawnHere != null)
+		{
+			logger.log(Level.DEBUG, " - Found getCanSpawnHere");
+
+			for (int i = 0; i < getCanSpawnHere.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = getCanSpawnHere.instructions.get(i);
+
+				if (ain instanceof FieldInsnNode)
+				{
+					FieldInsnNode fin = (FieldInsnNode) ain;
+					if (fin.name.equals("PEACEFUL"))
+					{
+						logger.log(Level.DEBUG, " - Found Insertion Point");
+						AbstractInsnNode skip = getCanSpawnHere.instructions.get(i + 1);
+
+						LabelNode l0 = new LabelNode(new Label());
+						
+						InsnList toInsert = new InsnList();
+
+						toInsert.add(new VarInsnNode(ALOAD, 0));
+						toInsert.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/entity/monster/EntitySlime", MCPNames.field("field_70170_p"), "Lnet/minecraft/world/World;"));
+						toInsert.add(new VarInsnNode(ALOAD, 2));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "overrideSlimeChunk", "(Lnet/minecraft/world/World;Lnet/minecraft/world/chunk/Chunk;)I", false));
+						toInsert.add(new InsnNode(DUP));
+						toInsert.add(new JumpInsnNode(IFLT, l0));
+						toInsert.add(new InsnNode(IRETURN));
+						toInsert.add(l0);
+						toInsert.add(new InsnNode(POP));
+
+						getCanSpawnHere.instructions.insert(skip, toInsert);
+					}
+				}
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchMovementInput(byte[] basicClass)

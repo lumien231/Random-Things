@@ -10,6 +10,7 @@ import lumien.randomthings.item.ModItems;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -19,6 +20,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.GameData;
 
@@ -42,7 +45,7 @@ public class RTCommand extends CommandBase
 	{
 		if (args.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter" });
+			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn" });
 		}
 		else if (args.length == 2)
 		{
@@ -57,6 +60,11 @@ public class RTCommand extends CommandBase
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
 	{
+		if (args.length == 0)
+		{
+			return;
+		}
+
 		if (args[0].equals("setBiomeCrystal"))
 		{
 			if (args.length == 2 && sender instanceof EntityPlayer)
@@ -120,6 +128,18 @@ public class RTCommand extends CommandBase
 
 					player.connection.setPlayerLocation(pos.getX(), pos.getY() + 150, pos.getZ(), player.rotationYaw, player.rotationPitch);
 				}
+			}
+		}
+		else if (args[0].equals("testSlimeSpawn"))
+		{
+			BlockPos pos = sender.getPosition();
+			World world = sender.getEntityWorld();
+
+			if (pos != null && world != null)
+			{
+				EntitySlime slime = new EntitySlime(world);
+				slime.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0F, 0F);
+				sender.sendMessage(new TextComponentString(slime.getCanSpawnHere() + ""));
 			}
 		}
 	}

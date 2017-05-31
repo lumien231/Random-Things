@@ -20,7 +20,20 @@ public abstract class BlockContainerBase extends BlockBase
 	{
 		super(name, materialIn, itemBlock);
 	}
+	
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntity te = worldIn.getTileEntity(pos);
 
+		if (te instanceof TileEntityBase)
+		{
+			((TileEntityBase) te).breakBlock(worldIn, pos, state);
+		}
+		
+		super.breakBlock(worldIn, pos, state);
+	}
+	
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{

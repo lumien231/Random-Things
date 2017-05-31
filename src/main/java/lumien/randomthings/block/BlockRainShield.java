@@ -55,13 +55,6 @@ public class BlockRainShield extends BlockContainerBase
 		return new TileEntityRainShield();
 	}
 
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-	{
-		((TileEntityRainShield) worldIn.getTileEntity(pos)).broken();
-		super.breakBlock(worldIn, pos, state);
-	}
-
 	@SideOnly(Side.CLIENT)
 	@Override
 	public BlockRenderLayer getBlockLayer()

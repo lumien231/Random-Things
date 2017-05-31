@@ -41,8 +41,9 @@ public class ModTileEntitys
 		registerTE(TileEntityBiomeRadar.class, "biomeRadar");
 		registerTE(TileEntityIronDropper.class, "ironDropper");
 		registerTE(TileEntityItemProjector.class, "itemProjector");
-		registerTE(TileEntityInventoryRerouter.class,"inventoryRerouter");
+		registerTE(TileEntityInventoryRerouter.class, "inventoryRerouter");
 		registerTE(TileEntityRuneBase.class, "runeBase");
+		registerTE(TileEntitySlimeCube.class, "slimeCore");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

@@ -220,9 +220,12 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 			notifyTargets(neighbor);
 		}
 	}
-
-	public void broken()
+	
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
+		super.breakBlock(worldIn, pos, state);
+		
 		this.invalidate();
 		
 		notifyTargets(Blocks.REDSTONE_BLOCK);
