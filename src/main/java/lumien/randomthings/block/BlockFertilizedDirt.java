@@ -45,6 +45,12 @@ public class BlockFertilizedDirt extends BlockBase
 	}
 	
 	@Override
+	protected ItemStack getSilkTouchDrop(IBlockState state)
+	{
+		return new ItemStack(ModBlocks.fertilizedDirt);
+	}
+	
+	@Override
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		if (!tilled)
