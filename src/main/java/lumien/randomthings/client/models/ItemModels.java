@@ -17,6 +17,7 @@ public class ItemModels
 	public static void register()
 	{
 		registerBlock(ModBlocks.fertilizedDirt);
+		registerBlock(ModBlocks.fertilizedDirtTilled);
 		registerBlock(ModBlocks.playerInterface);
 		registerBlock(ModBlocks.creativePlayerInterface);
 		registerBlock(ModBlocks.lapisGlass);
