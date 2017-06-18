@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 
 public class SpectreChunkProvider implements IChunkGenerator
 {
@@ -21,7 +21,7 @@ public class SpectreChunkProvider implements IChunkGenerator
 	}
 
 	@Override
-	public Chunk provideChunk(int x, int z)
+	public Chunk generateChunk(int x, int z)
 	{
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 
@@ -49,15 +49,20 @@ public class SpectreChunkProvider implements IChunkGenerator
 		return new ArrayList<>();
 	}
 
+	@Override
+	public void recreateStructures(Chunk chunkIn, int x, int z)
+	{
+	}
 
 	@Override
-	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_)
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored)
 	{
 		return null;
 	}
 
 	@Override
-	public void recreateStructures(Chunk chunkIn, int x, int z)
+	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos)
 	{
+		return false;
 	}
 }

@@ -234,7 +234,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{
-		if (worldIn.isRainingAt(pos.up()) && !worldIn.getBlockState(pos.down()).isFullyOpaque() && rand.nextInt(15) == 1)
+		if (worldIn.isRainingAt(pos.up()) && !worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && rand.nextInt(15) == 1)
 		{
 			double d0 = pos.getX() + rand.nextFloat();
 			double d1 = pos.getY() - 0.05D;

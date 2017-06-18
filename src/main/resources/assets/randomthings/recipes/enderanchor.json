@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    "OSO",
+    "OOO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "randomthings:stableenderpearl"
+    }
+  },
+  "result": {
+    "item": "randomthings:enderanchor"
+  }
+}

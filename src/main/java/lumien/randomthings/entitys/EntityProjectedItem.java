@@ -35,7 +35,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 public class EntityProjectedItem extends Entity implements IEntityAdditionalSpawnData
 {
-	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack> createKey(EntityProjectedItem.class, DataSerializers.OPTIONAL_ITEM_STACK);
+	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack> createKey(EntityProjectedItem.class, DataSerializers.ITEM_STACK);
 	/**
 	 * The age of this EntityItem (used to animate it up and down as well as
 	 * expire it)
@@ -118,7 +118,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	@Override
 	public void onUpdate()
 	{
-		if (this.getEntityItem() == null)
+		if (this.getItem() == null)
 		{
 			this.setDead();
 		}
@@ -148,11 +148,11 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 				if (this.enterInventories)
 				{
 					TileEntity nextTileEntity = this.world.getTileEntity(new BlockPos(this.posX, this.posY, this.posZ).offset(this.direction));
-					if (this.getEntityItem() != null && this.getEntityItem().getCount() > 0 && nextTileEntity != null && nextTileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite()))
+					if (this.getItem() != null && this.getItem().getCount() > 0 && nextTileEntity != null && nextTileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite()))
 					{
 						IItemHandler itemHandler = nextTileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction.getOpposite());
 
-						ItemStack remaining = ItemHandlerHelper.insertItemStacked(itemHandler, this.getEntityItem(), false);
+						ItemStack remaining = ItemHandlerHelper.insertItemStacked(itemHandler, this.getItem(), false);
 
 						if (remaining != null && remaining.getCount() > 0)
 						{
@@ -199,9 +199,9 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 
 	private void dropAsItem()
 	{
-		if (this.getEntityItem() != null && this.getEntityItem().getCount() > 0)
+		if (this.getItem() != null && this.getItem().getCount() > 0)
 		{
-			EntityItem ei = new EntityItem(this.world, this.posX, this.posY, this.posZ, this.getEntityItem());
+			EntityItem ei = new EntityItem(this.world, this.posX, this.posY, this.posZ, this.getItem());
 			this.world.spawnEntity(ei);
 
 			ei.lifespan = 20 * 60;
@@ -261,9 +261,9 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 		compound.setInteger("direction", direction.ordinal());
 		compound.setBoolean("canBePickedUp", canBePickedUp);
 
-		if (this.getEntityItem() != null)
+		if (this.getItem() != null)
 		{
-			compound.setTag("Item", this.getEntityItem().writeToNBT(new NBTTagCompound()));
+			compound.setTag("Item", this.getItem().writeToNBT(new NBTTagCompound()));
 		}
 	}
 
@@ -296,7 +296,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	{
 		if (!this.world.isRemote && this.canBePickedUp)
 		{
-			ItemStack itemstack = this.getEntityItem();
+			ItemStack itemstack = this.getItem();
 			int i = itemstack.getCount();
 
 			if (i <= 0 || entityIn.inventory.addItemStackToInventory(itemstack))
@@ -312,7 +312,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 				{
 					EntityTracker entitytracker = ((WorldServer) this.world).getEntityTracker();
 
-					entitytracker.sendToTracking(this, new SPacketCollectItem(this.getEntityId(), entityIn.getEntityId(), this.getEntityItem().getCount()));
+					entitytracker.sendToTracking(this, new SPacketCollectItem(this.getEntityId(), entityIn.getEntityId(), this.getItem().getCount()));
 				}
 				if (itemstack.getCount() <= 0)
 				{
@@ -330,7 +330,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? this.getCustomNameTag() : I18n.translateToLocal("item." + this.getEntityItem().getUnlocalizedName());
+		return this.hasCustomName() ? this.getCustomNameTag() : I18n.translateToLocal("item." + this.getItem().getUnlocalizedName());
 	}
 
 	/**
@@ -356,7 +356,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	 * exists, will log an error but still return an ItemStack containing
 	 * Block.stone)
 	 */
-	public ItemStack getEntityItem()
+	public ItemStack getItem()
 	{
 		ItemStack itemstack = this.getDataManager().get(ITEM);
 

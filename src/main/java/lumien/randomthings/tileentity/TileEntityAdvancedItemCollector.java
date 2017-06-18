@@ -105,9 +105,9 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 						
 						for (EntityItem ei : entityItemList)
 						{
-							if (!ei.isDead && (filterRepres == null || filterRepres.matchesItemStack(ei.getEntityItem())))
+							if (!ei.isDead && (filterRepres == null || filterRepres.matchesItemStack(ei.getItem())))
 							{
-								ItemStack original = ei.getEntityItem().copy();
+								ItemStack original = ei.getItem().copy();
 								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, original, false);
 
 								if (left.getCount() < original.getCount())
@@ -121,7 +121,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 								}
 								else
 								{
-									ei.setEntityItemStack(left);
+									ei.setItem(left);
 								}
 							}
 						}

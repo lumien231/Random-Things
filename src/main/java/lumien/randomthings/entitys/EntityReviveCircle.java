@@ -65,7 +65,7 @@ public class EntityReviveCircle extends Entity
 		{
 			if (this.reviver == null || this.reviver.isDead || this.reviver.getDistanceSq(this.getPosition()) > 25 || this.reviver.dimension != this.dimension || toRevive == null || toRevive.isDead)
 			{
-				this.kill();
+				this.setDead();
 			}
 
 			if (this.world.getTotalWorldTime() % 20 == 0)
@@ -73,7 +73,7 @@ public class EntityReviveCircle extends Entity
 				EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(toRevive.playerName);
 				if (player == null)
 				{
-					this.kill();
+					this.setDead();
 				}
 			}
 
@@ -92,7 +92,7 @@ public class EntityReviveCircle extends Entity
 				{
 					if (player.getHealth() <= 0)
 					{
-						EntityPlayerMP revived = player.connection.playerEntity = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().recreatePlayerEntity(player, 0, false);
+						EntityPlayerMP revived = player.connection.player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().recreatePlayerEntity(player, 0, false);
 						if (revived.world.provider.getDimension() != this.dimension)
 						{
 							FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(revived, this.world.provider.getDimension(), new Teleporter((WorldServer) this.world));
@@ -144,7 +144,7 @@ public class EntityReviveCircle extends Entity
 		}
 		else
 		{
-			this.kill();
+			this.setDead();
 		}
 	}
 

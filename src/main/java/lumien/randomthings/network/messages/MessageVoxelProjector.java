@@ -138,7 +138,7 @@ public class MessageVoxelProjector implements IRTMessage
 				{
 					NetHandlerPlayServer handler = (NetHandlerPlayServer) context.netHandler;
 
-					EntityPlayerMP player = handler.playerEntity;
+					EntityPlayerMP player = handler.player;
 
 					if (player != null && player.openContainer != null && player.openContainer instanceof ContainerVoxelProjector)
 					{

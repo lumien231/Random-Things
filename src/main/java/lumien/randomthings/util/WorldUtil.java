@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import lumien.randomthings.network.MessageUtil;
@@ -38,7 +39,7 @@ public class WorldUtil
 
 		if (!worldObj.isRemote)
 		{
-			c.setChunkModified();
+			c.setModified(true);
 			MessageUtil.sendToAllWatchingPos(worldObj, pos, new MessageSetBiome(pos, Biome.getIdForBiome(biome)));
 		}
 		else
@@ -140,7 +141,7 @@ public class WorldUtil
 
 				for (AxisAlignedBB bb : boxMap.get(chunkVec))
 				{
-					if (entity.getEntityBoundingBox().intersectsWith(bb) && (filter == null || filter.apply(entity)))
+					if (entity.getEntityBoundingBox().intersects(bb) && (filter == null || filter.apply(entity)))
 					{
 						arraylist.add(entity);
 
@@ -152,7 +153,7 @@ public class WorldUtil
 							{
 								entity = entityParts[l];
 
-								if (entity.getEntityBoundingBox().intersectsWith(bb) && (filter == null || filter.apply(entity)))
+								if (entity.getEntityBoundingBox().intersects(bb) && (filter == null || filter.apply(entity)))
 								{
 									arraylist.add(entity);
 								}

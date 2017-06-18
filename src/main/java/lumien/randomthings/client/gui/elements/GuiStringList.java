@@ -21,7 +21,7 @@ public class GuiStringList extends GuiScrollingList
 
 	public GuiStringList(IStringCallback parent, Minecraft client, int width, int height, int posX, int posY,int screenWidth,int screenHeight, ArrayList<String> stringList)
 	{
-		super(client, width, height, posY, posY + height, posX, Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT,screenWidth,screenHeight);
+		super(client, width, height, posY, posY + height, posX, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT,screenWidth,screenHeight);
 
 		this.stringList = stringList;
 		this.parent = parent;
@@ -55,7 +55,7 @@ public class GuiStringList extends GuiScrollingList
 	protected void drawSlot(int var1, int var2, int var3, int var4, Tessellator var5)
 	{
 		GlStateManager.disableLighting();
-		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
+		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 		ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
 		int factor = scaledResolution.getScaleFactor();
 

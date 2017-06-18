@@ -12,7 +12,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
@@ -33,8 +32,6 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 		this.setResistance(10.0F);
 		this.setSoundType(SoundType.STONE);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockBiomeStone.EnumType.COBBLE));
-		
-		
 	}
 
 	@Override
@@ -45,7 +42,7 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList list)
 	{
 		BlockBiomeStone.EnumType[] aenumtype = BlockBiomeStone.EnumType.values();
 		int i = aenumtype.length;
@@ -53,7 +50,7 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 		for (int j = 0; j < i; ++j)
 		{
 			BlockBiomeStone.EnumType enumtype = aenumtype[j];
-			list.add(new ItemStack(itemIn, 1, enumtype.getMetadata()));
+			list.add(new ItemStack(this, 1, enumtype.getMetadata()));
 		}
 	}
 

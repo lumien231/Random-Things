@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ILI",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "L": {
+      "item": "randomthings:superlubricentice"
+    }
+  },
+  "result": {
+    "item": "randomthings:itemcorrector"
+  }
+}

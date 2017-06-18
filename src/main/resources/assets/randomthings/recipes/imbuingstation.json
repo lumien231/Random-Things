@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W ",
+    "VCV",
+    "LEL"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "V": {
+      "item": "minecraft:vine"
+    },
+    "C": {
+      "item": "minecraft:hardened_clay"
+    },
+    "L": {
+      "item": "minecraft:waterlily"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "randomthings:imbuingstation"
+  }
+}

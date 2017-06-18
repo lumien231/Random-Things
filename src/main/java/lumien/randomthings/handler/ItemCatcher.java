@@ -21,7 +21,7 @@ public class ItemCatcher
 		{
 			if (catchingDrops && !event.isCanceled())
 			{
-				catchedDrops.add(((EntityItem) event.getEntity()).getEntityItem());
+				catchedDrops.add(((EntityItem) event.getEntity()).getItem());
 				event.setCanceled(true);
 			}
 		}

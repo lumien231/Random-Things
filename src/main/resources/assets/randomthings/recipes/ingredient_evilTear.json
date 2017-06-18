@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    " T ",
+    " E "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:skull",
+      "data": 1
+    },
+    "T": {
+      "item": "minecraft:ghast_tear"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "randomthings:ingredient",
+    "data": 1
+  }
+}

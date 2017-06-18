@@ -1,10 +1,10 @@
 package lumien.randomthings.handler;
 
 import lumien.randomthings.lib.ILuminousItem;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 
@@ -15,9 +15,9 @@ public class LuminousHandler
 	static ItemStack stack;
 	static float backUpX;
 	static float backUpY;
-	static VertexBuffer luminousBuffer;
+	static BufferBuilder luminousBuffer;
 
-	public static void luminousHookStart(ItemStack stack, VertexBuffer buffer)
+	public static void luminousHookStart(ItemStack stack, BufferBuilder buffer)
 	{
 		if (stack.getItem() instanceof ILuminousItem)
 		{

@@ -10,7 +10,6 @@ import lumien.randomthings.tileentity.TileEntityIronDropper.EFFECTS;
 import lumien.randomthings.tileentity.TileEntityIronDropper.PICKUP_DELAY;
 import lumien.randomthings.tileentity.TileEntityIronDropper.REDSTONE_MODE;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class GuiIronDropper extends GuiContainer
+public class GuiIronDropper extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/ironDropper.png");
 	final TileEntity te;
@@ -67,7 +66,7 @@ public class GuiIronDropper extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRendererObj.drawString(I18n.format("tile.ironDropper.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.ironDropper.name", new Object[0]), 8, 6, 4210752);
 
 		for (GuiButton guibutton : this.buttonList)
 		{

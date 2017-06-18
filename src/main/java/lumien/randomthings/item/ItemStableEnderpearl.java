@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +37,7 @@ public class ItemStableEnderpearl extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, World world, List tooltip, ITooltipFlag advanced)
 	{
 		NBTTagCompound compound;
 		if ((compound = stack.getTagCompound()) != null)
@@ -56,7 +57,7 @@ public class ItemStableEnderpearl extends ItemBase
 			if (!entityItem.world.isRemote)
 			{
 				entityItem.setDead();
-				ItemStack itemStack = entityItem.getEntityItem();
+				ItemStack itemStack = entityItem.getItem();
 				EntityPlayerMP player = null;
 				if (itemStack.getTagCompound() != null)
 				{

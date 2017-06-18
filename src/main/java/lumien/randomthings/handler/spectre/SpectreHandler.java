@@ -10,9 +10,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -61,7 +61,7 @@ public class SpectreHandler extends WorldSavedData
 
 			Chunk c = worldObj.getChunkFromBlockCoords(pos);
 
-			int position = c.xPosition / 16;
+			int position = c.x / 16;
 
 			for (SpectreCube cube : cubes.values())
 			{

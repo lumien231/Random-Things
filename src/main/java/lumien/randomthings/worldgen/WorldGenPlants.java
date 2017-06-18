@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenPlants implements IWorldGenerator
@@ -17,7 +17,7 @@ public class WorldGenPlants implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if (world.getWorldType() != WorldType.DEBUG_WORLD)
+		if (world.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES)
 		{
 			// Beans
 			if (Worldgen.beans && random.nextBoolean())
@@ -27,7 +27,7 @@ public class WorldGenPlants implements IWorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null && target.getY() > 0 && world.isAirBlock(target) && (!world.provider.hasNoSky() || target.getY() < 255) && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
+				if (target != null && target.getY() > 0 && world.isAirBlock(target) && (target.getY() < 255) && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
 				{
 					world.setBlockState(target, ModBlocks.beanSprout.getDefaultState(), 2);
 				}

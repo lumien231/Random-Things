@@ -2,8 +2,12 @@ package lumien.randomthings;
 
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
+import lumien.randomthings.asm.ClassTransformer;
+import lumien.randomthings.asm.CustomClassWriter;
+import lumien.randomthings.asm.confirmer.ServerConfirmer;
 import lumien.randomthings.biomes.ModBiomes;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
@@ -57,6 +61,9 @@ public class RandomThings implements LoadingCallback
 	@SidedProxy(clientSide = "lumien.randomthings.client.ClientProxy", serverSide = "lumien.randomthings.CommonProxy")
 	public static CommonProxy proxy;
 
+	@SidedProxy(clientSide = "lumien.randomthings.asm.confirmer.ClientConfirmer", serverSide = "lumien.randomthings.asm.confirmer.ServerConfirmer")
+	public static ServerConfirmer asmConfirmer;
+
 	public RTCreativeTab creativeTab;
 
 	public Logger logger;
@@ -99,12 +106,10 @@ public class RandomThings implements LoadingCallback
 		PacketHandler.init();
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this);
-		
-		
+
+
 		// IMC
-		String enderIOMagneticMessage = "<enchantment name=\"enchantment.randomthings.magnetic\" costPerLevel=\"20\" >" +
-				"    <itemStack modID=\"minecraft\" itemName=\"iron_block\" itemMeta=\"0\" />" +
-				"</enchantment>";
+		String enderIOMagneticMessage = "<enchantment name=\"enchantment.randomthings.magnetic\" costPerLevel=\"20\" >" + "    <itemStack modID=\"minecraft\" itemName=\"iron_block\" itemMeta=\"0\" />" + "</enchantment>";
 		FMLInterModComms.sendMessage("enderio", "recipe:enchanter", enderIOMagneticMessage);
 	}
 
@@ -123,6 +128,13 @@ public class RandomThings implements LoadingCallback
 	{
 		proxy.registerRenderers();
 		SyncHandler.postInit(event);
+
+		// Confirm all ASM Patches
+		asmConfirmer.confirm();
+
+		logger.log(Level.DEBUG, ClassTransformer.transformations + "/16 ASM Transformations were applied.");
+
+		CustomClassWriter.customClassLoader = null;
 	}
 
 	@EventHandler

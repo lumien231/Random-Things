@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "OSO",
+    "OOO"
+  ],
+  "key": {
+    "A": {
+      "item": "randomthings:redstoneactivator"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "randomthings:stableenderpearl"
+    }
+  },
+  "result": {
+    "item": "randomthings:redstoneremote"
+  }
+}

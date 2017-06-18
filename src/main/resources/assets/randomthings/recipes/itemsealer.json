@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ALA",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
+    },
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "gemLapis"
+    },
+    "L": {
+      "item": "randomthings:superlubricentice"
+    }
+  },
+  "result": {
+    "item": "randomthings:itemsealer"
+  }
+}

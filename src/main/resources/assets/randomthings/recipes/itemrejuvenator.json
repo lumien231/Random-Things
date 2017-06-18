@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WLW",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 0
+    },
+    "L": {
+      "item": "randomthings:superlubricentice"
+    }
+  },
+  "result": {
+    "item": "randomthings:itemrejuvenator"
+  }
+}

@@ -8,7 +8,6 @@ import lumien.randomthings.item.block.ItemBlockLuminous;
 import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.tileentity.TileEntitySlimeCube;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;

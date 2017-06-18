@@ -575,7 +575,7 @@ public class RTEventHandler
 						int power = hitState.getValue(BlockRedstoneWire.POWER);
 
 						GlStateManager.disableBlend();
-						Minecraft.getMinecraft().fontRendererObj.drawString(power + "", width / 2 + 5, height / 2 + 5, Colors.RED_INT);
+						Minecraft.getMinecraft().fontRenderer.drawString(power + "", width / 2 + 5, height / 2 + 5, Colors.RED_INT);
 						GlStateManager.color(1, 1, 1, 1);
 						GlStateManager.enableBlend();
 					}
@@ -588,7 +588,7 @@ public class RTEventHandler
 				int height = event.getResolution().getScaledHeight();
 
 				GlStateManager.disableBlend();
-				Minecraft.getMinecraft().fontRendererObj.drawString(b.getBiomeName(), width / 2 + 5, height / 2 + 5, Colors.WHITE_INT);
+				Minecraft.getMinecraft().fontRenderer.drawString(b.getBiomeName(), width / 2 + 5, height / 2 + 5, Colors.WHITE_INT);
 				GlStateManager.color(1, 1, 1, 1);
 				GlStateManager.enableBlend();
 			}
@@ -749,9 +749,9 @@ public class RTEventHandler
 			{
 				EntityDamageSource damageSource = (EntityDamageSource) event.getSource();
 
-				if (damageSource.getEntity() != null && damageSource.getEntity() instanceof EntityLivingBase)
+				if (damageSource.getTrueSource() != null && damageSource.getTrueSource() instanceof EntityLivingBase)
 				{
-					EntityLivingBase livingEntity = (EntityLivingBase) damageSource.getEntity();
+					EntityLivingBase livingEntity = (EntityLivingBase) damageSource.getTrueSource();
 
 					if (livingEntity.isPotionActive(ModPotions.imbueFire))
 					{
@@ -903,7 +903,7 @@ public class RTEventHandler
 				}
 			}
 
-			if (event.getSource().getEntity() != null && !(event.getSource().getEntity() instanceof FakePlayer) && event.getSource().getEntity() instanceof EntityPlayer && !(event.getEntity() instanceof EntitySpirit))
+			if (event.getSource().getTrueSource() != null && !(event.getSource().getTrueSource() instanceof FakePlayer) && event.getSource().getTrueSource() instanceof EntityPlayer && !(event.getEntity() instanceof EntitySpirit))
 			{
 				double chance = Numbers.SPIRIT_CHANCE_NORMAL;
 

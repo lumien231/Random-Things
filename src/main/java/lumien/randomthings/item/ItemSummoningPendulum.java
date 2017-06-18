@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import lumien.randomthings.util.EntityUtil;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -90,7 +91,7 @@ public class ItemSummoningPendulum extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, World world, List tooltip, ITooltipFlag advanced)
 	{
 		int entityCount = 0;
 

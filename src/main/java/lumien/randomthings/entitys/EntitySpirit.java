@@ -80,9 +80,9 @@ public class EntitySpirit extends EntityFlying
 		if (source instanceof EntityDamageSource)
 		{
 			EntityDamageSource eds = (EntityDamageSource) source;
-			if (eds.getDamageType().equals("player") && eds.getEntity() instanceof EntityPlayer)
+			if (eds.getDamageType().equals("player") && eds.getTrueSource() instanceof EntityPlayer)
 			{
-				EntityPlayer player = (EntityPlayer) eds.getEntity();
+				EntityPlayer player = (EntityPlayer) eds.getTrueSource();
 				
 				ItemStack equipped;
 				if ((equipped = player.getHeldItemMainhand()) != null && equipped.getItem() == ModItems.spectreSword)

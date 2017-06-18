@@ -38,7 +38,7 @@ public class MessageUtil
 
 				PlayerChunkMap playerManager = ((WorldServer) worldObj).getPlayerChunkMap();
 
-				PlayerChunkMapEntry playerInstance = playerManager.getEntry(c.xPosition, c.zPosition);
+				PlayerChunkMapEntry playerInstance = playerManager.getEntry(c.x, c.z);
 				if (playerInstance != null)
 				{
 					playerInstance.sendPacket(PacketHandler.INSTANCE.getPacketFrom(message));
@@ -61,7 +61,7 @@ public class MessageUtil
 
 				PlayerChunkMap playerManager = ((WorldServer) worldObj).getPlayerChunkMap();
 
-				PlayerChunkMapEntry playerInstance = playerManager.getEntry(c.xPosition, c.zPosition);
+				PlayerChunkMapEntry playerInstance = playerManager.getEntry(c.x, c.z);
 				if (playerInstance != null)
 				{
 					playerInstance.sendPacket(packet);

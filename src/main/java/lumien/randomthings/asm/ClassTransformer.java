@@ -1,32 +1,40 @@
 package lumien.randomthings.asm;
 
-import static org.objectweb.asm.Opcodes.*;
+import static org.objectweb.asm.Opcodes.AALOAD;
+import static org.objectweb.asm.Opcodes.ACC_PRIVATE;
+import static org.objectweb.asm.Opcodes.ACONST_NULL;
 import static org.objectweb.asm.Opcodes.ALOAD;
+import static org.objectweb.asm.Opcodes.DRETURN;
 import static org.objectweb.asm.Opcodes.DUP;
+import static org.objectweb.asm.Opcodes.FRETURN;
+import static org.objectweb.asm.Opcodes.GETFIELD;
 import static org.objectweb.asm.Opcodes.GETSTATIC;
 import static org.objectweb.asm.Opcodes.GOTO;
 import static org.objectweb.asm.Opcodes.ICONST_0;
+import static org.objectweb.asm.Opcodes.ICONST_1;
+import static org.objectweb.asm.Opcodes.ICONST_2;
 import static org.objectweb.asm.Opcodes.IFEQ;
 import static org.objectweb.asm.Opcodes.IFGT;
 import static org.objectweb.asm.Opcodes.IFLT;
 import static org.objectweb.asm.Opcodes.IF_ICMPEQ;
 import static org.objectweb.asm.Opcodes.ILOAD;
+import static org.objectweb.asm.Opcodes.INSTANCEOF;
+import static org.objectweb.asm.Opcodes.INVOKEINTERFACE;
 import static org.objectweb.asm.Opcodes.INVOKESTATIC;
 import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
 import static org.objectweb.asm.Opcodes.IRETURN;
 import static org.objectweb.asm.Opcodes.POP;
+import static org.objectweb.asm.Opcodes.PUTFIELD;
 import static org.objectweb.asm.Opcodes.PUTSTATIC;
 import static org.objectweb.asm.Opcodes.RETURN;
+import static org.objectweb.asm.Opcodes.SWAP;
 
 import java.util.Iterator;
-
-import net.minecraft.launchwrapper.IClassTransformer;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -45,12 +53,16 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.TypeInsnNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
+import net.minecraft.launchwrapper.IClassTransformer;
+
 public class ClassTransformer implements IClassTransformer
 {
-	Logger logger = LogManager.getLogger("RandomThingsCore");
-
+	public static Logger logger = LogManager.getLogger("RandomThingsCore");
+	
 	final String asmHandler = "lumien/randomthings/handler/AsmHandler";
 
+	public static int transformations = 0;
+	
 	public ClassTransformer()
 	{
 		logger.log(Level.DEBUG, "Starting Class Transformation");
@@ -61,66 +73,82 @@ public class ClassTransformer implements IClassTransformer
 	{
 		if (transformedName.equals("net.minecraft.world.World"))
 		{
+			transformations++;
 			return patchWorldClass(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.client.renderer.BlockRendererDispatcher"))
 		{
+			transformations++;
 			return patchBlockRendererDispatcher(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.block.Block"))
 		{
+			transformations++;
 			return patchBlock(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.client.renderer.entity.RenderLivingBase"))
 		{
+			transformations++;
 			return patchRenderLivingBase(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.entity.EntityLivingBase"))
 		{
+			transformations++;
 			return patchEntityLivingBase(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.client.renderer.RenderItem"))
 		{
+			transformations++;
 			return patchRenderItem(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.client.renderer.entity.layers.LayerArmorBase"))
 		{
+			transformations++;
 			return patchLayerArmorBase(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.world.gen.structure.StructureOceanMonumentPieces$MonumentCoreRoom"))
 		{
+			transformations++;
 			return patchOceanMonument(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer"))
 		{
+			transformations++;
 			return patchEntityRenderer(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.entity.player.InventoryPlayer"))
 		{
+			transformations++;
 			return patchInventoryPlayer(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.server.management.PlayerInteractionManager"))
 		{
+			transformations++;
 			return patchPlayerInteractionManager(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.world.gen.feature.WorldGenAbstractTree"))
 		{
+			transformations++;
 			return patchWorldGenTrees(basicClass);
 		}
 		else if (transformedName.equals("net.minecraftforge.client.model.pipeline.VertexLighterFlat"))
 		{
+			transformations++;
 			return patchVertexLighterFlat(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.client.multiplayer.PlayerControllerMP"))
 		{
+			transformations++;
 			return patchPlayerController(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.util.MovementInputFromOptions"))
 		{
+			transformations++;
 			return patchMovementInput(basicClass);
 		}
 		else if (transformedName.equals("net.minecraft.entity.monster.EntitySlime"))
 		{
+			transformations++;
 			return patchEntitySlime(basicClass);
 		}
 
@@ -181,7 +209,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -231,7 +259,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -278,7 +306,7 @@ public class ClassTransformer implements IClassTransformer
 		}
 
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -391,10 +419,10 @@ public class ClassTransformer implements IClassTransformer
 				}
 			}
 
-
-
 			if (tintTarget != null)
 			{
+				logger.log(Level.DEBUG, " - Found tintTarget (3/4");
+				
 				LabelNode l0 = new LabelNode(new Label());
 				LabelNode l1 = new LabelNode(new Label());
 
@@ -447,7 +475,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		try
@@ -513,7 +541,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -587,7 +615,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -644,7 +672,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -689,7 +717,7 @@ public class ClassTransformer implements IClassTransformer
 			shouldSideBeRendered.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -791,7 +819,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -810,7 +838,7 @@ public class ClassTransformer implements IClassTransformer
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(MCPNames.method("func_180451_a")))
+			if (mn.name.equals(MCPNames.method("func_191966_a")))
 			{
 				renderEffect = mn;
 			}
@@ -818,7 +846,7 @@ public class ClassTransformer implements IClassTransformer
 			{
 				renderItem = mn;
 			}
-			else if (mn.name.equals(MCPNames.method("func_175032_a")))
+			else if (mn.name.equals(MCPNames.method("func_191970_a")))
 			{
 				renderQuads = mn;
 			}
@@ -868,7 +896,7 @@ public class ClassTransformer implements IClassTransformer
 
 					if (!found)
 					{
-						if (min.name.equals(MCPNames.method("func_180451_a")))
+						if (min.name.equals(MCPNames.method("func_191966_a")))
 						{
 							logger.log(Level.DEBUG, "- Found renderEffect calling");
 
@@ -923,7 +951,7 @@ public class ClassTransformer implements IClassTransformer
 			InsnList startInsrt = new InsnList();
 			startInsrt.add(new VarInsnNode(ALOAD, 4));
 			startInsrt.add(new VarInsnNode(ALOAD, 1));
-			startInsrt.add(new MethodInsnNode(INVOKESTATIC, luminousHandler, "luminousHookStart", "(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/renderer/VertexBuffer;)V", false));
+			startInsrt.add(new MethodInsnNode(INVOKESTATIC, luminousHandler, "luminousHookStart", "(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/renderer/BufferBuilder;)V", false));
 
 			renderQuads.instructions.insert(startInsrt);
 
@@ -962,7 +990,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -984,7 +1012,7 @@ public class ClassTransformer implements IClassTransformer
 			{
 				updatePotionEffects = mn;
 			}
-			else if (mn.name.equals(MCPNames.method("func_70612_e")))
+			else if (mn.name.equals(MCPNames.method("func_191986_a")))
 			{
 				moveEntityWithHeading = mn;
 			}
@@ -1060,7 +1088,7 @@ public class ClassTransformer implements IClassTransformer
 
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -1100,7 +1128,7 @@ public class ClassTransformer implements IClassTransformer
 			canRenderName.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -1144,7 +1172,7 @@ public class ClassTransformer implements IClassTransformer
 			addCollisionBoxesToList.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -1179,7 +1207,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(new VarInsnNode(ALOAD, 2));
 			toInsert.add(new VarInsnNode(ALOAD, 3));
 			toInsert.add(new VarInsnNode(ALOAD, 4));
-			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "renderBlock", "(Lnet/minecraft/client/renderer/BlockRendererDispatcher;Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/client/renderer/VertexBuffer;)I", false));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "renderBlock", "(Lnet/minecraft/client/renderer/BlockRendererDispatcher;Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/client/renderer/BufferBuilder;)I", false));
 			toInsert.add(new InsnNode(DUP));
 			toInsert.add(new InsnNode(ICONST_2));
 			toInsert.add(new JumpInsnNode(IF_ICMPEQ, l1));
@@ -1190,7 +1218,7 @@ public class ClassTransformer implements IClassTransformer
 			renderBlock.instructions.insert(toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -1285,7 +1313,7 @@ public class ClassTransformer implements IClassTransformer
 			isRainingAt.instructions.insertBefore(returnNode, toInsert);
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -1403,7 +1431,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -1459,7 +1487,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
@@ -1472,7 +1500,7 @@ public class ClassTransformer implements IClassTransformer
 		classReader.accept(classNode, 0);
 		logger.log(Level.DEBUG, "Found Dummy Class: " + classNode.name);
 
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		return writer.toByteArray();

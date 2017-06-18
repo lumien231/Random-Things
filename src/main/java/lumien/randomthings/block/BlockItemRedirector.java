@@ -88,12 +88,12 @@ public class BlockItemRedirector extends BlockBase
 		{
 			Vec3d motionVec = new Vec3d(entityIn.posX, entityIn.posY, entityIn.posZ).subtract(new Vec3d(entityIn.lastTickPosX, entityIn.lastTickPosY, entityIn.lastTickPosZ));
 
-			EnumFacing roughMovingFacing = EnumFacing.getFacingFromVector((float)motionVec.xCoord, (float)motionVec.yCoord, (float)motionVec.zCoord).getOpposite();
+			EnumFacing roughMovingFacing = EnumFacing.getFacingFromVector((float)motionVec.x, (float)motionVec.y, (float)motionVec.z).getOpposite();
 			
 			Vec3d center = new Vec3d(pos).addVector(0.5, 0, 0.5);
 			Vec3d difVec = center.subtract(entityIn.getPositionVector());
 
-			EnumFacing facing = EnumFacing.getFacingFromVector((float) difVec.xCoord, (float) difVec.yCoord, (float) difVec.zCoord).getOpposite();
+			EnumFacing facing = EnumFacing.getFacingFromVector((float) difVec.x, (float) difVec.y, (float) difVec.z).getOpposite();
 
 			EnumFacing currentInput = state.getValue(INPUT_FACING);
 			EnumFacing currentOutput = state.getValue(OUTPUT_FACING);
@@ -115,11 +115,11 @@ public class BlockItemRedirector extends BlockBase
 				float dif = facing.getOpposite().getHorizontalAngle() - outputFacing.getHorizontalAngle();
 
 				Vec3d outputMotionVec = motionVec.rotateYaw((float) Math.toRadians(dif));
-				entityIn.setPosition(facingVec.xCoord, facingVec.yCoord, facingVec.zCoord);
+				entityIn.setPosition(facingVec.x, facingVec.y, facingVec.z);
 
-				entityIn.motionX = outputMotionVec.xCoord;
-				entityIn.motionY = outputMotionVec.yCoord;
-				entityIn.motionZ = outputMotionVec.zCoord;
+				entityIn.motionX = outputMotionVec.x;
+				entityIn.motionY = outputMotionVec.y;
+				entityIn.motionZ = outputMotionVec.z;
 			}
 		}
 	}

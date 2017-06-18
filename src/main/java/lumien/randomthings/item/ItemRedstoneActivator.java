@@ -5,6 +5,7 @@ import java.util.List;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,9 +29,9 @@ public class ItemRedstoneActivator extends ItemBase
 	}
 	
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
-		super.addInformation(stack, playerIn, tooltip, advanced);
+		super.addInformation(stack, world, tooltip, advanced);
 		
 		tooltip.add(I18n.format("tooltip.redstoneactivator.duration", durations[getDurationIndex(stack)]));
 	}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "IEI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "E": {
+      "item": "randomthings:ingredient",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "randomthings:spectreanchor"
+  }
+}

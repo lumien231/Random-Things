@@ -1,7 +1,7 @@
 package lumien.randomthings.client.particles;
 
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -39,7 +39,7 @@ public class EntityColoredSmokeFX extends Particle
 	 * Renders the particle
 	 */
 	@Override
-	public void renderParticle(VertexBuffer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
+	public void renderParticle(BufferBuilder worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
 	{
 		float f = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
 		f = MathHelper.clamp(f, 0.0F, 1.0F);

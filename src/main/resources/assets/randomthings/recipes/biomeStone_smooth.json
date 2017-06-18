@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SBS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "B": {
+      "item": "randomthings:biomecrystal"
+    }
+  },
+  "result": {
+    "item": "randomthings:biomestone",
+    "data": 1,
+    "count": 16
+  }
+}

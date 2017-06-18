@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomthings:stainedbrick",
+      "data": 11
+    },
+    {
+      "item": "randomthings:ingredient",
+      "data": 5
+    }
+  ],
+  "result": {
+    "item": "randomthings:luminousstainedbrick",
+    "data": 11
+  }
+}

@@ -2,22 +2,21 @@ package lumien.randomthings.client.gui;
 
 import java.io.IOException;
 
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageAnalogEmitter;
 import lumien.randomthings.tileentity.TileEntityAnalogEmitter;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.lwjgl.opengl.GL11;
-
-public class GuiAnalogEmitter extends GuiContainer
+public class GuiAnalogEmitter extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/analogEmitter.png");
 
@@ -54,12 +53,12 @@ public class GuiAnalogEmitter extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRendererObj.drawString(I18n.format("tile.analogEmitter.name", new Object[0]), 4, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.analogEmitter.name", new Object[0]), 4, 6, 4210752);
 
 		if (analogEmitter != null)
 		{
-			int stringWidth = fontRendererObj.getStringWidth(analogEmitter.emitLevel + "");
-			fontRendererObj.drawString(analogEmitter.emitLevel + "", xSize / 2 - stringWidth / 2 + 3, ySize / 2 - fontRendererObj.FONT_HEIGHT / 2 + 5, Colors.RED_INT);
+			int stringWidth = fontRenderer.getStringWidth(analogEmitter.emitLevel + "");
+			fontRenderer.drawString(analogEmitter.emitLevel + "", xSize / 2 - stringWidth / 2 + 3, ySize / 2 - fontRenderer.FONT_HEIGHT / 2 + 5, Colors.RED_INT);
 		}
 	}
 

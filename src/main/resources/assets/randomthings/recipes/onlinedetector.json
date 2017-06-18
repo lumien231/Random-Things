@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SRS",
+    "RTR",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stone"
+    },
+    "R": {
+      "item": "minecraft:repeater"
+    },
+    "T": {
+      "type": "forge:ore_dict",
+      "ore": "dyeBlue"
+    }
+  },
+  "result": {
+    "item": "randomthings:onlinedetector"
+  }
+}

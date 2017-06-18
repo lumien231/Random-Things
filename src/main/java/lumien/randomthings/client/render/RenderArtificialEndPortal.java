@@ -5,10 +5,10 @@ import java.util.Random;
 
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -102,7 +102,7 @@ public class RenderArtificialEndPortal extends Render
 	            GlStateManager.multMatrix(PROJECTION);
 	            GlStateManager.multMatrix(MODELVIEW);
 	            Tessellator tessellator = Tessellator.getInstance();
-	            VertexBuffer vertexbuffer = tessellator.getBuffer();
+	            BufferBuilder vertexbuffer = tessellator.getBuffer();
 	            vertexbuffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
 				float f11 = (RANDOM.nextFloat() * 0.5F + 0.1F) * f6;
 				float f12 = (RANDOM.nextFloat() * 0.5F + 0.4F) * f6;

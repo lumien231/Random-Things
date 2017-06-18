@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I  ",
+    "IP ",
+    "  I"
+  ],
+  "key": {
+    "I": {
+      "item": "randomthings:ingredient",
+      "data": 3
+    },
+    "P": {
+      "item": "randomthings:stableenderpearl"
+    }
+  },
+  "result": {
+    "item": "randomthings:spectrekey"
+  }
+}

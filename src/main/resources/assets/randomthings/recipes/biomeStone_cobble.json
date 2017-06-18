@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CBC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "B": {
+      "item": "randomthings:biomecrystal"
+    }
+  },
+  "result": {
+    "item": "randomthings:biomestone",
+    "data": 0,
+    "count": 16
+  }
+}

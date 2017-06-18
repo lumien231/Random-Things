@@ -24,13 +24,13 @@ public class RenderBiomeRadar extends TileEntitySpecialRenderer<TileEntityBiomeR
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntityBiomeRadar te, double x, double y, double z, float partialTicks, int destroyStage)
+	public void renderTileEntityAt(TileEntityBiomeRadar te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
 	{
 		ItemStack currentCrystal;
 
 		if (!(currentCrystal = te.getCurrentCrystal()).isEmpty())
 		{
-			entityItem.setEntityItemStack(currentCrystal);
+			entityItem.setItem(currentCrystal);
 			entityItem.setWorld(te.getWorld());
 			entityItem.setPosition(x + 0.5, y - 0.1, z + 0.5);
 

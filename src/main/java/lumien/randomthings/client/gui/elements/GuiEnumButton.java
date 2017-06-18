@@ -66,14 +66,14 @@ public class GuiEnumButton<E extends Enum> extends GuiButton
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY)
+	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible)
 		{
-			FontRenderer fontrenderer = mc.fontRendererObj;
+			FontRenderer fontrenderer = mc.fontRenderer;
 			mc.getTextureManager().bindTexture(textureLocation);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
 			E value = getValue();
 			int ordinal = value.ordinal();
@@ -82,7 +82,7 @@ public class GuiEnumButton<E extends Enum> extends GuiButton
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, ordinal * width, (i - 1) * height, this.width, this.height);
+			this.drawTexturedModalRect(this.x, this.y, ordinal * width, (i - 1) * height, this.width, this.height);
 			this.mouseDragged(mc, mouseX, mouseY);
 			int j = 14737632;
 
@@ -99,7 +99,7 @@ public class GuiEnumButton<E extends Enum> extends GuiButton
 				j = 16777120;
 			}
 
-			this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, j);
+			this.drawCenteredString(fontrenderer, this.displayString, this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
 		}
 	}
 
@@ -113,7 +113,7 @@ public class GuiEnumButton<E extends Enum> extends GuiButton
 				String toolTip = this.tooltips[((Enum) field.get(instance)).ordinal()];
 
 				Minecraft mc = Minecraft.getMinecraft();
-				FontRenderer fontrenderer = mc.fontRendererObj;
+				FontRenderer fontrenderer = mc.fontRenderer;
 
 				toolTip = I18n.format(toolTip);
 				GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { toolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);

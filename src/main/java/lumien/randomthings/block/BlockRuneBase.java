@@ -19,7 +19,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -88,7 +87,7 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 
 	}
@@ -151,12 +150,12 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 
 					int[][] runeData = te.getRuneData();
 
-					int x = (int) Math.floor(hitVec.xCoord * 4);
-					int y = (int) Math.floor(hitVec.zCoord * 4);
+					int x = (int) Math.floor(hitVec.x * 4);
+					int y = (int) Math.floor(hitVec.z * 4);
 
 					if (runeData[x][y] != -1)
 					{
-						EntityItem entityitem = new EntityItem(worldIn, pos.getX() + hitVec.xCoord, pos.getY() + 0.1, pos.getZ() + hitVec.zCoord, new ItemStack(ModItems.runeDust, 1, runeData[x][y]));
+						EntityItem entityitem = new EntityItem(worldIn, pos.getX() + hitVec.x, pos.getY() + 0.1, pos.getZ() + hitVec.z, new ItemStack(ModItems.runeDust, 1, runeData[x][y]));
 						entityitem.setNoPickupDelay();
 						worldIn.spawnEntity(entityitem);
 

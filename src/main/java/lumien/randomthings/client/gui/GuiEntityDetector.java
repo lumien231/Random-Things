@@ -6,22 +6,19 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
 import lumien.randomthings.container.ContainerEntityDetector;
-import lumien.randomthings.item.ItemEntityFilter;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageEntityDetector;
 import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import lumien.randomthings.tileentity.TileEntityEntityDetector.FILTER;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 
-public class GuiEntityDetector extends GuiContainer
+public class GuiEntityDetector extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/entityDetector.png");
 
@@ -106,16 +103,16 @@ public class GuiEntityDetector extends GuiContainer
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		fontRendererObj.drawString(I18n.format("tile.entityDetector.name", new Object[0]), 8 + 14, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.entityDetector.name", new Object[0]), 8 + 14, 6, 4210752);
 
 		String radiusX = I18n.format("gui.entityDetector.radiusX", entityDetector.getRangeX());
-		fontRendererObj.drawString(radiusX, xSize / 2 - fontRendererObj.getStringWidth(radiusX) / 2 - 3, 26, 4210752);
+		fontRenderer.drawString(radiusX, xSize / 2 - fontRenderer.getStringWidth(radiusX) / 2 - 3, 26, 4210752);
 
 		String radiusY = I18n.format("gui.entityDetector.radiusY", entityDetector.getRangeY());
-		fontRendererObj.drawString(radiusY, xSize / 2 - fontRendererObj.getStringWidth(radiusY) / 2 - 3, 46, 4210752);
+		fontRenderer.drawString(radiusY, xSize / 2 - fontRenderer.getStringWidth(radiusY) / 2 - 3, 46, 4210752);
 
 		String radiusZ = I18n.format("gui.entityDetector.radiusZ", entityDetector.getRangeZ());
-		fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2 - 3, 66, 4210752);
+		fontRenderer.drawString(radiusZ, xSize / 2 - fontRenderer.getStringWidth(radiusZ) / 2 - 3, 66, 4210752);
 
 		if (this.entityDetector.getFilter() == FILTER.CUSTOM)
 		{
@@ -124,7 +121,7 @@ public class GuiEntityDetector extends GuiContainer
 			this.drawTexturedModalRect(129, 93, 176, 40, 20, 20);
 		}
 
-		// this.fontRendererObj.drawString(I18n.format("container.inventory",
+		// this.fontRenderer.drawString(I18n.format("container.inventory",
 		// new Object[0]), 8, this.ySize - 128 + 2, 4210752);
 	}
 

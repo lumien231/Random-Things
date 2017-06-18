@@ -107,7 +107,7 @@ public class BlockFilteredSuperLubricentPlatform extends BlockContainerBase impl
 
 				ItemFilterRepresentation repres = ((TileEntityFilteredSuperLubricentPlatform) worldIn.getTileEntity(pos)).getRepres();
 
-				if (repres != null && repres.matchesItemStack(ei.getEntityItem()))
+				if (repres != null && repres.matchesItemStack(ei.getItem()))
 				{
 					return;
 				}

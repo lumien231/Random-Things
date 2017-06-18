@@ -215,7 +215,7 @@ public class ContainerImbuingStation extends Container
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendProgressBarUpdate(this, 0, this.te.imbuingProgress);
+		listener.sendWindowProperty(this, 0, this.te.imbuingProgress);
 	}
 
 	@Override
@@ -229,7 +229,7 @@ public class ContainerImbuingStation extends Container
 
 			if (this.lastImbuingProgress != this.te.imbuingProgress)
 			{
-				icrafting.sendProgressBarUpdate(this, 0, this.te.imbuingProgress);
+				icrafting.sendWindowProperty(this, 0, this.te.imbuingProgress);
 			}
 		}
 

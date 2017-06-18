@@ -1,10 +1,10 @@
 package lumien.randomthings.item.spectretools;
 
+import java.util.Set;
+
 import com.google.common.collect.Sets;
 
 import lumien.randomthings.item.ItemBase;
-
-import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

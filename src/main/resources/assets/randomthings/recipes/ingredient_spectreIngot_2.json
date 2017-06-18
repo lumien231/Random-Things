@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ELE",
+    "EIE",
+    "EEE"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:lapis_block"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "blockGold"
+    },
+    "E": {
+      "item": "randomthings:ingredient",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "randomthings:ingredient",
+    "data": 3,
+    "count": 9
+  }
+}

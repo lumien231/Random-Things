@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "RLB"
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "dyeGreen"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "dyeRed"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "dyeBlue"
+    },
+    "L": {
+      "item": "minecraft:redstone_lamp"
+    }
+  },
+  "result": {
+    "item": "randomthings:rainbowlamp"
+  }
+}

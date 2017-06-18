@@ -152,7 +152,7 @@ public class ModelRune implements IBakedModel
 			c4 = rotate(c4.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
 		}
 
-		return new BakedQuad(Ints.concat(vertexToInts((float) c1.xCoord, (float) c1.yCoord, (float) c1.zCoord, -1, texture, u1, v1, side), vertexToInts((float) c2.xCoord, (float) c2.yCoord, (float) c2.zCoord, -1, texture, u1, v2, side), vertexToInts((float) c3.xCoord, (float) c3.yCoord, (float) c3.zCoord, -1, texture, u2, v2, side), vertexToInts((float) c4.xCoord, (float) c4.yCoord, (float) c4.zCoord, -1, texture, u2, v1, side)), tintIndex, side, texture, false, DefaultVertexFormats.ITEM);
+		return new BakedQuad(Ints.concat(vertexToInts((float) c1.x, (float) c1.y, (float) c1.z, -1, texture, u1, v1, side), vertexToInts((float) c2.x, (float) c2.y, (float) c2.z, -1, texture, u1, v2, side), vertexToInts((float) c3.x, (float) c3.y, (float) c3.z, -1, texture, u2, v2, side), vertexToInts((float) c4.x, (float) c4.y, (float) c4.z, -1, texture, u2, v1, side)), tintIndex, side, texture, false, DefaultVertexFormats.ITEM);
 	}
 
 	@Override
@@ -196,17 +196,17 @@ public class ModelRune implements IBakedModel
 		switch (side)
 		{
 			case DOWN:
-				return new Vec3d(vec.xCoord, -vec.yCoord, -vec.zCoord);
+				return new Vec3d(vec.x, -vec.y, -vec.z);
 			case UP:
-				return new Vec3d(vec.xCoord, vec.yCoord, vec.zCoord);
+				return new Vec3d(vec.x, vec.y, vec.z);
 			case NORTH:
-				return new Vec3d(vec.xCoord, vec.zCoord, -vec.yCoord);
+				return new Vec3d(vec.x, vec.z, -vec.y);
 			case SOUTH:
-				return new Vec3d(vec.xCoord, -vec.zCoord, vec.yCoord);
+				return new Vec3d(vec.x, -vec.z, vec.y);
 			case WEST:
-				return new Vec3d(-vec.yCoord, vec.xCoord, vec.zCoord);
+				return new Vec3d(-vec.y, vec.x, vec.z);
 			case EAST:
-				return new Vec3d(vec.yCoord, -vec.xCoord, vec.zCoord);
+				return new Vec3d(vec.y, -vec.x, vec.z);
 		}
 		return null;
 	}

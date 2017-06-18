@@ -43,9 +43,9 @@ public class MessageEnderLetter implements IRTMessage
 		{
 			NetHandlerPlayServer serverHandler = (NetHandlerPlayServer) context.netHandler;
 
-			if (serverHandler.playerEntity != null)
+			if (serverHandler.player != null)
 			{
-				ItemStack equipped = serverHandler.playerEntity.getHeldItemMainhand();
+				ItemStack equipped = serverHandler.player.getHeldItemMainhand();
 
 				if (equipped != null && equipped.getItem() instanceof ItemEnderLetter)
 				{

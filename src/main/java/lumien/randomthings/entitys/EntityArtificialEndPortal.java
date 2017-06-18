@@ -92,7 +92,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 	{
 		super.onCollideWithPlayer(entityIn);
 
-		if (!this.world.isRemote && this.actionTimer >= 200 && entityIn.getEntityBoundingBox().intersectsWith(this.getEntityBoundingBox()) && !entityIn.isRiding() && !entityIn.isBeingRidden())
+		if (!this.world.isRemote && this.actionTimer >= 200 && entityIn.getEntityBoundingBox().intersects(this.getEntityBoundingBox()) && !entityIn.isRiding() && !entityIn.isBeingRidden())
 		{
 			entityIn.changeDimension(1);
 		}

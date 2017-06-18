@@ -45,7 +45,7 @@ public class MessageItemFilter implements IRTMessage
 			{
 				NetHandlerPlayServer serverHandler = context.getServerHandler();
 
-				Container container = context.getServerHandler().playerEntity.openContainer;
+				Container container = context.getServerHandler().player.openContainer;
 
 				if (container != null && container instanceof ContainerItemFilter)
 				{

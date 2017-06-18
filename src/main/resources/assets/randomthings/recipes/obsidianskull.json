@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ORO",
+    "BWB",
+    "ORO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "R": {
+      "item": "minecraft:blaze_rod"
+    },
+    "W": {
+      "item": "minecraft:skull",
+      "data": 1
+    },
+    "B": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "result": {
+    "item": "randomthings:obsidianskull"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ROR",
+    "OIO",
+    "ROR"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "blockRedstone"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "I": {
+      "item": "randomthings:basicredstoneinterface"
+    }
+  },
+  "result": {
+    "item": "randomthings:advancedredstoneinterface"
+  }
+}

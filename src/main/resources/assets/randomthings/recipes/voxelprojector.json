@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RGB",
+    "WLW",
+    "WWW"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlassRed"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlassGreen"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlassBlue"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 15
+    },
+    "L": {
+      "item": "minecraft:redstone_lamp"
+    }
+  },
+  "result": {
+    "item": "randomthings:voxelprojector"
+  }
+}

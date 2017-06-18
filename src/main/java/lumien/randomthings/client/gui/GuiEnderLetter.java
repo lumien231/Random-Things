@@ -9,14 +9,13 @@ import lumien.randomthings.container.ContainerEnderLetter;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageEnderLetter;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class GuiEnderLetter extends GuiContainer
+public class GuiEnderLetter extends GuiContainerBase
 {
 	ItemStack enderLetterStack;
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/enderLetter.png");
@@ -43,7 +42,7 @@ public class GuiEnderLetter extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString(I18n.format("item.enderLetter.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("item.enderLetter.name", new Object[0]), 8, 6, 4210752);
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class GuiEnderLetter extends GuiContainer
 	{
 		super.initGui();
 
-		receiverName = new GuiTextField(0, this.fontRendererObj, (width - xSize) / 2 + 92, (height - ySize) / 2 + 5, 76, 10);
+		receiverName = new GuiTextField(0, this.fontRenderer, (width - xSize) / 2 + 92, (height - ySize) / 2 + 5, 76, 10);
 		receiverName.setFocused(false);
 		receiverName.setCanLoseFocus(true);
 		receiverName.setEnabled(!received);

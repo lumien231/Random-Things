@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RBR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:stonebrick",
+      "data": 0
+    },
+    "B": {
+      "item": "randomthings:biomecrystal"
+    }
+  },
+  "result": {
+    "item": "randomthings:biomestone",
+    "data": 2,
+    "count": 16
+  }
+}

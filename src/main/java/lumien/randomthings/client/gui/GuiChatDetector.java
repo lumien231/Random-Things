@@ -2,6 +2,9 @@ package lumien.randomthings.client.gui;
 
 import java.io.IOException;
 
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
 import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.network.PacketHandler;
@@ -9,17 +12,13 @@ import lumien.randomthings.network.messages.MessageChatDetector;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-public class GuiChatDetector extends GuiContainer
+public class GuiChatDetector extends GuiContainerBase
 {
 	TileEntityChatDetector te;
 
@@ -42,7 +41,7 @@ public class GuiChatDetector extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
-		chatMessageInput = new GuiTextField(0, this.fontRendererObj, (width / 2 - xSize / 2) + 5, (height / 2), 127, 20);
+		chatMessageInput = new GuiTextField(0, this.fontRenderer, (width / 2 - xSize / 2) + 5, (height / 2), 127, 20);
 		chatMessageInput.setFocused(false);
 		chatMessageInput.setCanLoseFocus(true);
 		chatMessageInput.setText(te.getChatMessage());
@@ -92,7 +91,7 @@ public class GuiChatDetector extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRendererObj.drawString(I18n.format("tile.chatDetector.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.chatDetector.name", new Object[0]), 8, 6, 4210752);
 	}
 
 	@Override

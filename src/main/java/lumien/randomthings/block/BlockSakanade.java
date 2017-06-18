@@ -41,7 +41,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 	}
 	
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		
 	}
@@ -103,7 +103,7 @@ public class BlockSakanade extends BlockBase implements IShearable
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
+	public boolean isNormalCube(IBlockState state)
 	{
 		return false;
 	}

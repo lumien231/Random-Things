@@ -53,21 +53,21 @@ public class GuiCustomButton extends GuiButton
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY)
+	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible)
 		{
-			FontRenderer fontrenderer = mc.fontRendererObj;
+			FontRenderer fontrenderer = mc.fontRenderer;
 			mc.getTextureManager().bindTexture(buttonTextures);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 			int k = this.getHoverState(this.hovered);
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 			GlStateManager.blendFunc(770, 771);
 
-			GuiUtils.drawContinuousTexturedBox(buttonTextures, this.xPosition, this.yPosition, uX + (value ? 20 : 0), uY + (k - 1) * 20, this.width, this.height, this.textureWidth, this.textureHeight, 2, 3, 2, 2, this.zLevel);
-			// this.drawTexturedModalRect(this.xPosition, this.yPosition, uX +
+			GuiUtils.drawContinuousTexturedBox(buttonTextures, this.x, this.y, uX + (value ? 20 : 0), uY + (k - 1) * 20, this.width, this.height, this.textureWidth, this.textureHeight, 2, 3, 2, 2, this.zLevel);
+			// this.drawTexturedModalRect(this.x, this.y, uX +
 			// (value ? 20 : 0), uY + (k - 1) * 20, this.width, this.height);
 			this.mouseDragged(mc, mouseX, mouseY);
 			int color = 14737632;
@@ -87,13 +87,13 @@ public class GuiCustomButton extends GuiButton
 
 
 			String buttonText = this.displayString;
-			int strWidth = mc.fontRendererObj.getStringWidth(buttonText);
-			int ellipsisWidth = mc.fontRendererObj.getStringWidth("...");
+			int strWidth = mc.fontRenderer.getStringWidth(buttonText);
+			int ellipsisWidth = mc.fontRenderer.getStringWidth("...");
 
 			if (strWidth > width - 6 && strWidth > ellipsisWidth)
-				buttonText = mc.fontRendererObj.trimStringToWidth(buttonText, width - 6 - ellipsisWidth).trim() + "...";
+				buttonText = mc.fontRenderer.trimStringToWidth(buttonText, width - 6 - ellipsisWidth).trim() + "...";
 
-			this.drawCenteredString(mc.fontRendererObj, buttonText, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, color);
+			this.drawCenteredString(mc.fontRenderer, buttonText, this.x + this.width / 2, this.y + (this.height - 8) / 2, color);
 		}
 	}
 
@@ -113,7 +113,7 @@ public class GuiCustomButton extends GuiButton
 		if (toolTip != null)
 		{
 			toolTip = I18n.format(toolTip);
-			GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { toolTip }), mouseX, mouseY, parent.mc.displayWidth, parent.mc.displayHeight, -1, parent.mc.fontRendererObj);
+			GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { toolTip }), mouseX, mouseY, parent.mc.displayWidth, parent.mc.displayHeight, -1, parent.mc.fontRenderer);
 		}
 	}
 

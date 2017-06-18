@@ -3,6 +3,9 @@ package lumien.randomthings.client.gui.redstoneremote;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.client.gui.GuiContainerBase;
 import lumien.randomthings.client.gui.elements.GuiSlotButton;
 import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.container.inventories.InventoryItem;
@@ -10,7 +13,6 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageRedstoneRemote;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,9 +21,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import org.lwjgl.opengl.GL11;
-
-public class GuiRedstoneRemoteUse extends GuiContainer
+public class GuiRedstoneRemoteUse extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/redstoneRemote/redstoneRemoteUse.png");
 
@@ -127,7 +127,7 @@ public class GuiRedstoneRemoteUse extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRendererObj.drawString(I18n.format("item.redstoneRemote.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("item.redstoneRemote.name", new Object[0]), 8, 6, 4210752);
 
 		for (GuiButton guibutton : this.buttonList)
 		{

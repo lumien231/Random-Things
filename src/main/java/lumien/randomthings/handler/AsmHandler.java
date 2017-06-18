@@ -28,9 +28,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
@@ -85,7 +85,7 @@ public class AsmHandler
 					int chunkX = pos.getX() >> 4;
 					int chunkZ = pos.getZ() >> 4;
 					
-					if (chunk.xPosition == chunkX && chunk.zPosition == chunkZ)
+					if (chunk.x == chunkX && chunk.z == chunkZ)
 					{
 						return core.isRedstonePowered() ? 0 : 1;
 					}
@@ -235,7 +235,7 @@ public class AsmHandler
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static int renderBlock(BlockRendererDispatcher dispatcher, IBlockState state, BlockPos pos, IBlockAccess blockAccess, VertexBuffer worldRendererIn)
+	public static int renderBlock(BlockRendererDispatcher dispatcher, IBlockState state, BlockPos pos, IBlockAccess blockAccess, BufferBuilder worldRendererIn)
 	{
 		synchronized (TileEntityLightRedirector.redirectorSet)
 		{
@@ -261,7 +261,7 @@ public class AsmHandler
 						}
 						else
 						{
-							if (blockAccess.getWorldType() != WorldType.DEBUG_WORLD)
+							if (blockAccess.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES)
 							{
 								try
 								{
@@ -374,7 +374,7 @@ public class AsmHandler
 					if (boots != null && ((((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader) && state.getBlock().getMaterial(state) == Material.WATER) || (boots.getItem() == ModItems.lavaWader && state.getBlock().getMaterial(state) == Material.LAVA)))
 					{
 						AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), (double) pos.getX() + 1, (double) pos.getY() + 1, (double) pos.getZ() + 1);
-						if (mask.intersectsWith(bb))
+						if (mask.intersects(bb))
 						{
 							list.add(bb);
 						}
@@ -518,14 +518,14 @@ public class AsmHandler
 
 			if (forward)
 			{
-				input.moveForward -= 2;
+				input.field_192832_b -= 2;
 				input.forwardKeyDown = false;
 				input.backKeyDown = true;
 			}
 
 			if (backwards)
 			{
-				input.moveForward += 2;
+				input.field_192832_b += 2;
 				input.backKeyDown = false;
 				input.forwardKeyDown = true;
 			}

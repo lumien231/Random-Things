@@ -47,7 +47,7 @@ public class MessageRedstoneRemote implements IRTMessage
 	@Override
 	public void onMessage(MessageContext context)
 	{
-		EntityPlayerMP player = context.getServerHandler().playerEntity;
+		EntityPlayerMP player = context.getServerHandler().player;
 
 		if (slotUsed >= 0 && slotUsed < 9 && player != null)
 		{

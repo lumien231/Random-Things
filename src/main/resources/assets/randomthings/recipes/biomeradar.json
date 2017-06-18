@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "GSG",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    },
+    "S": {
+      "item": "randomthings:ingredient",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "randomthings:biomeradar"
+  }
+}

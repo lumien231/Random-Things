@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "CBC",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "B": {
+      "item": "randomthings:enderbridge"
+    }
+  },
+  "result": {
+    "item": "randomthings:prismarineenderbridge"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS ",
+    "SO ",
+    " O "
+  ],
+  "key": {
+    "S": {
+      "item": "randomthings:ingredient",
+      "data": 3
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "randomthings:spectreaxe"
+  }
+}

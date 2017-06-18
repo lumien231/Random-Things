@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.CommonProxy;
 import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.client.models.ItemModels;
@@ -44,9 +46,9 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -58,7 +60,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import org.lwjgl.opengl.GL11;
 
 public class ClientProxy extends CommonProxy
 {
@@ -237,7 +238,7 @@ public class ClientProxy extends CommonProxy
 	private void drawInterfaceLines(EntityPlayerSP player, float partialTicks)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer worldRenderer = tessellator.getBuffer();
+		BufferBuilder worldRenderer = tessellator.getBuffer();
 
 		double playerX = player.prevPosX + (player.posX - player.prevPosX) * partialTicks;
 		double playerY = player.prevPosY + (player.posY - player.prevPosY) * partialTicks;

@@ -17,7 +17,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -64,7 +63,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	}
 	
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		
 	}
@@ -120,7 +119,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
+	public boolean isNormalCube(IBlockState state)
 	{
 		return false;
 	}

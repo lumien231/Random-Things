@@ -16,15 +16,14 @@ import lumien.randomthings.network.messages.MessageVoxelProjector;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiSlider;
 
-public class GuiVoxelProjector extends GuiContainer implements IStringCallback
+public class GuiVoxelProjector extends GuiContainerBase implements IStringCallback
 {
 	TileEntityVoxelProjector te;
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/voxelProjector.png");
@@ -140,7 +139,7 @@ public class GuiVoxelProjector extends GuiContainer implements IStringCallback
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		fontRendererObj.drawString(I18n.format("tile.voxelProjector.name", new Object[0]), 3, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.voxelProjector.name", new Object[0]), 3, 6, 4210752);
 	}
 
 	@Override

@@ -10,7 +10,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,7 +35,7 @@ public class BlockBlockLuminous extends BlockBase implements  ILuminousBlock
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;
@@ -44,7 +43,7 @@ public class BlockBlockLuminous extends BlockBase implements  ILuminousBlock
 		for (int j = 0; j < i; ++j)
 		{
 			EnumDyeColor enumdyecolor = aenumdyecolor[j];
-			list.add(new ItemStack(itemIn, 1, enumdyecolor.getMetadata()));
+			list.add(new ItemStack(this, 1, enumdyecolor.getMetadata()));
 		}
 	}
 

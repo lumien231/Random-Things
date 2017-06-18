@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "randomthings:ingredient",
+      "data": 5
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dyeRed"
+    }
+  ],
+  "result": {
+    "item": "randomthings:runedust",
+    "data": 14,
+    "count": 8
+  }
+}

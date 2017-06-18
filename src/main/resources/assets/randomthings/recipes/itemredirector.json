@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    " H ",
+    "OLO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "L": {
+      "item": "randomthings:superlubricentice"
+    }
+  },
+  "result": {
+    "item": "randomthings:itemredirector",
+    "count": 2
+  }
+}

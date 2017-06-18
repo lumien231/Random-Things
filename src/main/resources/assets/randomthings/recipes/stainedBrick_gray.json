@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TDT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:brick_block"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dyeGray"
+    }
+  },
+  "result": {
+    "item": "randomthings:stainedbrick",
+    "data": 7,
+    "count": 8
+  }
+}

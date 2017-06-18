@@ -36,7 +36,7 @@ public class MessageContainerSignal implements IRTMessage
 	@Override
 	public void onMessage(MessageContext context)
 	{
-		EntityPlayerMP player = context.getServerHandler().playerEntity;
+		EntityPlayerMP player = context.getServerHandler().player;
 		
 		if (player.openContainer instanceof ContainerTE)
 		{

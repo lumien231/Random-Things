@@ -34,7 +34,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 
 	private int transformModelCount(EntityProjectedItem itemIn, double p_177077_2_, double p_177077_4_, double p_177077_6_, float p_177077_8_, IBakedModel p_177077_9_)
 	{
-		ItemStack itemstack = itemIn.getEntityItem();
+		ItemStack itemstack = itemIn.getItem();
 		Item item = itemstack.getItem();
 
 		if (item == null)
@@ -102,7 +102,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 	@Override
 	public void doRender(EntityProjectedItem entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		ItemStack itemstack = entity.getEntityItem();
+		ItemStack itemstack = entity.getItem();
 		int i;
 
 		if (!itemstack.isEmpty() && itemstack.getItem() != null)

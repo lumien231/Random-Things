@@ -2,22 +2,21 @@ package lumien.randomthings.client.gui;
 
 import java.io.IOException;
 
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageOnlineDetector;
 import lumien.randomthings.tileentity.TileEntityOnlineDetector;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-public class GuiOnlineDetector extends GuiContainer
+public class GuiOnlineDetector extends GuiContainerBase
 {
 	TileEntityOnlineDetector te;
 
@@ -38,7 +37,7 @@ public class GuiOnlineDetector extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
-		usernameInput = new GuiTextField(0, this.fontRendererObj, (width / 2 - xSize / 2) + 5, (height / 2), 127, 20);
+		usernameInput = new GuiTextField(0, this.fontRenderer, (width / 2 - xSize / 2) + 5, (height / 2), 127, 20);
 		usernameInput.setFocused(false);
 		usernameInput.setCanLoseFocus(true);
 		usernameInput.setText(te.getPlayerName());
@@ -86,7 +85,7 @@ public class GuiOnlineDetector extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRendererObj.drawString(I18n.format("tile.onlineDetector.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.onlineDetector.name", new Object[0]), 8, 6, 4210752);
 	}
 
 	@Override

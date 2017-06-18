@@ -18,9 +18,9 @@ import com.google.common.cache.CacheBuilder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -337,7 +337,7 @@ public class RenderUtils
 		Minecraft.getMinecraft().entityRenderer.disableLightmap();
 
 		Tessellator t = Tessellator.getInstance();
-		VertexBuffer wr = t.getBuffer();
+		BufferBuilder wr = t.getBuffer();
 
 		GlStateManager.disableTexture2D();
 

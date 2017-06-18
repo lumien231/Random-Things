@@ -282,25 +282,25 @@ public class ContainerPotionVaporizer extends Container
 			IContainerListener listener = this.listeners.get(i);
 
 			if (lastDurationLeft != potionVaporizer.getDurationLeft())
-				listener.sendProgressBarUpdate(this, 0, this.potionVaporizer.getDurationLeft());
+				listener.sendWindowProperty(this, 0, this.potionVaporizer.getDurationLeft());
 
 			if (lastDuration != potionVaporizer.getDuration())
-				listener.sendProgressBarUpdate(this, 1, this.potionVaporizer.getDuration());
+				listener.sendWindowProperty(this, 1, this.potionVaporizer.getDuration());
 
 			if (lastColor != potionVaporizer.getColor())
-				listener.sendProgressBarUpdate(this, 2, this.potionVaporizer.getColor());
+				listener.sendWindowProperty(this, 2, this.potionVaporizer.getColor());
 
 			if (lastPotionID != potionVaporizer.getPotionID())
-				listener.sendProgressBarUpdate(this, 3, this.potionVaporizer.getPotionID());
+				listener.sendWindowProperty(this, 3, this.potionVaporizer.getPotionID());
 
 			if (lastAmplifier != potionVaporizer.getAmplifier())
-				listener.sendProgressBarUpdate(this, 4, this.potionVaporizer.getAmplifier());
+				listener.sendWindowProperty(this, 4, this.potionVaporizer.getAmplifier());
 
 			if (lastFuelBurnTime != potionVaporizer.getFuelBurnTime())
-				listener.sendProgressBarUpdate(this, 5, this.potionVaporizer.getFuelBurnTime());
+				listener.sendWindowProperty(this, 5, this.potionVaporizer.getFuelBurnTime());
 
 			if (lastFuelBurn != potionVaporizer.getFuelBurn())
-				listener.sendProgressBarUpdate(this, 6, this.potionVaporizer.getFuelBurn());
+				listener.sendWindowProperty(this, 6, this.potionVaporizer.getFuelBurn());
 		}
 
 		this.lastDurationLeft = this.potionVaporizer.getDurationLeft();

@@ -127,7 +127,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float p_180535_8_, int p_180535_9_)
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float p_180535_8_, int p_180535_9_,float alpha)
 	{
 		this.func_180538_a((TileEntitySpecialChest) te, x, y, z, p_180535_8_, p_180535_9_);
 	}

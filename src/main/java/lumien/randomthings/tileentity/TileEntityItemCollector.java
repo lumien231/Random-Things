@@ -58,7 +58,7 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 						{
 							if (!ei.isDead)
 							{
-								ItemStack original = ei.getEntityItem().copy();
+								ItemStack original = ei.getItem().copy();
 								ItemStack left = ItemHandlerHelper.insertItemStacked(itemHandler, original, false);
 
 								if (left.getCount() < original.getCount())
@@ -72,7 +72,7 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 								}
 								else
 								{
-									ei.setEntityItemStack(left);
+									ei.setItem(left);
 								}
 							}
 						}

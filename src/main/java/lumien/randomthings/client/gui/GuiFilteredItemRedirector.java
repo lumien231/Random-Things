@@ -3,13 +3,12 @@ package lumien.randomthings.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.container.ContainerFilteredItemRedirector;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class GuiFilteredItemRedirector extends GuiContainer
+public class GuiFilteredItemRedirector extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/filteredItemRedirector.png");
 
@@ -36,7 +35,7 @@ public class GuiFilteredItemRedirector extends GuiContainer
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, 37, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, 37, 4210752);
 	}
 
 	@Override

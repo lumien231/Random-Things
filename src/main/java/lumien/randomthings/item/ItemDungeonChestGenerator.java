@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -41,9 +42,9 @@ public class ItemDungeonChestGenerator extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	public void addInformation(ItemStack par1ItemStack, World world, List par3List, ITooltipFlag par4)
 	{
-		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+		super.addInformation(par1ItemStack, world, par3List, par4);
 
 		NBTTagCompound nbt = par1ItemStack.getTagCompound();
 		if (nbt != null)

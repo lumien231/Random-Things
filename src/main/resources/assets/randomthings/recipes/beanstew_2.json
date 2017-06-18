@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    " W ",
+    " O "
+  ],
+  "key": {
+    "B": {
+      "item": "randomthings:beans",
+      "data": 0
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    },
+    "O": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "randomthings:beanstew"
+  }
+}

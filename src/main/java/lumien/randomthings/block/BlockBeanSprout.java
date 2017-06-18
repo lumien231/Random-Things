@@ -38,7 +38,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList list)
 	{
 
 	}

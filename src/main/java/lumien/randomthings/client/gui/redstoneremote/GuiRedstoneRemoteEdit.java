@@ -1,15 +1,15 @@
 package lumien.randomthings.client.gui.redstoneremote;
 
+import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.client.gui.GuiContainerBase;
 import lumien.randomthings.container.ContainerRedstoneRemote;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import org.lwjgl.opengl.GL11;
-
-public class GuiRedstoneRemoteEdit extends GuiContainer
+public class GuiRedstoneRemoteEdit extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/redstoneRemote/redstoneRemoteEdit.png");
 
@@ -40,7 +40,7 @@ public class GuiRedstoneRemoteEdit extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRendererObj.drawString(I18n.format("item.redstoneRemote.name", new Object[0]), 8, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 95 + 2, 4210752);
+		fontRenderer.drawString(I18n.format("item.redstoneRemote.name", new Object[0]), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 95 + 2, 4210752);
 	}
 }

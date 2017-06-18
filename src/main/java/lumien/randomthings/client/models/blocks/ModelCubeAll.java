@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.primitives.Ints;
 
 import lumien.randomthings.client.RenderReference;
@@ -20,7 +18,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.Vec3d;
-import scala.actors.threadpool.Arrays;
 
 public class ModelCubeAll implements IBakedModel
 {
@@ -113,7 +110,7 @@ public class ModelCubeAll implements IBakedModel
 			v4 = rotate(v4.addVector(-.5, -.5, -.5), currentRotation).addVector(.5, 0.5, .5);
 		}
 
-		return new BakedQuad(Ints.concat(vertexToInts((float) v1.xCoord, (float) v1.yCoord, (float) v1.zCoord, -1, texture, uvs[0][0], uvs[0][1], side), vertexToInts((float) v2.xCoord, (float) v2.yCoord, (float) v2.zCoord, -1, texture, uvs[1][0], uvs[1][1], side), vertexToInts((float) v3.xCoord, (float) v3.yCoord, (float) v3.zCoord, -1, texture, uvs[2][0], uvs[2][1], side), vertexToInts((float) v4.xCoord, (float) v4.yCoord, (float) v4.zCoord, -1, texture, uvs[3][0], uvs[3][1], side)), 0, side, texture, false, DefaultVertexFormats.ITEM);
+		return new BakedQuad(Ints.concat(vertexToInts((float) v1.x, (float) v1.y, (float) v1.z, -1, texture, uvs[0][0], uvs[0][1], side), vertexToInts((float) v2.x, (float) v2.y, (float) v2.z, -1, texture, uvs[1][0], uvs[1][1], side), vertexToInts((float) v3.x, (float) v3.y, (float) v3.z, -1, texture, uvs[2][0], uvs[2][1], side), vertexToInts((float) v4.x, (float) v4.y, (float) v4.z, -1, texture, uvs[3][0], uvs[3][1], side)), 0, side, texture, false, DefaultVertexFormats.ITEM);
 	}
 
 	@Override
@@ -163,17 +160,17 @@ public class ModelCubeAll implements IBakedModel
 		switch (side)
 		{
 			case DOWN:
-				return new Vec3d(vec.xCoord, -vec.yCoord, -vec.zCoord);
+				return new Vec3d(vec.x, -vec.y, -vec.z);
 			case UP:
-				return new Vec3d(vec.xCoord, vec.yCoord, vec.zCoord);
+				return new Vec3d(vec.x, vec.y, vec.z);
 			case NORTH:
-				return new Vec3d(vec.xCoord, vec.zCoord, -vec.yCoord);
+				return new Vec3d(vec.x, vec.z, -vec.y);
 			case SOUTH:
-				return new Vec3d(vec.xCoord, -vec.zCoord, vec.yCoord);
+				return new Vec3d(vec.x, -vec.z, vec.y);
 			case WEST:
-				return new Vec3d(-vec.yCoord, vec.xCoord, vec.zCoord);
+				return new Vec3d(-vec.y, vec.x, vec.z);
 			case EAST:
-				return new Vec3d(vec.yCoord, -vec.xCoord, vec.zCoord);
+				return new Vec3d(vec.y, -vec.x, vec.z);
 		}
 		return null;
 	}
@@ -183,17 +180,17 @@ public class ModelCubeAll implements IBakedModel
 		switch (side)
 		{
 			case DOWN:
-				return new Vec3d(vec.xCoord, -vec.yCoord, -vec.zCoord);
+				return new Vec3d(vec.x, -vec.y, -vec.z);
 			case UP:
-				return new Vec3d(vec.xCoord, vec.yCoord, vec.zCoord);
+				return new Vec3d(vec.x, vec.y, vec.z);
 			case NORTH:
-				return new Vec3d(vec.xCoord, -vec.zCoord, vec.yCoord);
+				return new Vec3d(vec.x, -vec.z, vec.y);
 			case SOUTH:
-				return new Vec3d(vec.xCoord, vec.zCoord, -vec.yCoord);
+				return new Vec3d(vec.x, vec.z, -vec.y);
 			case WEST:
-				return new Vec3d(vec.yCoord, -vec.xCoord, vec.zCoord);
+				return new Vec3d(vec.y, -vec.x, vec.z);
 			case EAST:
-				return new Vec3d(-vec.yCoord, vec.xCoord, vec.zCoord);
+				return new Vec3d(-vec.y, vec.x, vec.z);
 		}
 		return null;
 	}

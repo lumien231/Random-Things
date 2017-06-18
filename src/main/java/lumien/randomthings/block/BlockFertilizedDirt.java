@@ -51,11 +51,11 @@ public class BlockFertilizedDirt extends BlockBase
 	}
 	
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		if (!tilled)
 		{
-			super.getSubBlocks(itemIn, tab, list);
+			super.getSubBlocks(tab, list);
 		}
 	}
 	

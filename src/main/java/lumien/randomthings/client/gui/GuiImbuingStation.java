@@ -1,18 +1,17 @@
 package lumien.randomthings.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.container.ContainerImbuingStation;
 import lumien.randomthings.tileentity.TileEntityImbuingStation;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.lwjgl.opengl.GL11;
-
-public class GuiImbuingStation extends GuiContainer
+public class GuiImbuingStation extends GuiContainerBase
 {
 	TileEntityImbuingStation te;
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/imbuingStation.png");
@@ -76,7 +75,7 @@ public class GuiImbuingStation extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRendererObj.drawString(I18n.format("tile.imbuingStation.name", new Object[0]), 3, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.imbuingStation.name", new Object[0]), 3, 6, 4210752);
 	}
 
 	@Override

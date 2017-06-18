@@ -1,7 +1,5 @@
 package lumien.randomthings.potion;
 
-import com.google.common.base.Predicate;
-
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.potion.effects.EffectCollapse;
 import lumien.randomthings.potion.imbues.ImbueCollapse;
@@ -12,12 +10,14 @@ import lumien.randomthings.potion.imbues.ImbueWither;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModPotions
 {
@@ -55,16 +55,13 @@ public class ModPotions
 		collapseTypeLong.setRegistryName(new ResourceLocation("randomthings", "long_collapse"));
 		collapseTypeStrong.setRegistryName(new ResourceLocation("randomthings", "strong_collapse"));
 
-		GameData.getPotionTypesRegistry().register(collapseType);
-		GameData.getPotionTypesRegistry().register(collapseTypeLong);
-		GameData.getPotionTypesRegistry().register(collapseTypeStrong);
+		GameRegistry.register(collapseType);
+		GameRegistry.register(collapseTypeLong);
+		GameRegistry.register(collapseTypeStrong);
 		
 		// Brewing
-		Predicate<ItemStack> longer = new PotionHelper.ItemPredicateInstance(Items.REDSTONE);
-		Predicate<ItemStack> stronger = new PotionHelper.ItemPredicateInstance(Items.GLOWSTONE_DUST);
-		
-		PotionHelper.registerPotionTypeConversion(PotionTypes.AWKWARD, new PotionHelper.ItemPredicateInstance(ModItems.ingredients, 0), collapseType);
-		PotionHelper.registerPotionTypeConversion(collapseType, longer, collapseTypeLong);
-		PotionHelper.registerPotionTypeConversion(collapseType, stronger, collapseTypeStrong);
+		PotionHelper.func_193356_a(PotionTypes.AWKWARD, Ingredient.fromStacks(new ItemStack(ModItems.ingredients, 1, 0)), collapseType);
+		PotionHelper.func_193357_a(collapseType, Items.REDSTONE, collapseTypeLong);
+		PotionHelper.func_193357_a(collapseType, Items.GLOWSTONE_DUST, collapseTypeStrong);
 	}
 }

@@ -17,7 +17,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -53,7 +52,7 @@ public class BlockBlazingFire extends BlockBase
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		return;
 	}
@@ -319,7 +318,7 @@ public class BlockBlazingFire extends BlockBase
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
-		return worldIn.getBlockState(pos.down()).isFullyOpaque() || this.canNeighborCatchFire(worldIn, pos);
+		return worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) || this.canNeighborCatchFire(worldIn, pos);
 	}
 
 	/**
@@ -331,7 +330,7 @@ public class BlockBlazingFire extends BlockBase
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos changedPos)
 	{
-		if (!worldIn.getBlockState(pos.down()).isFullyOpaque() && !this.canNeighborCatchFire(worldIn, pos))
+		if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !this.canNeighborCatchFire(worldIn, pos))
 		{
 			worldIn.setBlockToAir(pos);
 		}
@@ -346,7 +345,7 @@ public class BlockBlazingFire extends BlockBase
 	{
 		if (worldIn.provider.getDimensionType().getId() > 0 || !Blocks.PORTAL.trySpawnPortal(worldIn, pos))
 		{
-			if (!worldIn.getBlockState(pos.down()).isFullyOpaque() && !this.canNeighborCatchFire(worldIn, pos))
+			if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !this.canNeighborCatchFire(worldIn, pos))
 			{
 				worldIn.setBlockToAir(pos);
 			}
@@ -439,7 +438,7 @@ public class BlockBlazingFire extends BlockBase
 	 * Get the MapColor for this Block and the given BlockState
 	 */
 	@Override
-	public MapColor getMapColor(IBlockState state)
+	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
 	{
 		return MapColor.TNT;
 	}

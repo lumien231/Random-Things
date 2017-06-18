@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    " I ",
+    " E "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:dye",
+      "data": 4
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "E": {
+      "item": "randomthings:ingredient",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "randomthings:ingredient",
+    "data": 3
+  }
+}

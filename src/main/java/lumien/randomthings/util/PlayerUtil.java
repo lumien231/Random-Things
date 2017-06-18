@@ -57,7 +57,7 @@ public class PlayerUtil
 	{
 		boolean comingFromEnd = player.dimension == 1;
 
-		FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(player, dimension, new SimpleTeleporter(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(dimension)));
+		FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(player, dimension, new SimpleTeleporter(FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(dimension)));
 
 		// If a player is teleported from the end certain logic elements are ignored in transferPlayerToDimension
 		if (comingFromEnd)
@@ -73,7 +73,7 @@ public class PlayerUtil
 			}
 		}
 
-		player.removeExperienceLevel(0);
+		player.addExperienceLevel(0);
 		player.setPlayerHealthUpdated();
 	}
 

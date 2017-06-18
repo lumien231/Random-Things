@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    " E "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:planks",
+      "data": 3
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "randomthings:platform",
+    "data": 3,
+    "count": 6
+  }
+}

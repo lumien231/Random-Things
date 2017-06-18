@@ -60,7 +60,7 @@ public class DescriptionHandler
 
 					if (item.getCreativeTab() == RandomThings.instance.creativeTab)
 					{
-						item.getSubItems(item, RandomThings.instance.creativeTab, subItems);
+						item.getSubItems( RandomThings.instance.creativeTab, subItems);
 					}
 				}
 				else if (t instanceof Block)
@@ -69,7 +69,7 @@ public class DescriptionHandler
 
 					if (block.getCreativeTabToDisplayOn() == RandomThings.instance.creativeTab)
 					{
-						block.getSubBlocks(Item.getItemFromBlock(block), RandomThings.instance.creativeTab, subItems);
+						block.getSubBlocks(RandomThings.instance.creativeTab, subItems);
 					}
 				}
 

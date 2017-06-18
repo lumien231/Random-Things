@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "ERS",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:end_stone"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "randomthings:stableenderpearl"
+    }
+  },
+  "result": {
+    "item": "randomthings:enderbridge"
+  }
+}

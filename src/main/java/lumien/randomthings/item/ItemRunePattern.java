@@ -1,7 +1,6 @@
 package lumien.randomthings.item;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.tileentity.TileEntityRuneBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -35,9 +35,9 @@ public class ItemRunePattern extends ItemBase
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
-		super.addInformation(stack, playerIn, tooltip, advanced);
+		super.addInformation(stack, world, tooltip, advanced);
 
 		if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("runeData"))
 		{

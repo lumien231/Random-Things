@@ -5,6 +5,7 @@ import java.util.List;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.util.InventoryUtil;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
@@ -26,9 +27,9 @@ public class ItemCraftingRecipe extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, World world, List tooltip, ITooltipFlag advanced)
 	{
-		super.addInformation(stack, playerIn, tooltip, advanced);
+		super.addInformation(stack, world, tooltip, advanced);
 
 		NBTTagCompound compound;
 

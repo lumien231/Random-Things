@@ -7,7 +7,6 @@ import lumien.randomthings.tileentity.TileEntityRuneBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -83,7 +82,7 @@ public class ItemRuneDust extends ItemBase implements IRTItemColor
 	}
 
 	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		int damage = 0;
 		for (EnumRuneDust runeType : EnumRuneDust.values())

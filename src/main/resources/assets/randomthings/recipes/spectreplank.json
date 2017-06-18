@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomthings:spectrelog"
+    }
+  ],
+  "result": {
+    "item": "randomthings:spectreplank",
+    "count": 4
+  }
+}

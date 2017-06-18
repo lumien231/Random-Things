@@ -9,15 +9,14 @@ import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageAdvancedItemCollector;
 import lumien.randomthings.tileentity.TileEntityAdvancedItemCollector;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class GuiAdvancedItemCollector extends GuiContainer
+public class GuiAdvancedItemCollector extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/advancedItemCollector.png");
 
@@ -90,16 +89,16 @@ public class GuiAdvancedItemCollector extends GuiContainer
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		fontRendererObj.drawString(I18n.format("tile.advancedItemCollector.name", new Object[0]), 8 + 14, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.advancedItemCollector.name", new Object[0]), 8 + 14, 6, 4210752);
 
 		String radiusX = I18n.format("gui.entityDetector.radiusX", advancedItemCollector.getRangeX());
-		fontRendererObj.drawString(radiusX, xSize / 2 - fontRendererObj.getStringWidth(radiusX) / 2 - 3, 26, 4210752);
+		fontRenderer.drawString(radiusX, xSize / 2 - fontRenderer.getStringWidth(radiusX) / 2 - 3, 26, 4210752);
 
 		String radiusY = I18n.format("gui.entityDetector.radiusY", advancedItemCollector.getRangeY());
-		fontRendererObj.drawString(radiusY, xSize / 2 - fontRendererObj.getStringWidth(radiusY) / 2 - 3, 51, 4210752);
+		fontRenderer.drawString(radiusY, xSize / 2 - fontRenderer.getStringWidth(radiusY) / 2 - 3, 51, 4210752);
 
 		String radiusZ = I18n.format("gui.entityDetector.radiusZ", advancedItemCollector.getRangeZ());
-		fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2 - 3, 76, 4210752);
+		fontRenderer.drawString(radiusZ, xSize / 2 - fontRenderer.getStringWidth(radiusZ) / 2 - 3, 76, 4210752);
 
 		ItemStack filter;
 		if ((filter = this.advancedItemCollector.getInventory().getStackInSlot(0)) != null)

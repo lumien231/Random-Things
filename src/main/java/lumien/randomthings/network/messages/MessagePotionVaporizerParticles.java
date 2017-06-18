@@ -8,8 +8,8 @@ import io.netty.buffer.ByteBuf;
 import lumien.randomthings.network.IRTMessage;
 import lumien.randomthings.network.MessageUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 

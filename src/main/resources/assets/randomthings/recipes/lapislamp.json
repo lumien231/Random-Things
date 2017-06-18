@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "LAL",
+    " L "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:dye",
+      "data": 4
+    },
+    "A": {
+      "item": "minecraft:redstone_lamp"
+    }
+  },
+  "result": {
+    "item": "randomthings:lapislamp"
+  }
+}

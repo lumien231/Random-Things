@@ -1,14 +1,14 @@
 package lumien.randomthings.handler.compability.jei.imbuing;
 
-import com.google.common.base.Objects;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.item.ItemStack;
+import com.google.common.base.Objects;
+
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
+import net.minecraft.item.ItemStack;
 
 public class ImbuingRecipeWrapper extends BlankRecipeWrapper
 {

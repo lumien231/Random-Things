@@ -1,8 +1,8 @@
 package lumien.randomthings.handler;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class RTWorldInformation extends WorldSavedData
@@ -51,7 +51,7 @@ public class RTWorldInformation extends WorldSavedData
 
 	public static RTWorldInformation getInstance()
 	{
-		WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
+		WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
 		if (world != null)
 		{
 			WorldSavedData handler = world.getMapStorage().getOrLoadData(RTWorldInformation.class, ID);

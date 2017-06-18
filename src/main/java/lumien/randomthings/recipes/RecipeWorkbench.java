@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -15,7 +16,9 @@ public class RecipeWorkbench extends ShapedOreRecipe
 
 	public RecipeWorkbench()
 	{
-		super(new ItemStack(ModBlocks.customWorkbench), "www", "wxw", "www", 'w', "plankWood", 'x', Blocks.CRAFTING_TABLE);
+		super(new ResourceLocation("randomthings","recipes"), new ItemStack(ModBlocks.customWorkbench), "www", "wxw", "www", 'w', "plankWood", 'x', Blocks.CRAFTING_TABLE);
+		
+		this.setRegistryName(new ResourceLocation("randomthings","customWorkbench"));
 	}
 
 	@Override

@@ -120,7 +120,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList list)
+	public void getSubBlocks( CreativeTabs tab, NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;
@@ -128,7 +128,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 		for (int j = 0; j < i; ++j)
 		{
 			EnumDyeColor enumdyecolor = aenumdyecolor[j];
-			list.add(new ItemStack(itemIn, 1, enumdyecolor.getMetadata()));
+			list.add(new ItemStack(this, 1, enumdyecolor.getMetadata()));
 		}
 	}
 

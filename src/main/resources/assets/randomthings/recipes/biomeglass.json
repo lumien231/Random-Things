@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GBG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlassColorless"
+    },
+    "B": {
+      "item": "randomthings:biomecrystal"
+    }
+  },
+  "result": {
+    "item": "randomthings:biomeglass",
+    "count": 16
+  }
+}

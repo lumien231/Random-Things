@@ -2,14 +2,14 @@ package lumien.randomthings.client.gui.redstoneinterface;
 
 import org.lwjgl.opengl.GL11;
 
+import lumien.randomthings.client.gui.GuiContainerBase;
 import lumien.randomthings.container.redstoneinterface.ContainerAdvancedRedstoneInterface;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class GuiAdvancedRedstoneInterface extends GuiContainer
+public class GuiAdvancedRedstoneInterface extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/redstoneinterface/advancedRedstoneInterface.png");
 
@@ -24,8 +24,8 @@ public class GuiAdvancedRedstoneInterface extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString(I18n.format("tile.advancedRedstoneInterface.name", new Object[0]), 8, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+		fontRenderer.drawString(I18n.format("tile.advancedRedstoneInterface.name", new Object[0]), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
 	}
 
 	@Override

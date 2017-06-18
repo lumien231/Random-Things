@@ -7,7 +7,6 @@ import lumien.randomthings.container.ContainerItemProjector;
 import lumien.randomthings.tileentity.TileEntityItemProjector;
 import lumien.randomthings.tileentity.TileEntityItemProjector.SELECTION_MODE;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -15,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class GuiItemProjector extends GuiContainer
+public class GuiItemProjector extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/itemProjector.png");
 	final TileEntity te;
@@ -49,7 +48,7 @@ public class GuiItemProjector extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRendererObj.drawString(I18n.format("tile.itemProjector.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.itemProjector.name", new Object[0]), 8, 6, 4210752);
 
 		for (GuiButton guibutton : this.buttonList)
 		{

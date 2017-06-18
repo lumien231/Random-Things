@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "I",
+    "W"
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "slimeball"
+    },
+    "I": {
+      "item": "minecraft:ice"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "randomthings:superlubricentice",
+    "count": 16
+  }
+}

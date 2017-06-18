@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LD",
+    "LL"
+  ],
+  "key": {
+    "L": {
+      "item": "randomthings:ingredient",
+      "data": 5
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dyeMagenta"
+    }
+  },
+  "result": {
+    "item": "randomthings:luminousblock",
+    "data": 2
+  }
+}

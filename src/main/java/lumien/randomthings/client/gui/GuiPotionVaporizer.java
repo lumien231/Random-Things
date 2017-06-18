@@ -5,7 +5,6 @@ import java.awt.Color;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.container.ContainerPotionVaporizer;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 
-public class GuiPotionVaporizer extends GuiContainer
+public class GuiPotionVaporizer extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/potionVaporizer.png");
 
@@ -73,7 +72,7 @@ public class GuiPotionVaporizer extends GuiContainer
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		fontRendererObj.drawString(I18n.format("tile.potionVaporizer.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.potionVaporizer.name", new Object[0]), 8, 6, 4210752);
 
 		// Draw Active Potion
 
@@ -117,9 +116,9 @@ public class GuiPotionVaporizer extends GuiContainer
 						s1 = s1 + " " + I18n.format("enchantment.level.4", new Object[0]);
 					}
 
-					this.fontRendererObj.drawStringWithShadow(s1, i + 10 + 18, j + 6, 16777215);
+					this.fontRenderer.drawStringWithShadow(s1, i + 10 + 18, j + 6, 16777215);
 					String s = StringUtils.ticksToElapsedTime(container.durationLeft);
-					this.fontRendererObj.drawStringWithShadow(s, i + 10 + 18, j + 6 + 10, 8355711);
+					this.fontRenderer.drawStringWithShadow(s, i + 10 + 18, j + 6 + 10, 8355711);
 				}
 			}
 		}

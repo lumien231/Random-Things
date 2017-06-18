@@ -1,9 +1,8 @@
 package lumien.randomthings.entitys;
 
-import io.netty.buffer.ByteBuf;
-
 import java.util.List;
 
+import io.netty.buffer.ByteBuf;
 import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.entity.Entity;
@@ -39,7 +38,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender(float partial)
+	public int getBrightnessForRender()
 	{
 		return 255;
 	}

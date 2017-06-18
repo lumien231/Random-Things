@@ -34,19 +34,19 @@ public class GuiSlotButton extends GuiButton
 
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY)
+	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
 	{
 		GlStateManager.disableLighting();
-		FontRenderer fontrenderer = mc.fontRendererObj;
+		FontRenderer fontrenderer = mc.fontRenderer;
 		mc.getTextureManager().bindTexture(texture);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+		this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 		int i = this.getHoverState(this.hovered);
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-		this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 0 + (i - 1) * 18, this.width, this.height);
+		this.drawTexturedModalRect(this.x, this.y, 0, 0 + (i - 1) * 18, this.width, this.height);
 		this.mouseDragged(mc, mouseX, mouseY);
 
 		if (!stack.isEmpty())
@@ -57,8 +57,8 @@ public class GuiSlotButton extends GuiButton
 			this.itemRender.zLevel = 100.0F;
 
 			GlStateManager.enableDepth();
-			this.itemRender.renderItemAndEffectIntoGUI(this.mc.player, stack, this.xPosition + 1, this.yPosition + 1);
-			this.itemRender.renderItemOverlayIntoGUI(fontrenderer, stack, this.xPosition + 1, this.yPosition + 1, "");
+			this.itemRender.renderItemAndEffectIntoGUI(this.mc.player, stack, this.x + 1, this.y + 1);
+			this.itemRender.renderItemOverlayIntoGUI(fontrenderer, stack, this.x + 1, this.y + 1, "");
 
 			this.itemRender.zLevel = 0.0F;
 			this.zLevel = 0.0F;
@@ -72,7 +72,7 @@ public class GuiSlotButton extends GuiButton
 	{
 		if (tooltip != null)
 		{
-			GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { tooltip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRendererObj);
+			GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { tooltip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
 		}
 	}
 }

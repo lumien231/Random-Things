@@ -53,7 +53,7 @@ public class RenderVoxelProjector extends TileEntitySpecialRenderer<TileEntityVo
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntityVoxelProjector te, double x, double y, double z, float p_180535_8_, int p_180535_9_)
+	public void renderTileEntityAt(TileEntityVoxelProjector te, double x, double y, double z, float p_180535_8_, int p_180535_9_, float alpha)
 	{
 		this.func_180538_a(te, x, y, z, p_180535_8_, p_180535_9_);
 	}

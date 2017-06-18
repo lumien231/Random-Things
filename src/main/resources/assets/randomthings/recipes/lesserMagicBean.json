@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NBN",
+    "NNN"
+  ],
+  "key": {
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "cropBean"
+    },
+    "N": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
+    }
+  },
+  "result": {
+    "item": "randomthings:beans",
+    "data": 1
+  }
+}

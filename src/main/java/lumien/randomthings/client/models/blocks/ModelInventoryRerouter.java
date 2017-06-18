@@ -157,7 +157,7 @@ public class ModelInventoryRerouter implements IBakedModel
 		Vec3d v3 = rotate(new Vec3d(x2 - .5, y - .5, z2 - .5), side).addVector(.5, .5, .5);
 		Vec3d v4 = rotate(new Vec3d(x2 - .5, y - .5, z1 - .5), side).addVector(.5, .5, .5);
 
-		return new BakedQuad(Ints.concat(vertexToInts((float) v1.xCoord, (float) v1.yCoord, (float) v1.zCoord, -1, texture, 0, 0, side), vertexToInts((float) v2.xCoord, (float) v2.yCoord, (float) v2.zCoord, -1, texture, 0, 16, side), vertexToInts((float) v3.xCoord, (float) v3.yCoord, (float) v3.zCoord, -1, texture, 16, 16, side), vertexToInts((float) v4.xCoord, (float) v4.yCoord, (float) v4.zCoord, -1, texture, 16, 0, side)), -1, side, texture, false, DefaultVertexFormats.ITEM);
+		return new BakedQuad(Ints.concat(vertexToInts((float) v1.x, (float) v1.y, (float) v1.z, -1, texture, 0, 0, side), vertexToInts((float) v2.x, (float) v2.y, (float) v2.z, -1, texture, 0, 16, side), vertexToInts((float) v3.x, (float) v3.y, (float) v3.z, -1, texture, 16, 16, side), vertexToInts((float) v4.x, (float) v4.y, (float) v4.z, -1, texture, 16, 0, side)), -1, side, texture, false, DefaultVertexFormats.ITEM);
 	}
 
 	private BakedQuad createSidedBakedQuad(float x1, float x2, float z1, float z2, float y, float u1, float v1, float u2, float v2, int tintIndex, TextureAtlasSprite texture, EnumFacing side)
@@ -190,7 +190,7 @@ public class ModelInventoryRerouter implements IBakedModel
 			c4 = rotate(c4.addVector(-.5, -.5, -.5), rotation).addVector(.5, 0.5, .5);
 		}
 
-		return new BakedQuad(Ints.concat(vertexToInts((float) c1.xCoord, (float) c1.yCoord, (float) c1.zCoord, -1, texture, u1, v1, side), vertexToInts((float) c2.xCoord, (float) c2.yCoord, (float) c2.zCoord, -1, texture, u1, v2, side), vertexToInts((float) c3.xCoord, (float) c3.yCoord, (float) c3.zCoord, -1, texture, u2, v2, side), vertexToInts((float) c4.xCoord, (float) c4.yCoord, (float) c4.zCoord, -1, texture, u2, v1, side)), tintIndex, side, texture, false, DefaultVertexFormats.ITEM);
+		return new BakedQuad(Ints.concat(vertexToInts((float) c1.x, (float) c1.y, (float) c1.z, -1, texture, u1, v1, side), vertexToInts((float) c2.x, (float) c2.y, (float) c2.z, -1, texture, u1, v2, side), vertexToInts((float) c3.x, (float) c3.y, (float) c3.z, -1, texture, u2, v2, side), vertexToInts((float) c4.x, (float) c4.y, (float) c4.z, -1, texture, u2, v1, side)), tintIndex, side, texture, false, DefaultVertexFormats.ITEM);
 	}
 
 	private static Vec3d rotate(Vec3d vec, EnumFacing side)
@@ -198,17 +198,17 @@ public class ModelInventoryRerouter implements IBakedModel
 		switch (side)
 		{
 			case DOWN:
-				return new Vec3d(vec.xCoord, -vec.yCoord, -vec.zCoord);
+				return new Vec3d(vec.x, -vec.y, -vec.z);
 			case UP:
-				return new Vec3d(vec.xCoord, vec.yCoord, vec.zCoord);
+				return new Vec3d(vec.x, vec.y, vec.z);
 			case NORTH:
-				return new Vec3d(vec.xCoord, vec.zCoord, -vec.yCoord);
+				return new Vec3d(vec.x, vec.z, -vec.y);
 			case SOUTH:
-				return new Vec3d(vec.xCoord, -vec.zCoord, vec.yCoord);
+				return new Vec3d(vec.x, -vec.z, vec.y);
 			case WEST:
-				return new Vec3d(-vec.yCoord, vec.xCoord, vec.zCoord);
+				return new Vec3d(-vec.y, vec.x, vec.z);
 			case EAST:
-				return new Vec3d(vec.yCoord, -vec.xCoord, vec.zCoord);
+				return new Vec3d(vec.y, -vec.x, vec.z);
 		}
 		return null;
 	}

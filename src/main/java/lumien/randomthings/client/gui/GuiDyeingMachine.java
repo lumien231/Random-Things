@@ -2,9 +2,10 @@ package lumien.randomthings.client.gui;
 
 import java.awt.Color;
 
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.container.ContainerDyeingMachine;
 import lumien.randomthings.util.DyeUtil;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,9 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
-import org.lwjgl.opengl.GL11;
-
-public class GuiDyeingMachine extends GuiContainer
+public class GuiDyeingMachine extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/dyeingMachine.png");
 
@@ -76,14 +75,15 @@ public class GuiDyeingMachine extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2)
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRendererObj.drawString(I18n.format("tile.dyeingMachine.name", new Object[0]), 8, 6, 4210752);
+		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+		fontRenderer.drawString(I18n.format("tile.dyeingMachine.name", new Object[0]), 8, 6, 4210752);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
-	{
+	{	
 		this.mc.renderEngine.bindTexture(background);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;

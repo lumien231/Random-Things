@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GQG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "randomthings:quartzglass",
+    "count": 8
+  }
+}

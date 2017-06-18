@@ -4,13 +4,12 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.container.ContainerEnderMailbox;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class GuiEnderMailbox extends GuiContainer
+public class GuiEnderMailbox extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/enderMailbox.png");
 
@@ -22,8 +21,8 @@ public class GuiEnderMailbox extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString(I18n.format("tile.enderMailbox.name", new Object[0]), 8, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 128 + 2, 4210752);
+		fontRenderer.drawString(I18n.format("tile.enderMailbox.name", new Object[0]), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 128 + 2, 4210752);
 	}
 
 	@Override

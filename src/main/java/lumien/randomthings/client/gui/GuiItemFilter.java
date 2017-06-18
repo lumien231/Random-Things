@@ -8,13 +8,12 @@ import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageItemFilter;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class GuiItemFilter extends GuiContainer
+public class GuiItemFilter extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/itemFilter.png");
 
@@ -97,7 +96,7 @@ public class GuiItemFilter extends GuiContainer
             }
         }
 		
-		fontRendererObj.drawString(I18n.format("item.itemFilter.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("item.itemFilter.name", new Object[0]), 8, 6, 4210752);
 	}
 
 

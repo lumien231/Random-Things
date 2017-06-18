@@ -1,17 +1,17 @@
 package lumien.randomthings.client.gui.redstoneinterface;
 
-import lumien.randomthings.container.ContainerEmptyContainer;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
 
-public class GuiBasicRedstoneInterface extends GuiContainer
+import lumien.randomthings.client.gui.GuiContainerBase;
+import lumien.randomthings.container.ContainerEmptyContainer;
+import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+public class GuiBasicRedstoneInterface extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/redstoneinterface/basicRedstoneInterface.png");
 
@@ -29,20 +29,20 @@ public class GuiBasicRedstoneInterface extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString(I18n.format("tile.basicRedstoneInterface.name", new Object[0]), 4, 6, 13107220);
+		fontRenderer.drawString(I18n.format("tile.basicRedstoneInterface.name", new Object[0]), 4, 6, 13107220);
 
 		BlockPos target = te.getTarget();
 
 		if (target == null)
 		{
 			String center = I18n.format("gui.basicRedstoneInterface.notarget");
-			fontRendererObj.drawString(center, 136 / 2 - fontRendererObj.getStringWidth(center) / 2, 54 / 2 - fontRendererObj.FONT_HEIGHT / 2 + 3, 9830400);
+			fontRenderer.drawString(center, 136 / 2 - fontRenderer.getStringWidth(center) / 2, 54 / 2 - fontRenderer.FONT_HEIGHT / 2 + 3, 9830400);
 		}
 		else
 		{
-			fontRendererObj.drawString(I18n.format("gui.basicRedstoneInterface.targetX", target.getX()), 8, 18, 1310740);
-			fontRendererObj.drawString(I18n.format("gui.basicRedstoneInterface.targetY", target.getY()), 8, 28, 1310740);
-			fontRendererObj.drawString(I18n.format("gui.basicRedstoneInterface.targetZ", target.getZ()), 8, 38, 1310740);
+			fontRenderer.drawString(I18n.format("gui.basicRedstoneInterface.targetX", target.getX()), 8, 18, 1310740);
+			fontRenderer.drawString(I18n.format("gui.basicRedstoneInterface.targetY", target.getY()), 8, 28, 1310740);
+			fontRenderer.drawString(I18n.format("gui.basicRedstoneInterface.targetZ", target.getZ()), 8, 38, 1310740);
 		}
 	}
 
