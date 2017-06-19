@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class BiomeSpectral extends Biome
 {
@@ -17,6 +19,8 @@ public class BiomeSpectral extends Biome
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
+		
+		BiomeDictionary.addTypes(this, Type.MAGICAL);
 	}
 
 	@Override
