@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.structure.StructureOceanMonumentPieces.MonumentCoreRoom;
+import net.minecraft.world.gen.structure.StructureVillagePieces.Church;
 
 public class ServerConfirmer
 {
@@ -25,6 +26,7 @@ public class ServerConfirmer
 		fun(WorldGenAbstractTree.class);
 		fun(EntitySlime.class);
 		fun(WorldEntitySpawner.class);
+		fun(Church.class);
 	}
 	
 	protected void fun(Class class1)
