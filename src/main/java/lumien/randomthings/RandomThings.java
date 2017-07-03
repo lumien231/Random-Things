@@ -129,6 +129,8 @@ public class RandomThings implements LoadingCallback
 		proxy.registerRenderers();
 		SyncHandler.postInit(event);
 
+		logger.log(Level.DEBUG, "Confirming ASM Transformations...");
+		
 		// Confirm all ASM Patches
 		asmConfirmer.confirm();
 

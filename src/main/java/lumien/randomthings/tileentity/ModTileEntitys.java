@@ -44,6 +44,7 @@ public class ModTileEntitys
 		registerTE(TileEntityInventoryRerouter.class, "inventoryRerouter");
 		registerTE(TileEntityRuneBase.class, "runeBase");
 		registerTE(TileEntitySlimeCube.class, "slimeCore");
+		registerTE(TileEntityPeaceCandle.class, "peaceCandle");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

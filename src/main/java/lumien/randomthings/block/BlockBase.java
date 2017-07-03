@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public abstract class BlockBase extends Block
@@ -24,11 +25,11 @@ public abstract class BlockBase extends Block
 		this.setRegistryName(new ResourceLocation("randomthings", name));
 		this.setCreativeTab(RandomThings.instance.creativeTab);
 
-		GameRegistry.register(this);
+		ForgeRegistries.BLOCKS.register(this);
 
 		if (!(this instanceof INoItem))
 		{
-			GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+			ForgeRegistries.ITEMS.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		}
 
 		RandomThings.proxy.scheduleColor(this);
@@ -49,10 +50,10 @@ public abstract class BlockBase extends Block
 		this.setRegistryName(new ResourceLocation("randomthings", name));
 		this.setCreativeTab(RandomThings.instance.creativeTab);
 
-		GameRegistry.register(this);
+		ForgeRegistries.BLOCKS.register(this);
 		try
 		{
-			GameRegistry.register(itemBlock.getConstructor(Block.class).newInstance(this).setRegistryName(this.getRegistryName()));
+			ForgeRegistries.ITEMS.register(itemBlock.getConstructor(Block.class).newInstance(this).setRegistryName(this.getRegistryName()));
 		}
 		catch (Exception e)
 		{
@@ -75,11 +76,11 @@ public abstract class BlockBase extends Block
 		block.setCreativeTab(RandomThings.instance.creativeTab);
 		block.setUnlocalizedName(name);
 
-		GameRegistry.register(block);
+		ForgeRegistries.BLOCKS.register(block);
 
 		if (!(block instanceof INoItem))
 		{
-			GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+			ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
 		}
 		RandomThings.proxy.scheduleColor(block);
 

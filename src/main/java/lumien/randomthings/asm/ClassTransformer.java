@@ -58,11 +58,11 @@ import net.minecraft.launchwrapper.IClassTransformer;
 public class ClassTransformer implements IClassTransformer
 {
 	public static Logger logger = LogManager.getLogger("RandomThingsCore");
-	
+
 	final String asmHandler = "lumien/randomthings/handler/AsmHandler";
 
 	public static int transformations = 0;
-	
+
 	public ClassTransformer()
 	{
 		logger.log(Level.DEBUG, "Starting Class Transformation");
@@ -151,8 +151,135 @@ public class ClassTransformer implements IClassTransformer
 			transformations++;
 			return patchEntitySlime(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.world.WorldEntitySpawner"))
+		{
+			transformations++;
+			return patchWorldEntitySpawner(basicClass);
+		}
+		else if (transformedName.equals("net.minecraft.world.gen.structure.StructureVillagePieces$Church"))
+		{
+			transformations++;
+			return patchVillageChurch(basicClass);
+		}
 
 		return basicClass;
+	}
+
+	private byte[] patchVillageChurch(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found VillagePiece Church Class: " + classNode.name);
+
+		MethodNode addComponentParts = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_74875_a")))
+			{
+				addComponentParts = mn;
+			}
+		}
+
+		if (addComponentParts != null)
+		{
+			logger.log(Level.DEBUG, " - Found addComponentParts");
+
+			for (int i = 0; i < addComponentParts.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = addComponentParts.instructions.get(i);
+
+				if (ain instanceof InsnNode)
+				{
+					InsnNode in = (InsnNode) ain;
+
+					if (in.getOpcode() == Opcodes.IRETURN)
+					{
+						logger.log(Level.DEBUG, " - Patched addComponentParts");
+
+						AbstractInsnNode before = addComponentParts.instructions.get(i - 1);
+
+						InsnList toInsert = new InsnList();
+
+						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 1));
+						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 2));
+						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 3));
+						toInsert.add(new VarInsnNode(Opcodes.ALOAD, 0));
+						toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "lumien/randomthings/worldgen/WorldGenPeaceCandle", "addComponentParts", "(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/world/gen/structure/StructureBoundingBox;Lnet/minecraft/world/gen/structure/StructureVillagePieces$Church;)V", false));
+
+						i += 5;
+						addComponentParts.instructions.insertBefore(before, toInsert);
+					}
+				}
+			}
+		}
+
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
+	}
+
+	private byte[] patchWorldEntitySpawner(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found WorldEntitySpawner Class: " + classNode.name);
+
+		MethodNode findChunksForSpawning = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_77192_a")))
+			{
+				findChunksForSpawning = mn;
+				break;
+			}
+		}
+
+		if (findChunksForSpawning != null)
+		{
+			logger.log(Level.DEBUG, " - Found findChunksForSpawning");
+
+			for (int i = 0; i < findChunksForSpawning.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = findChunksForSpawning.instructions.get(i);
+
+				if (ain instanceof VarInsnNode)
+				{
+					VarInsnNode vin = (VarInsnNode) ain;
+
+					if (vin.var == 14 && vin.getOpcode() == Opcodes.ASTORE)
+					{
+						AbstractInsnNode before = findChunksForSpawning.instructions.get(i - 1);
+
+						if (before instanceof MethodInsnNode)
+						{
+							MethodInsnNode beforeMin = (MethodInsnNode) before;
+							if (beforeMin.name.equals("newArrayList"))
+							{
+								logger.log(Level.DEBUG, " - Patched findChunksForSpawning");
+
+								InsnList toInsert = new InsnList();
+
+								toInsert.add(new VarInsnNode(ALOAD, 11));
+								toInsert.add(new VarInsnNode(ALOAD, 14));
+								toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "modifyValidSpawningChunks", "(Lnet/minecraft/entity/EnumCreatureType;Ljava/util/List;)V", false));
+
+								findChunksForSpawning.instructions.insert(vin, toInsert);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchEntitySlime(byte[] basicClass)
@@ -190,7 +317,7 @@ public class ClassTransformer implements IClassTransformer
 						AbstractInsnNode skip = getCanSpawnHere.instructions.get(i + 1);
 
 						LabelNode l0 = new LabelNode(new Label());
-						
+
 						InsnList toInsert = new InsnList();
 
 						toInsert.add(new VarInsnNode(ALOAD, 0));
@@ -422,7 +549,7 @@ public class ClassTransformer implements IClassTransformer
 			if (tintTarget != null)
 			{
 				logger.log(Level.DEBUG, " - Found tintTarget (3/4");
-				
+
 				LabelNode l0 = new LabelNode(new Label());
 				LabelNode l1 = new LabelNode(new Label());
 

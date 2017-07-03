@@ -2,10 +2,12 @@ package lumien.randomthings.handler;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.block.ModBlocks;
@@ -18,6 +20,7 @@ import lumien.randomthings.item.spectretools.ItemSpectreSword;
 import lumien.randomthings.lib.ISuperLubricent;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
+import lumien.randomthings.tileentity.TileEntityPeaceCandle;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntitySlimeCube;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
@@ -37,8 +40,10 @@ import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,6 +55,7 @@ import net.minecraft.util.MovementInputFromOptions;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -72,6 +78,50 @@ public class AsmHandler
 		}
 	}
 
+	public static void modifyValidSpawningChunks(EnumCreatureType creatureType, List<ChunkPos> positions)
+	{
+		if (creatureType == EnumCreatureType.MONSTER)
+		{
+			Set<ChunkPos> toRemove = new HashSet<ChunkPos>();
+
+			synchronized (TileEntityPeaceCandle.candles)
+			{
+				for (TileEntityPeaceCandle pc : TileEntityPeaceCandle.candles)
+				{
+					if (!pc.isInvalid())
+					{
+						int cX = pc.getPos().getX() >> 4;
+						int cZ = pc.getPos().getZ() >> 4;
+
+						for (int mX = -3; mX < 4; mX++)
+						{
+							for (int mZ = -3; mZ < 4; mZ++)
+							{
+								toRemove.add(new ChunkPos(cX + mX, cZ + mZ));
+							}
+						}
+					}
+				}
+			}
+
+			if (!toRemove.isEmpty())
+			{
+				Iterator<ChunkPos> iterator = positions.iterator();
+
+				while (iterator.hasNext())
+				{
+					ChunkPos pos = iterator.next();
+
+					if (toRemove.remove(pos))
+					{
+						FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0).setBlockState(new BlockPos(pos.getXStart(), 150, pos.getZStart()), Blocks.GREEN_GLAZED_TERRACOTTA.getDefaultState());
+						iterator.remove();
+					}
+				}
+			}
+		}
+	}
+
 	// -1 = vanilla, 0 = NO, 1 = YES
 	public static int overrideSlimeChunk(World worldObj, Chunk chunk)
 	{
@@ -84,7 +134,7 @@ public class AsmHandler
 					BlockPos pos = core.getPos();
 					int chunkX = pos.getX() >> 4;
 					int chunkZ = pos.getZ() >> 4;
-					
+
 					if (chunk.x == chunkX && chunk.z == chunkZ)
 					{
 						return core.isRedstonePowered() ? 0 : 1;
@@ -518,14 +568,14 @@ public class AsmHandler
 
 			if (forward)
 			{
-				input.field_192832_b -= 2;
+				input.moveForward -= 2;
 				input.forwardKeyDown = false;
 				input.backKeyDown = true;
 			}
 
 			if (backwards)
 			{
-				input.field_192832_b += 2;
+				input.moveForward += 2;
 				input.backKeyDown = false;
 				input.forwardKeyDown = true;
 			}

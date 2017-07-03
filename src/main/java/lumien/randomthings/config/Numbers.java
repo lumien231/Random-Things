@@ -24,7 +24,6 @@ public class Numbers
 
 	@ConfigOption(category = "Numbers", name = "ItemCollectorRange", comment = "The radius of a normal item collector")
 	public static int ITEM_COLLECTOR_RANGE = 3;
-	
 
 	@ConfigOption(category = "VoxelProjector", name = "ModelTransferBandwidth", comment = "The amount of bytes that can be used to transfer models to clients per tick (The default 1000 Byte equal 20 kbyte/sec)")
 	public static int MODEL_TRANSFER_BANDWIDTH = 1000;

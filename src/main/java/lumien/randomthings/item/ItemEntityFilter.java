@@ -15,8 +15,8 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.EntityRegistry.EntityRegistration;
-import net.minecraftforge.fml.common.registry.GameData;
 
 public class ItemEntityFilter extends ItemBase
 {
@@ -53,7 +53,7 @@ public class ItemEntityFilter extends ItemBase
 			{
 				int entityID = compound.getInteger("entityID");
 
-				EntityEntry entry = GameData.getEntityRegistry().getObjectById(entityID);
+				EntityEntry entry = ForgeRegistries.ENTITIES.getValues().get(entityID);
 
 				if (entry != null)
 				{

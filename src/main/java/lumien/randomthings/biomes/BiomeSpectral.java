@@ -20,7 +20,7 @@ public class BiomeSpectral extends Biome
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
 		
-		BiomeDictionary.addTypes(this, Type.MAGICAL);
+		
 	}
 
 	@Override

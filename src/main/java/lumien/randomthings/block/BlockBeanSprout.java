@@ -20,6 +20,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,7 +32,9 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 	public BlockBeanSprout()
 	{
 		this.setUnlocalizedName("beanSprout");
-		GameRegistry.register(this, new ResourceLocation("randomthings", "beanSprout"));
+		
+		this.setRegistryName(new ResourceLocation("randomthings", "beanSprout"));
+		ForgeRegistries.BLOCKS.register(this);
 
 		this.setSoundType(SoundType.PLANT);
 	}

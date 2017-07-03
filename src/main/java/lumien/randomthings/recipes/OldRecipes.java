@@ -38,6 +38,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
@@ -208,7 +209,7 @@ public class OldRecipes
 		outputShaped(new ResourceLocation("randomthings", "recipes"), new ItemStack(ModBlocks.platform, 6, 4), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 4), 'e', enderPearl);
 		outputShaped(new ResourceLocation("randomthings", "recipes"), new ItemStack(ModBlocks.platform, 6, 5), "www", "xex", 'w', new ItemStack(Blocks.PLANKS, 1, 5), 'e', enderPearl);
 
-		GameRegistry.register(new RecipeWorkbench());
+		ForgeRegistries.RECIPES.register(new RecipeWorkbench());
 
 		outputShapeless(new ResourceLocation("randomthings", "recipes"), new ItemStack(ModBlocks.spectrePlank, 4), ModBlocks.spectreLog);
 
@@ -335,7 +336,7 @@ public class OldRecipes
 		};
 
 		RecipeSorter.register("spectreAnchorCombine", anchorRecipe.getClass(), Category.SHAPELESS, "");
-		GameRegistry.register(anchorRecipe);
+		ForgeRegistries.RECIPES.register(anchorRecipe);
 
 		// Golden Compass
 		IRecipe goldenCompassRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "goldenCompassSetPosition"))
@@ -462,7 +463,7 @@ public class OldRecipes
 		};
 
 		RecipeSorter.register("goldenCompass", goldenCompassRecipe.getClass(), Category.SHAPELESS, "");
-		GameRegistry.register(goldenCompassRecipe);
+		ForgeRegistries.RECIPES.register(goldenCompassRecipe);
 
 		// Luminous Powder
 		IRecipe luminousPowderRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "luminousPowder"))
@@ -563,7 +564,7 @@ public class OldRecipes
 		};
 
 		RecipeSorter.register("luminousPowder", luminousPowderRecipe.getClass(), Category.SHAPELESS, "");
-		GameRegistry.register(luminousPowderRecipe);
+		ForgeRegistries.RECIPES.register(luminousPowderRecipe);
 	}
 
 	private static void createRunicDustRecipes()

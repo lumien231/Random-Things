@@ -23,7 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class RTCommand extends CommandBase
 {
@@ -51,7 +51,7 @@ public class RTCommand extends CommandBase
 		{
 			if (args[0].equals("setBiomeCrystal"))
 			{
-				return getListOfStringsMatchingLastWord(args, GameData.getBiomeRegistry().getKeys());
+				return getListOfStringsMatchingLastWord(args, ForgeRegistries.BIOMES.getKeys());
 			}
 		}
 		return Collections.<String> emptyList();

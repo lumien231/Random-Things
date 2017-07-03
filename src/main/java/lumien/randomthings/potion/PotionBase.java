@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -19,7 +19,7 @@ public class PotionBase extends Potion
 		super(isBadEffectIn, liquidColorIn);
 
 		this.setRegistryName(new ResourceLocation("randomthings:" + name));
-		GameData.getPotionRegistry().register(this);
+		ForgeRegistries.POTIONS.register(this);
 	}
 	
 	@Override

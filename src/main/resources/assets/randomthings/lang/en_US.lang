@@ -54,6 +54,7 @@ tile.blockOfSticks.returning.name=Returning Block of Sticks
 tile.igniter.name=Igniter
 tile.inventoryRerouter.name=Inventory Rerouter
 tile.slimeCube.name=§aSlime Cube§7
+tile.peaceCandle.name=Peace Candle
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling

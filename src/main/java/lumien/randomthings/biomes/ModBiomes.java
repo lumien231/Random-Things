@@ -1,7 +1,9 @@
 package lumien.randomthings.biomes;
 
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class ModBiomes
 {
@@ -11,6 +13,7 @@ public class ModBiomes
 	{
 		spectralBiome = new BiomeSpectral();
 		
-		GameData.getBiomeRegistry().register(spectralBiome);
+		ForgeRegistries.BIOMES.register(spectralBiome);
+		BiomeDictionary.addTypes(spectralBiome, Type.MAGICAL);
 	}
 }

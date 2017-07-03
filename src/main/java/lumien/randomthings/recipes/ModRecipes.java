@@ -38,6 +38,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
@@ -76,7 +77,7 @@ public class ModRecipes
 		final ItemStack glisteringMelon = new ItemStack(Items.SPECKLED_MELON);
 		final ItemStack witherSkull = new ItemStack(Items.SKULL, 1, 1);
 		
-		GameRegistry.register(new RecipeWorkbench());
+		ForgeRegistries.RECIPES.register(new RecipeWorkbench());
 
 		// Imbuing Station
 		ImbuingRecipeHandler.addRecipe(waterBottle, vine, boneMeal, cobblestone, mossyCobblestone);
@@ -195,7 +196,7 @@ public class ModRecipes
 		};
 
 		RecipeSorter.register("spectreAnchorCombine", anchorRecipe.getClass(), Category.SHAPELESS, "");
-		GameRegistry.register(anchorRecipe);
+		ForgeRegistries.RECIPES.register(anchorRecipe);
 
 		// Golden Compass
 		IRecipe goldenCompassRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "goldenCompassSetPosition"))
@@ -322,7 +323,7 @@ public class ModRecipes
 		};
 
 		RecipeSorter.register("goldenCompass", goldenCompassRecipe.getClass(), Category.SHAPELESS, "");
-		GameRegistry.register(goldenCompassRecipe);
+		ForgeRegistries.RECIPES.register(goldenCompassRecipe);
 
 		// Luminous Powder
 		IRecipe luminousPowderRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "luminousPowder"))
@@ -423,6 +424,6 @@ public class ModRecipes
 		};
 
 		RecipeSorter.register("luminousPowder", luminousPowderRecipe.getClass(), Category.SHAPELESS, "");
-		GameRegistry.register(luminousPowderRecipe);
+		ForgeRegistries.RECIPES.register(luminousPowderRecipe);
 	}
 }

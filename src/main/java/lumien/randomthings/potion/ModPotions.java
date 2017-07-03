@@ -16,8 +16,7 @@ import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameData;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class ModPotions
 {
@@ -55,13 +54,13 @@ public class ModPotions
 		collapseTypeLong.setRegistryName(new ResourceLocation("randomthings", "long_collapse"));
 		collapseTypeStrong.setRegistryName(new ResourceLocation("randomthings", "strong_collapse"));
 
-		GameRegistry.register(collapseType);
-		GameRegistry.register(collapseTypeLong);
-		GameRegistry.register(collapseTypeStrong);
+		ForgeRegistries.POTION_TYPES.register(collapseType);
+		ForgeRegistries.POTION_TYPES.register(collapseTypeLong);
+		ForgeRegistries.POTION_TYPES.register(collapseTypeStrong);
 		
 		// Brewing
-		PotionHelper.func_193356_a(PotionTypes.AWKWARD, Ingredient.fromStacks(new ItemStack(ModItems.ingredients, 1, 0)), collapseType);
-		PotionHelper.func_193357_a(collapseType, Items.REDSTONE, collapseTypeLong);
-		PotionHelper.func_193357_a(collapseType, Items.GLOWSTONE_DUST, collapseTypeStrong);
+		PotionHelper.addMix(PotionTypes.AWKWARD, Ingredient.fromStacks(new ItemStack(ModItems.ingredients, 1, 0)), collapseType);
+		PotionHelper.addMix(collapseType, Items.REDSTONE, collapseTypeLong);
+		PotionHelper.addMix(collapseType, Items.GLOWSTONE_DUST, collapseTypeStrong);
 	}
 }

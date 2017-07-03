@@ -3,6 +3,7 @@ package lumien.randomthings.enchantment;
 import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModEnchantments
@@ -12,6 +13,6 @@ public class ModEnchantments
 	public static void preInit(FMLPreInitializationEvent event)
 	{
 		magnetic = new EnchantmentMagnetic(Rarity.VERY_RARE, new EntityEquipmentSlot[] { EntityEquipmentSlot.MAINHAND });
-		GameRegistry.register(magnetic);
+		ForgeRegistries.ENCHANTMENTS.register(magnetic);
 	}
 }

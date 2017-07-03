@@ -8,6 +8,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.server.management.PlayerInteractionManager;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.structure.StructureOceanMonumentPieces.MonumentCoreRoom;
 
@@ -23,6 +24,7 @@ public class ServerConfirmer
 		fun(PlayerInteractionManager.class);
 		fun(WorldGenAbstractTree.class);
 		fun(EntitySlime.class);
+		fun(WorldEntitySpawner.class);
 	}
 	
 	protected void fun(Class class1)
