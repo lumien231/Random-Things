@@ -114,7 +114,6 @@ public class AsmHandler
 
 					if (toRemove.remove(pos))
 					{
-						FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0).setBlockState(new BlockPos(pos.getXStart(), 150, pos.getZStart()), Blocks.GREEN_GLAZED_TERRACOTTA.getDefaultState());
 						iterator.remove();
 					}
 				}

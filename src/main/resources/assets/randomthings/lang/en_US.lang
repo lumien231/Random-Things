@@ -372,7 +372,8 @@ tile.platform.info=Pressing shift while standing on these platforms will make yo
 tile.basicRedstoneInterface.info=You can bind the Redstone Interface to a Block. Whenever the Redstone Interface receives a redstone signal the block bound to it also does. (Wirelessly)
 tile.advancedRedstoneInterface.info=A Redstone Interface which can be bound to multiple blocks using Position Filters.
 tile.spectreSapling.info=Created by right clicking a vanilla sapling with ectoplasm this sapling grows into a spectre tree that drops ectoplasm when cut down.
-tile.slimeCube.info=This block allows Slimes to spawn in the Chunk it's in. Unlike Vanilla Slime Chunks Slimes can spawn at any height & do so at a significantly increased rate. Powered by Redstone this block instead prevents slimes from spawning through vanilla spawning mechanics (Slime Chunk / Swampland 
+tile.slimeCube.info=This block allows Slimes to spawn in the Chunk it's in. Unlike Vanilla Slime Chunks Slimes can spawn at any height & do so at a significantly increased rate. Powered by Redstone this block instead prevents slimes from spawning through vanilla spawning mechanics (Slime Chunk / Swampland)
+tile.peaceCandle.info=A Peace Candle will prevent natural mob spawning in a 3 Chunk Radius around it. There is a peace candle in 1/3 of all Villager Churches.
 
 item.positionFilter.info=This filter represents a block position (x/y/z), you set it by right clicking a block with it in your hand.
 item.biomeCrystal.info=You find Biome Crystals in dungeon chests, they can be used to find the biome they represent using a Biome Radar.

@@ -1424,7 +1424,17 @@ public class ClassTransformer implements IClassTransformer
 		{
 			logger.log(Level.DEBUG, "- Found isRainingAt (3/3)");
 
-			AbstractInsnNode returnNode = isRainingAt.instructions.get(isRainingAt.instructions.size() - 2);
+			
+			AbstractInsnNode returnNode = null;
+			for (int i=0;i<isRainingAt.instructions.size();i++)
+			{
+				AbstractInsnNode ain = isRainingAt.instructions.get(i);
+				
+				if (ain.getOpcode() == Opcodes.IRETURN)
+				{
+					returnNode = ain;
+				}
+			}
 
 			InsnList toInsert = new InsnList();
 			LabelNode returnLabel = new LabelNode(new Label());
@@ -1438,6 +1448,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(returnLabel);
 
 			isRainingAt.instructions.insertBefore(returnNode, toInsert);
+			
 		}
 
 		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
