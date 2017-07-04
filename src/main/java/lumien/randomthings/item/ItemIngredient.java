@@ -49,9 +49,12 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
-		for (INGREDIENT i : INGREDIENT.values())
+		if (this.isInCreativeTab(tab))
 		{
-			subItems.add(new ItemStack(this, 1, i.id));
+			for (INGREDIENT i : INGREDIENT.values())
+			{
+				subItems.add(new ItemStack(this, 1, i.id));
+			}
 		}
 	}
 

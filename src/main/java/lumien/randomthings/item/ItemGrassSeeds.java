@@ -31,9 +31,12 @@ public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
-		for (int i = 0; i < 17; i++)
+		if (this.isInCreativeTab(tab))
 		{
-			subItems.add(new ItemStack(this, 1, i));
+			for (int i = 0; i < 17; i++)
+			{
+				subItems.add(new ItemStack(this, 1, i));
+			}
 		}
 	}
 
@@ -65,7 +68,7 @@ public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 	}
 
 	@Override
-	public EnumActionResult onItemUse( EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
@@ -81,10 +84,10 @@ public class ItemGrassSeeds extends ItemBase implements IRTItemColor
 				{
 					worldIn.setBlockState(pos, ModBlocks.coloredGrass.getStateFromMeta(stack.getItemDamage() - 1));
 				}
-				
+
 				return EnumActionResult.SUCCESS;
 			}
-			
+
 			return EnumActionResult.FAIL;
 		}
 		return EnumActionResult.SUCCESS;

@@ -32,9 +32,12 @@ public class ItemBean extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
-		for (int i = 0; i < 3; i++)
+		if (this.isInCreativeTab(tab))
 		{
-			subItems.add(new ItemStack(this, 1, i));
+			for (int i = 0; i < 3; i++)
+			{
+				subItems.add(new ItemStack(this, 1, i));
+			}
 		}
 	}
 
