@@ -4,14 +4,12 @@ import java.util.Random;
 
 import lumien.randomthings.client.particles.ParticlePeaceCandle;
 import lumien.randomthings.tileentity.TileEntityPeaceCandle;
-import lumien.randomthings.tileentity.TileEntityRainShield;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -27,7 +25,7 @@ public class BlockPeaceCandle extends BlockContainerBase
 	{
 		super("peaceCandle", Material.ROCK);
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -63,7 +61,7 @@ public class BlockPeaceCandle extends BlockContainerBase
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(new ParticlePeaceCandle(worldIn, d0, d1, d2, 0.0D, 0.0D, 0.0D));
 	}
-	
+
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
@@ -75,15 +73,15 @@ public class BlockPeaceCandle extends BlockContainerBase
 	{
 		return canPlaceOn(worldIn, pos.down());
 	}
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		super.neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
-		
+
 		checkForDrop(worldIn, pos, state);
 	}
-	
+
 	private boolean canPlaceOn(World worldIn, BlockPos pos)
 	{
 		return worldIn.isSideSolid(pos, EnumFacing.UP);
