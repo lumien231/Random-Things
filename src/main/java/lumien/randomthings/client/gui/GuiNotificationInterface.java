@@ -126,8 +126,6 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 	@Override
 	public void setEntryValue(int id, String value)
 	{
-		System.out.println("Changed "+id+" to "+value);
-		
 		String newTitle = titleField.getText();
 		String newDescription = descriptionField.getText();
 		
