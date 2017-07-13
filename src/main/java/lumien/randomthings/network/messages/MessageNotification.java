@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageNotification implements IRTMessage
 {
@@ -43,6 +44,7 @@ public class MessageNotification implements IRTMessage
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onMessage(MessageContext context)
 	{
 		Minecraft.getMinecraft().getToastGui().add(new NotificationToast(title, body, icon));
