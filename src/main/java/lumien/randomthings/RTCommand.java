@@ -7,6 +7,9 @@ import java.util.List;
 import lumien.randomthings.item.ItemBiomeCrystal;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.network.PacketHandler;
+import lumien.randomthings.network.RandomThingsNetworkWrapper;
+import lumien.randomthings.network.messages.MessageNotification;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -15,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -45,13 +49,24 @@ public class RTCommand extends CommandBase
 	{
 		if (args.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn" });
+			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn", "notify" });
 		}
-		else if (args.length == 2)
+		else
 		{
-			if (args[0].equals("setBiomeCrystal"))
+			if (args[0].equals("setBiomeCrystal") && args.length == 2)
 			{
 				return getListOfStringsMatchingLastWord(args, ForgeRegistries.BIOMES.getKeys());
+			}
+			else if (args[0].equals("notify"))
+			{
+				if (args.length == 4)
+				{
+					return getListOfStringsMatchingLastWord(args, Item.REGISTRY.getKeys());
+				}
+				else if (args.length == 5)
+				{
+					return getListOfStringsMatchingLastWord(args, server.getOnlinePlayerNames());
+				}
 			}
 		}
 		return Collections.<String> emptyList();
@@ -141,6 +156,20 @@ public class RTCommand extends CommandBase
 				slime.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0F, 0F);
 				sender.sendMessage(new TextComponentString(slime.getCanSpawnHere() + ""));
 			}
+		}
+		else if (args[0].equals("notify") && args.length == 5)
+		{
+			String title = args[1];
+			String body = args[2];
+			String itemName = args[3];
+			String player = args[4];
+
+			EntityPlayerMP playerEntity = server.getPlayerList().getPlayerByUsername(player);
+			
+			ItemStack itemStack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName)));
+
+			MessageNotification message = new MessageNotification(title, body, itemStack);
+			PacketHandler.INSTANCE.sendTo(message, playerEntity);
 		}
 	}
 

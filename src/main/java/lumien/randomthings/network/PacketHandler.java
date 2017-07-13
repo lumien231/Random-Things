@@ -8,6 +8,8 @@ import lumien.randomthings.network.messages.MessageEnderLetter;
 import lumien.randomthings.network.messages.MessageEntityDetector;
 import lumien.randomthings.network.messages.MessageItemFilter;
 import lumien.randomthings.network.messages.MessageLightRedirector;
+import lumien.randomthings.network.messages.MessageNotification;
+import lumien.randomthings.network.messages.MessageNotificationInterface;
 import lumien.randomthings.network.messages.MessageOnlineDetector;
 import lumien.randomthings.network.messages.MessagePotionVaporizerParticles;
 import lumien.randomthings.network.messages.MessageRedstoneRemote;
@@ -43,5 +45,7 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageBiomeRadarAntenna.class);
 		INSTANCE.registerMessage(MessageContainerSignal.class);
 		INSTANCE.registerMessage(MessageSetBiome.class);
+		INSTANCE.registerMessage(MessageNotification.class);
+		INSTANCE.registerMessage(MessageNotificationInterface.class);
 	}
 }

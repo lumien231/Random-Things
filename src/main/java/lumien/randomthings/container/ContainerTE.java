@@ -156,6 +156,11 @@ public abstract class ContainerTE<E extends TileEntity> extends Container
 			}
 		}
 	}
+	
+	public E getTE()
+	{
+		return te;
+	}
 
 	public abstract void signal(int signal);
 }

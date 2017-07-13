@@ -66,6 +66,7 @@ public class ModBlocks
 	public static BlockRuneBase runeBase;
 	public static BlockSlimeCube slimeCube;
 	public static BlockPeaceCandle peaceCandle;
+	public static BlockNotificationInterface notificationInterface;
 	
 	public static BlockSpectrePlank spectrePlank;
 	public static BlockSpectreSapling spectreSapling;
@@ -152,6 +153,7 @@ public class ModBlocks
 		runeBase = new BlockRuneBase();
 		slimeCube = new BlockSlimeCube();
 		peaceCandle = new BlockPeaceCandle();
+		notificationInterface = new BlockNotificationInterface();
 		
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();

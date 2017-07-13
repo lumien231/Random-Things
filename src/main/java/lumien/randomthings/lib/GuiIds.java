@@ -25,4 +25,5 @@ public class GuiIds
 	public static final int REDSTONE_OBSERVER = 21;
 	public static final int IRON_DROPPER = 22;
 	public static final int ITEM_PROJECTOR = 23;
+	public static final int NOTIFICATION_INTERFACE = 24;
 }

@@ -1,0 +1,105 @@
+package lumien.randomthings.tileentity;
+
+import java.util.UUID;
+
+import lumien.randomthings.lib.IRedstoneSensitive;
+import lumien.randomthings.network.PacketHandler;
+import lumien.randomthings.network.messages.MessageNotification;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+
+public class TileEntityNotificationInterface extends TileEntityBase implements IRedstoneSensitive
+{
+	UUID owner;
+
+	String title = "Title";
+	String description = "Description";
+
+	public TileEntityNotificationInterface()
+	{
+		this.setItemHandler(new ItemStackHandler(1)
+		{
+			@Override
+			protected void onContentsChanged(int slot)
+			{
+				TileEntityNotificationInterface.this.markDirty();
+			}
+		});
+	}
+	
+	public void setData(String title, String description)
+	{
+		this.title = title;
+		this.description = description;
+		
+		this.markDirty();
+		this.syncTE();
+	}
+	
+	public String getTitle()
+	{
+		return title;
+	}
+	
+	public String getDescription()
+	{
+		return description;
+	}
+
+	private void notifyGo()
+	{
+		if (this.owner != null)
+		{
+			EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(owner);
+
+			if (player != null)
+			{
+				MessageNotification message = new MessageNotification(title, description, this.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(0));
+				
+				PacketHandler.INSTANCE.sendTo(message, player);
+			}
+		}
+	}
+
+	@Override
+	public void redstoneChange(boolean oldState, boolean newState)
+	{
+		if (!oldState && newState)
+		{
+			notifyGo();
+		}
+	}
+
+	@Override
+	public void writeDataToNBT(NBTTagCompound compound)
+	{
+		compound.setString("title", title);
+		compound.setString("description", description);
+		
+		if (this.owner != null)
+		{
+			compound.setString("owner", owner.toString());
+		}
+	}
+
+	@Override
+	public void readDataFromNBT(NBTTagCompound compound)
+	{
+		this.title = compound.getString("title");
+		this.description = compound.getString("description");
+		
+		if (compound.hasKey("owner"))
+		{
+			this.owner = UUID.fromString(compound.getString("owner"));
+		}
+	}
+
+	public void setPlayerUUID(UUID id)
+	{
+		this.owner = id;
+	}
+
+}

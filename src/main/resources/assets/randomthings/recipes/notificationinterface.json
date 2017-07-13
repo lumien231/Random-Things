@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SPS",
+    "PQP",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "randomthings:notificationinterface"
+  }
+}
