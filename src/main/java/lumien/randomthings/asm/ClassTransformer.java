@@ -779,21 +779,26 @@ public class ClassTransformer implements IClassTransformer
 
 					if (jin.getOpcode() == Opcodes.IFNE)
 					{
-						LabelNode l0 = jin.label;
+						AbstractInsnNode before = dropAllItems.instructions.get(i - 1);
 
-						InsnList toInsert = new InsnList();
+						if (before instanceof MethodInsnNode && ((MethodInsnNode) before).name.equals(MCPNames.method("func_190926_b")))
+						{
+							LabelNode l0 = jin.label;
 
-						toInsert.add(new VarInsnNode(ALOAD, 0));
-						toInsert.add(new VarInsnNode(ILOAD, 3));
-						toInsert.add(new VarInsnNode(ALOAD, 4));
-						toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "shouldPlayerDrop", "(Lnet/minecraft/entity/player/InventoryPlayer;ILnet/minecraft/item/ItemStack;)Z", false));
-						toInsert.add(new JumpInsnNode(IFEQ, l0));
+							InsnList toInsert = new InsnList();
 
-						dropAllItems.instructions.insert(jin, toInsert);
+							toInsert.add(new VarInsnNode(ALOAD, 0));
+							toInsert.add(new VarInsnNode(ILOAD, 3));
+							toInsert.add(new VarInsnNode(ALOAD, 4));
+							toInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "shouldPlayerDrop", "(Lnet/minecraft/entity/player/InventoryPlayer;ILnet/minecraft/item/ItemStack;)Z", false));
+							toInsert.add(new JumpInsnNode(IFEQ, l0));
 
-						i += 5;
+							dropAllItems.instructions.insert(jin, toInsert);
 
-						logger.log(Level.DEBUG, " - Patched dropAllItems (2/2)");
+							i += 5;
+
+							logger.log(Level.DEBUG, " - Patched dropAllItems (2/2)");
+						}
 					}
 				}
 			}
@@ -1424,12 +1429,12 @@ public class ClassTransformer implements IClassTransformer
 		{
 			logger.log(Level.DEBUG, "- Found isRainingAt (3/3)");
 
-			
+
 			AbstractInsnNode returnNode = null;
-			for (int i=0;i<isRainingAt.instructions.size();i++)
+			for (int i = 0; i < isRainingAt.instructions.size(); i++)
 			{
 				AbstractInsnNode ain = isRainingAt.instructions.get(i);
-				
+
 				if (ain.getOpcode() == Opcodes.IRETURN)
 				{
 					returnNode = ain;
@@ -1448,7 +1453,7 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(returnLabel);
 
 			isRainingAt.instructions.insertBefore(returnNode, toInsert);
-			
+
 		}
 
 		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
