@@ -56,6 +56,7 @@ tile.inventoryRerouter.name=Inventory Rerouter
 tile.slimeCube.name=§aSlime Cube§7
 tile.peaceCandle.name=Peace Candle
 tile.notificationInterface.name=Notification Interface
+tile.glowingMushroom.name=Glowing Mushroom
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -376,6 +377,7 @@ tile.spectreSapling.info=Created by right clicking a vanilla sapling with ectopl
 tile.slimeCube.info=This block allows Slimes to spawn in the Chunk it's in. Unlike Vanilla Slime Chunks Slimes can spawn at any height & do so at a significantly increased rate. Powered by Redstone this block instead prevents slimes from spawning through vanilla spawning mechanics (Slime Chunk / Swampland)
 tile.peaceCandle.info=A Peace Candle will prevent natural mob spawning in a 3 Chunk Radius around it. There is a peace candle in 1/3 of all Villager Churches.
 tile.notificationinterface=When receiving a redstone pulse the notification interface will send the player who placed it a notification in the top right corner of their screen. The Icon, Title & Description of the Notification can be configured in the blocks gui.
+tile.glowingMushroom.info=Can be found in caves & used as a replacement for glowstone in all potion recipes.
 
 item.positionFilter.info=This filter represents a block position (x/y/z), you set it by right clicking a block with it in your hand.
 item.biomeCrystal.info=You find Biome Crystals in dungeon chests, they can be used to find the biome they represent using a Biome Radar.

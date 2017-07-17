@@ -67,6 +67,7 @@ public class ModBlocks
 	public static BlockSlimeCube slimeCube;
 	public static BlockPeaceCandle peaceCandle;
 	public static BlockNotificationInterface notificationInterface;
+	public static BlockGlowingMushroom glowingMushroom;
 	
 	public static BlockSpectrePlank spectrePlank;
 	public static BlockSpectreSapling spectreSapling;
@@ -154,6 +155,7 @@ public class ModBlocks
 		slimeCube = new BlockSlimeCube();
 		peaceCandle = new BlockPeaceCandle();
 		notificationInterface = new BlockNotificationInterface();
+		glowingMushroom = new BlockGlowingMushroom();
 		
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();

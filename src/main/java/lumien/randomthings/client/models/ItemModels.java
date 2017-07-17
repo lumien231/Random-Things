@@ -76,6 +76,7 @@ public class ItemModels
 		registerBlock(ModBlocks.slimeCube);
 		registerBlock(ModBlocks.peaceCandle);
 		registerBlock(ModBlocks.notificationInterface);
+		registerBlock(ModBlocks.glowingMushroom);
 
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);

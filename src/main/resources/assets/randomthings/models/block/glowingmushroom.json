@@ -1,0 +1,8 @@
+{
+    "parent": "randomthings:block/template/cross_2tint",
+    "textures": {
+        "cross1": "randomthings:blocks/glowingmushroom",
+        "cross2": "randomthings:blocks/glowingmushroom_glow",
+        "particle": "randomthings:blocks/glowingmushroom_complete"
+    }
+}

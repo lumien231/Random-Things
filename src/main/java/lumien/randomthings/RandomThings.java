@@ -28,6 +28,7 @@ import lumien.randomthings.recipes.ModRecipes;
 import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.tileentity.TileEntityEnderAnchor;
 import lumien.randomthings.worldgen.WorldGenCores;
+import lumien.randomthings.worldgen.WorldGenEventHandler;
 import lumien.randomthings.worldgen.WorldGenPlants;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -99,14 +100,15 @@ public class RandomThings implements LoadingCallback
 
 		RTEventHandler eventHandler = new RTEventHandler();
 		MinecraftForge.EVENT_BUS.register(eventHandler);
-		FMLCommonHandler.instance().bus().register(eventHandler);
+		
+		WorldGenEventHandler worldGenEventHandler = new WorldGenEventHandler();
+		MinecraftForge.TERRAIN_GEN_BUS.register(worldGenEventHandler);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		PacketHandler.init();
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this);
-
 
 		// IMC
 		String enderIOMagneticMessage = "<enchantment name=\"enchantment.randomthings.magnetic\" costPerLevel=\"20\" >" + "    <itemStack modID=\"minecraft\" itemName=\"iron_block\" itemMeta=\"0\" />" + "</enchantment>";
@@ -137,6 +139,10 @@ public class RandomThings implements LoadingCallback
 		logger.log(Level.DEBUG, ClassTransformer.transformations + "/16 ASM Transformations were applied.");
 
 		CustomClassWriter.customClassLoader = null;
+		
+		ModRecipes.addGlowingMushroomRecipes();
+		
+		//ThermalExpansionComp.postInit(event); NU
 	}
 
 	@EventHandler

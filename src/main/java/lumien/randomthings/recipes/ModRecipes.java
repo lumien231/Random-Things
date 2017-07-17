@@ -2,11 +2,15 @@ package lumien.randomthings.recipes;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.logging.log4j.Level;
 
 import com.google.common.io.Files;
 import com.google.gson.Gson;
@@ -15,12 +19,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler;
+import lumien.randomthings.util.ReflectionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -30,8 +37,13 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionHealth;
+import net.minecraft.potion.PotionHelper;
+import net.minecraft.potion.PotionHelper.MixPredicate;
+import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -48,6 +60,50 @@ public class ModRecipes
 	public static String[] oreDictDyes = new String[16];
 	static String[] dyes = { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White" };
 
+	public static void addGlowingMushroomRecipes()
+	{
+		try
+		{
+			Field listField = PotionHelper.class.getDeclaredField(MCPNames.field("field_185213_a"));
+			ReflectionUtil.makeModifiable(listField);
+
+			Field inputField = MixPredicate.class.getDeclaredField(MCPNames.field("field_185198_a"));
+			ReflectionUtil.makeModifiable(inputField);
+
+			Field reagentField = MixPredicate.class.getDeclaredField(MCPNames.field("field_185199_b"));
+			ReflectionUtil.makeModifiable(reagentField);
+
+			Field outputField = MixPredicate.class.getDeclaredField(MCPNames.field("field_185200_c"));
+			ReflectionUtil.makeModifiable(outputField);
+
+			List<PotionHelper.MixPredicate<PotionType>> conversionList = (List<MixPredicate<PotionType>>) listField.get(null);
+
+			List<MixPredicate<PotionType>> toAdd = new ArrayList<MixPredicate<PotionType>>();
+			
+			for (MixPredicate<PotionType> p : conversionList)
+			{
+				Ingredient reagent = (Ingredient) reagentField.get(p);
+				
+				if (reagent.test(new ItemStack(Items.GLOWSTONE_DUST)))
+				{
+					PotionType input = (PotionType) inputField.get(p);
+					PotionType output = (PotionType) outputField.get(p);
+					
+					toAdd.add(new MixPredicate<PotionType>(input, Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.glowingMushroom)), output));
+				}
+			}
+			
+			
+			RandomThings.instance.logger.log(Level.DEBUG, "Added "+toAdd.size()+" Glowing Mushroom Recipes");
+			conversionList.addAll(toAdd);
+		}
+		catch (Exception e)
+		{
+			RandomThings.instance.logger.log(Level.ERROR, "Couldn't add glowing mushroom potion recipes, please report this as a bug");
+			e.printStackTrace();
+		}
+	}
+
 	public static void register()
 	{
 		for (int i = 0; i < oreDictDyes.length; i++)
@@ -56,7 +112,7 @@ public class ModRecipes
 		}
 
 		ArrayUtils.reverse(oreDictDyes);
-		
+
 		RecipeSorter.register("randomthings:customWorkbenchRecipe", RecipeWorkbench.class, Category.SHAPED, "");
 
 		final ItemStack rottenFlesh = new ItemStack(Items.ROTTEN_FLESH);
@@ -76,7 +132,7 @@ public class ModRecipes
 		final ItemStack glowStone = new ItemStack(Items.GLOWSTONE_DUST);
 		final ItemStack glisteringMelon = new ItemStack(Items.SPECKLED_MELON);
 		final ItemStack witherSkull = new ItemStack(Items.SKULL, 1, 1);
-		
+
 		ForgeRegistries.RECIPES.register(new RecipeWorkbench());
 
 		// Imbuing Station
