@@ -163,20 +163,20 @@ public class RTEventHandler
 		if (event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON))
 		{
 			if (Worldgen.LAVA_CHARM)
-				addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.02f);
+				addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.1f);
 
 			if (Worldgen.SUMMONING_PENDULUM)
-				addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.02f);
+				addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.1f);
 
 			if (Worldgen.MAGIC_HOOD)
-				addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.03f);
+				addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.15f);
 
 			if (Worldgen.SLIME_CUBE)
-				addSingleItemWithChance("slimeCube", table, Item.getItemFromBlock(ModBlocks.slimeCube), 0.03f);
+				addSingleItemWithChance("slimeCube", table, Item.getItemFromBlock(ModBlocks.slimeCube), 0.3f);
 		}
 		else if (Worldgen.LAVA_CHARM && event.getName().equals(LootTableList.CHESTS_NETHER_BRIDGE))
 		{
-			addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.2f);
+			addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.3f);
 		}
 		else if (Worldgen.MAGIC_HOOD && event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH))
 		{
@@ -185,6 +185,10 @@ public class RTEventHandler
 		else if (Worldgen.SUMMONING_PENDULUM && event.getName().equals(LootTableList.CHESTS_STRONGHOLD_CORRIDOR))
 		{
 			addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.5f);
+		}
+		else if (Worldgen.SLIME_CUBE && event.getName().equals(LootTableList.CHESTS_JUNGLE_TEMPLE))
+		{
+			addSingleItemWithChance("slimeCube", table, Item.getItemFromBlock(ModBlocks.slimeCube), 0.8f);
 		}
 
 		if (Worldgen.BIOME_CRYSTAL && event.getName().toString().startsWith("minecraft:chests/"))
