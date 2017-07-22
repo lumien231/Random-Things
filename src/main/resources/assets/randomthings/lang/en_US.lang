@@ -187,6 +187,7 @@ item.spectreSword.name=Spectre Sword
 item.goldenCompass.name=Golden Compass
 item.blazeAndSteel.name=Blaze and Steel
 item.runePattern.name=Rune Pattern
+item.superLubricentBoots.name=Super Lubricent Boots
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -228,6 +229,7 @@ item.ingredient.ectoPlasm.name=Ectoplasm
 item.ingredient.spectreIngot.name=Spectre Ingot
 item.ingredient.biomeSensor.name=Biome Sensor
 item.ingredient.luminousPowder.name=Luminous Powder
+item.ingredient.superLubricentTincture.name=Super Lubricent Tincture
 
 item.spectrePickaxe.name=Spectre Pickaxe
 item.spectreAxe.name=Spectre Axe
@@ -421,3 +423,4 @@ item.ingredient.sakanadeSpores.info=Sakande Spores can be found on the bottom of
 item.ingredient.ectoPlasm.info=Whenever an entity dies there's a small chance a Spirit will spawn, killing that Spirit using Magic (For Example Potions) yields 1-2 Ectoplasm.
 item.ingredient.luminousPowder.info=Besides being a crafting ingredient you can also combine luminous powder and enchanted items in a crafting table to make the enchantment glint glow in the dark.
 item.runePattern.info=Right clicking runic dust with a piece of paper will give you a runic pattern. You can then create copies of the dust by right clicking the top of a block with the pattern. This will still use up runic dust from your inventory if you aren't in creative mode.
+item.superLubricentBoots.info=Wearing Super Lubricent Boots makes you glide over blocks without friction as if you were walking on Super Lubricent Ice.

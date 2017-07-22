@@ -37,6 +37,7 @@ public class ModItems
 	public static ItemGoldenCompass goldenCompass;
 	public static ItemBlazeAndSteel blazeAndSteel;
 	public static ItemRunePattern runePattern;
+	public static ItemSuperLubricentBoots superLubricentBoots;
 	
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -76,6 +77,7 @@ public class ModItems
 		goldenCompass = new ItemGoldenCompass();
 		blazeAndSteel = new ItemBlazeAndSteel();
 		runePattern = new ItemRunePattern();
+		superLubricentBoots = new ItemSuperLubricentBoots();
 
 		grassSeeds = new ItemGrassSeeds();
 		

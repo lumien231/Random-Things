@@ -44,6 +44,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -519,11 +520,30 @@ public class AsmHandler
 	}
 
 	static Block changed;
+	static float oldSlipper;
 
-	public static void preSlipFix(Block b)
+	public static void preSlipFix(EntityLivingBase entity, Block b)
 	{
-		if (b instanceof ISuperLubricent)
+		boolean wearsBoots = false;
+
+		if (!entity.isSneaking())
 		{
+			Iterator<ItemStack> iterator = entity.getArmorInventoryList().iterator();
+			while (iterator.hasNext())
+			{
+				ItemStack stack = iterator.next();
+
+				if (!stack.isEmpty() && stack.getItem() == ModItems.superLubricentBoots)
+				{
+					wearsBoots = true;
+					break;
+				}
+			}
+		}
+
+		if (b instanceof ISuperLubricent || wearsBoots)
+		{
+			oldSlipper = b.slipperiness;
 			b.slipperiness = 1F / 0.91F;
 			changed = b;
 		}
@@ -533,7 +553,7 @@ public class AsmHandler
 	{
 		if (changed != null)
 		{
-			changed.slipperiness = 1F / 0.98F;
+			changed.slipperiness = oldSlipper;
 			changed = null;
 		}
 	}

@@ -1203,7 +1203,9 @@ public class ClassTransformer implements IClassTransformer
 							{
 								InsnList preInsert = new InsnList();
 								preInsert.add(new InsnNode(Opcodes.DUP));
-								preInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "preSlipFix", "(Lnet/minecraft/block/Block;)V", false));
+								preInsert.add(new VarInsnNode(ALOAD, 0));
+								preInsert.add(new InsnNode(Opcodes.SWAP));
+								preInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "preSlipFix", "(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/block/Block;)V", false));
 
 								InsnList postInsert = new InsnList();
 								postInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "postSlipFix", "()V", false));

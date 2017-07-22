@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SW",
+    " B"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "W": {
+      "type" : "minecraft:item_nbt",
+      "item": "minecraft:potion",
+      "nbt": 
+      {
+        "Potion": "minecraft:water"
+      }
+    },
+    "B": {
+      "item": "randomthings:beans",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "randomthings:ingredient",
+    "data": 6,
+    "count": 4
+  }
+}

@@ -45,6 +45,7 @@ public class DescriptionHandler
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.BIOME_SENSOR.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.EVIL_TEAR.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_INGOT.id));
+		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SUPERLUBRICENT_TINCTURE.id));
 
 		removeDes(overrideMap, ModBlocks.spectreLeaf, ModBlocks.natureCore, ModBlocks.spectreLog, ModBlocks.spectrePlank, ModBlocks.specialChest, ModBlocks.itemSealer, ModBlocks.superLubricentIce, ModBlocks.itemCorrector, ModBlocks.itemRedirector, ModBlocks.itemRejuvenator, ModBlocks.superLubricentPlatform, ModBlocks.filteredSuperLubricentPlatform, ModBlocks.filteredItemRedirector, ModBlocks.itemProjector);
 

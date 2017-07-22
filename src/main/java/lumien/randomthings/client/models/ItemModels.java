@@ -111,6 +111,7 @@ public class ItemModels
 		registerItem(ModItems.spectreSword);
 		registerItem(ModItems.goldenCompass);
 		registerItem(ModItems.blazeAndSteel);
+		registerItem(ModItems.superLubricentBoots);
 		registerItem(ModItems.runePattern);
 
 		registerItem(ModItems.spectrePickaxe);
