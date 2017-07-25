@@ -15,8 +15,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
@@ -27,6 +29,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 {
+	protected static final AxisAlignedBB AABB_1 = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.3000000238418579D, 0.699999988079071D);
+	protected static final AxisAlignedBB AABB_2 = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.6000000238418579D, 0.699999988079071D);
+	
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
 
 	public BlockBeanSprout()
@@ -37,6 +42,19 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 		ForgeRegistries.BLOCKS.register(this);
 
 		this.setSoundType(SoundType.PLANT);
+	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		if (state.getValue(AGE) == 7)
+		{
+			return AABB_2;
+		}
+		else
+		{
+			return AABB_1;
+		}
 	}
 
 	@Override
