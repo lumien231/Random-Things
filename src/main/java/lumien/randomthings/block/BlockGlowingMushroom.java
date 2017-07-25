@@ -173,6 +173,6 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
     
     protected boolean canSustainBush(IBlockState state)
     {
-        return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.STONE;
+        return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.fertilizedDirt;
     }
 }
