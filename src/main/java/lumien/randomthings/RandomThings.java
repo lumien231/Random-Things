@@ -103,6 +103,7 @@ public class RandomThings implements LoadingCallback
 		
 		WorldGenEventHandler worldGenEventHandler = new WorldGenEventHandler();
 		MinecraftForge.TERRAIN_GEN_BUS.register(worldGenEventHandler);
+		MinecraftForge.EVENT_BUS.register(worldGenEventHandler);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
@@ -121,7 +122,6 @@ public class RandomThings implements LoadingCallback
 		ModRecipes.register();
 		ModDimensions.register();
 
-		GameRegistry.registerWorldGenerator(new WorldGenPlants(), 1000);
 		GameRegistry.registerWorldGenerator(new WorldGenCores(), 1000);
 	}
 

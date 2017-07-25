@@ -10,20 +10,21 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-public class WorldGenPlants implements IWorldGenerator
+public class WorldGenPlants extends WorldGenerator
 {
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	public boolean generate(World world, Random random, BlockPos position)
 	{
 		if (world.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES)
 		{
 			// Beans
 			if (Worldgen.beans && random.nextBoolean())
 			{
-				int x = chunkX * 16 + 8 + random.nextInt(16);
-				int z = chunkZ * 16 + 8 + random.nextInt(16);
+				int x = position.getX()+ random.nextInt(16);
+				int z = position.getZ() + random.nextInt(16);
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
@@ -36,8 +37,8 @@ public class WorldGenPlants implements IWorldGenerator
 			// Pitcher Plants
 			if (Worldgen.pitcherPlants && random.nextInt(10) == 0)
 			{
-				int x = chunkX * 16 + 8 + random.nextInt(16);
-				int z = chunkZ * 16 + 8 + random.nextInt(16);
+				int x = position.getX() + random.nextInt(16);
+				int z = position.getZ() + random.nextInt(16);
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
@@ -52,5 +53,7 @@ public class WorldGenPlants implements IWorldGenerator
 				}
 			}
 		}
+		
+		 return true;
 	}
 }

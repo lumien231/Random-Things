@@ -77,7 +77,7 @@ public class WorldGenCores implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if (world.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES)
+		if (world.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES && world.getWorldInfo().isMapFeaturesEnabled())
 		{
 			if (world.provider.getDimension() == 0)
 			{
