@@ -3,6 +3,7 @@ package lumien.randomthings.worldgen;
 import java.util.Random;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.config.Worldgen;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
@@ -19,7 +20,7 @@ public class WorldGenEventHandler
 		BlockPos chunkPos = event.getPos();
 		Random random = event.getRand();
 
-		if (event.getRand().nextInt(4) == 0)
+		if (Worldgen.GLOWING_MUSHROOM && event.getRand().nextInt(4) == 0)
 		{
 			int offX = random.nextInt(16) + 8;
 			int offZ = random.nextInt(16) + 8;

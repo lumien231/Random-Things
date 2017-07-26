@@ -32,5 +32,8 @@ public class Worldgen
 	
 	@ConfigOption(category = "worldgen", name = "SlimeCube")
 	public static boolean SLIME_CUBE = true;
+	
+	@ConfigOption(category = "worldgen", name = "GlowingMushrooms")
+	public static boolean GLOWING_MUSHROOM = true;
 }
 

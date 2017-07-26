@@ -10,25 +10,25 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenPatches extends WorldGenerator
 {
-    private final Block block;
+	private final Block block;
 
-    public WorldGenPatches(Block blockIn)
-    {
-        this.block = blockIn;
-    }
+	public WorldGenPatches(Block blockIn)
+	{
+		this.block = blockIn;
+	}
 
-    public boolean generate(World worldIn, Random rand, BlockPos position)
-    {
-        for (int i = 0; i < 64; ++i)
-        {
-            BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+	public boolean generate(World worldIn, Random rand, BlockPos position)
+	{
+		for (int i = 0; i < 64; ++i)
+		{
+			BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-            if (worldIn.isAirBlock(blockpos) && (!worldIn.provider.isNether() || blockpos.getY() < worldIn.getHeight() - 1) && this.block.canPlaceBlockAt(worldIn, blockpos) && !worldIn.canSeeSky(blockpos))
-            {
-                worldIn.setBlockState(blockpos, this.block.getDefaultState(), 2);
-            }
-        }
+			if (worldIn.isAirBlock(blockpos) && (!worldIn.provider.isNether() || blockpos.getY() < worldIn.getHeight() - 1) && this.block.canPlaceBlockAt(worldIn, blockpos) && !worldIn.canSeeSky(blockpos))
+			{
+				worldIn.setBlockState(blockpos, this.block.getDefaultState(), 2);
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 }
