@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
+import lumien.randomthings.config.Features;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,25 +26,28 @@ public class ItemPositionFilter extends ItemBase
 	@Override
 	public void addInformation(ItemStack par1ItemStack, World world, List par3List, ITooltipFlag par4)
 	{
-		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+		if (!Features.HIDE_CORDS)
 		{
-			NBTTagCompound compound;
-			if ((compound = par1ItemStack.getTagCompound()) != null && compound.getBoolean("hasPosition"))
+			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
 			{
-				int dimension = compound.getInteger("dimension");
-				int filterX = compound.getInteger("filterX");
-				int filterY = compound.getInteger("filterY");
-				int filterZ = compound.getInteger("filterZ");
+				NBTTagCompound compound;
+				if ((compound = par1ItemStack.getTagCompound()) != null && compound.getBoolean("hasPosition"))
+				{
+					int dimension = compound.getInteger("dimension");
+					int filterX = compound.getInteger("filterX");
+					int filterY = compound.getInteger("filterY");
+					int filterZ = compound.getInteger("filterZ");
 
-				par3List.add(I18n.format("tooltip.positionFilter.dimension", dimension));
-				par3List.add(I18n.format("tooltip.positionFilter.x", filterX));
-				par3List.add(I18n.format("tooltip.positionFilter.y", filterY));
-				par3List.add(I18n.format("tooltip.positionFilter.z", filterZ));
+					par3List.add(I18n.format("tooltip.positionFilter.dimension", dimension));
+					par3List.add(I18n.format("tooltip.positionFilter.x", filterX));
+					par3List.add(I18n.format("tooltip.positionFilter.y", filterY));
+					par3List.add(I18n.format("tooltip.positionFilter.z", filterZ));
+				}
 			}
-		}
-		else
-		{
-			par3List.add(I18n.format("tooltip.general.shift"));
+			else
+			{
+				par3List.add(I18n.format("tooltip.general.shift"));
+			}
 		}
 	}
 
