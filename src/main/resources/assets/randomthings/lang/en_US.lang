@@ -57,6 +57,7 @@ tile.slimeCube.name=§aSlime Cube§7
 tile.peaceCandle.name=Peace Candle
 tile.notificationInterface.name=Notification Interface
 tile.glowingMushroom.name=Glowing Mushroom
+tile.inventoryTester.name=Inventory Sensor
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -308,6 +309,9 @@ gui.entityDetector.filter.monster=Monster
 gui.entityDetector.filter.player=Players
 gui.entityDetector.filter.item=Items
 gui.entityDetector.filter.custom=Custom
+
+tooltip.inventoryTester.invertSignal.yes=Emit Redstone if not successful
+tooltip.inventoryTester.invertSignal.no=Emit Redstone if successful
 
 block.enderMailbox.owner=You are not the owner of this mailbox
 

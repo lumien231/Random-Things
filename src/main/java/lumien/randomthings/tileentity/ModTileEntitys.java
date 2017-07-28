@@ -46,6 +46,7 @@ public class ModTileEntitys
 		registerTE(TileEntitySlimeCube.class, "slimeCore");
 		registerTE(TileEntityPeaceCandle.class, "peaceCandle");
 		registerTE(TileEntityNotificationInterface.class, "notificationInterface");
+		registerTE(TileEntityInventoryTester.class, "inventoryTester");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");
