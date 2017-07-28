@@ -15,11 +15,18 @@ import net.minecraftforge.items.ItemStackHandler;
 public abstract class TileEntityBase extends TileEntity
 {
 	private IItemHandler inventoryHandler;
+	private boolean itemHandlerInternal = false;
+	
 	private boolean redstonePowered;
 
 	protected void setItemHandler(IItemHandler handler)
 	{
 		this.inventoryHandler = handler;
+	}
+	
+	protected void setItemHandlerInternal()
+	{
+		this.itemHandlerInternal = true;
 	}
 
 	@Override
@@ -147,7 +154,7 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
 	{
-		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryHandler != null)
+		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryHandler != null && !itemHandlerInternal)
 		{
 			return (T) inventoryHandler;
 		}
@@ -157,7 +164,7 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, net.minecraft.util.EnumFacing facing)
 	{
-		return (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryHandler != null) || super.hasCapability(capability, facing);
+		return (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryHandler != null && !itemHandlerInternal) || super.hasCapability(capability, facing);
 	}
 
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
@@ -167,5 +174,10 @@ public abstract class TileEntityBase extends TileEntity
 	public boolean isRedstonePowered()
 	{
 		return redstonePowered;
+	}
+
+	public IItemHandler getItemHandler()
+	{
+		return inventoryHandler;
 	}
 }

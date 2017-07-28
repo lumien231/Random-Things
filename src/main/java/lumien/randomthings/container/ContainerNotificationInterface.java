@@ -22,7 +22,7 @@ public class ContainerNotificationInterface extends ContainerTE<TileEntityNotifi
 	public ContainerNotificationInterface(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(player, world, x, y, z);
-		itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+		itemHandler = te.getItemHandler();
 
 		this.addSlotToContainer(new SlotGhostItemHandler(itemHandler, 0, 8, 31));
 

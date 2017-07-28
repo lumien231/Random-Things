@@ -28,6 +28,8 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 				TileEntityNotificationInterface.this.markDirty();
 			}
 		});
+		
+		this.setItemHandlerInternal();
 	}
 	
 	public void setData(String title, String description)
@@ -57,7 +59,7 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 
 			if (player != null)
 			{
-				MessageNotification message = new MessageNotification(title, description, this.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(0));
+				MessageNotification message = new MessageNotification(title, description, getItemHandler().getStackInSlot(0));
 				
 				PacketHandler.INSTANCE.sendTo(message, player);
 			}
