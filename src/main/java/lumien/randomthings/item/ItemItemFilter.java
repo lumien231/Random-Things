@@ -88,7 +88,7 @@ public class ItemItemFilter extends ItemBase
 			{
 				ItemStack item = filterInventory.getStackInSlot(i);
 
-				if (item != null)
+				if (!item.isEmpty())
 				{
 					if (oreDict)
 					{
