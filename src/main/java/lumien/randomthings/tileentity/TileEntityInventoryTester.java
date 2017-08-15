@@ -58,7 +58,6 @@ public class TileEntityInventoryTester extends TileEntityBase implements ITickab
 	{
 		if (!world.isRemote && ++counter == 2)
 		{
-			System.out.println("Ding "+counter);
 			counter = 0;
 			IItemHandler me = getItemHandler();
 			ItemStack testStack = me.getStackInSlot(0);

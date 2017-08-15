@@ -58,6 +58,7 @@ tile.peaceCandle.name=Peace Candle
 tile.notificationInterface.name=Notification Interface
 tile.glowingMushroom.name=Glowing Mushroom
 tile.inventoryTester.name=Inventory Sensor
+tile.flooBrick.name=Floo Brick
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -189,6 +190,7 @@ item.goldenCompass.name=Golden Compass
 item.blazeAndSteel.name=Blaze and Steel
 item.runePattern.name=Rune Pattern
 item.superLubricentBoots.name=Super Lubricent Boots
+item.flooSign.name=Floo Sign
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -231,6 +233,7 @@ item.ingredient.spectreIngot.name=Spectre Ingot
 item.ingredient.biomeSensor.name=Biome Sensor
 item.ingredient.luminousPowder.name=Luminous Powder
 item.ingredient.superLubricentTincture.name=Super Lubricent Tincture
+item.ingredient.flooPowder.name=Floo Powder
 
 item.spectrePickaxe.name=Spectre Pickaxe
 item.spectreAxe.name=Spectre Axe
@@ -309,6 +312,9 @@ gui.entityDetector.filter.monster=Monster
 gui.entityDetector.filter.player=Players
 gui.entityDetector.filter.item=Items
 gui.entityDetector.filter.custom=Custom
+
+floo.info.teleport=§7Teleporting to §a%s
+floo.info.same=§cYou are already at your destination
 
 tooltip.inventoryTester.invertSignal.yes=Emit Redstone if not successful
 tooltip.inventoryTester.invertSignal.no=Emit Redstone if successful

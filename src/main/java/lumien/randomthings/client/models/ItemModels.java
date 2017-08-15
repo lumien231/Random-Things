@@ -77,6 +77,7 @@ public class ItemModels
 		registerBlock(ModBlocks.peaceCandle);
 		registerBlock(ModBlocks.notificationInterface);
 		registerBlock(ModBlocks.glowingMushroom);
+		registerBlock(ModBlocks.flooBrick);
 
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);
@@ -113,6 +114,7 @@ public class ItemModels
 		registerItem(ModItems.blazeAndSteel);
 		registerItem(ModItems.superLubricentBoots);
 		registerItem(ModItems.runePattern);
+		registerItem(ModItems.flooSign);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ER",
+    "GB"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "G": {
+        "item": "minecraft:gunpowder"
+    },
+    "B": {
+        "item": "randomthings:beans",
+        "data": 0
+    }
+  },
+  "result": {
+    "item": "randomthings:ingredient",
+    "count": 16,
+    "data": 7
+  }
+}

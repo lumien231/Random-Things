@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lumien.randomthings.handler.floo.FlooFireplace;
+import lumien.randomthings.handler.floo.FlooNetworkHandler;
 import lumien.randomthings.item.ItemBiomeCrystal;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
@@ -24,6 +26,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -49,7 +52,7 @@ public class RTCommand extends CommandBase
 	{
 		if (args.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn", "notify" });
+			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn", "notify", "fireplaces" });
 		}
 		else
 		{
@@ -165,11 +168,26 @@ public class RTCommand extends CommandBase
 			String player = args[4];
 
 			EntityPlayerMP playerEntity = server.getPlayerList().getPlayerByUsername(player);
-			
+
 			ItemStack itemStack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName)));
 
 			MessageNotification message = new MessageNotification(title, body, itemStack);
 			PacketHandler.INSTANCE.sendTo(message, playerEntity);
+		}
+		else if (args[0].equals("fireplaces"))
+		{
+			FlooNetworkHandler handler = FlooNetworkHandler.get(sender.getEntityWorld());
+
+			List<FlooFireplace> firePlaces = handler.getFirePlaces();
+
+			sender.sendMessage(new TextComponentString("Floo Fireplaces in Dimension " + sender.getEntityWorld().provider.getDimension()).setStyle(new Style().setUnderlined(true)));
+			sender.sendMessage(new TextComponentString(""));
+
+			for (FlooFireplace firePlace : firePlaces)
+			{
+				String name = firePlace.getName();
+				sender.sendMessage(new TextComponentString((name == null ? "<Unnamed>" : name) + ": " + firePlace.getLastKnownPosition().toString()));
+			}
 		}
 	}
 

@@ -38,6 +38,7 @@ public class ModItems
 	public static ItemBlazeAndSteel blazeAndSteel;
 	public static ItemRunePattern runePattern;
 	public static ItemSuperLubricentBoots superLubricentBoots;
+	public static ItemFlooSign flooSign;
 	
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -78,6 +79,7 @@ public class ModItems
 		blazeAndSteel = new ItemBlazeAndSteel();
 		runePattern = new ItemRunePattern();
 		superLubricentBoots = new ItemSuperLubricentBoots();
+		flooSign = new ItemFlooSign();
 
 		grassSeeds = new ItemGrassSeeds();
 		

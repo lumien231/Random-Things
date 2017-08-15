@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "randomthings:ingredient",
+      "data": 7
+    },
+    "S": {
+      "item": "minecraft:sign"
+    }
+  },
+  "result": {
+    "item": "randomthings:floosign",
+    "count": 1
+  }
+}

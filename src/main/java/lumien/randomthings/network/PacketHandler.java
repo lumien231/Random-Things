@@ -6,6 +6,7 @@ import lumien.randomthings.network.messages.MessageChatDetector;
 import lumien.randomthings.network.messages.MessageContainerSignal;
 import lumien.randomthings.network.messages.MessageEnderLetter;
 import lumien.randomthings.network.messages.MessageEntityDetector;
+import lumien.randomthings.network.messages.MessageFlooParticles;
 import lumien.randomthings.network.messages.MessageItemFilter;
 import lumien.randomthings.network.messages.MessageLightRedirector;
 import lumien.randomthings.network.messages.MessageNotification;
@@ -47,5 +48,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageSetBiome.class);
 		INSTANCE.registerMessage(MessageNotification.class);
 		INSTANCE.registerMessage(MessageNotificationInterface.class);
+		INSTANCE.registerMessage(MessageFlooParticles.class);
 	}
 }

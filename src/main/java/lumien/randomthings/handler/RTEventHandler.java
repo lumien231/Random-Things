@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 import org.apache.logging.log4j.Level;
 
@@ -19,6 +20,7 @@ import lumien.randomthings.config.Numbers;
 import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
+import lumien.randomthings.handler.floo.FlooNetworkHandler;
 import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
@@ -33,6 +35,7 @@ import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.anvil.AnvilRecipe;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
+import lumien.randomthings.tileentity.TileEntityFlooBrick;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.tileentity.TileEntityRuneBase;
@@ -68,6 +71,7 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
@@ -503,6 +507,49 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void chatEvent(ServerChatEvent event)
 	{
+		EntityPlayerMP player = event.getPlayer();
+		BlockPos below = player.getPosition().down();
+		IBlockState state = player.world.getBlockState(below);
+		ItemStack flooDust = player.getHeldItemMainhand();
+
+		if ((player.capabilities.isCreativeMode || (!flooDust.isEmpty() && flooDust.getItem() instanceof ItemIngredient && flooDust.getItemDamage() == ItemIngredient.INGREDIENT.FLOO_POWDER.id)) && state.getBlock() == ModBlocks.flooBrick)
+		{
+			String target = event.getMessage();
+			
+			TileEntityFlooBrick te = (TileEntityFlooBrick) player.world.getTileEntity(below);
+			UUID firePlaceUUID = te.getFirePlaceUid();
+
+			if (firePlaceUUID != null)
+			{
+				FlooNetworkHandler networkHandler = FlooNetworkHandler.get(player.world);
+				
+				TileEntity masterTE = networkHandler.getFirePlaceTE(player.world, firePlaceUUID);
+
+				if (masterTE instanceof TileEntityFlooBrick)
+				{
+					TileEntityFlooBrick masterBrick = ((TileEntityFlooBrick) masterTE);
+
+					if (masterBrick.isMaster())
+					{
+						boolean success = networkHandler.teleport(player.world, masterBrick.getPos(),masterBrick, player, target);
+
+						if (success)
+						{
+							if (!player.capabilities.isCreativeMode)
+							{
+								flooDust.shrink(1);
+							}
+						}
+
+						event.setCanceled(true);
+					}
+				}
+			}
+
+			return;
+		}
+
+
 		Iterator<TileEntityChatDetector> iterator = TileEntityChatDetector.detectors.iterator();
 
 		while (iterator.hasNext())

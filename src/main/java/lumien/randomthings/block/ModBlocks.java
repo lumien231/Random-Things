@@ -70,6 +70,8 @@ public class ModBlocks
 	public static BlockGlowingMushroom glowingMushroom;
 	public static BlockInventoryTester inventorySensor;
 	
+	public static BlockFlooBrick flooBrick;
+	
 	public static BlockSpectrePlank spectrePlank;
 	public static BlockSpectreSapling spectreSapling;
 	public static BlockSpectreLog spectreLog;
@@ -158,6 +160,8 @@ public class ModBlocks
 		notificationInterface = new BlockNotificationInterface();
 		glowingMushroom = new BlockGlowingMushroom();
 		inventorySensor = new BlockInventoryTester();
+		
+		flooBrick = new BlockFlooBrick();
 		
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();
