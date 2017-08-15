@@ -78,6 +78,7 @@ public class ItemModels
 		registerBlock(ModBlocks.notificationInterface);
 		registerBlock(ModBlocks.glowingMushroom);
 		registerBlock(ModBlocks.flooBrick);
+		registerBlock(ModBlocks.inventoryTester);
 
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);

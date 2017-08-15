@@ -68,7 +68,7 @@ public class ModBlocks
 	public static BlockPeaceCandle peaceCandle;
 	public static BlockNotificationInterface notificationInterface;
 	public static BlockGlowingMushroom glowingMushroom;
-	public static BlockInventoryTester inventorySensor;
+	public static BlockInventoryTester inventoryTester;
 	
 	public static BlockFlooBrick flooBrick;
 	
@@ -159,7 +159,7 @@ public class ModBlocks
 		peaceCandle = new BlockPeaceCandle();
 		notificationInterface = new BlockNotificationInterface();
 		glowingMushroom = new BlockGlowingMushroom();
-		inventorySensor = new BlockInventoryTester();
+		inventoryTester = new BlockInventoryTester();
 		
 		flooBrick = new BlockFlooBrick();
 		

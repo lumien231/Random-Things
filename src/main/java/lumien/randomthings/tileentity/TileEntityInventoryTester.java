@@ -83,7 +83,7 @@ public class TileEntityInventoryTester extends TileEntityBase implements ITickab
 						this.emitRedstone = newRedstone;
 						
 						this.syncTE();
-						this.world.notifyNeighborsOfStateChange(pos, ModBlocks.inventorySensor, false);
+						this.world.notifyNeighborsOfStateChange(pos, ModBlocks.inventoryTester, false);
 					}
 				}
 			}

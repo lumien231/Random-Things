@@ -27,12 +27,12 @@ public class BlockInventoryTester extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 	
-	protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 1.0F - 5 / 16.0F, 0.625F, 0.625F, 1.0F);
-	protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 0.0F, 0.625F, 0.625F, 5 / 16.0F);
-	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(1.0F - 5 / 16.0F, 0.375F, 0.375F, 1.0F, 0.625F, 0.625F);
-	protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0F, 0.375F, 0.375F, 5 / 16.0F, 0.625F, 0.625F);
-	protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.375F, 0.0F, 0.375F, 0.625F, 0.0F + 5 / 16.0F, 0.625F);
-	protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.375F, 1.0F - 5 / 16.0F, 0.375F, 0.625F, 1.0F, 0.625F);
+	protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 1.0F - 1 / 16.0F, 0.625F, 0.625F, 1.0F);
+	protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 0.0F, 0.625F, 0.625F, 1 / 16.0F);
+	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(1.0F - 1 / 16.0F, 0.375F, 0.375F, 1.0F, 0.625F, 0.625F);
+	protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0F, 0.375F, 0.375F, 1 / 16.0F, 0.625F, 0.625F);
+	protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.375F, 0.0F, 0.375F, 0.625F, 0.0F + 1 / 16.0F, 0.625F);
+	protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.375F, 1.0F - 1 / 16.0F, 0.375F, 0.625F, 1.0F, 0.625F);
 
 	protected BlockInventoryTester()
 	{

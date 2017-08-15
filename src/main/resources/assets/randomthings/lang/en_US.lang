@@ -57,7 +57,7 @@ tile.slimeCube.name=§aSlime Cube§7
 tile.peaceCandle.name=Peace Candle
 tile.notificationInterface.name=Notification Interface
 tile.glowingMushroom.name=Glowing Mushroom
-tile.inventoryTester.name=Inventory Sensor
+tile.inventoryTester.name=Inventory Tester
 tile.flooBrick.name=Floo Brick
 
 tile.spectrePlank.name=Spectre Planks

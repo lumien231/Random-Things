@@ -1,0 +1,22 @@
+{
+	"textures": {
+		"particle": "randomthings:blocks/inventorytester",
+		"front": "randomthings:blocks/inventorytester",
+		"sides": "minecraft:blocks/stone_slab_top"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 6, 0, 6 ],
+			"to": [ 10, 1, 10 ],
+			"faces": {
+				"down": { "uv": [ 6, 6, 10, 10 ], "texture": "#sides" },
+				"up": { "uv": [ 6, 6, 10, 10 ], "texture": "#front" },
+				"north": { "uv": [ 6, 15, 10, 16 ], "texture": "#sides" },
+				"south": { "uv": [ 6, 15, 10, 16 ], "texture": "#sides" },
+				"west": { "uv": [ 6, 15, 10, 16 ], "texture": "#sides" },
+				"east": { "uv": [ 6, 15, 10, 16 ], "texture": "#sides" }
+			}
+		}
+	]
+}
