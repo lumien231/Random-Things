@@ -36,6 +36,12 @@ public class BlockPlatform extends BlockBase
 	}
 	
 	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return getMetaFromState(state);
+	}
+	
+	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return PLATFORM_AABB;
