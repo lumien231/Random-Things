@@ -48,7 +48,6 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 		filterInventory.addInventoryChangeListener(this);
 	}
 
-
 	public IInventory getInventory()
 	{
 		return filterInventory;

@@ -3,6 +3,9 @@ package lumien.randomthings.block;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.TileEntityAdvancedItemCollector;
+import lumien.randomthings.tileentity.TileEntityBiomeRadar;
+import lumien.randomthings.tileentity.TileEntityEntityDetector;
+import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -11,6 +14,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -38,6 +42,15 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		this.setHardness(0.3F);
+	}
+	
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntityAdvancedItemCollector tileentity = (TileEntityAdvancedItemCollector) worldIn.getTileEntity(pos);
+		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity.getInventory());
+		
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
