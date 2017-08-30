@@ -519,10 +519,7 @@ public class AsmHandler
 		}
 	}
 
-	static Block changed;
-	static float oldSlipper;
-
-	public static void preSlipFix(EntityLivingBase entity, Block b)
+	public static float slipFix(float original, EntityLivingBase entity, Block b)
 	{
 		boolean wearsBoots = false;
 
@@ -543,19 +540,10 @@ public class AsmHandler
 
 		if (b instanceof ISuperLubricent || wearsBoots)
 		{
-			oldSlipper = b.slipperiness;
-			b.slipperiness = 1F / 0.91F;
-			changed = b;
+			return 1F;
 		}
-	}
-
-	public static void postSlipFix()
-	{
-		if (changed != null)
-		{
-			changed.slipperiness = oldSlipper;
-			changed = null;
-		}
+		
+		return original;
 	}
 
 	public static void modifyInput(MovementInputFromOptions input)

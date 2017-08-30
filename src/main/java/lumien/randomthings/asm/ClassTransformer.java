@@ -1136,7 +1136,7 @@ public class ClassTransformer implements IClassTransformer
 		logger.log(Level.DEBUG, "Found EntityLivingBase Class: " + classNode.name);
 
 		MethodNode updatePotionEffects = null;
-		MethodNode moveEntityWithHeading = null;
+		MethodNode travel = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
@@ -1146,7 +1146,7 @@ public class ClassTransformer implements IClassTransformer
 			}
 			else if (mn.name.equals(MCPNames.method("func_191986_a")))
 			{
-				moveEntityWithHeading = mn;
+				travel = mn;
 			}
 		}
 
@@ -1181,45 +1181,40 @@ public class ClassTransformer implements IClassTransformer
 			}
 		}
 
-		if (moveEntityWithHeading != null)
+		if (travel != null)
 		{
-			logger.log(Level.DEBUG, "- Found moveEntityWithHeading (2/2)");
+			logger.log(Level.DEBUG, "- Found travel (2/2)");
 
-			for (int i = 0; i < moveEntityWithHeading.instructions.size(); i++)
+			for (int i = 0; i < travel.instructions.size(); i++)
 			{
-				AbstractInsnNode ain = moveEntityWithHeading.instructions.get(i);
-				if (ain instanceof FieldInsnNode)
+				AbstractInsnNode ain = travel.instructions.get(i);
+				if (ain instanceof LdcInsnNode)
 				{
-					FieldInsnNode fin = (FieldInsnNode) ain;
-
-					if (fin.name.equals(MCPNames.field("field_149765_K")))
+					LdcInsnNode lin = (LdcInsnNode) ain;
+					if (lin.cst.equals(new Float("0.91")))
 					{
-						AbstractInsnNode next = moveEntityWithHeading.instructions.get(i + 1);
+						AbstractInsnNode next = travel.instructions.get(i + 1);
 
-						if (next instanceof LdcInsnNode)
+						if (next.getOpcode() == Opcodes.FMUL)
 						{
-							LdcInsnNode lin = (LdcInsnNode) next;
-							if (lin.cst.equals(new Float("0.91")))
-							{
-								InsnList preInsert = new InsnList();
-								preInsert.add(new InsnNode(Opcodes.DUP));
-								preInsert.add(new VarInsnNode(ALOAD, 0));
-								preInsert.add(new InsnNode(Opcodes.SWAP));
-								preInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "preSlipFix", "(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/block/Block;)V", false));
+							InsnList toInsert = new InsnList();
+							toInsert.add(new VarInsnNode(ALOAD, 0));
+							
+							toInsert.add(new VarInsnNode(ALOAD, 0));
+							toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/entity/EntityLivingBase", "world", "Lnet/minecraft/world/World;"));
+							toInsert.add(new VarInsnNode(ALOAD, 5));
+							toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/world/World", "getBlockState", "(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;", false));
+							toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", "getBlock", "()Lnet/minecraft/block/Block;", true));
 
-								InsnList postInsert = new InsnList();
-								postInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "postSlipFix", "()V", false));
+							toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "slipFix", "(FLnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/block/Block;)F", false));
 
-								moveEntityWithHeading.instructions.insertBefore(fin, preInsert);
-								moveEntityWithHeading.instructions.insert(fin, postInsert);
+							travel.instructions.insert(next, toInsert);
 
-								i += 3;
-							}
+							i += 6;
 						}
 					}
 				}
 			}
-
 		}
 
 		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);
