@@ -1,18 +1,13 @@
 package lumien.randomthings.tileentity.redstoneinterface;
 
-import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.machine.Callback;
-import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.Optional;
 
-@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
-public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterface implements SimpleComponent
+
+public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterface
 {
 	BlockPos target;
 
@@ -71,34 +66,6 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 	public BlockPos getTarget()
 	{
 		return this.target;
-	}
-
-	@Override
-	public String getComponentName()
-	{
-		return "redstoneInterface";
-	}
-
-	@Callback
-	@Optional.Method(modid = "OpenComputers")
-	public Object[] setTarget(Context context, Arguments args)
-	{
-		this.setTarget(new BlockPos(args.checkInteger(0), args.checkInteger(1), args.checkInteger(2)));
-		return new Object[] {};
-	}
-
-	@Callback
-	@Optional.Method(modid = "OpenComputers")
-	public Object[] getTarget(Context context, Arguments args)
-	{
-		if (this.target == null)
-		{
-			return new Object[] {};
-		}
-		else
-		{
-			return new Object[] { target.getX(), target.getY(), target.getZ() };
-		}
 	}
 
 	@Override

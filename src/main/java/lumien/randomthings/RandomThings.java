@@ -18,6 +18,7 @@ import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.entitys.ModEntitys;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.RTEventHandler;
+import lumien.randomthings.handler.compability.oc.OCComp;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.RTCreativeTab;
@@ -40,6 +41,7 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -123,6 +125,11 @@ public class RandomThings implements LoadingCallback
 		ModDimensions.register();
 
 		GameRegistry.registerWorldGenerator(new WorldGenCores(), 1000);
+		
+		if (Loader.isModLoaded("opencomputers"))
+		{
+			OCComp.init();
+		}
 	}
 
 	@EventHandler
