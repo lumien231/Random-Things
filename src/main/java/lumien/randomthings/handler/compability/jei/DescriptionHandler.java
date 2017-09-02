@@ -31,6 +31,7 @@ public class DescriptionHandler
 		Map<Object, String> overrideMap = new HashMap<>();
 		overrideMap.put(ModBlocks.customWorkbench, "tile.customWorkbench.info");
 		overrideMap.put(ModBlocks.specialChest, null);
+		overrideMap.put(ModItems.rezStone, null);
 		overrideMap.put(ModBlocks.platform, "tile.platform.info");
 		overrideMap.put(ModBlocks.contactLever, "tile.contactButton.info");
 		overrideMap.put(ModBlocks.luminousBlock, "tile.luminousBlock.info");
