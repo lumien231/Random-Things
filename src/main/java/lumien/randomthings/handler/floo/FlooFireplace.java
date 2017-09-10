@@ -81,4 +81,8 @@ public class FlooFireplace
 		this.lastKnownPosition = pos;
 	}
 
+	public UUID getCreatorUUID()
+	{
+		return creatorPlayerUUID;
+	}
 }

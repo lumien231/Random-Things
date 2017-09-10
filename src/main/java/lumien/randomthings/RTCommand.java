@@ -3,6 +3,9 @@ package lumien.randomthings;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
+
+import com.mojang.authlib.GameProfile;
 
 import lumien.randomthings.handler.floo.FlooFireplace;
 import lumien.randomthings.handler.floo.FlooNetworkHandler;
@@ -10,7 +13,6 @@ import lumien.randomthings.item.ItemBiomeCrystal;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.network.PacketHandler;
-import lumien.randomthings.network.RandomThingsNetworkWrapper;
 import lumien.randomthings.network.messages.MessageNotification;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -186,7 +188,22 @@ public class RTCommand extends CommandBase
 			for (FlooFireplace firePlace : firePlaces)
 			{
 				String name = firePlace.getName();
-				sender.sendMessage(new TextComponentString((name == null ? "<Unnamed>" : name) + ": " + firePlace.getLastKnownPosition().toString()));
+				UUID creator = firePlace.getCreatorUUID();
+				String ownerName = null;
+
+				if (creator != null)
+				{
+					GameProfile profile = server.getPlayerProfileCache().getProfileByUUID(creator);
+
+					if (profile != null)
+					{
+						ownerName = profile.getName();
+					}
+				}
+
+				BlockPos pos = firePlace.getLastKnownPosition();
+
+				sender.sendMessage(new TextComponentString((name == null ? "<Unnamed>" : name) + " | " + String.format("%d %d %d", pos.getX(), pos.getY(), pos.getZ()) + (ownerName != null ? " | " + ownerName : "")));
 			}
 		}
 	}
