@@ -1201,10 +1201,10 @@ public class ClassTransformer implements IClassTransformer
 							toInsert.add(new VarInsnNode(ALOAD, 0));
 							
 							toInsert.add(new VarInsnNode(ALOAD, 0));
-							toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/entity/EntityLivingBase", "world", "Lnet/minecraft/world/World;"));
+							toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/entity/EntityLivingBase", MCPNames.field("field_70170_p"), "Lnet/minecraft/world/World;"));
 							toInsert.add(new VarInsnNode(ALOAD, 5));
-							toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/world/World", "getBlockState", "(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;", false));
-							toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", "getBlock", "()Lnet/minecraft/block/Block;", true));
+							toInsert.add(new MethodInsnNode(INVOKEVIRTUAL, "net/minecraft/world/World", MCPNames.method("func_180495_p"), "(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/state/IBlockState;", false));
+							toInsert.add(new MethodInsnNode(INVOKEINTERFACE, "net/minecraft/block/state/IBlockState", MCPNames.method("func_177230_c"), "()Lnet/minecraft/block/Block;", true));
 
 							toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "slipFix", "(FLnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/block/Block;)F", false));
 
