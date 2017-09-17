@@ -332,6 +332,9 @@ item.enderLetter.noSpace=The letter appears to get rejected
 entity.randomthings.spirit.name=Spirit
 entity.spirit.name=Spirit
 
+entity.randomthings.playerSoul.name=Player Soul
+entity.playerSoul.name=Player Soul
+
 fluid.biomeEssence=Biome Essence
 
 enchantment.randomthings.magnetic=Magnetic

@@ -43,7 +43,6 @@ import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.WorldUtil;
 import lumien.randomthings.util.client.RenderUtils;
-import lumien.randomthings.worldgen.WorldGenPatches;
 import lumien.randomthings.worldgen.WorldGenSakanade;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
@@ -81,7 +80,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.biome.Biome;
@@ -116,7 +114,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
 import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent.PotentialSpawns;
@@ -515,14 +512,14 @@ public class RTEventHandler
 		if ((player.capabilities.isCreativeMode || (!flooDust.isEmpty() && flooDust.getItem() instanceof ItemIngredient && flooDust.getItemDamage() == ItemIngredient.INGREDIENT.FLOO_POWDER.id)) && state.getBlock() == ModBlocks.flooBrick)
 		{
 			String target = event.getMessage();
-			
+
 			TileEntityFlooBrick te = (TileEntityFlooBrick) player.world.getTileEntity(below);
 			UUID firePlaceUUID = te.getFirePlaceUid();
 
 			if (firePlaceUUID != null)
 			{
 				FlooNetworkHandler networkHandler = FlooNetworkHandler.get(player.world);
-				
+
 				TileEntity masterTE = networkHandler.getFirePlaceTE(player.world, firePlaceUUID);
 
 				if (masterTE instanceof TileEntityFlooBrick)
@@ -531,7 +528,7 @@ public class RTEventHandler
 
 					if (masterBrick.isMaster())
 					{
-						boolean success = networkHandler.teleport(player.world, masterBrick.getPos(),masterBrick, player, target);
+						boolean success = networkHandler.teleport(player.world, masterBrick.getPos(), masterBrick, player, target);
 
 						if (success)
 						{
