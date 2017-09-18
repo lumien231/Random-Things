@@ -104,4 +104,9 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 		this.owner = id;
 	}
 
+	public UUID getOwner()
+	{
+		return owner;
+	}
+
 }
