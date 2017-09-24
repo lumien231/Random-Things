@@ -2,11 +2,14 @@ package lumien.randomthings.item.block;
 
 import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.lib.ILuminousItem;
+import mezz.jei.api.ingredients.ISlowRenderItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Optional;
 
-public class ItemBlockClothLuminous extends ItemCloth implements ILuminousItem
+@Optional.Interface(iface = "mezz.jei.api.ingredients.ISlowRenderItem", modid = "jei")
+public class ItemBlockClothLuminous extends ItemCloth implements ILuminousItem, ISlowRenderItem
 {
 
 	public ItemBlockClothLuminous(Block block)
