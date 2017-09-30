@@ -100,15 +100,18 @@ public class RedstoneSignalHandler extends WorldSavedData
 
 	public synchronized int getStrongPower(World worldObj, BlockPos pos,EnumFacing facing)
 	{
-		pos = pos.offset(facing.getOpposite());
-		int dimension = worldObj.provider.getDimension();
-		for (RedstoneSignal rs : redstoneSignals)
+		if(facing != null)
 		{
-			if (rs.getDimension() == dimension)
+			pos = pos.offset(facing.getOpposite());
+			int dimension = worldObj.provider.getDimension();
+			for (RedstoneSignal rs : redstoneSignals)
 			{
-				if (rs.getPosition().equals(pos))
+				if (rs.getDimension() == dimension)
 				{
-					return rs.getRedstoneStrength();
+					if (rs.getPosition().equals(pos))
+					{
+						return rs.getRedstoneStrength();
+					}
 				}
 			}
 		}
