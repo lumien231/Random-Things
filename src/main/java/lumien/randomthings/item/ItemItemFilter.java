@@ -3,7 +3,10 @@ package lumien.randomthings.item;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.lib.GuiIds;
+import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.util.InventoryUtil;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -14,7 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemItemFilter extends ItemBase
+public class ItemItemFilter extends ItemBase implements IEntityFilterItem
 {
 	public static class ItemFilterRepresentation
 	{
@@ -200,5 +203,11 @@ public class ItemItemFilter extends ItemBase
 
 
 		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+	}
+
+	@Override
+	public boolean apply(ItemStack me, Entity entity)
+	{
+		return entity instanceof EntityItem && ItemFilterRepresentation.readFromItemStack(me).matchesItemStack((((EntityItem) entity).getItem()));
 	}
 }

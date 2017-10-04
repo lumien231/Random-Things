@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 
 import lumien.randomthings.container.slots.SlotFiltered;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -30,7 +31,7 @@ public class ContainerEntityDetector extends Container
 			@Override
 			public boolean apply(ItemStack input)
 			{
-				return input.getItem() == ModItems.entityFilter;
+				return input.getItem() instanceof IEntityFilterItem;
 			}
 		}));
 		

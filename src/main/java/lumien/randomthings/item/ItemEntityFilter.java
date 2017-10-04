@@ -1,15 +1,22 @@
 package lumien.randomthings.item;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
+import lumien.randomthings.lib.IEntityFilterItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -18,63 +25,37 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.EntityRegistry.EntityRegistration;
 
-public class ItemEntityFilter extends ItemBase
+public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 {
+	HashMap<String, Class> classCache = new HashMap<String, Class>();
 
 	public ItemEntityFilter()
 	{
 		super("entityFilter");
 	}
 
-	public static Class getEntityClass(ItemStack filter)
+	private Class getEntityClass(ItemStack filter)
 	{
 		NBTTagCompound compound;
 		if ((compound = filter.getTagCompound()) != null)
 		{
-			if (compound.getBoolean("modded"))
+			if (!compound.hasKey("entityKey"))
 			{
-				String modID = compound.getString("modID");
-				int entityID = compound.getInteger("entityID");
-
-				ModContainer modContainer = Loader.instance().getIndexedModList().get(modID);
-
-				if (modContainer != null)
-				{
-					EntityRegistration registration = EntityRegistry.instance().lookupModSpawn(modContainer, entityID);
-
-					if (registration != null)
-					{
-						return registration.getEntityClass();
-					}
-				}
-
+				return EntityCow.class;
 			}
 			else
 			{
-				int entityID = compound.getInteger("entityID");
+				String entityKeyString = compound.getString("entityKey");
+				Class clazz = EntityList.getClassFromName(entityKeyString);
 
-				EntityEntry entry = ForgeRegistries.ENTITIES.getValues().get(entityID);
-
-				if (entry != null)
+				if (clazz != null)
 				{
-					return entry.getEntityClass();
+					return clazz;
 				}
 			}
 		}
 
 		return null;
-	}
-
-	public static boolean filterAppliesTo(ItemStack filter, EntityLivingBase entity)
-	{
-		Class filterClass = getEntityClass(filter);
-		
-		if (filterClass != null)
-		{
-			return filterClass.isAssignableFrom(entity.getClass());
-		}
-
-		return false;
 	}
 
 	@Override
@@ -89,24 +70,9 @@ public class ItemEntityFilter extends ItemBase
 			}
 			NBTTagCompound compound = stack.getTagCompound();
 
-			int vanillaEntityID = EntityList.getID(target.getClass());
+			ResourceLocation entityKey = EntityList.getKey(target);
 
-			if (vanillaEntityID > 0)
-			{
-				compound.setBoolean("modded", false);
-				compound.setInteger("entityID", vanillaEntityID);
-			}
-			else
-			{
-				EntityRegistration registration = EntityRegistry.instance().lookupModSpawn(target.getClass(), false);
-
-				if (registration != null)
-				{
-					compound.setBoolean("modded", true);
-					compound.setString("modID", registration.getContainer().getModId());
-					compound.setInteger("entityID", registration.getModEntityId());
-				}
-			}
+			compound.setString("entityKey", entityKey.toString());
 		}
 
 		return true;
@@ -120,39 +86,36 @@ public class ItemEntityFilter extends ItemBase
 		NBTTagCompound compound;
 		if ((compound = stack.getTagCompound()) != null)
 		{
-			String entityName = null;
-			if (compound.getBoolean("modded"))
-			{
-				String modID = compound.getString("modID");
-				int entityID = compound.getInteger("entityID");
-
-				ModContainer modContainer = Loader.instance().getIndexedModList().get(modID);
-
-				if (modContainer != null)
-				{
-					EntityRegistration registration = EntityRegistry.instance().lookupModSpawn(modContainer, entityID);
-
-					if (registration != null)
-					{
-						entityName = registration.getEntityName();
-					}
-				}
-			}
-			else
-			{
-				int entityID = compound.getInteger("entityID");
-
-				entityName = EntityList.getTranslationName(EntityList.getKey((EntityList.getClassFromID(entityID))));
-			}
-
-			if (entityName != null)
-			{
-				tooltip.add(entityName);
-			}
-			else
+			if (!compound.hasKey("entityKey"))
 			{
 				tooltip.add(I18n.format("tooltip.entityFilter.invalidEntity"));
 			}
+			else
+			{
+				String entityKeyString = compound.getString("entityKey");
+				Class clazz = EntityList.getClassFromName(entityKeyString);
+				String translationKey = EntityList.getTranslationName(new ResourceLocation(entityKeyString));
+
+				if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+				{
+					tooltip.add(entityKeyString);
+				}
+				
+				tooltip.add(I18n.format("entity." + translationKey + ".name"));
+			}
 		}
+	}
+
+	@Override
+	public boolean apply(ItemStack me, Entity entity)
+	{
+		Class filterClass = getEntityClass(me);
+
+		if (filterClass != null)
+		{
+			return filterClass.isAssignableFrom(entity.getClass());
+		}
+
+		return false;
 	}
 }

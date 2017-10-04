@@ -93,7 +93,7 @@ public class BlockBlockOfSticks extends BlockBase
 			{
 				worldIn.playSound(null, pos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 0.6f, 1.2f);
 
-				List<EntityPlayer> playerList = worldIn.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).expand(50, 50, 50));
+				List<EntityPlayer> playerList = worldIn.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(50, 50, 50));
 
 				if (!playerList.isEmpty())
 				{

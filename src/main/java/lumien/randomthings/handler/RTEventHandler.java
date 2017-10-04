@@ -30,6 +30,7 @@ import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
+import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.lib.IExplosionImmune;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.anvil.AnvilRecipe;
@@ -927,9 +928,10 @@ public class RTEventHandler
 
 		ItemStack equipped = player.getHeldItemMainhand();
 
-		if (!equipped.isEmpty() && equipped.getItem() == ModItems.entityFilter)
+		if (!equipped.isEmpty() && equipped.getItem() instanceof IEntityFilterItem)
 		{
-			if (ItemEntityFilter.filterAppliesTo(equipped, event.getEntityLiving()))
+			IEntityFilterItem filterInstance = (IEntityFilterItem) equipped.getItem();
+			if (filterInstance.apply(equipped, event.getEntityLiving()))
 			{
 				for (int i = 0; i < 1; ++i)
 				{
