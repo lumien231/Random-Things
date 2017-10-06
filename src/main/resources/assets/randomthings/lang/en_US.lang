@@ -74,6 +74,7 @@ tile.plate_corrector.name=Corrector Plate
 tile.plate_accelerator_directional.name=Directional Accelerator Plate
 tile.plate_itemrejuvenator.name=Item Rejuvenator Plate
 tile.plate_itemsealer.name=Item Sealer Plate
+tile.plate_bouncy.name=Bouncy Plate
 
 tile.stainedBrick.black.name=Black Stained Bricks
 tile.stainedBrick.red.name=Red Stained Bricks

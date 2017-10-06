@@ -82,6 +82,7 @@ public class ItemModels
 		registerBlock(ModBlocks.filteredRedirectorPlate);
 		registerBlock(ModBlocks.itemRejuvenatorPlate);
 		registerBlock(ModBlocks.itemSealerPlate);
+		registerBlock(ModBlocks.bouncyPlate);
 
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);

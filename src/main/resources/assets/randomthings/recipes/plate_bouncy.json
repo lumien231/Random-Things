@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B B",
+    " S ",
+    "B B"
+  ],
+  "key": {
+    "B": {
+      "item": "randomthings:ingredient",
+      "data": 8
+    },
+    "S": {
+      "item": "minecraft:slime_ball",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "randomthings:plate_bouncy",
+    "data": 0,
+    "count": 2
+  }
+}
