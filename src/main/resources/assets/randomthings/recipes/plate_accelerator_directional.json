@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BDB",
+    "   ",
+    "BDB"
+  ],
+  "key": {
+    "B": {
+      "item": "randomthings:ingredient",
+      "data": 8
+    },
+    "D": {
+      "item": "minecraft:dye",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "randomthings:plate_accelerator_directional",
+    "data": 0,
+    "count": 2
+  }
+}

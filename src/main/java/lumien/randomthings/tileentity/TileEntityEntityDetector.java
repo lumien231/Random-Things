@@ -6,6 +6,7 @@ import com.google.common.base.Predicate;
 
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ItemEntityFilter;
+import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -101,34 +102,8 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 
 	private boolean checkSupposedPowereredState()
 	{
-		Class filterClass = filter.filterClass;
-
-		if (filterClass == null)
-		{
-			ItemStack filter;
-			if ((filter = filterInventory.getStackInSlot(0)) != null)
-			{
-				filterClass = ItemEntityFilter.getEntityClass(filter);
-			}
-		}
-
-		if (filterClass != null)
-		{
-			final Class finalFilterClass = filterClass;
-			List<Entity> entityList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.pos, this.pos.add(1, 1, 1)).expand(rangeX, rangeY, rangeZ), new Predicate<Entity>()
-			{
-				@Override
-				public boolean apply(Entity input)
-				{
-					return !invert == finalFilterClass.isAssignableFrom(input.getClass());
-				}
-			});
-			return entityList != null && entityList.size() > 0;
-		}
-		else
-		{
-			return false;
-		}
+		List<Entity> entityList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.pos, this.pos.add(1, 1, 1)).grow(rangeX, rangeY, rangeZ), new FilterPredicate(filter.filterClass, filterInventory.getStackInSlot(0)));
+		return !invert == (entityList != null && entityList.size() > 0);
 	}
 
 	@Override
@@ -251,5 +226,36 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 	public FILTER getFilter()
 	{
 		return filter;
+	}
+
+	private class FilterPredicate implements Predicate<Entity>
+	{
+		Class filterClass;
+		ItemStack filterItem;
+		IEntityFilterItem filterInstance;
+
+
+		public FilterPredicate(Class filterClass, ItemStack filterItem)
+		{
+			this.filterClass = filterClass;
+			this.filterItem = filterItem;
+
+			if (!filterItem.isEmpty() && filterItem.getItem() instanceof IEntityFilterItem)
+			{
+				this.filterInstance = (IEntityFilterItem) filterItem.getItem();
+			}
+		}
+
+		@Override
+		public boolean apply(Entity input)
+		{
+			if (filterClass == null && filterInstance == null)
+			{
+				return false;
+			}
+
+			return filterClass == null ? filterInstance.apply(filterItem, input) : filterClass.isAssignableFrom(input.getClass());
+		}
+
 	}
 }

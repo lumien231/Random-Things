@@ -49,7 +49,7 @@ public class DescriptionHandler
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SUPERLUBRICENT_TINCTURE.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.FLOO_POWDER.id));
 		
-		removeDes(overrideMap, ModBlocks.spectreLeaf, ModBlocks.natureCore, ModBlocks.spectreLog, ModBlocks.spectrePlank, ModBlocks.specialChest, ModBlocks.itemSealer, ModBlocks.superLubricentIce, ModBlocks.itemCorrector, ModBlocks.itemRedirector, ModBlocks.itemRejuvenator, ModBlocks.superLubricentPlatform, ModBlocks.filteredSuperLubricentPlatform, ModBlocks.filteredItemRedirector, ModBlocks.itemProjector);
+		removeDes(overrideMap, ModBlocks.spectreLeaf, ModBlocks.natureCore, ModBlocks.spectreLog, ModBlocks.spectrePlank, ModBlocks.specialChest, ModBlocks.superLubricentIce, ModBlocks.superLubricentPlatform, ModBlocks.filteredSuperLubricentPlatform, ModBlocks.itemProjector);
 
 		Stream.concat(BlockBase.rtBlockList.stream(), ItemBase.rtItemList.stream()).forEach(new Consumer<Object>()
 		{

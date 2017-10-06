@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BCB",
+    "Y L",
+    "BCB"
+  ],
+  "key": {
+    "B": {
+      "item": "randomthings:ingredient",
+      "data": 8
+    },
+    "C": {
+      "item": "minecraft:dye",
+      "data": 2
+    },
+    "Y": {
+      "item": "minecraft:dye",
+      "data": 11
+    },
+    "L": {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "randomthings:plate_filteredredirector",
+    "data": 0,
+    "count": 2
+  }
+}

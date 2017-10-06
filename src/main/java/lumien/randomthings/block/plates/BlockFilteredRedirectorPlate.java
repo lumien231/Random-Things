@@ -1,6 +1,13 @@
 package lumien.randomthings.block.plates;
 
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockBase;
+import lumien.randomthings.block.BlockContainerBase;
+import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
+import lumien.randomthings.lib.EntityFilterItemStack;
+import lumien.randomthings.lib.GuiIds;
+import lumien.randomthings.lib.IEntityFilterItem;
+import lumien.randomthings.tileentity.TileEntityFilteredRedirectorPlate;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -11,6 +18,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -20,18 +28,17 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRedirectorPlate extends BlockBase
+public class BlockFilteredRedirectorPlate extends BlockContainerBase
 {
 	protected static final AxisAlignedBB AABB = null;
 	protected static final AxisAlignedBB VISUAL_AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.03125D, 1D);
 
 	public static final PropertyDirection INPUT_FACING = PropertyDirection.create("inputfacing", EnumFacing.Plane.HORIZONTAL);
-	public static final PropertyDirection OUTPUT_FACING = PropertyDirection.create("outputfacing", EnumFacing.Plane.HORIZONTAL);
 
 
-	public BlockRedirectorPlate()
+	public BlockFilteredRedirectorPlate()
 	{
-		super("plate_redirector", Material.ROCK);
+		super("plate_filteredredirector", Material.ROCK);
 	}
 	
     public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
@@ -73,30 +80,36 @@ public class BlockRedirectorPlate extends BlockBase
 	public int getMetaFromState(IBlockState state)
 	{
 		EnumFacing currentInput = state.getValue(INPUT_FACING);
-		EnumFacing currentOutput = state.getValue(OUTPUT_FACING);
 
-		return (currentInput.ordinal() - 2) + (currentOutput.ordinal() - 2) * 4;
+		return currentInput.ordinal();
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing output = EnumFacing.values()[(meta / 4) + 2];
-		EnumFacing input = EnumFacing.values()[meta - (output.ordinal() - 2) * 4 + 2];
-		return this.getDefaultState().withProperty(INPUT_FACING, input).withProperty(OUTPUT_FACING, output);
+		EnumFacing input = EnumFacing.values()[meta];
+
+		if (INPUT_FACING.getAllowedValues().contains(input))
+		{
+			return this.getDefaultState().withProperty(INPUT_FACING, input);
+		}
+		else
+		{
+			return this.getDefaultState();
+		}
 	}
 
 	@Override
 	public BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { INPUT_FACING, OUTPUT_FACING });
+		return new BlockStateContainer(this, new IProperty[] { INPUT_FACING });
 	}
 
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
 		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-
+		
 		Vec3d motionVec = new Vec3d(entityIn.motionX, entityIn.motionY, entityIn.motionZ);
 
 		EnumFacing roughMovingFacing = EnumFacing.getFacingFromVector((float) motionVec.x, (float) motionVec.y, (float) motionVec.z).getOpposite();
@@ -106,24 +119,35 @@ public class BlockRedirectorPlate extends BlockBase
 
 		EnumFacing facing = EnumFacing.getFacingFromVector((float) difVec.x, (float) difVec.y, (float) difVec.z).getOpposite();
 
-		EnumFacing currentInput = state.getValue(INPUT_FACING);
-		EnumFacing currentOutput = state.getValue(OUTPUT_FACING);
+		EnumFacing inputSide = state.getValue(INPUT_FACING);
 
-		EnumFacing outputFacing = null;
-		if (facing == currentInput && roughMovingFacing == currentInput)
+		if ((facing == inputSide || facing == inputSide.getOpposite()) && facing == roughMovingFacing)
 		{
-			outputFacing = currentOutput;
-		}
-		else if (facing == currentOutput && roughMovingFacing == currentOutput)
-		{
-			outputFacing = currentInput;
-		}
+			TileEntityFilteredRedirectorPlate te = (TileEntityFilteredRedirectorPlate) worldIn.getTileEntity(pos);
 
-		if (outputFacing != null)
-		{
-			Vec3d facingVec = new Vec3d(outputFacing.getDirectionVec()).scale(0.4).add(center);
+			EntityFilterItemStack[] filter = te.getFilter();
 
-			float dif = facing.getOpposite().getHorizontalAngle() - outputFacing.getHorizontalAngle();
+			EnumFacing output = facing.getOpposite();
+
+			if (filter[0] != null)
+			{
+				if (filter[0].apply(entityIn))
+				{
+					output = inputSide.rotateY();
+				}
+			}
+
+			if (filter[1] != null)
+			{
+				if (filter[1].apply(entityIn))
+				{
+					output = inputSide.rotateYCCW();
+				}
+			}
+
+			Vec3d facingVec = new Vec3d(output.getDirectionVec()).scale(0.4).add(center);
+
+			float dif = facing.getOpposite().getHorizontalAngle() - output.getHorizontalAngle();
 
 			Vec3d outputMotionVec = motionVec.rotateYaw((float) Math.toRadians(dif));
 			entityIn.setPosition(facingVec.x, facingVec.y, facingVec.z);
@@ -137,24 +161,11 @@ public class BlockRedirectorPlate extends BlockBase
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (side == EnumFacing.UP)
+		if (!worldIn.isRemote)
 		{
-			EnumFacing currentInput = state.getValue(INPUT_FACING);
-			EnumFacing currentOutput = state.getValue(OUTPUT_FACING);
-
-			EnumFacing newOutput = EnumFacing.getFacingFromVector(hitX - 0.5F, 0, hitZ - 0.5F);
-
-			if (currentInput != newOutput && currentOutput != newOutput)
-			{
-				if (!worldIn.isRemote)
-				{
-					worldIn.setBlockState(pos, state.withProperty(OUTPUT_FACING, newOutput));
-				}
-				return true;
-			}
+			playerIn.openGui(RandomThings.instance, GuiIds.FILTERED_REDIRECTOR_PLATE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
-
-		return false;
+		return true;
 	}
 
 	@Override
@@ -166,7 +177,7 @@ public class BlockRedirectorPlate extends BlockBase
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(INPUT_FACING, placer.getHorizontalFacing().getOpposite()).withProperty(OUTPUT_FACING, placer.getHorizontalFacing());
+		return this.getDefaultState().withProperty(INPUT_FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
@@ -196,7 +207,13 @@ public class BlockRedirectorPlate extends BlockBase
 				enumfacing = EnumFacing.WEST;
 			}
 
-			worldIn.setBlockState(pos, state.withProperty(INPUT_FACING, enumfacing).withProperty(OUTPUT_FACING, enumfacing.getOpposite()), 2);
+			worldIn.setBlockState(pos, state.withProperty(INPUT_FACING, enumfacing), 2);
 		}
+	}
+
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state)
+	{
+		return new TileEntityFilteredRedirectorPlate();
 	}
 }

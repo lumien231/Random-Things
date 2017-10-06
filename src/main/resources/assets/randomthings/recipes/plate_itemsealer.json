@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BLB",
+    "L L",
+    "BLB"
+  ],
+  "key": {
+    "B": {
+      "item": "randomthings:ingredient",
+      "data": 8
+    },
+    "L": {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "randomthings:plate_itemsealer",
+    "data": 0,
+    "count": 2
+  }
+}

@@ -15,6 +15,8 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -41,7 +43,7 @@ public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 		{
 			if (!compound.hasKey("entityKey"))
 			{
-				return EntityCow.class;
+				return null;
 			}
 			else
 			{
@@ -76,6 +78,14 @@ public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 		}
 
 		return true;
+	}
+	
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		ItemStack stack = playerIn.getHeldItem(handIn);
+		
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 
 	@Override
@@ -116,6 +126,6 @@ public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 			return filterClass.isAssignableFrom(entity.getClass());
 		}
 
-		return false;
+		return true;
 	}
 }

@@ -18,7 +18,7 @@ public class GuiIds
 	public static final int ITEM_FILTER = 14;
 	public static final int ADVANCED_ITEM_COLLECTOR = 15;
 	public static final int ADVANCED_REDSTONE_INTERFACE = 16;
-	public static final int FILTERED_ITEM_REDIRECTOR = 17;
+	public static final int FILTERED_REDIRECTOR_PLATE = 17;
 	public static final int REDSTONE_REMOTE_EDIT = 18;
 	public static final int REDSTONE_REMOTE_USE = 19;
 	public static final int FILTERED_SUPERLUBRICENT_PLATFORM = 20;

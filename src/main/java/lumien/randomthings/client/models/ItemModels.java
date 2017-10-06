@@ -57,14 +57,9 @@ public class ItemModels
 		registerBlock(ModBlocks.blockBreaker);
 		registerBlock(ModBlocks.spectreCore);
 		registerBlock(ModBlocks.rainbowLamp);
-		registerBlock(ModBlocks.itemSealer);
 		registerBlock(ModBlocks.superLubricentIce);
 		registerBlock(ModBlocks.compressedSlimeBlock);
-		registerBlock(ModBlocks.itemCorrector);
-		registerBlock(ModBlocks.itemRedirector);
-		registerBlock(ModBlocks.itemRejuvenator);
 		registerBlock(ModBlocks.superLubricentPlatform);
-		registerBlock(ModBlocks.filteredItemRedirector);
 		registerBlock(ModBlocks.filteredSuperLubricentPlatform);
 		registerBlock(ModBlocks.redstoneObserver);
 		registerBlock(ModBlocks.biomeRadar);
@@ -79,6 +74,14 @@ public class ItemModels
 		registerBlock(ModBlocks.glowingMushroom);
 		registerBlock(ModBlocks.flooBrick);
 		registerBlock(ModBlocks.inventoryTester);
+		
+		registerBlock(ModBlocks.acceleratorPlate);
+		registerBlock(ModBlocks.acceleratorPlateDirectional);
+		registerBlock(ModBlocks.correctorPlate);
+		registerBlock(ModBlocks.redirectorPlate);
+		registerBlock(ModBlocks.filteredRedirectorPlate);
+		registerBlock(ModBlocks.itemRejuvenatorPlate);
+		registerBlock(ModBlocks.itemSealerPlate);
 
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);

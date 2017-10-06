@@ -1,0 +1,16 @@
+{
+	"textures": {
+	    "base" : "randomthings:blocks/plates/corrector_base",
+		"particle": "randomthings:blocks/plates/corrector_base"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "PlaneY1",
+			"from": [ 0, 0.05, 0 ],
+			"to": [ 16, 0.05, 16 ],
+			"faces": {
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#base" }
+			}
+		}
+	]
+}

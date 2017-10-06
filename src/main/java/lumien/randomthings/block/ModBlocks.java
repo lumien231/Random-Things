@@ -1,5 +1,12 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.block.plates.BlockAcceleratorPlate;
+import lumien.randomthings.block.plates.BlockCorrectorPlate;
+import lumien.randomthings.block.plates.BlockDirectionalAcceleratorPlate;
+import lumien.randomthings.block.plates.BlockFilteredRedirectorPlate;
+import lumien.randomthings.block.plates.BlockItemRejuvenatorPlate;
+import lumien.randomthings.block.plates.BlockItemSealerPlate;
+import lumien.randomthings.block.plates.BlockRedirectorPlate;
 import lumien.randomthings.block.redstoneinterface.BlockAdvancedRedstoneInterface;
 import lumien.randomthings.block.redstoneinterface.BlockBasicRedstoneInterface;
 import lumien.randomthings.block.spectretree.BlockSpectreLeaf;
@@ -45,14 +52,9 @@ public class ModBlocks
 	public static BlockSakanade sakanade;
 	public static BlockRainShield rainShield;
 	public static BlockBlockBreaker blockBreaker;
-	public static BlockItemSealer itemSealer;
 	public static BlockSuperLubricentIce superLubricentIce;
-	public static BlockItemCorrector itemCorrector;
 	public static BlockCompressedSlimeBlock compressedSlimeBlock;
-	public static BlockItemRedirector itemRedirector;
-	public static BlockItemRejuvenator itemRejuvenator;
 	public static BlockSuperLubricentPlatform superLubricentPlatform;
-	public static BlockFilteredItemRedirector filteredItemRedirector;
 	public static BlockFilteredSuperLubricentPlatform filteredSuperLubricentPlatform;
 	public static BlockRedstoneObserver redstoneObserver;
 	public static BlockBiomeRadar biomeRadar;
@@ -69,34 +71,43 @@ public class ModBlocks
 	public static BlockNotificationInterface notificationInterface;
 	public static BlockGlowingMushroom glowingMushroom;
 	public static BlockInventoryTester inventoryTester;
-	
+
 	public static BlockFlooBrick flooBrick;
-	
+
 	public static BlockSpectrePlank spectrePlank;
 	public static BlockSpectreSapling spectreSapling;
 	public static BlockSpectreLog spectreLog;
 	public static BlockSpectreLeaf spectreLeaf;
-	
+
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
-	
+
 	public static BlockContactButton contactButton;
 	public static BlockContactLever contactLever;
-	
+
 	public static BlockNatureCore natureCore;
 
 	public static BlockBeanStalk beanStalk;
 	public static BlockBeanStalk lesserBeanStalk;
-	
+
 	public static BlockSpectreCore spectreCore;
-	
+
 	public static BlockRainbowLamp rainbowLamp;
-	
+
 	public static BlockBasicRedstoneInterface basicRedstoneInterface;
 	public static BlockAdvancedRedstoneInterface advancedRedstoneInterface;
-	
+
 	public static BlockStainedBrick stainedBrick;
 	public static BlockStainedBrick luminousStainedBrick;
+
+	// Plates
+	public static BlockRedirectorPlate redirectorPlate;
+	public static BlockFilteredRedirectorPlate filteredRedirectorPlate;
+	public static BlockCorrectorPlate correctorPlate;
+	public static BlockItemSealerPlate itemSealerPlate;
+	public static BlockItemRejuvenatorPlate itemRejuvenatorPlate;
+	public static BlockAcceleratorPlate acceleratorPlate;
+	public static BlockDirectionalAcceleratorPlate acceleratorPlateDirectional;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -136,14 +147,9 @@ public class ModBlocks
 		sakanade = new BlockSakanade();
 		rainShield = new BlockRainShield();
 		blockBreaker = new BlockBlockBreaker();
-		itemSealer = new BlockItemSealer();
 		superLubricentIce = new BlockSuperLubricentIce();
-		itemCorrector = new BlockItemCorrector();
 		compressedSlimeBlock = new BlockCompressedSlimeBlock();
-		itemRedirector = new BlockItemRedirector();
-		itemRejuvenator = new BlockItemRejuvenator();
 		superLubricentPlatform = new BlockSuperLubricentPlatform();
-		filteredItemRedirector = new BlockFilteredItemRedirector();
 		filteredSuperLubricentPlatform = new BlockFilteredSuperLubricentPlatform();
 		redstoneObserver = new BlockRedstoneObserver();
 		biomeRadar = new BlockBiomeRadar();
@@ -160,31 +166,39 @@ public class ModBlocks
 		notificationInterface = new BlockNotificationInterface();
 		glowingMushroom = new BlockGlowingMushroom();
 		inventoryTester = new BlockInventoryTester();
-		
+
 		flooBrick = new BlockFlooBrick();
-		
+
 		spectrePlank = new BlockSpectrePlank();
 		spectreSapling = new BlockSpectreSapling();
 		spectreLog = new BlockSpectreLog();
 		spectreLeaf = new BlockSpectreLeaf();
-		
+
 		itemCollector = new BlockItemCollector();
 		advancedItemCollector = new BlockAdvancedItemCollector();
-		
+
 		natureCore = new BlockNatureCore();
 
 		biomeStone = new BlockBiomeStone();
 		biomeGlass = new BlockBiomeGlass();
 		coloredGrass = new BlockColoredGrass();
-		
+
 		spectreCore = new BlockSpectreCore();
-		
+
 		rainbowLamp = new BlockRainbowLamp();
-		
+
 		basicRedstoneInterface = new BlockBasicRedstoneInterface();
 		advancedRedstoneInterface = new BlockAdvancedRedstoneInterface();
-		
+
 		stainedBrick = new BlockStainedBrick(false);
 		luminousStainedBrick = new BlockStainedBrick(true);
+
+		redirectorPlate = new BlockRedirectorPlate();
+		filteredRedirectorPlate = new BlockFilteredRedirectorPlate();
+		correctorPlate = new BlockCorrectorPlate();
+		itemSealerPlate = new BlockItemSealerPlate();
+		itemRejuvenatorPlate = new BlockItemRejuvenatorPlate();
+		acceleratorPlate = new BlockAcceleratorPlate();
+		acceleratorPlateDirectional = new BlockDirectionalAcceleratorPlate();
 	}
 }

@@ -36,14 +36,9 @@ tile.rainShield.name=Rain Shield
 tile.blockBreaker.name=Block Breaker
 tile.spectreCore.name=Spectre Core
 tile.rainbowLamp.name=Rainbow Lamp
-tile.itemSealer.name=Item Sealer
 tile.superLubricentIce.name=Superlubricent Ice
 tile.compressedSlimeBlock.name=Compressed Slime Block
-tile.itemRedirector.name=Item Redirector
-tile.itemCorrector.name=Item Corrector
-tile.itemRejuvenator.name=Item Rejuvenator
 tile.superLubricentPlatform.name=Super Lubricent Platform
-tile.filteredItemRedirector.name=Filtered Item Redirector
 tile.filteredSuperLubricentPlatform.name=Filtered Super Lubricent Platform
 tile.redstoneObserver.name=Redstone Observer
 tile.biomeRadar.name=Biome Radar
@@ -71,6 +66,14 @@ tile.advancedItemCollector.name=Advanced Item Collector
 tile.natureCore.name=Nature Core
 tile.netherCore.name=Nether Core
 tile.enderCore.name=Ender Core
+
+tile.plate_redirector.name=Redirector Plate
+tile.plate_filteredredirector.name=Filtered Redirector Plate
+tile.plate_accelerator.name=Accelerator Plate
+tile.plate_corrector.name=Corrector Plate
+tile.plate_accelerator_directional.name=Directional Accelerator Plate
+tile.plate_itemrejuvenator.name=Item Rejuvenator Plate
+tile.plate_itemsealer.name=Item Sealer Plate
 
 tile.stainedBrick.black.name=Black Stained Bricks
 tile.stainedBrick.red.name=Red Stained Bricks
@@ -234,6 +237,7 @@ item.ingredient.biomeSensor.name=Biome Sensor
 item.ingredient.luminousPowder.name=Luminous Powder
 item.ingredient.superLubricentTincture.name=Super Lubricent Tincture
 item.ingredient.flooPowder.name=Floo Powder
+item.ingredient.plateBase.name=Plate Base
 
 item.spectrePickaxe.name=Spectre Pickaxe
 item.spectreAxe.name=Spectre Axe

@@ -1,0 +1,68 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "north": "randomthings:blocks/plates/redirector_grey",
+            "east": "randomthings:blocks/plates/redirector_grey",
+            "south": "randomthings:blocks/plates/redirector_grey",
+            "west": "randomthings:blocks/plates/redirector_grey",
+            "input": "randomthings:blocks/plates/redirector_green"
+        },
+        "model": "randomthings:plate_redirector",
+        "uvlock": true
+    },
+    "variants": {
+        "inputfacing": {
+            "north" :
+            {
+                "textures": {
+                    "north": "#input"
+                }
+            },
+            "south" :
+            {
+                "textures": {
+                    "south": "#input"
+                }
+            },
+            "west" :
+            {
+                "textures": {
+                    "west": "#input"
+                }
+            },
+            "east" :
+            {
+                "textures": {
+                    "east": "#input"
+                }
+            }
+        },
+        "outputfacing": {
+            "north" :
+            {
+                "textures": {
+                    "north": "#input"
+                }
+            },
+            "south" :
+            {
+                "textures": {
+                    "south": "#input"
+                }
+            },
+            "west" :
+            {
+                "textures": {
+                    "west": "#input"
+                }
+            },
+            "east" :
+            {
+                "textures": {
+                    "east": "#input"
+                }
+            }
+        }
+    }
+}

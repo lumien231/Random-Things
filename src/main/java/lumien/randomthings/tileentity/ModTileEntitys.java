@@ -32,10 +32,7 @@ public class ModTileEntitys
 		registerTE(TileEntityRainShield.class, "rainShield");
 		registerTE(TileEntityBlockBreaker.class, "blockBreaker");
 		registerTE(TileEntityLightRedirector.class, "lightRedirector");
-		registerTE(TileEntityItemSealer.class, "itemSealer");
-		registerTE(TileEntityItemCorrector.class, "itemCorrector");
-		registerTE(TileEntityItemRejuvenator.class, "itemRejuvenator");
-		registerTE(TileEntityFilteredItemRedirector.class, "filteredItemRedirector");
+		registerTE(TileEntityFilteredRedirectorPlate.class, "filteredRedirectorPlate");
 		registerTE(TileEntityFilteredSuperLubricentPlatform.class, "filteredSuperLubricentPlatform");
 		registerTE(TileEntityRedstoneObserver.class, "redstoneObserver");
 		registerTE(TileEntityBiomeRadar.class, "biomeRadar");

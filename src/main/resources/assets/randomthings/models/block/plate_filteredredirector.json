@@ -1,0 +1,52 @@
+{
+    "textures": {
+        "base" : "randomthings:blocks/plates/filteredredirector_base",
+        "particle": "randomthings:blocks/plates/filteredredirector_base",
+        "north": "randomthings:blocks/plates/redirector_green",
+        "east": "randomthings:blocks/plates/filteredredirector_left",
+        "south": "randomthings:blocks/plates/redirector_green",
+        "west": "randomthings:blocks/plates/filteredredirector_right"
+    },
+    "elements": [    
+        {
+            "__comment": "PlaneY1",
+            "from": [ 0, 0.05, 0 ],
+            "to": [ 16, 0.05, 16 ],
+            "faces": {
+                "up": { "uv": [ 0, 0, 16, 16 ], "texture": "#base" }
+            }
+        },
+        {
+            "__comment": "PlaneY3",
+            "from": [ 0, 0.05, 5 ],
+            "to": [ 1, 0.05, 11 ],
+            "faces": {
+                "up": { "uv": [ 0, 0, 1, 6 ], "texture": "#west" }
+            }
+        },
+        {
+            "__comment": "PlaneY4",
+            "from": [ 5, 0.05, 0 ],
+            "to": [ 11, 0.05, 1 ],
+            "faces": {
+                "up": { "uv": [ 0, 0, 1, 6 ], "texture": "#north" }
+            }
+        },
+        {
+            "__comment": "PlaneY5",
+            "from": [ 15, 0.05, 5 ],
+            "to": [ 16, 0.05, 11 ],
+            "faces": {
+                "up": { "uv": [ 0, 0, 1, 6 ], "texture": "#east" }
+            }
+        },
+        {
+            "__comment": "PlaneY6",
+            "from": [ 5, 0.05, 15 ],
+            "to": [ 11, 0.05, 16 ],
+            "faces": {
+                "up": { "uv": [ 0, 0, 1, 6 ], "texture": "#south" }
+            }
+        }
+    ]
+}

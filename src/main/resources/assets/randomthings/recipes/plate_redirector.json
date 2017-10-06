@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BCB",
+    "C C",
+    "BCB"
+  ],
+  "key": {
+    "B": {
+      "item": "randomthings:ingredient",
+      "data": 8
+    },
+    "C": {
+      "item": "minecraft:dye",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "randomthings:plate_redirector",
+    "data": 0,
+    "count": 2
+  }
+}

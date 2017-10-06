@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BIB",
+    "I I",
+    "BIB"
+  ],
+  "key": {
+    "B": {
+      "item": "randomthings:ingredient",
+      "data": 8
+    },
+    "I": {
+      "item": "minecraft:iron_bars",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "randomthings:plate_corrector",
+    "data": 0,
+    "count": 2
+  }
+}
