@@ -2,6 +2,7 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.block.plates.BlockAcceleratorPlate;
 import lumien.randomthings.block.plates.BlockBouncyPlate;
+import lumien.randomthings.block.plates.BlockCollectionPlate;
 import lumien.randomthings.block.plates.BlockCorrectorPlate;
 import lumien.randomthings.block.plates.BlockDirectionalAcceleratorPlate;
 import lumien.randomthings.block.plates.BlockFilteredRedirectorPlate;
@@ -110,6 +111,7 @@ public class ModBlocks
 	public static BlockAcceleratorPlate acceleratorPlate;
 	public static BlockDirectionalAcceleratorPlate acceleratorPlateDirectional;
 	public static BlockBouncyPlate bouncyPlate;
+	public static BlockCollectionPlate collectionPlate;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -203,5 +205,6 @@ public class ModBlocks
 		acceleratorPlate = new BlockAcceleratorPlate();
 		acceleratorPlateDirectional = new BlockDirectionalAcceleratorPlate();
 		bouncyPlate = new BlockBouncyPlate();
+		collectionPlate = new BlockCollectionPlate();
 	}
 }

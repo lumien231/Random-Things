@@ -83,6 +83,7 @@ public class ItemModels
 		registerBlock(ModBlocks.itemRejuvenatorPlate);
 		registerBlock(ModBlocks.itemSealerPlate);
 		registerBlock(ModBlocks.bouncyPlate);
+		registerBlock(ModBlocks.collectionPlate);
 
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);
