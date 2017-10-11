@@ -128,6 +128,9 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 							catching = true;
 						}
 
+						player.dimension = this.world.provider.getDimension();
+						player.interactionManager.world = player.world = this.world;
+						
 						player.interactionManager.tryHarvestBlock(targetPos);
 
 						IItemHandler itemHandler = null;
