@@ -18,6 +18,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 
@@ -30,6 +31,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 	int rangeZ = 5;
 
 	boolean invert;
+	boolean strongOutput;
 
 	static final int MAX_RANGE = 10;
 
@@ -61,6 +63,11 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 		}
 	}
 
+	public boolean strongOutput()
+	{
+		return strongOutput;
+	}
+
 	public IInventory getInventory()
 	{
 		return filterInventory;
@@ -77,7 +84,19 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			{
 				powered = newPowered;
 				this.syncTE();
-				this.world.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector, false);
+
+				if (!strongOutput)
+				{
+					this.world.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector, false);
+				}
+				else
+				{
+					this.world.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector, false);
+					for (EnumFacing facing : EnumFacing.VALUES)
+					{
+						this.world.notifyNeighborsOfStateChange(this.pos.offset(facing), ModBlocks.entityDetector, false);
+					}
+				}
 			}
 		}
 	}
@@ -116,7 +135,10 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 		compound.setInteger("rangeZ", rangeZ);
 
 		compound.setInteger("filter", filter.ordinal());
+
+
 		compound.setBoolean("invert", invert);
+		compound.setBoolean("strongOutput", strongOutput);
 
 		NBTTagCompound inventoryCompound = new NBTTagCompound();
 		InventoryUtil.writeInventoryToCompound(inventoryCompound, filterInventory);
@@ -133,7 +155,9 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 		rangeZ = compound.getInteger("rangeZ");
 
 		filter = FILTER.values()[compound.getInteger("filter")];
+
 		invert = compound.getBoolean("invert");
+		strongOutput = compound.getBoolean("strongOutput");
 
 		NBTTagCompound inventoryCompound = compound.getCompoundTag("inventory");
 
@@ -257,5 +281,19 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 			return filterClass == null ? filterInstance.apply(filterItem, input) : filterClass.isAssignableFrom(input.getClass());
 		}
 
+	}
+
+	public void toggleStrongOutput()
+	{
+		this.strongOutput = !this.strongOutput;
+
+		this.syncTE();
+
+		this.world.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector, false);
+		
+		for (EnumFacing facing : EnumFacing.VALUES)
+		{
+			this.world.notifyNeighborsOfStateChange(this.pos.offset(facing), ModBlocks.entityDetector, false);
+		}
 	}
 }

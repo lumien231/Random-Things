@@ -88,6 +88,9 @@ public class MessageEntityDetector implements IRTMessage
 						case 7:
 							entityDetector.toggleInvert();
 							break;
+						case 8:
+							entityDetector.toggleStrongOutput();
+							break;
 					}
 				}
 			}

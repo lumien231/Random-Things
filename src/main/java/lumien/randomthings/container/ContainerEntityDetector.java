@@ -26,7 +26,7 @@ public class ContainerEntityDetector extends Container
 		this.pos = new BlockPos(x, y, z);
 		this.entityDetector = (TileEntityEntityDetector) world.getTileEntity(pos);
 
-		this.addSlotToContainer(new SlotFiltered(entityDetector.getInventory(), 0, 131, 95, new Predicate<ItemStack>()
+		this.addSlotToContainer(new SlotFiltered(entityDetector.getInventory(), 0, 140, 95, new Predicate<ItemStack>()
 		{
 			@Override
 			public boolean apply(ItemStack input)

@@ -303,6 +303,11 @@ tooltip.itemProjector.selectionMode.first=Start from first slot
 tooltip.itemProjector.selectionMode.last=Start from last slot
 tooltip.itemProjector.selectionMode.biggest=Select biggest stack
 
+tooltip.entityDetector.normalOutput=Normal Output
+tooltip.entityDetector.invertedOutput=Inverted Output
+tooltip.entityDetector.weakOutput=Weak Redstone Output
+tooltip.entityDetector.strongOutput=Strong Redstone Output
+
 gui.basicRedstoneInterface.notarget=No Target
 gui.basicRedstoneInterface.targetX=Target-X: %s
 gui.basicRedstoneInterface.targetY=Target-Y: %s

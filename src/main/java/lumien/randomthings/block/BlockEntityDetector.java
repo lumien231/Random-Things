@@ -43,6 +43,21 @@ public class BlockEntityDetector extends BlockContainerBase
 
 		return te.isPowered() ? 15 : 0;
 	}
+	
+	@Override
+	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	{
+		TileEntityEntityDetector te = (TileEntityEntityDetector) blockAccess.getTileEntity(pos);
+
+		if (te.isPowered() && te.strongOutput())
+		{
+			return 15;
+		}
+		else
+		{
+			return super.getStrongPower(blockState, blockAccess, pos, side);
+		}
+	}
 
 	@Override
 	public boolean isNormalCube(IBlockState state)
@@ -77,6 +92,15 @@ public class BlockEntityDetector extends BlockContainerBase
 	{
 		TileEntityEntityDetector tileentity = (TileEntityEntityDetector) worldIn.getTileEntity(pos);
 		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity.getInventory());
+		
+		if (tileentity.strongOutput())
+		{
+			
+			for (EnumFacing facing : EnumFacing.VALUES)
+			{
+				worldIn.notifyNeighborsOfStateChange(pos.offset(facing), ModBlocks.entityDetector, false);
+			}
+		}
 
 		super.breakBlock(worldIn, pos, state);
 	}
