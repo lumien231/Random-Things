@@ -8,6 +8,7 @@ import lumien.randomthings.lib.EntityFilterItemStack;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.tileentity.TileEntityFilteredRedirectorPlate;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -39,6 +40,41 @@ public class BlockFilteredRedirectorPlate extends BlockContainerBase
 	public BlockFilteredRedirectorPlate()
 	{
 		super("plate_filteredredirector", Material.ROCK);
+	}
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
+	{
+		checkForDrop(worldIn, pos, state);
+	}
+	
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	{
+		return canPlaceOn(worldIn, pos.down());
+	}
+	
+	private boolean canPlaceOn(World worldIn, BlockPos pos)
+	{
+		return worldIn.isSideSolid(pos, EnumFacing.UP);
+	}
+
+	protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (state.getBlock() == this && this.canPlaceOn(worldIn, pos.down()))
+		{
+			return true;
+		}
+		else
+		{
+			if (worldIn.getBlockState(pos).getBlock() == this)
+			{
+				this.dropBlockAsItem(worldIn, pos, state, 0);
+				worldIn.setBlockToAir(pos);
+			}
+
+			return false;
+		}
 	}
 	
     public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
@@ -172,6 +208,7 @@ public class BlockFilteredRedirectorPlate extends BlockContainerBase
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		this.setDefaultFacing(worldIn, pos, state);
+		this.checkForDrop(worldIn, pos, state);
 	}
 
 	@Override

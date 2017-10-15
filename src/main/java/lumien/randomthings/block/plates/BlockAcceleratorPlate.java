@@ -1,6 +1,8 @@
 package lumien.randomthings.block.plates;
 
 import lumien.randomthings.block.BlockBase;
+import lumien.randomthings.tileentity.TileEntityRainShield;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -11,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -29,6 +32,47 @@ public class BlockAcceleratorPlate extends BlockBase
 	public BlockAcceleratorPlate()
 	{
 		super("plate_accelerator", Material.ROCK);
+	}
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
+	{
+		checkForDrop(worldIn, pos, state);
+	}
+	
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	{
+		return canPlaceOn(worldIn, pos.down());
+	}
+	
+	private boolean canPlaceOn(World worldIn, BlockPos pos)
+	{
+		return worldIn.isSideSolid(pos, EnumFacing.UP);
+	}
+
+	protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (state.getBlock() == this && this.canPlaceOn(worldIn, pos.down()))
+		{
+			return true;
+		}
+		else
+		{
+			if (worldIn.getBlockState(pos).getBlock() == this)
+			{
+				this.dropBlockAsItem(worldIn, pos, state, 0);
+				worldIn.setBlockToAir(pos);
+			}
+
+			return false;
+		}
+	}
+	
+	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	{
+		this.checkForDrop(worldIn, pos, state);
 	}
 	
     public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
