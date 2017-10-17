@@ -39,6 +39,7 @@ public class ModItems
 	public static ItemRunePattern runePattern;
 	public static ItemSuperLubricentBoots superLubricentBoots;
 	public static ItemFlooSign flooSign;
+	public static ItemIDCard idCard;
 	
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -80,6 +81,7 @@ public class ModItems
 		runePattern = new ItemRunePattern();
 		superLubricentBoots = new ItemSuperLubricentBoots();
 		flooSign = new ItemFlooSign();
+		idCard = new ItemIDCard();
 
 		grassSeeds = new ItemGrassSeeds();
 		

@@ -121,6 +121,7 @@ public class ItemModels
 		registerItem(ModItems.superLubricentBoots);
 		registerItem(ModItems.runePattern);
 		registerItem(ModItems.flooSign);
+		registerItem(ModItems.idCard);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);
