@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "ECE",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "item": "randomthings:emeraldcompass"
+  }
+}

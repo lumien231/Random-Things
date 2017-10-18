@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
@@ -22,6 +23,7 @@ import com.google.gson.JsonPrimitive;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.item.ItemIDCard;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
@@ -481,5 +483,132 @@ public class ModRecipes
 
 		RecipeSorter.register("luminousPowder", luminousPowderRecipe.getClass(), Category.SHAPELESS, "");
 		ForgeRegistries.RECIPES.register(luminousPowderRecipe);
+		
+		
+		// Emerald Compass
+		IRecipe emeraldCompassRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "emeraldcompass_settarget"))
+		{
+			@Override
+			public boolean matches(InventoryCrafting inv, World worldIn)
+			{
+				ItemStack compass = null;
+				ItemStack target = null;
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == ModItems.emeraldCompass)
+						{
+							if (compass == null)
+							{
+								compass = is;
+							}
+							else
+							{
+								return false;
+							}
+						}
+						else
+						{
+							if (target == null)
+							{
+								if (is.getItem() == ModItems.idCard)
+								{
+									target = is;
+								}
+								else
+								{
+									return false;
+								}
+							}
+							else
+							{
+								return false;
+							}
+						}
+					}
+				}
+				return compass != null && target != null && (!target.hasTagCompound() || !target.getTagCompound().hasKey("spectreAnchor"));
+			}
+
+			@Override
+			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
+			{
+				NonNullList aitemstack = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == ModItems.idCard)
+						{
+							aitemstack.set(i, is.copy());
+						}
+					}
+				}
+
+				return aitemstack;
+			}
+
+			@Override
+			public ItemStack getRecipeOutput()
+			{
+				return new ItemStack(ModItems.emeraldCompass);
+			}
+
+			@Override
+			public ItemStack getCraftingResult(InventoryCrafting inv)
+			{
+				ItemStack compass = null;
+				ItemStack target = null;
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == ModItems.emeraldCompass)
+						{
+							compass = is;
+						}
+						else
+						{
+							target = is;
+						}
+					}
+				}
+
+				ItemStack result = compass.copy();
+
+				UUID uuid = ItemIDCard.getUUID(target);
+
+				if (uuid != null)
+				{
+					if (result.getTagCompound() == null)
+					{
+						result.setTagCompound(new NBTTagCompound());
+					}
+					NBTTagCompound compound = result.getTagCompound();
+
+					compound.setString("uuid", uuid.toString());
+				}
+				return result;
+			}
+
+			@Override
+			public boolean canFit(int width, int height)
+			{
+				return true;
+			}
+		};
+
+		RecipeSorter.register("emeraldCompass", emeraldCompassRecipe.getClass(), Category.SHAPELESS, "");
+		ForgeRegistries.RECIPES.register(emeraldCompassRecipe);
 	}
 }

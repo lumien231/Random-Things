@@ -23,23 +23,21 @@ public class ItemIDCard extends ItemBase implements IEntityFilterItem
 	{
 		super("idcard");
 	}
-
+	
 	@Override
-	public String getItemStackDisplayName(ItemStack stack)
+	public String getHighlightTip(ItemStack stack, String displayName)
 	{
-		String original = super.getItemStackDisplayName(stack);
-		
 		if (stack.hasTagCompound())
 		{
 			NBTTagCompound compound = stack.getTagCompound();
 			
 			if (compound.hasKey("name"))
 			{
-				original += " (" + compound.getString("name")+ ")";
+				displayName += " (" + compound.getString("name")+ ")";
 			}
 		}
 		
-		return original;
+		return displayName;
 	}
 
 	@Override
@@ -119,4 +117,17 @@ public class ItemIDCard extends ItemBase implements IEntityFilterItem
 		return entity instanceof EntityPlayer;
 	}
 
+	public static UUID getUUID(ItemStack card)
+	{
+		if (card.hasTagCompound())
+		{
+			NBTTagCompound compound = card.getTagCompound();
+
+			if (compound.hasKey("uuid"))
+			{
+				return UUID.fromString(compound.getString("uuid"));
+			}
+		}
+		return null;
+	}
 }

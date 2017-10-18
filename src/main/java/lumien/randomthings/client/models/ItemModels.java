@@ -122,6 +122,7 @@ public class ItemModels
 		registerItem(ModItems.runePattern);
 		registerItem(ModItems.flooSign);
 		registerItem(ModItems.idCard);
+		registerItem(ModItems.emeraldCompass);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);

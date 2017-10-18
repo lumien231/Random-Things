@@ -1,0 +1,41 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "randomthings:items/emeraldcompass/emeraldcompass_16"
+    },
+    "overrides": [
+        { "predicate": { "angle": 0.000000 }, "model": "randomthings:item/emeraldcompass" },
+        { "predicate": { "angle": 0.015625 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_17" },
+        { "predicate": { "angle": 0.046875 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_18" },
+        { "predicate": { "angle": 0.078125 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_19" },
+        { "predicate": { "angle": 0.109375 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_20" },
+        { "predicate": { "angle": 0.140625 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_21" },
+        { "predicate": { "angle": 0.171875 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_22" },
+        { "predicate": { "angle": 0.203125 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_23" },
+        { "predicate": { "angle": 0.234375 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_24" },
+        { "predicate": { "angle": 0.265625 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_25" },
+        { "predicate": { "angle": 0.296875 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_26" },
+        { "predicate": { "angle": 0.328125 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_27" },
+        { "predicate": { "angle": 0.359375 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_28" },
+        { "predicate": { "angle": 0.390625 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_29" },
+        { "predicate": { "angle": 0.421875 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_30" },
+        { "predicate": { "angle": 0.453125 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_31" },
+        { "predicate": { "angle": 0.484375 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_00" },
+        { "predicate": { "angle": 0.515625 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_01" },
+        { "predicate": { "angle": 0.546875 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_02" },
+        { "predicate": { "angle": 0.578125 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_03" },
+        { "predicate": { "angle": 0.609375 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_04" },
+        { "predicate": { "angle": 0.640625 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_05" },
+        { "predicate": { "angle": 0.671875 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_06" },
+        { "predicate": { "angle": 0.703125 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_07" },
+        { "predicate": { "angle": 0.734375 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_08" },
+        { "predicate": { "angle": 0.765625 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_09" },
+        { "predicate": { "angle": 0.796875 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_10" },
+        { "predicate": { "angle": 0.828125 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_11" },
+        { "predicate": { "angle": 0.859375 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_12" },
+        { "predicate": { "angle": 0.890625 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_13" },
+        { "predicate": { "angle": 0.921875 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_14" },
+        { "predicate": { "angle": 0.953125 }, "model": "randomthings:item/emeraldcompass/emeraldcompass_15" },
+        { "predicate": { "angle": 0.984375 }, "model": "randomthings:item/emeraldcompass" }
+    ]
+}

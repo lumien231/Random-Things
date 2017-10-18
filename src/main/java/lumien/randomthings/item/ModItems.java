@@ -40,6 +40,7 @@ public class ModItems
 	public static ItemSuperLubricentBoots superLubricentBoots;
 	public static ItemFlooSign flooSign;
 	public static ItemIDCard idCard;
+	public static ItemEmeraldCompass emeraldCompass;
 	
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -82,6 +83,7 @@ public class ModItems
 		superLubricentBoots = new ItemSuperLubricentBoots();
 		flooSign = new ItemFlooSign();
 		idCard = new ItemIDCard();
+		emeraldCompass = new ItemEmeraldCompass();
 
 		grassSeeds = new ItemGrassSeeds();
 		
