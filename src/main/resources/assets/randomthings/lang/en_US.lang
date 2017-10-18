@@ -406,6 +406,8 @@ tile.slimeCube.info=This block allows Slimes to spawn in the Chunk it's in. Unli
 tile.peaceCandle.info=A Peace Candle will prevent natural mob spawning in a 3 Chunk Radius around it. There is a peace candle in 1/3 of all Villager Churches.
 tile.notificationinterface=When receiving a redstone pulse the notification interface will send the player who placed it a notification in the top right corner of their screen. The Icon, Title & Description of the Notification can be configured in the blocks gui.
 tile.glowingMushroom.info=Can be found in caves & used as a replacement for glowstone in all potion recipes.
+tile.notificationInterface.info=This block sends configurable toast notifications to you when powered by redstone.
+tile.inventoryTester.info=Attempts to insert the itemstack specified in its gui into the inventory it's attached to. Emits Redstone if successful (Redstone behavior can be inverted)
 
 item.positionFilter.info=This filter represents a block position (x/y/z), you set it by right clicking a block with it in your hand.
 item.biomeCrystal.info=You find Biome Crystals in dungeon chests, they can be used to find the biome they represent using a Biome Radar.
@@ -451,3 +453,5 @@ item.ingredient.luminousPowder.info=Besides being a crafting ingredient you can 
 item.runePattern.info=Right clicking runic dust with a piece of paper will give you a runic pattern. You can then create copies of the dust by right clicking the top of a block with the pattern. This will still use up runic dust from your inventory if you aren't in creative mode.
 item.superLubricentBoots.info=Wearing Super Lubricent Boots makes you glide over blocks without friction as if you were walking on Super Lubricent Ice.
 item.flooSign.info=Right clicking a connected line of bricks with a Floo Sign will turn them into Floo Bricks and create a Floo Fireplace. When you are holding Floo Dust while standing on top of Floo Bricks & type a message in chat you will be teleported to the fireplace which name is closest to the message you typed. The name of a fireplace is defined by the name of the Floo Sign used to create it (Rename it in an Anvil). Fireplaces without a name can still be used to teleport but can't be teleported to. Players will arrrive facing the opposite direction you were facing while creating the fireplace.
+item.idcard.info=Can be used wherever an entity filter can be used and matches only the Player it's set to. You set it by right clicking it.
+item.emeraldcompass.info=Combined with an ID Card in a crafting table this compass will point at the owner of the id card as long as that player is online.
