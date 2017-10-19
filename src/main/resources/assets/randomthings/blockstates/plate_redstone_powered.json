@@ -1,0 +1,73 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "north": "randomthings:blocks/plates/redstone_grey",
+            "east": "randomthings:blocks/plates/redstone_grey",
+            "south": "randomthings:blocks/plates/redstone_grey",
+            "west": "randomthings:blocks/plates/redstone_grey",
+            "input": "randomthings:blocks/plates/redstone_red",
+            "opposite": "randomthings:blocks/plates/redstone_lightred"
+        },
+        "model": "randomthings:plate_redstone",
+        "uvlock": true
+    },
+    "variants": {
+        "inputfacing": {
+            "north" :
+            {
+                "textures": {
+                    "north": "#input",
+                    "south": "#input"
+                }
+            },
+            "south" :
+            {
+                "textures": {
+                    "south": "#input",
+                    "north": "#input"
+                }
+            },
+            "west" :
+            {
+                "textures": {
+                    "west": "#input",
+                    "east": "#input"
+                }
+            },
+            "east" :
+            {
+                "textures": {
+                    "east": "#input",
+                    "west": "#input"
+                }
+            }
+        },
+        "outputfacing": {
+            "north" :
+            {
+                "textures": {
+                    "north": "#opposite"
+                }
+            },
+            "south" :
+            {
+                "textures": {
+                    "south": "#opposite"
+                }
+            },
+            "west" :
+            {
+                "textures": {
+                    "west": "#opposite"
+                }
+            },
+            "east" :
+            {
+                "textures": {
+                    "east": "#opposite"
+                }
+            }
+        }
+    }
+}

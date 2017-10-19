@@ -9,6 +9,7 @@ import lumien.randomthings.block.plates.BlockFilteredRedirectorPlate;
 import lumien.randomthings.block.plates.BlockItemRejuvenatorPlate;
 import lumien.randomthings.block.plates.BlockItemSealerPlate;
 import lumien.randomthings.block.plates.BlockRedirectorPlate;
+import lumien.randomthings.block.plates.BlockRedstonePlate;
 import lumien.randomthings.block.redstoneinterface.BlockAdvancedRedstoneInterface;
 import lumien.randomthings.block.redstoneinterface.BlockBasicRedstoneInterface;
 import lumien.randomthings.block.spectretree.BlockSpectreLeaf;
@@ -113,6 +114,8 @@ public class ModBlocks
 	public static BlockDirectionalAcceleratorPlate acceleratorPlateDirectional;
 	public static BlockBouncyPlate bouncyPlate;
 	public static BlockCollectionPlate collectionPlate;
+	public static BlockRedstonePlate redstonePlate;
+	public static BlockRedstonePlate redstonePlatePowered;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -201,6 +204,8 @@ public class ModBlocks
 
 		redirectorPlate = new BlockRedirectorPlate();
 		filteredRedirectorPlate = new BlockFilteredRedirectorPlate();
+		redstonePlate = new BlockRedstonePlate(false);
+		redstonePlatePowered = new BlockRedstonePlate(true);
 		correctorPlate = new BlockCorrectorPlate();
 		itemSealerPlate = new BlockItemSealerPlate();
 		itemRejuvenatorPlate = new BlockItemRejuvenatorPlate();
