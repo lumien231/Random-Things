@@ -54,6 +54,7 @@ tile.notificationInterface.name=Notification Interface
 tile.glowingMushroom.name=Glowing Mushroom
 tile.inventoryTester.name=Inventory Tester
 tile.flooBrick.name=Floo Brick
+tile.superlubricentstone.name=Super Lubricent Stone
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling

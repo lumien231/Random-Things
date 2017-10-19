@@ -73,6 +73,7 @@ public class ModBlocks
 	public static BlockNotificationInterface notificationInterface;
 	public static BlockGlowingMushroom glowingMushroom;
 	public static BlockInventoryTester inventoryTester;
+	public static BlockSuperLubricentStone superLubricentStone;
 
 	public static BlockFlooBrick flooBrick;
 
@@ -170,6 +171,7 @@ public class ModBlocks
 		notificationInterface = new BlockNotificationInterface();
 		glowingMushroom = new BlockGlowingMushroom();
 		inventoryTester = new BlockInventoryTester();
+		superLubricentStone = new BlockSuperLubricentStone();
 
 		flooBrick = new BlockFlooBrick();
 

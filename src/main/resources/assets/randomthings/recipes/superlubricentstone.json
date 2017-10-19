@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "STS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "T": {
+      "item": "randomthings:ingredient",
+      "data": 6
+    }
+  },
+  "result": {
+    "item": "randomthings:superlubricentstone",
+    "data": 0,
+    "count": 8
+  }
+}

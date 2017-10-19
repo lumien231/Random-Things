@@ -74,6 +74,7 @@ public class ItemModels
 		registerBlock(ModBlocks.glowingMushroom);
 		registerBlock(ModBlocks.flooBrick);
 		registerBlock(ModBlocks.inventoryTester);
+		registerBlock(ModBlocks.superLubricentStone);
 		
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);
