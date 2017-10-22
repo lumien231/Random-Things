@@ -410,6 +410,19 @@ tile.notificationinterface=When receiving a redstone pulse the notification inte
 tile.glowingMushroom.info=Can be found in caves & used as a replacement for glowstone in all potion recipes.
 tile.notificationInterface.info=This block sends configurable toast notifications to you when powered by redstone.
 tile.inventoryTester.info=Attempts to insert the itemstack specified in its gui into the inventory it's attached to. Emits Redstone if successful (Redstone behavior can be inverted)
+tile.superlubricentstone.info=Entities moving over this block don't loose momentum due to friction.
+tile.superLubricentIce.info=Entities moving over this block don't loose momentum due to friction.
+
+tile.plate_redirector.info=Entities moving over this plate are redirected towards a different direction. Right clicking the plate allows you to change that direction.
+tile.plate_filteredredirector.info=Entities moving over this plate are redirected towards a different direction depending on which filter they match.
+tile.plate_accelerator.info=Entities moving over this plate are accelerated up to a certain limit.
+tile.plate_corrector.info=The movement of entities moving over this plate will be "straightened" out.
+tile.plate_accelerator_directional.info=Entities moving over this plate are accelerated in the direction of the plate.
+tile.plate_itemrejuvenator.info=The despawn timer of item entities moving over this plate is set to 4 minutes.
+tile.plate_itemsealer.info=Item entities that move over this plate can't be picked up for 30 seconds.
+tile.plate_bouncy.info=Entities that move over this plate are propelled upwards.
+tile.plate_collection.info=Item entities moving over this plate are collected into adjacent inventories.
+tile.plate_redstone.info=Entities moving over this plate are redirected towards a different direction. Powered by redstone they will keep going straight instead.
 
 item.positionFilter.info=This filter represents a block position (x/y/z), you set it by right clicking a block with it in your hand.
 item.biomeCrystal.info=You find Biome Crystals in dungeon chests, they can be used to find the biome they represent using a Biome Radar.
