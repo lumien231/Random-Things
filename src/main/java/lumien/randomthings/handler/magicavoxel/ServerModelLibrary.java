@@ -2,7 +2,9 @@ package lumien.randomthings.handler.magicavoxel;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,7 +21,9 @@ import lumien.randomthings.config.Numbers;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelData;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelRequestUpdate;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ServerModelLibrary
@@ -138,35 +142,58 @@ public class ServerModelLibrary
 				@Override
 				public boolean accept(File dir, String name)
 				{
-					return name.endsWith(".vox") && new File(dir, name.substring(0, name.length() - 3) + "act").isFile();
+					return name.endsWith(".vox");
 				}
 			});
 
 			for (File modelFile : modelFiles)
 			{
-				String modelName = modelFile.getName().substring(0, modelFile.getName().length() - 4);
-				File paletteFile = new File(modelFolder, modelName + ".act");
-
-				if (modelFile.length() <= 2000 * 1000 && paletteFile.length() <= 2000 * 1000)
+				try
 				{
-					try
+					String modelName = modelFile.getName().substring(0, modelFile.getName().length() - 4);
+
+					File paletteFile = new File(modelFolder, modelName + ".act");
+
+					InputStream modelInputStream;
+					InputStream paletteInputStream;
+
+					if (modelFile.length() <= 2000 * 1000 && (!paletteFile.isFile() || paletteFile.length() <= 2000 * 1000))
 					{
-						FileInputStream modelInputStream = new FileInputStream(modelFile);
-						FileInputStream paletteInputStream = new FileInputStream(paletteFile);
+						modelInputStream = new FileInputStream(modelFile);
+						
+						if (paletteFile.isFile())
+						{
+							paletteInputStream = new FileInputStream(paletteFile);
+						}
+						else
+						{
+							paletteInputStream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("randomthings:voxmodels/default_palette.act")).getInputStream();
+							
+							FileOutputStream paletteOutput = new FileOutputStream(paletteFile);
+							
+							int currentByte = -1;
+							
+							while ((currentByte = paletteInputStream.read()) != -1)
+							{
+								paletteOutput.write(currentByte);
+							}
+							
+							paletteOutput.close();
+						}
 
 						LoadedModelFile loadedFile = new LoadedModelFile(IOUtils.toByteArray(modelInputStream), IOUtils.toByteArray(paletteInputStream));
 
 						loadedModels.put(modelName, loadedFile);
 					}
-					catch (Exception e)
+					else
 					{
-						RandomThings.instance.logger.log(Level.ERROR, "Error loading magica voxel model " + modelFile.getName());
-						e.printStackTrace();
+						RandomThings.instance.logger.log(Level.ERROR, "Model file too large (Has to be smaller than 2mb) " + modelFile.getName());
 					}
 				}
-				else
+				catch (Exception e)
 				{
-					RandomThings.instance.logger.log(Level.ERROR, "Model file too large (Has to be smaller than 2mb) " + modelFile.getName());
+					RandomThings.instance.logger.log(Level.ERROR, "Error loading magica voxel model " + modelFile.getName());
+					e.printStackTrace();
 				}
 			}
 		}

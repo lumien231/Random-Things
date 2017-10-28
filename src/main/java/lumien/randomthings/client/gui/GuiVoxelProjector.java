@@ -61,7 +61,7 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 			@Override
 			public void onChangeSliderValue(GuiSlider slider)
 			{
-				int rotation = (int) Math.floor(slider.sliderValue * 360);
+				int rotation = slider.getValueInt();
 				GuiVoxelProjector.this.te.setModelRotation(rotation);
 
 				if (rotation != GuiVoxelProjector.this.oldRotation)
@@ -81,7 +81,7 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 			@Override
 			public void onChangeSliderValue(GuiSlider slider)
 			{
-				int scale = Math.min(20, (int) Math.floor((slider.sliderValue + 1F / 20f) * 20));
+				int scale = slider.getValueInt();
 				GuiVoxelProjector.this.te.setScale(scale);
 
 				if (scale != GuiVoxelProjector.this.oldScale)
@@ -101,7 +101,7 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 			@Override
 			public void onChangeSliderValue(GuiSlider slider)
 			{
-				int rotationSpeed = (int) Math.floor(slider.sliderValue * 40);
+				int rotationSpeed = slider.getValueInt();
 				GuiVoxelProjector.this.te.setRotationSpeed(rotationSpeed);
 
 				if (rotationSpeed != GuiVoxelProjector.this.oldRotationSpeed)

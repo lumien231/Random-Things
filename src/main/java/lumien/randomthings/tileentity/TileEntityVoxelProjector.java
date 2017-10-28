@@ -82,7 +82,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	{
 		if (this.rotationSpeed != 0)
 		{
-			return this.modelRotation + this.rotationMod + partialTicks * this.rotationSpeed;
+			return this.modelRotation + ((this.world.getTotalWorldTime() + partialTicks) * this.rotationSpeed);
 		}
 		else
 		{
