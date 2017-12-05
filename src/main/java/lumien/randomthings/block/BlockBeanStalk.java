@@ -48,7 +48,7 @@ public class BlockBeanStalk extends BlockBase
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
-		if (entityIn.onGround || entityIn.isCollidedVertically)
+		if (entityIn.onGround || entityIn.collidedVertically)
 		{
 			return;
 		}

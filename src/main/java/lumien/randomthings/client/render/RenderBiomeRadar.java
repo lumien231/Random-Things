@@ -38,7 +38,7 @@ public class RenderBiomeRadar extends TileEntitySpecialRenderer<TileEntityBiomeR
 
 			entityItem.hoverStart = (float) (pi2 - (entityItem.getAge() + partialTicks) / 10.0F);
 
-			Minecraft.getMinecraft().getRenderManager().doRenderEntity(entityItem, x + 0.5, y - 0.1, z + 0.5, 0, partialTicks, true);
+			Minecraft.getMinecraft().getRenderManager().renderEntity(entityItem, x + 0.5, y - 0.1, z + 0.5, 0, partialTicks, true);
 		}
 	}
 

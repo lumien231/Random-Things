@@ -54,6 +54,19 @@ public class FlooNetworkHandler extends WorldSavedData
 		return instance;
 	}
 
+	public String getNameFromUUID(UUID uuid)
+	{
+		for (FlooFireplace ff : firePlaces)
+		{
+			if (ff.masterUUID.equals(uuid))
+			{
+				return ff.name;
+			}
+		}
+
+		return null;
+	}
+
 	public void addFirePlace(UUID creatorPlayerUUID, UUID masterUUID, String name, BlockPos currentPos)
 	{
 		FlooFireplace firePlace = new FlooFireplace(creatorPlayerUUID, masterUUID, name, currentPos);
@@ -86,7 +99,7 @@ public class FlooNetworkHandler extends WorldSavedData
 
 		if (targetFirePlace != null)
 		{
-			if (targetFirePlace.lastKnownPosition.equals(originPos))
+			if (originPos != null && targetFirePlace.lastKnownPosition.equals(originPos))
 			{
 				player.sendMessage(new TextComponentTranslation("floo.info.same"));
 
@@ -112,18 +125,23 @@ public class FlooNetworkHandler extends WorldSavedData
 
 
 						// Particles
-						List<BlockPos> originPositions = new ArrayList<BlockPos>();
-						originPositions.add(originPos);
-						originPositions.addAll(originTE.getChildren());
+						if (originPos != null && originTE != null)
+						{
+							List<BlockPos> originPositions = new ArrayList<BlockPos>();
+							originPositions.add(originPos);
+							originPositions.addAll(originTE.getChildren());
+
+							MessageFlooParticles p1 = new MessageFlooParticles(originPositions);
+
+							MessageUtil.sendToAllWatchingPos(player.world, originPos, p1);
+						}
 
 						List<BlockPos> destinationPositions = new ArrayList<BlockPos>();
 						destinationPositions.add(targetPos);
 						destinationPositions.addAll(targetTE.getChildren());
 
-						MessageFlooParticles p1 = new MessageFlooParticles(originPositions);
 						MessageFlooParticles p2 = new MessageFlooParticles(destinationPositions);
 
-						MessageUtil.sendToAllWatchingPos(player.world, originPos, p1);
 						MessageUtil.sendToAllWatchingPos(player.world, targetPos, p2);
 
 						PacketHandler.INSTANCE.sendTo(p2, player);

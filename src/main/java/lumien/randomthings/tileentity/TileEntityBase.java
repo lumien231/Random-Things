@@ -28,6 +28,12 @@ public abstract class TileEntityBase extends TileEntity
 	{
 		this.itemHandlerInternal = true;
 	}
+	
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+    {
+        return (oldState.getBlock() != newState.getBlock());
+    }
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)

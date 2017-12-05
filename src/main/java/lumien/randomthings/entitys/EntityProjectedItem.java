@@ -237,7 +237,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 		}
 		else
 		{
-			this.setBeenAttacked();
+			this.markVelocityChanged();
 			this.health = (int) (this.health - amount);
 
 			if (this.health <= 0)

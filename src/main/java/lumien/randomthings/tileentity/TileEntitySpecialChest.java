@@ -1,6 +1,7 @@
 package lumien.randomthings.tileentity;
 
 import lumien.randomthings.block.BlockSpecialChest;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
@@ -18,6 +19,8 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class TileEntitySpecialChest extends TileEntityLockableLoot implements ITickable
 {
@@ -50,6 +53,12 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 			this.markDirty();
 		}
 	}
+	
+	@Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+    {
+        return (oldState.getBlock() != newState.getBlock());
+    }
 
 	/**
 	 * Returns the number of slots in the inventory.

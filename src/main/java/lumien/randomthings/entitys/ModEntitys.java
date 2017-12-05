@@ -14,6 +14,7 @@ public class ModEntitys
 		registerEntity(EntitySpirit.class, "spirit", 2, RandomThings.instance, 80, 1, true);
 		registerEntity(EntityArtificialEndPortal.class, "artificialEndPortal", 3, RandomThings.instance, 80, 1, true);
 		registerEntity(EntityProjectedItem.class, "projectedItem", 4, RandomThings.instance, 80, 20, false);
+		registerEntity(EntityTemporaryFlooFireplace.class, "flooFirePlace", 5, RandomThings.instance, 80, 20, false);
 		
 		EntityRegistry.registerEgg(new ResourceLocation("randomthings","spirit"), 0, 2550);
 	}

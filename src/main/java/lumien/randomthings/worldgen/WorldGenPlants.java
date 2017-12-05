@@ -46,7 +46,7 @@ public class WorldGenPlants extends WorldGenerator
 				{
 					Biome biome = world.getBiome(target);
 
-					if (world.isAirBlock(target) && biome.getFloatTemperature(target) >= 0.8F && ModBlocks.pitcherPlant.canBlockStay(world, target, ModBlocks.pitcherPlant.getDefaultState()))
+					if (world.isAirBlock(target) && biome.getTemperature(target) >= 0.8F && ModBlocks.pitcherPlant.canBlockStay(world, target, ModBlocks.pitcherPlant.getDefaultState()))
 					{
 						world.setBlockState(target, ModBlocks.pitcherPlant.getDefaultState(), 2);
 					}

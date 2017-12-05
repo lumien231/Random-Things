@@ -19,16 +19,16 @@ public class ItemSpectreAxe extends ItemTool
 	public ItemSpectreAxe()
 	{
 		super(ItemSpectreSword.spectreToolMaterial, EFFECTIVE_ON);
-		this.damageVsEntity = 8.0f;
+		this.attackDamage = 8.0f;
 		this.attackSpeed = -3.0f;
 		
 		ItemBase.registerItem("spectreAxe", this);
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state)
+	public float getDestroySpeed(ItemStack stack, IBlockState state)
 	{
 		Material material = state.getMaterial();
-		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
+		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 }

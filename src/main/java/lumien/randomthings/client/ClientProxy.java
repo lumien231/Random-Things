@@ -16,6 +16,7 @@ import lumien.randomthings.client.models.ItemModels;
 import lumien.randomthings.client.models.blocks.BlockModels;
 import lumien.randomthings.client.render.RenderArtificialEndPortal;
 import lumien.randomthings.client.render.RenderBiomeRadar;
+import lumien.randomthings.client.render.RenderEntityNothing;
 import lumien.randomthings.client.render.RenderProjectedItem;
 import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
@@ -27,6 +28,7 @@ import lumien.randomthings.entitys.EntityProjectedItem;
 import lumien.randomthings.entitys.EntityReviveCircle;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
+import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
 import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.IRTBlockColor;
@@ -129,7 +131,7 @@ public class ClientProxy extends CommonProxy
 					{
 
 						@Override
-						public int getColorFromItemstack(ItemStack stack, int tintIndex)
+						public int colorMultiplier(ItemStack stack, int tintIndex)
 						{
 							return itemColor.getColorFromItemstack(stack, tintIndex);
 						}
@@ -184,7 +186,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(Minecraft.getMinecraft().getRenderManager(), new ModelSlime(16), 0.25F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityArtificialEndPortal.class, new RenderArtificialEndPortal(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectedItem.class, new RenderProjectedItem(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityTemporaryFlooFireplace.class, new RenderEntityNothing(Minecraft.getMinecraft().getRenderManager()));
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBiomeRadar.class, new RenderBiomeRadar());

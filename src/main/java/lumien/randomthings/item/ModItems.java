@@ -41,6 +41,7 @@ public class ModItems
 	public static ItemFlooSign flooSign;
 	public static ItemIDCard idCard;
 	public static ItemEmeraldCompass emeraldCompass;
+	public static ItemFlooToken flooToken;
 	
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -84,6 +85,7 @@ public class ModItems
 		flooSign = new ItemFlooSign();
 		idCard = new ItemIDCard();
 		emeraldCompass = new ItemEmeraldCompass();
+		flooToken = new ItemFlooToken();
 
 		grassSeeds = new ItemGrassSeeds();
 		
