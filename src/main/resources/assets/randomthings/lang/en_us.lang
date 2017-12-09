@@ -354,6 +354,7 @@ entity.playerSoul.name=Player Soul
 fluid.biomeEssence=Biome Essence
 
 enchantment.randomthings.magnetic=Magnetic
+enchantment.randomthings.magnetic.desc=The drops from blocks you mine with a tool that has the magnetic enchantment go directly into your inventory instead of dropping on the ground.
 
 tile.fertilizedDirt.info=Compared to Vanilla Farmland Fertilized Dirt does not require any nearby water blocks, increases the growth of plants by a factor of 3 and crops aren't destroyed when entities walk / jump on top of it. If you want to plant crops on it you need to till it with a hoe.
 tile.playerInterface.info=The Player Interface is a block that allows you to wirelessly access your players inventory as if it was a normal block inventory.
