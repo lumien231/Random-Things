@@ -41,6 +41,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -61,7 +62,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -202,9 +206,19 @@ public class AsmHandler
 	{
 		if (ItemCatcher.isCatching() && interactionManager != null)
 		{
+			EntityPlayer player = interactionManager.player;
 			for (ItemStack is : ItemCatcher.stopCatching())
 			{
-				ItemHandlerHelper.giveItemToPlayer(interactionManager.player, is.copy());
+				ItemStack stack = is.copy();
+				EntityItem fakeEntity = new EntityItem(player.world, player.posX, player.posY, player.posZ);
+				fakeEntity.setItem(stack);
+
+				EntityItemPickupEvent event = new EntityItemPickupEvent(player, fakeEntity);
+
+				if (!MinecraftForge.EVENT_BUS.post(event))
+				{
+					ItemHandlerHelper.giveItemToPlayer(player, stack);
+				}
 			}
 
 			interactionManager = null;
@@ -542,7 +556,7 @@ public class AsmHandler
 		{
 			return 1F;
 		}
-		
+
 		return original;
 	}
 
