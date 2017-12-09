@@ -200,6 +200,7 @@ item.superLubricentBoots.name=Super Lubricent Boots
 item.flooSign.name=Floo Sign
 item.idcard.name=ID Card
 item.emeraldcompass.name=Emerald Compass
+item.flootoken.name=Floo Token
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -470,3 +471,4 @@ item.superLubricentBoots.info=Wearing Super Lubricent Boots makes you glide over
 item.flooSign.info=Right clicking a connected line of bricks with a Floo Sign will turn them into Floo Bricks and create a Floo Fireplace. When you are holding Floo Dust while standing on top of Floo Bricks & type a message in chat you will be teleported to the fireplace which name is closest to the message you typed. The name of a fireplace is defined by the name of the Floo Sign used to create it (Rename it in an Anvil). Fireplaces without a name can still be used to teleport but can't be teleported to. Players will arrrive facing the opposite direction you were facing while creating the fireplace.
 item.idcard.info=Can be used wherever an entity filter can be used and matches only the Player it's set to. You set it by right clicking it.
 item.emeraldcompass.info=Combined with an ID Card in a crafting table this compass will point at the owner of the id card as long as that player is online.
+item.flootoken.info=When thrown on the ground the floo token will create a temporary "fireplace" you can use to teleport through the floo network. Stand on the green flames and type your destination in chat to use it.

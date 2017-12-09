@@ -20,6 +20,7 @@ import lumien.randomthings.config.Numbers;
 import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
+import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
 import lumien.randomthings.handler.floo.FlooNetworkHandler;
 import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
@@ -469,8 +470,6 @@ public class RTEventHandler
 		ModelRune runeBaseModel = new ModelRune();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:runeBase", "normal"), runeBaseModel);
 
-
-
 		ModelInventoryRerouter inventoryRerouterModel = new ModelInventoryRerouter();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:inventoryRerouter", "normal"), inventoryRerouterModel);
 	}
@@ -510,8 +509,21 @@ public class RTEventHandler
 		IBlockState state = player.world.getBlockState(below);
 		ItemStack flooDust = player.getHeldItemMainhand();
 
-		if ((player.capabilities.isCreativeMode || (!flooDust.isEmpty() && flooDust.getItem() instanceof ItemIngredient && flooDust.getItemDamage() == ItemIngredient.INGREDIENT.FLOO_POWDER.id)) && state.getBlock() == ModBlocks.flooBrick)
+		if (!player.world.getEntitiesWithinAABB(EntityTemporaryFlooFireplace.class, player.getEntityBoundingBox().grow(0.5)).isEmpty())
 		{
+			String target = event.getMessage();
+			FlooNetworkHandler networkHandler = FlooNetworkHandler.get(player.world);
+			
+			boolean success = networkHandler.teleport(player.world, null, null, player, target);
+			
+			if (success)
+			{
+				event.setCanceled(true);
+			}
+		}
+		else if ((player.capabilities.isCreativeMode || (!flooDust.isEmpty() && flooDust.getItem() instanceof ItemIngredient && flooDust.getItemDamage() == ItemIngredient.INGREDIENT.FLOO_POWDER.id)) && state.getBlock() == ModBlocks.flooBrick)
+		{
+
 			String target = event.getMessage();
 
 			TileEntityFlooBrick te = (TileEntityFlooBrick) player.world.getTileEntity(below);
@@ -546,7 +558,6 @@ public class RTEventHandler
 
 			return;
 		}
-
 
 		Iterator<TileEntityChatDetector> iterator = TileEntityChatDetector.detectors.iterator();
 
@@ -935,7 +946,8 @@ public class RTEventHandler
 			{
 				for (int i = 0; i < 1; ++i)
 				{
-					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
+					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D)
+							* 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
 					particle.setRBGColorF(0.2F, 0.2F, 1);
 				}
 			}

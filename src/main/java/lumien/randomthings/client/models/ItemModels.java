@@ -125,6 +125,7 @@ public class ItemModels
 		registerItem(ModItems.flooSign);
 		registerItem(ModItems.idCard);
 		registerItem(ModItems.emeraldCompass);
+		registerItem(ModItems.flooToken);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);
