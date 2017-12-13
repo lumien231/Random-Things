@@ -35,7 +35,7 @@ public class RenderUtils
 {
 	static Gui gui = new Gui();
 
-	static Cache<String, Integer> biomeColorCache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).build();
+	static Cache<Biome, Integer> biomeColorCache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).build();
 
 	public static int getBiomeColor(IBlockAccess worldIn, final Biome biome, final BlockPos pos)
 	{
@@ -51,7 +51,7 @@ public class RenderUtils
 	        	int l = Color.WHITE.getRGB();
 				try
 				{
-					l = biomeColorCache.get(Biome.REGISTRY.getNameForObject(biomeA).toString(), new Callable<Integer>()
+					l = biomeColorCache.get(biomeA, new Callable<Integer>()
 					{
 						@Override
 						public Integer call() throws Exception
@@ -180,7 +180,7 @@ public class RenderUtils
 		{
 			try
 			{
-				return biomeColorCache.get(Biome.REGISTRY.getNameForObject(biome).toString(), new Callable<Integer>()
+				return biomeColorCache.get(biome, new Callable<Integer>()
 				{
 					@Override
 					public Integer call() throws Exception
