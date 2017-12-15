@@ -13,6 +13,7 @@ import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
+import lumien.randomthings.item.ItemPortKey;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ModItems;
@@ -487,6 +488,11 @@ public class AsmHandler
 			if (currentlyRendering.getItem() instanceof ItemSpectreKey)
 			{
 				return Color.CYAN.darker().getRGB() | -16777216;
+			}
+			
+			if (currentlyRendering.getItem() instanceof ItemPortKey)
+			{
+				return Color.MAGENTA.darker().getRGB() | -16777216;
 			}
 
 			NBTTagCompound compound;

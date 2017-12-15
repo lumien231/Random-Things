@@ -1,7 +1,10 @@
 package lumien.randomthings.handler;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -26,7 +29,6 @@ import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.handler.spectre.SpectreHandler;
-import lumien.randomthings.item.ItemEntityFilter;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
@@ -61,11 +63,13 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
@@ -110,6 +114,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -151,6 +156,69 @@ public class RTEventHandler
 				ClientModelLibrary.getInstance().reset();
 			}
 		});
+	}
+
+	@SubscribeEvent
+	public void itemPickup(EntityItemPickupEvent event)
+	{
+		EntityItem ei = event.getItem();
+		ItemStack stack = ei.getItem();
+		EntityPlayer player = event.getEntityPlayer();
+
+		if (stack.getItem() == ModItems.portKey)
+		{
+			NBTTagCompound targetCompound = stack.getSubCompound("target");
+
+			NBTTagCompound ageCompound = stack.getSubCompound("trueage");
+
+			if (ageCompound != null && ageCompound.getInteger("value") > 100 && targetCompound != null)
+			{
+				int dimension = targetCompound.getInteger("dimension");
+				int posX = targetCompound.getInteger("posX");
+				int posY = targetCompound.getInteger("posY");
+				int posZ = targetCompound.getInteger("posZ");
+
+				if (dimension == event.getEntityPlayer().world.provider.getDimension())
+				{
+					List<BlockPos> possiblePositions = new ArrayList<BlockPos>();
+
+					for (int modX = -2; modX < 3; modX++)
+					{
+						for (int modZ = -2; modZ < 3; modZ++)
+						{
+							for (int targetY = posY; targetY >= 0 && targetY >= posY - 10; targetY--)
+							{
+								BlockPos evPos = new BlockPos(posX + modX, targetY, posZ + modZ);
+
+								if (ei.world.isSideSolid(evPos, EnumFacing.UP))
+								{
+									if (ei.world.isAirBlock(evPos.up()) && ei.world.isAirBlock(evPos.up().up()))
+									{
+										possiblePositions.add(evPos);
+									}
+								}
+							}
+						}
+					}
+
+					if (!possiblePositions.isEmpty())
+					{
+						Collections.shuffle(possiblePositions);
+
+						BlockPos teleportTarget = possiblePositions.get(0);
+
+						player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
+
+						((EntityPlayerMP) event.getEntityPlayer()).connection.setPlayerLocation(teleportTarget.getX() + 0.5, teleportTarget.getY() + 1, teleportTarget.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
+
+						player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
+
+						ei.setDead();
+						event.setCanceled(true);
+					}
+				}
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -513,9 +581,9 @@ public class RTEventHandler
 		{
 			String target = event.getMessage();
 			FlooNetworkHandler networkHandler = FlooNetworkHandler.get(player.world);
-			
+
 			boolean success = networkHandler.teleport(player.world, null, null, player, target);
-			
+
 			if (success)
 			{
 				event.setCanceled(true);
@@ -946,8 +1014,7 @@ public class RTEventHandler
 			{
 				for (int i = 0; i < 1; ++i)
 				{
-					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D)
-							* 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
+					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
 					particle.setRBGColorF(0.2F, 0.2F, 1);
 				}
 			}
@@ -1032,29 +1099,52 @@ public class RTEventHandler
 			if (!itemStack.isEmpty())
 			{
 				Item item = itemStack.getItem();
+
+				boolean validItem = false;
+				int targetDimension = 0;
+				int targetX = 0;
+				int targetY = 0;
+				int targetZ = 0;
+
 				if (item == ModItems.positionFilter && itemStack.getTagCompound() != null)
 				{
 					NBTTagCompound compound = itemStack.getTagCompound();
-					int dimension = compound.getInteger("dimension");
-					int filterX = compound.getInteger("filterX");
-					int filterY = compound.getInteger("filterY");
-					int filterZ = compound.getInteger("filterZ");
 
-					if (player.dimension == dimension)
+					targetDimension = compound.getInteger("dimension");
+					targetX = compound.getInteger("filterX");
+					targetY = compound.getInteger("filterY");
+					targetZ = compound.getInteger("filterZ");
+					validItem = true;
+				}
+				else if (item == ModItems.portKey)
+				{
+					NBTTagCompound targetCompound = itemStack.getSubCompound("target");
+
+					if (targetCompound != null)
 					{
-						double playerX = player.prevPosX + (player.posX - player.prevPosX) * event.getPartialTicks();
-						double playerY = player.prevPosY + (player.posY - player.prevPosY) * event.getPartialTicks();
-						double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * event.getPartialTicks();
+						validItem = true;
 
-						GlStateManager.enableBlend();
-						GlStateManager.pushMatrix();
-						{
-							GlStateManager.translate(-playerX, -playerY, -playerZ);
-							RenderUtils.drawCube(filterX - 0.01F, filterY - 0.01F, filterZ - 0.01F, 1.02f, 102, 0, 255, 51);
-						}
-						GlStateManager.popMatrix();
-						GlStateManager.disableBlend();
+						targetDimension = targetCompound.getInteger("dimension");
+						targetX = targetCompound.getInteger("posX");
+						targetY = targetCompound.getInteger("posY");
+						targetZ = targetCompound.getInteger("posZ");
 					}
+				}
+
+				if (validItem && player.dimension == targetDimension)
+				{
+					double playerX = player.prevPosX + (player.posX - player.prevPosX) * event.getPartialTicks();
+					double playerY = player.prevPosY + (player.posY - player.prevPosY) * event.getPartialTicks();
+					double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * event.getPartialTicks();
+
+					GlStateManager.enableBlend();
+					GlStateManager.pushMatrix();
+					{
+						GlStateManager.translate(-playerX, -playerY, -playerZ);
+						RenderUtils.drawCube(targetX - 0.01F, targetY - 0.01F, targetZ - 0.01F, 1.02f, 102, 0, 255, 51);
+					}
+					GlStateManager.popMatrix();
+					GlStateManager.disableBlend();
 				}
 			}
 		}

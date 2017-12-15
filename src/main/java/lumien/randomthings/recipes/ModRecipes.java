@@ -81,22 +81,22 @@ public class ModRecipes
 			List<PotionHelper.MixPredicate<PotionType>> conversionList = (List<MixPredicate<PotionType>>) listField.get(null);
 
 			List<MixPredicate<PotionType>> toAdd = new ArrayList<MixPredicate<PotionType>>();
-			
+
 			for (MixPredicate<PotionType> p : conversionList)
 			{
 				Ingredient reagent = (Ingredient) reagentField.get(p);
-				
+
 				if (reagent.test(new ItemStack(Items.GLOWSTONE_DUST)))
 				{
 					PotionType input = (PotionType) inputField.get(p);
 					PotionType output = (PotionType) outputField.get(p);
-					
+
 					toAdd.add(new MixPredicate<PotionType>(input, Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.glowingMushroom)), output));
 				}
 			}
-			
-			
-			RandomThings.instance.logger.log(Level.DEBUG, "Added "+toAdd.size()+" Glowing Mushroom Recipes");
+
+
+			RandomThings.instance.logger.log(Level.DEBUG, "Added " + toAdd.size() + " Glowing Mushroom Recipes");
 			conversionList.addAll(toAdd);
 		}
 		catch (Exception e)
@@ -483,8 +483,8 @@ public class ModRecipes
 
 		RecipeSorter.register("luminousPowder", luminousPowderRecipe.getClass(), Category.SHAPELESS, "");
 		ForgeRegistries.RECIPES.register(luminousPowderRecipe);
-		
-		
+
+
 		// Emerald Compass
 		IRecipe emeraldCompassRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "emeraldcompass_settarget"))
 		{
@@ -608,7 +608,119 @@ public class ModRecipes
 			}
 		};
 
-		RecipeSorter.register("emeraldCompass", emeraldCompassRecipe.getClass(), Category.SHAPELESS, "");
-		ForgeRegistries.RECIPES.register(emeraldCompassRecipe);
+		// Emerald Compass
+		IRecipe portKeyCamoRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "portkey_camo"))
+		{
+			@Override
+			public boolean matches(InventoryCrafting inv, World worldIn)
+			{
+				ItemStack portkey = null;
+				ItemStack camo = null;
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == ModItems.portKey)
+						{
+							if (portkey == null)
+							{
+								portkey = is;
+							}
+							else
+							{
+								return false;
+							}
+						}
+						else if (is.getItem() != ModItems.portKey)
+						{
+							if (camo == null)
+							{
+								camo = is;
+							}
+							else
+							{
+								return false;
+							}
+						}
+					}
+				}
+				return portkey != null && camo != null;
+			}
+
+			@Override
+			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
+			{
+				NonNullList aitemstack = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() != ModItems.portKey)
+						{
+							aitemstack.set(i, is.copy());
+						}
+					}
+				}
+
+				return aitemstack;
+			}
+
+			@Override
+			public ItemStack getRecipeOutput()
+			{
+				return new ItemStack(ModItems.portKey);
+			}
+
+			@Override
+			public ItemStack getCraftingResult(InventoryCrafting inv)
+			{
+				ItemStack portKey = null;
+				ItemStack camo = null;
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == ModItems.portKey)
+						{
+							portKey = is;
+						}
+						else
+						{
+							camo = is;
+						}
+					}
+				}
+
+				ItemStack result = portKey.copy();
+
+				UUID uuid = ItemIDCard.getUUID(camo);
+
+				NBTTagCompound camoTag = result.getOrCreateSubCompound("camo");
+				
+				NBTTagCompound stackTag = new NBTTagCompound();
+				camo.writeToNBT(stackTag);
+				camoTag.setTag("stack", stackTag);
+				
+				return result;
+			}
+
+			@Override
+			public boolean canFit(int width, int height)
+			{
+				return true;
+			}
+		};
+
+		RecipeSorter.register("portKeyCamoRecipe", portKeyCamoRecipe.getClass(), Category.SHAPELESS, "");
+		ForgeRegistries.RECIPES.register(portKeyCamoRecipe);
 	}
 }

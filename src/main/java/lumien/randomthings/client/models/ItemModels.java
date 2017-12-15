@@ -1,6 +1,7 @@
 package lumien.randomthings.client.models;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.mesh.PortKeyMesh;
 import lumien.randomthings.client.mesh.RedstoneActivatorMesh;
 import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.item.ItemIngredient;
@@ -147,6 +148,9 @@ public class ItemModels
 		
 		ModelLoader.setCustomMeshDefinition(ModItems.redstoneActivator, new RedstoneActivatorMesh());
 		ModelBakery.registerItemVariants(ModItems.redstoneActivator, new ModelResourceLocation[]{new ModelResourceLocation("randomthings:redstoneactivator_0"),new ModelResourceLocation("randomthings:redstoneactivator_1"),new ModelResourceLocation("randomthings:redstoneactivator_2")});
+	
+		ModelLoader.setCustomMeshDefinition(ModItems.portKey, new PortKeyMesh());
+		ModelLoader.setCustomModelResourceLocation(ModItems.portKey, 1, new ModelResourceLocation("randomthings:portkey"));
 	}
 
 	private static void registerRuneDust()
