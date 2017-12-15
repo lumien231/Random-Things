@@ -475,7 +475,7 @@ public class AsmHandler
 
 	public static ItemStack currentlyRendering = null;
 
-	public static int enchantmentColorHook()
+	public static int enchantmentColorHook(int original)
 	{
 		if (currentlyRendering != null)
 		{
@@ -504,7 +504,7 @@ public class AsmHandler
 			}
 		}
 
-		return -8372020;
+		return original;
 	}
 
 	public static void armorColorHook(ItemStack stack)
@@ -523,7 +523,7 @@ public class AsmHandler
 
 	public static void armorEnchantmentHook()
 	{
-		int color = enchantmentColorHook();
+		int color = enchantmentColorHook(-8372020);
 
 		if (color != -8372020)
 		{

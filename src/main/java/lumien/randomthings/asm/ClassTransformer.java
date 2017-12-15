@@ -1001,8 +1001,7 @@ public class ClassTransformer implements IClassTransformer
 					if (lin.cst.equals(new Integer(-8372020)))
 					{
 						logger.log(Level.DEBUG, "- Found Texture Binding");
-						renderEffect.instructions.insert(lin, new MethodInsnNode(INVOKESTATIC, asmHandler, "enchantmentColorHook", "()I", false));
-						renderEffect.instructions.remove(lin);
+						renderEffect.instructions.insert(lin, new MethodInsnNode(INVOKESTATIC, asmHandler, "enchantmentColorHook", "(I)I", false));
 					}
 				}
 				else if (ain.getOpcode() == RETURN)
