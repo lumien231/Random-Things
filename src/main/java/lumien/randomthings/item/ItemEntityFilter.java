@@ -48,7 +48,7 @@ public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 			else
 			{
 				String entityKeyString = compound.getString("entityKey");
-				Class clazz = EntityList.getClassFromName(entityKeyString);
+				Class clazz = EntityList.getClass(new ResourceLocation(entityKeyString));
 
 				if (clazz != null)
 				{
