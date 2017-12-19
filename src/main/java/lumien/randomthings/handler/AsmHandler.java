@@ -190,42 +190,6 @@ public class AsmHandler
 		return b == ModBlocks.fertilizedDirt || b == ModBlocks.fertilizedDirtTilled;
 	}
 
-	static PlayerInteractionManager interactionManager;
-
-	public static void preHarvest(PlayerInteractionManager manager)
-	{
-		ItemStack tool = manager.player.getHeldItemMainhand();
-
-		if (tool != null && EnchantmentHelper.getEnchantmentLevel(ModEnchantments.magnetic, tool) > 0)
-		{
-			ItemCatcher.startCatching();
-			interactionManager = manager;
-		}
-	}
-
-	public static void postHarvest()
-	{
-		if (ItemCatcher.isCatching() && interactionManager != null)
-		{
-			EntityPlayer player = interactionManager.player;
-			for (ItemStack is : ItemCatcher.stopCatching())
-			{
-				ItemStack stack = is.copy();
-				EntityItem fakeEntity = new EntityItem(player.world, player.posX, player.posY, player.posZ);
-				fakeEntity.setItem(stack);
-
-				EntityItemPickupEvent event = new EntityItemPickupEvent(player, fakeEntity);
-
-				if (!MinecraftForge.EVENT_BUS.post(event))
-				{
-					ItemHandlerHelper.giveItemToPlayer(player, stack);
-				}
-			}
-
-			interactionManager = null;
-		}
-	}
-
 	public static boolean shouldPlayerDrop(InventoryPlayer inventory, int slot, ItemStack item)
 	{
 		return !(item.hasTagCompound() && item.getTagCompound().hasKey("spectreAnchor"));

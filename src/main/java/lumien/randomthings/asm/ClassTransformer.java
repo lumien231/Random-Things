@@ -681,43 +681,13 @@ public class ClassTransformer implements IClassTransformer
 		classReader.accept(classNode, 0);
 		logger.log(Level.DEBUG, "Found PlayerInteractionManager Class: " + classNode.name);
 
-		MethodNode tryHarvestBlock = null;
 		MethodNode getBlockReachDistance = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(MCPNames.method("func_180237_b")))
-			{
-				tryHarvestBlock = mn;
-			}
-			else if (mn.name.equals("getBlockReachDistance"))
+			if (mn.name.equals("getBlockReachDistance"))
 			{
 				getBlockReachDistance = mn;
-			}
-		}
-
-		if (tryHarvestBlock != null)
-		{
-			logger.log(Level.DEBUG, " - Found tryHarvestBlock");
-
-			InsnList startInsert = new InsnList();
-			startInsert.add(new VarInsnNode(ALOAD, 0));
-			startInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "preHarvest", "(Lnet/minecraft/server/management/PlayerInteractionManager;)V", false));
-
-			tryHarvestBlock.instructions.insert(startInsert);
-
-			for (int i = 0; i < tryHarvestBlock.instructions.size(); i++)
-			{
-				AbstractInsnNode ain = tryHarvestBlock.instructions.get(i);
-
-				if (ain.getOpcode() == Opcodes.IRETURN)
-				{
-					InsnList endInsert = new InsnList();
-					endInsert.add(new MethodInsnNode(Opcodes.INVOKESTATIC, asmHandler, "postHarvest", "()V", false));
-
-					tryHarvestBlock.instructions.insertBefore(ain, endInsert);
-					i += 1;
-				}
 			}
 		}
 

@@ -9,6 +9,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
@@ -221,11 +223,22 @@ public class RTEventHandler
 		}
 	}
 
-	@SubscribeEvent
-	public void entityJoinWorld(EntityJoinWorldEvent event)
-	{
-		ItemCatcher.entityJoinWorld(event);
+
+	@SubscribeEvent(priority=EventPriority.LOWEST)
+	public void onDrops(LivingDropsEvent e) {
+		ItemCatcher.onDrops(e);
 	}
+
+	@SubscribeEvent(priority=EventPriority.LOWEST)
+	public void onBreak(BlockEvent.BreakEvent e) {
+		ItemCatcher.onBreak(e);
+	}
+
+	@SubscribeEvent(priority=EventPriority.LOWEST)
+	public void onDrops(BlockEvent.HarvestDropsEvent e) {
+		ItemCatcher.onDrops(e);
+	}
+
 
 	@SubscribeEvent
 	public void loadLootTable(LootTableLoadEvent event)
@@ -521,6 +534,8 @@ public class RTEventHandler
 		{
 			event.setDroppedExperience(event.getDroppedExperience() + event.getOriginalExperience());
 		}
+
+		ItemCatcher.onDropXp(event);
 	}
 
 	@SideOnly(Side.CLIENT)
