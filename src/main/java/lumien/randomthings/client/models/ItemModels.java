@@ -77,6 +77,7 @@ public class ItemModels
 		registerBlock(ModBlocks.inventoryTester);
 		registerBlock(ModBlocks.superLubricentStone);
 		registerBlock(ModBlocks.redstonePlate);
+		registerBlock(ModBlocks.globalChatDetector);
 		
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);
@@ -160,7 +161,7 @@ public class ItemModels
 			String name = runeType.getName();
 
 			ModelLoader.setCustomModelResourceLocation(ModItems.runeDust, runeType.ordinal(), new ModelResourceLocation("randomthings:runedust", "inventory"));
-		}
+		} 
 	}
 
 	private static void registerIngredients()

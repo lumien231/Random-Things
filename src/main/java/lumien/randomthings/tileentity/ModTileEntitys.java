@@ -45,6 +45,7 @@ public class ModTileEntitys
 		registerTE(TileEntityNotificationInterface.class, "notificationInterface");
 		registerTE(TileEntityInventoryTester.class, "inventoryTester");
 		registerTE(TileEntityFlooBrick.class, "flooBrick");
+		registerTE(TileEntityGlobalChatDetector.class, "globalChatDetector");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

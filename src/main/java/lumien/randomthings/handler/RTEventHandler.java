@@ -40,6 +40,7 @@ import lumien.randomthings.recipes.anvil.AnvilRecipe;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.tileentity.TileEntityFlooBrick;
+import lumien.randomthings.tileentity.TileEntityGlobalChatDetector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.tileentity.TileEntityRuneBase;
@@ -591,7 +592,6 @@ public class RTEventHandler
 		}
 		else if ((player.capabilities.isCreativeMode || (!flooDust.isEmpty() && flooDust.getItem() instanceof ItemIngredient && flooDust.getItemDamage() == ItemIngredient.INGREDIENT.FLOO_POWDER.id)) && state.getBlock() == ModBlocks.flooBrick)
 		{
-
 			String target = event.getMessage();
 
 			TileEntityFlooBrick te = (TileEntityFlooBrick) player.world.getTileEntity(below);
@@ -635,6 +635,24 @@ public class RTEventHandler
 			if (chatDetector.isInvalid())
 			{
 				iterator.remove();
+			}
+			else
+			{
+				if (chatDetector.checkMessage(event.getUsername(), event.getMessage()))
+				{
+					event.setCanceled(true);
+				}
+			}
+		}
+		
+		Iterator<TileEntityGlobalChatDetector> iteratorGlobal = TileEntityGlobalChatDetector.detectors.iterator();
+
+		while (iteratorGlobal.hasNext())
+		{
+			TileEntityGlobalChatDetector chatDetector = iteratorGlobal.next();
+			if (chatDetector.isInvalid())
+			{
+				iteratorGlobal.remove();
 			}
 			else
 			{

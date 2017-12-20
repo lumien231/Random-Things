@@ -16,6 +16,7 @@ tile.lesserBeanStalk.name=Lesser Bean Stalk
 tile.beanPod.name=Bean Pod
 tile.beanSprout.name=Bean Sprout
 tile.chatDetector.name=Chat Detector
+tile.globalChatDetector.name=Global Chat Detector
 tile.lightRedirector.name=Light Redirector
 tile.imbuingStation.name=Imbuing Station
 tile.spectreBlock.name=Spectre Block

@@ -29,6 +29,7 @@ public class ModBlocks
 	public static BlockDyeingMachine dyeingMachine;
 	public static BlockOnlineDetector onlineDetector;
 	public static BlockChatDetector chatDetector;
+	public static BlockGlobalChatDetector globalChatDetector;
 	public static BlockEnderBridge enderBridge;
 	public static BlockEnderAnchor enderAnchor;
 	public static BlockBiomeStone biomeStone;
@@ -175,6 +176,7 @@ public class ModBlocks
 		glowingMushroom = new BlockGlowingMushroom();
 		inventoryTester = new BlockInventoryTester();
 		superLubricentStone = new BlockSuperLubricentStone();
+		globalChatDetector = new BlockGlobalChatDetector();
 
 		flooBrick = new BlockFlooBrick();
 
