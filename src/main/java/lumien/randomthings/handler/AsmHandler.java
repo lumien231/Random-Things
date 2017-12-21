@@ -157,6 +157,11 @@ public class AsmHandler
 
 	public static float getPlayerRange(float original, EntityPlayer player)
 	{
+		if (true)
+		{
+			return original;
+		}
+		
 		if (player != null)
 		{
 			ItemStack holdingMain = player.getHeldItemMainhand();

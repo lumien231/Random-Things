@@ -35,6 +35,7 @@ import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.lib.IExplosionImmune;
+import lumien.randomthings.lib.MagneticModifier;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.anvil.AnvilRecipe;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
@@ -226,6 +227,13 @@ public class RTEventHandler
 	public void entityJoinWorld(EntityJoinWorldEvent event)
 	{
 		ItemCatcher.entityJoinWorld(event);
+		
+		if (event.getEntity() instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.getEntity();
+			
+			player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).applyModifier(new MagneticModifier(player));
+		}
 	}
 
 	@SubscribeEvent

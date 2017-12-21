@@ -1,6 +1,5 @@
 package lumien.randomthings.handler.compability.oc;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 import li.cil.oc.api.machine.Arguments;
@@ -11,11 +10,6 @@ import li.cil.oc.api.prefab.DriverSidedTileEntity;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageNotification;
 import lumien.randomthings.tileentity.TileEntityNotificationInterface;
-import lumien.randomthings.tileentity.TileEntityOnlineDetector;
-import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
-import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
-import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,9 +17,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.GameData;
 
 public class DriverNotificationInterface extends DriverSidedTileEntity
 {
