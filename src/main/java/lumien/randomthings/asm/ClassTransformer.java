@@ -1284,6 +1284,7 @@ public class ClassTransformer implements IClassTransformer
 		MethodNode getRedstonePower = null;
 		MethodNode getStrongPower = null;
 		MethodNode isRainingAt = null;
+		MethodNode canSnowAt = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
@@ -1299,11 +1300,15 @@ public class ClassTransformer implements IClassTransformer
 			{
 				isRainingAt = mn;
 			}
+			else if (mn.name.equals(MCPNames.method("func_175708_f")))
+			{
+				canSnowAt = mn;
+			}
 		}
 
 		if (getRedstonePower != null)
 		{
-			logger.log(Level.DEBUG, "- Found getRedstonePower (1/3)");
+			logger.log(Level.DEBUG, "- Found getRedstonePower (1/4)");
 
 			InsnList toInsert = new InsnList();
 
@@ -1324,7 +1329,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (getStrongPower != null)
 		{
-			logger.log(Level.DEBUG, "- Found getStrongPower (2/3)");
+			logger.log(Level.DEBUG, "- Found getStrongPower (2/4)");
 
 			InsnList toInsert = new InsnList();
 
@@ -1345,8 +1350,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (isRainingAt != null)
 		{
-			logger.log(Level.DEBUG, "- Found isRainingAt (3/3)");
-
+			logger.log(Level.DEBUG, "- Found isRainingAt (3/4)");
 
 			AbstractInsnNode returnNode = null;
 			for (int i = 0; i < isRainingAt.instructions.size(); i++)
@@ -1372,6 +1376,35 @@ public class ClassTransformer implements IClassTransformer
 
 			isRainingAt.instructions.insertBefore(returnNode, toInsert);
 
+		}
+		
+		if (canSnowAt != null)
+		{
+			logger.log(Level.DEBUG, "- Found canSnowAt (4/4)");
+
+			AbstractInsnNode returnNode = null;
+			for (int i = 0; i < canSnowAt.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = canSnowAt.instructions.get(i);
+
+				if (ain.getOpcode() == Opcodes.IRETURN)
+				{
+					returnNode = ain;
+				}
+			}
+
+			InsnList toInsert = new InsnList();
+			LabelNode returnLabel = new LabelNode(new Label());
+
+			toInsert.add(new InsnNode(Opcodes.DUP));
+			toInsert.add(new JumpInsnNode(IFEQ, returnLabel));
+			toInsert.add(new InsnNode(POP));
+			toInsert.add(new VarInsnNode(ALOAD, 0));
+			toInsert.add(new VarInsnNode(ALOAD, 1));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "canSnowAt", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Z", false));
+			toInsert.add(returnLabel);
+
+			canSnowAt.instructions.insertBefore(returnNode, toInsert);
 		}
 
 		CustomClassWriter writer = new CustomClassWriter(CustomClassWriter.COMPUTE_MAXS | CustomClassWriter.COMPUTE_FRAMES);

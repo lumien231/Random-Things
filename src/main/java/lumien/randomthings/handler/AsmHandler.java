@@ -247,6 +247,11 @@ public class AsmHandler
 	{
 		return TileEntityRainShield.shouldRain(worldObj, pos.add(0, -pos.getY(), 0));
 	}
+	
+	public static boolean canSnowAt(World worldObj, BlockPos pos)
+	{
+		return TileEntityRainShield.shouldRain(worldObj, pos.add(0, -pos.getY(), 0));
+	}
 
 	public static boolean shouldRenderPotionParticles(EntityLivingBase entity)
 	{
