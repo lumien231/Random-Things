@@ -21,7 +21,9 @@ public class ItemCatcher
 		{
 			if (catchingDrops && !event.isCanceled())
 			{
-				catchedDrops.add(((EntityItem) event.getEntity()).getItem());
+				EntityItem ei = (EntityItem) event.getEntity();
+				ei.setPickupDelay(50000);
+				catchedDrops.add(ei.getItem());
 				event.setCanceled(true);
 			}
 		}
