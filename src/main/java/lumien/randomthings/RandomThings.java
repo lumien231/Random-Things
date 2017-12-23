@@ -143,7 +143,7 @@ public class RandomThings implements LoadingCallback
 		// Confirm all ASM Patches
 		asmConfirmer.confirm();
 
-		logger.log(Level.DEBUG, ClassTransformer.transformations + "/16 ASM Transformations were applied.");
+		logger.log(Level.DEBUG, ClassTransformer.transformations + "/17 ASM Transformations were applied.");
 
 		CustomClassWriter.customClassLoader = null;
 		

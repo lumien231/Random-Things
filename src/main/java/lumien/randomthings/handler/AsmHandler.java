@@ -150,34 +150,6 @@ public class AsmHandler
 		return -1;
 	}
 
-	public static double getPlayerRange(double original, EntityPlayer player)
-	{
-		return getPlayerRange((float) original, player);
-	}
-
-	public static float getPlayerRange(float original, EntityPlayer player)
-	{
-		if (true)
-		{
-			return original;
-		}
-		
-		if (player != null)
-		{
-			ItemStack holdingMain = player.getHeldItemMainhand();
-			ItemStack holdingOff = player.getHeldItemOffhand();
-
-			if (holdingMain.getItem() == ModItems.spectrePickaxe || holdingMain.getItem() == ModItems.spectreAxe || holdingMain.getItem() == ModItems.spectreShovel)
-			{
-				return original + 3;
-			}
-
-
-		}
-
-		return original;
-	}
-
 	public static void updateColor(float[] normal, float[] color, float x, float y, float z, float tint, int multiplier)
 	{
 		if (tint != -1)
