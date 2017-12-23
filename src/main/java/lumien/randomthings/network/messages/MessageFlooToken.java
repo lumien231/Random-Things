@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageFlooToken implements IRTMessage
 {
@@ -51,6 +52,7 @@ public class MessageFlooToken implements IRTMessage
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onMessage(MessageContext context)
 	{
 		EntityPlayer player = Minecraft.getMinecraft().player;
