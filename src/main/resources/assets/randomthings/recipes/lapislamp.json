@@ -7,8 +7,8 @@
   ],
   "key": {
     "L": {
-      "item": "minecraft:dye",
-      "data": 4
+      "type": "forge:ore_dict",
+      "ore": "gemLapis"
     },
     "A": {
       "item": "minecraft:redstone_lamp"

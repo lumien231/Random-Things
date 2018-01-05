@@ -11,8 +11,8 @@
       "data": 8
     },
     "C": {
-      "item": "minecraft:dye",
-      "data": 2
+      "type": "forge:ore_dict",
+      "ore": "dyeGreen"
     },
     "R": {
     	"item": "minecraft:redstone",

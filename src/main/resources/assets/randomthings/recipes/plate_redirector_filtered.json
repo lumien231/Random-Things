@@ -11,16 +11,16 @@
       "data": 8
     },
     "C": {
-      "item": "minecraft:dye",
-      "data": 2
+      "type": "forge:ore_dict",
+      "ore": "dyeGreen"
     },
     "Y": {
-      "item": "minecraft:dye",
-      "data": 11
+      "type": "forge:ore_dict",
+      "ore": "dyeYellow"
     },
     "L": {
-      "item": "minecraft:dye",
-      "data": 4
+      "type": "forge:ore_dict",
+      "ore": "dyeBlue"
     }
   },
   "result": {
