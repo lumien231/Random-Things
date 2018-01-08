@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
 
+import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -69,6 +70,12 @@ public class ItemStableEnderpearl extends ItemBase
 				if (player != null)
 				{
 					player.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1, 1);
+					
+					if (player.dimension != entityItem.dimension)
+					{
+						PlayerUtil.teleportPlayerToDimension(player, entityItem.dimension);
+					}
+					
 					player.connection.setPlayerLocation(entityItem.posX, entityItem.posY, entityItem.posZ, player.rotationYaw, player.rotationPitch);
 				}
 				else
