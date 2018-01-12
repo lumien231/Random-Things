@@ -3,15 +3,19 @@ package lumien.randomthings.item;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
+import lumien.randomthings.handler.festival.FestivalHandler;
 import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -26,7 +30,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 	public enum INGREDIENT
 	{
-		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder"), SUPERLUBRICENT_TINCTURE("superLubricentTincture"), FLOO_POWDER("flooPowder"), PLATE_BASE("plateBase");
+		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder"), SUPERLUBRICENT_TINCTURE("superLubricentTincture"), FLOO_POWDER("flooPowder"), PLATE_BASE("plateBase"), PRECIOUS_EMERALD("preciousEmerald");
 
 		public String name;
 
@@ -44,6 +48,12 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 		super("ingredient");
 
 		this.setHasSubtypes(true);
+	}
+	
+	@Override
+	public boolean hasEffect(ItemStack stack)
+	{
+		return stack.getItemDamage() == INGREDIENT.PRECIOUS_EMERALD.id;
 	}
 
 	@Override

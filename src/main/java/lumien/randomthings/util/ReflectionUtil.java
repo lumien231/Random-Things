@@ -10,7 +10,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
+import net.minecraft.village.Village;
 import net.minecraftforge.client.ItemModelMesherForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,20 +22,22 @@ public class ReflectionUtil
 {
 	static Field entityItemAge;
 	static Field simpleShapes;
+	static Field village;
 	static
 	{
 		try
 		{
 			entityItemAge = EntityItem.class.getDeclaredField(MCPNames.field("field_70292_b"));
 			entityItemAge.setAccessible(true);
+			
+			village = EntityVillager.class.getDeclaredField(MCPNames.field("field_70954_d"));
+			village.setAccessible(true);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	public static void makeModifiable(Field nameField) throws Exception
 	{
@@ -43,6 +47,24 @@ public class ReflectionUtil
 		modifiers = modifiers & ~Modifier.FINAL;
 		modifierField.setAccessible(true);
 		modifierField.setInt(nameField, modifiers);
+	}
+	
+	public static Village getVillage(EntityVillager villager)
+	{
+		try
+		{
+			return (Village) village.get(villager);
+		}
+		catch (IllegalArgumentException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	public static int getEntityItemAge(EntityItem entityItem)

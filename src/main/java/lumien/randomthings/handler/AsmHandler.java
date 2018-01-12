@@ -13,6 +13,7 @@ import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
+import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemPortKey;
 import lumien.randomthings.item.ItemRedstoneTool;
 import lumien.randomthings.item.ItemSpectreKey;
@@ -247,7 +248,7 @@ public class AsmHandler
 	{
 		return TileEntityRainShield.shouldRain(worldObj, pos.add(0, -pos.getY(), 0));
 	}
-	
+
 	public static boolean canSnowAt(World worldObj, BlockPos pos)
 	{
 		return TileEntityRainShield.shouldRain(worldObj, pos.add(0, -pos.getY(), 0));
@@ -471,7 +472,7 @@ public class AsmHandler
 			{
 				return Color.CYAN.darker().getRGB() | -16777216;
 			}
-			
+
 			if (currentlyRendering.getItem() instanceof ItemPortKey)
 			{
 				return Color.MAGENTA.darker().getRGB() | -16777216;
@@ -489,6 +490,11 @@ public class AsmHandler
 			if (currentlyRendering.getItem() instanceof ItemSpectreSword)
 			{
 				return Color.WHITE.darker().darker().getRGB() | -16777216;
+			}
+
+			if (currentlyRendering.getItem() instanceof ItemIngredient && currentlyRendering.getItemDamage() == ItemIngredient.INGREDIENT.PRECIOUS_EMERALD.id)
+			{
+				return Color.HSBtoRGB((float) (1D/360D * (30F * Math.sin(1 / 20D * RTEventHandler.clientAnimationCounter) + 1 + 120 - 90 + 120)), 1F, 0.6F);
 			}
 		}
 

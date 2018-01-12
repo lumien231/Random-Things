@@ -24,6 +24,7 @@ import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
+import lumien.randomthings.handler.festival.FestivalHandler;
 import lumien.randomthings.handler.floo.FlooNetworkHandler;
 import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
@@ -61,10 +62,12 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -89,6 +92,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.village.Village;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootEntry;
@@ -108,6 +113,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -119,6 +125,7 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
@@ -126,6 +133,7 @@ import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent.PotentialSpawns;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -157,6 +165,38 @@ public class RTEventHandler
 				ClientModelLibrary.getInstance().reset();
 			}
 		});
+	}
+
+	@SubscribeEvent
+	public void entityInteract(EntityInteract event)
+	{
+		Entity target = event.getTarget();
+		if (target instanceof EntityVillager)
+		{
+			EntityVillager villager = (EntityVillager) target;
+			ItemStack stack = event.getEntityPlayer().getHeldItem(event.getHand());
+
+			if (!stack.isEmpty() && stack.getItem() == ModItems.ingredients && stack.getItemDamage() == ItemIngredient.INGREDIENT.PRECIOUS_EMERALD.id && !target.world.isRemote)
+			{
+				int success = FestivalHandler.get(target.world).addFestival((EntityVillager) target);
+
+				if (success == 2)
+				{
+					stack.shrink(1);
+
+					villager.world.setEntityState(villager, (byte) 12);
+				}
+				else if (success == 1)
+				{
+					villager.world.setEntityState(villager, (byte) 14);
+				}
+				else{
+					villager.world.setEntityState(villager, (byte) 13);
+				}
+			}
+
+			event.setCanceled(true);
+		}
 	}
 
 	@SubscribeEvent
@@ -364,6 +404,12 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void tick(TickEvent tickEvent)
 	{
+		if (tickEvent.type == TickEvent.Type.WORLD && tickEvent.phase == TickEvent.Phase.START)
+		{
+			World world = ((WorldTickEvent) tickEvent).world;
+			FestivalHandler.get(world).tick(world);
+		}
+
 		if ((tickEvent.type == TickEvent.Type.CLIENT || tickEvent.type == TickEvent.Type.SERVER) && tickEvent.phase == TickEvent.Phase.END)
 		{
 			TileEntityRainShield.rainCache.clear();
@@ -644,7 +690,7 @@ public class RTEventHandler
 				}
 			}
 		}
-		
+
 		Iterator<TileEntityGlobalChatDetector> iteratorGlobal = TileEntityGlobalChatDetector.detectors.iterator();
 
 		while (iteratorGlobal.hasNext())

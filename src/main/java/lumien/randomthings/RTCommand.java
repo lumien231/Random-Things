@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
 
+import lumien.randomthings.handler.festival.Festival;
+import lumien.randomthings.handler.festival.FestivalHandler;
 import lumien.randomthings.handler.floo.FlooFireplace;
 import lumien.randomthings.handler.floo.FlooNetworkHandler;
 import lumien.randomthings.item.ItemBiomeCrystal;
@@ -14,10 +16,12 @@ import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageNotification;
+import lumien.randomthings.util.ReflectionUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -27,9 +31,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -54,7 +61,7 @@ public class RTCommand extends CommandBase
 	{
 		if (args.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn", "notify", "fireplaces" });
+			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn", "notify", "fireplaces", "festival" });
 		}
 		else
 		{
@@ -204,6 +211,31 @@ public class RTCommand extends CommandBase
 				BlockPos pos = firePlace.getLastKnownPosition();
 
 				sender.sendMessage(new TextComponentString((name == null ? "<Unnamed>" : name) + " | " + String.format("%d %d %d", pos.getX(), pos.getY(), pos.getZ()) + (ownerName != null ? " | " + ownerName : "")));
+			}
+		}
+		else if (args[0].equals("festival"))
+		{
+			FestivalHandler handler = FestivalHandler.get(sender.getEntityWorld());
+			List<EntityVillager> villagerList = sender.getEntityWorld().getEntitiesWithinAABB(EntityVillager.class, new AxisAlignedBB(sender.getPosition()).grow(50));
+
+			if (!villagerList.isEmpty())
+			{
+				EntityVillager villager = villagerList.get(0);
+
+				int success = handler.addFestival(villager);
+
+				if (success == 2)
+				{
+					sender.sendMessage(new TextComponentTranslation("command.festival.scheduled"));
+				}
+				else
+				{
+					sender.sendMessage(new TextComponentTranslation("command.festival.failed"));
+				}
+			}
+			else
+			{
+				sender.sendMessage(new TextComponentTranslation("command.festival.novillager"));
 			}
 		}
 	}
