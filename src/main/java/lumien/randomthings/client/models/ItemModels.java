@@ -65,7 +65,6 @@ public class ItemModels
 		registerBlock(ModBlocks.redstoneObserver);
 		registerBlock(ModBlocks.biomeRadar);
 		registerBlock(ModBlocks.ironDropper);
-		registerBlock(ModBlocks.itemProjector);
 		registerBlock(ModBlocks.igniter);
 		registerBlock(ModBlocks.inventoryRerouter);
 		registerBlock(ModBlocks.runeBase);
