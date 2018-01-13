@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import lumien.randomthings.block.BlockPotionVaporizer;
+import lumien.randomthings.lib.ISlotFilter;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessagePotionVaporizerParticles;
 import lumien.randomthings.util.InventoryUtil;
@@ -30,11 +31,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-public class TileEntityPotionVaporizer extends TileEntityBase implements ITickable, ISidedInventory
+public class TileEntityPotionVaporizer extends TileEntityBase implements ITickable
 {
 	HashSet<BlockPos> affectedBlocks;
-
-	InventoryBasic inventory;
 
 	final int MAX_BLOCKS = 100;
 
@@ -56,14 +55,50 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		durationLeft = 1;
 		fuelBurnTime = 0;
 
-		inventory = new InventoryBasic("tile.potionVaporizer", false, 3);
+		this.setItemHandler(3);
+		this.setItemHandlerPublic(new int[] { 0, 1 }, new int[] { 2 });
+		
+		this.addSlotFilter(0, new ISlotFilter()
+		{
+			@Override
+			public boolean isItemStackValid(ItemStack is)
+			{
+				return TileEntityFurnace.isItemFuel(is);
+			}
+		});
+		
+		this.addSlotFilter(1, new ISlotFilter()
+		{
+			@Override
+			public boolean isItemStackValid(ItemStack is)
+			{
+				if (is.getItem() != Items.POTIONITEM)
+				{
+					return false;
+				}
+				List<PotionEffect> effects = PotionUtils.getEffectsFromStack(is);
+				if (effects==null || effects.size()==0)
+				{
+					return false;
+				}
+				
+				return !effects.get(0).getPotion().isInstant();
+			}
+		});
+		
+		this.addSlotFilter(2, new ISlotFilter()
+		{
+			@Override
+			public boolean isItemStackValid(ItemStack is)
+			{
+				return is.getItem() == Items.GLASS_BOTTLE;
+			}
+		});
 	}
 
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound)
 	{
-		InventoryUtil.writeInventoryToCompound(compound, inventory);
-
 		compound.setInteger("durationLeft", durationLeft);
 		compound.setInteger("fuelBurn", fuelBurn);
 		compound.setInteger("fuelBurnTime", fuelBurnTime);
@@ -96,8 +131,6 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	@Override
 	public void readDataFromNBT(NBTTagCompound compound)
 	{
-		InventoryUtil.readInventoryFromCompound(compound, inventory);
-
 		durationLeft = compound.getInteger("durationLeft");
 		fuelBurn = compound.getInteger("fuelBurn");
 		fuelBurnTime = compound.getInteger("fuelBurnTime");
@@ -141,11 +174,6 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		}
 	}
 
-	public IInventory getInventory()
-	{
-		return inventory;
-	}
-
 	public int getDurationLeft()
 	{
 		return durationLeft;
@@ -183,11 +211,11 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		}
 		else if (currentPotionEffect != null && affectedBlocks.size() > 0)
 		{
-			if (!getStackInSlot(0).isEmpty() && durationLeft > 0)
+			if (!getItemHandler().getStackInSlot(0).isEmpty() && durationLeft > 0)
 			{
-				fuelBurnTime = fuelBurn = TileEntityFurnace.getItemBurnTime(getStackInSlot(0));
+				fuelBurnTime = fuelBurn = TileEntityFurnace.getItemBurnTime(getItemHandler().getStackInSlot(0));
 
-				decrStackSize(0, 1);
+				getItemHandler().extractItem(0, 1, false);
 			}
 		}
 	}
@@ -196,11 +224,11 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	{
 		if (currentPotionEffect == null)
 		{
-			ItemStack newPotion = inventory.getStackInSlot(1);
+			ItemStack newPotion = getItemHandler().getStackInSlot(1);
 
 			if (!newPotion.isEmpty())
 			{
-				ItemStack output = getStackInSlot(2);
+				ItemStack output = getItemHandler().getStackInSlot(2);
 
 				if (output.isEmpty() || output.getCount() < 64)
 				{
@@ -211,7 +239,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 						currentPotionEffect = new PotionEffect(effects.get(0));
 						durationLeft = currentPotionEffect.getDuration();
 
-						inventory.setInventorySlotContents(1, ItemStack.EMPTY);
+						getItemHandler().extractItem(1, 1, false);
 
 						if (!output.isEmpty())
 						{
@@ -219,7 +247,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 						}
 						else
 						{
-							setInventorySlotContents(2, new ItemStack(Items.GLASS_BOTTLE, 1, 0));
+							getItemHandler().insertItem(2, new ItemStack(Items.GLASS_BOTTLE, 1, 0), false);
 						}
 					}
 				}
@@ -341,139 +369,6 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 		toBeChecked.add(this.pos.offset(facing));
 	}
 
-	@Override
-	public int getSizeInventory()
-	{
-		return inventory.getSizeInventory();
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int index)
-	{
-		return inventory.getStackInSlot(index);
-	}
-
-	@Override
-	public ItemStack decrStackSize(int index, int count)
-	{
-		return inventory.decrStackSize(index, count);
-	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int index)
-	{
-		return inventory.removeStackFromSlot(index);
-	}
-
-	@Override
-	public void setInventorySlotContents(int index, ItemStack stack)
-	{
-		inventory.setInventorySlotContents(index, stack);
-	}
-
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return inventory.getInventoryStackLimit();
-	}
-
-	@Override
-	public boolean isUsableByPlayer(EntityPlayer player)
-	{
-		return inventory.isUsableByPlayer(player);
-	}
-
-	@Override
-	public void openInventory(EntityPlayer player)
-	{
-		inventory.openInventory(player);
-	}
-
-	@Override
-	public void closeInventory(EntityPlayer player)
-	{
-		inventory.closeInventory(player);
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack)
-	{
-		return inventory.isItemValidForSlot(index, stack);
-	}
-
-	@Override
-	public int getField(int id)
-	{
-		return inventory.getField(id);
-	}
-
-	@Override
-	public void setField(int id, int value)
-	{
-		inventory.setField(id, value);
-	}
-
-	@Override
-	public int getFieldCount()
-	{
-		return inventory.getFieldCount();
-	}
-
-	@Override
-	public void clear()
-	{
-		inventory.clear();
-	}
-
-	@Override
-	public String getName()
-	{
-		return inventory.getName();
-	}
-
-	@Override
-	public boolean hasCustomName()
-	{
-		return inventory.hasCustomName();
-	}
-
-	@Override
-	public ITextComponent getDisplayName()
-	{
-		return inventory.getDisplayName();
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing side)
-	{
-		return new int[] { 0, 1, 2 };
-	}
-
-	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
-	{
-		if (index == 2)
-		{
-			return false;
-		}
-
-		switch (index)
-		{
-			case 0:
-				return TileEntityFurnace.isItemFuel(itemStackIn);
-			case 1:
-				return itemStackIn.getItem() == Items.POTIONITEM;
-		}
-
-		return false;
-	}
-
-	@Override
-	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
-	{
-		return index == 2;
-	}
-
 	public int getPotionID()
 	{
 		if (currentPotionEffect == null)
@@ -506,17 +401,5 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	public int getFuelBurn()
 	{
 		return fuelBurn;
-	}
-
-	@Override
-	public boolean writeNBTToDescriptionPacket()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isEmpty()
-	{
-		return inventory.isEmpty();
 	}
 }

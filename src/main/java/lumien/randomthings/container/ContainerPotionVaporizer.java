@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import lumien.randomthings.container.slots.SlotFiltered;
+import lumien.randomthings.container.slots.SlotItemHandlerOutputOnly;
 import lumien.randomthings.container.slots.SlotOutputOnly;
 import lumien.randomthings.tileentity.TileEntityPotionVaporizer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerPotionVaporizer extends Container
 {
@@ -46,30 +49,11 @@ public class ContainerPotionVaporizer extends Container
 	public ContainerPotionVaporizer(EntityPlayer player, World world, int x, int y, int z)
 	{
 		potionVaporizer = (TileEntityPotionVaporizer) world.getTileEntity(new BlockPos(x, y, z));
-		IInventory inventory = potionVaporizer.getInventory();
+		IItemHandler itemHandler = potionVaporizer.getItemHandler();
 
-		this.addSlotToContainer(new SlotFurnaceFuel(inventory, 0, 80, 53));
-		this.addSlotToContainer(new SlotFiltered(inventory, 1, 29, 17, new Predicate<ItemStack>()
-		{
-			@Override
-			public boolean apply(ItemStack input)
-			{
-				if (input.getItem() != Items.POTIONITEM)
-				{
-					return false;
-				}
-				List<PotionEffect> effects = PotionUtils.getEffectsFromStack(input);
-				if (effects==null || effects.size()==0)
-				{
-					return false;
-				}
-				
-				return !effects.get(0).getPotion().isInstant();
-				
-			}
-		}));
-
-		this.addSlotToContainer(new SlotOutputOnly(inventory, 2, 131, 17));
+		this.addSlotToContainer(new SlotItemHandler(itemHandler, 0, 80, 53));
+		this.addSlotToContainer(new SlotItemHandler(itemHandler, 1, 29, 17));
+		this.addSlotToContainer(new SlotItemHandlerOutputOnly(itemHandler, 2, 131, 17));
 
 		bindPlayerInventory(player.inventory);
 	}
@@ -118,14 +102,14 @@ public class ContainerPotionVaporizer extends Container
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	public boolean mergeItemStack(ItemStack par1ItemStack, int startIndex, int endIndex, boolean reverseDirection)
 	{
 		boolean flag1 = false;
-		int k = par2;
+		int k = startIndex;
 
-		if (par4)
+		if (reverseDirection)
 		{
-			k = par3 - 1;
+			k = endIndex - 1;
 		}
 
 		Slot slot;
@@ -133,7 +117,7 @@ public class ContainerPotionVaporizer extends Container
 
 		if (par1ItemStack.isStackable())
 		{
-			while (par1ItemStack.getCount() > 0 && (!par4 && k < par3 || par4 && k >= par2))
+			while (par1ItemStack.getCount() > 0 && (!reverseDirection && k < endIndex || reverseDirection && k >= startIndex))
 			{
 				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
@@ -158,7 +142,7 @@ public class ContainerPotionVaporizer extends Container
 					}
 				}
 
-				if (par4)
+				if (reverseDirection)
 				{
 					--k;
 				}
@@ -171,16 +155,16 @@ public class ContainerPotionVaporizer extends Container
 
 		if (par1ItemStack.getCount() > 0)
 		{
-			if (par4)
+			if (reverseDirection)
 			{
-				k = par3 - 1;
+				k = endIndex - 1;
 			}
 			else
 			{
-				k = par2;
+				k = startIndex;
 			}
 
-			while (!par4 && k < par3 || par4 && k >= par2)
+			while (!reverseDirection && k < endIndex || reverseDirection && k >= startIndex)
 			{
 				slot = this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
@@ -207,7 +191,7 @@ public class ContainerPotionVaporizer extends Container
 					}
 				}
 
-				if (par4)
+				if (reverseDirection)
 				{
 					--k;
 				}

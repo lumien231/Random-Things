@@ -1,9 +1,13 @@
 package lumien.randomthings.tileentity;
 
+import java.util.HashMap;
+
 import lumien.randomthings.lib.IRedstoneSensitive;
+import lumien.randomthings.lib.ISlotFilter;
 import lumien.randomthings.lib.ItemHandlerWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -17,6 +21,8 @@ public abstract class TileEntityBase extends TileEntity
 {
 	private IItemHandler inventoryHandler;
 	private IItemHandler publicInventoryHandler;
+	
+	private HashMap<Integer, ISlotFilter> slotFilter;
 
 	private boolean itemHandlerInternal = true;
 
@@ -32,7 +38,31 @@ public abstract class TileEntityBase extends TileEntity
 				super.onContentsChanged(slots);
 				TileEntityBase.this.markDirty();
 			}
+			
+			@Override
+			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+			{
+				if (slotFilter != null && slotFilter.containsKey(slot))
+				{
+					if (!slotFilter.get(slot).isItemStackValid(stack))
+					{
+						return stack;
+					}
+				}
+				
+				return super.insertItem(slot, stack, simulate);
+			}
 		};
+	}
+	
+	protected void addSlotFilter(int slot, ISlotFilter filter)
+	{
+		if (slotFilter == null)
+		{
+			slotFilter = new HashMap<Integer, ISlotFilter>();
+		}
+		
+		slotFilter.put(slot, filter);
 	}
 
 	protected void setItemHandlerPublic(int[] insertSlots, int[] outputSlots)
