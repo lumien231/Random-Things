@@ -4,16 +4,17 @@ import java.util.ArrayList;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 
 public class ImbuingRecipeHandler
 {
 	public static ArrayList<ImbuingRecipe> imbuingRecipes = new ArrayList<>();
 
-	public static ItemStack getRecipeOutput(IInventory imbuingItems)
+	public static ItemStack getRecipeOutput(IItemHandler iItemHandler)
 	{
 		for (ImbuingRecipe ir : imbuingRecipes)
 		{
-			if (ir.matchesInventory(imbuingItems))
+			if (ir.matchesItemHandler(iItemHandler))
 			{
 				return ir.result;
 			}

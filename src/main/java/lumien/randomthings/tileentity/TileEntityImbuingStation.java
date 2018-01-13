@@ -1,5 +1,8 @@
 package lumien.randomthings.tileentity;
 
+import org.apache.logging.log4j.Level;
+
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,10 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityImbuingStation extends TileEntityBase implements IInventory, ITickable
+public class TileEntityImbuingStation extends TileEntityBase implements ITickable
 {
-	InventoryBasic inventory;
 	public int imbuingProgress;
 
 	ItemStack currentOutput = ItemStack.EMPTY;
@@ -21,22 +24,54 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 
 	public TileEntityImbuingStation()
 	{
-		inventory = new InventoryBasic("Imbuing Station", false, 5);
+		this.setItemHandler(5);
+		this.setItemHandlerPublic(new int[] { 0, 1, 2, 3 }, new int[] { 4 });
 	}
 
 	@Override
 	public void writeDataToNBT(NBTTagCompound nbt)
 	{
 		nbt.setInteger("imbuingProgress", imbuingProgress);
-		InventoryUtil.writeInventoryToCompound(nbt, inventory);
+
+		if (!currentOutput.isEmpty())
+		{
+			NBTTagCompound outputCompound = new NBTTagCompound();
+			currentOutput.writeToNBT(outputCompound);
+			nbt.setTag("output", outputCompound);
+		}
 	}
 
 	@Override
 	public void readDataFromNBT(NBTTagCompound nbt)
 	{
 		this.imbuingProgress = nbt.getInteger("imbuingProgress");
-		InventoryUtil.readInventoryFromCompound(nbt, inventory);
-		this.currentOutput = ImbuingRecipeHandler.getRecipeOutput(inventory);
+
+		boolean inventoryThere = false;
+		for (int slot = 0; slot < getItemHandler().getSlots(); slot++)
+		{
+			if (nbt.hasKey("slot" + slot))
+			{
+				inventoryThere = true;
+				break;
+			}
+		}
+
+		if (inventoryThere)
+		{
+			InventoryBasic inventory = new InventoryBasic("", false, getItemHandler().getSlots());
+			InventoryUtil.readInventoryFromCompound(nbt, inventory);
+			for (int slot = 0; slot < inventory.getSizeInventory(); slot++)
+			{
+				((ItemStackHandler) this.getItemHandler()).setStackInSlot(slot, inventory.getStackInSlot(slot));
+			}
+
+			RandomThings.instance.logger.log(Level.DEBUG, "Switching Imbuing Station to Item Handler...");
+		}
+
+		if (nbt.hasKey("output"))
+		{
+			currentOutput = new ItemStack(nbt.getCompoundTag("output"));
+		}
 	}
 
 	@Override
@@ -44,14 +79,14 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	{
 		if (!world.isRemote)
 		{
-			ItemStack validOutput = ImbuingRecipeHandler.getRecipeOutput(inventory);
+			ItemStack validOutput = ImbuingRecipeHandler.getRecipeOutput(getItemHandler());
 			if (!ItemStack.areItemStacksEqual(validOutput, currentOutput) && canHandleOutput(validOutput))
 			{
 				this.imbuingProgress = 0;
 				currentOutput = validOutput;
 			}
 
-			
+
 			if (!this.currentOutput.isEmpty())
 			{
 				this.imbuingProgress++;
@@ -70,13 +105,13 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 
 	private boolean canHandleOutput(ItemStack validOutput)
 	{
-		if (validOutput.isEmpty() || inventory.getStackInSlot(4).isEmpty())
+		if (validOutput.isEmpty() || getItemHandler().getStackInSlot(4).isEmpty())
 		{
 			return true;
 		}
 		else
 		{
-			ItemStack currentInOutput = inventory.getStackInSlot(4);
+			ItemStack currentInOutput = getItemHandler().getStackInSlot(4);
 			ItemStack requiredOutput = validOutput;
 
 			if (!(ItemStack.areItemsEqual(currentInOutput, requiredOutput) && ItemStack.areItemStackTagsEqual(currentInOutput, requiredOutput)))
@@ -97,123 +132,12 @@ public class TileEntityImbuingStation extends TileEntityBase implements IInvento
 	private void imbue()
 	{
 		// Set Output
-		if (this.inventory.getStackInSlot(4).isEmpty())
-		{
-			this.inventory.setInventorySlotContents(4, currentOutput.copy());
-		}
-		else
-		{
-			this.inventory.getStackInSlot(4).grow(currentOutput.getCount());
-		}
+		this.getItemHandler().insertItem(4, currentOutput.copy(), false);
 
 		// Decrease Ingredients
-		for (int slot = 0; slot < this.inventory.getSizeInventory() - 1; slot++)
+		for (int slot = 0; slot < this.getItemHandler().getSlots() - 1; slot++)
 		{
-			this.inventory.decrStackSize(slot, 1);
+			this.getItemHandler().extractItem(slot, 1, false);
 		}
-	}
-
-	@Override
-	public int getSizeInventory()
-	{
-		return inventory.getSizeInventory();
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int slot)
-	{
-		return inventory.getStackInSlot(slot);
-	}
-
-	@Override
-	public ItemStack decrStackSize(int slot, int amount)
-	{
-		return inventory.decrStackSize(slot, amount);
-	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int slot)
-	{
-		return inventory.getStackInSlot(slot);
-	}
-
-	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack)
-	{
-		inventory.setInventorySlotContents(slot, stack);
-	}
-
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return inventory.getInventoryStackLimit();
-	}
-
-	@Override
-	public boolean isUsableByPlayer(EntityPlayer player)
-	{
-		return player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
-	}
-
-	@Override
-	public boolean hasCustomName()
-	{
-		return false;
-	}
-
-	@Override
-	public ITextComponent getDisplayName()
-	{
-		return null;
-	}
-
-	@Override
-	public void openInventory(EntityPlayer player)
-	{
-	}
-
-	@Override
-	public void closeInventory(EntityPlayer player)
-	{
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack)
-	{
-		return index != 4;
-	}
-
-	@Override
-	public int getField(int id)
-	{
-		return 0;
-	}
-
-	@Override
-	public void setField(int id, int value)
-	{
-	}
-
-	@Override
-	public int getFieldCount()
-	{
-		return 0;
-	}
-
-	@Override
-	public void clear()
-	{
-	}
-
-	@Override
-	public String getName()
-	{
-		return "Imbuing Station";
-	}
-
-	@Override
-	public boolean isEmpty()
-	{
-		return this.inventory.isEmpty();
 	}
 }

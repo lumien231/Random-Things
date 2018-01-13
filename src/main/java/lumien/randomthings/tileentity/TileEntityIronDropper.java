@@ -49,14 +49,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 
 	public TileEntityIronDropper()
 	{
-		this.setItemHandler(new ItemStackHandler(9)
-		{
-			@Override
-			protected void onContentsChanged(int slot)
-			{
-				TileEntityIronDropper.this.markDirty();
-			}
-		});
+		this.setItemHandler(9);
 	}
 
 	@Override

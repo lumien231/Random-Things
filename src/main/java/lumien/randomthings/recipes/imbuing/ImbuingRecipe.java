@@ -6,6 +6,7 @@ import java.util.HashMap;
 import lumien.randomthings.util.ItemUtil;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 
 public class ImbuingRecipe
 {
@@ -25,13 +26,13 @@ public class ImbuingRecipe
 		}
 	}
 
-	public boolean matchesInventory(IInventory e)
+	public boolean matchesItemHandler(IItemHandler iItemHandler)
 	{
 		HashMap<ItemStack, Boolean> providedIngredients = new HashMap<>();
-		ItemStack i1 = e.getStackInSlot(0);
-		ItemStack i2 = e.getStackInSlot(1);
-		ItemStack i3 = e.getStackInSlot(2);
-		ItemStack center = e.getStackInSlot(3);
+		ItemStack i1 = iItemHandler.getStackInSlot(0);
+		ItemStack i2 = iItemHandler.getStackInSlot(1);
+		ItemStack i3 = iItemHandler.getStackInSlot(2);
+		ItemStack center = iItemHandler.getStackInSlot(3);
 
 		providedIngredients.put(i1, false);
 		providedIngredients.put(i2, false);

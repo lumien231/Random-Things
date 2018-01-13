@@ -38,17 +38,7 @@ public class TileEntityGlobalChatDetector extends TileEntityBase implements ITic
 			detectors.add(this);
 		}
 
-		this.setItemHandlerInternal();
-		this.setItemHandler(new ItemStackHandler(9)
-		{
-			@Override
-			protected void onContentsChanged(int slot)
-			{
-				super.onContentsChanged(slot);
-
-				TileEntityGlobalChatDetector.this.markDirty();
-			}
-		});
+		this.setItemHandler(9);
 	}
 
 	@Override

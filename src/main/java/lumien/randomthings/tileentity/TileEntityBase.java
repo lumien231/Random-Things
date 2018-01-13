@@ -1,6 +1,7 @@
 package lumien.randomthings.tileentity;
 
 import lumien.randomthings.lib.IRedstoneSensitive;
+import lumien.randomthings.lib.ItemHandlerWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,25 +16,36 @@ import net.minecraftforge.items.ItemStackHandler;
 public abstract class TileEntityBase extends TileEntity
 {
 	private IItemHandler inventoryHandler;
-	private boolean itemHandlerInternal = false;
-	
+	private IItemHandler publicInventoryHandler;
+
+	private boolean itemHandlerInternal = true;
+
 	private boolean redstonePowered;
 
-	protected void setItemHandler(IItemHandler handler)
+	protected void setItemHandler(int slots)
 	{
-		this.inventoryHandler = handler;
+		this.inventoryHandler = new ItemStackHandler(slots)
+		{
+			@Override
+			protected void onContentsChanged(int slot)
+			{
+				super.onContentsChanged(slots);
+				TileEntityBase.this.markDirty();
+			}
+		};
 	}
-	
-	protected void setItemHandlerInternal()
+
+	protected void setItemHandlerPublic(int[] insertSlots, int[] outputSlots)
 	{
-		this.itemHandlerInternal = true;
+		this.itemHandlerInternal = false;
+		this.publicInventoryHandler = new ItemHandlerWrapper(inventoryHandler, insertSlots, outputSlots);
 	}
-	
+
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
-    {
-        return (oldState.getBlock() != newState.getBlock());
-    }
+	{
+		return (oldState.getBlock() != newState.getBlock());
+	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
@@ -160,9 +172,9 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
 	{
-		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryHandler != null && !itemHandlerInternal)
+		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && !itemHandlerInternal)
 		{
-			return (T) inventoryHandler;
+			return (T) publicInventoryHandler;
 		}
 		return super.getCapability(capability, facing);
 	}
@@ -170,13 +182,13 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, net.minecraft.util.EnumFacing facing)
 	{
-		return (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && inventoryHandler != null && !itemHandlerInternal) || super.hasCapability(capability, facing);
+		return (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && !itemHandlerInternal) || super.hasCapability(capability, facing);
 	}
 
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 	}
-	
+
 	public boolean isRedstonePowered()
 	{
 		return redstonePowered;

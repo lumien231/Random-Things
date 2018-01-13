@@ -1,5 +1,6 @@
 package lumien.randomthings.container;
 
+import lumien.randomthings.container.slots.SlotItemHandlerOutputOnly;
 import lumien.randomthings.container.slots.SlotOutputOnly;
 import lumien.randomthings.tileentity.TileEntityImbuingStation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerImbuingStation extends Container
 {
@@ -22,11 +25,13 @@ public class ContainerImbuingStation extends Container
 	{
 		this.te = (TileEntityImbuingStation) world.getTileEntity(new BlockPos(x, y, z));
 
-		this.addSlotToContainer(new Slot(te, 0, 80, 9));
-		this.addSlotToContainer(new Slot(te, 1, 35, 54));
-		this.addSlotToContainer(new Slot(te, 2, 80, 99));
-		this.addSlotToContainer(new Slot(te, 3, 80, 54));
-		this.addSlotToContainer(new SlotOutputOnly(te, 4, 125, 54));
+		IItemHandler itemHandler = te.getItemHandler();
+		
+		this.addSlotToContainer(new SlotItemHandler(itemHandler, 0, 80, 9));
+		this.addSlotToContainer(new SlotItemHandler(itemHandler, 1, 35, 54));
+		this.addSlotToContainer(new SlotItemHandler(itemHandler, 2, 80, 99));
+		this.addSlotToContainer(new SlotItemHandler(itemHandler, 3, 80, 54));
+		this.addSlotToContainer(new SlotItemHandlerOutputOnly(itemHandler, 4, 125, 54));
 
 		bindPlayerInventory(player.inventory);
 
@@ -208,7 +213,7 @@ public class ContainerImbuingStation extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return te.isUsableByPlayer(entityplayer);
+		return true;
 	}
 
 	@Override

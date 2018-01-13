@@ -25,16 +25,7 @@ public class TileEntityInventoryTester extends TileEntityBase implements ITickab
 	
 	public TileEntityInventoryTester()
 	{
-		this.setItemHandler(new ItemStackHandler(1)
-		{
-			@Override
-			protected void onContentsChanged(int slot)
-			{
-				TileEntityInventoryTester.this.markDirty();
-			}
-		});
-		
-		this.setItemHandlerInternal();
+		this.setItemHandler(1);
 	}
 
 	@Override

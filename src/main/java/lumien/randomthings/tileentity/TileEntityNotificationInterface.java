@@ -20,16 +20,7 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 
 	public TileEntityNotificationInterface()
 	{
-		this.setItemHandler(new ItemStackHandler(1)
-		{
-			@Override
-			protected void onContentsChanged(int slot)
-			{
-				TileEntityNotificationInterface.this.markDirty();
-			}
-		});
-		
-		this.setItemHandlerInternal();
+		this.setItemHandler(1);
 	}
 	
 	public void setData(String title, String description)
