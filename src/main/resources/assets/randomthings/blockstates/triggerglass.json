@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "triggered=false": { "model": "randomthings:triggerglass" },
+        "triggered=true": { "model": "randomthings:triggerglass_triggered" }
+    }
+}

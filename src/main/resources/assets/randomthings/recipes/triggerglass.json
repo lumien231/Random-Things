@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "QAQ",
+    " L "
+  ],
+  "key": {
+    "L": {
+      "item": "randomthings:lapisglass"
+    },
+    "Q": {
+      "item": "randomthings:quartzglass"
+    },
+    "A": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "randomthings:triggerglass",
+    "count": 4
+  }
+}

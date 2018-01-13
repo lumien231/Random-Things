@@ -75,6 +75,7 @@ public class ModBlocks
 	public static BlockGlowingMushroom glowingMushroom;
 	public static BlockInventoryTester inventoryTester;
 	public static BlockSuperLubricentStone superLubricentStone;
+	public static BlockTriggerGlass triggerGlass;
 
 	public static BlockFlooBrick flooBrick;
 
@@ -175,6 +176,7 @@ public class ModBlocks
 		inventoryTester = new BlockInventoryTester();
 		superLubricentStone = new BlockSuperLubricentStone();
 		globalChatDetector = new BlockGlobalChatDetector();
+		triggerGlass = new BlockTriggerGlass();
 
 		flooBrick = new BlockFlooBrick();
 
