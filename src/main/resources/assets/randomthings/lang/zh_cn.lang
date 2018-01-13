@@ -126,6 +126,7 @@ tile.coloredGrass.gray.name=灰色草方块
 tile.coloredGrass.pink.name=粉色草方块
 tile.coloredGrass.lime.name=黄绿色草方块
 tile.coloredGrass.yellow.name=黄色草方块
+#tile.coloredGrass.lightBlue.name=淡蓝色草方块
 tile.coloredGrass.lightBlue.name=淡蓝色草方块
 tile.coloredGrass.magenta.name=品红色草方块
 tile.coloredGrass.orange.name=橙色草方块
@@ -200,6 +201,8 @@ item.superLubricentBoots.name=超级滑滑靴
 item.flooSign.name=飞路标签
 item.idcard.name=身份证
 item.emeraldcompass.name=绿宝石指南针
+item.flootoken.name=飞路标
+item.portKey.name=钥匙
 
 item.bean.name=豆
 item.lesserMagicBean.name=次级魔豆
@@ -244,6 +247,7 @@ item.ingredient.luminousPowder.name=荧光粉
 item.ingredient.superLubricentTincture.name=超级滑滑剂
 item.ingredient.flooPowder.name=飞路粉
 item.ingredient.plateBase.name=压力板基板
+item.ingredient.preciousEmerald.name=华丽的绿宝石
 
 item.spectrePickaxe.name=灵魂铁镐
 item.spectreAxe.name=灵魂铁斧
@@ -344,6 +348,12 @@ item.enderLetter.receiver=收件人： %s
 item.enderLetter.noPlayer=玩家"%s"似乎并不是这个世界的居民
 item.enderLetter.noSpace=邮件似乎被退回了
 
+item.portkey.notset=<No target set>
+item.portkey.set=<Target set>
+item.portkey.x=X坐标： %d
+item.portkey.y=Y坐标： %d
+item.portkey.z=Z坐标： %d
+
 entity.randomthings.spirit.name=灵魂
 entity.spirit.name=灵魂
 
@@ -353,3 +363,10 @@ entity.playerSoul.name=玩家灵魂
 fluid.biomeEssence=生物群系精华
 
 enchantment.randomthings.magnetic=磁性
+enchantment.randomthings.magnetic.desc=具有磁性附魔的工具，会吸收周围的掉落物进行物品栏中。
+
+command.festival.scheduled=设定附近村庄特殊节日日期
+command.festival.failed=未能为附近村庄安排特殊节日
+command.festival.novillager=附近没有村庄
+
+festival.celebrating=附近村庄的村民正在庆祝节日！
