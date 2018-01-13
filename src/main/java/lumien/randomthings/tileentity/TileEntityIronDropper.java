@@ -38,7 +38,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 
 	@ContainerSynced
 	PICKUP_DELAY pickupDelay = PICKUP_DELAY.TICKS_5;
-	
+
 	@ContainerSynced
 	EFFECTS effects = EFFECTS.NONE;
 
@@ -50,6 +50,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 	public TileEntityIronDropper()
 	{
 		this.setItemHandler(9);
+		this.setItemHandlerPublic(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
 	}
 
 	@Override
@@ -172,12 +173,12 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 
 				world.spawnEntity(entityItem);
 			}
-			
+
 			if (effects == EFFECTS.SOUND || effects == EFFECTS.SOUND_PARTICLE)
 			{
 				world.playEvent(1000, this.pos, 0);
 			}
-			
+
 			if (effects == EFFECTS.PARTICLE || effects == EFFECTS.SOUND_PARTICLE)
 			{
 				world.playEvent(2000, this.pos, facing.getFrontOffsetX() + 1 + (facing.getFrontOffsetZ() + 1) * 3);
@@ -244,7 +245,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 	{
 		randomMotion = !randomMotion;
 	}
-	
+
 	public void rotateEffects()
 	{
 		effects = RandomUtil.rotateEnum(effects);

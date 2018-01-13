@@ -18,7 +18,7 @@ public class ContainerIronDropper extends ContainerTE<TileEntityIronDropper>
 	{
 		super(player, world, x, y, z);
 
-		itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+		itemHandler = te.getItemHandler();
 		for (int i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 3; ++j)
