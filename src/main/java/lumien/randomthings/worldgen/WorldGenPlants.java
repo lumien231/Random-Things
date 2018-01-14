@@ -23,8 +23,8 @@ public class WorldGenPlants extends WorldGenerator
 			// Beans
 			if (Worldgen.beans && random.nextBoolean())
 			{
-				int x = position.getX()+ random.nextInt(16);
-				int z = position.getZ() + random.nextInt(16);
+				int x = position.getX() + 8 + random.nextInt(16);
+				int z = position.getZ() + 8 + random.nextInt(16);
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
@@ -37,8 +37,8 @@ public class WorldGenPlants extends WorldGenerator
 			// Pitcher Plants
 			if (Worldgen.pitcherPlants && random.nextInt(10) == 0)
 			{
-				int x = position.getX() + random.nextInt(16);
-				int z = position.getZ() + random.nextInt(16);
+				int x = position.getX() + 8 + random.nextInt(16);
+				int z = position.getZ() + 8 + random.nextInt(16);
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
