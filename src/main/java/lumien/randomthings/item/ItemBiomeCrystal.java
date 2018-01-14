@@ -27,6 +27,7 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack stack)
 	{
 		String myName = super.getItemStackDisplayName(stack);
