@@ -36,6 +36,12 @@ public class BlockTriggerGlass extends BlockBase
 	}
 	
 	@Override
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
+	{
+		return false;
+	}
+	
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		if (!worldIn.isRemote && !state.getValue(TRIGGERED))

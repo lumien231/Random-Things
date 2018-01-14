@@ -430,6 +430,7 @@ tile.notificationInterface.info=This block sends configurable toast notification
 tile.inventoryTester.info=Attempts to insert the itemstack specified in its gui into the inventory it's attached to. Emits Redstone if successful (Redstone behavior can be inverted)
 tile.superlubricentstone.info=Entities moving over this block don't loose momentum due to friction.
 tile.superLubricentIce.info=Entities moving over this block don't loose momentum due to friction.
+tile.triggerGlass.info=Trigger Glass is a block that looses its collision box for 3 seconds when powered by redstone. Any trigger glass connected to one receiving the redstone glass will also trigger.
 
 tile.plate_redirector.info=Entities moving over this plate are redirected towards a different direction. Right clicking the plate allows you to change that direction.
 tile.plate_filteredredirector.info=Entities moving over this plate are redirected towards a different direction depending on which filter they match.
