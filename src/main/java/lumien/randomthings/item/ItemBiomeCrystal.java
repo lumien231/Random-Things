@@ -1,8 +1,10 @@
 package lumien.randomthings.item;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.List;
 
+import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.lib.IRTItemColor;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -19,6 +21,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 {
+	static Field biomeNameField = null;
+	static
+	{
+		try
+		{
+			biomeNameField = Biome.class.getDeclaredField(MCPNames.field("field_76791_y"));
+		}
+		catch (NoSuchFieldException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{
+			e.printStackTrace();
+		}
+
+		biomeNameField.setAccessible(true);
+	}
+
 	public ItemBiomeCrystal()
 	{
 		super("biomeCrystal");
@@ -35,7 +56,18 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 
 		if ((biome = getBiome(stack)) != null)
 		{
-			myName = myName + " (" + biome.getBiomeName() + ")";
+			try
+			{
+				myName = myName + " (" + biomeNameField.get(biome) + ")";
+			}
+			catch (IllegalArgumentException e)
+			{
+				e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{
+				e.printStackTrace();
+			}
 		}
 
 		return myName;
