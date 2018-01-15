@@ -203,7 +203,7 @@ item.flooSign.name=飞路标签
 item.idcard.name=身份证
 item.emeraldcompass.name=绿宝石指南针
 item.flootoken.name=飞路标
-item.portKey.name=钥匙
+item.portKey.name=门钥匙
 
 item.bean.name=豆
 item.lesserMagicBean.name=次级魔豆
@@ -490,4 +490,4 @@ item.flooSign.info=使用飞路标右键砖块来使它们变为飞路砖，并�
 item.idcard.info=身份证可配合实体过滤器使用，你可以通过右击来设置它。
 item.emeraldcompass.info=绿宝石指南针需要配合身份证在工作台上进行合成，只要身份证所设置的玩家在线就会指向该玩家。
 item.flootoken.info=当你将它扔在地上时，飞路标就会创造一个临时‘壁炉’，你便可通过飞路网络进行传送。只需站在火焰上，并在聊天栏中输入消息即可。
-item.portKey.info=你可以右击以设定钥匙的目标。将其丢在地上等待5秒后，可发现其附魔闪光消失，此时这个钥匙就（蓄势待发）不会再消失了。玩家捡起此钥匙后会被传送到它所绑定的目标上去。将钥匙与其他物品合成即可改变其外观。
+item.portKey.info=你可以右击以设定门钥匙的目标。将其丢在地上等待5秒后，可发现其附魔闪光消失，此时这个门钥匙就（蓄势待发）不会再消失了。玩家捡起此门钥匙后会被传送到它所绑定的目标上去。将门钥匙与其他物品合成即可改变其外观。
