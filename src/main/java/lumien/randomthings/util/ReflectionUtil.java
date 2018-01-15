@@ -13,6 +13,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
 import net.minecraft.village.Village;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.ItemModelMesherForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,6 +24,7 @@ public class ReflectionUtil
 	static Field entityItemAge;
 	static Field simpleShapes;
 	static Field village;
+	static Field biomeName;
 	static
 	{
 		try
@@ -32,6 +34,9 @@ public class ReflectionUtil
 			
 			village = EntityVillager.class.getDeclaredField(MCPNames.field("field_70954_d"));
 			village.setAccessible(true);
+			
+			biomeName = Biome.class.getDeclaredField(MCPNames.field("field_76791_y"));
+			biomeName.setAccessible(true);
 		}
 		catch (Exception e)
 		{
@@ -47,6 +52,24 @@ public class ReflectionUtil
 		modifiers = modifiers & ~Modifier.FINAL;
 		modifierField.setAccessible(true);
 		modifierField.setInt(nameField, modifiers);
+	}
+	
+	public static String getBiomeName(Biome b)
+	{
+		try
+		{
+			return (String) biomeName.get(b);
+		}
+		catch (IllegalArgumentException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return "";
 	}
 	
 	public static Village getVillage(EntityVillager villager)

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.List;
 
 import lumien.randomthings.lib.IRTItemColor;
+import lumien.randomthings.util.ReflectionUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -27,7 +28,6 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack stack)
 	{
 		String myName = super.getItemStackDisplayName(stack);
@@ -36,7 +36,7 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 
 		if ((biome = getBiome(stack)) != null)
 		{
-			myName = myName + " (" + biome.getBiomeName() + ")";
+			myName = myName + " (" + ReflectionUtil.getBiomeName(biome) + ")";
 		}
 
 		return myName;
