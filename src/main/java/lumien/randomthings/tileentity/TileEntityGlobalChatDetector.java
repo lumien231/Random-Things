@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
-import lumien.randomthings.block.BlockChatDetector;
 import lumien.randomthings.block.BlockGlobalChatDetector;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ItemIDCard;
@@ -16,7 +15,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityGlobalChatDetector extends TileEntityBase implements ITickable
 {

@@ -1,9 +1,7 @@
 package lumien.randomthings.asm;
 
-import java.lang.reflect.Type;
 import java.net.URLClassLoader;
 
-import org.apache.logging.log4j.Level;
 import org.objectweb.asm.ClassWriter;
 
 import net.minecraft.launchwrapper.Launch;

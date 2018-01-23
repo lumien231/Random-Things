@@ -1,7 +1,6 @@
 package lumien.randomthings.tileentity;
 
 import lumien.randomthings.block.BlockInventoryTester;
-import lumien.randomthings.block.BlockItemCollector;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.lib.ContainerSynced;
 import net.minecraft.item.ItemStack;
@@ -12,7 +11,6 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityInventoryTester extends TileEntityBase implements ITickable
 {

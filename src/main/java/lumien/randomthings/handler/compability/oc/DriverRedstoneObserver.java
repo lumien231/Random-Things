@@ -1,20 +1,14 @@
 package lumien.randomthings.handler.compability.oc;
 
-import java.util.Arrays;
-
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.ManagedEnvironment;
 import li.cil.oc.api.prefab.DriverSidedTileEntity;
-import lumien.randomthings.tileentity.TileEntityOnlineDetector;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
-import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Optional;
 
 public class DriverRedstoneObserver extends DriverSidedTileEntity
 {

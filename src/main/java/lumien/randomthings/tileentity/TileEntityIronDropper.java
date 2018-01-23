@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSensitive, ITickable
 {

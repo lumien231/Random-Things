@@ -52,12 +52,13 @@ public class BlockPeaceCandle extends BlockContainerBase
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{
-		double d0 = (double) pos.getX() + 0.5D;
-		double d1 = (double) pos.getY() + 0.3D;
-		double d2 = (double) pos.getZ() + 0.5D;
+		double d0 = pos.getX() + 0.5D;
+		double d1 = pos.getY() + 0.3D;
+		double d2 = pos.getZ() + 0.5D;
 		double d3 = 0.22D;
 		double d4 = 0.27D;
 

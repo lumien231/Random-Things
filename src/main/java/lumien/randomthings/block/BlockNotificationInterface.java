@@ -2,7 +2,6 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
-import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.tileentity.TileEntityNotificationInterface;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

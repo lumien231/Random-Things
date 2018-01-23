@@ -3,17 +3,11 @@ package lumien.randomthings.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.elements.GuiBoolButton;
-import lumien.randomthings.client.gui.elements.GuiEnumButton;
 import lumien.randomthings.container.ContainerInventoryTester;
 import lumien.randomthings.tileentity.TileEntityInventoryTester;
-import lumien.randomthings.tileentity.TileEntityIronDropper;
-import lumien.randomthings.tileentity.TileEntityIronDropper.EFFECTS;
-import lumien.randomthings.tileentity.TileEntityIronDropper.PICKUP_DELAY;
-import lumien.randomthings.tileentity.TileEntityIronDropper.REDSTONE_MODE;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

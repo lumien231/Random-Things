@@ -1,8 +1,6 @@
 package lumien.randomthings.asm.confirmer;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.multiplayer.PlayerControllerMP;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.InventoryPlayer;

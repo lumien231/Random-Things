@@ -1,17 +1,11 @@
 package lumien.randomthings.client.notifications;
 
-import java.util.List;
-
-import com.google.common.collect.Lists;
-
 import net.minecraft.client.gui.toasts.GuiToast;
 import net.minecraft.client.gui.toasts.IToast;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,6 +25,7 @@ public class NotificationToast implements IToast
 		this.icon = icon;
 	}
 
+	@Override
 	public IToast.Visibility draw(GuiToast toastGui, long delta)
 	{
 		toastGui.getMinecraft().getTextureManager().bindTexture(TEXTURE_TOASTS);

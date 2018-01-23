@@ -8,15 +8,10 @@ import lumien.randomthings.block.BlockPotionVaporizer;
 import lumien.randomthings.lib.ISlotFilter;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessagePotionVaporizerParticles;
-import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.WorldUtil;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -28,7 +23,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class TileEntityPotionVaporizer extends TileEntityBase implements ITickable

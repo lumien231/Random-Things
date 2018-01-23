@@ -229,6 +229,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		}
 	}
 
+	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		if (mining && uuid != null)

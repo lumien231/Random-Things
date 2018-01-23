@@ -3,7 +3,6 @@ package lumien.randomthings.handler.festival;
 import java.util.ArrayList;
 import java.util.List;
 
-import lumien.randomthings.util.NBTUtil;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;

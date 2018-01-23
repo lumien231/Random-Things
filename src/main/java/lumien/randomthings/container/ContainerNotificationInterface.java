@@ -1,15 +1,11 @@
 package lumien.randomthings.container;
 
-import lumien.randomthings.container.slots.SlotGhost;
 import lumien.randomthings.container.slots.SlotGhostItemHandler;
-import lumien.randomthings.tileentity.TileEntityIronDropper;
 import lumien.randomthings.tileentity.TileEntityNotificationInterface;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;

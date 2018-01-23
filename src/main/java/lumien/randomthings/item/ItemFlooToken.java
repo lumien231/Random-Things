@@ -2,36 +2,13 @@ package lumien.randomthings.item;
 
 import java.util.List;
 
-import lumien.randomthings.block.BlockFlooBrick;
 import lumien.randomthings.client.particles.ParticleFlooFlame;
 import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
-import lumien.randomthings.handler.ModDimensions;
-import lumien.randomthings.handler.floo.FlooNetworkHandler;
-import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.network.messages.MessageFlooToken;
-import lumien.randomthings.tileentity.TileEntityFlooBrick;
 import lumien.randomthings.util.ReflectionUtil;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleSmokeNormal;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

@@ -7,7 +7,6 @@ import java.util.Map;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import lumien.randomthings.asm.MCPNames;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityVillager;
