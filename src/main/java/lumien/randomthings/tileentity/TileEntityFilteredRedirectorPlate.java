@@ -1,6 +1,5 @@
 package lumien.randomthings.tileentity;
 
-import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.lib.EntityFilterItemStack;
 import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.util.InventoryUtil;

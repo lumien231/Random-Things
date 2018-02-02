@@ -5,7 +5,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import lumien.randomthings.block.ModBlocks;
-import lumien.randomthings.item.ItemEntityFilter;
 import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.entity.Entity;

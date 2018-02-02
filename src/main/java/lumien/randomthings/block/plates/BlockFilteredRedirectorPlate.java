@@ -1,12 +1,9 @@
 package lumien.randomthings.block.plates;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.block.BlockBase;
 import lumien.randomthings.block.BlockContainerBase;
-import lumien.randomthings.item.ItemItemFilter.ItemFilterRepresentation;
 import lumien.randomthings.lib.EntityFilterItemStack;
 import lumien.randomthings.lib.GuiIds;
-import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.tileentity.TileEntityFilteredRedirectorPlate;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -18,7 +15,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -81,7 +77,8 @@ public class BlockFilteredRedirectorPlate extends BlockContainerBase
 		}
 	}
 	
-    public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
+    @Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
     {
         return BlockFaceShape.UNDEFINED;
     }

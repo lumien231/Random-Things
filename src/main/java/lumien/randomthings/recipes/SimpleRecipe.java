@@ -12,6 +12,7 @@ public abstract class SimpleRecipe implements IRecipe
 		this.registryName = registryName;
 	}
 	
+	@Override
 	public ResourceLocation getRegistryName()
 	{
 		return registryName;

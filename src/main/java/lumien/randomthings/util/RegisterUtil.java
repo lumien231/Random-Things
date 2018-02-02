@@ -4,7 +4,6 @@ import lumien.randomthings.RandomThings;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class RegisterUtil
 {

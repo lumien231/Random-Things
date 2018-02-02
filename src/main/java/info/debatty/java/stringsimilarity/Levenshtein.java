@@ -36,7 +36,8 @@ public class Levenshtein implements MetricStringDistance {
      * @return The computed Levenshtein distance.
      * @throws NullPointerException if s1 or s2 is null.
      */
-    public final double distance(final String s1, final String s2) {
+    @Override
+	public final double distance(final String s1, final String s2) {
         if (s1 == null) {
             throw new NullPointerException("s1 must not be null");
         }

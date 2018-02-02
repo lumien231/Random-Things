@@ -1,15 +1,9 @@
 package lumien.randomthings.client.particles;
 
-import lumien.randomthings.lib.AtlasSprite;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class ParticlePeaceCandle extends ParticleBase
@@ -23,9 +17,9 @@ public class ParticlePeaceCandle extends ParticleBase
 		this.motionX = this.motionX * 0.009999999776482582D + xSpeedIn;
 		this.motionY = this.motionY * 0.009999999776482582D + ySpeedIn;
 		this.motionZ = this.motionZ * 0.009999999776482582D + zSpeedIn;
-		this.posX += (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
-		this.posY += (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
-		this.posZ += (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
+		this.posX += (this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F;
+		this.posY += (this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F;
+		this.posZ += (this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F;
 		this.flameScale = this.particleScale;
 		this.particleRed = 1.0F;
 		this.particleGreen = 1.0F;
@@ -37,21 +31,23 @@ public class ParticlePeaceCandle extends ParticleBase
 	@Override
     public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
-		float w = ((float) this.particleAge + partialTicks) / (float) this.particleMaxAge;
+		float w = (this.particleAge + partialTicks) / this.particleMaxAge;
 		this.particleScale = this.flameScale * (1.0F - w * w * 0.5F);
 		
 		super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
     }
 
+	@Override
 	public void move(double x, double y, double z)
 	{
 		this.setBoundingBox(this.getBoundingBox().offset(x, y, z));
 		this.resetPositionToBB();
 	}
 
+	@Override
 	public int getBrightnessForRender(float p_189214_1_)
 	{
-		float f = ((float) this.particleAge + p_189214_1_) / (float) this.particleMaxAge;
+		float f = (this.particleAge + p_189214_1_) / this.particleMaxAge;
 		f = MathHelper.clamp(f, 0.0F, 1.0F);
 		int i = super.getBrightnessForRender(p_189214_1_);
 		int j = i & 255;
@@ -66,6 +62,7 @@ public class ParticlePeaceCandle extends ParticleBase
 		return j | k << 16;
 	}
 
+	@Override
 	public void onUpdate()
 	{
 		this.prevPosX = this.posX;

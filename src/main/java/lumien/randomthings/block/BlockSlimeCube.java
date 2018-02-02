@@ -89,6 +89,7 @@ public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 		return AABB;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
@@ -134,6 +135,7 @@ public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 		}
 	}
 
+	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;

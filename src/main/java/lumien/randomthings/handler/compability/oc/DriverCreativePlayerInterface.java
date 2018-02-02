@@ -1,6 +1,5 @@
 package lumien.randomthings.handler.compability.oc;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
@@ -11,14 +10,11 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.ManagedEnvironment;
 import li.cil.oc.api.prefab.DriverSidedTileEntity;
 import lumien.randomthings.tileentity.TileEntityCreativePlayerInterface;
-import lumien.randomthings.tileentity.TileEntityOnlineDetector;
-import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Optional;
 
 public class DriverCreativePlayerInterface extends DriverSidedTileEntity
 {

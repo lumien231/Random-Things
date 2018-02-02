@@ -8,8 +8,6 @@ import lumien.randomthings.network.messages.MessageNotification;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityNotificationInterface extends TileEntityBase implements IRedstoneSensitive
 {

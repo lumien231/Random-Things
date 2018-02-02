@@ -5,25 +5,15 @@ import java.lang.reflect.Method;
 import java.util.Random;
 
 import lumien.randomthings.asm.MCPNames;
-import lumien.randomthings.block.BlockSpecialChest;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Worldgen;
-import lumien.randomthings.item.ModItems;
-import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraft.world.gen.structure.StructureOceanMonumentPieces.MonumentCoreRoom;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Church;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTableList;
 
 public class WorldGenPeaceCandle
 {

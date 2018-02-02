@@ -2,9 +2,7 @@ package lumien.randomthings.block;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
-import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import lumien.randomthings.tileentity.TileEntityInventoryTester;
-import lumien.randomthings.tileentity.TileEntityItemCollector;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

@@ -3,7 +3,6 @@ package lumien.randomthings.container;
 import com.google.common.base.Predicate;
 
 import lumien.randomthings.container.slots.SlotFiltered;
-import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.tileentity.TileEntityEntityDetector;
 import net.minecraft.entity.player.EntityPlayer;

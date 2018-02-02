@@ -1,6 +1,5 @@
 package lumien.randomthings.container;
 
-import lumien.randomthings.container.slots.SlotGhostItemHandler;
 import lumien.randomthings.container.slots.SlotGhostItemHandlerStacked;
 import lumien.randomthings.tileentity.TileEntityInventoryTester;
 import net.minecraft.entity.player.EntityPlayer;

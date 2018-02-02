@@ -1,7 +1,6 @@
 package lumien.randomthings.container;
 
 import lumien.randomthings.container.slots.SlotItemHandlerOutputOnly;
-import lumien.randomthings.container.slots.SlotOutputOnly;
 import lumien.randomthings.tileentity.TileEntityImbuingStation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

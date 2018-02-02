@@ -2,8 +2,6 @@ package lumien.randomthings.tileentity;
 
 import java.util.UUID;
 
-import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.machine.Context;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerPlayer;

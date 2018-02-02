@@ -2,12 +2,8 @@ package lumien.randomthings.client.mesh;
 
 import java.util.Map;
 
-import org.lwjgl.input.Keyboard;
-
 import gnu.trove.map.hash.TIntObjectHashMap;
-import lumien.randomthings.item.ModItems;
 import lumien.randomthings.util.ReflectionUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;

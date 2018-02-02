@@ -6,12 +6,9 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.elements.GuiCustomButton;
-import lumien.randomthings.container.ContainerEmptyContainer;
 import lumien.randomthings.container.ContainerGlobalChatDetector;
 import lumien.randomthings.network.PacketHandler;
-import lumien.randomthings.network.messages.MessageChatDetector;
 import lumien.randomthings.network.messages.MessageGlobalChatDetector;
-import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.tileentity.TileEntityGlobalChatDetector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;

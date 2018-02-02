@@ -1,24 +1,13 @@
 package lumien.randomthings.container;
 
-import java.util.List;
-
-import com.google.common.base.Predicate;
-
-import lumien.randomthings.container.slots.SlotFiltered;
 import lumien.randomthings.container.slots.SlotItemHandlerOutputOnly;
-import lumien.randomthings.container.slots.SlotOutputOnly;
 import lumien.randomthings.tileentity.TileEntityPotionVaporizer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;

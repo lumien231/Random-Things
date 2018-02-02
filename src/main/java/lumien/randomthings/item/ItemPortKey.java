@@ -3,7 +3,6 @@ package lumien.randomthings.item;
 import java.util.List;
 
 import lumien.randomthings.config.Features;
-import lumien.randomthings.util.ReflectionUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
