@@ -4,6 +4,7 @@ import lumien.randomthings.block.BlockBase;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.lib.INoItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -37,12 +38,15 @@ public class BlockRedstonePlate extends BlockBase implements INoItem
 
 	public BlockRedstonePlate(boolean powered)
 	{
-		super("plate_redstone" + (powered ? "_powered" : ""), Material.ROCK);
+		super("plate_redstone" + (powered ? "_powered" : ""), Material.GROUND);
 
 		if (!powered)
 			ForgeRegistries.ITEMS.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 
 		this.powered = powered;
+		
+		this.setHardness(0.3f);
+		this.setSoundType(SoundType.STONE);
 	}
 
 	@Override

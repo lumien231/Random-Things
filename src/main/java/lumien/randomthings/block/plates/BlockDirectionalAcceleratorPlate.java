@@ -2,6 +2,7 @@ package lumien.randomthings.block.plates;
 
 import lumien.randomthings.block.BlockBase;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -30,7 +31,10 @@ public class BlockDirectionalAcceleratorPlate extends BlockBase
 
 	public BlockDirectionalAcceleratorPlate()
 	{
-		super("plate_accelerator_directional", Material.ROCK);
+		super("plate_accelerator_directional", Material.GROUND);
+		
+		this.setHardness(0.3f);
+		this.setSoundType(SoundType.STONE);
 	}
 	
 	@Override

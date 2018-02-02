@@ -2,6 +2,7 @@ package lumien.randomthings.block.plates;
 
 import lumien.randomthings.block.BlockBase;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -27,7 +28,10 @@ public class BlockCollectionPlate extends BlockBase
 
 	public BlockCollectionPlate()
 	{
-		super("plate_collection", Material.ROCK);
+		super("plate_collection", Material.GROUND);
+		
+		this.setHardness(0.3f);
+		this.setSoundType(SoundType.STONE);
 	}
 	
 	@Override

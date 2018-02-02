@@ -9,6 +9,7 @@ import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.tileentity.TileEntityFilteredRedirectorPlate;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -39,7 +40,10 @@ public class BlockFilteredRedirectorPlate extends BlockContainerBase
 
 	public BlockFilteredRedirectorPlate()
 	{
-		super("plate_filteredredirector", Material.ROCK);
+		super("plate_filteredredirector", Material.GROUND);
+		
+		this.setHardness(0.3f);
+		this.setSoundType(SoundType.STONE);
 	}
 	
 	@Override
