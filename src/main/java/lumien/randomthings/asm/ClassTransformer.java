@@ -155,8 +155,59 @@ public class ClassTransformer implements IClassTransformer
 			transformations++;
 			return patchVillageChurch(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.block.BlockFalling"))
+		{
+			transformations++;
+			return patchBlockFalling(basicClass);
+		}
 
 		return basicClass;
+	}
+
+	private byte[] patchBlockFalling(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		logger.log(Level.DEBUG, "Found BlockFalling Class: " + classNode.name);
+
+		MethodNode canFallThrough = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(MCPNames.method("func_185759_i")))
+			{
+				canFallThrough = mn;
+				break;
+			}
+		}
+
+		if (canFallThrough != null)
+		{
+			logger.log(Level.DEBUG, " - Found canFallThrough");
+
+			for (int i = 0; i < canFallThrough.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = canFallThrough.instructions.get(i);
+				
+				if (ain.getOpcode() == IRETURN)
+				{
+					InsnList toInsert = new InsnList();
+					
+					toInsert.add(new VarInsnNode(ALOAD, 0));
+					toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "overrideFallThrough", "(ZLnet/minecraft/block/state/IBlockState;)Z", false));
+					
+					canFallThrough.instructions.insertBefore(ain, toInsert);
+					
+					i+=2;
+				}
+			}
+		}
+
+		CustomClassWriter writer = new CustomClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchVillageChurch(byte[] basicClass)
@@ -1119,7 +1170,7 @@ public class ClassTransformer implements IClassTransformer
 						{
 							InsnList toInsert = new InsnList();
 							toInsert.add(new VarInsnNode(ALOAD, 0));
-							
+
 							toInsert.add(new VarInsnNode(ALOAD, 0));
 							toInsert.add(new FieldInsnNode(GETFIELD, "net/minecraft/entity/EntityLivingBase", MCPNames.field("field_70170_p"), "Lnet/minecraft/world/World;"));
 							toInsert.add(new VarInsnNode(ALOAD, 5));
@@ -1376,7 +1427,7 @@ public class ClassTransformer implements IClassTransformer
 			isRainingAt.instructions.insertBefore(returnNode, toInsert);
 
 		}
-		
+
 		if (canSnowAt != null)
 		{
 			logger.log(Level.DEBUG, "- Found canSnowAt (4/4)");

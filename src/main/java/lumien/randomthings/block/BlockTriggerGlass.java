@@ -87,7 +87,7 @@ public class BlockTriggerGlass extends BlockBase
 	@Override
 	public Material getMaterial(IBlockState state)
 	{
-		return state.getValue(TRIGGERED) ? Material.FIRE : Material.GROUND;
+		return Material.GROUND;
 	}
 
 	@Override

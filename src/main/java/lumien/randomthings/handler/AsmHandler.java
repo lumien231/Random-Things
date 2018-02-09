@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.Set;
 
 import lumien.randomthings.asm.MCPNames;
+import lumien.randomthings.block.BlockTriggerGlass;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
@@ -78,6 +79,18 @@ public class AsmHandler
 		if (FMLCommonHandler.instance().getSide().isClient())
 		{
 			getFields();
+		}
+	}
+	
+	public static boolean overrideFallThrough(boolean original, IBlockState state)
+	{
+		if (state == ModBlocks.triggerGlass.getDefaultState().withProperty(BlockTriggerGlass.TRIGGERED, true))
+		{
+			return true;
+		}
+		else
+		{
+			return original;
 		}
 	}
 
