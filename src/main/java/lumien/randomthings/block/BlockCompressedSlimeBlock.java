@@ -74,7 +74,7 @@ public class BlockCompressedSlimeBlock extends BlockBase implements ISuperLubric
 		{
 			entityIn.onGround = false;
 			entityIn.fallDistance = 0;
-			entityIn.motionY = 1;
+			entityIn.motionY = 1.2;
 		}
 	}
 }
