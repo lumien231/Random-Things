@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ORO",
+    "SDS",
+    "ORO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "minecraft:sand",
+      "data": 0
+    },
+    "D": {
+        "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "randomthings:blockdestabilizer"
+  }
+}

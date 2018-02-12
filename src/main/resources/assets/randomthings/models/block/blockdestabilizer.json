@@ -1,0 +1,9 @@
+{
+    "parent": "randomthings:block/template/cube_orientable_2tint",
+    "textures": {
+        "front": "randomthings:blocks/blockdestabilizer/front",
+        "side": "randomthings:blocks/blockdestabilizer/side",
+        "front_t": "randomthings:blocks/blockdestabilizer/front_overlay",
+        "side_t": "randomthings:blocks/blockdestabilizer/side_overlay"
+    }
+}

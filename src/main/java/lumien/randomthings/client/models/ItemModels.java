@@ -78,6 +78,7 @@ public class ItemModels
 		registerBlock(ModBlocks.redstonePlate);
 		registerBlock(ModBlocks.globalChatDetector);
 		registerBlock(ModBlocks.triggerGlass);
+		registerBlock(ModBlocks.blockDestabilizer);
 		
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);

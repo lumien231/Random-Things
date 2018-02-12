@@ -45,6 +45,7 @@ public class ModTileEntitys
 		registerTE(TileEntityInventoryTester.class, "inventoryTester");
 		registerTE(TileEntityFlooBrick.class, "flooBrick");
 		registerTE(TileEntityGlobalChatDetector.class, "globalChatDetector");
+		registerTE(TileEntityBlockDestabilizer.class, "blockDestabilizer");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");
