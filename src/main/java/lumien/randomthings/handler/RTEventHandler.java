@@ -671,38 +671,42 @@ public class RTEventHandler
 			return;
 		}
 
-		Iterator<TileEntityChatDetector> iterator = TileEntityChatDetector.detectors.iterator();
-
-		while (iterator.hasNext())
+		if (!(player instanceof FakePlayer) && player.getGameProfile() != null)
 		{
-			TileEntityChatDetector chatDetector = iterator.next();
-			if (chatDetector.isInvalid())
+
+			Iterator<TileEntityChatDetector> iterator = TileEntityChatDetector.detectors.iterator();
+
+			while (iterator.hasNext())
 			{
-				iterator.remove();
-			}
-			else
-			{
-				if (chatDetector.checkMessage(event.getUsername(), event.getMessage()))
+				TileEntityChatDetector chatDetector = iterator.next();
+				if (chatDetector.isInvalid())
 				{
-					event.setCanceled(true);
+					iterator.remove();
+				}
+				else
+				{
+					if (chatDetector.checkMessage(event.getPlayer(), event.getMessage()))
+					{
+						event.setCanceled(true);
+					}
 				}
 			}
-		}
 
-		Iterator<TileEntityGlobalChatDetector> iteratorGlobal = TileEntityGlobalChatDetector.detectors.iterator();
+			Iterator<TileEntityGlobalChatDetector> iteratorGlobal = TileEntityGlobalChatDetector.detectors.iterator();
 
-		while (iteratorGlobal.hasNext())
-		{
-			TileEntityGlobalChatDetector chatDetector = iteratorGlobal.next();
-			if (chatDetector.isInvalid())
+			while (iteratorGlobal.hasNext())
 			{
-				iteratorGlobal.remove();
-			}
-			else
-			{
-				if (chatDetector.checkMessage(event.getUsername(), event.getMessage()))
+				TileEntityGlobalChatDetector chatDetector = iteratorGlobal.next();
+				if (chatDetector.isInvalid())
 				{
-					event.setCanceled(true);
+					iteratorGlobal.remove();
+				}
+				else
+				{
+					if (chatDetector.checkMessage(event.getPlayer(), event.getMessage()))
+					{
+						event.setCanceled(true);
+					}
 				}
 			}
 		}
@@ -1076,8 +1080,7 @@ public class RTEventHandler
 			{
 				for (int i = 0; i < 1; ++i)
 				{
-					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D)
-							* 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
+					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
 					particle.setRBGColorF(0.2F, 0.2F, 1);
 				}
 			}
