@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=south,locked=false": { "model": "randomthings:advancedredstonerepeater/on" },
+        "facing=west,locked=false": { "model": "randomthings:advancedredstonerepeater/on", "y": 90 },
+        "facing=north,locked=false": { "model": "randomthings:advancedredstonerepeater/on", "y": 180 },
+        "facing=east,locked=false": { "model": "randomthings:advancedredstonerepeater/on", "y": 270 },
+        "facing=south,locked=true": { "model": "randomthings:advancedredstonerepeater/on_locked" },
+        "facing=west,locked=true": { "model": "randomthings:advancedredstonerepeater/on_locked", "y": 90 },
+        "facing=north,locked=true": { "model": "randomthings:advancedredstonerepeater/on_locked", "y": 180 },
+        "facing=east,locked=true": { "model": "randomthings:advancedredstonerepeater/on_locked", "y": 270 }
+    }
+}

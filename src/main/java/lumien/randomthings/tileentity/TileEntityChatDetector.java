@@ -8,10 +8,12 @@ import java.util.WeakHashMap;
 import lumien.randomthings.block.BlockChatDetector;
 import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class TileEntityChatDetector extends TileEntityBase implements ITickable
@@ -122,12 +124,12 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable
 		return (oldState.getBlock() != newState.getBlock());
 	}
 
-	public boolean checkMessage(String user, String sendMessage)
+	public boolean checkMessage(EntityPlayerMP entityPlayerMP, String sendMessage)
 	{
 		if (!this.world.isRemote)
 		{
-			UUID sendUUID = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(user).getGameProfile().getId();
-			if (sendUUID.equals(this.playerUUID))
+			UUID sendUUID = entityPlayerMP.getGameProfile().getId();
+			if (sendUUID != null && sendUUID.equals(this.playerUUID))
 			{
 				if (this.chatMessage.equals(sendMessage))
 				{

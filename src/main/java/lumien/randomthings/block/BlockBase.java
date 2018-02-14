@@ -26,7 +26,7 @@ public abstract class BlockBase extends Block
 
 		ForgeRegistries.BLOCKS.register(this);
 
-		if (!(this instanceof INoItem))
+		if (!(this instanceof INoItem && ((INoItem) this).hasNoItem()))
 		{
 			ForgeRegistries.ITEMS.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		}

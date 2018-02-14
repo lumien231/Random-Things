@@ -77,6 +77,9 @@ public class ModBlocks
 	public static BlockSuperLubricentStone superLubricentStone;
 	public static BlockTriggerGlass triggerGlass;
 	public static BlockBlockDestabilizer blockDestabilizer;
+	
+	public static BlockAdvancedRedstoneRepeater unpoweredAdvancedRedstoneRepeater;
+	public static BlockAdvancedRedstoneRepeater poweredAdvancedRedstoneRepeater;
 
 	public static BlockFlooBrick flooBrick;
 
@@ -179,6 +182,9 @@ public class ModBlocks
 		globalChatDetector = new BlockGlobalChatDetector();
 		triggerGlass = new BlockTriggerGlass();
 		blockDestabilizer = new BlockBlockDestabilizer();
+		
+		unpoweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(false);
+		poweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(true);
 
 		flooBrick = new BlockFlooBrick();
 
