@@ -56,7 +56,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	@Override
 	public boolean hasNoItem()
 	{
-		return isRepeaterPowered;
+		return this.getUnlocalizedName().endsWith("_powered");
 	}
 	
 	@Override

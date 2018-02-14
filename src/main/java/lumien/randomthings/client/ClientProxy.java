@@ -297,7 +297,7 @@ public class ClientProxy extends CommonProxy
 						BlockPos target = positions.get(i);
 						BlockPos position = positions.get(i + 1);
 
-						if (position.distanceSq(player.getPosition()) < 225)
+						if (position.distanceSq(player.getPosition()) < 256 || target.distanceSq(player.getPosition()) < 256)
 						{
 							worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 							worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
@@ -321,7 +321,7 @@ public class ClientProxy extends CommonProxy
 
 					if (target != null)
 					{
-						if (target.distanceSq(player.getPosition()) < 225)
+						if (target.distanceSq(player.getPosition()) < 256 || position.distanceSq(player.getPosition()) < 256)
 						{
 							worldRenderer.pos(target.getX() + 0.5 - playerX, target.getY() + 0.5 - playerY, target.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
 							worldRenderer.pos(position.getX() + 0.5 - playerX, position.getY() + 0.5 - playerY, position.getZ() + 0.5 - playerZ).color(255, 0, 0, 255).endVertex();
