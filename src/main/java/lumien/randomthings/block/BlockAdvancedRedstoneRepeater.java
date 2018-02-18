@@ -425,12 +425,12 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 */
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Items.REPEATER;
+		return Item.getItemFromBlock(ModBlocks.unpoweredAdvancedRedstoneRepeater);
 	}
 
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(Items.REPEATER);
+		return new ItemStack(ModBlocks.unpoweredAdvancedRedstoneRepeater);
 	}
 
 	public boolean isLocked(IBlockAccess worldIn, BlockPos pos, IBlockState state)
