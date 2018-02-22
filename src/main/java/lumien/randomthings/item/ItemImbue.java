@@ -102,19 +102,19 @@ public class ItemImbue extends ItemBase
 				switch (stack.getItemDamage())
 				{
 					case FIRE:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueFire, 60 * 5 * 20));
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueFire, 60 * 20 * 20));
 						break;
 					case POISON:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbuePoison, 60 * 5 * 20));
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbuePoison, 60 * 20 * 20));
 						break;
 					case EXPERIENCE:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueExperience, 60 * 5 * 20));
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueExperience, 60 * 20 * 20));
 						break;
 					case WITHER:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueWither, 60 * 5 * 20));
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueWither, 60 * 20 * 20));
 						break;
 					case COLLAPSE:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueCollapse, 60 * 5 * 20));
+						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueCollapse, 60 * 20 * 20));
 						break;
 				}
 			}
