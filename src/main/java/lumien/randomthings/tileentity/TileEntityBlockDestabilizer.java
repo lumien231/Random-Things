@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import lumien.randomthings.block.BlockBlockDestabilizer;
 import lumien.randomthings.block.BlockPotionVaporizer;
+import lumien.randomthings.config.Numbers;
 import lumien.randomthings.lib.ContainerSynced;
 import lumien.randomthings.lib.IRedstoneSensitive;
 import net.minecraft.block.Block;
@@ -309,7 +310,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 
 	private void stepSearch()
 	{
-		if (toCheck.isEmpty() || targetBlocks.size() >= 50)
+		if (toCheck.isEmpty() || (Numbers.BLOCK_DESTABILIZER_LIMIT != 0 && targetBlocks.size() >= Numbers.BLOCK_DESTABILIZER_LIMIT))
 		{
 			initDrop();
 		}
