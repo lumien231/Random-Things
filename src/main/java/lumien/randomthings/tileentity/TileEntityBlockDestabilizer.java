@@ -43,6 +43,9 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 
 	@ContainerSynced
 	boolean lazy;
+	
+	@ContainerSynced
+	boolean fuzzy;
 
 	HashSet<BlockPos> invalidBlocks;
 
@@ -59,6 +62,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 	{
 		compound.setInteger("state", state.ordinal());
 		compound.setBoolean("lazy", lazy);
+		compound.setBoolean("fuzzy", fuzzy);
 
 		if (lazy && invalidBlocks != null)
 		{
@@ -134,6 +138,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 	{
 		this.state = STATE.values()[compound.getInteger("state")];
 		this.lazy = compound.getBoolean("lazy");
+		this.fuzzy = compound.getBoolean("fuzzy");
 
 		if (lazy && compound.hasKey("invalidBlocks"))
 		{
@@ -258,6 +263,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 			IBlockState target = world.getBlockState(pos);
 
 			if (target == targetState && world.getTileEntity(pos) == null)
+			if ((fuzzy && target.getBlock() == targetState.getBlock() || target == targetState) && world.getTileEntity(pos) == null)
 			{
 				EntityFallingBlock fallingEntity = new EntityFallingBlock(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, target);
 
@@ -324,7 +330,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 
 				alreadyChecked.add(nextPos);
 
-				if (state == targetState)
+				if ((fuzzy && state.getBlock() == targetState.getBlock() || state == targetState))
 				{
 					targetBlocks.add(nextPos);
 
@@ -408,5 +414,10 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 				invalidBlocks = null;
 			}
 		}
+	}
+
+	public void toggleFuzzy()
+	{
+		fuzzy = !fuzzy;
 	}
 }

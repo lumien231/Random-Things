@@ -27,6 +27,9 @@ public class ContainerBlockDestabilizer extends ContainerTE<TileEntityBlockDesta
 				te.toggleLazy();
 				break;
 			case 1:
+				te.toggleFuzzy();
+				break;
+			case 2:
 				te.resetLazy();
 				break;
 		}

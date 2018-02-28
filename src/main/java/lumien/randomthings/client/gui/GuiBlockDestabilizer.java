@@ -37,7 +37,7 @@ public class GuiBlockDestabilizer extends GuiContainerBase
 	{
 		super(new ContainerBlockDestabilizer(player, world, x, y, z));
 
-		this.xSize = 60;
+		this.xSize = 85;
 		this.ySize = 35;
 		this.te = world.getTileEntity(new BlockPos(x, y, z));
 	}
@@ -49,8 +49,11 @@ public class GuiBlockDestabilizer extends GuiContainerBase
 
 		GuiBoolButton lazyButton = new GuiBoolButton(0, this.guiLeft + 7, this.guiTop + 7, 20, 20, new ResourceLocation("randomthings", "textures/gui/blockDestabilizer/lazy.png"), TileEntityBlockDestabilizer.class, "lazy", te);
 		this.buttonList.add(lazyButton);
+		
+		GuiBoolButton fuzzyButton = new GuiBoolButton(1, this.guiLeft + 33, this.guiTop + 7, 20, 20, new ResourceLocation("randomthings", "textures/gui/blockDestabilizer/fuzzy.png"), TileEntityBlockDestabilizer.class, "fuzzy", te);
+		this.buttonList.add(fuzzyButton);
 
-		GuiButton resetButton = new GuiButtonImage(1, this.guiLeft + 33, this.guiTop + 7, 20, 20, 60, 0, 20, background);
+		GuiButton resetButton = new GuiButtonImage(2, this.guiLeft + 58, this.guiTop + 7, 20, 20, 85, 0, 20, background);
 		this.buttonList.add(resetButton);
 	}
 	
@@ -59,9 +62,9 @@ public class GuiBlockDestabilizer extends GuiContainerBase
 	{
 		super.actionPerformed(button);
 		
-		if (button.id == 1)
+		if (button.id == 2)
 		{
-			MessageContainerSignal message = new MessageContainerSignal(1);
+			MessageContainerSignal message = new MessageContainerSignal(2);
 			PacketHandler.INSTANCE.sendToServer(message);
 		}
 	}
