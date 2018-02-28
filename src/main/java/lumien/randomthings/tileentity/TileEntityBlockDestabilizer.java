@@ -7,6 +7,7 @@ import java.util.HashSet;
 import lumien.randomthings.block.BlockBlockDestabilizer;
 import lumien.randomthings.block.BlockPotionVaporizer;
 import lumien.randomthings.config.Numbers;
+import lumien.randomthings.entitys.EntityFallingBlockSpecial;
 import lumien.randomthings.lib.ContainerSynced;
 import lumien.randomthings.lib.IRedstoneSensitive;
 import net.minecraft.block.Block;
@@ -262,10 +263,9 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 
 			IBlockState target = world.getBlockState(pos);
 
-			if (target == targetState && world.getTileEntity(pos) == null)
 			if ((fuzzy && target.getBlock() == targetState.getBlock() || target == targetState) && world.getTileEntity(pos) == null)
 			{
-				EntityFallingBlock fallingEntity = new EntityFallingBlock(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, target);
+				EntityFallingBlockSpecial fallingEntity = new EntityFallingBlockSpecial(this.world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, target);
 
 				this.world.spawnEntity(fallingEntity);
 
@@ -359,7 +359,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 		{
 			targetState = world.getBlockState(pos.offset(facing));
 
-			if (targetState.getBlockHardness(this.world, pos.offset(facing)) > 0)
+			if (targetState.getBlockHardness(this.world, pos.offset(facing)) >= 0)
 			{
 
 				this.state = STATE.SEARCHING;

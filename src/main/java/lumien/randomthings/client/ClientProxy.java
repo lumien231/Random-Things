@@ -17,6 +17,7 @@ import lumien.randomthings.client.models.blocks.BlockModels;
 import lumien.randomthings.client.render.RenderArtificialEndPortal;
 import lumien.randomthings.client.render.RenderBiomeRadar;
 import lumien.randomthings.client.render.RenderEntityNothing;
+import lumien.randomthings.client.render.RenderFallingBlockSpecial;
 import lumien.randomthings.client.render.RenderProjectedItem;
 import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
@@ -24,6 +25,7 @@ import lumien.randomthings.client.render.RenderSpecialChest;
 import lumien.randomthings.client.render.RenderSpirit;
 import lumien.randomthings.client.render.RenderVoxelProjector;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
+import lumien.randomthings.entitys.EntityFallingBlockSpecial;
 import lumien.randomthings.entitys.EntityProjectedItem;
 import lumien.randomthings.entitys.EntityReviveCircle;
 import lumien.randomthings.entitys.EntitySoul;
@@ -187,6 +189,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityArtificialEndPortal.class, new RenderArtificialEndPortal(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectedItem.class, new RenderProjectedItem(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTemporaryFlooFireplace.class, new RenderEntityNothing(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockSpecial.class, new RenderFallingBlockSpecial(Minecraft.getMinecraft().getRenderManager()));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
