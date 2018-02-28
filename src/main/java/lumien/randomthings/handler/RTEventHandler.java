@@ -12,6 +12,7 @@ import java.util.UUID;
 import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.block.BlockCompressedSlimeBlock;
 import lumien.randomthings.block.BlockContactButton;
 import lumien.randomthings.block.BlockContactLever;
 import lumien.randomthings.block.ModBlocks;
@@ -51,6 +52,7 @@ import lumien.randomthings.util.WorldUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import lumien.randomthings.worldgen.WorldGenSakanade;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCompressedPowered;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -475,7 +477,21 @@ public class RTEventHandler
 						if (!event.getWorld().isRemote)
 						{
 							event.getWorld().setBlockState(event.getPos(), ModBlocks.compressedSlimeBlock.getDefaultState());
-							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.SLIME_BLOCK.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 1);
+							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.SLIME_BLOCK.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 0.8f);
+							equipped.damageItem(1, event.getEntityPlayer());
+						}
+					}
+				}
+				else if (targetState.getBlock() == ModBlocks.compressedSlimeBlock)
+				{
+					int currentCompression = targetState.getValue(BlockCompressedSlimeBlock.COMPRESSION);
+					event.getEntityPlayer().swingArm(event.getHand());
+					if (!event.getWorld().isRemote)
+					{
+						if (currentCompression < 2)
+						{
+							rcEvent.getWorld().setBlockState(rcEvent.getPos(), targetState.withProperty(BlockCompressedSlimeBlock.COMPRESSION, currentCompression + 1));
+							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.SLIME_BLOCK.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 0.8f - ((currentCompression+1)*0.2f));
 							equipped.damageItem(1, event.getEntityPlayer());
 						}
 					}

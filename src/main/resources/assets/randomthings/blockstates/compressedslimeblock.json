@@ -1,5 +1,7 @@
 {
     "variants": {
-        "normal": { "model": "randomthings:compressedslimeblock" }
+        "compression=0":  { "model": "randomthings:compressedslimeblock_0"},
+        "compression=1":  { "model": "randomthings:compressedslimeblock_1"},
+        "compression=2":  { "model": "randomthings:compressedslimeblock_2"}
     }
 }

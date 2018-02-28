@@ -1,5 +1,5 @@
 {
-    "parent": "randomthings:block/compressedslimeblock",
+    "parent": "randomthings:block/compressedslimeblock_0",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],
