@@ -57,6 +57,8 @@ tile.inventoryTester.name=物流检测器
 tile.flooBrick.name=飞路砖
 tile.superlubricentstone.name=超级滑滑石
 tile.triggerGlass.name=感知玻璃
+tile.blockDestabilizer.name=干扰器
+tile.advancedRedstoneRepeater.name=高级红石中继器
 
 tile.spectrePlank.name=通灵木板
 tile.spectreSapling.name=通灵树苗
@@ -431,6 +433,8 @@ tile.inventoryTester.info=物流检测器会检测物品栏中指定物品的数
 tile.superlubricentstone.info=行走在这个方块上会由于没有摩擦而滑行。
 tile.superLubricentIce.info=行走在这个方块上会由于没有摩擦而滑行。
 tile.triggerGlass.info=感知玻璃会在接收到红石信号的三秒钟内失去碰撞体积，与之相邻的感知玻璃也会因为其中一个收到红石信号而失去碰撞体积。
+tile.blockDestabilizer.info=The Block Destabilizer will make blocks connected to its front fall down when powered by redstone. It can destabilize a total of 50 blocks at once though they all have to be connected to each other and of the same type. In its GUI you can toggle lazy mode, in lazy mode the block destabilizer will remember the "shape" it dropped last time so it will run faster. However it will be "locked" to that shape and won't drop any blocks outside of it. Use lazy mode if you want a block destabilizer to keep dropping the same shape of blocks. You can reset the remembered shape with the "arrow" button.
+tile.advancedRedstoneRepeater.info=一种可自由设置的红石中继器。
 
 tile.plate_redirector.info=在这个板上移动的实体会被重定向到一个不同的方向，右键单击以改变方向。
 tile.plate_filteredredirector.info=在这个板上移动的实体会根据过滤被重定向到一个不同的方向。
