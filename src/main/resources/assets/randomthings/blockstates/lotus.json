@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "age=0": { "model": "randomthings:lotus_0" },
+        "age=1": { "model": "randomthings:lotus_1"},
+        "age=2": { "model": "randomthings:lotus_2"},
+        "age=3": { "model": "randomthings:lotus_3"}
+    }
+}

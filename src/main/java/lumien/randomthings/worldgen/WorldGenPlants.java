@@ -2,13 +2,17 @@ package lumien.randomthings.worldgen;
 
 import java.util.Random;
 
+import lumien.randomthings.block.BlockLotus;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Worldgen;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class WorldGenPlants extends WorldGenerator
 {
@@ -49,8 +53,29 @@ public class WorldGenPlants extends WorldGenerator
 					}
 				}
 			}
+
+			if (Worldgen.LOTUS && random.nextInt(10) == 0)
+			{
+				int x = position.getX() + 8 + random.nextInt(16);
+				int z = position.getZ() + 8 + random.nextInt(16);
+
+				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
+
+				if (target != null && target.getY() >= 0)
+				{
+					Biome biome = world.getBiome(target);
+					IBlockState state = world.getBlockState(target);
+					
+					IBlockState placeState = ModBlocks.lotus.getDefaultState().withProperty(BlockLotus.AGE, random.nextInt(4));
+					
+					if ((state.getBlock().isAir(state, world, target) || state.getBlock().isReplaceable(world, target)) && BiomeDictionary.hasType(biome, Type.SNOWY) && ModBlocks.lotus.canBlockStay(world, target, placeState))
+					{
+						world.setBlockState(target, placeState, 2);
+					}
+				}
+			}
 		}
-		
-		 return true;
+
+		return true;
 	}
 }

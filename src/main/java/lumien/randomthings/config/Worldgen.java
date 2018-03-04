@@ -17,6 +17,9 @@ public class Worldgen
 	@ConfigOption(category = "worldgen",name = "PeaceCandle")
 	public static boolean PEACE_CANDLE = true;
 	
+	@ConfigOption(category = "worldgen",name = "Lotus")
+	public static boolean LOTUS = true;
+	
 	// Loot Chances
 	@ConfigOption(category = "worldgen",name = "MagicHood")
 	public static boolean MAGIC_HOOD = true;

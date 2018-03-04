@@ -80,6 +80,7 @@ public class ItemModels
 		registerBlock(ModBlocks.triggerGlass);
 		registerBlock(ModBlocks.blockDestabilizer);
 		registerBlock(ModBlocks.unpoweredAdvancedRedstoneRepeater);
+		registerBlock(ModBlocks.lotus);
 		
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);
@@ -130,6 +131,7 @@ public class ItemModels
 		registerItem(ModItems.idCard);
 		registerItem(ModItems.emeraldCompass);
 		registerItem(ModItems.flooToken);
+		registerItem(ModItems.lotusSeeds);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);

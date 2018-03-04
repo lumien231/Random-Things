@@ -4,15 +4,24 @@ import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import lumien.randomthings.lib.IRTItemColor;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -26,7 +35,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 	public enum INGREDIENT
 	{
-		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder"), SUPERLUBRICENT_TINCTURE("superLubricentTincture"), FLOO_POWDER("flooPowder"), PLATE_BASE("plateBase"), PRECIOUS_EMERALD("preciousEmerald");
+		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder"), SUPERLUBRICENT_TINCTURE("superLubricentTincture"), FLOO_POWDER("flooPowder"), PLATE_BASE("plateBase"), PRECIOUS_EMERALD("preciousEmerald"), LOTUS_BLOSSOM("lotusBlossom");
 
 		public String name;
 
@@ -45,7 +54,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 		this.setHasSubtypes(true);
 	}
-	
+
 	@Override
 	public boolean hasEffect(ItemStack stack)
 	{
@@ -132,6 +141,73 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 		}
 
 		return EnumActionResult.PASS;
+	}
+
+	@Override
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
+	{
+		if (getIngredient(stack) == ItemIngredient.INGREDIENT.LOTUS_BLOSSOM)
+		{
+			if (entityLiving instanceof EntityPlayer)
+			{
+				EntityPlayer entityplayer = (EntityPlayer) entityLiving;
+
+				if (!worldIn.isRemote)
+				{
+					int i = 3 + worldIn.rand.nextInt(5) + worldIn.rand.nextInt(5);
+
+					while (i > 0)
+					{
+						int j = EntityXPOrb.getXPSplit(i);
+						i -= j;
+						worldIn.spawnEntity(new EntityXPOrb(worldIn, entityplayer.posX, entityplayer.posY, entityplayer.posZ, j));
+					}
+				}
+			}
+
+			stack.shrink(1);
+
+			return stack;
+		}
+
+		return super.onItemUseFinish(stack, worldIn, entityLiving);
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack)
+	{
+		if (getIngredient(stack) == ItemIngredient.INGREDIENT.LOTUS_BLOSSOM)
+		{
+			return 10;
+		}
+
+		return super.getMaxItemUseDuration(stack);
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+
+		if (getIngredient(stack) == ItemIngredient.INGREDIENT.LOTUS_BLOSSOM)
+		{
+			return EnumAction.EAT;
+		}
+
+		return super.getItemUseAction(stack);
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
+
+		if (getIngredient(itemstack) == ItemIngredient.INGREDIENT.LOTUS_BLOSSOM)
+		{
+			playerIn.setActiveHand(handIn);
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+		}
+
+		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
 	@Override

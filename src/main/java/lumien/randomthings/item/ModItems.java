@@ -43,6 +43,7 @@ public class ModItems
 	public static ItemEmeraldCompass emeraldCompass;
 	public static ItemFlooToken flooToken;
 	public static ItemPortKey portKey;
+	public static ItemLotusSeeds lotusSeeds;
 	
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -88,6 +89,7 @@ public class ModItems
 		emeraldCompass = new ItemEmeraldCompass();
 		flooToken = new ItemFlooToken();
 		portKey = new ItemPortKey();
+		lotusSeeds = new ItemLotusSeeds();
 
 		grassSeeds = new ItemGrassSeeds();
 		
