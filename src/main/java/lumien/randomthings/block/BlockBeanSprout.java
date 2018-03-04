@@ -3,6 +3,7 @@ package lumien.randomthings.block;
 import java.util.Random;
 
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -11,8 +12,11 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -30,19 +34,50 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 {
 	protected static final AxisAlignedBB AABB_1 = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.3000000238418579D, 0.699999988079071D);
 	protected static final AxisAlignedBB AABB_2 = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.6000000238418579D, 0.699999988079071D);
-	
+
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
 
 	public BlockBeanSprout()
 	{
 		this.setUnlocalizedName("beanSprout");
-		
+
 		this.setRegistryName(new ResourceLocation("randomthings", "beanSprout"));
 		ForgeRegistries.BLOCKS.register(this);
 
 		this.setSoundType(SoundType.PLANT);
 	}
-	
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		int age = state.getValue(AGE);
+
+		if (age == 7)
+		{
+			if (!worldIn.isRemote)
+			{
+				worldIn.setBlockState(pos, state.withProperty(AGE, 0));
+				
+				Random rand = new Random();
+				int beans = rand.nextInt(2) + 1;
+				
+				ItemStack stack = new ItemStack(ModItems.beans, beans);
+				
+				
+				if (!playerIn.addItemStackToInventory(stack))
+				{
+					WorldUtil.spawnItemStack(worldIn, pos, stack);
+				}
+			}
+
+			return true;
+		}
+		else
+		{
+			return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+		}
+	}
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -58,7 +93,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 
 	}
