@@ -78,6 +78,7 @@ public class ModBlocks
 	public static BlockTriggerGlass triggerGlass;
 	public static BlockBlockDestabilizer blockDestabilizer;
 	public static BlockLotus lotus;
+	public static BlockBlockLuminousTranslucent translucentLuminousBlock;
 	
 	public static BlockAdvancedRedstoneRepeater unpoweredAdvancedRedstoneRepeater;
 	public static BlockAdvancedRedstoneRepeater poweredAdvancedRedstoneRepeater;
@@ -172,6 +173,7 @@ public class ModBlocks
 		blockOfSticks = new BlockBlockOfSticks();
 		blazingFire = new BlockBlazingFire();
 		luminousBlock = new BlockBlockLuminous();
+		translucentLuminousBlock = new BlockBlockLuminousTranslucent();
 		inventoryRerouter = new BlockInventoryRerouter();
 		runeBase = new BlockRuneBase();
 		slimeCube = new BlockSlimeCube();

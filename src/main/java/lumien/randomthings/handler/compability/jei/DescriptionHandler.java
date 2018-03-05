@@ -35,6 +35,7 @@ public class DescriptionHandler
 		overrideMap.put(ModBlocks.platform, "tile.platform.info");
 		overrideMap.put(ModBlocks.contactLever, "tile.contactButton.info");
 		overrideMap.put(ModBlocks.luminousBlock, "tile.luminousBlock.info");
+		overrideMap.put(ModBlocks.translucentLuminousBlock, "tile.translucentLuminousBlock.info");
 		overrideMap.put(ModBlocks.biomeStone, "tile.biomeStone.info");
 		overrideMap.put(ModBlocks.coloredGrass, "tile.coloredGrass.info");
 		overrideMap.put(ModBlocks.stainedBrick, "tile.stainedBrick.info");

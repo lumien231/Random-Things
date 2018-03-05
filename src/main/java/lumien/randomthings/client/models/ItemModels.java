@@ -81,7 +81,7 @@ public class ItemModels
 		registerBlock(ModBlocks.blockDestabilizer);
 		registerBlock(ModBlocks.unpoweredAdvancedRedstoneRepeater);
 		registerBlock(ModBlocks.lotus);
-		
+
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);
 		registerBlock(ModBlocks.correctorPlate);
@@ -150,10 +150,10 @@ public class ItemModels
 		registerLuminousBlocks();
 
 		registerRuneDust();
-		
+
 		ModelLoader.setCustomMeshDefinition(ModItems.redstoneActivator, new RedstoneActivatorMesh());
-		ModelBakery.registerItemVariants(ModItems.redstoneActivator, new ModelResourceLocation[]{new ModelResourceLocation("randomthings:redstoneactivator_0"),new ModelResourceLocation("randomthings:redstoneactivator_1"),new ModelResourceLocation("randomthings:redstoneactivator_2")});
-	
+		ModelBakery.registerItemVariants(ModItems.redstoneActivator, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:redstoneactivator_0"), new ModelResourceLocation("randomthings:redstoneactivator_1"), new ModelResourceLocation("randomthings:redstoneactivator_2") });
+
 		ModelLoader.setCustomMeshDefinition(ModItems.portKey, new PortKeyMesh());
 		ModelLoader.setCustomModelResourceLocation(ModItems.portKey, 1, new ModelResourceLocation("randomthings:portkey"));
 	}
@@ -165,7 +165,7 @@ public class ItemModels
 			String name = runeType.getName();
 
 			ModelLoader.setCustomModelResourceLocation(ModItems.runeDust, runeType.ordinal(), new ModelResourceLocation("randomthings:runedust", "inventory"));
-		} 
+		}
 	}
 
 	private static void registerIngredients()
@@ -231,6 +231,11 @@ public class ItemModels
 		for (int i = 0; i < 16; i++)
 		{
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.luminousBlock), i, new ModelResourceLocation("randomthings:luminousblock/" + EnumDyeColor.byMetadata(i).getUnlocalizedName(), "inventory"));
+		}
+
+		for (int i = 0; i < 16; i++)
+		{
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.translucentLuminousBlock), i, new ModelResourceLocation("randomthings:luminousblock/" + EnumDyeColor.byMetadata(i).getUnlocalizedName() + "_t", "inventory"));
 		}
 	}
 
