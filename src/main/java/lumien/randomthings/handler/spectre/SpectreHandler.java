@@ -202,6 +202,10 @@ public class SpectreHandler extends WorldSavedData
 			double spectrePosZ = compound.getDouble("spectrePosZ");
 			int spectreDimension = compound.getInteger("spectreDimension");
 
+			player.posX = spectrePosX;
+			player.posY = spectrePosY;
+			player.posZ = spectrePosZ;
+			
 			if (player.dimension != spectreDimension)
 			{
 				PlayerUtil.teleportPlayerToDimension(player, spectreDimension);
