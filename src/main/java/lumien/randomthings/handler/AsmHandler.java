@@ -81,7 +81,7 @@ public class AsmHandler
 			getFields();
 		}
 	}
-	
+
 	public static boolean overrideFallThrough(boolean original, IBlockState state)
 	{
 		if (state == ModBlocks.triggerGlass.getDefaultState().withProperty(BlockTriggerGlass.TRIGGERED, true))
@@ -385,7 +385,10 @@ public class AsmHandler
 						{
 							for (EnumFacing facing : EnumFacing.values())
 							{
-								redirector.targets.put(redirector.getPos().offset(facing), redirector.getPos().offset(facing.getOpposite()));
+								if (redirector.isEnabled(facing))
+								{
+									redirector.targets.put(redirector.getPos().offset(facing), redirector.getPos().offset(facing.getOpposite()));
+								}
 							}
 						}
 
@@ -503,7 +506,7 @@ public class AsmHandler
 
 			if (currentlyRendering.getItem() instanceof ItemIngredient && currentlyRendering.getItemDamage() == ItemIngredient.INGREDIENT.PRECIOUS_EMERALD.id)
 			{
-				return Color.HSBtoRGB((float) (1D/360D * (30F * Math.sin(1 / 20D * RTEventHandler.clientAnimationCounter) + 1 + 120 - 90 + 120)), 1F, 0.6F);
+				return Color.HSBtoRGB((float) (1D / 360D * (30F * Math.sin(1 / 20D * RTEventHandler.clientAnimationCounter) + 1 + 120 - 90 + 120)), 1F, 0.6F);
 			}
 		}
 

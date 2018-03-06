@@ -1,7 +1,12 @@
 {
-    "parent": "block/cube_all",
-    "textures": 
-    {
-        "all": "randomthings:blocks/lightredirector"
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "randomthings:blocks/lightredirector",
+        "north": "randomthings:blocks/lightredirector",
+        "east": "randomthings:blocks/lightredirector",
+        "south": "randomthings:blocks/lightredirector",
+        "west": "randomthings:blocks/lightredirector",
+        "up": "randomthings:blocks/lightredirector",
+        "down": "randomthings:blocks/lightredirector"
     }
 }

@@ -1,5 +1,84 @@
 {
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "north": "randomthings:blocks/lightredirector",
+            "east": "randomthings:blocks/lightredirector",
+            "south": "randomthings:blocks/lightredirector",
+            "west": "randomthings:blocks/lightredirector",
+            "up": "randomthings:blocks/lightredirector",
+            "down": "randomthings:blocks/lightredirector",
+            "disabled": "randomthings:blocks/lightredirector_disabled"
+        },
+        "model": "randomthings:lightredirector",
+        "uvlock": true
+    },
     "variants": {
-        "normal": { "model": "randomthings:lightredirector" }
+        "north": {
+            "true":
+            {
+            },
+            "false" :
+            {
+                "textures": {
+                    "north": "#disabled"
+                }
+            }
+        },
+        "east": {
+            "true":
+            {
+            },
+            "false" :
+            {
+                "textures": {
+                    "east": "#disabled"
+                }
+            }
+        },
+        "south": {
+            "true":
+            {
+            },
+            "false" :
+            {
+                "textures": {
+                    "south": "#disabled"
+                }
+            }
+        },
+        "west": {
+            "true":
+            {
+            },
+            "false" :
+            {
+                "textures": {
+                    "west": "#disabled"
+                }
+            }
+        },
+        "up": {
+            "true":
+            {
+            },
+            "false" :
+            {
+                "textures": {
+                    "up": "#disabled"
+                }
+            }
+        },
+        "down": {
+            "true":
+            {
+            },
+            "false" :
+            {
+                "textures": {
+                    "down": "#disabled"
+                }
+            }
+        }
     }
 }
