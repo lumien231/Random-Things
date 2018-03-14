@@ -59,6 +59,7 @@ tile.superlubricentstone.name=超级滑滑石
 tile.triggerGlass.name=感知玻璃
 tile.blockDestabilizer.name=干扰器
 tile.advancedRedstoneRepeater.name=高级红石中继器
+tile.lotus.name=莲
 
 tile.spectrePlank.name=通灵木板
 tile.spectreSapling.name=通灵树苗
@@ -152,6 +153,23 @@ tile.luminousBlock.magenta.name=荧光品红色方块
 tile.luminousBlock.orange.name=荧光橙色方块
 tile.luminousBlock.white.name=荧光白色方块
 
+tile.translucentLuminousBlock.black.name=通透荧光黑色方块
+tile.translucentLuminousBlock.red.name=通透荧光红色方块
+tile.translucentLuminousBlock.green.name=通透荧光绿色方块
+tile.translucentLuminousBlock.brown.name=通透荧光棕色方块
+tile.translucentLuminousBlock.blue.name=通透荧光蓝色方块
+tile.translucentLuminousBlock.purple.name=通透荧光紫色方块
+tile.translucentLuminousBlock.cyan.name=通透荧光青色方块
+tile.translucentLuminousBlock.silver.name=通透荧光淡灰色方块
+tile.translucentLuminousBlock.gray.name=通透荧光灰色方块
+tile.translucentLuminousBlock.pink.name=通透荧光粉色方块
+tile.translucentLuminousBlock.lime.name=通透荧光黄绿色方块
+tile.translucentLuminousBlock.yellow.name=通透荧光黄色方块
+tile.translucentLuminousBlock.lightBlue.name=通透荧光淡蓝色方块
+tile.translucentLuminousBlock.magenta.name=通透荧光品红色方块
+tile.translucentLuminousBlock.orange.name=通透荧光橙色方块
+tile.translucentLuminousBlock.white.name=通透荧光白色方块
+
 tile.biomeStone.cobble.name=自然感知圆石
 tile.biomeStone.smooth.name=自然感知石头
 tile.biomeStone.brick.name=自然感知石砖
@@ -206,6 +224,7 @@ item.idcard.name=身份证
 item.emeraldcompass.name=绿宝石指南针
 item.flootoken.name=飞路标
 item.portKey.name=门钥匙
+item.lotusseeds.name=莲子
 
 item.bean.name=豆
 item.lesserMagicBean.name=次级魔豆
@@ -250,7 +269,8 @@ item.ingredient.luminousPowder.name=荧光粉
 item.ingredient.superLubricentTincture.name=超级滑滑剂
 item.ingredient.flooPowder.name=飞路粉
 item.ingredient.plateBase.name=压力板基板
-item.ingredient.preciousEmerald.name=华丽的绿宝石
+item.ingredient.preciousEmerald.name=无暇绿宝石
+item.ingredient.lotusBlossom.name=莲花
 
 item.spectrePickaxe.name=通灵之镐
 item.spectreAxe.name=通灵之斧
@@ -435,6 +455,7 @@ tile.superLubricentIce.info=行走在这个方块上会由于没有摩擦而滑�
 tile.triggerGlass.info=感知玻璃会在接收到红石信号的三秒钟内失去碰撞体积，与之相邻的感知玻璃也会因为其中一个收到红石信号而失去碰撞体积。
 tile.blockDestabilizer.info=The Block Destabilizer will make blocks connected to its front fall down when powered by redstone. It can destabilize a total of 50 blocks at once though they all have to be connected to each other and of the same type. In its GUI you can toggle lazy mode, in lazy mode the block destabilizer will remember the "shape" it dropped last time so it will run faster. However it will be "locked" to that shape and won't drop any blocks outside of it. Use lazy mode if you want a block destabilizer to keep dropping the same shape of blocks. You can reset the remembered shape with the "arrow" button.
 tile.advancedRedstoneRepeater.info=一种可自由设置的红石中继器。
+tile.translucentLuminousBlock.info=一种通透的荧光方块。
 
 tile.plate_redirector.info=在这个板上移动的实体会被重定向到一个不同的方向，右键单击以改变方向。
 tile.plate_filteredredirector.info=在这个板上移动的实体会根据过滤被重定向到一个不同的方向。
@@ -495,3 +516,5 @@ item.idcard.info=身份证可配合实体过滤器使用，你可以通过右击
 item.emeraldcompass.info=绿宝石指南针需要配合身份证在工作台上进行合成，只要身份证所设置的玩家在线就会指向该玩家。
 item.flootoken.info=当你将它扔在地上时，飞路标就会创造一个临时‘壁炉’，你便可通过飞路网络进行传送。只需站在火焰上，并在聊天栏中输入消息即可。
 item.portKey.info=你可以右击以设定门钥匙的目标。将其丢在地上等待5秒后，可发现其附魔闪光消失，此时这个门钥匙就（蓄势待发）不会再消失了。玩家捡起此门钥匙后会被传送到它所绑定的目标上去。将门钥匙与其他物品合成即可改变其外观。
+item.ingredient.lotusBlossom.info=玩家可通过食用以获得经验。
+item.lotusseeds.info=通过破坏莲花植株掉落，你可以在‘snowy’生物群系找到它。另外，食用它的花朵还能给予你经验。
