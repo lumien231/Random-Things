@@ -123,6 +123,10 @@ public class BlockBeanStalk extends BlockBase
 				worldIn.setBlockState(pos.up(), this.getDefaultState());
 				worldIn.scheduleUpdate(pos.up(), this, strongMagic ? 1 : 5);
 			}
+			else
+			{
+				worldIn.setBlockState(pos, ModBlocks.beanPod.getDefaultState());
+			}
 		}
 	}
 
