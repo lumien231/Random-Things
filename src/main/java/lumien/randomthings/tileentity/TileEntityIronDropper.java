@@ -186,7 +186,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setInteger("redstoneMode", redstoneMode.ordinal());
 		compound.setInteger("dropCounter", dropCounter);
@@ -196,7 +196,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.redstoneMode = REDSTONE_MODE.values()[compound.getInteger("redstoneMode")];
 		this.dropCounter = compound.getInteger("dropCounter");
@@ -206,7 +206,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 	}
 
 	@Override
-	public boolean writeNBTToDescriptionPacket()
+	public boolean syncAdditionalData()
 	{
 		return false;
 	}

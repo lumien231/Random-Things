@@ -22,18 +22,6 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 	int counter = 0;
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
-	{
-
-	}
-
-	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
-	{
-
-	}
-
-	@Override
 	public void update()
 	{
 		if (!this.world.isRemote)

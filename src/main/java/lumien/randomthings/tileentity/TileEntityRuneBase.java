@@ -23,7 +23,7 @@ public class TileEntityRuneBase extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagList runeList = new NBTTagList();
 		for (int i = 0; i < runeData.length; i++)
@@ -35,7 +35,7 @@ public class TileEntityRuneBase extends TileEntityBase
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagList runeList = compound.getTagList("runeData", (byte) 11);
 

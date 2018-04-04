@@ -67,7 +67,7 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setBoolean("consume", consume);
 		compound.setString("chatMessage", chatMessage);
@@ -81,7 +81,7 @@ public class TileEntityChatDetector extends TileEntityBase implements ITickable
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		consume = compound.getBoolean("consume");
 		chatMessage = compound.getString("chatMessage");

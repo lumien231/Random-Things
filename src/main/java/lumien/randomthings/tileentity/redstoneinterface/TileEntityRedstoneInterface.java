@@ -70,7 +70,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagCompound weakPowerCompound = new NBTTagCompound();
 		NBTTagCompound strongPowerCompound = new NBTTagCompound();
@@ -86,7 +86,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagCompound weakPowerCompound = compound.getCompoundTag("weakPowerCompound");
 		NBTTagCompound strongPowerCompound = compound.getCompoundTag("strongPowerCompound");

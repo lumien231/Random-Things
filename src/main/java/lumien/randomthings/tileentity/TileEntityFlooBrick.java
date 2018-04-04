@@ -66,7 +66,7 @@ public class TileEntityFlooBrick extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setBoolean("amMaster", amMaster);
 
@@ -96,7 +96,7 @@ public class TileEntityFlooBrick extends TileEntityBase
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.amMaster = compound.getBoolean("amMaster");
 

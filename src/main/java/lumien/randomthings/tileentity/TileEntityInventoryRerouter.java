@@ -29,7 +29,7 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagList facingList = new NBTTagList();
 
@@ -45,7 +45,7 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagList facingList = compound.getTagList("facingList", (byte) 3);
 

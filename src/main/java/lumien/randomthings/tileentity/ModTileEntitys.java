@@ -47,6 +47,7 @@ public class ModTileEntitys
 		registerTE(TileEntityGlobalChatDetector.class, "globalChatDetector");
 		registerTE(TileEntityBlockDestabilizer.class, "blockDestabilizer");
 		registerTE(TileEntityAdvancedRedstoneRepeater.class, "configurableRepeater");
+		registerTE(TileEntityAncientFurnace.class, "ancientFurnace");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

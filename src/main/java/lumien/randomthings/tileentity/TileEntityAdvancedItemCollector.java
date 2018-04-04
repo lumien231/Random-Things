@@ -54,7 +54,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setInteger("rangeX", rangeX);
 		compound.setInteger("rangeY", rangeY);
@@ -66,7 +66,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		rangeX = compound.getInteger("rangeX");
 		rangeY = compound.getInteger("rangeY");

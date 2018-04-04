@@ -60,6 +60,7 @@ tile.triggerGlass.name=Trigger Glass
 tile.blockDestabilizer.name=Block Destabilizer
 tile.advancedRedstoneRepeater.name=Advanced Redstone Repeater
 tile.lotus.name=Lotus
+tile.ancientBrick.name=Ancient Brick
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling

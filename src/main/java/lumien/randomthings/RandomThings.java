@@ -28,6 +28,7 @@ import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.ModRecipes;
 import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.tileentity.TileEntityEnderAnchor;
+import lumien.randomthings.worldgen.WorldGenAncientFurnace;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenEventHandler;
 import net.minecraft.nbt.NBTTagCompound;
@@ -123,6 +124,7 @@ public class RandomThings implements LoadingCallback
 		ModDimensions.register();
 
 		GameRegistry.registerWorldGenerator(new WorldGenCores(), 1000);
+		GameRegistry.registerWorldGenerator(new WorldGenAncientFurnace(), 1000);
 		
 		if (Loader.isModLoaded("opencomputers"))
 		{

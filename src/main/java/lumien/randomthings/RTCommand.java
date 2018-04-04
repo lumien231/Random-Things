@@ -15,6 +15,7 @@ import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageNotification;
+import lumien.randomthings.worldgen.WorldGenAncientFurnace;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -234,6 +235,10 @@ public class RTCommand extends CommandBase
 			{
 				sender.sendMessage(new TextComponentTranslation("command.festival.novillager"));
 			}
+		}
+		else if (args[0].equals("ancientFurnace"))
+		{
+			WorldGenAncientFurnace.pattern.place(sender.getEntityWorld(), sender.getPosition(), 3);
 		}
 	}
 

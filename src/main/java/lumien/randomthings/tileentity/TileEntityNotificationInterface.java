@@ -65,7 +65,7 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setString("title", title);
 		compound.setString("description", description);
@@ -77,7 +77,7 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.title = compound.getString("title");
 		this.description = compound.getString("description");

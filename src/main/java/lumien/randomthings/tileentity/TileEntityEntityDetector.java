@@ -125,7 +125,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setBoolean("powered", powered);
 
@@ -145,7 +145,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		powered = compound.getBoolean("powered");
 

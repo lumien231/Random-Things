@@ -30,7 +30,7 @@ public class TileEntityFilteredRedirectorPlate extends TileEntityBase implements
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagCompound inventoryCompound = new NBTTagCompound();
 		InventoryUtil.writeInventoryToCompound(inventoryCompound, filterInventory);
@@ -39,7 +39,7 @@ public class TileEntityFilteredRedirectorPlate extends TileEntityBase implements
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagCompound inventoryCompound = compound.getCompoundTag("inventoryCompound");
 

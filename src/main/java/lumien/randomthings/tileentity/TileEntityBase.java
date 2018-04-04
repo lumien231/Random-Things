@@ -82,7 +82,7 @@ public abstract class TileEntityBase extends TileEntity
 	{
 		super.writeToNBT(compound);
 
-		writeDataToNBT(compound);
+		writeDataToNBT(compound, false);
 
 		if (this.inventoryHandler instanceof ItemStackHandler)
 		{
@@ -94,7 +94,7 @@ public abstract class TileEntityBase extends TileEntity
 		{
 			compound.setBoolean("redstonePowered", redstonePowered);
 		}
-
+		
 		return compound;
 	}
 
@@ -103,7 +103,7 @@ public abstract class TileEntityBase extends TileEntity
 	{
 		super.readFromNBT(compound);
 
-		readDataFromNBT(compound);
+		readDataFromNBT(compound, false);
 
 		if (this.inventoryHandler instanceof ItemStackHandler)
 		{
@@ -119,15 +119,28 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
 	{
-		if (writeNBTToDescriptionPacket())
-		{
-			readFromNBT(packet.getNbtCompound());
-		}
+		handleUpdateTag(packet.getNbtCompound());
 
+		if (this instanceof IRedstoneSensitive)
+		{
+			this.redstonePowered = packet.getNbtCompound().getBoolean("redstonePowered");
+		}
+		
 		if (renderAfterData())
 		{
 			IBlockState state = this.world.getBlockState(this.pos);
 			this.world.notifyBlockUpdate(pos, state, state, 3);
+		}
+	}
+	
+	@Override
+	public void handleUpdateTag(NBTTagCompound tag)
+	{
+		super.readFromNBT(tag);
+		
+		if (syncAdditionalData())
+		{
+			readDataFromNBT(tag, true);
 		}
 	}
 
@@ -136,9 +149,14 @@ public abstract class TileEntityBase extends TileEntity
 	{
 		NBTTagCompound baseCompound = super.getUpdateTag();
 
-		if (writeNBTToDescriptionPacket())
+		if (this instanceof IRedstoneSensitive)
 		{
-			this.writeDataToNBT(baseCompound);
+			baseCompound.setBoolean("redstonePowered", redstonePowered);
+		}
+		
+		if (syncAdditionalData())
+		{
+			this.writeDataToNBT(baseCompound, true);
 		}
 
 		return baseCompound;
@@ -147,12 +165,7 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		if (writeNBTToDescriptionPacket())
-		{
-			this.writeToNBT(nbtTag);
-		}
-		return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, 1, this.getUpdateTag());
 	}
 
 	public void syncTE()
@@ -161,9 +174,15 @@ public abstract class TileEntityBase extends TileEntity
 		this.world.notifyBlockUpdate(pos, state, state, 3);
 	}
 
-	public abstract void writeDataToNBT(NBTTagCompound compound);
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
+	{
+		
+	}
 
-	public abstract void readDataFromNBT(NBTTagCompound compound);
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
+	{
+		
+	}
 
 	public boolean renderAfterData()
 	{
@@ -189,7 +208,7 @@ public abstract class TileEntityBase extends TileEntity
 		}
 	}
 
-	public boolean writeNBTToDescriptionPacket()
+	public boolean syncAdditionalData()
 	{
 		return true;
 	}

@@ -21,21 +21,21 @@ public class TileEntityAdvancedRedstoneRepeater extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setInteger("turnOnDelay", turnOnDelay);
 		compound.setInteger("turnOffDelay", turnOffDelay);
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.turnOnDelay = compound.getInteger("turnOnDelay");
 		this.turnOffDelay = compound.getInteger("turnOffDelay");
 	}
 
 	@Override
-	public boolean writeNBTToDescriptionPacket()
+	public boolean syncAdditionalData()
 	{
 		return false;
 	}

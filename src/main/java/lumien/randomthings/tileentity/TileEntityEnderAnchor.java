@@ -15,13 +15,13 @@ public class TileEntityEnderAnchor extends TileEntityBase implements ITickable
 	boolean firstTick = true;
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 
 	}

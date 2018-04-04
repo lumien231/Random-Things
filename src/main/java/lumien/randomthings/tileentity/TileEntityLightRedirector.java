@@ -95,7 +95,7 @@ public class TileEntityLightRedirector extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		for (int i = 0; i < EnumFacing.VALUES.length; i++)
 		{
@@ -104,7 +104,7 @@ public class TileEntityLightRedirector extends TileEntityBase
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		for (int i = 0; i < EnumFacing.VALUES.length; i++)
 		{

@@ -35,7 +35,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		if (target != null)
 		{
@@ -58,7 +58,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		if (compound.hasKey("targetX"))
 		{

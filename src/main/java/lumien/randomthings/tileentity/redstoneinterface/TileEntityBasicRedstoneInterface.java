@@ -6,15 +6,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
-
 public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterface
 {
 	BlockPos target;
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
-		super.writeDataToNBT(compound);
+		super.writeDataToNBT(compound, sync);
 		
 		if (target != null)
 		{
@@ -25,9 +24,9 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
-		super.readDataFromNBT(compound);
+		super.readDataFromNBT(compound, sync);
 		
 		if (compound.hasKey("targetX"))
 		{

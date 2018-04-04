@@ -80,6 +80,9 @@ public class ModBlocks
 	public static BlockLotus lotus;
 	public static BlockBlockLuminousTranslucent translucentLuminousBlock;
 	
+	public static BlockAncientFurnace ancientFurnace;
+	public static BlockAncientBrick ancientBrick;
+	
 	public static BlockAdvancedRedstoneRepeater unpoweredAdvancedRedstoneRepeater;
 	public static BlockAdvancedRedstoneRepeater poweredAdvancedRedstoneRepeater;
 
@@ -186,6 +189,8 @@ public class ModBlocks
 		triggerGlass = new BlockTriggerGlass();
 		blockDestabilizer = new BlockBlockDestabilizer();
 		lotus = new BlockLotus();
+		ancientFurnace = new BlockAncientFurnace();
+		ancientBrick = new BlockAncientBrick();
 		
 		unpoweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(false);
 		poweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(true);

@@ -27,7 +27,7 @@ public class TileEntityInventoryTester extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setBoolean("emitRedstone", emitRedstone);
 		compound.setBoolean("invertSignal", invertSignal);
@@ -35,7 +35,7 @@ public class TileEntityInventoryTester extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.emitRedstone = compound.getBoolean("emitRedstone");
 		this.invertSignal = compound.getBoolean("invertSignal");

@@ -214,7 +214,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		if (currentCrystal != null)
 		{
@@ -242,7 +242,7 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.currentCrystal = new ItemStack(compound.getCompoundTag("currentCrystal"));
 		this.state = STATE.values()[compound.getInteger("state")];

@@ -18,7 +18,7 @@ public class TileEntityFluidDisplay extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		NBTTagCompound fluidCompound = new NBTTagCompound();
 
@@ -33,7 +33,7 @@ public class TileEntityFluidDisplay extends TileEntityBase
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		if (compound.hasKey("fluidStack"))
 		{

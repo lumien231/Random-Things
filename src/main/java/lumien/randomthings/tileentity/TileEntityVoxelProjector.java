@@ -44,7 +44,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setString("model", model);
 		compound.setInteger("modelRotation", modelRotation);
@@ -55,7 +55,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.model = compound.getString("model");
 		this.modelRotation = compound.getInteger("modelRotation");

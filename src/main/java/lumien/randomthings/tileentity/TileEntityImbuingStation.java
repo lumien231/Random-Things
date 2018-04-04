@@ -26,7 +26,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements ITickabl
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound nbt)
+	public void writeDataToNBT(NBTTagCompound nbt, boolean sync)
 	{
 		nbt.setInteger("imbuingProgress", imbuingProgress);
 
@@ -39,7 +39,7 @@ public class TileEntityImbuingStation extends TileEntityBase implements ITickabl
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound nbt)
+	public void readDataFromNBT(NBTTagCompound nbt, boolean sync)
 	{
 		this.imbuingProgress = nbt.getInteger("imbuingProgress");
 

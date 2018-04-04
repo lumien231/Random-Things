@@ -40,13 +40,13 @@ public class TileEntityRainShield extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setBoolean("active", active);
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		if (!compound.hasKey("active"))
 		{
@@ -59,7 +59,7 @@ public class TileEntityRainShield extends TileEntityBase
 	}
 
 	@Override
-	public boolean writeNBTToDescriptionPacket()
+	public boolean syncAdditionalData()
 	{
 		return true;
 	}

@@ -95,7 +95,7 @@ public class TileEntityPlayerInterface extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound nbt)
+	public void writeDataToNBT(NBTTagCompound nbt, boolean sync)
 	{
 		if (this.playerUUID != null)
 		{
@@ -104,7 +104,7 @@ public class TileEntityPlayerInterface extends TileEntityBase
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound nbt)
+	public void readDataFromNBT(NBTTagCompound nbt, boolean sync)
 	{
 		if (nbt.hasKey("player-uuid"))
 		{

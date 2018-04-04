@@ -59,14 +59,14 @@ public class TileEntityOnlineDetector extends TileEntityBase implements ITickabl
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setString("username", username);
 		compound.setBoolean("playerOnline", playerOnline);
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		username = compound.getString("username");
 		playerOnline = compound.getBoolean("playerOnline");

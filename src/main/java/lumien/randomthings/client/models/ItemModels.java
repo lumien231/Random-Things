@@ -148,6 +148,7 @@ public class ItemModels
 		registerIngredients();
 		registerBlockOfSticks();
 		registerLuminousBlocks();
+		registerAncientBrick();
 
 		registerRuneDust();
 
@@ -255,6 +256,14 @@ public class ItemModels
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 2, new ModelResourceLocation("randomthings:biomeStone/brick", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 3, new ModelResourceLocation("randomthings:biomeStone/cracked", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 4, new ModelResourceLocation("randomthings:biomeStone/chiseled", "inventory"));
+	}
+	
+	private static void registerAncientBrick()
+	{
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.ancientBrick), 0, new ModelResourceLocation("randomthings:ancientBrick/runes", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.ancientBrick), 1, new ModelResourceLocation("randomthings:ancientBrick/default", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.ancientBrick), 2, new ModelResourceLocation("randomthings:ancientBrick/empty", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.ancientBrick), 3, new ModelResourceLocation("randomthings:ancientBrick/full", "inventory"));
 	}
 
 	private static void registerPlatforms()

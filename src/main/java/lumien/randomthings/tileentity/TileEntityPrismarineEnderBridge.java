@@ -113,7 +113,7 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setInteger("state", state.ordinal());
 		compound.setBoolean("redstonePowered", redstonePowered);
@@ -121,7 +121,7 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		state = BRIDGESTATE.values()[compound.getInteger("state")];
 		redstonePowered = compound.getBoolean("redstonePowered");

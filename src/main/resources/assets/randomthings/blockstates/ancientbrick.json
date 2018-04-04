@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "variant=runes": [{"model": "randomthings:ancientbrick/runes_0"},
+        {"model": "randomthings:ancientbrick/runes_1"},
+        {"model": "randomthings:ancientbrick/runes_2"},
+        {"model": "randomthings:ancientbrick/runes_3"} ],
+        "variant=default": { "model": "randomthings:ancientbrick/default" },
+        "variant=empty": { "model": "randomthings:ancientbrick/empty" },
+        "variant=full": { "model": "randomthings:ancientbrick/full" },
+        "variant=output": { "model": "randomthings:ancientbrick/output" }
+    }
+}

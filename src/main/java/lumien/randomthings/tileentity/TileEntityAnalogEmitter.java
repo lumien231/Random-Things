@@ -27,13 +27,13 @@ public class TileEntityAnalogEmitter extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setInteger("emitLevel", emitLevel);
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.emitLevel = compound.getInteger("emitLevel");
 	}

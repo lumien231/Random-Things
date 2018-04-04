@@ -70,7 +70,7 @@ public class TileEntityGlobalChatDetector extends TileEntityBase implements ITic
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setBoolean("consume", consume);
 		compound.setString("chatMessage", chatMessage);
@@ -80,7 +80,7 @@ public class TileEntityGlobalChatDetector extends TileEntityBase implements ITic
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		consume = compound.getBoolean("consume");
 		chatMessage = compound.getString("chatMessage");

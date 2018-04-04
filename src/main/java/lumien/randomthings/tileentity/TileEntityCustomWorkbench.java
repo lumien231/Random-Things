@@ -31,7 +31,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		String woodMaterialName = woodMaterial.getRegistryName().toString();
 		compound.setString("woodMaterialName", woodMaterialName);
@@ -40,7 +40,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		String woodMaterialName = compound.getString("woodMaterialName");
 		woodMeta = compound.getInteger("woodMeta");

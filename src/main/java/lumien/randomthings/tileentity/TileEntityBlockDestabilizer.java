@@ -59,7 +59,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setInteger("state", state.ordinal());
 		compound.setBoolean("lazy", lazy);
@@ -135,7 +135,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		this.state = STATE.values()[compound.getInteger("state")];
 		this.lazy = compound.getBoolean("lazy");
@@ -234,7 +234,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 	}
 
 	@Override
-	public boolean writeNBTToDescriptionPacket()
+	public boolean syncAdditionalData()
 	{
 		return false;
 	}

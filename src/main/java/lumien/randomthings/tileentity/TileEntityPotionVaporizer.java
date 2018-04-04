@@ -91,7 +91,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public void writeDataToNBT(NBTTagCompound compound)
+	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		compound.setInteger("durationLeft", durationLeft);
 		compound.setInteger("fuelBurn", fuelBurn);
@@ -123,7 +123,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 	}
 
 	@Override
-	public void readDataFromNBT(NBTTagCompound compound)
+	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		durationLeft = compound.getInteger("durationLeft");
 		fuelBurn = compound.getInteger("fuelBurn");
