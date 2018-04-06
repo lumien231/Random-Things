@@ -32,5 +32,5 @@ public class Numbers
 	public static int MODEL_TRANSFER_BANDWIDTH = 1000;
 
 	@ConfigOption(category = "Numbers", name = "AncientFurnaceLimit", comment = "How many blocks an Ancient Furnace can transform before stopping")
-	public static int ANCIENT_FURNACE_LIMIT = 16 * 16 * 20 * 20;
+	public static int ANCIENT_FURNACE_LIMIT = 10000;
 }

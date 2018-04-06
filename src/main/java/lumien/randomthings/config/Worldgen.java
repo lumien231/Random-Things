@@ -38,5 +38,8 @@ public class Worldgen
 	
 	@ConfigOption(category = "worldgen", name = "GlowingMushrooms")
 	public static boolean GLOWING_MUSHROOM = true;
+	
+	@ConfigOption(category = "worldgen", name = "AncientFurnace")
+	public static boolean ANCIENT_FURNACE = true;
 }
 

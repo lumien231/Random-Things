@@ -222,10 +222,6 @@ public class TileEntityAncientFurnace extends TileEntityBase implements ITickabl
 				}
 				else
 				{
-					Explosion explosion = new Explosion(this.world, null, this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 10, true, true);
-					explosion.doExplosionA();
-					explosion.doExplosionB(true);
-
 					for (int modX = -1; modX < 2; modX++)
 					{
 						for (int modY = -1; modY < 2; modY++)
@@ -236,6 +232,10 @@ public class TileEntityAncientFurnace extends TileEntityBase implements ITickabl
 							}
 						}
 					}
+					
+					Explosion explosion = new Explosion(this.world, null, this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 4, true, true);
+					explosion.doExplosionA();
+					explosion.doExplosionB(true);
 				}
 			}
 			else

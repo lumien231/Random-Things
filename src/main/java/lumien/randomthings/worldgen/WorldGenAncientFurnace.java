@@ -80,9 +80,9 @@ public class WorldGenAncientFurnace implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if (world.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES && world.getWorldInfo().isMapFeaturesEnabled())
+		if (Worldgen.ANCIENT_FURNACE && world.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES && world.getWorldInfo().isMapFeaturesEnabled())
 		{
-			if (world.provider.getDimension() == 0)
+			if (world.provider.getDimension() == 0 && random.nextInt(2000) == 0)
 			{
 				int x = chunkX * 16 + 8 + random.nextInt(16);
 				int z = chunkZ * 16 + 8 + random.nextInt(16);
@@ -94,7 +94,6 @@ public class WorldGenAncientFurnace implements IWorldGenerator
 
 					if (AncientFurnaceConversion.getHeatingConversion(biome) != null)
 					{
-						System.out.println("FURANCE: " + target);
 						pattern.place(world, target.down(2), 0);
 					}
 				}

@@ -1,5 +1,6 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.lib.INoItem;
 import lumien.randomthings.tileentity.TileEntityAncientFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -10,7 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockAncientFurnace extends BlockContainerBase
+public class BlockAncientFurnace extends BlockContainerBase implements INoItem
 {
 
 	protected BlockAncientFurnace()

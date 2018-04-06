@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -21,11 +22,12 @@ import static lumien.randomthings.block.BlockAncientBrick.VARIANT.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
-import lumien.randomthings.item.block.ItemBlockAncientBrick;
+import lumien.randomthings.lib.INoItem;
 import lumien.randomthings.tileentity.TileEntityAncientFurnace;
 
-public class BlockAncientBrick extends BlockBase
+public class BlockAncientBrick extends BlockBase implements INoItem
 {
 	public static enum VARIANT implements IStringSerializable
 	{
@@ -49,11 +51,26 @@ public class BlockAncientBrick extends BlockBase
 
 	protected BlockAncientBrick()
 	{
-		super("ancientBrick", Material.ROCK, ItemBlockAncientBrick.class);
+		super("ancientBrick", Material.ROCK);
 
 		this.setBlockUnbreakable().setResistance(6000000.0F);
+		this.setTickRandomly(true);
 		
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, VARIANT.RUNES));
+	}
+	
+	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	{
+		if (!worldIn.isRemote && rand.nextInt(3) == 0)
+		{
+			IBlockState upState = worldIn.getBlockState(pos.up());
+			
+			if (upState.getBlock() == Blocks.SNOW_LAYER)
+			{
+				worldIn.setBlockToAir(pos.up());
+			}
+		}
 	}
 	
 	@Override
