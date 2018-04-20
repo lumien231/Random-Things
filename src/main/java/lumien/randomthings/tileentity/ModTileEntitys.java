@@ -48,6 +48,7 @@ public class ModTileEntitys
 		registerTE(TileEntityBlockDestabilizer.class, "blockDestabilizer");
 		registerTE(TileEntityAdvancedRedstoneRepeater.class, "configurableRepeater");
 		registerTE(TileEntityAncientFurnace.class, "ancientFurnace");
+		registerTE(TileEntitySoundBox.class, "soundBox");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

@@ -44,6 +44,8 @@ public class ModItems
 	public static ItemFlooToken flooToken;
 	public static ItemPortKey portKey;
 	public static ItemLotusSeeds lotusSeeds;
+	public static ItemSoundPattern soundPattern;
+	public static ItemSoundRecorder soundRecorder;
 	
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -90,6 +92,8 @@ public class ModItems
 		flooToken = new ItemFlooToken();
 		portKey = new ItemPortKey();
 		lotusSeeds = new ItemLotusSeeds();
+		soundPattern = new ItemSoundPattern();
+		soundRecorder = new ItemSoundRecorder();
 
 		grassSeeds = new ItemGrassSeeds();
 		

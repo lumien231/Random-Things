@@ -189,17 +189,17 @@ public class ClassTransformer implements IClassTransformer
 			for (int i = 0; i < canFallThrough.instructions.size(); i++)
 			{
 				AbstractInsnNode ain = canFallThrough.instructions.get(i);
-				
+
 				if (ain.getOpcode() == IRETURN)
 				{
 					InsnList toInsert = new InsnList();
-					
+
 					toInsert.add(new VarInsnNode(ALOAD, 0));
 					toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "overrideFallThrough", "(ZLnet/minecraft/block/state/IBlockState;)Z", false));
-					
+
 					canFallThrough.instructions.insertBefore(ain, toInsert);
-					
-					i+=2;
+
+					i += 2;
 				}
 			}
 		}
@@ -1335,6 +1335,7 @@ public class ClassTransformer implements IClassTransformer
 		MethodNode getStrongPower = null;
 		MethodNode isRainingAt = null;
 		MethodNode canSnowAt = null;
+		MethodNode playSound = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
@@ -1354,11 +1355,15 @@ public class ClassTransformer implements IClassTransformer
 			{
 				canSnowAt = mn;
 			}
+			else if (mn.name.equals(MCPNames.method("func_184148_a")) && mn.desc.equals("(Lnet/minecraft/entity/player/EntityPlayer;DDDLnet/minecraft/util/SoundEvent;Lnet/minecraft/util/SoundCategory;FF)V"))
+			{
+				playSound = mn;
+			}
 		}
 
 		if (getRedstonePower != null)
 		{
-			logger.log(Level.DEBUG, "- Found getRedstonePower (1/4)");
+			logger.log(Level.DEBUG, "- Found getRedstonePower (1/5)");
 
 			InsnList toInsert = new InsnList();
 
@@ -1379,7 +1384,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (getStrongPower != null)
 		{
-			logger.log(Level.DEBUG, "- Found getStrongPower (2/4)");
+			logger.log(Level.DEBUG, "- Found getStrongPower (2/5)");
 
 			InsnList toInsert = new InsnList();
 
@@ -1400,7 +1405,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (isRainingAt != null)
 		{
-			logger.log(Level.DEBUG, "- Found isRainingAt (3/4)");
+			logger.log(Level.DEBUG, "- Found isRainingAt (3/5)");
 
 			AbstractInsnNode returnNode = null;
 			for (int i = 0; i < isRainingAt.instructions.size(); i++)
@@ -1430,7 +1435,7 @@ public class ClassTransformer implements IClassTransformer
 
 		if (canSnowAt != null)
 		{
-			logger.log(Level.DEBUG, "- Found canSnowAt (4/4)");
+			logger.log(Level.DEBUG, "- Found canSnowAt (4/5)");
 
 			AbstractInsnNode returnNode = null;
 			for (int i = 0; i < canSnowAt.instructions.size(); i++)
@@ -1455,6 +1460,32 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(returnLabel);
 
 			canSnowAt.instructions.insertBefore(returnNode, toInsert);
+		}
+
+
+		if (playSound != null)
+		{
+			for (int i = 0; i < playSound.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = playSound.instructions.get(i);
+
+				if (ain instanceof VarInsnNode)
+				{
+					logger.log(Level.DEBUG, " - Found playSound (5/5)");
+
+					InsnList startInsertion = new InsnList();
+					
+					startInsertion.add(new VarInsnNode(ALOAD, 0));
+					startInsertion.add(new VarInsnNode(ALOAD, 2));
+					startInsertion.add(new VarInsnNode(ALOAD, 3));
+					startInsertion.add(new VarInsnNode(ALOAD, 4));
+					startInsertion.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "setSoundHelpers", "(Lnet/minecraft/world/World;DDD)V",false));
+
+					playSound.instructions.insertBefore(ain, startInsertion);
+					
+					break;
+				}
+			}
 		}
 
 		CustomClassWriter writer = new CustomClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);

@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+import lumien.randomthings.handler.AsmHandler;
 import lumien.randomthings.item.block.ItemBlockOfSticks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

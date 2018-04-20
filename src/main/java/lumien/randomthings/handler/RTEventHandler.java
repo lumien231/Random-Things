@@ -32,6 +32,7 @@ import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.ItemIngredient;
+import lumien.randomthings.item.ItemSoundRecorder;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
@@ -82,6 +83,7 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.management.PlayerList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -91,6 +93,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -112,11 +115,14 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.client.event.sound.PlaySoundSourceEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -133,6 +139,7 @@ import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent.PotentialSpawns;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -151,6 +158,52 @@ public class RTEventHandler
 	static Random rng = new Random();
 
 	public static int clientAnimationCounter;
+
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void playSoundEvent(PlaySoundAtEntityEvent event)
+	{
+		if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+		{
+			World world = AsmHandler.soundWorld;
+			double soundX = AsmHandler.soundX;
+			double soundY = AsmHandler.soundY;
+			double soundZ = AsmHandler.soundZ;
+
+			float volume = event.getVolume();
+			double radius = volume > 1.0F ? (double) (16.0F * volume) : 16.0D;
+
+			PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
+
+			for (int i = 0; i < playerList.getPlayers().size(); ++i)
+			{
+				EntityPlayerMP entityplayermp = playerList.getPlayers().get(i);
+
+				if (entityplayermp.dimension == world.provider.getDimension())
+				{
+					double d0 = soundX - entityplayermp.posX;
+					double d1 = soundY - entityplayermp.posY;
+					double d2 = soundZ - entityplayermp.posZ;
+
+					if (d0 * d0 + d1 * d1 + d2 * d2 < radius * radius)
+					{
+						for (int slot = 0; slot < entityplayermp.inventory.getSizeInventory(); slot++)
+						{
+							ItemStack stack = entityplayermp.inventory.getStackInSlot(slot);
+
+							if (!stack.isEmpty() && stack.getItem() == ModItems.soundRecorder)
+							{
+								ItemSoundRecorder.recordSound(stack, event);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		AsmHandler.soundWorld = null;
+	}
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
@@ -491,7 +544,7 @@ public class RTEventHandler
 						if (currentCompression < 2)
 						{
 							rcEvent.getWorld().setBlockState(rcEvent.getPos(), targetState.withProperty(BlockCompressedSlimeBlock.COMPRESSION, currentCompression + 1));
-							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.SLIME_BLOCK.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 0.8f - ((currentCompression+1)*0.2f));
+							event.getWorld().playSound(null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), Blocks.SLIME_BLOCK.getSoundType().getPlaceSound(), SoundCategory.PLAYERS, 1, 0.8f - ((currentCompression + 1) * 0.2f));
 							equipped.damageItem(1, event.getEntityPlayer());
 						}
 					}
