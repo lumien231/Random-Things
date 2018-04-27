@@ -1,6 +1,6 @@
 package lumien.randomthings.asm;
 
-import static org.objectweb.asm.Opcodes.AALOAD;
+import static org.objectweb.asm.Opcodes.*;
 import static org.objectweb.asm.Opcodes.ACC_PRIVATE;
 import static org.objectweb.asm.Opcodes.ACONST_NULL;
 import static org.objectweb.asm.Opcodes.ALOAD;
@@ -1462,23 +1462,22 @@ public class ClassTransformer implements IClassTransformer
 			canSnowAt.instructions.insertBefore(returnNode, toInsert);
 		}
 
-
 		if (playSound != null)
 		{
+			logger.log(Level.DEBUG, " - Found playSound (5/5)");
 			for (int i = 0; i < playSound.instructions.size(); i++)
 			{
 				AbstractInsnNode ain = playSound.instructions.get(i);
 
-				if (ain instanceof VarInsnNode)
+				if (ain instanceof MethodInsnNode && ((MethodInsnNode)ain).name.equals("onPlaySoundAtEntity"))
 				{
-					logger.log(Level.DEBUG, " - Found playSound (5/5)");
-
+					logger.log(Level.DEBUG, " - - Found Event Call");
 					InsnList startInsertion = new InsnList();
 					
 					startInsertion.add(new VarInsnNode(ALOAD, 0));
-					startInsertion.add(new VarInsnNode(ALOAD, 2));
-					startInsertion.add(new VarInsnNode(ALOAD, 3));
-					startInsertion.add(new VarInsnNode(ALOAD, 4));
+					startInsertion.add(new VarInsnNode(DLOAD, 2));
+					startInsertion.add(new VarInsnNode(DLOAD, 4));
+					startInsertion.add(new VarInsnNode(DLOAD, 6));
 					startInsertion.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "setSoundHelpers", "(Lnet/minecraft/world/World;DDD)V",false));
 
 					playSound.instructions.insertBefore(ain, startInsertion);

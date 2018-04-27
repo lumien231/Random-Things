@@ -84,6 +84,8 @@ public class ItemSoundRecorder extends ItemBase
 				{
 					compound.setBoolean("recording", false);
 				}
+				
+				compound.setTag("recordList", recordList);
 			}
 		}
 	}
