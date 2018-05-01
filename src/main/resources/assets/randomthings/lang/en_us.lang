@@ -61,6 +61,7 @@ tile.blockDestabilizer.name=Block Destabilizer
 tile.advancedRedstoneRepeater.name=Advanced Redstone Repeater
 tile.lotus.name=Lotus
 tile.ancientBrick.name=Ancient Brick
+tile.soundBox.name=Sound Box
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -226,6 +227,7 @@ item.emeraldcompass.name=Emerald Compass
 item.flootoken.name=Floo Token
 item.portKey.name=Portkey
 item.lotusseeds.name=Lotus Seeds
+item.soundPattern.name=Sound Pattern
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean

@@ -1,12 +1,13 @@
 package lumien.randomthings.container;
 
-import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.container.slots.SlotDisplay;
+import lumien.randomthings.container.slots.SlotFiltered;
 import lumien.randomthings.container.slots.SlotOutputOnly;
-import lumien.randomthings.util.InventoryUtil;
+import lumien.randomthings.item.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,18 +15,21 @@ import net.minecraft.world.World;
 
 public class ContainerSoundRecorder extends Container
 {
-	ItemStack soundRecorderStack;
-	
-	InventoryItem inventory;
+	Slot patternSlot;
+	Slot outputSlot;
+
+	InventoryBasic tempInventory;
+
+	World world;
 
 	public ContainerSoundRecorder(EntityPlayer player, World world, int x, int y, int z)
 	{
-		soundRecorderStack = player.inventory.getCurrentItem();
-		inventory = new InventoryItem("SoundRecorderContent", 1, soundRecorderStack);
+		this.world = world;
 
-		NBTTagCompound compound;
+		tempInventory = new InventoryBasic("Sound Recorder", false, 2);
 
-		this.addSlotToContainer(new Slot(inventory, 0, 8, 18));
+		this.addSlotToContainer(patternSlot = new SlotFiltered(tempInventory, 0, 65, 73, is -> is.getItem() == ModItems.soundPattern));
+		this.addSlotToContainer(outputSlot = new SlotOutputOnly(tempInventory, 1, 108, 73));
 
 		bindPlayerInventory(player.inventory);
 	}
@@ -33,13 +37,18 @@ public class ContainerSoundRecorder extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return ItemStack.areItemsEqual(inventory.getItemStack(), playerIn.getHeldItemMainhand());
+		return true;
 	}
 
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn)
 	{
 		super.onContainerClosed(playerIn);
+
+		if (!this.world.isRemote)
+		{
+			this.clearContainer(playerIn, this.world, this.tempInventory);
+		}
 	}
 
 	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
@@ -48,7 +57,7 @@ public class ContainerSoundRecorder extends Container
 		{
 			for (int j = 0; j < 9; j++)
 			{
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 51 + i * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 15 + j * 18, 105 + i * 18));
 			}
 		}
 
@@ -56,11 +65,11 @@ public class ContainerSoundRecorder extends Container
 		{
 			if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getHeldItemMainhand())
 			{
-				addSlotToContainer(new SlotDisplay(inventoryPlayer, i, 8 + i * 18, 109));
+				addSlotToContainer(new SlotDisplay(inventoryPlayer, i, 15 + i * 18, 163));
 			}
 			else
 			{
-				addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 109));
+				addSlotToContainer(new Slot(inventoryPlayer, i, 15 + i * 18, 163));
 			}
 		}
 	}
@@ -76,14 +85,14 @@ public class ContainerSoundRecorder extends Container
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 < 9)
+			if (par2 < 2)
 			{
-				if (!this.mergeItemStack(itemstack1, 9, 45, true))
+				if (!this.mergeItemStack(itemstack1, 2, 38, true))
 				{
 					return ItemStack.EMPTY;
 				}
 			}
-			else if (!this.mergeItemStack(itemstack1, 0, 8, false))
+			else if (!this.mergeItemStack(itemstack1, 0, 1, false))
 			{
 				return ItemStack.EMPTY;
 			}
@@ -209,5 +218,28 @@ public class ContainerSoundRecorder extends Container
 			}
 		}
 		return flag1;
+	}
+
+	public void outputSound(String selectedSound)
+	{
+		if (patternSlot.getHasStack())
+		{
+			ItemStack pattern = new ItemStack(ModItems.soundPattern);
+
+			pattern.setTagCompound(new NBTTagCompound());
+
+			pattern.getTagCompound().setString("sound", selectedSound);
+
+			if (!outputSlot.getHasStack())
+			{
+				outputSlot.putStack(pattern);
+				patternSlot.getStack().shrink(1);
+			}
+			else if (ItemStack.areItemsEqual(outputSlot.getStack(), pattern) && ItemStack.areItemStackTagsEqual(outputSlot.getStack(), pattern) && outputSlot.getStack().getCount() < 64)
+			{
+				outputSlot.getStack().grow(1);
+				patternSlot.getStack().shrink(1);
+			}
+		}
 	}
 }

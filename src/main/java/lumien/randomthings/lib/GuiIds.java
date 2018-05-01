@@ -29,4 +29,5 @@ public class GuiIds
 	public static final int INVENTORY_TESTER = 25;
 	public static final int BLOCK_DESTABILIZER = 26;
 	public static final int ADVANCED_REDSTONE_REPEATER = 27;
+	public static final int SOUND_RECORDER = 28;
 }

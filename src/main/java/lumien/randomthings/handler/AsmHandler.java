@@ -81,20 +81,6 @@ public class AsmHandler
 			getFields();
 		}
 	}
-	
-	// Sound Helper
-	public static World soundWorld;
-	public static double soundX;
-	public static double soundY;
-	public static double soundZ;
-	
-	public static void setSoundHelpers(World worldObj, double soundX, double soundY, double soundZ)
-	{
-		soundWorld = worldObj;
-		AsmHandler.soundX = soundX;
-		AsmHandler.soundY = soundY;
-		AsmHandler.soundZ = soundZ;
-	}
 
 	public static boolean overrideFallThrough(boolean original, IBlockState state)
 	{

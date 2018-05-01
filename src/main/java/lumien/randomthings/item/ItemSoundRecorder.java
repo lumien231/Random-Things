@@ -1,5 +1,6 @@
 package lumien.randomthings.item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lumien.randomthings.RandomThings;
@@ -23,7 +24,7 @@ public class ItemSoundRecorder extends ItemBase
 	{
 		super("soundRecorder");
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
@@ -45,48 +46,74 @@ public class ItemSoundRecorder extends ItemBase
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
 		{
-			if (!itemStackIn.hasTagCompound())
+			if (playerIn.isSneaking())
 			{
-				itemStackIn.setTagCompound(new NBTTagCompound());
+				if (!itemStackIn.hasTagCompound())
+				{
+					itemStackIn.setTagCompound(new NBTTagCompound());
+				}
 				
-				itemStackIn.getTagCompound().setBoolean("recording", !itemStackIn.getTagCompound().getBoolean("recording"));
+				itemStackIn.getTagCompound().setBoolean("recording", true);
+			}
+			else
+			{
+				if (!itemStackIn.hasTagCompound() || !itemStackIn.getTagCompound().getBoolean("recording"))
+				{
+					playerIn.openGui(RandomThings.instance, GuiIds.SOUND_RECORDER, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
+				}
 			}
 		}
 
 		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 
-	public static void recordSound(ItemStack stack, PlaySoundAtEntityEvent event)
+	public static void recordSound(ItemStack stack, String soundName)
 	{
 		NBTTagCompound compound;
 		if ((compound = stack.getTagCompound()) != null && compound.getBoolean("recording"))
 		{
 			NBTTagList recordList = compound.getTagList("recordList", 8);
 
-			ResourceLocation soundName = event.getSound().getRegistryName();
-			String soundString = soundName.toString();
 			boolean duplicate = false;
 
 			for (int i = 0; i < recordList.tagCount(); i++)
 			{
-				if (recordList.getStringTagAt(i).equals(soundString))
+				if (recordList.getStringTagAt(i).equals(soundName))
 				{
 					duplicate = true;
 					break;
 				}
 			}
-			
+
 			if (!duplicate)
 			{
-				recordList.appendTag(new NBTTagString(soundString));
-				
-				if (recordList.tagCount() == 10)
+				recordList.appendTag(new NBTTagString(soundName));
+
+				if (recordList.tagCount() >= 10)
 				{
 					compound.setBoolean("recording", false);
 				}
-				
+
 				compound.setTag("recordList", recordList);
 			}
 		}
+	}
+
+	public static ArrayList<String> getRecordedSounds(ItemStack stack)
+	{
+		ArrayList<String> list = new ArrayList<String>();
+
+		NBTTagCompound compound;
+		if ((compound = stack.getTagCompound()) != null)
+		{
+			NBTTagList recordList = compound.getTagList("recordList", 8);
+
+			for (int i = 0; i < recordList.tagCount(); i++)
+			{
+				list.add(recordList.getStringTagAt(i));
+			}
+		}
+
+		return list;
 	}
 }

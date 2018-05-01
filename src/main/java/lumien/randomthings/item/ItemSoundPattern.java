@@ -1,22 +1,10 @@
 package lumien.randomthings.item;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SoundEventAccessor;
-import net.minecraft.client.audio.SoundRegistry;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class ItemSoundPattern extends ItemBase
@@ -28,24 +16,16 @@ public class ItemSoundPattern extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public String getItemStackDisplayName(ItemStack stack)
 	{
-		ItemStack stack = playerIn.getHeldItem(handIn);
-
-		if (!worldIn.isRemote)
+		NBTTagCompound compound;
+		if (stack.hasTagCompound() && ((compound = stack.getTagCompound()).hasKey("sound")))
 		{
-			List<ResourceLocation> rlList = new ArrayList<ResourceLocation>(SoundEvent.REGISTRY.getKeys());
-
-			ResourceLocation random = rlList.get(new Random().nextInt(rlList.size()));
-
-			stack.setTagCompound(new NBTTagCompound());
-			stack.getTagCompound().setString("sound", random.toString());
-
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+			return super.getItemStackDisplayName(stack) + " <" + (stack.getTagCompound().getString("sound")) + ">";
 		}
 		else
 		{
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+			return super.getItemStackDisplayName(stack);
 		}
 	}
 

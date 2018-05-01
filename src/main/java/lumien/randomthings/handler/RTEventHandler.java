@@ -38,6 +38,8 @@ import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
 import lumien.randomthings.lib.IEntityFilterItem;
 import lumien.randomthings.lib.IExplosionImmune;
+import lumien.randomthings.network.PacketHandler;
+import lumien.randomthings.network.messages.MessagePlayedSound;
 import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.anvil.AnvilRecipe;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
@@ -159,50 +161,26 @@ public class RTEventHandler
 
 	public static int clientAnimationCounter;
 
-
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void playSoundEvent(PlaySoundAtEntityEvent event)
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void playSoundEvent(PlaySoundEvent event)
 	{
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+		EntityPlayerSP thePlayer = Minecraft.getMinecraft().player;
+
+		if (thePlayer != null && !event.isCanceled())
 		{
-			World world = AsmHandler.soundWorld;
-			double soundX = AsmHandler.soundX;
-			double soundY = AsmHandler.soundY;
-			double soundZ = AsmHandler.soundZ;
-
-			float volume = event.getVolume();
-			double radius = volume > 1.0F ? (double) (16.0F * volume) : 16.0D;
-
-			PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
-
-			for (int i = 0; i < playerList.getPlayers().size(); ++i)
+			for (int slot = 0; slot < thePlayer.inventory.getSizeInventory(); slot++)
 			{
-				EntityPlayerMP entityplayermp = playerList.getPlayers().get(i);
+				ItemStack stack = thePlayer.inventory.getStackInSlot(slot);
 
-				if (entityplayermp.dimension == world.provider.getDimension())
+				if (!stack.isEmpty() && stack.getItem() == ModItems.soundRecorder)
 				{
-					double d0 = soundX - entityplayermp.posX;
-					double d1 = soundY - entityplayermp.posY;
-					double d2 = soundZ - entityplayermp.posZ;
+					MessagePlayedSound msg = new MessagePlayedSound(event.getName(), slot);
+					PacketHandler.INSTANCE.sendToServer(msg);
 
-					if (d0 * d0 + d1 * d1 + d2 * d2 < radius * radius)
-					{
-						for (int slot = 0; slot < entityplayermp.inventory.getSizeInventory(); slot++)
-						{
-							ItemStack stack = entityplayermp.inventory.getStackInSlot(slot);
-
-							if (!stack.isEmpty() && stack.getItem() == ModItems.soundRecorder)
-							{
-								ItemSoundRecorder.recordSound(stack, event);
-								break;
-							}
-						}
-					}
+					break;
 				}
 			}
 		}
-		
-		AsmHandler.soundWorld = null;
 	}
 
 	@SubscribeEvent
@@ -1149,7 +1127,8 @@ public class RTEventHandler
 			{
 				for (int i = 0; i < 1; ++i)
 				{
-					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
+					Particle particle = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.PORTAL.ordinal(), event.getEntityLiving().posX + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, event.getEntityLiving().posY + RTEventHandler.rng.nextDouble() * event.getEntityLiving().height - 0.25D, event.getEntityLiving().posZ + (RTEventHandler.rng.nextDouble() - 0.5D) * event.getEntityLiving().width, (RTEventHandler.rng.nextDouble() - 0.5D)
+							* 2.0D, -RTEventHandler.rng.nextDouble(), (RTEventHandler.rng.nextDouble() - 0.5D) * 2.0D);
 					particle.setRBGColorF(0.2F, 0.2F, 1);
 				}
 			}

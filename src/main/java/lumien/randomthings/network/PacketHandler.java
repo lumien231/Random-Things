@@ -14,8 +14,10 @@ import lumien.randomthings.network.messages.MessageLightRedirector;
 import lumien.randomthings.network.messages.MessageNotification;
 import lumien.randomthings.network.messages.MessageNotificationInterface;
 import lumien.randomthings.network.messages.MessageOnlineDetector;
+import lumien.randomthings.network.messages.MessagePlayedSound;
 import lumien.randomthings.network.messages.MessagePotionVaporizerParticles;
 import lumien.randomthings.network.messages.MessageRedstoneRemote;
+import lumien.randomthings.network.messages.MessageSelectSound;
 import lumien.randomthings.network.messages.MessageSetBiome;
 import lumien.randomthings.network.messages.MessageVoxelProjector;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelData;
@@ -53,5 +55,7 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageFlooParticles.class);
 		INSTANCE.registerMessage(MessageFlooToken.class);
 		INSTANCE.registerMessage(MessageGlobalChatDetector.class);
+		INSTANCE.registerMessage(MessagePlayedSound.class);
+		INSTANCE.registerMessage(MessageSelectSound.class);
 	}
 }

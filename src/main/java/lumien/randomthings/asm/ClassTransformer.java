@@ -1355,10 +1355,6 @@ public class ClassTransformer implements IClassTransformer
 			{
 				canSnowAt = mn;
 			}
-			else if (mn.name.equals(MCPNames.method("func_184148_a")) && mn.desc.equals("(Lnet/minecraft/entity/player/EntityPlayer;DDDLnet/minecraft/util/SoundEvent;Lnet/minecraft/util/SoundCategory;FF)V"))
-			{
-				playSound = mn;
-			}
 		}
 
 		if (getRedstonePower != null)
@@ -1460,31 +1456,6 @@ public class ClassTransformer implements IClassTransformer
 			toInsert.add(returnLabel);
 
 			canSnowAt.instructions.insertBefore(returnNode, toInsert);
-		}
-
-		if (playSound != null)
-		{
-			logger.log(Level.DEBUG, " - Found playSound (5/5)");
-			for (int i = 0; i < playSound.instructions.size(); i++)
-			{
-				AbstractInsnNode ain = playSound.instructions.get(i);
-
-				if (ain instanceof MethodInsnNode && ((MethodInsnNode)ain).name.equals("onPlaySoundAtEntity"))
-				{
-					logger.log(Level.DEBUG, " - - Found Event Call");
-					InsnList startInsertion = new InsnList();
-					
-					startInsertion.add(new VarInsnNode(ALOAD, 0));
-					startInsertion.add(new VarInsnNode(DLOAD, 2));
-					startInsertion.add(new VarInsnNode(DLOAD, 4));
-					startInsertion.add(new VarInsnNode(DLOAD, 6));
-					startInsertion.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "setSoundHelpers", "(Lnet/minecraft/world/World;DDD)V",false));
-
-					playSound.instructions.insertBefore(ain, startInsertion);
-					
-					break;
-				}
-			}
 		}
 
 		CustomClassWriter writer = new CustomClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
