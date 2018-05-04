@@ -3,6 +3,8 @@ package lumien.randomthings.client.models;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.mesh.PortKeyMesh;
 import lumien.randomthings.client.mesh.RedstoneActivatorMesh;
+import lumien.randomthings.client.mesh.SoundPatternMesh;
+import lumien.randomthings.client.mesh.SoundRecorderMesh;
 import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
@@ -81,6 +83,7 @@ public class ItemModels
 		registerBlock(ModBlocks.blockDestabilizer);
 		registerBlock(ModBlocks.unpoweredAdvancedRedstoneRepeater);
 		registerBlock(ModBlocks.lotus);
+		registerBlock(ModBlocks.soundBox);
 
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);
@@ -157,6 +160,12 @@ public class ItemModels
 
 		ModelLoader.setCustomMeshDefinition(ModItems.portKey, new PortKeyMesh());
 		ModelLoader.setCustomModelResourceLocation(ModItems.portKey, 1, new ModelResourceLocation("randomthings:portkey"));
+
+		ModelLoader.setCustomMeshDefinition(ModItems.soundRecorder, new SoundRecorderMesh());
+		ModelBakery.registerItemVariants(ModItems.soundRecorder, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundrecorder_idle"), new ModelResourceLocation("randomthings:soundrecorder_active") });
+	
+		ModelLoader.setCustomMeshDefinition(ModItems.soundPattern, new SoundPatternMesh());
+		ModelBakery.registerItemVariants(ModItems.soundPattern, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundpattern_empty"), new ModelResourceLocation("randomthings:soundpattern_full") });
 	}
 
 	private static void registerRuneDust()
@@ -257,7 +266,7 @@ public class ItemModels
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 3, new ModelResourceLocation("randomthings:biomeStone/cracked", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.biomeStone), 4, new ModelResourceLocation("randomthings:biomeStone/chiseled", "inventory"));
 	}
-	
+
 	private static void registerAncientBrick()
 	{
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.ancientBrick), 0, new ModelResourceLocation("randomthings:ancientBrick/runes", "inventory"));

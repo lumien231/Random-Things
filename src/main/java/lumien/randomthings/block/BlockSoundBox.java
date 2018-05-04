@@ -3,12 +3,15 @@ package lumien.randomthings.block;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntitySoundBox;
 import lumien.randomthings.util.WorldUtil;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -23,6 +26,26 @@ public class BlockSoundBox extends BlockContainerBase
 	protected BlockSoundBox()
 	{
 		super("soundBox", Material.WOOD);
+		
+		this.setSoundType(SoundType.WOOD).setHardness(0.8F);
+	}
+
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+
+		if (tileentity instanceof TileEntitySoundBox)
+		{
+			ItemStack stack = ((TileEntitySoundBox) tileentity).getPattern();
+
+			if (!stack.isEmpty())
+			{
+				WorldUtil.spawnItemStack(worldIn, pos, stack);
+			}
+		}
+
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
@@ -53,9 +76,14 @@ public class BlockSoundBox extends BlockContainerBase
 			{
 				if (!worldIn.isRemote)
 				{
-					te.insertPattern(heldItem);
+					ItemStack inserted = heldItem.copy();
+					inserted.shrink(inserted.getCount() - 1);
+					te.insertPattern(inserted);
+
+					if (!playerIn.capabilities.isCreativeMode)
+						heldItem.shrink(1);
 				}
-				
+
 				return true;
 			}
 		}

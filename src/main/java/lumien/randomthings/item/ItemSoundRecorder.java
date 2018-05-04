@@ -52,8 +52,13 @@ public class ItemSoundRecorder extends ItemBase
 				{
 					itemStackIn.setTagCompound(new NBTTagCompound());
 				}
+
+				itemStackIn.getTagCompound().setBoolean("recording", !itemStackIn.getTagCompound().getBoolean("recording"));
 				
-				itemStackIn.getTagCompound().setBoolean("recording", true);
+				if (itemStackIn.getTagCompound().getBoolean("recording"))
+				{
+					itemStackIn.getTagCompound().removeTag("recordList");
+				}
 			}
 			else
 			{

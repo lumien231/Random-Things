@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "has_pattern=true": { "model": "randomthings:soundbox_full" },
+        "has_pattern=false": { "model": "randomthings:soundbox_empty" }
+    }
+}
