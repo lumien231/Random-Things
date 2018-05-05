@@ -98,7 +98,7 @@ public class ContainerEnderLetter extends Container
 					return ItemStack.EMPTY;
 				}
 			}
-			else if (!received && !this.mergeItemStack(itemstack1, 0, 8, false))
+			else if (!received && !this.mergeItemStack(itemstack1, 0, 9, false))
 			{
 				return ItemStack.EMPTY;
 			}
