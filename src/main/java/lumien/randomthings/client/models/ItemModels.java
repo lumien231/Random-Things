@@ -135,6 +135,7 @@ public class ItemModels
 		registerItem(ModItems.emeraldCompass);
 		registerItem(ModItems.flooToken);
 		registerItem(ModItems.lotusSeeds);
+		registerItem(ModItems.portableSoundDampener);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);

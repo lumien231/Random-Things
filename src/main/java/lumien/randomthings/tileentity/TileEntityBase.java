@@ -23,6 +23,8 @@ public abstract class TileEntityBase extends TileEntity
 	private IItemHandler publicInventoryHandler;
 	
 	private HashMap<Integer, ISlotFilter> slotFilter;
+	
+	private Runnable inventoryChangeListener;
 
 	private boolean itemHandlerInternal = true;
 
@@ -37,6 +39,11 @@ public abstract class TileEntityBase extends TileEntity
 			{
 				super.onContentsChanged(slots);
 				TileEntityBase.this.markDirty();
+				
+				if (inventoryChangeListener != null)
+				{
+					inventoryChangeListener.run();
+				}
 			}
 			
 			@Override
@@ -53,6 +60,11 @@ public abstract class TileEntityBase extends TileEntity
 				return super.insertItem(slot, stack, simulate);
 			}
 		};
+	}
+	
+	protected void setInventoryChangeListener(Runnable runnable)
+	{
+		this.inventoryChangeListener = runnable;
 	}
 	
 	protected void addSlotFilter(int slot, ISlotFilter filter)

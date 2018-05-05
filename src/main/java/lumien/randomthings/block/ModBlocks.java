@@ -80,6 +80,7 @@ public class ModBlocks
 	public static BlockLotus lotus;
 	public static BlockBlockLuminousTranslucent translucentLuminousBlock;
 	public static BlockSoundBox soundBox;
+	public static BlockSoundDampener soundDampener;
 	
 	public static BlockAncientFurnace ancientFurnace;
 	public static BlockAncientBrick ancientBrick;
@@ -193,6 +194,7 @@ public class ModBlocks
 		ancientFurnace = new BlockAncientFurnace();
 		ancientBrick = new BlockAncientBrick();
 		soundBox = new BlockSoundBox();
+		soundDampener = new BlockSoundDampener();
 		
 		unpoweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(false);
 		poweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(true);

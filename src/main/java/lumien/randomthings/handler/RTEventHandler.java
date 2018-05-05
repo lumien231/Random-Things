@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.logging.log4j.Level;
 
@@ -22,6 +24,7 @@ import lumien.randomthings.client.models.blocks.ModelInventoryRerouter;
 import lumien.randomthings.client.models.blocks.ModelRune;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.config.Worldgen;
+import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
@@ -32,6 +35,8 @@ import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.ItemIngredient;
+import lumien.randomthings.item.ItemPortableSoundDampener;
+import lumien.randomthings.item.ItemSoundPattern;
 import lumien.randomthings.item.ItemSoundRecorder;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
@@ -49,6 +54,7 @@ import lumien.randomthings.tileentity.TileEntityGlobalChatDetector;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.tileentity.TileEntityRuneBase;
+import lumien.randomthings.tileentity.TileEntitySoundDampener;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
 import lumien.randomthings.util.WorldUtil;
@@ -60,6 +66,7 @@ import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSound;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
@@ -154,6 +161,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
 
 public class RTEventHandler
 {
@@ -166,18 +174,73 @@ public class RTEventHandler
 	{
 		EntityPlayerSP thePlayer = Minecraft.getMinecraft().player;
 
-		if (thePlayer != null && !event.isCanceled())
+		if (thePlayer != null && !event.isCanceled() && event.getSound() != null && event.getSound().getCategory() != SoundCategory.MUSIC && event.getSound().getCategory() != SoundCategory.RECORDS && Minecraft.getMinecraft().gameSettings.getSoundLevel(event.getSound().getCategory()) > 0)
 		{
-			for (int slot = 0; slot < thePlayer.inventory.getSizeInventory(); slot++)
+			BlockPos soundPosition;
+
+			if (event.getSound() instanceof PositionedSound)
 			{
-				ItemStack stack = thePlayer.inventory.getStackInSlot(slot);
+				PositionedSound ps = (PositionedSound) event.getSound();
 
-				if (!stack.isEmpty() && stack.getItem() == ModItems.soundRecorder)
+				soundPosition = new BlockPos(ps.getXPosF(), ps.getYPosF(), ps.getZPosF());
+			}
+			else
+			{
+				soundPosition = thePlayer.getPosition();
+			}
+
+			synchronized (TileEntitySoundDampener.dampeners)
+			{
+				for (TileEntitySoundDampener soundDampener : TileEntitySoundDampener.dampeners)
 				{
-					MessagePlayedSound msg = new MessagePlayedSound(event.getName(), slot);
-					PacketHandler.INSTANCE.sendToServer(msg);
+					if (!soundDampener.isInvalid() && soundDampener.getPos().distanceSq(soundPosition) < 10 * 10)
+					{
+						if (soundDampener.getMutedSounds().contains(event.getSound().getSoundLocation()))
+						{
+							event.setResultSound(null);
+							break;
+						}
+					}
+				}
+			}
 
-					break;
+			if (event.getResultSound() != null)
+			{
+				for (int slot = 0; slot < thePlayer.inventory.mainInventory.size(); slot++)
+				{
+					ItemStack stack = thePlayer.inventory.getStackInSlot(slot);
+
+					if (!stack.isEmpty())
+					{
+						if (stack.getItem() == ModItems.soundRecorder)
+						{
+							MessagePlayedSound msg = new MessagePlayedSound(event.getSound().getSoundLocation().toString(), slot);
+							PacketHandler.INSTANCE.sendToServer(msg);
+						}
+						else if (stack.getItem() == ModItems.portableSoundDampener)
+						{
+							InventoryItem inv = ItemPortableSoundDampener.getInventory(stack);
+
+							if (!inv.isEmpty())
+							{
+								for (int s = 0; s < inv.getSizeInventory(); s++)
+								{
+									ItemStack sis = inv.getStackInSlot(s);
+
+									if (!sis.isEmpty())
+									{
+										ResourceLocation rl = ItemSoundPattern.getSoundLocation(sis);
+
+										if (rl != null && rl.equals(event.getSound().getSoundLocation()))
+										{
+											event.setResultSound(null);
+											return;
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}

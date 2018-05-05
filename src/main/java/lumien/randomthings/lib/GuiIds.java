@@ -30,4 +30,6 @@ public class GuiIds
 	public static final int BLOCK_DESTABILIZER = 26;
 	public static final int ADVANCED_REDSTONE_REPEATER = 27;
 	public static final int SOUND_RECORDER = 28;
+	public static final int PORTABLE_SOUND_DAMPENER = 29;
+	public static final int SOUND_DAMPENER = 30;
 }
