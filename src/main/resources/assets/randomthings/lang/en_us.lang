@@ -369,7 +369,7 @@ tooltip.inventoryTester.invertSignal.no=Emit Redstone if successful
 block.enderMailbox.owner=You are not the owner of this mailbox
 
 item.dungeonChestGenerator.category=Category: %s
-item.dungeonChestGenerator.shiftCategory=Shift click to change category
+item.dungeonChestGenerator.shiftCategory=Shift right/left click to change category
 
 item.enderLetter.sender=Sender: %s
 item.enderLetter.receiver=Receiver: %s

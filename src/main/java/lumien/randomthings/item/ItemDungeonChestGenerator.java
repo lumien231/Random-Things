@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Set;
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -51,7 +52,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 		{
 			Set<ResourceLocation> lootTableSet = LootTableList.getAll();
 			List<ResourceLocation> sortedList = new ArrayList<>(lootTableSet);
-			
+
 			Collections.sort(sortedList, new Comparator<ResourceLocation>()
 			{
 				@Override
@@ -102,6 +103,35 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+	{
+		if (!entityLiving.world.isRemote && entityLiving.isSneaking())
+		{
+			NBTTagCompound nbt = stack.getTagCompound();
+			if (nbt == null)
+			{
+				stack.setTagCompound(new NBTTagCompound());
+				stack.getTagCompound().setInteger("tableIndex", 0);
+			}
+
+			int currentCategory = stack.getTagCompound().getInteger("tableIndex");
+			if (currentCategory - 1 > 0)
+			{
+				currentCategory--;
+			}
+			else
+			{
+				currentCategory = LootTableList.getAll().size() - 1;
+			}
+
+			stack.getTagCompound().setInteger("tableIndex", currentCategory);
+
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
 		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
@@ -113,20 +143,18 @@ public class ItemDungeonChestGenerator extends ItemBase
 				par1ItemStack.setTagCompound(new NBTTagCompound());
 				par1ItemStack.getTagCompound().setInteger("tableIndex", 0);
 			}
+
+			int currentCategory = par1ItemStack.getTagCompound().getInteger("tableIndex");
+			if (currentCategory + 1 < LootTableList.getAll().size())
+			{
+				currentCategory++;
+			}
 			else
 			{
-				int currentCategory = par1ItemStack.getTagCompound().getInteger("tableIndex");
-				if (currentCategory + 1 < LootTableList.getAll().size())
-				{
-					currentCategory++;
-				}
-				else
-				{
-					currentCategory = 0;
-				}
-
-				par1ItemStack.getTagCompound().setInteger("tableIndex", currentCategory);
+				currentCategory = 0;
 			}
+
+			par1ItemStack.getTagCompound().setInteger("tableIndex", currentCategory);
 
 			return new ActionResult<>(EnumActionResult.SUCCESS, par1ItemStack);
 		}
