@@ -23,21 +23,8 @@ public class ItemSoundRecorder extends ItemBase
 	public ItemSoundRecorder()
 	{
 		super("soundRecorder");
-	}
-
-	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-	{
-		NBTTagCompound compound;
-		if ((compound = stack.getTagCompound()) != null && compound.hasKey("recordList"))
-		{
-			NBTTagList recordList = compound.getTagList("recordList", 8);
-
-			for (int i = 0; i < recordList.tagCount(); i++)
-			{
-				tooltip.add(recordList.getStringTagAt(i));
-			}
-		}
+		
+		this.setMaxStackSize(1);
 	}
 
 	@Override

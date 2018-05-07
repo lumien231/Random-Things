@@ -94,8 +94,6 @@ public class TileEntitySoundDampener extends TileEntityBase
 		for (int i = 0; i < soundList.tagCount(); i++)
 		{
 			String sound = soundList.getStringTagAt(i);
-			
-			System.out.println(sound);
 
 			this.mutedSounds.add(new ResourceLocation(sound));
 		}

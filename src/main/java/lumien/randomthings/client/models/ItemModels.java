@@ -84,6 +84,7 @@ public class ItemModels
 		registerBlock(ModBlocks.unpoweredAdvancedRedstoneRepeater);
 		registerBlock(ModBlocks.lotus);
 		registerBlock(ModBlocks.soundBox);
+		registerBlock(ModBlocks.soundDampener);
 
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);

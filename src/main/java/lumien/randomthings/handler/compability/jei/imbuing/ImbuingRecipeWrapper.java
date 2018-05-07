@@ -18,7 +18,6 @@ public class ImbuingRecipeWrapper extends BlankRecipeWrapper
 	private final List inputs;
 	private final int hashCode;
 
-	@SuppressWarnings("unchecked")
 	public ImbuingRecipeWrapper(List<ItemStack> ingredients, ItemStack toImbue, ItemStack result)
 	{
 		this.ingredients = ingredients;

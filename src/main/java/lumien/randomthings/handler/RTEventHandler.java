@@ -170,6 +170,7 @@ public class RTEventHandler
 	public static int clientAnimationCounter;
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SideOnly(Side.CLIENT)
 	public void playSoundEvent(PlaySoundEvent event)
 	{
 		EntityPlayerSP thePlayer = Minecraft.getMinecraft().player;
@@ -193,7 +194,7 @@ public class RTEventHandler
 			{
 				for (TileEntitySoundDampener soundDampener : TileEntitySoundDampener.dampeners)
 				{
-					if (!soundDampener.isInvalid() && soundDampener.getPos().distanceSq(soundPosition) < 10 * 10)
+					if (soundDampener.getWorld() == thePlayer.world && !soundDampener.isInvalid() && soundDampener.getPos().distanceSq(soundPosition) < 10 * 10)
 					{
 						if (soundDampener.getMutedSounds().contains(event.getSound().getSoundLocation()))
 						{
