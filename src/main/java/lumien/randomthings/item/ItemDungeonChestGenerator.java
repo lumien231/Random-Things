@@ -63,7 +63,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 			});
 
 			int tableIndex = nbt.getInteger("tableIndex");
-			if (tableIndex > 0 && tableIndex < sortedList.size())
+			if (tableIndex >= 0 && tableIndex < sortedList.size())
 			{
 				ResourceLocation tableLocation = sortedList.get(tableIndex);
 				par3List.add(net.minecraft.client.resources.I18n.format("item.dungeonChestGenerator.category", tableLocation.toString()));
@@ -91,7 +91,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 			});
 
 			int tableIndex = nbt.getInteger("tableIndex");
-			if (tableIndex > 0 && tableIndex < sortedList.size())
+			if (tableIndex >= 0 && tableIndex < sortedList.size())
 			{
 				ResourceLocation tableLocation = sortedList.get(tableIndex);
 				return ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name")).trim() + " (" + tableLocation.toString() + ")";
@@ -115,7 +115,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 			}
 
 			int currentCategory = stack.getTagCompound().getInteger("tableIndex");
-			if (currentCategory - 1 > 0)
+			if (currentCategory - 1 >= 0)
 			{
 				currentCategory--;
 			}
@@ -196,7 +196,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 								}
 							});
 
-							if (currentCategory > 0 && currentCategory < sortedList.size())
+							if (currentCategory >= 0 && currentCategory < sortedList.size())
 							{
 								ResourceLocation currentTableLocation = sortedList.get(currentCategory);
 
