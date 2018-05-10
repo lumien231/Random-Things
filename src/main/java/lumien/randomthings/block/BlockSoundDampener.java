@@ -23,10 +23,10 @@ public class BlockSoundDampener extends BlockContainerBase
 	protected BlockSoundDampener()
 	{
 		super("soundDampener", Material.ROCK);
-		
+
 		this.setHardness(2.0f);
 	}
-	
+
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
@@ -34,15 +34,12 @@ public class BlockSoundDampener extends BlockContainerBase
 
 		if (tileentity instanceof TileEntitySoundBox)
 		{
-			if (tileentity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP))
-	        {
-	            InventoryUtil.dropItemHandlerItems(worldIn, pos, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP));
-	        }
+			InventoryUtil.dropItemHandlerItems(worldIn, pos, ((TileEntitySoundBox) tileentity).getItemHandler());
 		}
 
 		super.breakBlock(worldIn, pos, state);
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
