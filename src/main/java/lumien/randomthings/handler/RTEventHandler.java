@@ -518,6 +518,7 @@ public class RTEventHandler
 		if (tickEvent instanceof ServerTickEvent)
 		{
 			ServerModelLibrary.getInstance().tick();
+			EscapeRopeHandler.getInstance().tick();
 		}
 
 		if (tickEvent instanceof WorldTickEvent)

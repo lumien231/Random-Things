@@ -508,6 +508,11 @@ public class AsmHandler
 			{
 				return Color.HSBtoRGB((float) (1D / 360D * (30F * Math.sin(1 / 20D * RTEventHandler.clientAnimationCounter) + 1 + 120 - 90 + 120)), 1F, 0.6F);
 			}
+			
+			if (currentlyRendering.getItem() == ModItems.escapeRope)
+			{
+				return Color.YELLOW.darker().getRGB() | -16777216;
+			}
 		}
 
 		return original;

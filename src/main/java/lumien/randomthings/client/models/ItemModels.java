@@ -137,6 +137,7 @@ public class ItemModels
 		registerItem(ModItems.flooToken);
 		registerItem(ModItems.lotusSeeds);
 		registerItem(ModItems.portableSoundDampener);
+		registerItem(ModItems.escapeRope);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);
