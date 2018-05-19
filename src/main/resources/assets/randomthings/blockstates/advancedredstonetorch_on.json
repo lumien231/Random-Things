@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=up":  { "model": "randomthings:advancedredstonetorch_on" },
+        "facing=east":  { "model": "randomthings:advancedredstonetorch_on_wall" },
+        "facing=south":  { "model": "randomthings:advancedredstonetorch_on_wall", "y": 90 },
+        "facing=west":  { "model": "randomthings:advancedredstonetorch_on_wall", "y": 180 },
+        "facing=north":  { "model": "randomthings:advancedredstonetorch_on_wall", "y": 270 }
+    }
+}

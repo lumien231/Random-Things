@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/torch",
+    "textures": {
+        "torch": "randomthings:blocks/advancedredstonetorch_on"
+    }
+}

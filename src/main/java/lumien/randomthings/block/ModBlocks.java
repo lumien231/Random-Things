@@ -87,6 +87,9 @@ public class ModBlocks
 	
 	public static BlockAdvancedRedstoneRepeater unpoweredAdvancedRedstoneRepeater;
 	public static BlockAdvancedRedstoneRepeater poweredAdvancedRedstoneRepeater;
+	
+	public static BlockAdvancedRedstoneTorch advancedRedstoneTorchOff;
+	public static BlockAdvancedRedstoneTorch advancedRedstoneTorchOn;
 
 	public static BlockFlooBrick flooBrick;
 
@@ -198,6 +201,9 @@ public class ModBlocks
 		
 		unpoweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(false);
 		poweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(true);
+		
+		advancedRedstoneTorchOff = new BlockAdvancedRedstoneTorch(false);
+		advancedRedstoneTorchOn = new BlockAdvancedRedstoneTorch(true);
 
 		flooBrick = new BlockFlooBrick();
 

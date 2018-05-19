@@ -63,6 +63,8 @@ tile.lotus.name=Lotus
 tile.ancientBrick.name=Ancient Brick
 tile.soundBox.name=Sound Box
 tile.soundDampener.name=Sound Dampener
+tile.advancedRedstoneTorch_on.name=Advanced Redstone Torch
+tile.advancedRedstoneTorch_off.name=Advanced Redstone Torch
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -465,6 +467,7 @@ tile.translucentLuminousBlock.info=Single colored transparent luminous (Glowing)
 tile.soundBox.info=A Sound Box will play the sound represented by the Sound Pattern inside of it when powered by redstone. Simply right click a sound pattern on the box to put it inside and right click it again to take it out again.
 tile.soundDampener.info=Sound Dampeners will prevent the sounds from the sound patterns inside of it from being played in a 10 block radius around it.
 tile.globalChatDetector.info=Unlike the normal Chat Detector the Global one isn't limited to the player who placed it. It will instead react to chat messages from all players. However to "consume" messages there has to be an id card for the player who wrote the message in the global chat detector.
+tile.advancedRedstoneTorch_on.info=Unlike a normal redstone torch which just emits either a redstone signal of 15 or 0 with an advanced one you can configure the signal strength for the two states freely. It's green while powered and red while unpowered.
 
 tile.plate_redirector.info=Entities moving over this plate are redirected towards a different direction. Right clicking the plate allows you to change that direction.
 tile.plate_filteredredirector.info=Entities moving over this plate are redirected towards a different direction depending on which filter they match.
