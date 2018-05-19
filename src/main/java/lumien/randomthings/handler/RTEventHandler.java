@@ -194,7 +194,7 @@ public class RTEventHandler
 			{
 				for (TileEntitySoundDampener soundDampener : TileEntitySoundDampener.dampeners)
 				{
-					if (soundDampener.getWorld() == thePlayer.world && !soundDampener.isInvalid() && soundDampener.getPos().distanceSq(soundPosition) < 10 * 10)
+					if (soundDampener.getWorld() == thePlayer.world && !soundDampener.isInvalid() && soundDampener.getPos().distanceSq(soundPosition) < 20 * 20)
 					{
 						if (soundDampener.getMutedSounds().contains(event.getSound().getSoundLocation()))
 						{
