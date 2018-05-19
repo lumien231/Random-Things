@@ -32,9 +32,9 @@ public class BlockSoundDampener extends BlockContainerBase
 	{
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 
-		if (tileentity instanceof TileEntitySoundBox)
+		if (tileentity instanceof TileEntitySoundDampener)
 		{
-			InventoryUtil.dropItemHandlerItems(worldIn, pos, ((TileEntitySoundBox) tileentity).getItemHandler());
+			InventoryUtil.dropItemHandlerItems(worldIn, pos, ((TileEntitySoundDampener) tileentity).getItemHandler());
 		}
 
 		super.breakBlock(worldIn, pos, state);
