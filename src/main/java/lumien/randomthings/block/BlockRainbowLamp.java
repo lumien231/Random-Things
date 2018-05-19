@@ -33,7 +33,7 @@ public class BlockRainbowLamp extends BlockBase
 	{
 		if (!worldIn.isRemote)
 		{
-			int redstoneLevel = worldIn.getStrongPower(pos);
+			int redstoneLevel = worldIn.isBlockIndirectlyGettingPowered(pos);
 
 			int colorIndex = ((EnumDyeColor) state.getValue(COLOR)).ordinal();
 
@@ -49,7 +49,7 @@ public class BlockRainbowLamp extends BlockBase
 	{
 		if (!worldIn.isRemote)
 		{
-			int redstoneLevel = worldIn.getStrongPower(pos);
+			int redstoneLevel = worldIn.isBlockIndirectlyGettingPowered(pos);
 
 			int colorIndex = ((EnumDyeColor) state.getValue(COLOR)).ordinal();
 
@@ -65,7 +65,7 @@ public class BlockRainbowLamp extends BlockBase
 	{
 		if (!worldIn.isRemote)
 		{
-			int redstoneLevel = worldIn.getStrongPower(pos);
+			int redstoneLevel = worldIn.isBlockIndirectlyGettingPowered(pos);
 
 			int colorIndex = ((EnumDyeColor) state.getValue(COLOR)).ordinal();
 
