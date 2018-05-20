@@ -1,5 +1,7 @@
 package lumien.randomthings.item;
 
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.lib.GuiIds;
@@ -9,8 +11,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 
-public class ItemPortableSoundDampener extends ItemBase
+@Optional.Interface(iface = "baubles.api.IBauble", modid = "baubles")
+public class ItemPortableSoundDampener extends ItemBase implements IBauble
 {
 
 	public ItemPortableSoundDampener()
@@ -37,6 +41,12 @@ public class ItemPortableSoundDampener extends ItemBase
 		}
 
 		return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
+	}
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemstack)
+	{
+		return BaubleType.BODY;
 	}
 
 }

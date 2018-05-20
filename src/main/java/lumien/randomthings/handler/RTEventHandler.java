@@ -207,6 +207,34 @@ public class RTEventHandler
 
 			if (event.getResultSound() != null)
 			{
+				ItemStack baubleDampener = InventoryUtil.getBauble(ModItems.portableSoundDampener, thePlayer);
+				
+				// Bauble
+				if (!baubleDampener.isEmpty())
+				{
+					InventoryItem inv = ItemPortableSoundDampener.getInventory(baubleDampener);
+
+					if (!inv.isEmpty())
+					{
+						for (int s = 0; s < inv.getSizeInventory(); s++)
+						{
+							ItemStack sis = inv.getStackInSlot(s);
+
+							if (!sis.isEmpty())
+							{
+								ResourceLocation rl = ItemSoundPattern.getSoundLocation(sis);
+
+								if (rl != null && rl.equals(event.getSound().getSoundLocation()))
+								{
+									event.setResultSound(null);
+									return;
+								}
+							}
+						}
+					}
+				}
+				
+				// Normal
 				for (int slot = 0; slot < thePlayer.inventory.mainInventory.size(); slot++)
 				{
 					ItemStack stack = thePlayer.inventory.getStackInSlot(slot);
