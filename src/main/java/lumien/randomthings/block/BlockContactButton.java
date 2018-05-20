@@ -115,7 +115,6 @@ public class BlockContactButton extends BlockBase
 		return this.getDefaultState().withProperty(FACING, EnumFacing.values()[facing]).withProperty(POWERED, powered);
 	}
 
-
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
@@ -138,35 +137,35 @@ public class BlockContactButton extends BlockBase
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!worldIn.isRemote)
-        {
-            IBlockState iblockstate = worldIn.getBlockState(pos.north());
-            IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
-            IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
-            IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-            EnumFacing enumfacing = state.getValue(FACING);
+	{
+		if (!worldIn.isRemote)
+		{
+			IBlockState iblockstate = worldIn.getBlockState(pos.north());
+			IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
+			IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
+			IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
+			EnumFacing enumfacing = state.getValue(FACING);
 
-            if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
-            {
-                enumfacing = EnumFacing.SOUTH;
-            }
-            else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock())
-            {
-                enumfacing = EnumFacing.NORTH;
-            }
-            else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock())
-            {
-                enumfacing = EnumFacing.EAST;
-            }
-            else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock())
-            {
-                enumfacing = EnumFacing.WEST;
-            }
+			if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
+			{
+				enumfacing = EnumFacing.SOUTH;
+			}
+			else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock())
+			{
+				enumfacing = EnumFacing.NORTH;
+			}
+			else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock())
+			{
+				enumfacing = EnumFacing.EAST;
+			}
+			else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock())
+			{
+				enumfacing = EnumFacing.WEST;
+			}
 
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
-        }
-    }
+			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+		}
+	}
 
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
@@ -187,7 +186,7 @@ public class BlockContactButton extends BlockBase
 		this.setDefaultFacing(worldIn, pos, state);
 	}
 
-	public void activate(World world, BlockPos pos,EnumFacing fromFacing)
+	public void activate(World world, BlockPos pos, EnumFacing fromFacing)
 	{
 		IBlockState state = world.getBlockState(pos);
 		if (state.getValue(POWERED).booleanValue())
@@ -198,7 +197,7 @@ public class BlockContactButton extends BlockBase
 		{
 			world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)), 3);
 			world.markBlockRangeForRenderUpdate(pos, pos);
-			world.playSound(null,pos.offset(fromFacing).add(0.5,0.5,0.5), SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6F);
+			world.playSound(null, pos.offset(fromFacing).add(0.5, 0.5, 0.5), SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6F);
 			this.notifyNeighbors(world, pos, state.getValue(FACING));
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 			return;

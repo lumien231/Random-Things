@@ -32,7 +32,6 @@ public class GuiSlotButton extends GuiButton
 		this.tooltip = tooltip;
 	}
 
-
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
 	{
@@ -72,7 +71,7 @@ public class GuiSlotButton extends GuiButton
 	{
 		if (tooltip != null)
 		{
-			GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { tooltip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
+			GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { tooltip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
 		}
 	}
 }

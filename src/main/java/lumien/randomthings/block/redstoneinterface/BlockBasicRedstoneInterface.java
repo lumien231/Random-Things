@@ -25,7 +25,7 @@ public class BlockBasicRedstoneInterface extends BlockRedstoneInterface
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world,IBlockState state)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityBasicRedstoneInterface();
 	}

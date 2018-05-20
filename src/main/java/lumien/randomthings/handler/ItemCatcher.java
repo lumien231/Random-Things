@@ -38,17 +38,17 @@ public class ItemCatcher
 
 		catchingDrops = true;
 	}
-	
+
 	public static List<ItemStack> stopCatching()
 	{
 		if (!catchingDrops)
 		{
 			RandomThings.instance.logger.log(Level.WARN, "Not catching drops, unexpected!");
 		}
-		
+
 		ArrayList<ItemStack> copy = new ArrayList<>(catchedDrops);
 		catchedDrops.clear();
-		
+
 		catchingDrops = false;
 		return copy;
 	}

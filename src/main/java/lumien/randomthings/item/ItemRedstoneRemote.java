@@ -14,12 +14,12 @@ public class ItemRedstoneRemote extends ItemBase
 	public ItemRedstoneRemote()
 	{
 		super("redstoneRemote");
-		
+
 		this.setMaxStackSize(1);
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick( World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
@@ -33,7 +33,6 @@ public class ItemRedstoneRemote extends ItemBase
 				playerIn.openGui(RandomThings.instance, GuiIds.REDSTONE_REMOTE_USE, worldIn, 0, 0, 0);
 			}
 		}
-
 
 		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 	}

@@ -19,27 +19,26 @@ public class BlockCorrectorPlate extends BlockBase
 	protected static final AxisAlignedBB AABB = null;
 	protected static final AxisAlignedBB VISUAL_AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.03125D, 1D);
 
-
 	public BlockCorrectorPlate()
 	{
 		super("plate_corrector", Material.GROUND);
-		
+
 		this.setHardness(0.3f);
 		this.setSoundType(SoundType.STONE);
 	}
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		checkForDrop(worldIn, pos, state);
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		return canPlaceOn(worldIn, pos.down());
 	}
-	
+
 	private boolean canPlaceOn(World worldIn, BlockPos pos)
 	{
 		return worldIn.isSideSolid(pos, EnumFacing.UP);
@@ -62,18 +61,18 @@ public class BlockCorrectorPlate extends BlockBase
 			return false;
 		}
 	}
-	
+
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		this.checkForDrop(worldIn, pos, state);
 	}
-	
-    @Override
+
+	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
-    {
-        return BlockFaceShape.UNDEFINED;
-    }
+	{
+		return BlockFaceShape.UNDEFINED;
+	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -109,14 +108,14 @@ public class BlockCorrectorPlate extends BlockBase
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
 		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-		
+
 		if (Math.abs(entityIn.motionX) < Math.abs(entityIn.motionZ))
 		{
 			if (entityIn.posX != pos.getX() + 0.5)
 			{
 				entityIn.setPositionAndUpdate(pos.getX() + 0.5, entityIn.posY, entityIn.posZ);
 			}
-			
+
 			if (entityIn.motionX != 0)
 			{
 				entityIn.motionX = 0;
@@ -128,7 +127,7 @@ public class BlockCorrectorPlate extends BlockBase
 			{
 				entityIn.setPositionAndUpdate(entityIn.posX, entityIn.posY, pos.getZ() + 0.5);
 			}
-			
+
 			if (entityIn.motionZ != 0)
 			{
 				entityIn.motionZ = 0;

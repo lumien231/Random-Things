@@ -71,15 +71,15 @@ public class WorldGenPeaceCandle
 		{
 			switch (enumfacing)
 			{
-				case NORTH:
-				case SOUTH:
-					return boundingBox.minX + x;
-				case WEST:
-					return boundingBox.maxX - z;
-				case EAST:
-					return boundingBox.minX + z;
-				default:
-					return x;
+			case NORTH:
+			case SOUTH:
+				return boundingBox.minX + x;
+			case WEST:
+				return boundingBox.maxX - z;
+			case EAST:
+				return boundingBox.minX + z;
+			default:
+				return x;
 			}
 		}
 	}
@@ -101,15 +101,15 @@ public class WorldGenPeaceCandle
 		{
 			switch (enumfacing)
 			{
-				case NORTH:
-					return boundingBox.maxZ - z;
-				case SOUTH:
-					return boundingBox.minZ + z;
-				case WEST:
-				case EAST:
-					return boundingBox.minZ + x;
-				default:
-					return z;
+			case NORTH:
+				return boundingBox.maxZ - z;
+			case SOUTH:
+				return boundingBox.minZ + z;
+			case WEST:
+			case EAST:
+				return boundingBox.minZ + x;
+			default:
+				return z;
 			}
 		}
 	}

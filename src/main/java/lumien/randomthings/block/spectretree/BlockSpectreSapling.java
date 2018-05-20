@@ -36,7 +36,7 @@ public class BlockSpectreSapling extends BlockBush
 
 		this.setHardness(0.0F);
 		this.setSoundType(SoundType.PLANT);
-		
+
 		OreDictionary.registerOre("treeSapling", this);
 	}
 

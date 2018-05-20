@@ -10,11 +10,11 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ItemBase extends Item
 {
 	public static List<Item> rtItemList = new ArrayList<>(30);
-	
+
 	public ItemBase(String name)
 	{
 		registerItem(name, this);
-		
+
 		RandomThings.proxy.scheduleColor(this);
 	}
 
@@ -25,7 +25,7 @@ public class ItemBase extends Item
 		item.setUnlocalizedName(name);
 
 		ForgeRegistries.ITEMS.register(item);
-		
+
 		rtItemList.add(item);
 	}
 }

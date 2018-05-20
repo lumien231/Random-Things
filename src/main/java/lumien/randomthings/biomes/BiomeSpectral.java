@@ -11,14 +11,13 @@ public class BiomeSpectral extends Biome
 	public BiomeSpectral()
 	{
 		super(new BiomeProperties("Spectral").setRainDisabled().setWaterColor(Color.CYAN.getRGB()).setTemperature(0.2f));
-		
+
 		this.setRegistryName(new ResourceLocation("randomthings", "spectral"));
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
-		
-		
+
 	}
 
 	@Override

@@ -31,10 +31,10 @@ public class RTWorldInformation extends WorldSavedData
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		nbt.setBoolean("enderDragonDefeated", enderDragonDefeated);
-		
+
 		return nbt;
 	}
-	
+
 	public boolean isDragonDefeated()
 	{
 		return enderDragonDefeated;

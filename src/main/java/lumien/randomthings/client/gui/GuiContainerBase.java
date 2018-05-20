@@ -14,9 +14,9 @@ public abstract class GuiContainerBase extends GuiContainer
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		this.drawDefaultBackground();
-		
+
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		
+
 		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 }

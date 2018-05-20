@@ -14,20 +14,20 @@ public class ItemSpectreShovel extends ItemSpade
 	public ItemSpectreShovel()
 	{
 		super(ItemSpectreSword.spectreToolMaterial);
-		
+
 		ItemBase.registerItem("spectreShovel", this);
 	}
 
 	@Override
-    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
-    {
-        Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
+	{
+		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
-        if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
-        {
-            multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(ItemSpectrePickaxe.MOD_UUID, "Spectre Range Modifier", 3, 0));
-        }
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
+		{
+			multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(ItemSpectrePickaxe.MOD_UUID, "Spectre Range Modifier", 3, 0));
+		}
 
-        return multimap;
-    }
+		return multimap;
+	}
 }

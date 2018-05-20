@@ -160,7 +160,7 @@ public class ServerModelLibrary
 					if (modelFile.length() <= 2000 * 1000 && (!paletteFile.isFile() || paletteFile.length() <= 2000 * 1000))
 					{
 						modelInputStream = new FileInputStream(modelFile);
-						
+
 						if (paletteFile.isFile())
 						{
 							paletteInputStream = new FileInputStream(paletteFile);
@@ -168,16 +168,16 @@ public class ServerModelLibrary
 						else
 						{
 							paletteInputStream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("randomthings:voxmodels/default_palette.act")).getInputStream();
-							
+
 							FileOutputStream paletteOutput = new FileOutputStream(paletteFile);
-							
+
 							int currentByte = -1;
-							
+
 							while ((currentByte = paletteInputStream.read()) != -1)
 							{
 								paletteOutput.write(currentByte);
 							}
-							
+
 							paletteOutput.close();
 						}
 

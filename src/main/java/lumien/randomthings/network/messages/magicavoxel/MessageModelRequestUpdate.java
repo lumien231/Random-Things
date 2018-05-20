@@ -14,8 +14,8 @@ public class MessageModelRequestUpdate implements IRTMessage
 
 	int modelSize;
 	int paletteSize;
-	
-	public void setData(String modelName,int modelSize,int paletteSize)
+
+	public void setData(String modelName, int modelSize, int paletteSize)
 	{
 		this.modelName = modelName;
 		this.modelSize = modelSize;

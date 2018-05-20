@@ -14,7 +14,7 @@ public class ClientModelRequest
 
 	byte[] modelData;
 	byte[] paletteData;
-	
+
 	int bytesReceived;
 
 	public void setState(STATE state)
@@ -39,7 +39,7 @@ public class ClientModelRequest
 			this.paletteSize = paletteSize;
 			this.modelData = new byte[modelSize];
 			this.paletteData = new byte[paletteSize];
-			
+
 			this.state = STATE.RECEIVING;
 		}
 	}

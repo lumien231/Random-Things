@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderArtificialEndPortal extends Render
@@ -50,7 +49,7 @@ public class RenderArtificialEndPortal extends Render
 			for (int j = 0; j < i; ++j)
 			{
 				GlStateManager.pushMatrix();
-				float f1 = 2.0F / (float) (18 - j);
+				float f1 = 2.0F / (18 - j);
 
 				if (j == 0)
 				{
@@ -88,8 +87,8 @@ public class RenderArtificialEndPortal extends Render
 				GlStateManager.loadIdentity();
 				GlStateManager.translate(0.5F, 0.5F, 0.0F);
 				GlStateManager.scale(0.5F, 0.5F, 1.0F);
-				float f2 = (float) (j + 1);
-				GlStateManager.translate(17.0F / f2, (2.0F + f2 / 1.5F) * ((float) Minecraft.getSystemTime() % 800000.0F / 800000.0F), 0.0F);
+				float f2 = j + 1;
+				GlStateManager.translate(17.0F / f2, (2.0F + f2 / 1.5F) * (Minecraft.getSystemTime() % 800000.0F / 800000.0F), 0.0F);
 				GlStateManager.rotate((f2 * f2 * 4321.0F + f2 * 9.0F) * 2.0F, 0.0F, 0.0F, 1.0F);
 				GlStateManager.scale(4.5F - f2 / 4.0F, 4.5F - f2 / 4.0F, 1.0F);
 				GlStateManager.multMatrix(PROJECTION);
@@ -103,10 +102,10 @@ public class RenderArtificialEndPortal extends Render
 
 				double size_half = size / 2;
 
-				bufferbuilder.pos(x - size_half, y + (double) f, z + size_half).color(f3, f4, f5, 1.0F).endVertex();
-				bufferbuilder.pos(x + size_half, y + (double) f, z + size_half).color(f3, f4, f5, 1.0F).endVertex();
-				bufferbuilder.pos(x + size_half, y + (double) f, z - size_half).color(f3, f4, f5, 1.0F).endVertex();
-				bufferbuilder.pos(x - size_half, y + (double) f, z - size_half).color(f3, f4, f5, 1.0F).endVertex();
+				bufferbuilder.pos(x - size_half, y + f, z + size_half).color(f3, f4, f5, 1.0F).endVertex();
+				bufferbuilder.pos(x + size_half, y + f, z + size_half).color(f3, f4, f5, 1.0F).endVertex();
+				bufferbuilder.pos(x + size_half, y + f, z - size_half).color(f3, f4, f5, 1.0F).endVertex();
+				bufferbuilder.pos(x - size_half, y + f, z - size_half).color(f3, f4, f5, 1.0F).endVertex();
 
 				tessellator.draw();
 				GlStateManager.popMatrix();

@@ -194,18 +194,18 @@ public class ContainerIronDropper extends ContainerTE<TileEntityIronDropper>
 	{
 		switch (signal)
 		{
-			case 0:
-				te.rotateRedstoneMode();
-				break;
-			case 1:
-				te.rotatePickupDelay();
-				break;
-			case 2:
-				te.rotateRandomMotion();
-				break;
-			case 3:
-				te.rotateEffects();
-				break;
+		case 0:
+			te.rotateRedstoneMode();
+			break;
+		case 1:
+			te.rotatePickupDelay();
+			break;
+		case 2:
+			te.rotateRandomMotion();
+			break;
+		case 3:
+			te.rotateEffects();
+			break;
 		}
 	}
 }

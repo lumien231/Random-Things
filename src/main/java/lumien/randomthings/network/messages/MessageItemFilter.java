@@ -53,18 +53,18 @@ public class MessageItemFilter implements IRTMessage
 
 					switch (buttonPressed)
 					{
-						case 0:
-							itemFilterContainer.repres.toggleMetadata();
-							break;
-						case 1:
-							itemFilterContainer.repres.toggleOreDict();
-							break;
-						case 2:
-							itemFilterContainer.repres.toggleNBT();
-							break;
-						case 3:
-							itemFilterContainer.repres.toggleListType();
-							break;
+					case 0:
+						itemFilterContainer.repres.toggleMetadata();
+						break;
+					case 1:
+						itemFilterContainer.repres.toggleOreDict();
+						break;
+					case 2:
+						itemFilterContainer.repres.toggleNBT();
+						break;
+					case 3:
+						itemFilterContainer.repres.toggleListType();
+						break;
 					}
 				}
 			}

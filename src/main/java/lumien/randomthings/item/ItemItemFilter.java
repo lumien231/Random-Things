@@ -121,7 +121,6 @@ public class ItemItemFilter extends ItemBase implements IEntityFilterItem
 						break;
 					}
 
-
 					if (item.getItem() == stackToCheck.getItem())
 					{
 						if (!metadata || item.getItemDamage() == stackToCheck.getItemDamage())
@@ -200,7 +199,6 @@ public class ItemItemFilter extends ItemBase implements IEntityFilterItem
 		{
 			playerIn.openGui(RandomThings.instance, GuiIds.ITEM_FILTER, worldIn, 0, 0, 0);
 		}
-
 
 		return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 	}

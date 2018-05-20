@@ -215,27 +215,27 @@ public class ContainerPotionVaporizer extends Container
 	{
 		switch (id)
 		{
-			case 0:
-				this.durationLeft = data;
-				break;
-			case 1:
-				this.duration = data;
-				break;
-			case 2:
-				this.color = data;
-				break;
-			case 3:
-				this.potionID = data;
-				break;
-			case 4:
-				this.amplifier = data;
-				break;
-			case 5:
-				this.fuelBurnTime = data;
-				break;
-			case 6:
-				this.fuelBurn = data;
-				break;
+		case 0:
+			this.durationLeft = data;
+			break;
+		case 1:
+			this.duration = data;
+			break;
+		case 2:
+			this.color = data;
+			break;
+		case 3:
+			this.potionID = data;
+			break;
+		case 4:
+			this.amplifier = data;
+			break;
+		case 5:
+			this.fuelBurnTime = data;
+			break;
+		case 6:
+			this.fuelBurn = data;
+			break;
 		}
 	}
 

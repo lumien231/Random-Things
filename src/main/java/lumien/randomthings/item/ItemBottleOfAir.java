@@ -59,7 +59,7 @@ public class ItemBottleOfAir extends ItemBase
 		if (player.isInsideOfMaterial(Material.WATER))
 		{
 			player.setActiveHand(hand);
-			
+
 			return new ActionResult(EnumActionResult.SUCCESS, itemStack);
 		}
 		return new ActionResult(EnumActionResult.FAIL, itemStack);

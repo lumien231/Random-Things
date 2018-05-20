@@ -1,6 +1,5 @@
 package lumien.randomthings.client.gui.elements;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 
 import org.lwjgl.input.Keyboard;
@@ -99,7 +98,7 @@ public class GuiTriggerButton extends GuiButton
 				FontRenderer fontrenderer = mc.fontRenderer;
 
 				String localizedToolTip = I18n.format(tooltip);
-				GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { localizedToolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
+				GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { localizedToolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
 			}
 			catch (Exception e)
 			{

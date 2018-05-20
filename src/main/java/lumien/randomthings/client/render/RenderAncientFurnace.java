@@ -4,17 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
 import org.lwjgl.opengl.GL11;
 
-import com.sun.javafx.stage.EmbeddedWindow;
-
-import lumien.randomthings.client.ClientProxy;
 import lumien.randomthings.handler.RTEventHandler;
 import lumien.randomthings.tileentity.TileEntityAncientFurnace;
 import lumien.randomthings.tileentity.TileEntityAncientFurnace.STATE;
-import lumien.randomthings.tileentity.TileEntityBiomeRadar;
-import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -24,9 +18,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
 public class RenderAncientFurnace extends TileEntitySpecialRenderer<TileEntityAncientFurnace>
@@ -69,12 +61,12 @@ public class RenderAncientFurnace extends TileEntitySpecialRenderer<TileEntityAn
 
 		if (state == STATE.RUNNING || (state == STATE.STARTING && counter > 100))
 		{
-			//System.out.println(transparency + "/" + counter);
-			
-			//transparency = 0.1f;
-			
+			// System.out.println(transparency + "/" + counter);
+
+			// transparency = 0.1f;
+
 			GlStateManager.alphaFunc(GL11.GL_ALWAYS, 0);
-			
+
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 
@@ -107,32 +99,32 @@ public class RenderAncientFurnace extends TileEntitySpecialRenderer<TileEntityAn
 
 					switch (f)
 					{
-						case NORTH:
-							renderer.pos(iX, y, iZ - 0.001).tex(1, 1).endVertex();
-							renderer.pos(iX, y + 1, iZ - 0.001).tex(1, 0).endVertex();
-							renderer.pos(iX + 1, y + 1, iZ - 0.001).tex(0, 0).endVertex();
-							renderer.pos(iX + 1, y, iZ - 0.001).tex(0, 1).endVertex();
-							break;
-						case SOUTH:
-							renderer.pos(iX, y, iZ + 1.001).tex(0, 1).endVertex();
-							renderer.pos(iX + 1, y, iZ + 1.001).tex(1, 1).endVertex();
-							renderer.pos(iX + 1, y + 1, iZ + 1.001).tex(1, 0).endVertex();
-							renderer.pos(iX, y + 1, iZ + 1.001).tex(0, 0).endVertex();
-							break;
-						case WEST:
-							renderer.pos(iX - 0.001, y, iZ).tex(0, 1).endVertex();
-							renderer.pos(iX - 0.001, y, iZ + 1).tex(1, 1).endVertex();
-							renderer.pos(iX - 0.001, y + 1, iZ + 1).tex(1, 0).endVertex();
-							renderer.pos(iX - 0.001, y + 1, iZ).tex(0, 0).endVertex();
-							break;
-						case EAST:
-							renderer.pos(iX + 1.001, y, iZ).tex(1, 1).endVertex();
-							renderer.pos(iX + 1.001, y + 1, iZ).tex(1, 0).endVertex();
-							renderer.pos(iX + 1.001, y + 1, iZ + 1).tex(0, 0).endVertex();
-							renderer.pos(iX + 1.001, y, iZ + 1).tex(0, 1).endVertex();
-							break;
-						default:
-							break;
+					case NORTH:
+						renderer.pos(iX, y, iZ - 0.001).tex(1, 1).endVertex();
+						renderer.pos(iX, y + 1, iZ - 0.001).tex(1, 0).endVertex();
+						renderer.pos(iX + 1, y + 1, iZ - 0.001).tex(0, 0).endVertex();
+						renderer.pos(iX + 1, y, iZ - 0.001).tex(0, 1).endVertex();
+						break;
+					case SOUTH:
+						renderer.pos(iX, y, iZ + 1.001).tex(0, 1).endVertex();
+						renderer.pos(iX + 1, y, iZ + 1.001).tex(1, 1).endVertex();
+						renderer.pos(iX + 1, y + 1, iZ + 1.001).tex(1, 0).endVertex();
+						renderer.pos(iX, y + 1, iZ + 1.001).tex(0, 0).endVertex();
+						break;
+					case WEST:
+						renderer.pos(iX - 0.001, y, iZ).tex(0, 1).endVertex();
+						renderer.pos(iX - 0.001, y, iZ + 1).tex(1, 1).endVertex();
+						renderer.pos(iX - 0.001, y + 1, iZ + 1).tex(1, 0).endVertex();
+						renderer.pos(iX - 0.001, y + 1, iZ).tex(0, 0).endVertex();
+						break;
+					case EAST:
+						renderer.pos(iX + 1.001, y, iZ).tex(1, 1).endVertex();
+						renderer.pos(iX + 1.001, y + 1, iZ).tex(1, 0).endVertex();
+						renderer.pos(iX + 1.001, y + 1, iZ + 1).tex(0, 0).endVertex();
+						renderer.pos(iX + 1.001, y, iZ + 1).tex(0, 1).endVertex();
+						break;
+					default:
+						break;
 					}
 
 					tessellator.draw();
@@ -143,7 +135,7 @@ public class RenderAncientFurnace extends TileEntitySpecialRenderer<TileEntityAn
 			this.setLightmapDisabled(false);
 			GlStateManager.enableLighting();
 			GlStateManager.disableBlend();
-			
+
 			GlStateManager.alphaFunc(516, 0.1F);
 		}
 	}

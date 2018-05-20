@@ -23,11 +23,11 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 
 	GuiTextField titleField;
 	GuiTextField descriptionField;
-	
+
 	public GuiNotificationInterface(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerNotificationInterface(player, world, x, y, z));
-		
+
 		this.xSize = 176;
 		this.ySize = 146;
 	}
@@ -47,7 +47,7 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		
+
 		titleField.drawTextBox();
 		descriptionField.drawTextBox();
 	}
@@ -56,7 +56,7 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 	public void updateScreen()
 	{
 		super.updateScreen();
-		
+
 		titleField.updateCursorCounter();
 		descriptionField.updateCursorCounter();
 	}
@@ -65,16 +65,16 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 	public void initGui()
 	{
 		super.initGui();
-		
+
 		Keyboard.enableRepeatEvents(true);
-		
+
 		titleField = new GuiTextField(0, fontRenderer, this.guiLeft + 34, this.guiTop + 18, 130, 15);
 		descriptionField = new GuiTextField(1, fontRenderer, this.guiLeft + 34, this.guiTop + 18 + 22, 130, 15);
-		
+
 		titleField.setGuiResponder(this);
 		descriptionField.setGuiResponder(this);
-		
-		TileEntityNotificationInterface te = (TileEntityNotificationInterface) ((ContainerTE)this.inventorySlots).getTE();
+
+		TileEntityNotificationInterface te = (TileEntityNotificationInterface) ((ContainerTE) this.inventorySlots).getTE();
 		titleField.setText(te.getTitle());
 		descriptionField.setText(te.getDescription());
 	}
@@ -106,7 +106,7 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 		{
 			this.titleField.textboxKeyTyped(typedChar, keyCode);
 		}
-		
+
 		if (descriptionField.isFocused())
 		{
 			this.descriptionField.textboxKeyTyped(typedChar, keyCode);
@@ -128,9 +128,9 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 	{
 		String newTitle = titleField.getText();
 		String newDescription = descriptionField.getText();
-		
-		TileEntityNotificationInterface te = (TileEntityNotificationInterface) ((ContainerTE)this.inventorySlots).getTE();
-		
+
+		TileEntityNotificationInterface te = (TileEntityNotificationInterface) ((ContainerTE) this.inventorySlots).getTE();
+
 		MessageNotificationInterface message = new MessageNotificationInterface(newTitle, newDescription, te.getPos());
 		PacketHandler.INSTANCE.sendToServer(message);
 	}

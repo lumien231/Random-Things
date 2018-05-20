@@ -76,7 +76,7 @@ public class ItemEnderLetter extends ItemBase
 		if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
 		{
 			playerIn.openGui(RandomThings.instance, GuiIds.ENDER_LETTER, worldIn, 0, 0, 0);
-			
+
 			return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 		}
 

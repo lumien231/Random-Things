@@ -26,12 +26,12 @@ public class RandomThingsTEItemRenderer
 			{
 				switch (itemStackIn.getItemDamage())
 				{
-					case 0:
-						TileEntityRendererDispatcher.instance.render(this.natureChest, 0.0D, 0.0D, 0.0D, 0.0F);
-						return true;
-					case 1:
-						TileEntityRendererDispatcher.instance.render(this.waterChest, 0.0D, 0.0D, 0.0D, 0.0F);
-						return true;
+				case 0:
+					TileEntityRendererDispatcher.instance.render(this.natureChest, 0.0D, 0.0D, 0.0D, 0.0F);
+					return true;
+				case 1:
+					TileEntityRendererDispatcher.instance.render(this.waterChest, 0.0D, 0.0D, 0.0D, 0.0F);
+					return true;
 				}
 			}
 		}

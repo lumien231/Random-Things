@@ -6,15 +6,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ModItems;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -45,7 +41,7 @@ public class EscapeRopeHandler
 	public void tick()
 	{
 		Iterator<Task> iterator = runningTasks.iterator();
-		
+
 		while (iterator.hasNext())
 		{
 			Task t = iterator.next();

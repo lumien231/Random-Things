@@ -27,10 +27,10 @@ public class BlockNatureCore extends BlockContainerBase implements ILuminousBloc
 
 		this.setSoundType(SoundType.WOOD);
 		this.setHarvestLevel("axe", 3);
-		
+
 		this.setHardness(25.0F).setResistance(2000.0F);
 	}
-	
+
 	@Override
 	public int getHarvestLevel(IBlockState state)
 	{

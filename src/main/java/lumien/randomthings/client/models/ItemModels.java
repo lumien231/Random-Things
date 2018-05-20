@@ -167,7 +167,7 @@ public class ItemModels
 
 		ModelLoader.setCustomMeshDefinition(ModItems.soundRecorder, new SoundRecorderMesh());
 		ModelBakery.registerItemVariants(ModItems.soundRecorder, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundrecorder_idle"), new ModelResourceLocation("randomthings:soundrecorder_active") });
-	
+
 		ModelLoader.setCustomMeshDefinition(ModItems.soundPattern, new SoundPatternMesh());
 		ModelBakery.registerItemVariants(ModItems.soundPattern, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundpattern_empty"), new ModelResourceLocation("randomthings:soundpattern_full") });
 	}

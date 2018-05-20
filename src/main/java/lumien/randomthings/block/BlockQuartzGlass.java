@@ -51,7 +51,7 @@ public class BlockQuartzGlass extends BlockBase
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean isNormalCube(IBlockState state)
 	{

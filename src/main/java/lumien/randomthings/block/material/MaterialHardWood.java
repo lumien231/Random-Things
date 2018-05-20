@@ -10,7 +10,7 @@ public class MaterialHardWood extends Material
 	public MaterialHardWood()
 	{
 		super(MapColor.WOOD);
-		
+
 		this.setRequiresTool();
 	}
 

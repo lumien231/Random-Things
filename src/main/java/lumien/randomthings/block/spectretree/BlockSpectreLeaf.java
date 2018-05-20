@@ -47,7 +47,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 		this.setSoundType(SoundType.PLANT);
 
 		BlockBase.registerBlock("spectreLeaf", this);
-		
+
 		OreDictionary.registerOre("treeLeaves", this);
 	}
 
@@ -302,7 +302,6 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	{
 		return false;
 	}
-
 
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)

@@ -30,7 +30,6 @@ public class ModPotions
 
 	public static EffectCollapse collapse;
 
-
 	// Potion Types
 	public static PotionType collapseType;
 	public static PotionType collapseTypeLong;
@@ -49,7 +48,7 @@ public class ModPotions
 		collapseType = new PotionType("rtcollapse", new PotionEffect(collapse, 450));
 		collapseTypeLong = new PotionType("rtcollapse", new PotionEffect(collapse, 900));
 		collapseTypeStrong = new PotionType("rtcollapse", new PotionEffect(collapse, 300, 1));
-		
+
 		collapseType.setRegistryName(new ResourceLocation("randomthings", "collapse"));
 		collapseTypeLong.setRegistryName(new ResourceLocation("randomthings", "long_collapse"));
 		collapseTypeStrong.setRegistryName(new ResourceLocation("randomthings", "strong_collapse"));
@@ -57,7 +56,7 @@ public class ModPotions
 		ForgeRegistries.POTION_TYPES.register(collapseType);
 		ForgeRegistries.POTION_TYPES.register(collapseTypeLong);
 		ForgeRegistries.POTION_TYPES.register(collapseTypeStrong);
-		
+
 		// Brewing
 		PotionHelper.addMix(PotionTypes.AWKWARD, Ingredient.fromStacks(new ItemStack(ModItems.ingredients, 1, 0)), collapseType);
 		PotionHelper.addMix(collapseType, Items.REDSTONE, collapseTypeLong);

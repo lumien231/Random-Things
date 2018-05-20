@@ -37,7 +37,7 @@ public class ContainerNotificationInterface extends ContainerTE<TileEntityNotifi
 			this.addSlotToContainer(new SlotItemHandler(playerItemHandler, l, 8 + l * 18, 122));
 		}
 	}
-	
+
 	@Override
 	public boolean canMergeSlot(ItemStack stack, Slot slotIn)
 	{

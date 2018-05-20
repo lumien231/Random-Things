@@ -85,7 +85,6 @@ public class BlockContactLever extends BlockBase
 		return this.getDefaultState().withProperty(FACING, EnumFacing.values()[facing]).withProperty(POWERED, powered);
 	}
 
-
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
@@ -108,38 +107,38 @@ public class BlockContactLever extends BlockBase
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!worldIn.isRemote)
-        {
-            IBlockState iblockstate = worldIn.getBlockState(pos.north());
-            IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
-            IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
-            IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-            EnumFacing enumfacing = state.getValue(FACING);
+	{
+		if (!worldIn.isRemote)
+		{
+			IBlockState iblockstate = worldIn.getBlockState(pos.north());
+			IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
+			IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
+			IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
+			EnumFacing enumfacing = state.getValue(FACING);
 
-            if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
-            {
-                enumfacing = EnumFacing.SOUTH;
-            }
-            else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock())
-            {
-                enumfacing = EnumFacing.NORTH;
-            }
-            else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock())
-            {
-                enumfacing = EnumFacing.EAST;
-            }
-            else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock())
-            {
-                enumfacing = EnumFacing.WEST;
-            }
+			if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
+			{
+				enumfacing = EnumFacing.SOUTH;
+			}
+			else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock())
+			{
+				enumfacing = EnumFacing.NORTH;
+			}
+			else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock())
+			{
+				enumfacing = EnumFacing.EAST;
+			}
+			else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock())
+			{
+				enumfacing = EnumFacing.WEST;
+			}
 
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
-        }
-    }
-	
+			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+		}
+	}
+
 	@Override
-	public boolean isSideSolid(IBlockState base_state,IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		return true;
 	}
@@ -147,13 +146,13 @@ public class BlockContactLever extends BlockBase
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving( pos, placer));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.getDirectionFromEntityLiving( pos, placer)), 2);
+		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer)), 2);
 	}
 
 	@Override
@@ -169,7 +168,7 @@ public class BlockContactLever extends BlockBase
 		state = state.cycleProperty(POWERED);
 		world.setBlockState(pos, state, 3);
 		this.notifyNeighbors(world, pos, fromFacing);
-		world.playSound(null,pos.add(0.5,0.5,0.5), SoundEvents.UI_BUTTON_CLICK,SoundCategory.BLOCKS, 0.3F, state.getValue(POWERED).booleanValue() ? 0.6F : 0.5F);
+		world.playSound(null, pos.add(0.5, 0.5, 0.5), SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.3F, state.getValue(POWERED).booleanValue() ? 0.6F : 0.5F);
 		return;
 
 	}

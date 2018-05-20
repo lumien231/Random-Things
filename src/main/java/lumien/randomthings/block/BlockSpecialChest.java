@@ -56,7 +56,7 @@ public class BlockSpecialChest extends BlockContainerBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		for (int i = 0; i < 2; i++)
 		{

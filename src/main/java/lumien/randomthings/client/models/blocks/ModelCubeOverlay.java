@@ -47,9 +47,9 @@ public class ModelCubeOverlay implements IBakedModel
 		for (EnumFacing f : EnumFacing.values())
 		{
 			List<BakedQuad> facingQuads = originalQuads.get(f);
-			
+
 			itemQuads.put(f, new ArrayList<>(originalQuads.get(f)));
-			
+
 			originalQuads.put(f, new ArrayList<>(originalQuads.get(f)));
 		}
 
@@ -149,18 +149,18 @@ public class ModelCubeOverlay implements IBakedModel
 	{
 		switch (side)
 		{
-			case DOWN:
-				return new Vec3d(vec.x, -vec.y, -vec.z);
-			case UP:
-				return new Vec3d(vec.x, vec.y, vec.z);
-			case NORTH:
-				return new Vec3d(vec.x, vec.z, -vec.y);
-			case SOUTH:
-				return new Vec3d(vec.x, -vec.z, vec.y);
-			case WEST:
-				return new Vec3d(-vec.y, vec.x, vec.z);
-			case EAST:
-				return new Vec3d(vec.y, -vec.x, vec.z);
+		case DOWN:
+			return new Vec3d(vec.x, -vec.y, -vec.z);
+		case UP:
+			return new Vec3d(vec.x, vec.y, vec.z);
+		case NORTH:
+			return new Vec3d(vec.x, vec.z, -vec.y);
+		case SOUTH:
+			return new Vec3d(vec.x, -vec.z, vec.y);
+		case WEST:
+			return new Vec3d(-vec.y, vec.x, vec.z);
+		case EAST:
+			return new Vec3d(vec.y, -vec.x, vec.z);
 		}
 		return null;
 	}
@@ -169,18 +169,18 @@ public class ModelCubeOverlay implements IBakedModel
 	{
 		switch (side)
 		{
-			case DOWN:
-				return new Vec3d(vec.x, -vec.y, -vec.z);
-			case UP:
-				return new Vec3d(vec.x, vec.y, vec.z);
-			case NORTH:
-				return new Vec3d(vec.x, -vec.z, vec.y);
-			case SOUTH:
-				return new Vec3d(vec.x, vec.z, -vec.y);
-			case WEST:
-				return new Vec3d(vec.y, -vec.x, vec.z);
-			case EAST:
-				return new Vec3d(-vec.y, vec.x, vec.z);
+		case DOWN:
+			return new Vec3d(vec.x, -vec.y, -vec.z);
+		case UP:
+			return new Vec3d(vec.x, vec.y, vec.z);
+		case NORTH:
+			return new Vec3d(vec.x, -vec.z, vec.y);
+		case SOUTH:
+			return new Vec3d(vec.x, vec.z, -vec.y);
+		case WEST:
+			return new Vec3d(vec.y, -vec.x, vec.z);
+		case EAST:
+			return new Vec3d(-vec.y, vec.x, vec.z);
 		}
 		return null;
 	}

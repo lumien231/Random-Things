@@ -66,7 +66,7 @@ public class GuiRedstoneRemoteUse extends GuiContainerBase
 			{
 				MessageRedstoneRemote message = new MessageRedstoneRemote(using, slotButton.id);
 				PacketHandler.INSTANCE.sendToServer(message);
-				
+
 				break;
 			}
 		}

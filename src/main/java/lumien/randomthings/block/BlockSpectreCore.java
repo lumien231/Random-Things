@@ -49,7 +49,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 		}
 	}
 
-	public static PropertyEnum<BlockSpectreCore.ORIENTATION> orientation = PropertyEnum.<BlockSpectreCore.ORIENTATION> create("orientation", BlockSpectreCore.ORIENTATION.class);
+	public static PropertyEnum<BlockSpectreCore.ORIENTATION> orientation = PropertyEnum.<BlockSpectreCore.ORIENTATION>create("orientation", BlockSpectreCore.ORIENTATION.class);
 
 	protected BlockSpectreCore()
 	{
@@ -61,11 +61,11 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 		this.setDefaultState(this.blockState.getBaseState().withProperty(orientation, ORIENTATION.NW));
 		this.setCreativeTab(null);
 	}
-	
+
 	@Override
-	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
-		
+
 	}
 
 	@Override

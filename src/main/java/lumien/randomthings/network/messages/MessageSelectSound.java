@@ -15,9 +15,9 @@ public class MessageSelectSound implements IRTMessage
 
 	public MessageSelectSound()
 	{
-		
+
 	}
-	
+
 	public MessageSelectSound(String selectedSound)
 	{
 		this.selectedSound = selectedSound;
@@ -40,16 +40,16 @@ public class MessageSelectSound implements IRTMessage
 	{
 		FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
 				EntityPlayerMP player = context.getServerHandler().player;
-				
+
 				if (selectedSound != null && player != null && player.openContainer instanceof ContainerSoundRecorder)
 				{
 					ContainerSoundRecorder csr = (ContainerSoundRecorder) player.openContainer;
-					
+
 					csr.outputSound(selectedSound);
 				}
 			}

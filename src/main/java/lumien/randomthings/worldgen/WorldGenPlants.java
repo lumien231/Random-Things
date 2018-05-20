@@ -65,9 +65,9 @@ public class WorldGenPlants extends WorldGenerator
 				{
 					Biome biome = world.getBiome(target);
 					IBlockState state = world.getBlockState(target);
-					
+
 					IBlockState placeState = ModBlocks.lotus.getDefaultState().withProperty(BlockLotus.AGE, random.nextInt(4));
-					
+
 					if ((state.getBlock().isAir(state, world, target) || state.getBlock().isReplaceable(world, target)) && BiomeDictionary.hasType(biome, Type.SNOWY) && ModBlocks.lotus.canBlockStay(world, target, placeState))
 					{
 						world.setBlockState(target, placeState, 2);

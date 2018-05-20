@@ -126,18 +126,18 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 
 				switch (pickupDelay)
 				{
-					case NONE:
-						pickupDelayInteger = 0;
-						break;
-					case TICKS_20:
-						pickupDelayInteger = 20;
-						break;
-					case TICKS_5:
-						pickupDelayInteger = 5;
-						break;
-					default:
-						pickupDelayInteger = 0;
-						break;
+				case NONE:
+					pickupDelayInteger = 0;
+					break;
+				case TICKS_20:
+					pickupDelayInteger = 20;
+					break;
+				case TICKS_5:
+					pickupDelayInteger = 5;
+					break;
+				default:
+					pickupDelayInteger = 0;
+					break;
 				}
 
 				entityItem.setPickupDelay(pickupDelayInteger);

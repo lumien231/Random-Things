@@ -7,6 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
 public interface IRTMessage extends IMessage
 {
 	public void onMessage(MessageContext context);
-	
+
 	public abstract Side getHandlingSide();
 }

@@ -52,7 +52,7 @@ public class BlockBlazingFire extends BlockBase
 	}
 
 	@Override
-	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		return;
 	}
@@ -75,8 +75,8 @@ public class BlockBlazingFire extends BlockBase
 	}
 
 	/**
-	 * Used to determine ambient occlusion and culling when rebuilding chunks
-	 * for render
+	 * Used to determine ambient occlusion and culling when rebuilding chunks for
+	 * render
 	 */
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
@@ -297,8 +297,8 @@ public class BlockBlazingFire extends BlockBase
 
 	/**
 	 * Returns if this block is collidable. Only used by fire, although stairs
-	 * return that of the block that the stair is made of (though nobody's going
-	 * to make fire stairs, right?)
+	 * return that of the block that the stair is made of (though nobody's going to
+	 * make fire stairs, right?)
 	 */
 	@Override
 	public boolean isCollidable()
@@ -322,10 +322,10 @@ public class BlockBlazingFire extends BlockBase
 	}
 
 	/**
-	 * Called when a neighboring block was changed and marks that this state
-	 * should perform any checks during a neighbor change. Cases may include
-	 * when redstone power is updated, cactus blocks popping off due to a
-	 * neighboring solid block, etc.
+	 * Called when a neighboring block was changed and marks that this state should
+	 * perform any checks during a neighbor change. Cases may include when redstone
+	 * power is updated, cactus blocks popping off due to a neighboring solid block,
+	 * etc.
 	 */
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos changedPos)
@@ -337,8 +337,8 @@ public class BlockBlazingFire extends BlockBase
 	}
 
 	/**
-	 * Called after the block is set in the Chunk data, but before the Tile
-	 * Entity is set
+	 * Called after the block is set in the Chunk data, but before the Tile Entity
+	 * is set
 	 */
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)

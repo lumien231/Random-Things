@@ -16,9 +16,9 @@ public class RecipeWorkbench extends ShapedOreRecipe
 
 	public RecipeWorkbench()
 	{
-		super(new ResourceLocation("randomthings","recipes"), new ItemStack(ModBlocks.customWorkbench), "www", "wxw", "www", 'w', "plankWood", 'x', Blocks.CRAFTING_TABLE);
-		
-		this.setRegistryName(new ResourceLocation("randomthings","customWorkbench"));
+		super(new ResourceLocation("randomthings", "recipes"), new ItemStack(ModBlocks.customWorkbench), "www", "wxw", "www", 'w', "plankWood", 'x', Blocks.CRAFTING_TABLE);
+
+		this.setRegistryName(new ResourceLocation("randomthings", "customWorkbench"));
 	}
 
 	@Override

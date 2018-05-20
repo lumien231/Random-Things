@@ -90,7 +90,7 @@ public class EntityUtil
 
 		return entityName;
 	}
-	
+
 	public static String getEntityName(Class entityClass)
 	{
 		String entityName = "NO_NAME";

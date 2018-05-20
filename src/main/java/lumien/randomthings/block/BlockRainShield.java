@@ -103,7 +103,7 @@ public class BlockRainShield extends BlockContainerBase
 		{
 			((TileEntityRainShield) te).neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 		}
-		
+
 		checkForDrop(worldIn, pos, state);
 	}
 

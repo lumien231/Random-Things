@@ -8,7 +8,7 @@ import net.minecraft.world.biome.Biome;
 public class AncientFurnaceConversion
 {
 	static HashMap<Biome, Biome> map = new HashMap<Biome, Biome>();
-	
+
 	static
 	{
 		map.put(Biomes.TAIGA, Biomes.FOREST);
@@ -25,7 +25,7 @@ public class AncientFurnaceConversion
 		map.put(Biomes.MUTATED_ICE_FLATS, Biomes.MUTATED_FOREST);
 		map.put(Biomes.MUTATED_TAIGA_COLD, Biomes.MUTATED_BIRCH_FOREST_HILLS);
 	}
-	
+
 	public static Biome getHeatingConversion(Biome b)
 	{
 		return map.get(b);

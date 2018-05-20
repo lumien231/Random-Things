@@ -47,7 +47,7 @@ public class ContainerInventoryTester extends ContainerTE<TileEntityInventoryTes
 			this.te.toggleInvert();
 		}
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{
@@ -69,15 +69,15 @@ public class ContainerInventoryTester extends ContainerTE<TileEntityInventoryTes
 				{
 					return super.slotClick(slotId, dragType, clickTypeIn, player);
 				}
-				
+
 				switch (dragType)
 				{
-					case 0:
-						is.setCount(Math.min(64, stackSize * 2));
-						return is;
-					case 1:
-						is.setCount((int) Math.floor(stackSize / 2));
-						return is;
+				case 0:
+					is.setCount(Math.min(64, stackSize * 2));
+					return is;
+				case 1:
+					is.setCount((int) Math.floor(stackSize / 2));
+					return is;
 				}
 			}
 		}

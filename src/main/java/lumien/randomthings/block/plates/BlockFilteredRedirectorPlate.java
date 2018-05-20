@@ -33,27 +33,26 @@ public class BlockFilteredRedirectorPlate extends BlockContainerBase
 
 	public static final PropertyDirection INPUT_FACING = PropertyDirection.create("inputfacing", EnumFacing.Plane.HORIZONTAL);
 
-
 	public BlockFilteredRedirectorPlate()
 	{
 		super("plate_filteredredirector", Material.GROUND);
-		
+
 		this.setHardness(0.3f);
 		this.setSoundType(SoundType.STONE);
 	}
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		checkForDrop(worldIn, pos, state);
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		return canPlaceOn(worldIn, pos.down());
 	}
-	
+
 	private boolean canPlaceOn(World worldIn, BlockPos pos)
 	{
 		return worldIn.isSideSolid(pos, EnumFacing.UP);
@@ -76,12 +75,12 @@ public class BlockFilteredRedirectorPlate extends BlockContainerBase
 			return false;
 		}
 	}
-	
-    @Override
+
+	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
-    {
-        return BlockFaceShape.UNDEFINED;
-    }
+	{
+		return BlockFaceShape.UNDEFINED;
+	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -146,7 +145,7 @@ public class BlockFilteredRedirectorPlate extends BlockContainerBase
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
 		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-		
+
 		Vec3d motionVec = new Vec3d(entityIn.motionX, entityIn.motionY, entityIn.motionZ);
 
 		EnumFacing roughMovingFacing = EnumFacing.getFacingFromVector((float) motionVec.x, (float) motionVec.y, (float) motionVec.z).getOpposite();

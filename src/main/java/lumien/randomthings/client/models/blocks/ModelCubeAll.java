@@ -28,16 +28,11 @@ public class ModelCubeAll implements IBakedModel
 	Map<EnumFacing, List<BakedQuad>> faceQuads;
 
 	Rotation rotation;
-	
+
 	static int[][][] uvArrays;
-	static 
+	static
 	{
-		uvArrays = new int[][][]{
-			{{0,0},{0,16},{16,16},{16,0}},
-			{{0,16},{16,16},{16,0},{0,0}},
-			{{16,16},{16,0},{0,0},{0,16}},
-			{{16,0},{0,0},{0,16},{16,16}}
-		};
+		uvArrays = new int[][][] { { { 0, 0 }, { 0, 16 }, { 16, 16 }, { 16, 0 } }, { { 0, 16 }, { 16, 16 }, { 16, 0 }, { 0, 0 } }, { { 16, 16 }, { 16, 0 }, { 0, 0 }, { 0, 16 } }, { { 16, 0 }, { 0, 0 }, { 0, 16 }, { 16, 16 } } };
 	}
 
 	public ModelCubeAll(TextureAtlasSprite texture, boolean isAmbientOcclusion, Rotation rotation)
@@ -45,7 +40,7 @@ public class ModelCubeAll implements IBakedModel
 		this.texture = texture;
 		this.isAmbientOcclusion = isAmbientOcclusion;
 		this.rotation = rotation;
-		
+
 		generalQuads = new ArrayList<>();
 		faceQuads = new HashMap<>();
 
@@ -81,7 +76,7 @@ public class ModelCubeAll implements IBakedModel
 	private BakedQuad createSidedBakedQuad(float x1, float x2, float z1, float z2, float y, TextureAtlasSprite texture, EnumFacing side)
 	{
 		int[][] uvs = uvArrays[rotation.ordinal()];
-		
+
 		Vec3d v1 = rotate(new Vec3d(x1 - .5, y - .5, z1 - .5), side).addVector(.5, 0.5, .5);
 		Vec3d v2 = rotate(new Vec3d(x1 - .5, y - .5, z2 - .5), side).addVector(.5, 0.5, .5);
 		Vec3d v3 = rotate(new Vec3d(x2 - .5, y - .5, z2 - .5), side).addVector(.5, 0.5, .5);
@@ -159,18 +154,18 @@ public class ModelCubeAll implements IBakedModel
 	{
 		switch (side)
 		{
-			case DOWN:
-				return new Vec3d(vec.x, -vec.y, -vec.z);
-			case UP:
-				return new Vec3d(vec.x, vec.y, vec.z);
-			case NORTH:
-				return new Vec3d(vec.x, vec.z, -vec.y);
-			case SOUTH:
-				return new Vec3d(vec.x, -vec.z, vec.y);
-			case WEST:
-				return new Vec3d(-vec.y, vec.x, vec.z);
-			case EAST:
-				return new Vec3d(vec.y, -vec.x, vec.z);
+		case DOWN:
+			return new Vec3d(vec.x, -vec.y, -vec.z);
+		case UP:
+			return new Vec3d(vec.x, vec.y, vec.z);
+		case NORTH:
+			return new Vec3d(vec.x, vec.z, -vec.y);
+		case SOUTH:
+			return new Vec3d(vec.x, -vec.z, vec.y);
+		case WEST:
+			return new Vec3d(-vec.y, vec.x, vec.z);
+		case EAST:
+			return new Vec3d(vec.y, -vec.x, vec.z);
 		}
 		return null;
 	}
@@ -179,18 +174,18 @@ public class ModelCubeAll implements IBakedModel
 	{
 		switch (side)
 		{
-			case DOWN:
-				return new Vec3d(vec.x, -vec.y, -vec.z);
-			case UP:
-				return new Vec3d(vec.x, vec.y, vec.z);
-			case NORTH:
-				return new Vec3d(vec.x, -vec.z, vec.y);
-			case SOUTH:
-				return new Vec3d(vec.x, vec.z, -vec.y);
-			case WEST:
-				return new Vec3d(vec.y, -vec.x, vec.z);
-			case EAST:
-				return new Vec3d(-vec.y, vec.x, vec.z);
+		case DOWN:
+			return new Vec3d(vec.x, -vec.y, -vec.z);
+		case UP:
+			return new Vec3d(vec.x, vec.y, vec.z);
+		case NORTH:
+			return new Vec3d(vec.x, -vec.z, vec.y);
+		case SOUTH:
+			return new Vec3d(vec.x, vec.z, -vec.y);
+		case WEST:
+			return new Vec3d(vec.y, -vec.x, vec.z);
+		case EAST:
+			return new Vec3d(-vec.y, vec.x, vec.z);
 		}
 		return null;
 	}

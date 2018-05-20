@@ -60,37 +60,37 @@ public class MessageEntityDetector implements IRTMessage
 
 					switch (buttonPressed)
 					{
-						case 0:
-							entityDetector.setRangeX(entityDetector.getRangeX() - 1);
-							break;
-						case 1:
-							entityDetector.setRangeX(entityDetector.getRangeX() + 1);
-							break;
+					case 0:
+						entityDetector.setRangeX(entityDetector.getRangeX() - 1);
+						break;
+					case 1:
+						entityDetector.setRangeX(entityDetector.getRangeX() + 1);
+						break;
 
-						case 2:
-							entityDetector.setRangeY(entityDetector.getRangeY() - 1);
-							break;
-						case 3:
-							entityDetector.setRangeY(entityDetector.getRangeY() + 1);
-							break;
+					case 2:
+						entityDetector.setRangeY(entityDetector.getRangeY() - 1);
+						break;
+					case 3:
+						entityDetector.setRangeY(entityDetector.getRangeY() + 1);
+						break;
 
-						case 4:
-							entityDetector.setRangeZ(entityDetector.getRangeZ() - 1);
-							break;
-						case 5:
-							entityDetector.setRangeZ(entityDetector.getRangeZ() + 1);
-							break;
+					case 4:
+						entityDetector.setRangeZ(entityDetector.getRangeZ() - 1);
+						break;
+					case 5:
+						entityDetector.setRangeZ(entityDetector.getRangeZ() + 1);
+						break;
 
-						case 6:
-							entityDetector.cycleFilter();
-							break;
+					case 6:
+						entityDetector.cycleFilter();
+						break;
 
-						case 7:
-							entityDetector.toggleInvert();
-							break;
-						case 8:
-							entityDetector.toggleStrongOutput();
-							break;
+					case 7:
+						entityDetector.toggleInvert();
+						break;
+					case 8:
+						entityDetector.toggleStrongOutput();
+						break;
 					}
 				}
 			}

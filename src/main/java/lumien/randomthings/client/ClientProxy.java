@@ -192,7 +192,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectedItem.class, new RenderProjectedItem(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTemporaryFlooFireplace.class, new RenderEntityNothing(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockSpecial.class, new RenderFallingBlockSpecial(Minecraft.getMinecraft().getRenderManager()));
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBiomeRadar.class, new RenderBiomeRadar());
@@ -267,7 +267,7 @@ public class ClientProxy extends CommonProxy
 			{
 				interfaces.addAll(TileEntityRedstoneInterface.interfaces);
 			}
-			
+
 			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
 			{
 				if (!redstoneInterface.isInvalid() && redstoneInterface.getWorld().isRemote)

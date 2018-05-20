@@ -10,7 +10,7 @@ public class ItemBlockPlatform extends ItemBlock
 	public ItemBlockPlatform(Block block)
 	{
 		super(block);
-		
+
 		this.setHasSubtypes(true);
 	}
 

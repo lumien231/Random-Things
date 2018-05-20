@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 public class SlotFiltered extends Slot
 {
 	Predicate<ItemStack> filterPredicate;
-	
-	public SlotFiltered(IInventory inventoryIn, int index, int xPosition, int yPosition,Predicate<ItemStack> filterPredicate)
+
+	public SlotFiltered(IInventory inventoryIn, int index, int xPosition, int yPosition, Predicate<ItemStack> filterPredicate)
 	{
 		super(inventoryIn, index, xPosition, yPosition);
 

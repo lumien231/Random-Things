@@ -76,7 +76,7 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 			}
 		}));
 
-		this.buttonList.add(new GuiSlider(1, this.guiLeft + 5, this.guiTop +60, 120, 20, "Scale: ", "", 1, 20, this.te.getScale(), false, true, new GuiSlider.ISlider()
+		this.buttonList.add(new GuiSlider(1, this.guiLeft + 5, this.guiTop + 60, 120, 20, "Scale: ", "", 1, 20, this.te.getScale(), false, true, new GuiSlider.ISlider()
 		{
 			@Override
 			public void onChangeSliderValue(GuiSlider slider)
@@ -96,7 +96,7 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 			}
 		}));
 
-		this.buttonList.add(new GuiSlider(2, this.guiLeft + 5, this.guiTop +120, 120, 20, "Rotation Speed: ", "", 0, 40, this.te.getRotationSpeed(), false, true, new GuiSlider.ISlider()
+		this.buttonList.add(new GuiSlider(2, this.guiLeft + 5, this.guiTop + 120, 120, 20, "Rotation Speed: ", "", 0, 40, this.te.getRotationSpeed(), false, true, new GuiSlider.ISlider()
 		{
 			@Override
 			public void onChangeSliderValue(GuiSlider slider)
@@ -116,13 +116,13 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 			}
 		}));
 
-		toggleAmbientLight = new GuiCustomButton(this, 3, te.ambientLight(), this.guiLeft + xSize - 25, this.guiTop +60, 20, 20, "", buttons, 0, 0);
-		toggleRandomizer = new GuiCustomButton(this, 4, te.randomize(), this.guiLeft + xSize - 25, this.guiTop +85, 20, 20, "", buttons, 42, 0);
+		toggleAmbientLight = new GuiCustomButton(this, 3, te.ambientLight(), this.guiLeft + xSize - 25, this.guiTop + 60, 20, 20, "", buttons, 0, 0);
+		toggleRandomizer = new GuiCustomButton(this, 4, te.randomize(), this.guiLeft + xSize - 25, this.guiTop + 85, 20, 20, "", buttons, 42, 0);
 
 		this.buttonList.add(toggleAmbientLight);
 		this.buttonList.add(toggleRandomizer);
 
-		availableModels = new GuiStringList(this, Minecraft.getMinecraft(), 120, 50, this.guiLeft + 5, this.guiTop +150, width, height, Lists.<String>newArrayList());
+		availableModels = new GuiStringList(this, Minecraft.getMinecraft(), 120, 50, this.guiLeft + 5, this.guiTop + 150, width, height, Lists.<String>newArrayList());
 	}
 
 	@Override

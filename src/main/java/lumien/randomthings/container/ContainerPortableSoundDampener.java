@@ -3,17 +3,14 @@ package lumien.randomthings.container;
 import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.container.slots.SlotDisplay;
 import lumien.randomthings.container.slots.SlotFiltered;
-import lumien.randomthings.container.slots.SlotOutputOnly;
 import lumien.randomthings.item.ItemPortableSoundDampener;
 import lumien.randomthings.item.ItemSoundPattern;
 import lumien.randomthings.item.ModItems;
-import lumien.randomthings.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class ContainerPortableSoundDampener extends Container

@@ -46,12 +46,12 @@ public class ItemBean extends ItemBase
 	{
 		switch (stack.getItemDamage())
 		{
-			case 0:
-				return "item.bean";
-			case 1:
-				return "item.lesserMagicBean";
-			case 2:
-				return "item.magicBean";
+		case 0:
+			return "item.bean";
+		case 1:
+			return "item.lesserMagicBean";
+		case 2:
+			return "item.magicBean";
 		}
 		return "item.bean.name";
 	}

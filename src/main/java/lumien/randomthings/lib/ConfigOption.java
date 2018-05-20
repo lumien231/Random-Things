@@ -7,8 +7,8 @@ import java.lang.annotation.Target;
 public @interface ConfigOption
 {
 	String name();
-	
+
 	String category();
-	
+
 	String comment() default "";
 }

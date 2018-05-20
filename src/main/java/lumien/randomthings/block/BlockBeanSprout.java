@@ -57,13 +57,12 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 			if (!worldIn.isRemote)
 			{
 				worldIn.setBlockState(pos, state.withProperty(AGE, 0));
-				
+
 				Random rand = new Random();
 				int beans = rand.nextInt(2) + 1;
-				
+
 				ItemStack stack = new ItemStack(ModItems.beans, beans);
-				
-				
+
 				if (!playerIn.addItemStackToInventory(stack))
 				{
 					WorldUtil.spawnItemStack(worldIn, pos, stack);

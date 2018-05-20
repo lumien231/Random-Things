@@ -174,12 +174,12 @@ public class WorldUtil
 
 	public static void spawnItemStack(World worldIn, double x, double y, double z, ItemStack stack)
 	{
-        float f = 0.5F;
-        double d0 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
-        double d1 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
-        double d2 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
-        EntityItem entityitem = new EntityItem(worldIn, x + d0, y+ d1, z + d2, stack);
-        entityitem.setDefaultPickupDelay();
-        worldIn.spawnEntity(entityitem);
+		float f = 0.5F;
+		double d0 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
+		double d1 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
+		double d2 = worldIn.rand.nextFloat() * 0.5F + 0.25D;
+		EntityItem entityitem = new EntityItem(worldIn, x + d0, y + d1, z + d2, stack);
+		entityitem.setDefaultPickupDelay();
+		worldIn.spawnEntity(entityitem);
 	}
 }

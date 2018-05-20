@@ -62,7 +62,7 @@ public class RenderReviveCircle extends Render
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder renderer = tessellator.getBuffer();
 		renderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-		
+
 		renderer.pos(0.0F - f7, 0.0F - f8, 0.0D).tex(f2, f5).endVertex();
 		renderer.pos(f6 - f7, 0.0F - f8, 0.0D).tex(f3, f5).endVertex();
 		renderer.pos(f6 - f7, 1.0F - f8, 0.0D).tex(f3, f4).endVertex();
@@ -72,7 +72,7 @@ public class RenderReviveCircle extends Render
 		renderer.pos(0.0F - f7, 0.0F - f8, 0.0D).tex(f2, f5).endVertex();
 		renderer.pos(0.0F - f7, 1.0F - f8, 0.0D).tex(f2, f4).endVertex();
 		renderer.pos(f6 - f7, 1.0F - f8, 0.0D).tex(f3, f4).endVertex();
-		
+
 		tessellator.draw();
 
 		GlStateManager.enableLighting();

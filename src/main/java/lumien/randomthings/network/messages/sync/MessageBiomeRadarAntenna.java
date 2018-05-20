@@ -21,7 +21,7 @@ public class MessageBiomeRadarAntenna implements IRTMessage
 		antennaBiomes = new String[4];
 	}
 
-	public MessageBiomeRadarAntenna(String[] antennaBiomes,BlockPos pos)
+	public MessageBiomeRadarAntenna(String[] antennaBiomes, BlockPos pos)
 	{
 		this.pos = pos;
 		this.antennaBiomes = antennaBiomes;
@@ -31,7 +31,7 @@ public class MessageBiomeRadarAntenna implements IRTMessage
 	public void fromBytes(ByteBuf buf)
 	{
 		this.pos = MessageUtil.readBlockPos(buf);
-		
+
 		int amount = buf.readInt();
 
 		for (int i = 0; i < amount; i++)
@@ -44,7 +44,7 @@ public class MessageBiomeRadarAntenna implements IRTMessage
 	public void toBytes(ByteBuf buf)
 	{
 		MessageUtil.writeBlockPos(pos, buf);
-		
+
 		int amount = 0;
 
 		for (int i = 0; i < antennaBiomes.length; i++)
@@ -70,15 +70,15 @@ public class MessageBiomeRadarAntenna implements IRTMessage
 	{
 		Minecraft.getMinecraft().addScheduledTask(new Runnable()
 		{
-			
+
 			@Override
 			public void run()
 			{
 				TileEntity te = Minecraft.getMinecraft().world.getTileEntity(pos);
-				
+
 				if (te instanceof TileEntityBiomeRadar)
 				{
-					((TileEntityBiomeRadar)te).setAntennaBiomes(antennaBiomes);
+					((TileEntityBiomeRadar) te).setAntennaBiomes(antennaBiomes);
 				}
 			}
 		});

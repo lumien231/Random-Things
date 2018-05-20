@@ -62,8 +62,7 @@ public class ItemEmeraldCompass extends ItemBase
 					if (hasTarget)
 					{
 						NBTTagCompound compound = stack.getTagCompound();
-						double d1 = flag ? (double) entity.rotationYaw
-								: this.getFrameRotation((EntityItemFrame) entity);
+						double d1 = flag ? (double) entity.rotationYaw : this.getFrameRotation((EntityItemFrame) entity);
 						d1 = d1 % 360.0D;
 						double d2 = this.getAngleToPos(worldIn, entity, new BlockPos(compound.getInteger("targetX"), 0, compound.getInteger("targetZ")));
 						d0 = Math.PI - ((d1 - 90.0D) * 0.01745329238474369D - d2);
@@ -113,7 +112,7 @@ public class ItemEmeraldCompass extends ItemBase
 			}
 		});
 	}
-	
+
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
 	{

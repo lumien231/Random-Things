@@ -15,18 +15,18 @@ public class MessageNotification implements IRTMessage
 	String title;
 	String body;
 	ItemStack icon;
-	
+
 	public MessageNotification(String title, String body, ItemStack icon)
 	{
 		this.title = title;
 		this.body = body;
 		this.icon = icon;
 	}
-	
+
 	public MessageNotification()
 	{
 	}
-	
+
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{

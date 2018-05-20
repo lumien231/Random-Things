@@ -56,7 +56,7 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean isNormalCube(IBlockState state)
 	{
@@ -74,7 +74,7 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 		{
 			return false;
 		}
-		
+
 		if (state != iblockstate)
 		{
 			return true;

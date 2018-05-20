@@ -1,35 +1,16 @@
 package lumien.randomthings.item;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.client.particles.EntityColoredSmokeFX;
-import lumien.randomthings.config.Numbers;
 import lumien.randomthings.handler.EscapeRopeHandler;
-import lumien.randomthings.handler.ModDimensions;
-import lumien.randomthings.handler.spectre.SpectreHandler;
-import lumien.randomthings.handler.spectre.SpectreWorldProvider;
-import lumien.randomthings.util.EntityUtil;
-import lumien.randomthings.util.PlayerUtil;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

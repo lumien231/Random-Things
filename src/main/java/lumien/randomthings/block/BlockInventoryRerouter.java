@@ -76,10 +76,9 @@ public class BlockInventoryRerouter extends BlockContainerBase
 		super.onBlockAdded(worldIn, pos, state);
 		this.setDefaultFacing(worldIn, pos, state);
 	}
-	
-	
+
 	HashSet<BlockPos> circleSet = new HashSet<>();
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
@@ -87,17 +86,17 @@ public class BlockInventoryRerouter extends BlockContainerBase
 		{
 			return;
 		}
-		
+
 		EnumFacing facing = state.getValue(FACING);
 		BlockPos offset = pos.offset(facing);
-		
+
 		if (offset.equals(changedPos))
 		{
 			circleSet.add(pos);
 			worldIn.notifyNeighborsOfStateChange(pos, this, false);
 			circleSet.remove(pos);
 		}
-		
+
 		super.neighborChanged(state, worldIn, pos, neighborBlock, changedPos);
 	}
 

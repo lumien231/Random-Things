@@ -23,7 +23,7 @@ public class ItemGoldenCompass extends ItemBase
 		super("goldenCompass");
 
 		this.setMaxStackSize(1);
-		
+
 		this.addPropertyOverride(new ResourceLocation("angle"), new IItemPropertyGetter()
 		{
 			@SideOnly(Side.CLIENT)
@@ -54,7 +54,7 @@ public class ItemGoldenCompass extends ItemBase
 					double d0;
 
 					boolean hasTarget = stack.getTagCompound() != null && stack.getTagCompound().hasKey("targetX");
-					
+
 					if (hasTarget)
 					{
 						NBTTagCompound compound = stack.getTagCompound();

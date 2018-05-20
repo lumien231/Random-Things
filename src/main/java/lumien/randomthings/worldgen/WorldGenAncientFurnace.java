@@ -3,32 +3,17 @@ package lumien.randomthings.worldgen;
 import java.util.Random;
 
 import lumien.randomthings.block.BlockAncientBrick;
-import lumien.randomthings.block.BlockAncientFurnace;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Worldgen;
-import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AncientFurnaceConversion;
-import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import lumien.randomthings.util.BlockPattern;
-import lumien.randomthings.util.InventoryUtil;
-import lumien.randomthings.util.WorldUtil;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenAncientFurnace implements IWorldGenerator

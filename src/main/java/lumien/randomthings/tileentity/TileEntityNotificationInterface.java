@@ -20,21 +20,21 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 	{
 		this.setItemHandler(1);
 	}
-	
+
 	public void setData(String title, String description)
 	{
 		this.title = title;
 		this.description = description;
-		
+
 		this.markDirty();
 		this.syncTE();
 	}
-	
+
 	public String getTitle()
 	{
 		return title;
 	}
-	
+
 	public String getDescription()
 	{
 		return description;
@@ -49,7 +49,7 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 			if (player != null)
 			{
 				MessageNotification message = new MessageNotification(title, description, getItemHandler().getStackInSlot(0));
-				
+
 				PacketHandler.INSTANCE.sendTo(message, player);
 			}
 		}
@@ -69,7 +69,7 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 	{
 		compound.setString("title", title);
 		compound.setString("description", description);
-		
+
 		if (this.owner != null)
 		{
 			compound.setString("owner", owner.toString());
@@ -81,7 +81,7 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 	{
 		this.title = compound.getString("title");
 		this.description = compound.getString("description");
-		
+
 		if (compound.hasKey("owner"))
 		{
 			this.owner = UUID.fromString(compound.getString("owner"));

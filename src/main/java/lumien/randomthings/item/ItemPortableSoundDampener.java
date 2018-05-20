@@ -20,15 +20,15 @@ public class ItemPortableSoundDampener extends ItemBase implements IBauble
 	public ItemPortableSoundDampener()
 	{
 		super("portableSoundDampener");
-		
+
 		this.setMaxStackSize(1);
 	}
-	
+
 	public static InventoryItem getInventory(ItemStack dampener)
 	{
 		return new InventoryItem("inventory", 9, dampener);
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
@@ -36,7 +36,7 @@ public class ItemPortableSoundDampener extends ItemBase implements IBauble
 		if (!worldIn.isRemote && handIn == EnumHand.MAIN_HAND)
 		{
 			playerIn.openGui(RandomThings.instance, GuiIds.PORTABLE_SOUND_DAMPENER, worldIn, 0, 0, 0);
-			
+
 			return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 		}
 

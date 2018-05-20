@@ -40,13 +40,13 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		this.setHardness(0.3F);
 	}
-	
+
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		TileEntityAdvancedItemCollector tileentity = (TileEntityAdvancedItemCollector) worldIn.getTileEntity(pos);
 		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity.getInventory());
-		
+
 		super.breakBlock(worldIn, pos, state);
 	}
 
@@ -166,18 +166,18 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 		EnumFacing enumfacing = state.getValue(FACING);
 		switch (enumfacing)
 		{
-			case EAST:
-				return EAST_AABB;
-			case WEST:
-				return WEST_AABB;
-			case SOUTH:
-				return SOUTH_AABB;
-			case NORTH:
-				return NORTH_AABB;
-			case UP:
-				return UP_AABB;
-			case DOWN:
-				return DOWN_AABB;
+		case EAST:
+			return EAST_AABB;
+		case WEST:
+			return WEST_AABB;
+		case SOUTH:
+			return SOUTH_AABB;
+		case NORTH:
+			return NORTH_AABB;
+		case UP:
+			return UP_AABB;
+		case DOWN:
+			return DOWN_AABB;
 		}
 
 		return UP_AABB;

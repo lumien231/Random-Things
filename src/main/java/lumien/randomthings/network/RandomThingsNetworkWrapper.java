@@ -45,9 +45,9 @@ public class RandomThingsNetworkWrapper
 
 	/**
 	 * Register a message and it's associated handler. The message will have the
-	 * supplied discriminator byte. The message handler will be registered on
-	 * the supplied side (this is the side where you want the message to be
-	 * processed and acted upon).
+	 * supplied discriminator byte. The message handler will be registered on the
+	 * supplied side (this is the side where you want the message to be processed
+	 * and acted upon).
 	 * 
 	 * @param messageHandler
 	 *            the message handler instance
@@ -95,8 +95,8 @@ public class RandomThingsNetworkWrapper
 	}
 
 	/**
-	 * Send this message to everyone. The {@link IMessageHandler} for this
-	 * message type should be on the CLIENT side.
+	 * Send this message to everyone. The {@link IMessageHandler} for this message
+	 * type should be on the CLIENT side.
 	 * 
 	 * @param message
 	 *            The message to send
@@ -108,8 +108,8 @@ public class RandomThingsNetworkWrapper
 	}
 
 	/**
-	 * Send this message to the specified player. The {@link IMessageHandler}
-	 * for this message type should be on the CLIENT side.
+	 * Send this message to the specified player. The {@link IMessageHandler} for
+	 * this message type should be on the CLIENT side.
 	 * 
 	 * @param message
 	 *            The message to send
@@ -125,8 +125,7 @@ public class RandomThingsNetworkWrapper
 
 	/**
 	 * Send this message to everyone within a certain range of a point. The
-	 * {@link IMessageHandler} for this message type should be on the CLIENT
-	 * side.
+	 * {@link IMessageHandler} for this message type should be on the CLIENT side.
 	 * 
 	 * @param message
 	 *            The message to send
@@ -142,8 +141,7 @@ public class RandomThingsNetworkWrapper
 
 	/**
 	 * Send this message to everyone within the supplied dimension. The
-	 * {@link IMessageHandler} for this message type should be on the CLIENT
-	 * side.
+	 * {@link IMessageHandler} for this message type should be on the CLIENT side.
 	 * 
 	 * @param message
 	 *            The message to send
@@ -158,8 +156,8 @@ public class RandomThingsNetworkWrapper
 	}
 
 	/**
-	 * Send this message to the server. The {@link IMessageHandler} for this
-	 * message type should be on the SERVER side.
+	 * Send this message to the server. The {@link IMessageHandler} for this message
+	 * type should be on the SERVER side.
 	 * 
 	 * @param message
 	 *            The message to send

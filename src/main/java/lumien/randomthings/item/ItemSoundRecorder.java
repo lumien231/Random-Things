@@ -1,11 +1,8 @@
 package lumien.randomthings.item;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,16 +11,14 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 
 public class ItemSoundRecorder extends ItemBase
 {
 	public ItemSoundRecorder()
 	{
 		super("soundRecorder");
-		
+
 		this.setMaxStackSize(1);
 	}
 
@@ -41,7 +36,7 @@ public class ItemSoundRecorder extends ItemBase
 				}
 
 				itemStackIn.getTagCompound().setBoolean("recording", !itemStackIn.getTagCompound().getBoolean("recording"));
-				
+
 				if (itemStackIn.getTagCompound().getBoolean("recording"))
 				{
 					itemStackIn.getTagCompound().removeTag("recordList");

@@ -31,7 +31,7 @@ public class AnvilRecipe
 	{
 		return inputPair.getLeft();
 	}
-	
+
 	public int getCost()
 	{
 		return cost;

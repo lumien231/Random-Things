@@ -42,13 +42,13 @@ public class RenderUtils
 		if (worldIn != null)
 		{
 			int i = 0;
-	        int j = 0;
-	        int k = 0;
+			int j = 0;
+			int k = 0;
 
-	        for (final BlockPos.MutableBlockPos blockpos$mutableblockpos : BlockPos.getAllInBoxMutable(pos.add(-1, 0, -1), pos.add(1, 0, 1)))
-	        {
-	        	final Biome biomeA = worldIn.getBiome(blockpos$mutableblockpos);
-	        	int l = Color.WHITE.getRGB();
+			for (final BlockPos.MutableBlockPos blockpos$mutableblockpos : BlockPos.getAllInBoxMutable(pos.add(-1, 0, -1), pos.add(1, 0, 1)))
+			{
+				final Biome biomeA = worldIn.getBiome(blockpos$mutableblockpos);
+				int l = Color.WHITE.getRGB();
 				try
 				{
 					l = biomeColorCache.get(biomeA, new Callable<Integer>()
@@ -68,135 +68,6 @@ public class RenderUtils
 							{
 								switch (t.getName())
 								{
-									case "BEACH":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.35f)), Math.min(255, (int) (colorResult.getGreen() * 1.3f)), Math.min(255, (int) (colorResult.getBlue() * 1.1f)));
-										break;
-									case "COLD":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.8f)), Math.min(255, (colorResult.getGreen())), Math.min(255, (int) (colorResult.getBlue() * 1.2f)));
-										break;
-									case "CONIFEROUS":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.1f)), Math.min(255, (colorResult.getBlue())));
-										break;
-									case "DEAD":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.8f)), Math.min(255, (int) (colorResult.getGreen() * 0.8f)), Math.min(255, (int) (colorResult.getBlue() * 0.8f)));
-										break;
-									case "DENSE":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1f)), Math.min(255, (int) (colorResult.getGreen() * 1.5f)), Math.min(255, (colorResult.getBlue())));
-										break;
-									case "DRY":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.1f)), Math.min(255, (int) (colorResult.getBlue() * 0.8f)));
-										break;
-									case "END":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.4f)), Math.min(255, (int) (colorResult.getGreen() * 0.1f)), Math.min(255, (int) (colorResult.getBlue() * 0.4f)));
-										break;
-									case "FOREST":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.8f)), Math.min(255, (int) (colorResult.getGreen() * 0.9f)), Math.min(255, (int) (colorResult.getBlue() * 0.8f)));
-										break;
-									case "HILLS":
-										colorResult = new Color(Math.min(255, colorResult.getRed() + 40), Math.min(255, colorResult.getGreen() + 40), Math.min(255, colorResult.getBlue() + 40));
-										break;
-									case "HOT":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.1f)), Math.min(255, (int) (colorResult.getGreen() * 1f)), Math.min(255, (int) (colorResult.getBlue() * 0.8f)));
-										break;
-									case "JUNGLE":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.1f)), Math.min(255, (int) (colorResult.getGreen() * 1.5f)), Math.min(255, (int) (colorResult.getBlue() * 1.2f)));
-										break;
-									case "LUSH":
-										colorResult = new Color(Math.min(255, (colorResult.getRed())), Math.min(255, (int) (colorResult.getGreen() * 1.4f)), Math.min(255, (colorResult.getBlue())));
-										break;
-									case "MAGICAL":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.5f)), Math.min(255, (int) (colorResult.getGreen() * 1.3f)), Math.min(255, (int) (colorResult.getBlue() * 1.5f)));
-										break;
-									case "MESA":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.9f)), Math.min(255, (int) (colorResult.getGreen() * 0.8f)), Math.min(255, (int) (colorResult.getBlue() * 0.5f)));
-										break;
-									case "MOUNTAIN":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.2f)), Math.min(255, (int) (colorResult.getBlue() * 1.2f)));
-										break;
-									case "MUSHROOM":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.3f)), Math.min(255, (int) (colorResult.getGreen() * 0.5f)), Math.min(255, (int) (colorResult.getBlue() * 1.3f)));
-										break;
-									case "NETHER":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.8f)), Math.min(255, (int) (colorResult.getGreen() * 0.5f)), Math.min(255, (int) (colorResult.getBlue() * 0.3f)));
-										break;
-									case "OCEAN":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.4f)), Math.min(255, (int) (colorResult.getGreen() * 0.4f)), Math.min(255, (colorResult.getBlue())));
-										break;
-									case "PLAINS":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.9f)), Math.min(255, (int) (colorResult.getGreen() * 0.9f)), Math.min(255, (int) (colorResult.getBlue() * 0.9f)));
-										break;
-									case "RIVER":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.6f)), Math.min(255, (int) (colorResult.getGreen() * 0.6f)), Math.min(255, (colorResult.getBlue())));
-										break;
-									case "SANDY":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.8)), Math.min(255, (int) (colorResult.getGreen() * 0.8)), Math.min(255, (int) (colorResult.getBlue() * 0.7f)));
-										break;
-									case "SAVANNA":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.1f)), Math.min(255, (int) (colorResult.getBlue() * 0.9f)));
-										break;
-									case "SNOWY":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.4f)), Math.min(255, (int) (colorResult.getGreen() * 1.4f)), Math.min(255, (int) (colorResult.getBlue() * 1.5f)));
-										break;
-									case "SPARSE":
-										colorResult = new Color(Math.min(255, (colorResult.getRed())), Math.min(255, (int) (colorResult.getGreen() * 0.8f)), Math.min(255, (colorResult.getBlue())));
-										break;
-									case "SPOOKY":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.7f)), Math.min(255, (int) (colorResult.getGreen() * 0.7f)), Math.min(255, (int) (colorResult.getBlue() * 0.7f)));
-										break;
-									case "SWAMP":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.4f)), Math.min(255, (int) (colorResult.getGreen() * 0.6f)), Math.min(255, (int) (colorResult.getBlue() * 0.4f)));
-										break;
-									case "WASTELAND":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.2f)), Math.min(255, (int) (colorResult.getBlue() * 1.2f)));
-										break;
-									case "WATER":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.5f)), Math.min(255, (int) (colorResult.getGreen() * 0.5f)), Math.min(255, (colorResult.getBlue())));
-										break;
-									case "WET":
-										colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.6f)), Math.min(255, (colorResult.getGreen())), Math.min(255, (colorResult.getBlue())));
-										break;
-									default:
-										break;
-								}
-							}
-
-							return colorResult.getRGB();
-						}
-
-					});
-				}
-				catch (ExecutionException e)
-				{
-					e.printStackTrace();
-				}
-	            i += (l & 16711680) >> 16;
-	            j += (l & 65280) >> 8;
-	            k += l & 255;
-	        }
-
-	        return (i / 9 & 255) << 16 | (j / 9 & 255) << 8 | k / 9 & 255;
-		}
-		else
-		{
-			try
-			{
-				return biomeColorCache.get(biome, new Callable<Integer>()
-				{
-					@Override
-					public Integer call() throws Exception
-					{
-						Set<Type> types = BiomeDictionary.getTypes(biome);
-
-						Color foliageColor = new Color(biome.getFoliageColorAtPos(pos));
-						Color waterColorMultiplier = new Color(biome.getWaterColorMultiplier());
-						Color grassColor = new Color(biome.getGrassColorAtPos(pos));
-
-						Color colorResult = blend(blend(foliageColor, waterColorMultiplier, 0.5f), grassColor, 0.5f);
-
-						for (Type t : types)
-						{
-							switch (t.getName())
-							{
 								case "BEACH":
 									colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.35f)), Math.min(255, (int) (colorResult.getGreen() * 1.3f)), Math.min(255, (int) (colorResult.getBlue() * 1.1f)));
 									break;
@@ -286,6 +157,135 @@ public class RenderUtils
 									break;
 								default:
 									break;
+								}
+							}
+
+							return colorResult.getRGB();
+						}
+
+					});
+				}
+				catch (ExecutionException e)
+				{
+					e.printStackTrace();
+				}
+				i += (l & 16711680) >> 16;
+				j += (l & 65280) >> 8;
+				k += l & 255;
+			}
+
+			return (i / 9 & 255) << 16 | (j / 9 & 255) << 8 | k / 9 & 255;
+		}
+		else
+		{
+			try
+			{
+				return biomeColorCache.get(biome, new Callable<Integer>()
+				{
+					@Override
+					public Integer call() throws Exception
+					{
+						Set<Type> types = BiomeDictionary.getTypes(biome);
+
+						Color foliageColor = new Color(biome.getFoliageColorAtPos(pos));
+						Color waterColorMultiplier = new Color(biome.getWaterColorMultiplier());
+						Color grassColor = new Color(biome.getGrassColorAtPos(pos));
+
+						Color colorResult = blend(blend(foliageColor, waterColorMultiplier, 0.5f), grassColor, 0.5f);
+
+						for (Type t : types)
+						{
+							switch (t.getName())
+							{
+							case "BEACH":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.35f)), Math.min(255, (int) (colorResult.getGreen() * 1.3f)), Math.min(255, (int) (colorResult.getBlue() * 1.1f)));
+								break;
+							case "COLD":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.8f)), Math.min(255, (colorResult.getGreen())), Math.min(255, (int) (colorResult.getBlue() * 1.2f)));
+								break;
+							case "CONIFEROUS":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.1f)), Math.min(255, (colorResult.getBlue())));
+								break;
+							case "DEAD":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.8f)), Math.min(255, (int) (colorResult.getGreen() * 0.8f)), Math.min(255, (int) (colorResult.getBlue() * 0.8f)));
+								break;
+							case "DENSE":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1f)), Math.min(255, (int) (colorResult.getGreen() * 1.5f)), Math.min(255, (colorResult.getBlue())));
+								break;
+							case "DRY":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.1f)), Math.min(255, (int) (colorResult.getBlue() * 0.8f)));
+								break;
+							case "END":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.4f)), Math.min(255, (int) (colorResult.getGreen() * 0.1f)), Math.min(255, (int) (colorResult.getBlue() * 0.4f)));
+								break;
+							case "FOREST":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.8f)), Math.min(255, (int) (colorResult.getGreen() * 0.9f)), Math.min(255, (int) (colorResult.getBlue() * 0.8f)));
+								break;
+							case "HILLS":
+								colorResult = new Color(Math.min(255, colorResult.getRed() + 40), Math.min(255, colorResult.getGreen() + 40), Math.min(255, colorResult.getBlue() + 40));
+								break;
+							case "HOT":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.1f)), Math.min(255, (int) (colorResult.getGreen() * 1f)), Math.min(255, (int) (colorResult.getBlue() * 0.8f)));
+								break;
+							case "JUNGLE":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.1f)), Math.min(255, (int) (colorResult.getGreen() * 1.5f)), Math.min(255, (int) (colorResult.getBlue() * 1.2f)));
+								break;
+							case "LUSH":
+								colorResult = new Color(Math.min(255, (colorResult.getRed())), Math.min(255, (int) (colorResult.getGreen() * 1.4f)), Math.min(255, (colorResult.getBlue())));
+								break;
+							case "MAGICAL":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.5f)), Math.min(255, (int) (colorResult.getGreen() * 1.3f)), Math.min(255, (int) (colorResult.getBlue() * 1.5f)));
+								break;
+							case "MESA":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.9f)), Math.min(255, (int) (colorResult.getGreen() * 0.8f)), Math.min(255, (int) (colorResult.getBlue() * 0.5f)));
+								break;
+							case "MOUNTAIN":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.2f)), Math.min(255, (int) (colorResult.getBlue() * 1.2f)));
+								break;
+							case "MUSHROOM":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.3f)), Math.min(255, (int) (colorResult.getGreen() * 0.5f)), Math.min(255, (int) (colorResult.getBlue() * 1.3f)));
+								break;
+							case "NETHER":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.8f)), Math.min(255, (int) (colorResult.getGreen() * 0.5f)), Math.min(255, (int) (colorResult.getBlue() * 0.3f)));
+								break;
+							case "OCEAN":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.4f)), Math.min(255, (int) (colorResult.getGreen() * 0.4f)), Math.min(255, (colorResult.getBlue())));
+								break;
+							case "PLAINS":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.9f)), Math.min(255, (int) (colorResult.getGreen() * 0.9f)), Math.min(255, (int) (colorResult.getBlue() * 0.9f)));
+								break;
+							case "RIVER":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.6f)), Math.min(255, (int) (colorResult.getGreen() * 0.6f)), Math.min(255, (colorResult.getBlue())));
+								break;
+							case "SANDY":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.8)), Math.min(255, (int) (colorResult.getGreen() * 0.8)), Math.min(255, (int) (colorResult.getBlue() * 0.7f)));
+								break;
+							case "SAVANNA":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.1f)), Math.min(255, (int) (colorResult.getBlue() * 0.9f)));
+								break;
+							case "SNOWY":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.4f)), Math.min(255, (int) (colorResult.getGreen() * 1.4f)), Math.min(255, (int) (colorResult.getBlue() * 1.5f)));
+								break;
+							case "SPARSE":
+								colorResult = new Color(Math.min(255, (colorResult.getRed())), Math.min(255, (int) (colorResult.getGreen() * 0.8f)), Math.min(255, (colorResult.getBlue())));
+								break;
+							case "SPOOKY":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.7f)), Math.min(255, (int) (colorResult.getGreen() * 0.7f)), Math.min(255, (int) (colorResult.getBlue() * 0.7f)));
+								break;
+							case "SWAMP":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.4f)), Math.min(255, (int) (colorResult.getGreen() * 0.6f)), Math.min(255, (int) (colorResult.getBlue() * 0.4f)));
+								break;
+							case "WASTELAND":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 1.2f)), Math.min(255, (int) (colorResult.getGreen() * 1.2f)), Math.min(255, (int) (colorResult.getBlue() * 1.2f)));
+								break;
+							case "WATER":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.5f)), Math.min(255, (int) (colorResult.getGreen() * 0.5f)), Math.min(255, (colorResult.getBlue())));
+								break;
+							case "WET":
+								colorResult = new Color(Math.min(255, (int) (colorResult.getRed() * 0.6f)), Math.min(255, (colorResult.getGreen())), Math.min(255, (colorResult.getBlue())));
+								break;
+							default:
+								break;
 							}
 						}
 

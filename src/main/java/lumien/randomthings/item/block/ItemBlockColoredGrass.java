@@ -16,7 +16,7 @@ public class ItemBlockColoredGrass extends ItemBlock implements IRTItemColor
 	public ItemBlockColoredGrass(Block block)
 	{
 		super(block);
-		
+
 		this.setHasSubtypes(true);
 		RandomThings.proxy.scheduleColor(this);
 	}

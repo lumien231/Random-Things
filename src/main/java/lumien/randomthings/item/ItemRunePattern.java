@@ -81,7 +81,7 @@ public class ItemRunePattern extends ItemBase
 			tooltip.add(I18n.format("tooltip.general.empty"));
 		}
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
@@ -89,7 +89,7 @@ public class ItemRunePattern extends ItemBase
 		{
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, new ItemStack(Items.PAPER));
 		}
-		
+
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 

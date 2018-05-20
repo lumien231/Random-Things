@@ -28,7 +28,7 @@ public class ThermalExpansionComp
 				Object treeType = typeEnum.getEnumConstants()[4];
 				Method addMethod = insolatorManager.getMethod("addDefaultTreeRecipe", ItemStack.class, ItemStack.class, ItemStack.class, int.class, boolean.class, typeEnum);
 
-				addMethod.invoke(null, new ItemStack(ModBlocks.spectreSapling), new ItemStack(ModBlocks.spectreLog,4), new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.ECTO_PLASM.id), 10, false, treeType);
+				addMethod.invoke(null, new ItemStack(ModBlocks.spectreSapling), new ItemStack(ModBlocks.spectreLog, 4), new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.ECTO_PLASM.id), 10, false, treeType);
 			}
 			catch (Exception e)
 			{

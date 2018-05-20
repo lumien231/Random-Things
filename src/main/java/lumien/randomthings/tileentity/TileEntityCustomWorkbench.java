@@ -19,12 +19,12 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 		this.woodMeta = 0;
 		this.woodState = Blocks.PLANKS.getDefaultState();
 	}
-	
+
 	public int getWoodMeta()
 	{
 		return woodMeta;
 	}
-	
+
 	public Block getWoodMaterial()
 	{
 		return woodMaterial;
@@ -79,7 +79,7 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 	{
 		this.woodMaterial = woodBlock;
 		this.woodMeta = meta;
-		
+
 		if (woodMaterial == null)
 		{
 			woodMaterial = Blocks.PLANKS;

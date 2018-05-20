@@ -31,7 +31,7 @@ public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 	protected BlockSlimeCube()
 	{
 		super("slimeCube", Material.CLAY, ItemBlockLuminous.class);
-		
+
 		this.setSoundType(SoundType.SLIME);
 	}
 
@@ -62,8 +62,8 @@ public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 				int posY = pos.getY() + rand.nextInt(11) - 5;
 				int posZ = pos.getZ() + rand.nextInt(11) - 5;
 
-				BlockPos target = new BlockPos(posX,posY,posZ);
-				
+				BlockPos target = new BlockPos(posX, posY, posZ);
+
 				IBlockState state = worldIn.getBlockState(target);
 
 				if (state.isFullCube() && worldIn.isAirBlock(target.up()))

@@ -1,15 +1,8 @@
 package lumien.randomthings.container;
 
 import lumien.randomthings.tileentity.TileEntityBlockDestabilizer;
-import lumien.randomthings.tileentity.TileEntityIronDropper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerBlockDestabilizer extends ContainerTE<TileEntityBlockDestabilizer>
 {
@@ -23,15 +16,15 @@ public class ContainerBlockDestabilizer extends ContainerTE<TileEntityBlockDesta
 	{
 		switch (signal)
 		{
-			case 0:
-				te.toggleLazy();
-				break;
-			case 1:
-				te.toggleFuzzy();
-				break;
-			case 2:
-				te.resetLazy();
-				break;
+		case 0:
+			te.toggleLazy();
+			break;
+		case 1:
+			te.toggleFuzzy();
+			break;
+		case 2:
+			te.resetLazy();
+			break;
 		}
 	}
 }

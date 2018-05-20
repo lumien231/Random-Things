@@ -31,12 +31,12 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 	{
 		switch (p_180538_1_.getChestType())
 		{
-			case 0:
-				Minecraft.getMinecraft().renderEngine.bindTexture(textureNatureChest);
-				break;
-			case 1:
-				Minecraft.getMinecraft().renderEngine.bindTexture(textureWaterChest);
-				break;
+		case 0:
+			Minecraft.getMinecraft().renderEngine.bindTexture(textureNatureChest);
+			break;
+		case 1:
+			Minecraft.getMinecraft().renderEngine.bindTexture(textureWaterChest);
+			break;
 		}
 		int j;
 
@@ -127,7 +127,7 @@ public class RenderSpecialChest extends TileEntitySpecialRenderer
 	}
 
 	@Override
-	public void render(TileEntity te, double x, double y, double z, float p_180535_8_, int p_180535_9_,float alpha)
+	public void render(TileEntity te, double x, double y, double z, float p_180535_8_, int p_180535_9_, float alpha)
 	{
 		this.func_180538_a((TileEntitySpecialChest) te, x, y, z, p_180535_8_, p_180535_9_);
 	}

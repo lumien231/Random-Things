@@ -15,12 +15,12 @@ import net.minecraftforge.items.ItemHandlerHelper;
 public class TileEntityInventoryTester extends TileEntityBase implements ITickable
 {
 	int counter = 0;
-	
+
 	boolean emitRedstone = false;
-	
+
 	@ContainerSynced
 	boolean invertSignal = false;
-	
+
 	public TileEntityInventoryTester()
 	{
 		this.setItemHandler(1);
@@ -61,16 +61,16 @@ public class TileEntityInventoryTester extends TileEntityBase implements ITickab
 					IItemHandler target = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
 					ItemStack testResult = ItemHandlerHelper.insertItemStacked(target, testStack, true);
 					boolean newRedstone = testResult.isEmpty();
-					
+
 					if (invertSignal)
 					{
 						newRedstone = !newRedstone;
 					}
-					
+
 					if (newRedstone != emitRedstone)
 					{
 						this.emitRedstone = newRedstone;
-						
+
 						this.syncTE();
 						this.world.notifyNeighborsOfStateChange(pos, ModBlocks.inventoryTester, false);
 					}

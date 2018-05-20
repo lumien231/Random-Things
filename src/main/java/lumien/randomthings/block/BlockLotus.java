@@ -48,7 +48,7 @@ public class BlockLotus extends BlockBase implements IPlantable, INoItem
 
 		this.setCreativeTab(null);
 	}
-	
+
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
@@ -119,17 +119,20 @@ public class BlockLotus extends BlockBase implements IPlantable, INoItem
 		return state;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
 
+	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
 	{
 		return BlockFaceShape.UNDEFINED;
 	}
 
+	@Override
 	@Nullable
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
@@ -137,14 +140,16 @@ public class BlockLotus extends BlockBase implements IPlantable, INoItem
 	}
 
 	/**
-	 * Used to determine ambient occlusion and culling when rebuilding chunks
-	 * for render
+	 * Used to determine ambient occlusion and culling when rebuilding chunks for
+	 * render
 	 */
+	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
@@ -153,6 +158,7 @@ public class BlockLotus extends BlockBase implements IPlantable, INoItem
 	/**
 	 * Checks if this block can be placed exactly at the given position.
 	 */
+	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		IBlockState soil = worldIn.getBlockState(pos.down());
@@ -164,7 +170,7 @@ public class BlockLotus extends BlockBase implements IPlantable, INoItem
 		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.FARMLAND;
 	}
 
-
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);

@@ -27,15 +27,15 @@ public class ItemRedstoneActivator extends ItemBase
 
 		this.setMaxStackSize(1);
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
 		super.addInformation(stack, world, tooltip, advanced);
-		
+
 		tooltip.add(I18n.format("tooltip.redstoneactivator.duration", durations[getDurationIndex(stack)]));
 	}
-	
+
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
 	{
@@ -60,7 +60,7 @@ public class ItemRedstoneActivator extends ItemBase
 			nextDurationIndex = currentDurationIndex + 1;
 			nextDurationIndex = nextDurationIndex >= durations.length ? 0 : nextDurationIndex;
 		}
-		
+
 		setDurationIndex(me, nextDurationIndex);
 
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, me);
@@ -78,8 +78,8 @@ public class ItemRedstoneActivator extends ItemBase
 		}
 		else
 		{
-			((EntityPlayerSP)playerIn).connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(pos, side, hand, hitX, hitY, hitZ));
-			
+			((EntityPlayerSP) playerIn).connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(pos, side, hand, hitX, hitY, hitZ));
+
 			return EnumActionResult.SUCCESS;
 		}
 	}
@@ -97,14 +97,14 @@ public class ItemRedstoneActivator extends ItemBase
 			return 1;
 		}
 	}
-	
-	public void setDurationIndex(ItemStack stack,int index)
+
+	public void setDurationIndex(ItemStack stack, int index)
 	{
 		if (stack.getTagCompound() == null)
 		{
 			stack.setTagCompound(new NBTTagCompound());
 		}
-		
+
 		stack.getTagCompound().setInteger("durationIndex", index);
 	}
 }

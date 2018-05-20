@@ -60,26 +60,26 @@ public class MessageAdvancedItemCollector implements IRTMessage
 
 					switch (buttonPressed)
 					{
-						case 0:
-							advancedItemCollector.setRangeX(advancedItemCollector.getRangeX() - 1);
-							break;
-						case 1:
-							advancedItemCollector.setRangeX(advancedItemCollector.getRangeX() + 1);
-							break;
+					case 0:
+						advancedItemCollector.setRangeX(advancedItemCollector.getRangeX() - 1);
+						break;
+					case 1:
+						advancedItemCollector.setRangeX(advancedItemCollector.getRangeX() + 1);
+						break;
 
-						case 2:
-							advancedItemCollector.setRangeY(advancedItemCollector.getRangeY() - 1);
-							break;
-						case 3:
-							advancedItemCollector.setRangeY(advancedItemCollector.getRangeY() + 1);
-							break;
+					case 2:
+						advancedItemCollector.setRangeY(advancedItemCollector.getRangeY() - 1);
+						break;
+					case 3:
+						advancedItemCollector.setRangeY(advancedItemCollector.getRangeY() + 1);
+						break;
 
-						case 4:
-							advancedItemCollector.setRangeZ(advancedItemCollector.getRangeZ() - 1);
-							break;
-						case 5:
-							advancedItemCollector.setRangeZ(advancedItemCollector.getRangeZ() + 1);
-							break;
+					case 4:
+						advancedItemCollector.setRangeZ(advancedItemCollector.getRangeZ() - 1);
+						break;
+					case 5:
+						advancedItemCollector.setRangeZ(advancedItemCollector.getRangeZ() + 1);
+						break;
 					}
 				}
 			}

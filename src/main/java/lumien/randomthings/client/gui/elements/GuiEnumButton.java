@@ -116,7 +116,7 @@ public class GuiEnumButton<E extends Enum> extends GuiButton
 				FontRenderer fontrenderer = mc.fontRenderer;
 
 				toolTip = I18n.format(toolTip);
-				GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { toolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
+				GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { toolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
 			}
 			catch (Exception e)
 			{

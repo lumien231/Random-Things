@@ -71,7 +71,7 @@ public class MessageChatDetector implements IRTMessage
 		});
 
 	}
-	
+
 	@Override
 	public Side getHandlingSide()
 	{

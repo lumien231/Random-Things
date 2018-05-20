@@ -159,7 +159,7 @@ public class MagicaVoxelRenderModel
 		if (build)
 		{
 			rendering = true;
-			
+
 			GlStateManager.disableTexture2D();
 			Minecraft.getMinecraft().entityRenderer.disableLightmap();
 
@@ -223,9 +223,9 @@ public class MagicaVoxelRenderModel
 			globalAmbient.rewind();
 			GlStateManager.enableLighting();
 			GL11.glLightModel(GL11.GL_LIGHT_MODEL_AMBIENT, globalAmbient);
-			
+
 			Minecraft.getMinecraft().entityRenderer.enableLightmap();
-			
+
 			rendering = false;
 		}
 	}

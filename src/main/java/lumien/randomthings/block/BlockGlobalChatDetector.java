@@ -30,7 +30,7 @@ public class BlockGlobalChatDetector extends BlockContainerBase
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world,IBlockState state)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityGlobalChatDetector();
 	}
@@ -54,7 +54,7 @@ public class BlockGlobalChatDetector extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockState base_state,IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		return true;
 	}

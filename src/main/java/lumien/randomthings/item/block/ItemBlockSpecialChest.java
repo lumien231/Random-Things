@@ -20,12 +20,12 @@ public class ItemBlockSpecialChest extends ItemBlock
 
 		switch (stack.getItemDamage())
 		{
-			case 0:
-				type = "nature";
-				break;
-			case 1:
-				type = "water";
-				break;
+		case 0:
+			type = "nature";
+			break;
+		case 1:
+			type = "water";
+			break;
 		}
 		return super.getUnlocalizedName() + "." + type;
 	}

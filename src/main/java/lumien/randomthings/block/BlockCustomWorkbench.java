@@ -95,7 +95,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		for (BlockPlanks.EnumType type : BlockPlanks.EnumType.values())
 		{
@@ -238,8 +238,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		}
 
 		/**
-		 * Gets the name of this command sender (usually username, but possibly
-		 * "Rcon")
+		 * Gets the name of this command sender (usually username, but possibly "Rcon")
 		 */
 		@Override
 		public String getName()
@@ -257,8 +256,8 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		}
 
 		/**
-		 * Get the formatted TextComponent that will be used for the sender's
-		 * username in chat
+		 * Get the formatted TextComponent that will be used for the sender's username
+		 * in chat
 		 */
 		@Override
 		public ITextComponent getDisplayName()

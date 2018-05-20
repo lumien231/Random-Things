@@ -11,7 +11,7 @@ public class ItemSuperLubricentBoots extends ItemArmor
 	public ItemSuperLubricentBoots()
 	{
 		super(ItemArmor.ArmorMaterial.IRON, 0, EntityEquipmentSlot.FEET);
-		
+
 		ItemBase.registerItem("superLubricentBoots", this);
 	}
 

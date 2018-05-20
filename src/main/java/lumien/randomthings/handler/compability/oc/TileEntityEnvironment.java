@@ -8,14 +8,14 @@ import li.cil.oc.api.prefab.AbstractManagedEnvironment;
 public class TileEntityEnvironment<T> extends AbstractManagedEnvironment implements NamedBlock
 {
 	String name;
-	
+
 	T tileEntity;
-	
+
 	public TileEntityEnvironment(String name, T tileEntity)
 	{
 		this.name = name;
 		this.tileEntity = tileEntity;
-		
+
 		this.setNode(Network.newNode(this, Visibility.Network).withComponent(this.name, Visibility.Network).create());
 	}
 

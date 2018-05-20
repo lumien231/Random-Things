@@ -24,7 +24,7 @@ public class ItemSpectreKey extends ItemBase
 	public ItemSpectreKey()
 	{
 		super("spectreKey");
-		
+
 		this.setMaxStackSize(1);
 	}
 
@@ -41,7 +41,7 @@ public class ItemSpectreKey extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick( World par2World, EntityPlayer par3EntityPlayer,EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
 		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
 		par3EntityPlayer.setActiveHand(hand);

@@ -191,23 +191,23 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 
 		switch ((int) Math.floor(a / (r * 2)))
 		{
-			// find the face : 0 top, 1 right, 2, bottom, 3 left
-			case 0:
-				x = a - r;
-				z = -r;
-				break;
-			case 1:
-				x = r;
-				z = (a % en) - r;
-				break;
-			case 2:
-				x = r - (a % en);
-				z = r;
-				break;
-			case 3:
-				x = -r;
-				z = r - (a % en);
-				break;
+		// find the face : 0 top, 1 right, 2, bottom, 3 left
+		case 0:
+			x = a - r;
+			z = -r;
+			break;
+		case 1:
+			x = r;
+			z = (a % en) - r;
+			break;
+		case 2:
+			x = r - (a % en);
+			z = r;
+			break;
+		case 3:
+			x = -r;
+			z = r - (a % en);
+			break;
 		}
 
 		return new BlockPos(this.pos.getX() + x * 48, this.pos.getY(), this.pos.getZ() + z * 48);
@@ -255,7 +255,6 @@ public class TileEntityBiomeRadar extends TileEntityBase implements ITickable
 
 		this.searchCounter = compound.getInteger("searchCounter");
 		this.antennaCounter = compound.getInteger("antennaCounter");
-
 
 		for (int i = 0; i < antennaBiomes.length; i++)
 		{

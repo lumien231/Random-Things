@@ -131,16 +131,16 @@ public class TileEntityGlobalChatDetector extends TileEntityBase implements ITic
 				if (consume)
 				{
 					boolean validConsume = false;
-					for (int slot=0;slot<this.getItemHandler().getSlots();slot++)
+					for (int slot = 0; slot < this.getItemHandler().getSlots(); slot++)
 					{
 						ItemStack stack = this.getItemHandler().getStackInSlot(slot);
-						
+
 						if (!stack.isEmpty())
 						{
 							if (stack.getItem() instanceof ItemIDCard)
 							{
 								UUID cardOwner = ItemIDCard.getUUID(stack);
-								
+
 								if (cardOwner.equals(sendUUID))
 								{
 									validConsume = true;

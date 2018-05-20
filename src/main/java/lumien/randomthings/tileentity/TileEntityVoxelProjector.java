@@ -15,7 +15,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	int rotationSpeed;
 
 	int rotationMod;
-	
+
 	boolean ambientLight;
 	boolean randomize;
 
@@ -34,7 +34,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 			if (this.rotationSpeed != 0)
 			{
 				this.rotationMod += rotationSpeed;
-				
+
 				if (this.rotationMod > 360)
 				{
 					this.rotationMod -= 360;
@@ -129,7 +129,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	{
 		return scale;
 	}
-	
+
 	public int getRotationSpeed()
 	{
 		return rotationSpeed;
@@ -138,13 +138,13 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	public void setRotationSpeed(int rotationSpeed)
 	{
 		this.rotationSpeed = rotationSpeed;
-		
+
 		if (!this.world.isRemote)
 		{
 			syncTE();
 		}
 	}
-	
+
 	public boolean ambientLight()
 	{
 		return ambientLight;
@@ -158,7 +158,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	public void setAmbientLight(boolean newAmbientLight)
 	{
 		this.ambientLight = newAmbientLight;
-		
+
 		if (!this.world.isRemote)
 		{
 			syncTE();
@@ -168,7 +168,7 @@ public class TileEntityVoxelProjector extends TileEntityBase implements ITickabl
 	public void setRandomize(boolean newRandomize)
 	{
 		this.randomize = newRandomize;
-		
+
 		if (!this.world.isRemote)
 		{
 			syncTE();

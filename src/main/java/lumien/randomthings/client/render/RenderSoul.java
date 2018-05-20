@@ -57,12 +57,12 @@ public class RenderSoul extends Render
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder worldRenderer = tessellator.getBuffer();
 			worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-			
+
 			worldRenderer.pos(0.0F - f7, 0.0F - f8, 0.0D).tex(f2, f5).endVertex();
 			worldRenderer.pos(f6 - f7, 0.0F - f8, 0.0D).tex(f3, f5).endVertex();
 			worldRenderer.pos(f6 - f7, 1.0F - f8, 0.0D).tex(f3, f4).endVertex();
 			worldRenderer.pos(0.0F - f7, 1.0F - f8, 0.0D).tex(f2, f4).endVertex();
-			
+
 			tessellator.draw();
 			GlStateManager.enableLighting();
 			GlStateManager.disableBlend();
@@ -83,10 +83,10 @@ public class RenderSoul extends Render
 	{
 		switch (((EntitySoul) entity).type)
 		{
-			case 0:
-				return soul1;
-			case 1:
-				return soul2;
+		case 0:
+			return soul1;
+		case 1:
+			return soul2;
 		}
 		return soul1;
 	}

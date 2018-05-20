@@ -332,16 +332,16 @@ public class AsmHandler
 
 							switch (enumblockrendertype)
 							{
-								case MODEL:
-									IBakedModel model = dispatcher.getModelForState(state);
-									state = state.getBlock().getExtendedState(state, blockAccess, changedPos);
-									return dispatcher.getBlockModelRenderer().renderModel(blockAccess, model, state, pos, worldRendererIn, true) ? 1 : 0;
-								case ENTITYBLOCK_ANIMATED:
-									return 0;
-								case LIQUID:
-									return 2;
-								default:
-									return 0;
+							case MODEL:
+								IBakedModel model = dispatcher.getModelForState(state);
+								state = state.getBlock().getExtendedState(state, blockAccess, changedPos);
+								return dispatcher.getBlockModelRenderer().renderModel(blockAccess, model, state, pos, worldRendererIn, true) ? 1 : 0;
+							case ENTITYBLOCK_ANIMATED:
+								return 0;
+							case LIQUID:
+								return 2;
+							default:
+								return 0;
 							}
 						}
 					}
@@ -508,7 +508,7 @@ public class AsmHandler
 			{
 				return Color.HSBtoRGB((float) (1D / 360D * (30F * Math.sin(1 / 20D * RTEventHandler.clientAnimationCounter) + 1 + 120 - 90 + 120)), 1F, 0.6F);
 			}
-			
+
 			if (currentlyRendering.getItem() == ModItems.escapeRope)
 			{
 				return Color.YELLOW.darker().getRGB() | -16777216;

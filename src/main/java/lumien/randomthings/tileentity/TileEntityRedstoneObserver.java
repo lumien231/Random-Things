@@ -139,7 +139,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.breakBlock(worldIn, pos, state);
-		
+
 		this.invalidate();
 	}
 

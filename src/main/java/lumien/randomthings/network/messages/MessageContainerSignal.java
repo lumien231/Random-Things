@@ -10,12 +10,12 @@ import net.minecraftforge.fml.relauncher.Side;
 public class MessageContainerSignal implements IRTMessage
 {
 	int signal;
-	
+
 	public MessageContainerSignal()
 	{
-		
+
 	}
-	
+
 	public MessageContainerSignal(int signal)
 	{
 		this.signal = signal;
@@ -37,10 +37,10 @@ public class MessageContainerSignal implements IRTMessage
 	public void onMessage(MessageContext context)
 	{
 		EntityPlayerMP player = context.getServerHandler().player;
-		
+
 		if (player.openContainer instanceof ContainerTE)
 		{
-			((ContainerTE)player.openContainer).signal(signal);
+			((ContainerTE) player.openContainer).signal(signal);
 		}
 	}
 

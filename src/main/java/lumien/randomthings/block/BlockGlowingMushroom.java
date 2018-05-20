@@ -29,23 +29,23 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
 	protected BlockGlowingMushroom()
 	{
 		super("glowingMushroom", Material.PLANTS);
-		
+
 		this.setTickRandomly(true);
 		this.setSoundType(SoundType.PLANT);
 	}
-	
+
 	@Override
-    @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-    {
-        return NULL_AABB;
-    }
-	
+	@Nullable
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	{
+		return NULL_AABB;
+	}
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        return MUSHROOM_AABB;
-    }
+	{
+		return MUSHROOM_AABB;
+	}
 
 	@Override
 	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
@@ -59,125 +59,125 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
 		return world.getBlockState(pos);
 	}
 
-    @Override
+	@Override
 	@SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.CUTOUT;
-    }
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.CUTOUT;
+	}
 
-    @Override
+	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
-    {
-        return BlockFaceShape.UNDEFINED;
-    }
+	{
+		return BlockFaceShape.UNDEFINED;
+	}
 
 	@Override
 	public boolean shouldGlow(IBlockState state, int tintIndex)
 	{
 		return tintIndex == 0;
 	}
-	
-    @Override
+
+	@Override
 	public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
+	{
+		return false;
+	}
 
-    @Override
+	@Override
 	public boolean isFullCube(IBlockState state)
-    {
-        return false;
-    }
-    
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
-        IBlockState soil = worldIn.getBlockState(pos.down());
-        return super.canPlaceBlockAt(worldIn, pos) && canBlockStay(worldIn, pos, this.getDefaultState());
-    }
-    
-    @Override
+	{
+		return false;
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	{
+		IBlockState soil = worldIn.getBlockState(pos.down());
+		return super.canPlaceBlockAt(worldIn, pos) && canBlockStay(worldIn, pos, this.getDefaultState());
+	}
+
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-        this.checkAndDropBlock(worldIn, pos, state);
-    }
+	{
+		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+		this.checkAndDropBlock(worldIn, pos, state);
+	}
 
-    @Override
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-    	if (rand.nextInt(20) == 0)
-        {
-            int i = 5;
-            int j = 4;
+	{
+		if (rand.nextInt(20) == 0)
+		{
+			int i = 5;
+			int j = 4;
 
-            for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4)))
-            {
-                if (worldIn.getBlockState(blockpos).getBlock() == this)
-                {
-                    --i;
+			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4)))
+			{
+				if (worldIn.getBlockState(blockpos).getBlock() == this)
+				{
+					--i;
 
-                    if (i <= 0)
-                    {
-                        return;
-                    }
-                }
-            }
+					if (i <= 0)
+					{
+						return;
+					}
+				}
+			}
 
-            BlockPos blockpos1 = pos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
+			BlockPos blockpos1 = pos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
 
-            for (int k = 0; k < 4; ++k)
-            {
-                if (worldIn.isAirBlock(blockpos1) && this.canBlockStay(worldIn, blockpos1, this.getDefaultState()))
-                {
-                    pos = blockpos1;
-                }
+			for (int k = 0; k < 4; ++k)
+			{
+				if (worldIn.isAirBlock(blockpos1) && this.canBlockStay(worldIn, blockpos1, this.getDefaultState()))
+				{
+					pos = blockpos1;
+				}
 
-                blockpos1 = pos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
-            }
+				blockpos1 = pos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
+			}
 
-            if (worldIn.isAirBlock(blockpos1) && this.canBlockStay(worldIn, blockpos1, this.getDefaultState()))
-            {
-                worldIn.setBlockState(blockpos1, this.getDefaultState(), 2);
-            }
-        }
-    	
-        this.checkAndDropBlock(worldIn, pos, state);
-    }
+			if (worldIn.isAirBlock(blockpos1) && this.canBlockStay(worldIn, blockpos1, this.getDefaultState()))
+			{
+				worldIn.setBlockState(blockpos1, this.getDefaultState(), 2);
+			}
+		}
 
-    protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!this.canBlockStay(worldIn, pos, state))
-        {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-        }
-    }
+		this.checkAndDropBlock(worldIn, pos, state);
+	}
 
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
-    {
-    	if (pos.getY() >= 0 && pos.getY() < 256)
-        {
-            IBlockState soil = worldIn.getBlockState(pos.down());
+	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (!this.canBlockStay(worldIn, pos, state))
+		{
+			this.dropBlockAsItem(worldIn, pos, state, 0);
+			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+		}
+	}
 
-            if (soil.getBlock() == Blocks.MYCELIUM)
-            {
-                return true;
-            }
-            else
-            {
-                return worldIn.getLight(pos) < 13 && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && canSustainBush(soil);
-            }
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    protected boolean canSustainBush(IBlockState state)
-    {
-        return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.fertilizedDirt;
-    }
+	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (pos.getY() >= 0 && pos.getY() < 256)
+		{
+			IBlockState soil = worldIn.getBlockState(pos.down());
+
+			if (soil.getBlock() == Blocks.MYCELIUM)
+			{
+				return true;
+			}
+			else
+			{
+				return worldIn.getLight(pos) < 13 && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && canSustainBush(soil);
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	protected boolean canSustainBush(IBlockState state)
+	{
+		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.fertilizedDirt;
+	}
 }

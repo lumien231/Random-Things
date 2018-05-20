@@ -26,11 +26,11 @@ public class BlockPotionVaporizer extends BlockContainerBase
 	protected BlockPotionVaporizer()
 	{
 		super("potionVaporizer", Material.ROCK);
-		
+
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setHardness(1.5F);
 	}
-	
+
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
@@ -60,57 +60,57 @@ public class BlockPotionVaporizer extends BlockContainerBase
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.onBlockAdded(worldIn, pos, state);
 		this.setDefaultFacing(worldIn, pos, state);
 	}
-	
+
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!worldIn.isRemote)
-        {
-            IBlockState iblockstate = worldIn.getBlockState(pos.north());
-            IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
-            IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
-            IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-            EnumFacing enumfacing = state.getValue(FACING);
+	{
+		if (!worldIn.isRemote)
+		{
+			IBlockState iblockstate = worldIn.getBlockState(pos.north());
+			IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
+			IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
+			IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
+			EnumFacing enumfacing = state.getValue(FACING);
 
-            if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
-            {
-                enumfacing = EnumFacing.SOUTH;
-            }
-            else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock())
-            {
-                enumfacing = EnumFacing.NORTH;
-            }
-            else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock())
-            {
-                enumfacing = EnumFacing.EAST;
-            }
-            else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock())
-            {
-                enumfacing = EnumFacing.WEST;
-            }
+			if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
+			{
+				enumfacing = EnumFacing.SOUTH;
+			}
+			else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock())
+			{
+				enumfacing = EnumFacing.NORTH;
+			}
+			else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock())
+			{
+				enumfacing = EnumFacing.EAST;
+			}
+			else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock())
+			{
+				enumfacing = EnumFacing.WEST;
+			}
 
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
-        }
-    }
+			worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+		}
+	}
 
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving( pos, placer));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.getDirectionFromEntityLiving( pos, placer)), 2);
+		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer)), 2);
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{

@@ -20,7 +20,7 @@ public class MessageModelList implements IRTMessage
 	{
 		modelList = new ArrayList<>();
 	}
-	
+
 	public void addModel(String modelName)
 	{
 		this.modelList.add(modelName);

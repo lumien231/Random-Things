@@ -32,8 +32,8 @@ public class EntityTemporaryFlooFireplace extends Entity
 		super.onEntityUpdate();
 
 		age++;
-		
-		if (this.world.isRemote && age >=7)
+
+		if (this.world.isRemote && age >= 7)
 		{
 			spawnParticles();
 		}

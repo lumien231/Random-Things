@@ -42,18 +42,18 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 		this.setDefaultState(this.blockState.getBaseState().withProperty(COLOR, EnumDyeColor.WHITE));
 		this.setTickRandomly(true);
 	}
-	
+
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
 		return Blocks.GRASS.canSustainPlant(Blocks.GRASS.getDefaultState(), world, pos, direction, plantable);
 	}
-	
+
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
 		Item item = Item.getItemFromBlock(this);
-        return item == null ? null : new ItemStack(item, 1, ((EnumDyeColor)state.getValue(COLOR)).getMetadata());
+		return item == null ? null : new ItemStack(item, 1, ((EnumDyeColor) state.getValue(COLOR)).getMetadata());
 	}
 
 	@Override
@@ -91,22 +91,22 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 				if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
 				{
 					for (int i = 0; i < 4; ++i)
-                    {
-                        BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+					{
+						BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
-                        if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos))
-                        {
-                            return;
-                        }
+						if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos))
+						{
+							return;
+						}
 
-                        IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
-                        IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
+						IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
+						IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == Blocks.DIRT && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
-                        {
-                            worldIn.setBlockState(blockpos, state);
-                        }
-                    }
+						if (iblockstate1.getBlock() == Blocks.DIRT && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
+						{
+							worldIn.setBlockState(blockpos, state);
+						}
+					}
 				}
 			}
 		}
@@ -120,7 +120,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;

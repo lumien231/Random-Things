@@ -22,10 +22,10 @@ public class MessageSetBiome implements IRTMessage
 		this.pos = pos;
 		this.biome = biome;
 	}
-	
+
 	public MessageSetBiome()
 	{
-		
+
 	}
 
 	@Override

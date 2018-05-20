@@ -34,6 +34,6 @@ public class AnvilRecipeHandler
 
 	private static boolean areStackPairsEqual(ItemStack o1, ItemStack o2, ItemStack o3, ItemStack o4)
 	{
-		return ((ItemStack.areItemsEqual(o1 , o3) && ItemStack.areItemsEqual(o2 , o4)) || (ItemStack.areItemsEqual(o1 , o4)) && (ItemStack.areItemsEqual(o2 , o3)));
+		return ((ItemStack.areItemsEqual(o1, o3) && ItemStack.areItemsEqual(o2, o4)) || (ItemStack.areItemsEqual(o1, o4)) && (ItemStack.areItemsEqual(o2, o3)));
 	}
 }

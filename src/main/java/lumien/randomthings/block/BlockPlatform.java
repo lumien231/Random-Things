@@ -27,20 +27,20 @@ public class BlockPlatform extends BlockBase
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockPlatform.EnumType.class);
 
 	protected static final AxisAlignedBB PLATFORM_AABB = new AxisAlignedBB(0, 14F / 16F, 0, 1, 1, 1);
-	
+
 	public BlockPlatform()
 	{
 		super("platform", Material.WOOD, ItemBlockPlatform.class);
 
 		this.setHardness(1.5F);
 	}
-	
+
 	@Override
 	public int damageDropped(IBlockState state)
 	{
 		return getMetaFromState(state);
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -67,7 +67,7 @@ public class BlockPlatform extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		BlockPlatform.EnumType[] aenumtype = BlockPlatform.EnumType.values();
 		int i = aenumtype.length;
@@ -118,7 +118,7 @@ public class BlockPlatform extends BlockBase
 			}
 		}
 
-		super.addCollisionBoxToList(state, worldIn, pos, mask, list, collidingEntity,p_185477_7_);
+		super.addCollisionBoxToList(state, worldIn, pos, mask, list, collidingEntity, p_185477_7_);
 	}
 
 	public static enum EnumType implements IStringSerializable

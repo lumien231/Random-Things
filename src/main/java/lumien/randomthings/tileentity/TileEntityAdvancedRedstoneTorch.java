@@ -11,7 +11,7 @@ public class TileEntityAdvancedRedstoneTorch extends TileEntityBase
 {
 	@ContainerSynced
 	int signalStrengthOn = 15;
-	
+
 	@ContainerSynced
 	int signalStrengthOff = 0;
 
@@ -50,16 +50,16 @@ public class TileEntityAdvancedRedstoneTorch extends TileEntityBase
 	{
 		return signalStrengthOn;
 	}
-	
+
 	public int getSignalStrengthOff()
 	{
 		return signalStrengthOff;
 	}
-	
+
 	public void decreaseSignalStrengthOff(int amount)
 	{
 		signalStrengthOff = Math.max(0, signalStrengthOff - amount);
-		
+
 		syncTE();
 		this.world.notifyNeighborsOfStateChange(pos, ModBlocks.advancedRedstoneTorchOn, false);
 	}
@@ -67,27 +67,27 @@ public class TileEntityAdvancedRedstoneTorch extends TileEntityBase
 	public void decreaseSignalStrengthOn(int amount)
 	{
 		signalStrengthOn = Math.max(0, signalStrengthOn - amount);
-		
+
 		syncTE();
 		this.world.notifyNeighborsOfStateChange(pos, ModBlocks.advancedRedstoneTorchOn, false);
 	}
-	
+
 	public void increaseSignalStrengthOff(int amount)
 	{
 		signalStrengthOff = Math.min(15, signalStrengthOff + amount);
-		
+
 		syncTE();
 		this.world.notifyNeighborsOfStateChange(pos, ModBlocks.advancedRedstoneTorchOn, false);
 	}
-	
+
 	public void increaseSignalStrengthOn(int amount)
 	{
 		signalStrengthOn = Math.min(15, signalStrengthOn + amount);
-		
+
 		syncTE();
 		this.world.notifyNeighborsOfStateChange(pos, ModBlocks.advancedRedstoneTorchOn, false);
 	}
-	
+
 	@Override
 	public boolean renderAfterData()
 	{

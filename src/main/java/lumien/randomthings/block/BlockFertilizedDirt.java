@@ -24,7 +24,7 @@ import net.minecraftforge.common.IPlantable;
 public class BlockFertilizedDirt extends BlockBase
 {
 	boolean tilled;
-	
+
 	protected static final AxisAlignedBB TILLED_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 
 	protected BlockFertilizedDirt(boolean tilled)
@@ -43,22 +43,22 @@ public class BlockFertilizedDirt extends BlockBase
 			this.useNeighborBrightness = true;
 		}
 	}
-	
+
 	@Override
 	protected ItemStack getSilkTouchDrop(IBlockState state)
 	{
 		return new ItemStack(ModBlocks.fertilizedDirt);
 	}
-	
+
 	@Override
-	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		if (!tilled)
 		{
 			super.getSubBlocks(tab, list);
 		}
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -83,12 +83,12 @@ public class BlockFertilizedDirt extends BlockBase
 	{
 		return "tile.fertilizedDirt";
 	}
-	
+
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-    {
-        return FULL_BLOCK_AABB;
-    }
+	{
+		return FULL_BLOCK_AABB;
+	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
@@ -115,20 +115,20 @@ public class BlockFertilizedDirt extends BlockBase
 
 		switch (plantType)
 		{
-			case Desert:
-				return !tilled;
-			case Nether:
-				return false;
-			case Crop:
-				return tilled;
-			case Cave:
-				return !tilled;
-			case Plains:
-				return !tilled || tilled && world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
-			case Water:
-				return false;
-			case Beach:
-				return !tilled;
+		case Desert:
+			return !tilled;
+		case Nether:
+			return false;
+		case Crop:
+			return tilled;
+		case Cave:
+			return !tilled;
+		case Plains:
+			return !tilled || tilled && world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
+		case Water:
+			return false;
+		case Beach:
+			return !tilled;
 		}
 
 		return false;

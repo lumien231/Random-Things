@@ -12,7 +12,7 @@ public class RTMessageHandler implements IMessageHandler<IRTMessage, IRTMessage>
 		{
 			message.onMessage(ctx);
 		}
-		
+
 		return null;
 	}
 }

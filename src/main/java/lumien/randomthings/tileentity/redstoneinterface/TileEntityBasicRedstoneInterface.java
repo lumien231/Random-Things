@@ -14,7 +14,7 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
 		super.writeDataToNBT(compound, sync);
-		
+
 		if (target != null)
 		{
 			compound.setInteger("targetX", target.getX());
@@ -27,7 +27,7 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
 		super.readDataFromNBT(compound, sync);
-		
+
 		if (compound.hasKey("targetX"))
 		{
 			target = new BlockPos(compound.getInteger("targetX"), compound.getInteger("targetY"), compound.getInteger("targetZ"));
@@ -79,7 +79,7 @@ public class TileEntityBasicRedstoneInterface extends TileEntityRedstoneInterfac
 		if (this.target != null)
 		{
 			IBlockState targetState = world.getBlockState(target);
-			targetState.neighborChanged(world, target, neighborBlock, this.pos); 
+			targetState.neighborChanged(world, target, neighborBlock, this.pos);
 			world.notifyNeighborsOfStateChange(target, neighborBlock, false);
 		}
 	}

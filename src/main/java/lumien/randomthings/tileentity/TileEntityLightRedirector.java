@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import lumien.randomthings.block.BlockLightRedirector;
-import lumien.randomthings.block.BlockLotus;
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.network.messages.MessageLightRedirector;
 import net.minecraft.block.state.IBlockState;

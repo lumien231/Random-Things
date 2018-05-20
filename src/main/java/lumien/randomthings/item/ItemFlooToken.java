@@ -24,7 +24,7 @@ public class ItemFlooToken extends ItemBase
 	public boolean onEntityItemUpdate(EntityItem entityItem)
 	{
 		int age = ReflectionUtil.getEntityItemAge(entityItem);
-		
+
 		if (!entityItem.world.isRemote)
 		{
 			if (age > 100 && entityItem.onGround)

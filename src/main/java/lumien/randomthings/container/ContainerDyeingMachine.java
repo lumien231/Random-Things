@@ -76,7 +76,7 @@ public class ContainerDyeingMachine extends Container
 
 			enchantmentResult.setInventorySlotContents(0, enchantmentCopy);
 		}
-		else if ( !toDye.isEmpty() && dye.isEmpty())
+		else if (!toDye.isEmpty() && dye.isEmpty())
 		{
 			this.enchantmentResult.setInventorySlotContents(0, ItemStack.EMPTY);
 			ItemStack copy = toDye.copy();
@@ -88,7 +88,7 @@ public class ContainerDyeingMachine extends Container
 				{
 					compound.removeTag("rtDye");
 				}
-				
+
 				if (compound.hasKey("enchantmentColor"))
 				{
 					compound.removeTag("enchantmentColor");

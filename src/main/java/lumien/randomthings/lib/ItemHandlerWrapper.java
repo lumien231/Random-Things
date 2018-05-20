@@ -6,11 +6,11 @@ import net.minecraftforge.items.IItemHandler;
 public class ItemHandlerWrapper implements IItemHandler
 {
 	IItemHandler actualHandler;
-	
+
 	int[] insertSlots;
 	int[] outputSlots;
 
-	public ItemHandlerWrapper(IItemHandler actualHandler, int[] insertSlots,int[] outputSlots)
+	public ItemHandlerWrapper(IItemHandler actualHandler, int[] insertSlots, int[] outputSlots)
 	{
 		this.actualHandler = actualHandler;
 
@@ -33,28 +33,28 @@ public class ItemHandlerWrapper implements IItemHandler
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
 	{
-		for (int i=0;i<insertSlots.length;i++)
+		for (int i = 0; i < insertSlots.length; i++)
 		{
 			if (insertSlots[i] == slot)
 			{
 				return actualHandler.insertItem(slot, stack, simulate);
 			}
 		}
-		
+
 		return stack;
 	}
 
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate)
 	{
-		for (int i=0;i<outputSlots.length;i++)
+		for (int i = 0; i < outputSlots.length; i++)
 		{
 			if (outputSlots[i] == slot)
 			{
 				return actualHandler.extractItem(slot, amount, simulate);
 			}
 		}
-		
+
 		return ItemStack.EMPTY;
 	}
 

@@ -40,7 +40,7 @@ public class DescriptionHandler
 		overrideMap.put(ModBlocks.coloredGrass, "tile.coloredGrass.info");
 		overrideMap.put(ModBlocks.stainedBrick, "tile.stainedBrick.info");
 		overrideMap.put(ModBlocks.luminousStainedBrick, "tile.luminousStainedBrick.info");
-		overrideMap.put(ModItems.grassSeeds,"item.grassSeeds.info");
+		overrideMap.put(ModItems.grassSeeds, "item.grassSeeds.info");
 		overrideMap.put(ModItems.runeDust, "item.runeDust.info");
 
 		List<ItemStack> stackBlackList = new ArrayList<>();
@@ -51,7 +51,7 @@ public class DescriptionHandler
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.FLOO_POWDER.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.PLATE_BASE.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.PRECIOUS_EMERALD.id));
-		
+
 		removeDes(overrideMap, ModBlocks.spectreLeaf, ModBlocks.natureCore, ModBlocks.spectreLog, ModBlocks.spectrePlank, ModBlocks.specialChest, ModBlocks.superLubricentPlatform, ModBlocks.filteredSuperLubricentPlatform);
 
 		Stream.concat(BlockBase.rtBlockList.stream(), ItemBase.rtItemList.stream()).forEach(new Consumer<Object>()
@@ -66,7 +66,7 @@ public class DescriptionHandler
 
 					if (item.getCreativeTab() == RandomThings.instance.creativeTab)
 					{
-						item.getSubItems( RandomThings.instance.creativeTab, subItems);
+						item.getSubItems(RandomThings.instance.creativeTab, subItems);
 					}
 				}
 				else if (t instanceof Block)

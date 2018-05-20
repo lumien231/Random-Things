@@ -1,15 +1,8 @@
 package lumien.randomthings.client.gui;
 
-import java.io.IOException;
-
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.container.ContainerEnderLetter;
 import lumien.randomthings.container.ContainerPortableSoundDampener;
-import lumien.randomthings.network.PacketHandler;
-import lumien.randomthings.network.messages.MessageEnderLetter;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,9 +17,9 @@ public class GuiPortableSoundDampener extends GuiContainerBase
 	public GuiPortableSoundDampener(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerPortableSoundDampener(player, world, x, y, z));
-		
+
 		dampenerStack = player.inventory.getCurrentItem();
-		
+
 		this.xSize = 176;
 		this.ySize = 133;
 	}

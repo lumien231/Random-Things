@@ -25,7 +25,7 @@ public class ItemFlooSign extends ItemBase
 	public ItemFlooSign()
 	{
 		super("flooSign");
-		
+
 		this.setMaxStackSize(1);
 	}
 
@@ -122,7 +122,7 @@ public class ItemFlooSign extends ItemBase
 						TileEntityFlooBrick te = (TileEntityFlooBrick) worldIn.getTileEntity(brickPos);
 						te.initToChild(uuid);
 					}
-					
+
 					if (!player.capabilities.isCreativeMode)
 					{
 						flooSign.shrink(1);

@@ -48,14 +48,14 @@ public class ModItems
 	public static ItemSoundRecorder soundRecorder;
 	public static ItemPortableSoundDampener portableSoundDampener;
 	public static ItemEscapeRope escapeRope;
-	
+
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
 	public static ItemSpectreSword spectreSword;
 	public static ItemSpectrePickaxe spectrePickaxe;
 	public static ItemSpectreAxe spectreAxe;
 	public static ItemSpectreShovel spectreShovel;
-	
+
 	public static ItemRuneDust runeDust;
 
 	public static void load(FMLPreInitializationEvent event)
@@ -100,14 +100,14 @@ public class ModItems
 		escapeRope = new ItemEscapeRope();
 
 		grassSeeds = new ItemGrassSeeds();
-		
+
 		spectreKey = new ItemSpectreKey();
 		spectreAnchor = new ItemSpectreAnchor();
 		spectreSword = new ItemSpectreSword();
 		spectrePickaxe = new ItemSpectrePickaxe();
 		spectreAxe = new ItemSpectreAxe();
 		spectreShovel = new ItemSpectreShovel();
-		
+
 		runeDust = new ItemRuneDust();
 	}
 }

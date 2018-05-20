@@ -38,20 +38,20 @@ public class EntityReviveCircle extends Entity
 		this.ignoreFrustumCheck = true;
 		this.reviver = reviver;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isInRangeToRenderDist(double distance)
 	{
 		double d0 = this.getEntityBoundingBox().getAverageEdgeLength();
 
-        if (Double.isNaN(d0))
-        {
-            d0 = 1.0D;
-        }
+		if (Double.isNaN(d0))
+		{
+			d0 = 1.0D;
+		}
 
-        d0 = d0 * 64.0D * 5;
-        return distance < d0 * d0;
+		d0 = d0 * 64.0D * 5;
+		return distance < d0 * d0;
 	}
 
 	@Override

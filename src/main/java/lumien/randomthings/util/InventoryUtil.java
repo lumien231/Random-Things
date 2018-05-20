@@ -20,20 +20,20 @@ public class InventoryUtil
 	{
 		dropItemHandlerItems(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemHandler);
 	}
-	
-    private static void dropItemHandlerItems(World worldIn, double x, double y, double z, IItemHandler itemHandler)
-    {
-        for (int i = 0; i < itemHandler.getSlots(); ++i)
-        {
-            ItemStack itemstack = itemHandler.getStackInSlot(i);
 
-            if (!itemstack.isEmpty())
-            {
-                WorldUtil.spawnItemStack(worldIn, x, y, z, itemstack);
-            }
-        }
-    }
-	
+	private static void dropItemHandlerItems(World worldIn, double x, double y, double z, IItemHandler itemHandler)
+	{
+		for (int i = 0; i < itemHandler.getSlots(); ++i)
+		{
+			ItemStack itemstack = itemHandler.getStackInSlot(i);
+
+			if (!itemstack.isEmpty())
+			{
+				WorldUtil.spawnItemStack(worldIn, x, y, z, itemstack);
+			}
+		}
+	}
+
 	public static void shuffleInventory(IInventory inventory)
 	{
 		Random rgen = new Random();

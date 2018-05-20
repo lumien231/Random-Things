@@ -42,7 +42,7 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		BlockBiomeStone.EnumType[] aenumtype = BlockBiomeStone.EnumType.values();
 		int i = aenumtype.length;

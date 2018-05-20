@@ -20,7 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBlockLuminousTranslucent extends BlockBase implements  ILuminousBlock
+public class BlockBlockLuminousTranslucent extends BlockBase implements ILuminousBlock
 {
 	public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
@@ -31,7 +31,7 @@ public class BlockBlockLuminousTranslucent extends BlockBase implements  ILumino
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3F);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
@@ -57,7 +57,7 @@ public class BlockBlockLuminousTranslucent extends BlockBase implements  ILumino
 	{
 		return false;
 	}
-	
+
 	@Override
 	public BlockRenderLayer getBlockLayer()
 	{
@@ -72,7 +72,7 @@ public class BlockBlockLuminousTranslucent extends BlockBase implements  ILumino
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;

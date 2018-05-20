@@ -18,7 +18,7 @@ public class Festival implements INBTSerializable<NBTTagCompound>
 
 	int dimensionID;
 	List<BlockPos> doorPositions;
-	
+
 	STATE state;
 
 	public Festival()
@@ -26,22 +26,22 @@ public class Festival implements INBTSerializable<NBTTagCompound>
 		doorPositions = new ArrayList<BlockPos>();
 		state = STATE.SCHEDULED;
 	}
-	
+
 	public void addDoorPos(BlockPos pos)
 	{
 		doorPositions.add(pos);
 	}
-	
+
 	public List<BlockPos> getDoorPositions()
 	{
 		return doorPositions;
 	}
-	
+
 	public STATE getState()
 	{
 		return state;
 	}
-	
+
 	public void setActive()
 	{
 		this.state = STATE.ACTIVE;
@@ -84,7 +84,7 @@ public class Festival implements INBTSerializable<NBTTagCompound>
 
 			this.doorPositions.add(pos);
 		}
-		
+
 		this.state = STATE.values()[nbt.getInteger("state")];
 	}
 }

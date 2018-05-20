@@ -46,7 +46,7 @@ public class BlockSuperLubricentIce extends BlockBase implements ISuperLubricent
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos)
 	{

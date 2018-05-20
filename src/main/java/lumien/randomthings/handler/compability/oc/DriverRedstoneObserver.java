@@ -31,7 +31,7 @@ public class DriverRedstoneObserver extends DriverSidedTileEntity
 		{
 			super("redstone_observer", te);
 		}
-		
+
 		@Callback
 		public Object[] setTarget(Context context, Arguments args)
 		{

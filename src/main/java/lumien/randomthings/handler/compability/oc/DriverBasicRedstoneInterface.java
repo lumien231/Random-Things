@@ -31,7 +31,7 @@ public class DriverBasicRedstoneInterface extends DriverSidedTileEntity
 		{
 			super("basic_redstone_interface", te);
 		}
-		
+
 		@Callback
 		public Object[] setTarget(Context context, Arguments args)
 		{

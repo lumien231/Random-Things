@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRema
 public class CustomClassWriter extends ClassWriter
 {
 	public static URLClassLoader customClassLoader = new URLClassLoader(((URLClassLoader) Launch.classLoader.getClass().getClassLoader()).getURLs());
-	
+
 	public CustomClassWriter(int flags)
 	{
 		super(flags);

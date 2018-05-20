@@ -1,32 +1,22 @@
 package lumien.randomthings.tileentity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Map.Entry;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.lib.AncientFurnaceConversion;
 import lumien.randomthings.util.NBTUtil;
 import lumien.randomthings.util.WorldUtil;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -232,7 +222,7 @@ public class TileEntityAncientFurnace extends TileEntityBase implements ITickabl
 							}
 						}
 					}
-					
+
 					Explosion explosion = new Explosion(this.world, null, this.pos.getX() + 0.5, this.pos.getY() + 0.5, this.pos.getZ() + 0.5, 4, true, true);
 					explosion.doExplosionA();
 					explosion.doExplosionB(true);

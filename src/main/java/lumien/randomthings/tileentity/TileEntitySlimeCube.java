@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class TileEntitySlimeCube extends TileEntityBase implements IRedstoneSensitive
 {
 	public static Set<TileEntitySlimeCube> cubes = Collections.newSetFromMap(new WeakHashMap());
-	
+
 	public TileEntitySlimeCube()
 	{
 		synchronized (cubes)
@@ -21,7 +21,7 @@ public class TileEntitySlimeCube extends TileEntityBase implements IRedstoneSens
 			cubes.add(this);
 		}
 	}
-	
+
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
@@ -36,7 +36,7 @@ public class TileEntitySlimeCube extends TileEntityBase implements IRedstoneSens
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.breakBlock(worldIn, pos, state);
-		
+
 		this.invalidate();
 	}
 
@@ -44,13 +44,13 @@ public class TileEntitySlimeCube extends TileEntityBase implements IRedstoneSens
 	public void redstoneChange(boolean oldState, boolean newState)
 	{
 	}
-	
+
 	@Override
 	public boolean renderAfterData()
 	{
 		return true;
 	}
-	
+
 	@Override
 	public void onChunkUnload()
 	{

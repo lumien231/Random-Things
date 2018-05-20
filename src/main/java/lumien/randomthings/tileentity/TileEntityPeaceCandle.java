@@ -20,15 +20,15 @@ public class TileEntityPeaceCandle extends TileEntityBase
 			candles.add(this);
 		}
 	}
-	
+
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.breakBlock(worldIn, pos, state);
-		
+
 		this.invalidate();
 	}
-	
+
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{

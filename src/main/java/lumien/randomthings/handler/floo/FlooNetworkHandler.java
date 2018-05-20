@@ -122,7 +122,6 @@ public class FlooNetworkHandler extends WorldSavedData
 
 						player.sendMessage(new TextComponentTranslation("floo.info.teleport", targetFirePlace.getName()));
 
-
 						// Particles
 						if (originPos != null && originTE != null)
 						{

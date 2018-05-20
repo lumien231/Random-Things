@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import lumien.randomthings.item.ItemPortableSoundDampener;
 import lumien.randomthings.item.ItemSoundPattern;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +15,6 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntitySoundDampener extends TileEntityBase
 {

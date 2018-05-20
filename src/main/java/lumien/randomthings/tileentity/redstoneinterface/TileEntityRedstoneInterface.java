@@ -25,7 +25,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 
 	HashMap<EnumFacing, Integer> weakPower;
 	HashMap<EnumFacing, Integer> strongPower;
-	
+
 	boolean firstTick = true;
 
 	public TileEntityRedstoneInterface()
@@ -48,7 +48,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 			weakPower.put(facing, -1);
 		}
 	}
-	
+
 	@Override
 	public void update()
 	{
@@ -173,10 +173,11 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 			return totalPower;
 		}
 	}
-	
+
 	protected abstract void notifyTargets(Block neighborBlock);
-	
+
 	static HashSet<BlockPos> notifiedPositions = new HashSet<>();
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
@@ -184,11 +185,11 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 		{
 			return;
 		}
-		
+
 		notifiedPositions.add(this.pos);
-		
+
 		updateRedstoneState(neighborBlock);
-		
+
 		notifiedPositions.remove(this.pos);
 	}
 
@@ -220,14 +221,14 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 			notifyTargets(neighbor);
 		}
 	}
-	
+
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.breakBlock(worldIn, pos, state);
-		
+
 		this.invalidate();
-		
+
 		notifyTargets(Blocks.REDSTONE_BLOCK);
 	}
 

@@ -26,10 +26,8 @@ public class ServerConfirmer
 		fun(WorldEntitySpawner.class);
 		fun(Church.class);
 	}
-	
+
 	protected void fun(Class class1)
 	{
 	}
 }
-
-

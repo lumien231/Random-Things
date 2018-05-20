@@ -10,8 +10,6 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -26,7 +24,7 @@ public class BlockSoundBox extends BlockContainerBase
 	protected BlockSoundBox()
 	{
 		super("soundBox", Material.WOOD);
-		
+
 		this.setSoundType(SoundType.WOOD).setHardness(0.8F);
 	}
 
@@ -91,23 +89,25 @@ public class BlockSoundBox extends BlockContainerBase
 		return false;
 	}
 
-
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntitySoundBox();
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(HAS_PATTERN, Boolean.valueOf(meta > 0));
 	}
 
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return ((Boolean) state.getValue(HAS_PATTERN)).booleanValue() ? 1 : 0;
+		return state.getValue(HAS_PATTERN).booleanValue() ? 1 : 0;
 	}
 
+	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[] { HAS_PATTERN });

@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import lumien.randomthings.handler.AsmHandler;
 import lumien.randomthings.item.block.ItemBlockOfSticks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -40,7 +39,7 @@ public class BlockBlockOfSticks extends BlockBase
 	}
 
 	@Override
-	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < 2; i++)
 		{

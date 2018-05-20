@@ -101,7 +101,7 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 					if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
 					{
 						IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
-						
+
 						for (EntityItem ei : entityItemList)
 						{
 							if (!ei.isDead && (filterRepres == null || filterRepres.matchesItemStack(ei.getItem())))
@@ -144,7 +144,6 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 			}
 		}
 	}
-
 
 	public int getRangeX()
 	{
@@ -211,7 +210,6 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 		IBlockState state = this.world.getBlockState(this.pos);
 		this.world.notifyBlockUpdate(pos, state, state, 3);
 	}
-
 
 	@Override
 	public void onInventoryChanged(IInventory p_76316_1_)

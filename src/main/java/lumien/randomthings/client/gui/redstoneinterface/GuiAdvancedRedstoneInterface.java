@@ -16,7 +16,7 @@ public class GuiAdvancedRedstoneInterface extends GuiContainerBase
 	public GuiAdvancedRedstoneInterface(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerAdvancedRedstoneInterface(player, world, x, y, z));
-		
+
 		xSize = 176;
 		ySize = 133;
 	}

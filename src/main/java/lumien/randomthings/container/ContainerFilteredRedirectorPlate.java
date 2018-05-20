@@ -43,10 +43,10 @@ public class ContainerFilteredRedirectorPlate extends Container
 				return !input.isEmpty() && input.getItem() instanceof IEntityFilterItem;
 			}
 		}));
-		
+
 		bindPlayerInventory(player.inventory);
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
@@ -89,7 +89,7 @@ public class ContainerFilteredRedirectorPlate extends Container
 
 		return itemstack;
 	}
-	
+
 	@Override
 	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{

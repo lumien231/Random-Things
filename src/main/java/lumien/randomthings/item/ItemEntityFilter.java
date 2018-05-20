@@ -72,12 +72,12 @@ public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 
 		return true;
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		
+
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 
@@ -103,7 +103,7 @@ public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 				{
 					tooltip.add(entityKeyString);
 				}
-				
+
 				tooltip.add(I18n.format("entity." + translationKey + ".name"));
 			}
 		}

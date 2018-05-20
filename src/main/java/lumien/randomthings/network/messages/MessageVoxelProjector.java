@@ -72,26 +72,26 @@ public class MessageVoxelProjector implements IRTMessage
 
 		switch (value)
 		{
-			case MODEL_ROTATION:
-				this.newModelRotation = buf.readInt();
-				break;
-			case MODEL:
-				this.newModel = ByteBufUtils.readUTF8String(buf);
-				break;
-			case SCALE:
-				this.newScale = buf.readInt();
-				break;
-			case ROTATION_SPEED:
-				this.newRotationSpeed = buf.readInt();
-				break;
-			case AMBIENT_LIGHT:
-				this.newAmbientLight = buf.readBoolean();
-				break;
-			case RANDOMIZE:
-				this.newRandomize = buf.readBoolean();
-				break;
-			default:
-				break;
+		case MODEL_ROTATION:
+			this.newModelRotation = buf.readInt();
+			break;
+		case MODEL:
+			this.newModel = ByteBufUtils.readUTF8String(buf);
+			break;
+		case SCALE:
+			this.newScale = buf.readInt();
+			break;
+		case ROTATION_SPEED:
+			this.newRotationSpeed = buf.readInt();
+			break;
+		case AMBIENT_LIGHT:
+			this.newAmbientLight = buf.readBoolean();
+			break;
+		case RANDOMIZE:
+			this.newRandomize = buf.readBoolean();
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -103,26 +103,26 @@ public class MessageVoxelProjector implements IRTMessage
 
 		switch (value)
 		{
-			case MODEL_ROTATION:
-				buf.writeInt(newModelRotation);
-				break;
-			case MODEL:
-				ByteBufUtils.writeUTF8String(buf, newModel);
-				break;
-			case SCALE:
-				buf.writeInt(newScale);
-				break;
-			case ROTATION_SPEED:
-				buf.writeInt(newRotationSpeed);
-				break;
-			case AMBIENT_LIGHT:
-				buf.writeBoolean(newAmbientLight);
-				break;
-			case RANDOMIZE:
-				buf.writeBoolean(newRandomize);
-				break;
-			default:
-				break;
+		case MODEL_ROTATION:
+			buf.writeInt(newModelRotation);
+			break;
+		case MODEL:
+			ByteBufUtils.writeUTF8String(buf, newModel);
+			break;
+		case SCALE:
+			buf.writeInt(newScale);
+			break;
+		case ROTATION_SPEED:
+			buf.writeInt(newRotationSpeed);
+			break;
+		case AMBIENT_LIGHT:
+			buf.writeBoolean(newAmbientLight);
+			break;
+		case RANDOMIZE:
+			buf.writeBoolean(newRandomize);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -148,38 +148,38 @@ public class MessageVoxelProjector implements IRTMessage
 						{
 							switch (value)
 							{
-								case MODEL:
-									if (newModel != null)
-									{
-										((TileEntityVoxelProjector) te).setModel(newModel);
-									}
-									break;
-								case MODEL_ROTATION:
-									if (newModelRotation >= 0 && newModelRotation < 361)
-									{
-										((TileEntityVoxelProjector) te).setModelRotation(newModelRotation);
-									}
-									break;
-								case SCALE:
-									if (newScale >= 1 && newScale < 21)
-									{
-										((TileEntityVoxelProjector) te).setScale(newScale);
-									}
-									break;
-								case ROTATION_SPEED:
-									if (newRotationSpeed >= 0 && newRotationSpeed < 41)
-									{
-										((TileEntityVoxelProjector) te).setRotationSpeed(newRotationSpeed);
-									}
-									break;
-								case AMBIENT_LIGHT:
-									((TileEntityVoxelProjector) te).setAmbientLight(newAmbientLight);
-									break;
-								case RANDOMIZE:
-									((TileEntityVoxelProjector) te).setRandomize(newRandomize);
-									break;
-								default:
-									break;
+							case MODEL:
+								if (newModel != null)
+								{
+									((TileEntityVoxelProjector) te).setModel(newModel);
+								}
+								break;
+							case MODEL_ROTATION:
+								if (newModelRotation >= 0 && newModelRotation < 361)
+								{
+									((TileEntityVoxelProjector) te).setModelRotation(newModelRotation);
+								}
+								break;
+							case SCALE:
+								if (newScale >= 1 && newScale < 21)
+								{
+									((TileEntityVoxelProjector) te).setScale(newScale);
+								}
+								break;
+							case ROTATION_SPEED:
+								if (newRotationSpeed >= 0 && newRotationSpeed < 41)
+								{
+									((TileEntityVoxelProjector) te).setRotationSpeed(newRotationSpeed);
+								}
+								break;
+							case AMBIENT_LIGHT:
+								((TileEntityVoxelProjector) te).setAmbientLight(newAmbientLight);
+								break;
+							case RANDOMIZE:
+								((TileEntityVoxelProjector) te).setRandomize(newRandomize);
+								break;
+							default:
+								break;
 							}
 						}
 					}
@@ -205,13 +205,13 @@ public class MessageVoxelProjector implements IRTMessage
 		this.newRotationSpeed = rotationSpeed;
 		this.value = VALUE.ROTATION_SPEED;
 	}
-	
+
 	public void setRandomize(boolean randomize)
 	{
 		this.newRandomize = randomize;
 		this.value = VALUE.RANDOMIZE;
 	}
-	
+
 	public void setAmbientLight(boolean ambientLight)
 	{
 		this.newAmbientLight = ambientLight;

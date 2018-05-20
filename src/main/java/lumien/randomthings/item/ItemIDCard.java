@@ -23,20 +23,20 @@ public class ItemIDCard extends ItemBase implements IEntityFilterItem
 	{
 		super("idcard");
 	}
-	
+
 	@Override
 	public String getHighlightTip(ItemStack stack, String displayName)
 	{
 		if (stack.hasTagCompound())
 		{
 			NBTTagCompound compound = stack.getTagCompound();
-			
+
 			if (compound.hasKey("name"))
 			{
-				displayName += " (" + compound.getString("name")+ ")";
+				displayName += " (" + compound.getString("name") + ")";
 			}
 		}
-		
+
 		return displayName;
 	}
 

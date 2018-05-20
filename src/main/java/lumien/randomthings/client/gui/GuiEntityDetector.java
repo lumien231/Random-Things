@@ -76,10 +76,10 @@ public class GuiEntityDetector extends GuiContainerBase
 
 		invert = new GuiCustomButton(this, 7, entityDetector.invert(), this.guiLeft + 15 + 77, this.guiTop + 93, 20, 20, "", background, 176, 0, 20, 20);
 		invert.setToolTips("tooltip.entityDetector.normalOutput", "tooltip.entityDetector.invertedOutput");
-		
+
 		strongOutput = new GuiCustomButton(this, 8, entityDetector.strongOutput(), this.guiLeft + 15 + 100, this.guiTop + 93, 20, 20, "", background, 216, 0, 20, 20);
 		strongOutput.setToolTips("tooltip.entityDetector.weakOutput", "tooltip.entityDetector.strongOutput");
-		
+
 		this.buttonList.add(minusX);
 		this.buttonList.add(plusX);
 
@@ -90,7 +90,7 @@ public class GuiEntityDetector extends GuiContainerBase
 		this.buttonList.add(plusZ);
 
 		this.buttonList.add(filter);
-		
+
 		this.buttonList.add(strongOutput);
 		this.buttonList.add(invert);
 	}
@@ -116,16 +116,16 @@ public class GuiEntityDetector extends GuiContainerBase
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.drawTexturedModalRect(138, 93, 176, 40, 20, 20);
 		}
-		
+
 		for (GuiButton guibutton : this.buttonList)
-        {
-            if (guibutton.isMouseOver())
-            {
-                guibutton.drawButtonForegroundLayer(mouseX - this.guiLeft, mouseY - this.guiTop);
-                break;
-            }
-        }
-		
+		{
+			if (guibutton.isMouseOver())
+			{
+				guibutton.drawButtonForegroundLayer(mouseX - this.guiLeft, mouseY - this.guiTop);
+				break;
+			}
+		}
+
 		fontRenderer.drawString(I18n.format("tile.entityDetector.name", new Object[0]), 8 + 14, 6, 4210752);
 
 		String radiusX = I18n.format("gui.entityDetector.radiusX", entityDetector.getRangeX());
@@ -157,7 +157,7 @@ public class GuiEntityDetector extends GuiContainerBase
 		{
 			invert.toggle();
 		}
-		
+
 		if (strongOutput.getValue() != entityDetector.strongOutput())
 		{
 			strongOutput.toggle();

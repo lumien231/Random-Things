@@ -31,7 +31,7 @@ public class BlockFilteredSuperLubricentPlatform extends BlockContainerBase impl
 	protected BlockFilteredSuperLubricentPlatform()
 	{
 		super("filteredSuperLubricentPlatform", Material.ICE);
-		
+
 		this.setHardness(0.5F).setLightOpacity(3);
 	}
 
@@ -112,7 +112,7 @@ public class BlockFilteredSuperLubricentPlatform extends BlockContainerBase impl
 					return;
 				}
 			}
-			
+
 			if (collidingEntity.posY < pos.getY() + 14F / 16F)
 			{
 				return;
@@ -132,8 +132,8 @@ public class BlockFilteredSuperLubricentPlatform extends BlockContainerBase impl
 		{
 			return;
 		}
-		
-		super.addCollisionBoxToList(state, worldIn, pos, mask, list, collidingEntity,p_185477_7_);
+
+		super.addCollisionBoxToList(state, worldIn, pos, mask, list, collidingEntity, p_185477_7_);
 	}
 
 	@Override

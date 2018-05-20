@@ -6,7 +6,6 @@ import lumien.randomthings.block.BlockItemCollector;
 import lumien.randomthings.config.Numbers;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
@@ -53,7 +52,7 @@ public class TileEntityItemCollector extends TileEntityBase implements ITickable
 								{
 									didSomething = true;
 								}
-								
+
 								if (left.isEmpty() || left.getCount() == 0)
 								{
 									ei.setDead();

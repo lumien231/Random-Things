@@ -35,7 +35,7 @@ public class DriverOnlineDetector extends DriverSidedTileEntity
 		{
 			super("online_detector", te);
 		}
-		
+
 		@Callback
 		public Object[] isPlayerOnline(Context context, Arguments args)
 		{

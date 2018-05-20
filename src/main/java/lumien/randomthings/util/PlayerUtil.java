@@ -14,8 +14,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 public class PlayerUtil
 {
 	static Method capturePosition;
-	
-	static 
+
+	static
 	{
 		try
 		{
@@ -27,7 +27,7 @@ public class PlayerUtil
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void capturePosition(NetHandlerPlayServer connection)
 	{
 		try
@@ -47,7 +47,7 @@ public class PlayerUtil
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static boolean isPlayerOnline(String username)
 	{
 		return RandomThings.proxy.isPlayerOnline(username);
@@ -59,7 +59,8 @@ public class PlayerUtil
 
 		FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension(player, dimension, new SimpleTeleporter(FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(dimension)));
 
-		// If a player is teleported from the end certain logic elements are ignored in transferPlayerToDimension
+		// If a player is teleported from the end certain logic elements are ignored in
+		// transferPlayerToDimension
 		if (comingFromEnd)
 		{
 			double d0 = MathHelper.clamp((int) player.posX, -29999872, 29999872);

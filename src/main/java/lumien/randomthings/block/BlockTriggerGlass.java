@@ -30,25 +30,25 @@ public class BlockTriggerGlass extends BlockBase
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3f);
-		
+
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TRIGGERED, false));
 	}
-	
+
 	@Override
 	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
 	{
 		return false;
 	}
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		if (!worldIn.isRemote && !state.getValue(TRIGGERED))
 		{
 			boolean powered = worldIn.isBlockIndirectlyGettingPowered(pos) > 0;
-			
+
 			IBlockState fromState = worldIn.getBlockState(fromPos);
-			
+
 			if (powered || fromState.getBlock() == this && fromState.getValue(TRIGGERED))
 			{
 				worldIn.setBlockState(pos, state.withProperty(TRIGGERED, true));
@@ -56,7 +56,7 @@ public class BlockTriggerGlass extends BlockBase
 			}
 		}
 	}
-	
+
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
@@ -65,7 +65,7 @@ public class BlockTriggerGlass extends BlockBase
 			worldIn.setBlockState(pos, state.withProperty(TRIGGERED, false));
 		}
 	}
-	
+
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{

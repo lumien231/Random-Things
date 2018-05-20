@@ -60,7 +60,7 @@ public class RenderVoxelProjector extends TileEntitySpecialRenderer<TileEntityVo
 
 	@Override
 	public boolean isGlobalRenderer(TileEntityVoxelProjector voxelProjector)
-    {
-        return true;
-    }
+	{
+		return true;
+	}
 }

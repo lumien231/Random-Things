@@ -51,25 +51,25 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 
 		this.setHardness(0.2f);
 	}
-	
+
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
 		return ItemStack.EMPTY;
 	}
-	
+
 	@Override
 	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager)
 	{
 		return true;
 	}
-	
+
 	@Override
 	public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager)
 	{
 		return true;
 	}
-	
+
 	@Override
 	public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles)
 	{
@@ -87,7 +87,7 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 
 	}
@@ -163,7 +163,6 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 						te.syncTE();
 
 						worldIn.playSound(null, pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1F, 0.8F);
-
 
 						boolean empty = true;
 						for (x = 0; x < runeData.length; x++)

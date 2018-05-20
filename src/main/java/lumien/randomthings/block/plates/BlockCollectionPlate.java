@@ -25,28 +25,26 @@ public class BlockCollectionPlate extends BlockBase
 	protected static final AxisAlignedBB AABB = null;
 	protected static final AxisAlignedBB VISUAL_AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.03125D, 1D);
 
-
 	public BlockCollectionPlate()
 	{
 		super("plate_collection", Material.GROUND);
-		
+
 		this.setHardness(0.3f);
 		this.setSoundType(SoundType.STONE);
 	}
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		checkForDrop(worldIn, pos, state);
 	}
-	
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		return canPlaceOn(worldIn, pos.down());
 	}
-	
+
 	private boolean canPlaceOn(World worldIn, BlockPos pos)
 	{
 		return worldIn.isSideSolid(pos, EnumFacing.UP);
@@ -69,7 +67,7 @@ public class BlockCollectionPlate extends BlockBase
 			return false;
 		}
 	}
-	
+
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
@@ -119,7 +117,7 @@ public class BlockCollectionPlate extends BlockBase
 
 		if (!worldIn.isRemote && entityIn instanceof EntityItem)
 		{
-			ItemStack stack = ((EntityItem)entityIn).getItem();
+			ItemStack stack = ((EntityItem) entityIn).getItem();
 			for (EnumFacing facing : EnumFacing.HORIZONTALS)
 			{
 				TileEntity te = worldIn.getTileEntity(pos.offset(facing));
@@ -131,14 +129,14 @@ public class BlockCollectionPlate extends BlockBase
 					if (itemHandler != null)
 					{
 						ItemStack remains = ItemHandlerHelper.insertItemStacked(itemHandler, stack, false);
-						
-						((EntityItem)entityIn).setItem(remains);
-						
+
+						((EntityItem) entityIn).setItem(remains);
+
 						if (remains.isEmpty())
 						{
 							entityIn.setDead();
 						}
-						
+
 						break;
 					}
 				}

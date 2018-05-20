@@ -43,7 +43,7 @@ public class BlockRedstonePlate extends BlockBase implements INoItem
 			ForgeRegistries.ITEMS.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 
 		this.powered = powered;
-		
+
 		this.setHardness(0.3f);
 		this.setSoundType(SoundType.STONE);
 	}

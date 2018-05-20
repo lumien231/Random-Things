@@ -25,7 +25,7 @@ public class ItemSpectreAxe extends ItemTool
 		super(ItemSpectreSword.spectreToolMaterial, EFFECTIVE_ON);
 		this.attackDamage = 8.0f;
 		this.attackSpeed = -3.0f;
-		
+
 		ItemBase.registerItem("spectreAxe", this);
 	}
 
@@ -35,17 +35,17 @@ public class ItemSpectreAxe extends ItemTool
 		Material material = state.getMaterial();
 		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
-	
+
 	@Override
-    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
-    {
-        Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
+	{
+		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
-        if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
-        {
-            multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(ItemSpectrePickaxe.MOD_UUID, "Spectre Range Modifier", 3, 0));
-        }
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
+		{
+			multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(ItemSpectrePickaxe.MOD_UUID, "Spectre Range Modifier", 3, 0));
+		}
 
-        return multimap;
-    }
+		return multimap;
+	}
 }

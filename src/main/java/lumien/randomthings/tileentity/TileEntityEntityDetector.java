@@ -135,7 +135,6 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 
 		compound.setInteger("filter", filter.ordinal());
 
-
 		compound.setBoolean("invert", invert);
 		compound.setBoolean("strongOutput", strongOutput);
 
@@ -257,7 +256,6 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 		ItemStack filterItem;
 		IEntityFilterItem filterInstance;
 
-
 		public FilterPredicate(Class filterClass, ItemStack filterItem)
 		{
 			this.filterClass = filterClass;
@@ -289,7 +287,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 		this.syncTE();
 
 		this.world.notifyNeighborsOfStateChange(pos, ModBlocks.entityDetector, false);
-		
+
 		for (EnumFacing facing : EnumFacing.VALUES)
 		{
 			this.world.notifyNeighborsOfStateChange(this.pos.offset(facing), ModBlocks.entityDetector, false);

@@ -140,8 +140,7 @@ public class FestivalHandler extends WorldSavedData
 				{
 					MessageUtil.sendToAllWatchingPos(worldObj, doorPositions.get(0), new SPacketChat(new TextComponentTranslation("festival.celebrating"), ChatType.SYSTEM));
 				}
-				
-				
+
 				boolean midnight = Math.abs(time - 18000) < 20 * 15;
 
 				if (time == 18000)

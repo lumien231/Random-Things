@@ -51,7 +51,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 
 		this.setItemHandler(3);
 		this.setItemHandlerPublic(new int[] { 0, 1 }, new int[] { 2 });
-		
+
 		this.addSlotFilter(0, new ISlotFilter()
 		{
 			@Override
@@ -60,7 +60,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 				return TileEntityFurnace.isItemFuel(is);
 			}
 		});
-		
+
 		this.addSlotFilter(1, new ISlotFilter()
 		{
 			@Override
@@ -71,15 +71,15 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 					return false;
 				}
 				List<PotionEffect> effects = PotionUtils.getEffectsFromStack(is);
-				if (effects==null || effects.size()==0)
+				if (effects == null || effects.size() == 0)
 				{
 					return false;
 				}
-				
+
 				return !effects.get(0).getPotion().isInstant();
 			}
 		});
-		
+
 		this.addSlotFilter(2, new ISlotFilter()
 		{
 			@Override

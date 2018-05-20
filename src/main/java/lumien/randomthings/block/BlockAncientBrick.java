@@ -6,7 +6,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -31,7 +30,7 @@ public class BlockAncientBrick extends BlockBase implements INoItem
 {
 	public static enum VARIANT implements IStringSerializable
 	{
-		RUNES("runes"), DEFAULT("default"),  STAR_EMPTY("empty"), STAR_FULL("full"), OUTPUT("output");
+		RUNES("runes"), DEFAULT("default"), STAR_EMPTY("empty"), STAR_FULL("full"), OUTPUT("output");
 
 		String name;
 
@@ -55,24 +54,24 @@ public class BlockAncientBrick extends BlockBase implements INoItem
 
 		this.setBlockUnbreakable().setResistance(6000000.0F);
 		this.setTickRandomly(true);
-		
+
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, VARIANT.RUNES));
 	}
-	
+
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if (!worldIn.isRemote && rand.nextInt(3) == 0)
 		{
 			IBlockState upState = worldIn.getBlockState(pos.up());
-			
+
 			if (upState.getBlock() == Blocks.SNOW_LAYER)
 			{
 				worldIn.setBlockToAir(pos.up());
 			}
 		}
 	}
-	
+
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
@@ -125,13 +124,13 @@ public class BlockAncientBrick extends BlockBase implements INoItem
 
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return getDefaultState().withProperty(TYPE, VARIANT.values()[meta]);
 	}
-	
+
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{

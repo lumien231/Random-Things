@@ -6,18 +6,13 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import com.google.common.collect.Lists;
-
 import lumien.randomthings.client.gui.elements.GuiStringList;
-import lumien.randomthings.container.ContainerEnderLetter;
 import lumien.randomthings.container.ContainerSoundRecorder;
 import lumien.randomthings.item.ItemSoundRecorder;
 import lumien.randomthings.lib.IStringCallback;
 import lumien.randomthings.network.PacketHandler;
-import lumien.randomthings.network.messages.MessageEnderLetter;
 import lumien.randomthings.network.messages.MessageSelectSound;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -46,15 +41,15 @@ public class GuiSoundRecorder extends GuiContainerBase implements IStringCallbac
 		fontRenderer.drawString(I18n.format("item.soundRecorder.name", new Object[0]), 8, 6, 4210752);
 		fontRenderer.drawString(I18n.format("container.inventory"), 15, this.ySize - 96 + 2, 4210752);
 	}
-	
+
 	@Override
 	public void handleMouseInput() throws IOException
 	{
 		super.handleMouseInput();
-		
-        int mouseX = Mouse.getEventX() * this.width / this.mc.displayWidth;
-        int mouseY = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
-		
+
+		int mouseX = Mouse.getEventX() * this.width / this.mc.displayWidth;
+		int mouseY = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
+
 		recordedSounds.handleMouseInput(mouseX, mouseY);
 	}
 
@@ -75,7 +70,7 @@ public class GuiSoundRecorder extends GuiContainerBase implements IStringCallbac
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
 		recordedSounds.drawScreen(mouseX, mouseY, partialTicks);
-		
+
 		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
@@ -109,7 +104,7 @@ public class GuiSoundRecorder extends GuiContainerBase implements IStringCallbac
 	public void pressed(String string)
 	{
 		MessageSelectSound msg = new MessageSelectSound(string);
-		
+
 		PacketHandler.INSTANCE.sendToServer(msg);
 	}
 }

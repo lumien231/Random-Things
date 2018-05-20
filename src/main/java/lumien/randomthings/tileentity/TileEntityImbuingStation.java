@@ -83,7 +83,6 @@ public class TileEntityImbuingStation extends TileEntityBase implements ITickabl
 				currentOutput = validOutput;
 			}
 
-
 			if (!this.currentOutput.isEmpty())
 			{
 				this.imbuingProgress++;

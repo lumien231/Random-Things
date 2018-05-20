@@ -2,8 +2,6 @@ package lumien.randomthings.container.slots;
 
 import com.google.common.base.Predicate;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -11,8 +9,8 @@ import net.minecraftforge.items.SlotItemHandler;
 public class SlotFilteredItemHandler extends SlotItemHandler
 {
 	Predicate<ItemStack> filterPredicate;
-	
-	public SlotFilteredItemHandler(IItemHandler itemHandler, int index, int xPosition, int yPosition,Predicate<ItemStack> filterPredicate)
+
+	public SlotFilteredItemHandler(IItemHandler itemHandler, int index, int xPosition, int yPosition, Predicate<ItemStack> filterPredicate)
 	{
 		super(itemHandler, index, xPosition, yPosition);
 

@@ -10,11 +10,11 @@ public class EffectCollapse extends PotionBase
 	public EffectCollapse()
 	{
 		super("collapse", false, Color.PINK.getRGB());
-		
+
 		this.setIcon(new ResourceLocation("randomthings:textures/gui/effects/collapse.png"));
 		this.setPotionName("Collapse");
 	}
-	
+
 	@Override
 	public boolean isBadEffect()
 	{

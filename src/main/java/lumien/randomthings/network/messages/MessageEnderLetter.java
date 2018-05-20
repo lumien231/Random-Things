@@ -51,11 +51,11 @@ public class MessageEnderLetter implements IRTMessage
 				{
 					if (equipped.getTagCompound() == null || !equipped.getTagCompound().getBoolean("received"))
 					{
-						if (equipped.getTagCompound()==null)
+						if (equipped.getTagCompound() == null)
 						{
 							equipped.setTagCompound(new NBTTagCompound());
 						}
-						
+
 						equipped.getTagCompound().setString("receiver", receiver);
 					}
 				}

@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Optional;
 
 @Optional.Interface(iface = "mezz.jei.api.ingredients.ISlowRenderItem", modid = "jei")
-public class ItemBlockLuminous extends ItemBlock  implements ILuminousItem, ISlowRenderItem
+public class ItemBlockLuminous extends ItemBlock implements ILuminousItem, ISlowRenderItem
 {
 
 	public ItemBlockLuminous(Block block)

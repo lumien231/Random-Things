@@ -9,7 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-
 public class TileEntityOnlineDetector extends TileEntityBase implements ITickable
 {
 	String username;

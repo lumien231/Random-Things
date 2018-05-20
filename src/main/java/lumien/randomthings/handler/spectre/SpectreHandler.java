@@ -205,7 +205,7 @@ public class SpectreHandler extends WorldSavedData
 			player.posX = spectrePosX;
 			player.posY = spectrePosY;
 			player.posZ = spectrePosZ;
-			
+
 			if (player.dimension != spectreDimension)
 			{
 				PlayerUtil.teleportPlayerToDimension(player, spectreDimension);
@@ -217,7 +217,7 @@ public class SpectreHandler extends WorldSavedData
 			{
 				player.setPosition(player.posX, player.posY + 1.0D, player.posZ);
 			}
-			
+
 			PlayerUtil.capturePosition(player.connection);
 		}
 		else

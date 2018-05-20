@@ -151,11 +151,11 @@ public class BlockPitcherPlant extends BlockBase
 			else
 			{
 				TileEntity te = worldIn.getTileEntity(testPos);
-				
+
 				if (te != null && te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing.getOpposite()))
 				{
 					IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing.getOpposite());
-					
+
 					if (fluidHandler != null)
 					{
 						fluidHandler.fill(new FluidStack(FluidRegistry.WATER, 1000), true);

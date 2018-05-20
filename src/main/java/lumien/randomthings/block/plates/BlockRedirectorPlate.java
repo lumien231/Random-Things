@@ -29,27 +29,26 @@ public class BlockRedirectorPlate extends BlockBase
 	public static final PropertyDirection INPUT_FACING = PropertyDirection.create("inputfacing", EnumFacing.Plane.HORIZONTAL);
 	public static final PropertyDirection OUTPUT_FACING = PropertyDirection.create("outputfacing", EnumFacing.Plane.HORIZONTAL);
 
-
 	public BlockRedirectorPlate()
 	{
 		super("plate_redirector", Material.GROUND);
-		
+
 		this.setHardness(0.3f);
 		this.setSoundType(SoundType.STONE);
 	}
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		checkForDrop(worldIn, pos, state);
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		return canPlaceOn(worldIn, pos.down());
 	}
-	
+
 	private boolean canPlaceOn(World worldIn, BlockPos pos)
 	{
 		return worldIn.isSideSolid(pos, EnumFacing.UP);
@@ -72,12 +71,12 @@ public class BlockRedirectorPlate extends BlockBase
 			return false;
 		}
 	}
-	
-    @Override
+
+	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
-    {
-        return BlockFaceShape.UNDEFINED;
-    }
+	{
+		return BlockFaceShape.UNDEFINED;
+	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

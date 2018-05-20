@@ -17,7 +17,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -54,6 +53,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", new Predicate<EnumFacing>()
 	{
+		@Override
 		public boolean apply(@Nullable EnumFacing p_apply_1_)
 		{
 			return p_apply_1_ != EnumFacing.DOWN;
@@ -85,6 +85,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		return true;
 	}
 
+	@Override
 	public int tickRate(World worldIn)
 	{
 		return 2;
@@ -97,7 +98,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 			toggles.put(worldIn, Lists.newArrayList());
 		}
 
-		List<BlockAdvancedRedstoneTorch.Toggle> list = (List) toggles.get(worldIn);
+		List<BlockAdvancedRedstoneTorch.Toggle> list = toggles.get(worldIn);
 
 		if (turnOff)
 		{
@@ -124,6 +125,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		return false;
 	}
 
+	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		if (this.isOn)
@@ -135,6 +137,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 	}
 
+	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		if (this.isOn)
@@ -146,6 +149,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 	}
 
+	@Override
 	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
 		int strengthOn = ((TileEntityAdvancedRedstoneTorch) blockAccess.getTileEntity(pos)).getSignalStrengthOn();
@@ -156,18 +160,20 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 
 	private boolean shouldBeOff(World worldIn, BlockPos pos, IBlockState state)
 	{
-		EnumFacing enumfacing = ((EnumFacing) state.getValue(FACING)).getOpposite();
+		EnumFacing enumfacing = state.getValue(FACING).getOpposite();
 		return worldIn.isSidePowered(pos.offset(enumfacing), enumfacing);
 	}
 
+	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
 	{
 	}
 
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		boolean flag = this.shouldBeOff(worldIn, pos, state);
-		List<BlockAdvancedRedstoneTorch.Toggle> list = (List) toggles.get(worldIn);
+		List<BlockAdvancedRedstoneTorch.Toggle> list = toggles.get(worldIn);
 
 		while (list != null && !list.isEmpty() && worldIn.getTotalWorldTime() - (list.get(0)).time > 60L)
 		{
@@ -186,9 +192,9 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 
 					for (int i = 0; i < 5; ++i)
 					{
-						double d0 = (double) pos.getX() + rand.nextDouble() * 0.6D + 0.2D;
-						double d1 = (double) pos.getY() + rand.nextDouble() * 0.6D + 0.2D;
-						double d2 = (double) pos.getZ() + rand.nextDouble() * 0.6D + 0.2D;
+						double d0 = pos.getX() + rand.nextDouble() * 0.6D + 0.2D;
+						double d1 = pos.getY() + rand.nextDouble() * 0.6D + 0.2D;
+						double d2 = pos.getZ() + rand.nextDouble() * 0.6D + 0.2D;
 						worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 					}
 
@@ -202,6 +208,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 	}
 
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		if (!this.onNeighborChangeInternal(worldIn, pos, state))
@@ -213,36 +220,40 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 	}
 
+	@Override
 	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
 		return side == EnumFacing.DOWN ? blockState.getWeakPower(blockAccess, pos, side) : 0;
 	}
 
+	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(ModBlocks.advancedRedstoneTorchOn);
 	}
 
+	@Override
 	public boolean canProvidePower(IBlockState state)
 	{
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{
-		double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
-		double d1 = (double) pos.getY() + 0.7D + (rand.nextDouble() - 0.5D) * 0.2D;
-		double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
-		EnumFacing enumfacing = (EnumFacing) stateIn.getValue(FACING);
+		double d0 = pos.getX() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
+		double d1 = pos.getY() + 0.7D + (rand.nextDouble() - 0.5D) * 0.2D;
+		double d2 = pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D) * 0.2D;
+		EnumFacing enumfacing = stateIn.getValue(FACING);
 
 		if (enumfacing.getAxis().isHorizontal())
 		{
 			EnumFacing enumfacing1 = enumfacing.getOpposite();
 			double d3 = 0.27D;
-			d0 += 0.27D * (double) enumfacing1.getFrontOffsetX();
+			d0 += 0.27D * enumfacing1.getFrontOffsetX();
 			d1 += 0.22D;
-			d2 += 0.27D * (double) enumfacing1.getFrontOffsetZ();
+			d2 += 0.27D * enumfacing1.getFrontOffsetZ();
 		}
 
 		if (this.isOn)
@@ -255,11 +266,13 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 	}
 
+	@Override
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
 		return new ItemStack(ModBlocks.advancedRedstoneTorchOn);
 	}
 
+	@Override
 	public boolean isAssociatedBlock(Block other)
 	{
 		return other == ModBlocks.advancedRedstoneTorchOn || other == ModBlocks.advancedRedstoneTorchOff;
@@ -283,9 +296,10 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		return new TileEntityAdvancedRedstoneTorch();
 	}
 
+	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		switch ((EnumFacing) state.getValue(FACING))
+		switch (state.getValue(FACING))
 		{
 		case EAST:
 			return TORCH_EAST_AABB;
@@ -300,17 +314,20 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 	}
 
+	@Override
 	@Nullable
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
 		return NULL_AABB;
 	}
 
+	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
@@ -322,6 +339,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		return state.getBlock().canPlaceTorchOnTop(state, worldIn, pos);
 	}
 
+	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		for (EnumFacing enumfacing : FACING.getAllowedValues())
@@ -356,6 +374,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 	}
 
+	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		if (this.canPlaceAt(worldIn, pos, facing))
@@ -384,7 +403,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 		else
 		{
-			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+			EnumFacing enumfacing = state.getValue(FACING);
 			EnumFacing.Axis enumfacing$axis = enumfacing.getAxis();
 			EnumFacing enumfacing1 = enumfacing.getOpposite();
 			BlockPos blockpos = pos.offset(enumfacing1);
@@ -414,7 +433,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 
 	protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)
 	{
-		if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, (EnumFacing) state.getValue(FACING)))
+		if (state.getBlock() == this && this.canPlaceAt(worldIn, pos, state.getValue(FACING)))
 		{
 			return true;
 		}
@@ -430,6 +449,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		}
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		IBlockState iblockstate = this.getDefaultState();
@@ -456,6 +476,7 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		return iblockstate;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{
@@ -465,11 +486,12 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 	/**
 	 * Convert the BlockState into the correct metadata value
 	 */
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		int i = 0;
 
-		switch ((EnumFacing) state.getValue(FACING))
+		switch (state.getValue(FACING))
 		{
 		case EAST:
 			i = i | 1;
@@ -492,21 +514,25 @@ public class BlockAdvancedRedstoneTorch extends BlockContainerBase implements IN
 		return i;
 	}
 
+	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot)
 	{
-		return state.withProperty(FACING, rot.rotate((EnumFacing) state.getValue(FACING)));
+		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
+	@Override
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
 	{
-		return state.withRotation(mirrorIn.toRotation((EnumFacing) state.getValue(FACING)));
+		return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
 	}
 
+	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[] { FACING });
 	}
 
+	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
 	{
 		return BlockFaceShape.UNDEFINED;

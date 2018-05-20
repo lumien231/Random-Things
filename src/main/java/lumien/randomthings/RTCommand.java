@@ -79,7 +79,7 @@ public class RTCommand extends CommandBase
 				}
 			}
 		}
-		return Collections.<String> emptyList();
+		return Collections.<String>emptyList();
 	}
 
 	@Override

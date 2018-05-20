@@ -71,7 +71,7 @@ public class TileEntityFilteredRedirectorPlate extends TileEntityBase implements
 		{
 			filter[1] = null;
 		}
-		
+
 		if (!reading)
 		{
 			this.syncTE();

@@ -5,23 +5,12 @@ import java.io.IOException;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.elements.GuiBoolButton;
-import lumien.randomthings.client.gui.elements.GuiCustomButton;
-import lumien.randomthings.client.gui.elements.GuiEnumButton;
 import lumien.randomthings.container.ContainerBlockDestabilizer;
-import lumien.randomthings.container.ContainerIronDropper;
-import lumien.randomthings.container.ContainerTE;
-import lumien.randomthings.container.redstoneinterface.ContainerAdvancedRedstoneInterface;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageContainerSignal;
 import lumien.randomthings.tileentity.TileEntityBlockDestabilizer;
-import lumien.randomthings.tileentity.TileEntityIronDropper;
-import lumien.randomthings.tileentity.TileEntityIronDropper.EFFECTS;
-import lumien.randomthings.tileentity.TileEntityIronDropper.PICKUP_DELAY;
-import lumien.randomthings.tileentity.TileEntityIronDropper.REDSTONE_MODE;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiButtonImage;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -49,19 +38,19 @@ public class GuiBlockDestabilizer extends GuiContainerBase
 
 		GuiBoolButton lazyButton = new GuiBoolButton(0, this.guiLeft + 7, this.guiTop + 7, 20, 20, new ResourceLocation("randomthings", "textures/gui/blockDestabilizer/lazy.png"), TileEntityBlockDestabilizer.class, "lazy", te);
 		this.buttonList.add(lazyButton);
-		
+
 		GuiBoolButton fuzzyButton = new GuiBoolButton(1, this.guiLeft + 33, this.guiTop + 7, 20, 20, new ResourceLocation("randomthings", "textures/gui/blockDestabilizer/fuzzy.png"), TileEntityBlockDestabilizer.class, "fuzzy", te);
 		this.buttonList.add(fuzzyButton);
 
 		GuiButton resetButton = new GuiButtonImage(2, this.guiLeft + 58, this.guiTop + 7, 20, 20, 85, 0, 20, background);
 		this.buttonList.add(resetButton);
 	}
-	
+
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
-		
+
 		if (button.id == 2)
 		{
 			MessageContainerSignal message = new MessageContainerSignal(2);
@@ -82,7 +71,8 @@ public class GuiBlockDestabilizer extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		//fontRenderer.drawString(I18n.format("tile.blockDestabilizer.name", new Object[0]), 8, 6, 4210752);
+		// fontRenderer.drawString(I18n.format("tile.blockDestabilizer.name", new
+		// Object[0]), 8, 6, 4210752);
 
 		for (GuiButton guibutton : this.buttonList)
 		{

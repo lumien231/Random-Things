@@ -22,34 +22,34 @@ public class BlockFlooBrick extends BlockContainerBase implements ILuminousBlock
 	protected BlockFlooBrick()
 	{
 		super("flooBrick", Material.ROCK, ItemBlockLuminous.class);
-		
+
 		this.setHardness(2.0F).setResistance(10.0F);
-		
+
 		this.setCreativeTab(null);
 	}
-	
+
 	@Override
-    public int quantityDropped(Random random)
-    {
-        return 0;
-    }
-	
+	public int quantityDropped(Random random)
+	{
+		return 0;
+	}
+
 	@Override
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
 	{
-		tooltip.add("§cINTERNAL BLOCK, DO NOT USE!");
+		tooltip.add("ï¿½cINTERNAL BLOCK, DO NOT USE!");
 	}
-	
+
 	@Override
 	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
 	{
-		
+
 	}
 
 	@Override

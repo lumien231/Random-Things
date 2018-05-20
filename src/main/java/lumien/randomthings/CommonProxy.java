@@ -4,7 +4,7 @@ import lumien.randomthings.entitys.EntitySoul;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class CommonProxy
-{	
+{
 	public void registerModels()
 	{
 
@@ -31,6 +31,6 @@ public class CommonProxy
 
 	public void scheduleColor(Object o)
 	{
-		
+
 	}
 }

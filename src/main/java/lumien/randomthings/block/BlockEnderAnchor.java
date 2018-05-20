@@ -28,7 +28,7 @@ public class BlockEnderAnchor extends BlockContainerBase
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te != null && te instanceof TileEntityEnderAnchor)
 		{
-			((TileEntityEnderAnchor)te).discardTicket();
+			((TileEntityEnderAnchor) te).discardTicket();
 		}
 
 		super.breakBlock(worldIn, pos, state);

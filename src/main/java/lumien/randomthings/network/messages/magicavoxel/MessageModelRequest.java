@@ -16,12 +16,12 @@ public class MessageModelRequest implements IRTMessage
 	public MessageModelRequest()
 	{
 	}
-	
+
 	public MessageModelRequest(String modelName)
 	{
 		this.modelName = modelName;
 	}
-	
+
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
@@ -44,7 +44,7 @@ public class MessageModelRequest implements IRTMessage
 			@Override
 			public void run()
 			{
-				ServerModelLibrary.getInstance().requestModel(context.getServerHandler(),modelName);
+				ServerModelLibrary.getInstance().requestModel(context.getServerHandler(), modelName);
 			}
 		});
 	}

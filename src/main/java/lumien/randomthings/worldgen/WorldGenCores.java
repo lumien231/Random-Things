@@ -216,7 +216,7 @@ public class WorldGenCores implements IWorldGenerator
 
 						InventoryUtil.shuffleInventory(te);
 					}
-					
+
 					placed = true;
 				}
 				if (placed)

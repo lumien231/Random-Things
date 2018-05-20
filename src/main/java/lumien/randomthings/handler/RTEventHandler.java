@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
@@ -37,7 +34,6 @@ import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemPortableSoundDampener;
 import lumien.randomthings.item.ItemSoundPattern;
-import lumien.randomthings.item.ItemSoundRecorder;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
@@ -61,7 +57,6 @@ import lumien.randomthings.util.WorldUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import lumien.randomthings.worldgen.WorldGenSakanade;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCompressedPowered;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -92,7 +87,6 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.management.PlayerList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -102,7 +96,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -125,13 +118,11 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.client.event.sound.PlaySoundSourceEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -148,7 +139,6 @@ import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.WorldEvent.PotentialSpawns;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
@@ -161,7 +151,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandler;
 
 public class RTEventHandler
 {
@@ -208,7 +197,7 @@ public class RTEventHandler
 			if (event.getResultSound() != null)
 			{
 				ItemStack baubleDampener = InventoryUtil.getBauble(ModItems.portableSoundDampener, thePlayer);
-				
+
 				// Bauble
 				if (!baubleDampener.isEmpty())
 				{
@@ -233,7 +222,7 @@ public class RTEventHandler
 						}
 					}
 				}
-				
+
 				// Normal
 				for (int slot = 0; slot < thePlayer.inventory.mainInventory.size(); slot++)
 				{

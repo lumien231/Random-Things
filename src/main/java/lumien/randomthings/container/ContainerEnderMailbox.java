@@ -59,7 +59,7 @@ public class ContainerEnderMailbox extends Container
 	{
 		return true;
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{

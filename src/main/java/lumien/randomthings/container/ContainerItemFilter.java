@@ -48,7 +48,7 @@ public class ContainerItemFilter extends Container
 
 		bindPlayerInventory(player.inventory);
 	}
-	
+
 	@Override
 	public boolean canMergeSlot(ItemStack stack, Slot slotIn)
 	{
@@ -75,12 +75,12 @@ public class ContainerItemFilter extends Container
 				{
 					Slot s = this.inventorySlots.get(i);
 					ItemStack ghostItem = s.getStack();
-					
+
 					if (ghostItem.isEmpty())
 					{
 						itemstack = itemstack1.copy();
 						itemstack.setCount(1);
-						
+
 						s.putStack(itemstack);
 						return ItemStack.EMPTY;
 					}

@@ -63,18 +63,18 @@ public class ModelInventoryRerouter implements IBakedModel
 	@Override
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
 	{
-		if (side == null || state == null) 
+		if (side == null || state == null)
 		{
 			return emptyList;
 		}
 
 		HashMap<EnumFacing, EnumFacing> overrideData = ((IExtendedBlockState) state).getValue(BlockInventoryRerouter.OVERRIDE_DATA);
-		
+
 		if (overrideData == null)
 		{
 			return emptyList;
 		}
-		
+
 		EnumFacing blockFacing = state.getValue(BlockInventoryRerouter.FACING);
 
 		CacheEntry entry = new CacheEntry(overrideData, blockFacing);
@@ -197,18 +197,18 @@ public class ModelInventoryRerouter implements IBakedModel
 	{
 		switch (side)
 		{
-			case DOWN:
-				return new Vec3d(vec.x, -vec.y, -vec.z);
-			case UP:
-				return new Vec3d(vec.x, vec.y, vec.z);
-			case NORTH:
-				return new Vec3d(vec.x, vec.z, -vec.y);
-			case SOUTH:
-				return new Vec3d(vec.x, -vec.z, vec.y);
-			case WEST:
-				return new Vec3d(-vec.y, vec.x, vec.z);
-			case EAST:
-				return new Vec3d(vec.y, -vec.x, vec.z);
+		case DOWN:
+			return new Vec3d(vec.x, -vec.y, -vec.z);
+		case UP:
+			return new Vec3d(vec.x, vec.y, vec.z);
+		case NORTH:
+			return new Vec3d(vec.x, vec.z, -vec.y);
+		case SOUTH:
+			return new Vec3d(vec.x, -vec.z, vec.y);
+		case WEST:
+			return new Vec3d(-vec.y, vec.x, vec.z);
+		case EAST:
+			return new Vec3d(vec.y, -vec.x, vec.z);
 		}
 		return null;
 	}

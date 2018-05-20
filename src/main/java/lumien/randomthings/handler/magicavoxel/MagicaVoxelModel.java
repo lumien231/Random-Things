@@ -22,7 +22,7 @@ public class MagicaVoxelModel
 	Palette palette;
 
 	int sizeX, sizeY, sizeZ;
-	
+
 	boolean build;
 
 	MagicaVoxelRenderModel renderModel;
@@ -34,15 +34,15 @@ public class MagicaVoxelModel
 		this.palette = palette;
 		this.build = false;
 	}
-	
+
 	public void build()
 	{
 		this.randomizedRenderModel = new MagicaVoxelRenderModel(this, true);
 		this.randomizedRenderModel.build();
-		
+
 		this.renderModel = new MagicaVoxelRenderModel(this, false);
 		this.renderModel.build();
-		
+
 		this.build = true;
 	}
 

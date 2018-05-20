@@ -156,7 +156,7 @@ public abstract class ContainerTE<E extends TileEntity> extends Container
 			}
 		}
 	}
-	
+
 	public E getTE()
 	{
 		return te;

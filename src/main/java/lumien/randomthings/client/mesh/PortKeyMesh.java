@@ -30,7 +30,7 @@ public class PortKeyMesh implements ItemMeshDefinition
 			if (modelMap != null && modelMap.containsKey(item.delegate))
 			{
 				TIntObjectHashMap<ModelResourceLocation> metaMap = modelMap.get(item.delegate);
-				
+
 				if (metaMap.contains(meta))
 				{
 					return metaMap.get(meta);

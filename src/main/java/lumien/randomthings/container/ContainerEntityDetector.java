@@ -33,10 +33,10 @@ public class ContainerEntityDetector extends Container
 				return input.getItem() instanceof IEntityFilterItem;
 			}
 		}));
-		
+
 		bindPlayerInventory(player.inventory);
 	}
-	
+
 	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
 	{
 		for (int i = 0; i < 3; i++)
@@ -58,7 +58,7 @@ public class ContainerEntityDetector extends Container
 	{
 		return this.worldObj.getTileEntity(this.pos) != entityDetector ? false : playerIn.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{

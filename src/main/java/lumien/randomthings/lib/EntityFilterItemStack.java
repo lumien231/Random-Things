@@ -7,7 +7,7 @@ public class EntityFilterItemStack
 {
 	ItemStack is;
 	IEntityFilterItem filterInstance;
-	
+
 	public EntityFilterItemStack(ItemStack is, IEntityFilterItem filterInstance)
 	{
 		this.is = is;

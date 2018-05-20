@@ -19,9 +19,9 @@ public class GuiStringList extends GuiScrollingList
 	private List<String> stringList;
 	private IStringCallback parent;
 
-	public GuiStringList(IStringCallback parent, Minecraft client, int width, int height, int posX, int posY,int screenWidth,int screenHeight, ArrayList<String> stringList)
+	public GuiStringList(IStringCallback parent, Minecraft client, int width, int height, int posX, int posY, int screenWidth, int screenHeight, ArrayList<String> stringList)
 	{
-		super(client, width, height, posY, posY + height, posX, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT,screenWidth,screenHeight);
+		super(client, width, height, posY, posY + height, posX, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT, screenWidth, screenHeight);
 
 		this.stringList = stringList;
 		this.parent = parent;
@@ -73,7 +73,7 @@ public class GuiStringList extends GuiScrollingList
 
 		fontRenderer.drawString(string, this.left + 3, var3, color);
 		GL11.glDisable(GL11.GL_SCISSOR_TEST);
-		
+
 		GlStateManager.enableLighting();
 	}
 

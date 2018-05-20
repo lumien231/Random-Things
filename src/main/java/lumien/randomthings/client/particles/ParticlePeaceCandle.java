@@ -5,7 +5,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-
 public class ParticlePeaceCandle extends ParticleBase
 {
 	/** the scale of the flame FX */
@@ -27,15 +26,15 @@ public class ParticlePeaceCandle extends ParticleBase
 		this.particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
 		this.setParticleTextureIndex(0);
 	}
-	
+
 	@Override
-    public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
-    {
+	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
+	{
 		float w = (this.particleAge + partialTicks) / this.particleMaxAge;
 		this.particleScale = this.flameScale * (1.0F - w * w * 0.5F);
-		
+
 		super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
-    }
+	}
 
 	@Override
 	public void move(double x, double y, double z)

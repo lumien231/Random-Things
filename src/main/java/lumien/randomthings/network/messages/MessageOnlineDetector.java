@@ -65,7 +65,7 @@ public class MessageOnlineDetector implements IRTMessage
 			}
 		});
 	}
-	
+
 	@Override
 	public Side getHandlingSide()
 	{

@@ -51,7 +51,7 @@ public class GuiPotionVaporizer extends GuiContainerBase
 			this.drawTexturedModalRect(x + 81, y + 18 + tankProgress, 176, 30, 14, 14 - tankProgress);
 			GlStateManager.color(1 / red, 1 / green, 1 / blue);
 		}
-		
+
 		this.drawTexturedModalRect(x + 80, y + 17, 176, 14, 16, 16);
 
 		if (container.fuelBurnTime > 0)
@@ -98,7 +98,7 @@ public class GuiPotionVaporizer extends GuiContainerBase
 						int l = potion.getStatusIconIndex();
 						this.drawTexturedModalRect(i + 6, j + 7, 0 + l % 8 * 18, 198 + l / 8 * 18, 18, 18);
 					}
-					potion.renderInventoryEffect(i, j, new PotionEffect(potion,container.durationLeft), mc);
+					potion.renderInventoryEffect(i, j, new PotionEffect(potion, container.durationLeft), mc);
 
 					String s1 = I18n.format(potion.getName(), new Object[0]);
 

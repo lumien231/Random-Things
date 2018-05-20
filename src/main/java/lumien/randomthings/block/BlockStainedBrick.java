@@ -56,7 +56,7 @@ public class BlockStainedBrick extends BlockBase implements ILuminousBlock
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;

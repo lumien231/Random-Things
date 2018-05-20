@@ -25,7 +25,7 @@ public class ContainerImbuingStation extends Container
 		this.te = (TileEntityImbuingStation) world.getTileEntity(new BlockPos(x, y, z));
 
 		IItemHandler itemHandler = te.getItemHandler();
-		
+
 		this.addSlotToContainer(new SlotItemHandler(itemHandler, 0, 80, 9));
 		this.addSlotToContainer(new SlotItemHandler(itemHandler, 1, 35, 54));
 		this.addSlotToContainer(new SlotItemHandler(itemHandler, 2, 80, 99));

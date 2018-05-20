@@ -29,23 +29,23 @@ public class BlockDirectionalAcceleratorPlate extends BlockBase
 	public BlockDirectionalAcceleratorPlate()
 	{
 		super("plate_accelerator_directional", Material.GROUND);
-		
+
 		this.setHardness(0.3f);
 		this.setSoundType(SoundType.STONE);
 	}
-	
+
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
 	{
 		checkForDrop(worldIn, pos, state);
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
 		return canPlaceOn(worldIn, pos.down());
 	}
-	
+
 	private boolean canPlaceOn(World worldIn, BlockPos pos)
 	{
 		return worldIn.isSideSolid(pos, EnumFacing.UP);
@@ -68,12 +68,12 @@ public class BlockDirectionalAcceleratorPlate extends BlockBase
 			return false;
 		}
 	}
-	
-    @Override
+
+	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
-    {
-        return BlockFaceShape.UNDEFINED;
-    }
+	{
+		return BlockFaceShape.UNDEFINED;
+	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -111,13 +111,13 @@ public class BlockDirectionalAcceleratorPlate extends BlockBase
 		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
 
 		EnumFacing acceleratingFacing = state.getValue(FACING).getOpposite();
-		
+
 		Vec3d accVector = new Vec3d(acceleratingFacing.getDirectionVec()).scale(0.1);
-		
-		Vec3d motionVec = new Vec3d(entityIn.motionX,entityIn.motionY,entityIn.motionZ);
+
+		Vec3d motionVec = new Vec3d(entityIn.motionX, entityIn.motionY, entityIn.motionZ);
 		motionVec = motionVec.add(accVector);
 
-		if (motionVec.lengthSquared() > 0.5*0.5)
+		if (motionVec.lengthSquared() > 0.5 * 0.5)
 		{
 			motionVec = motionVec.normalize().scale(0.5);
 		}
@@ -126,7 +126,7 @@ public class BlockDirectionalAcceleratorPlate extends BlockBase
 		entityIn.motionY = motionVec.y;
 		entityIn.motionZ = motionVec.z;
 	}
-	
+
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
@@ -155,7 +155,7 @@ public class BlockDirectionalAcceleratorPlate extends BlockBase
 	{
 		return new BlockStateContainer(this, new IProperty[] { FACING });
 	}
-	
+
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{

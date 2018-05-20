@@ -81,7 +81,7 @@ public class GuiBoolButton extends GuiButton
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-			this.drawTexturedModalRect(this.x, this.y, (value?1:0) * width, (i - 1) * height, this.width, this.height);
+			this.drawTexturedModalRect(this.x, this.y, (value ? 1 : 0) * width, (i - 1) * height, this.width, this.height);
 			this.mouseDragged(mc, mouseX, mouseY);
 			int j = 14737632;
 
@@ -99,7 +99,7 @@ public class GuiBoolButton extends GuiButton
 			}
 
 			this.drawCenteredString(fontrenderer, this.displayString, this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
-			
+
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		}
 	}
@@ -111,13 +111,13 @@ public class GuiBoolButton extends GuiButton
 		{
 			try
 			{
-				String toolTip = this.tooltips[field.getBoolean(instance)?1:0];
+				String toolTip = this.tooltips[field.getBoolean(instance) ? 1 : 0];
 
 				Minecraft mc = Minecraft.getMinecraft();
 				FontRenderer fontrenderer = mc.fontRenderer;
 
 				toolTip = I18n.format(toolTip);
-				GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { toolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
+				GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { toolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
 			}
 			catch (Exception e)
 			{

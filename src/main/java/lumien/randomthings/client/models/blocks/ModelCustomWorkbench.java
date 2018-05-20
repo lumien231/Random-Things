@@ -60,7 +60,7 @@ public class ModelCustomWorkbench implements IBakedModel
 	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
 	{
 		checkDefault();
-		
+
 		IBakedModel model = defaultModel;
 
 		IExtendedBlockState extendedState = (IExtendedBlockState) state;
@@ -116,7 +116,7 @@ public class ModelCustomWorkbench implements IBakedModel
 	{
 		return RenderReference.BLOCK_ITEM_TRANSFORM;
 	}
-	
+
 	private void checkDefault()
 	{
 		if (defaultModel == null)

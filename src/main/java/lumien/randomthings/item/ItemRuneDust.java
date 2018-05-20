@@ -77,7 +77,6 @@ public class ItemRuneDust extends ItemBase implements IRTItemColor
 			}
 		}
 
-
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 

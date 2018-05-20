@@ -39,11 +39,11 @@ public class BlockSakanade extends BlockBase implements IShearable
 
 		this.setCreativeTab(null);
 	}
-	
+
 	@Override
-	public void getSubBlocks( CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
-		
+
 	}
 
 	@Override

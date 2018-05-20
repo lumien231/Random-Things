@@ -50,7 +50,7 @@ public class MessageUtil
 			}
 		}
 	}
-	
+
 	public static void sendToAllWatchingPos(World worldObj, BlockPos pos, Packet packet)
 	{
 		if (worldObj.isBlockLoaded(pos))

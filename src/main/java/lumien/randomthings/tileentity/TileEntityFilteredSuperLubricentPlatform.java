@@ -15,7 +15,7 @@ public class TileEntityFilteredSuperLubricentPlatform extends TileEntityBase imp
 	InventoryBasic filterInventory;
 
 	boolean reading;
-	
+
 	public TileEntityFilteredSuperLubricentPlatform()
 	{
 		filterInventory = new InventoryBasic("FilteredSuperLubricentPlatform", false, 1);
@@ -65,7 +65,7 @@ public class TileEntityFilteredSuperLubricentPlatform extends TileEntityBase imp
 		{
 			repres = null;
 		}
-		
+
 		if (!reading)
 		{
 			this.syncTE();

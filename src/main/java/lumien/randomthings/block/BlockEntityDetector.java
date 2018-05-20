@@ -43,7 +43,7 @@ public class BlockEntityDetector extends BlockContainerBase
 
 		return te.isPowered() ? 15 : 0;
 	}
-	
+
 	@Override
 	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
@@ -92,10 +92,10 @@ public class BlockEntityDetector extends BlockContainerBase
 	{
 		TileEntityEntityDetector tileentity = (TileEntityEntityDetector) worldIn.getTileEntity(pos);
 		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity.getInventory());
-		
+
 		if (tileentity.strongOutput())
 		{
-			
+
 			for (EnumFacing facing : EnumFacing.VALUES)
 			{
 				worldIn.notifyNeighborsOfStateChange(pos.offset(facing), ModBlocks.entityDetector, false);

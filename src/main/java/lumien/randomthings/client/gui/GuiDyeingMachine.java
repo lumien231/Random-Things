@@ -83,7 +83,7 @@ public class GuiDyeingMachine extends GuiContainerBase
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
-	{	
+	{
 		this.mc.renderEngine.bindTexture(background);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;

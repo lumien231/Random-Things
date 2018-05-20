@@ -23,7 +23,7 @@ public class BlockSpectrePlank extends BlockBase
 		this.setLightOpacity(3);
 		this.setHardness(2.0F).setResistance(5.0F);
 		this.setSoundType(SoundType.WOOD);
-		
+
 		OreDictionary.registerOre("plankWood", this);
 	}
 
@@ -66,4 +66,3 @@ public class BlockSpectrePlank extends BlockBase
 		return EnumPushReaction.NORMAL;
 	}
 }
-

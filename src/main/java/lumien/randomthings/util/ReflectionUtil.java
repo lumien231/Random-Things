@@ -30,10 +30,10 @@ public class ReflectionUtil
 		{
 			entityItemAge = EntityItem.class.getDeclaredField(MCPNames.field("field_70292_b"));
 			entityItemAge.setAccessible(true);
-			
+
 			village = EntityVillager.class.getDeclaredField(MCPNames.field("field_70954_d"));
 			village.setAccessible(true);
-			
+
 			biomeName = Biome.class.getDeclaredField(MCPNames.field("field_76791_y"));
 			biomeName.setAccessible(true);
 		}
@@ -52,7 +52,7 @@ public class ReflectionUtil
 		modifierField.setAccessible(true);
 		modifierField.setInt(nameField, modifiers);
 	}
-	
+
 	public static String getBiomeName(Biome b)
 	{
 		try
@@ -67,10 +67,10 @@ public class ReflectionUtil
 		{
 			e.printStackTrace();
 		}
-		
+
 		return "";
 	}
-	
+
 	public static Village getVillage(EntityVillager villager)
 	{
 		try
@@ -85,7 +85,7 @@ public class ReflectionUtil
 		{
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
@@ -103,10 +103,10 @@ public class ReflectionUtil
 		{
 			e.printStackTrace();
 		}
-		
+
 		return 0;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public static Map<IRegistryDelegate<Item>, TIntObjectHashMap<ModelResourceLocation>> getModelMap()
 	{
@@ -126,7 +126,7 @@ public class ReflectionUtil
 			}
 			simpleShapes.setAccessible(true);
 		}
-		
+
 		try
 		{
 			return (Map<IRegistryDelegate<Item>, TIntObjectHashMap<ModelResourceLocation>>) simpleShapes.get(Minecraft.getMinecraft().getRenderItem().getItemModelMesher());

@@ -88,16 +88,15 @@ public class GuiItemFilter extends GuiContainerBase
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		for (GuiButton guibutton : this.buttonList)
-        {
-            if (guibutton.isMouseOver())
-            {
-                guibutton.drawButtonForegroundLayer(mouseX - this.guiLeft, mouseY - this.guiTop);
-                break;
-            }
-        }
-		
+		{
+			if (guibutton.isMouseOver())
+			{
+				guibutton.drawButtonForegroundLayer(mouseX - this.guiLeft, mouseY - this.guiTop);
+				break;
+			}
+		}
+
 		fontRenderer.drawString(I18n.format("item.itemFilter.name", new Object[0]), 8, 6, 4210752);
 	}
-
 
 }

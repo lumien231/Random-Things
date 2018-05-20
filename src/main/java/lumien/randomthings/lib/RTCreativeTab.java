@@ -29,7 +29,7 @@ public class RTCreativeTab extends CreativeTabs
 	public void displayAllRelevantItems(NonNullList<ItemStack> p_78018_1_)
 	{
 		super.displayAllRelevantItems(p_78018_1_);
-		
+
 		p_78018_1_.add(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), ModPotions.collapseType));
 		p_78018_1_.add(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), ModPotions.collapseTypeLong));
 		p_78018_1_.add(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), ModPotions.collapseTypeStrong));

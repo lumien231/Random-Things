@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PotionBase extends Potion
 {
 	private ResourceLocation icon;
-	
+
 	protected PotionBase(String name, boolean isBadEffectIn, int liquidColorIn)
 	{
 		super(isBadEffectIn, liquidColorIn);
@@ -21,13 +21,13 @@ public class PotionBase extends Potion
 		this.setRegistryName(new ResourceLocation("randomthings:" + name));
 		ForgeRegistries.POTIONS.register(this);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha)
 	{
 		super.renderHUDEffect(x, y, effect, mc, alpha);
-		
+
 		mc.renderEngine.bindTexture(getIcon());
 
 		GlStateManager.enableBlend();

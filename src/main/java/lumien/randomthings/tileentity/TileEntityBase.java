@@ -21,9 +21,9 @@ public abstract class TileEntityBase extends TileEntity
 {
 	private IItemHandler inventoryHandler;
 	private IItemHandler publicInventoryHandler;
-	
+
 	private HashMap<Integer, ISlotFilter> slotFilter;
-	
+
 	private Runnable inventoryChangeListener;
 
 	private boolean itemHandlerInternal = true;
@@ -39,13 +39,13 @@ public abstract class TileEntityBase extends TileEntity
 			{
 				super.onContentsChanged(slots);
 				TileEntityBase.this.markDirty();
-				
+
 				if (inventoryChangeListener != null)
 				{
 					inventoryChangeListener.run();
 				}
 			}
-			
+
 			@Override
 			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
 			{
@@ -56,24 +56,24 @@ public abstract class TileEntityBase extends TileEntity
 						return stack;
 					}
 				}
-				
+
 				return super.insertItem(slot, stack, simulate);
 			}
 		};
 	}
-	
+
 	protected void setInventoryChangeListener(Runnable runnable)
 	{
 		this.inventoryChangeListener = runnable;
 	}
-	
+
 	protected void addSlotFilter(int slot, ISlotFilter filter)
 	{
 		if (slotFilter == null)
 		{
 			slotFilter = new HashMap<Integer, ISlotFilter>();
 		}
-		
+
 		slotFilter.put(slot, filter);
 	}
 
@@ -106,7 +106,7 @@ public abstract class TileEntityBase extends TileEntity
 		{
 			compound.setBoolean("redstonePowered", redstonePowered);
 		}
-		
+
 		return compound;
 	}
 
@@ -137,19 +137,19 @@ public abstract class TileEntityBase extends TileEntity
 		{
 			this.redstonePowered = packet.getNbtCompound().getBoolean("redstonePowered");
 		}
-		
+
 		if (renderAfterData())
 		{
 			IBlockState state = this.world.getBlockState(this.pos);
 			this.world.notifyBlockUpdate(pos, state, state, 3);
 		}
 	}
-	
+
 	@Override
 	public void handleUpdateTag(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		
+
 		if (syncAdditionalData())
 		{
 			readDataFromNBT(tag, true);
@@ -165,7 +165,7 @@ public abstract class TileEntityBase extends TileEntity
 		{
 			baseCompound.setBoolean("redstonePowered", redstonePowered);
 		}
-		
+
 		if (syncAdditionalData())
 		{
 			this.writeDataToNBT(baseCompound, true);
@@ -188,12 +188,12 @@ public abstract class TileEntityBase extends TileEntity
 
 	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
-		
+
 	}
 
 	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
-		
+
 	}
 
 	public boolean renderAfterData()

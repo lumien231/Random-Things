@@ -1,7 +1,5 @@
 package lumien.randomthings.container;
 
-import lumien.randomthings.container.slots.SlotDisplay;
-import lumien.randomthings.container.slots.SlotFiltered;
 import lumien.randomthings.container.slots.SlotFilteredItemHandler;
 import lumien.randomthings.item.ItemSoundPattern;
 import lumien.randomthings.item.ModItems;

@@ -39,7 +39,6 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	@Nonnull
 	private final String localizedName;
 
-
 	public ImbuingRecipeCategory(IGuiHelper guiHelper)
 	{
 		ResourceLocation location = new ResourceLocation("randomthings:textures/gui/imbuingStation.png");
@@ -73,11 +72,11 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	@Override
 	public void drawExtras(Minecraft minecraft)
 	{
-		
+
 	}
 
 	@Override
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper,IIngredients ingredients)
+	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper, IIngredients ingredients)
 	{
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 

@@ -15,7 +15,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBlockLuminous extends BlockBase implements  ILuminousBlock
+public class BlockBlockLuminous extends BlockBase implements ILuminousBlock
 {
 	public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
@@ -35,7 +35,7 @@ public class BlockBlockLuminous extends BlockBase implements  ILuminousBlock
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;

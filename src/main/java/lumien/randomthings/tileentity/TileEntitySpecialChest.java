@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 
 public class TileEntitySpecialChest extends TileEntityLockableLoot implements ITickable
 {
-	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack> withSize(27, ItemStack.EMPTY);
+	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(27, ItemStack.EMPTY);
 
 	/** The current angle of the lid (between 0 and 1) */
 	public float lidAngle;
@@ -53,12 +53,12 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 			this.markDirty();
 		}
 	}
-	
+
 	@Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
-    {
-        return (oldState.getBlock() != newState.getBlock());
-    }
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+	{
+		return (oldState.getBlock() != newState.getBlock());
+	}
 
 	/**
 	 * Returns the number of slots in the inventory.
@@ -101,7 +101,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		this.chestContents = NonNullList.<ItemStack> withSize(this.getSizeInventory(), ItemStack.EMPTY);
+		this.chestContents = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
 
 		if (!this.checkLootAndRead(compound))
 		{
@@ -137,8 +137,8 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	}
 
 	/**
-	 * Returns the maximum stack size for a inventory slot. Seems to always be
-	 * 64, possibly will be extended.
+	 * Returns the maximum stack size for a inventory slot. Seems to always be 64,
+	 * possibly will be extended.
 	 */
 	@Override
 	public int getInventoryStackLimit()
@@ -156,7 +156,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 		int j = this.pos.getY();
 		int k = this.pos.getZ();
 		++this.ticksSinceSync;
-		
+
 		if (!this.world.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + i + j + k) % 200 == 0)
 		{
 			this.numPlayersUsing = 0;

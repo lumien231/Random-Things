@@ -21,7 +21,7 @@ public class BlockRedstoneObserver extends BlockContainerBase
 	protected BlockRedstoneObserver()
 	{
 		super("redstoneObserver", Material.ROCK);
-		
+
 		this.setHardness(2);
 	}
 
@@ -30,25 +30,25 @@ public class BlockRedstoneObserver extends BlockContainerBase
 	{
 		return new TileEntityRedstoneObserver();
 	}
-	
+
 	@Override
-    public boolean canProvidePower(IBlockState state)
-    {
-        return true;
-    }
-	
+	public boolean canProvidePower(IBlockState state)
+	{
+		return true;
+	}
+
 	@Override
 	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
 		return ((TileEntityRedstoneObserver) blockAccess.getTileEntity(pos)).getWeakPower(blockState, blockAccess, pos, side);
 	}
-	
+
 	@Override
 	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
 	{
 		return ((TileEntityRedstoneObserver) blockAccess.getTileEntity(pos)).getStrongPower(blockState, blockAccess, pos, side);
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{

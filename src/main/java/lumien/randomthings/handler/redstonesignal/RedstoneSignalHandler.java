@@ -32,7 +32,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 	{
 		this(ID);
 	}
-	
+
 	@Override
 	public boolean isDirty()
 	{
@@ -48,17 +48,17 @@ public class RedstoneSignalHandler extends WorldSavedData
 		if (handler == null)
 		{
 			handler = new RedstoneSignalHandler();
-			
+
 			overWorld.getMapStorage().setData(ID, handler);
 		}
-		
+
 		return handler;
 	}
 
 	private void updatePosition(World worldObj, BlockPos pos)
 	{
 		IBlockState targetState = worldObj.getBlockState(pos);
-		targetState.neighborChanged(worldObj, pos,  Blocks.REDSTONE_BLOCK, pos); // TODO DANGEROUS;
+		targetState.neighborChanged(worldObj, pos, Blocks.REDSTONE_BLOCK, pos); // TODO DANGEROUS;
 		worldObj.notifyNeighborsOfStateChange(pos, Blocks.REDSTONE_BLOCK, false);
 	}
 
@@ -98,7 +98,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 		}
 	}
 
-	public synchronized int getStrongPower(World worldObj, BlockPos pos,EnumFacing facing)
+	public synchronized int getStrongPower(World worldObj, BlockPos pos, EnumFacing facing)
 	{
 		pos = pos.offset(facing.getOpposite());
 		int dimension = worldObj.provider.getDimension();
@@ -147,7 +147,7 @@ public class RedstoneSignalHandler extends WorldSavedData
 		}
 
 		nbt.setTag("redstoneSignals", nbtSignalList);
-		
+
 		return nbt;
 	}
 

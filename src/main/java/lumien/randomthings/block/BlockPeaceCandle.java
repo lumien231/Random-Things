@@ -24,7 +24,7 @@ public class BlockPeaceCandle extends BlockContainerBase
 	protected BlockPeaceCandle()
 	{
 		super("peaceCandle", Material.ROCK);
-		
+
 		this.setHardness(2);
 	}
 

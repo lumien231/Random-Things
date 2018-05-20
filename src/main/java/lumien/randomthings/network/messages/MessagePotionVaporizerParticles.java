@@ -18,12 +18,12 @@ public class MessagePotionVaporizerParticles implements IRTMessage
 	List<BlockPos> affectedBlocks;
 	int color;
 
-	public MessagePotionVaporizerParticles(List<BlockPos> affectedBlocks,int color)
+	public MessagePotionVaporizerParticles(List<BlockPos> affectedBlocks, int color)
 	{
 		this.affectedBlocks = affectedBlocks;
 		this.color = color;
 	}
-	
+
 	public MessagePotionVaporizerParticles()
 	{
 		this.affectedBlocks = new ArrayList<>();

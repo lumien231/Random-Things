@@ -21,7 +21,7 @@ public class BlockNotificationInterface extends BlockContainerBase
 	protected BlockNotificationInterface()
 	{
 		super("notificationInterface", Material.ROCK);
-		
+
 		this.setHardness(2);
 	}
 
@@ -40,12 +40,12 @@ public class BlockNotificationInterface extends BlockContainerBase
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-		
+
 		if (!worldIn.isRemote && placer != null && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) instanceof TileEntityNotificationInterface)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) placer;

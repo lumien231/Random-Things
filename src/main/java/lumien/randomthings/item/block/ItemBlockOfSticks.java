@@ -10,10 +10,10 @@ public class ItemBlockOfSticks extends ItemBlock
 	public ItemBlockOfSticks(Block block)
 	{
 		super(block);
-		
+
 		this.setHasSubtypes(true);
 	}
-	
+
 	@Override
 	public int getMetadata(int damage)
 	{
@@ -27,12 +27,12 @@ public class ItemBlockOfSticks extends ItemBlock
 
 		switch (stack.getItemDamage())
 		{
-			case 0:
-				type = "normal";
-				break;
-			case 1:
-				type = "returning";
-				break;
+		case 0:
+			type = "normal";
+			break;
+		case 1:
+			type = "returning";
+			break;
 		}
 		return super.getUnlocalizedName() + "." + type;
 	}

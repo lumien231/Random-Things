@@ -38,10 +38,10 @@ public class GuiCustomButton extends GuiButton
 
 		this.textureWidth = textureWidth;
 		this.textureHeight = textureHeight;
-		
+
 		this.tooltips = Pair.of(null, null);
 	}
-	
+
 	public GuiCustomButton(GuiScreen parent, int buttonId, boolean value, int x, int y, int widthIn, int heightIn, String buttonText, ResourceLocation buttonTextures, int uX, int uY)
 	{
 		this(parent, buttonId, value, x, y, widthIn, heightIn, buttonText, buttonTextures, uX, uY, widthIn, heightIn);
@@ -85,7 +85,6 @@ public class GuiCustomButton extends GuiButton
 				color = 16777120;
 			}
 
-
 			String buttonText = this.displayString;
 			int strWidth = mc.fontRenderer.getStringWidth(buttonText);
 			int ellipsisWidth = mc.fontRenderer.getStringWidth("...");
@@ -113,7 +112,7 @@ public class GuiCustomButton extends GuiButton
 		if (toolTip != null)
 		{
 			toolTip = I18n.format(toolTip);
-			GuiUtils.drawHoveringText(Arrays.<String> asList(new String[] { toolTip }), mouseX, mouseY, parent.mc.displayWidth, parent.mc.displayHeight, -1, parent.mc.fontRenderer);
+			GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { toolTip }), mouseX, mouseY, parent.mc.displayWidth, parent.mc.displayHeight, -1, parent.mc.fontRenderer);
 		}
 	}
 

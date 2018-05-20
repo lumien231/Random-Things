@@ -59,7 +59,7 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 			facingMap.put(facing, override);
 		}
 	}
-	
+
 	static HashSet<TileEntityInventoryRerouter> circleSet = new HashSet<>();
 
 	@Override
@@ -69,7 +69,7 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 		{
 			return null;
 		}
-		
+
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
 			IBlockState myState = this.world.getBlockState(this.pos);
@@ -90,11 +90,11 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 				{
 					return null;
 				}
-				
+
 				circleSet.add(this);
 				T resultCap = facingTE.getCapability(capability, override);
 				circleSet.remove(this);
-				
+
 				return resultCap;
 			}
 		}
@@ -109,7 +109,7 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 		{
 			return false;
 		}
-		
+
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
 			IBlockState myState = this.world.getBlockState(this.pos);
@@ -130,11 +130,11 @@ public class TileEntityInventoryRerouter extends TileEntityBase
 				{
 					return false;
 				}
-				
+
 				circleSet.add(this);
 				boolean resultBool = facingTE.hasCapability(capability, override);
 				circleSet.remove(this);
-				
+
 				return resultBool;
 			}
 		}

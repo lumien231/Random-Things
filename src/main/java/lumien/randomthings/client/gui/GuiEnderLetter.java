@@ -21,23 +21,23 @@ public class GuiEnderLetter extends GuiContainerBase
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/enderLetter.png");
 
 	GuiTextField receiverName;
-	
+
 	String oldReceiver;
-	
+
 	boolean received;
 
 	public GuiEnderLetter(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerEnderLetter(player, world, x, y, z));
-		
+
 		enderLetterStack = player.inventory.getCurrentItem();
 		oldReceiver = "";
-		
+
 		if (enderLetterStack.hasTagCompound())
 		{
 			received = enderLetterStack.getTagCompound().getBoolean("received");
 		}
-		
+
 		this.xSize = 176;
 		this.ySize = 133;
 	}
@@ -66,7 +66,7 @@ public class GuiEnderLetter extends GuiContainerBase
 	public void updateScreen()
 	{
 		super.updateScreen();
-		
+
 		if (!oldReceiver.equals(receiverName.getText()))
 		{
 			oldReceiver = receiverName.getText();
@@ -84,12 +84,12 @@ public class GuiEnderLetter extends GuiContainerBase
 		receiverName.setCanLoseFocus(true);
 		receiverName.setEnabled(!received);
 		Keyboard.enableRepeatEvents(true);
-		
+
 		if (enderLetterStack.hasTagCompound() && enderLetterStack.getTagCompound().hasKey("receiver"))
 		{
 			this.oldReceiver = enderLetterStack.getTagCompound().getString("receiver");
 		}
-		
+
 		receiverName.setText(this.oldReceiver);
 	}
 

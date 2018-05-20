@@ -30,7 +30,6 @@ public class ModConfiguration
 		Worldgen.pitcherPlants = configuration.get("worldgen", "PitcherPlants", true).getBoolean();
 		Worldgen.sakanade = configuration.get("worldgen", "Sakanade", true).getBoolean();
 
-
 		// Annotation Based Config
 		doAnnoations(configuration);
 

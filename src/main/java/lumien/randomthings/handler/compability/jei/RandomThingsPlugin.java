@@ -40,31 +40,31 @@ public class RandomThingsPlugin implements IModPlugin
 	{
 		this.jeiHelpers = registry.getJeiHelpers();
 		RandomThingsPlugin.stackHelper = jeiHelpers.getStackHelper();
-		
+
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 
 		registry.handleRecipes(ImbuingRecipe.class, (recipe) -> (new ImbuingRecipeWrapper(recipe.getIngredients(), recipe.toImbue(), recipe.getResult())), IMBUE_ID);
 		registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuingStation), IMBUE_ID);
-		
+
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerImbuingStation.class, IMBUE_ID, 0, 4, 5, 36);
 
 		registry.addRecipes(lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler.imbuingRecipes, IMBUE_ID);
-		
+
 		List<IRecipeWrapper> anvilRecipes = new ArrayList<IRecipeWrapper>();
-		for (AnvilRecipe ar:lumien.randomthings.recipes.anvil.AnvilRecipeHandler.getAllRecipes())
+		for (AnvilRecipe ar : lumien.randomthings.recipes.anvil.AnvilRecipeHandler.getAllRecipes())
 		{
 			anvilRecipes.add(jeiHelpers.getVanillaRecipeFactory().createAnvilRecipe(ar.getFirst(), Lists.newArrayList(ar.getSecond()), Lists.newArrayList(ar.getOutput())));
 		}
-		
+
 		registry.addRecipes(anvilRecipes, VanillaRecipeCategoryUid.ANVIL);
 
 		registry.addRecipeClickArea(GuiImbuingStation.class, 99, 54, 22, 16, IMBUE_ID);
-		
+
 		DescriptionHandler.addDescriptions(registry);
 	}
-	
+
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry)
 	{
@@ -74,7 +74,7 @@ public class RandomThingsPlugin implements IModPlugin
 	@Override
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
 	{
-		
+
 	}
 
 	@Override

@@ -19,9 +19,9 @@ public class MessageLightRedirector implements IRTMessage
 
 	public MessageLightRedirector()
 	{
-		
+
 	}
-	
+
 	public MessageLightRedirector(int dimension, BlockPos pos)
 	{
 		this.dimension = dimension;

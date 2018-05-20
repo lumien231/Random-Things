@@ -29,14 +29,14 @@ public class RenderSpirit extends RenderLiving<EntitySpirit>
 	{
 		this.shadowSize = 0.25F * (float) 0.5;
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
-		
+
 		GlStateManager.enableLighting();
 		Minecraft.getMinecraft().entityRenderer.enableLightmap();
 	}
 
 	/**
-	 * Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime
+	 * Allows the render to do any OpenGL state modifications necessary before the
+	 * model is rendered. Args: entityLiving, partialTickTime
 	 */
 	@Override
 	protected void preRenderCallback(EntitySpirit entitylivingbaseIn, float partialTickTime)
@@ -48,8 +48,8 @@ public class RenderSpirit extends RenderLiving<EntitySpirit>
 	}
 
 	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture.
+	 * Returns the location of an entity's texture. Doesn't seem to be called unless
+	 * you call Render.bindEntityTexture.
 	 */
 	@Override
 	protected ResourceLocation getEntityTexture(EntitySpirit entity)

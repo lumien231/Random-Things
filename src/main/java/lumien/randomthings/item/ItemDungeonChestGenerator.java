@@ -213,7 +213,6 @@ public class ItemDungeonChestGenerator extends ItemBase
 									lootTable.fillInventory(chestInventory, worldIn.rand, builder.build());
 								}
 
-
 							}
 						}
 					}

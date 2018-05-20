@@ -34,10 +34,10 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 				return !input.isEmpty() && input.getItem() == ModItems.itemFilter;
 			}
 		}));
-		
+
 		bindPlayerInventory(player.inventory);
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
@@ -80,7 +80,7 @@ public class ContainerFilteredSuperLubricentPlatform extends Container
 
 		return itemstack;
 	}
-	
+
 	@Override
 	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{

@@ -60,7 +60,7 @@ public class DriverNotificationInterface extends DriverSidedTileEntity
 				if (player != null)
 				{
 					MessageNotification message = new MessageNotification(title, description, iconStack);
-					
+
 					PacketHandler.INSTANCE.sendTo(message, player);
 				}
 			}

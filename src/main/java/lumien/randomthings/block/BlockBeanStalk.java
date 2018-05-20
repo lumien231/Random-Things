@@ -75,7 +75,7 @@ public class BlockBeanStalk extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks( CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList list)
 	{
 		return;
 	}

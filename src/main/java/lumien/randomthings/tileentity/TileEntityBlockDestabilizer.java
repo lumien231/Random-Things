@@ -5,14 +5,12 @@ import java.util.Comparator;
 import java.util.HashSet;
 
 import lumien.randomthings.block.BlockBlockDestabilizer;
-import lumien.randomthings.block.BlockPotionVaporizer;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.entitys.EntityFallingBlockSpecial;
 import lumien.randomthings.lib.ContainerSynced;
 import lumien.randomthings.lib.IRedstoneSensitive;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
@@ -22,7 +20,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.registries.GameData;
 
 public class TileEntityBlockDestabilizer extends TileEntityBase implements ITickable, IRedstoneSensitive
 {
@@ -44,7 +41,7 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 
 	@ContainerSynced
 	boolean lazy;
-	
+
 	@ContainerSynced
 	boolean fuzzy;
 
@@ -367,7 +364,6 @@ public class TileEntityBlockDestabilizer extends TileEntityBase implements ITick
 				toCheck.add(pos.offset(facing));
 
 				targetBlocks = new HashSet<BlockPos>();
-
 
 				alreadyChecked = new HashSet<BlockPos>();
 

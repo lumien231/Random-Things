@@ -15,16 +15,16 @@ public class MessageNotificationInterface implements IRTMessage
 {
 	String newTitle;
 	String newDescription;
-	
+
 	BlockPos tePos;
-	
+
 	public MessageNotificationInterface(String newTitle, String newDescription, BlockPos tePos)
 	{
 		this.newTitle = newTitle;
 		this.newDescription = newDescription;
 		this.tePos = tePos;
 	}
-	
+
 	public MessageNotificationInterface()
 	{
 	}
@@ -34,7 +34,7 @@ public class MessageNotificationInterface implements IRTMessage
 	{
 		this.newTitle = ByteBufUtils.readUTF8String(buf);
 		this.newDescription = ByteBufUtils.readUTF8String(buf);
-		
+
 		this.tePos = MessageUtil.readBlockPos(buf);
 	}
 
@@ -43,7 +43,7 @@ public class MessageNotificationInterface implements IRTMessage
 	{
 		ByteBufUtils.writeUTF8String(buf, newTitle);
 		ByteBufUtils.writeUTF8String(buf, newDescription);
-		
+
 		MessageUtil.writeBlockPos(tePos, buf);
 	}
 
@@ -51,11 +51,11 @@ public class MessageNotificationInterface implements IRTMessage
 	public void onMessage(MessageContext context)
 	{
 		World world = context.getServerHandler().player.world;
-		
+
 		if (world != null)
 		{
 			TileEntity te = world.getTileEntity(tePos);
-			
+
 			if (te instanceof TileEntityNotificationInterface)
 			{
 				TileEntityNotificationInterface notInterface = (TileEntityNotificationInterface) te;

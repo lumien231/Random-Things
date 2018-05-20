@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockLightRedirector extends BlockContainerBase
 {
 	public static PropertyBool[] enabledProperties;
-	
+
 	static
 	{
 		enabledProperties = new PropertyBool[EnumFacing.VALUES.length];
@@ -39,29 +39,29 @@ public class BlockLightRedirector extends BlockContainerBase
 		this.setSoundType(SoundType.WOOD);
 		this.setHardness(2);
 	}
-	
+
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		return 0;
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return getDefaultState();
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
 			TileEntity te = worldIn.getTileEntity(pos);
-			
+
 			if (te instanceof TileEntityLightRedirector)
 			{
-				((TileEntityLightRedirector)te).toggleSide(facing);
+				((TileEntityLightRedirector) te).toggleSide(facing);
 			}
 		}
 
@@ -75,7 +75,7 @@ public class BlockLightRedirector extends BlockContainerBase
 
 		if (te instanceof TileEntityLightRedirector)
 		{
-			return ((TileEntityLightRedirector)te).makeState(state);
+			return ((TileEntityLightRedirector) te).makeState(state);
 		}
 		else
 		{

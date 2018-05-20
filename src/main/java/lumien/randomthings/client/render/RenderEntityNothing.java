@@ -15,11 +15,11 @@ public class RenderEntityNothing extends Render<Entity>
 	{
 		super(renderManager);
 	}
-	
+
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		
+
 	}
 
 	@Override

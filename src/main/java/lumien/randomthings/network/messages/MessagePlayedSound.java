@@ -15,12 +15,12 @@ public class MessagePlayedSound implements IRTMessage
 {
 	String soundName;
 	int recorderSlot;
-	
+
 	public MessagePlayedSound()
 	{
-		
+
 	}
-	
+
 	public MessagePlayedSound(String soundName, int recorderSlot)
 	{
 		this.soundName = soundName;
@@ -50,11 +50,11 @@ public class MessagePlayedSound implements IRTMessage
 			public void run()
 			{
 				EntityPlayerMP player = context.getServerHandler().player;
-				
+
 				if (player != null && recorderSlot >= 0 && recorderSlot < player.inventory.getSizeInventory())
 				{
 					ItemStack recorderStack = player.inventory.getStackInSlot(recorderSlot);
-					
+
 					if (!recorderStack.isEmpty() && recorderStack.getItem() == ModItems.soundRecorder)
 					{
 						ItemSoundRecorder.recordSound(recorderStack, soundName);

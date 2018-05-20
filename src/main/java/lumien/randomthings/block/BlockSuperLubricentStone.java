@@ -9,7 +9,7 @@ public class BlockSuperLubricentStone extends BlockBase implements ISuperLubrice
 	protected BlockSuperLubricentStone()
 	{
 		super("superlubricentstone", Material.ROCK);
-		
+
 		this.setHardness(1.5F);
 	}
 

@@ -2,7 +2,6 @@ package lumien.randomthings.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.container.ContainerPortableSoundDampener;
 import lumien.randomthings.container.ContainerSoundDampener;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +15,7 @@ public class GuiSoundDampener extends GuiContainerBase
 	public GuiSoundDampener(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerSoundDampener(player, world, x, y, z));
-		
+
 		this.xSize = 176;
 		this.ySize = 133;
 	}

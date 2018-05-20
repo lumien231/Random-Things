@@ -35,16 +35,15 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 public class EntityProjectedItem extends Entity implements IEntityAdditionalSpawnData
 {
-	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack> createKey(EntityProjectedItem.class, DataSerializers.ITEM_STACK);
+	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack>createKey(EntityProjectedItem.class, DataSerializers.ITEM_STACK);
 	/**
-	 * The age of this EntityItem (used to animate it up and down as well as
-	 * expire it)
+	 * The age of this EntityItem (used to animate it up and down as well as expire
+	 * it)
 	 */
 	private int age;
 
 	/** The health of this EntityItem. (For example, damage for tools) */
 	private int health;
-
 
 	/** The EntityItem's random initial float height. */
 	public float hoverStart;
@@ -54,8 +53,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	boolean enterInventories = true;
 
 	/**
-	 * The maximum age of this EntityItem. The item is expired once this is
-	 * reached.
+	 * The maximum age of this EntityItem. The item is expired once this is reached.
 	 */
 	public int lifespan = 20 * 60;
 
@@ -78,8 +76,8 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	}
 
 	/**
-	 * returns if this entity triggers Block.onEntityWalking on the blocks they
-	 * walk on. used for spiders and wolves to prevent them from trampling crops
+	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk
+	 * on. used for spiders and wolves to prevent them from trampling crops
 	 */
 	@Override
 	protected boolean canTriggerWalking()
@@ -352,9 +350,8 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	}
 
 	/**
-	 * Returns the ItemStack corresponding to the Entity (Note: if no item
-	 * exists, will log an error but still return an ItemStack containing
-	 * Block.stone)
+	 * Returns the ItemStack corresponding to the Entity (Note: if no item exists,
+	 * will log an error but still return an ItemStack containing Block.stone)
 	 */
 	public ItemStack getItem()
 	{

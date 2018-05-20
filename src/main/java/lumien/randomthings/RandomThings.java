@@ -101,7 +101,7 @@ public class RandomThings implements LoadingCallback
 
 		RTEventHandler eventHandler = new RTEventHandler();
 		MinecraftForge.EVENT_BUS.register(eventHandler);
-		
+
 		WorldGenEventHandler worldGenEventHandler = new WorldGenEventHandler();
 		MinecraftForge.TERRAIN_GEN_BUS.register(worldGenEventHandler);
 		MinecraftForge.EVENT_BUS.register(worldGenEventHandler);
@@ -125,7 +125,7 @@ public class RandomThings implements LoadingCallback
 
 		GameRegistry.registerWorldGenerator(new WorldGenCores(), 1000);
 		GameRegistry.registerWorldGenerator(new WorldGenAncientFurnace(), 1000);
-		
+
 		if (Loader.isModLoaded("opencomputers"))
 		{
 			OCComp.init();
@@ -139,17 +139,17 @@ public class RandomThings implements LoadingCallback
 		SyncHandler.postInit(event);
 
 		logger.log(Level.DEBUG, "Confirming ASM Transformations...");
-		
+
 		// Confirm all ASM Patches
 		asmConfirmer.confirm();
 
 		logger.log(Level.DEBUG, ClassTransformer.transformations + "/17 ASM Transformations were applied.");
 
 		CustomClassWriter.customClassLoader = null;
-		
+
 		ModRecipes.addGlowingMushroomRecipes();
-		
-		//ThermalExpansionComp.postInit(event); NU
+
+		// ThermalExpansionComp.postInit(event); NU
 	}
 
 	@EventHandler

@@ -155,7 +155,7 @@ public class TileEntityFlooBrick extends TileEntityBase
 		this.children = brickList;
 		this.facing = teleportFacing;
 	}
-	
+
 	public List<BlockPos> getChildren()
 	{
 		return children;

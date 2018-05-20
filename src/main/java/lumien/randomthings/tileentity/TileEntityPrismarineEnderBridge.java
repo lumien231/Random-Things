@@ -56,12 +56,12 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 						IBlockState nextState = world.getBlockState(nextPos);
 						if (nextState.getBlock() == ModBlocks.enderAnchor)
 						{
-							List<Entity> entityList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2),null);
-							
+							List<Entity> entityList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2), null);
+
 							if (!entityList.isEmpty())
 							{
 								BlockPos target = nextPos.up();
-								
+
 								for (Entity e : entityList)
 								{
 									if (TileEntityEnderBridge.entityWhitelist.contains(e.getClass()))
@@ -73,7 +73,7 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 
 							state = WAITING;
 						}
-						else if (!nextState.getBlock().isAir(nextState,world, nextPos))
+						else if (!nextState.getBlock().isAir(nextState, world, nextPos))
 						{
 							state = WAITING;
 						}

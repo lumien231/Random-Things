@@ -37,16 +37,16 @@ public class ItemImbue extends ItemBase
 	{
 		switch (stack.getItemDamage())
 		{
-			case FIRE:
-				return "item.imbue.fire";
-			case POISON:
-				return "item.imbue.poison";
-			case EXPERIENCE:
-				return "item.imbue.experience";
-			case WITHER:
-				return "item.imbue.wither";
-			case COLLAPSE:
-				return "item.imbue.collapse";
+		case FIRE:
+			return "item.imbue.fire";
+		case POISON:
+			return "item.imbue.poison";
+		case EXPERIENCE:
+			return "item.imbue.experience";
+		case WITHER:
+			return "item.imbue.wither";
+		case COLLAPSE:
+			return "item.imbue.collapse";
 		}
 		return "item.imbue.invalid";
 	}
@@ -101,21 +101,21 @@ public class ItemImbue extends ItemBase
 
 				switch (stack.getItemDamage())
 				{
-					case FIRE:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueFire, 60 * 20 * 20, 0, false, false));
-						break;
-					case POISON:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbuePoison, 60 * 20 * 20, 0, false, false));
-						break;
-					case EXPERIENCE:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueExperience, 60 * 20 * 20, 0, false, false));
-						break;
-					case WITHER:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueWither, 60 * 20 * 20, 0, false, false));
-						break;
-					case COLLAPSE:
-						playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueCollapse, 60 * 20 * 20, 0, false, false));
-						break;
+				case FIRE:
+					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueFire, 60 * 20 * 20, 0, false, false));
+					break;
+				case POISON:
+					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbuePoison, 60 * 20 * 20, 0, false, false));
+					break;
+				case EXPERIENCE:
+					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueExperience, 60 * 20 * 20, 0, false, false));
+					break;
+				case WITHER:
+					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueWither, 60 * 20 * 20, 0, false, false));
+					break;
+				case COLLAPSE:
+					playerIn.addPotionEffect(new PotionEffect(ModPotions.imbueCollapse, 60 * 20 * 20, 0, false, false));
+					break;
 				}
 			}
 

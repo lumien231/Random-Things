@@ -17,21 +17,21 @@ public class ItemSpectrePickaxe extends ItemPickaxe
 	public ItemSpectrePickaxe()
 	{
 		super(ItemSpectreSword.spectreToolMaterial);
-		
+
 		ItemBase.registerItem("spectrePickaxe", this);
 	}
 
 	@Override
-    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
-    {
-        Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
+	{
+		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
-        if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
-        {
-            multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(MOD_UUID, "Spectre Range Modifier", 3, 0));
-        }
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
+		{
+			multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(MOD_UUID, "Spectre Range Modifier", 3, 0));
+		}
 
-        return multimap;
-    }
+		return multimap;
+	}
 
 }

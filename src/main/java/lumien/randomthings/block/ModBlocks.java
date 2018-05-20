@@ -81,13 +81,13 @@ public class ModBlocks
 	public static BlockBlockLuminousTranslucent translucentLuminousBlock;
 	public static BlockSoundBox soundBox;
 	public static BlockSoundDampener soundDampener;
-	
+
 	public static BlockAncientFurnace ancientFurnace;
 	public static BlockAncientBrick ancientBrick;
-	
+
 	public static BlockAdvancedRedstoneRepeater unpoweredAdvancedRedstoneRepeater;
 	public static BlockAdvancedRedstoneRepeater poweredAdvancedRedstoneRepeater;
-	
+
 	public static BlockAdvancedRedstoneTorch advancedRedstoneTorchOff;
 	public static BlockAdvancedRedstoneTorch advancedRedstoneTorchOn;
 
@@ -198,10 +198,10 @@ public class ModBlocks
 		ancientBrick = new BlockAncientBrick();
 		soundBox = new BlockSoundBox();
 		soundDampener = new BlockSoundDampener();
-		
+
 		unpoweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(false);
 		poweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(true);
-		
+
 		advancedRedstoneTorchOff = new BlockAdvancedRedstoneTorch(false);
 		advancedRedstoneTorchOn = new BlockAdvancedRedstoneTorch(true);
 

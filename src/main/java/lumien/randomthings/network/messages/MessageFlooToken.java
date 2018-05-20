@@ -19,7 +19,7 @@ public class MessageFlooToken implements IRTMessage
 
 	public MessageFlooToken()
 	{
-		
+
 	}
 
 	public MessageFlooToken(int dimension, double posX, double posY, double posZ)
@@ -65,7 +65,7 @@ public class MessageFlooToken implements IRTMessage
 					for (float modZ = -1; modZ <= 1; modZ += 0.05)
 					{
 						ParticleFlooFlame particle = new ParticleFlooFlame(world, posX + modX + (Math.random() * 0.1 - 0.05), posY - 1, posZ + modZ + (Math.random() * 0.1 - 0.05), 0, Math.random() * 0.3 + 0.1, 0);
-					
+
 						Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 					}
 				}

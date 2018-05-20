@@ -29,9 +29,9 @@ public class MCPNames
 				Field dirField = gradleClass.getDeclaredField("CSV_DIR");
 				dirField.setAccessible(true);
 				File mappingDir = (File) dirField.get(null);
-				
-				fields = readMappings(new File(mappingDir , "fields.csv"));
-				methods = readMappings(new File(mappingDir , "methods.csv"));
+
+				fields = readMappings(new File(mappingDir, "fields.csv"));
+				methods = readMappings(new File(mappingDir, "methods.csv"));
 			}
 			catch (Exception e)
 			{
@@ -41,7 +41,7 @@ public class MCPNames
 				fields = readMappings(new File("./../mcp/fields.csv"));
 				methods = readMappings(new File("./../mcp/methods.csv"));
 			}
-			
+
 		}
 		else
 		{

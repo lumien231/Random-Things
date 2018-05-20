@@ -23,7 +23,7 @@ public class BlockPlayerInterface extends BlockContainerBase
 	}
 
 	@Override
-	public TileEntity createTileEntity(World world,IBlockState state)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityPlayerInterface();
 	}

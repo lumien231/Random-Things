@@ -69,7 +69,6 @@ public class BlockFluidDisplay extends BlockContainerBase implements IRTBlockCol
 				}
 			}
 
-
 		}
 		else
 		{

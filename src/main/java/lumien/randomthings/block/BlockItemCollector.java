@@ -20,7 +20,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 public class BlockItemCollector extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	
+
 	protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 1.0F - 5 / 16.0F, 0.625F, 0.625F, 1.0F);
 	protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 0.0F, 0.625F, 0.625F, 5 / 16.0F);
 	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(1.0F - 5 / 16.0F, 0.375F, 0.375F, 1.0F, 0.625F, 0.625F);
@@ -94,10 +94,10 @@ public class BlockItemCollector extends BlockContainerBase
 
 	protected static boolean func_181088_a(World p_181088_0_, BlockPos p_181088_1_, EnumFacing p_181088_2_)
 	{
-		return p_181088_2_ == EnumFacing.DOWN && isBlockInventory(p_181088_0_, p_181088_1_.down(),p_181088_2_) ? true : isBlockInventory(p_181088_0_,p_181088_1_.offset(p_181088_2_),p_181088_2_);
+		return p_181088_2_ == EnumFacing.DOWN && isBlockInventory(p_181088_0_, p_181088_1_.down(), p_181088_2_) ? true : isBlockInventory(p_181088_0_, p_181088_1_.offset(p_181088_2_), p_181088_2_);
 	}
 
-	private static boolean isBlockInventory(World worldObj, BlockPos pos,EnumFacing facing)
+	private static boolean isBlockInventory(World worldObj, BlockPos pos, EnumFacing facing)
 	{
 		TileEntity te = worldObj.getTileEntity(pos);
 
@@ -105,7 +105,7 @@ public class BlockItemCollector extends BlockContainerBase
 		{
 			return false;
 		}
-		
+
 		return te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
 	}
 
@@ -145,27 +145,27 @@ public class BlockItemCollector extends BlockContainerBase
 			return false;
 		}
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		EnumFacing enumfacing = state.getValue(FACING);
 		switch (enumfacing)
 		{
-			case EAST:
-				return EAST_AABB;
-			case WEST:
-				return WEST_AABB;
-			case SOUTH:
-				return SOUTH_AABB;
-			case NORTH:
-				return NORTH_AABB;
-			case UP:
-				return UP_AABB;
-			case DOWN:
-				return DOWN_AABB;
+		case EAST:
+			return EAST_AABB;
+		case WEST:
+			return WEST_AABB;
+		case SOUTH:
+			return SOUTH_AABB;
+		case NORTH:
+			return NORTH_AABB;
+		case UP:
+			return UP_AABB;
+		case DOWN:
+			return DOWN_AABB;
 		}
-		
+
 		return UP_AABB;
 	}
 

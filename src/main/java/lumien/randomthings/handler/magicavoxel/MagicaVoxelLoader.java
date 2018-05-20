@@ -25,34 +25,34 @@ public class MagicaVoxelLoader
 
 			switch (i)
 			{
-				case 0:
-					if (b != 'V')
-					{
-						modelInputStream.close();
-						throw new Exception("Invalid VOX Header");
-					}
-					break;
-				case 1:
-					if (b != 'O')
-					{
-						modelInputStream.close();
-						throw new Exception("Invalid VOX Header");
-					}
-					break;
-				case 2:
-					if (b != 'X')
-					{
-						modelInputStream.close();
-						throw new Exception("Invalid VOX Header");
-					}
-					break;
-				case 3:
-					if (b != ' ')
-					{
-						modelInputStream.close();
-						throw new Exception("Invalid VOX Header");
-					}
-					break;
+			case 0:
+				if (b != 'V')
+				{
+					modelInputStream.close();
+					throw new Exception("Invalid VOX Header");
+				}
+				break;
+			case 1:
+				if (b != 'O')
+				{
+					modelInputStream.close();
+					throw new Exception("Invalid VOX Header");
+				}
+				break;
+			case 2:
+				if (b != 'X')
+				{
+					modelInputStream.close();
+					throw new Exception("Invalid VOX Header");
+				}
+				break;
+			case 3:
+				if (b != ' ')
+				{
+					modelInputStream.close();
+					throw new Exception("Invalid VOX Header");
+				}
+				break;
 			}
 		}
 
@@ -128,13 +128,13 @@ public class MagicaVoxelLoader
 		modelInputStream.close();
 
 		model.build();
-		
+
 		return model;
 	}
 
 	public static MagicaVoxelModel getModel(File modelFile, File paletteFile) throws Exception
 	{
-		return getModel(new FileInputStream(modelFile),new FileInputStream(paletteFile));
+		return getModel(new FileInputStream(modelFile), new FileInputStream(paletteFile));
 	}
 
 	public static Palette getPalette(InputStream paletteInputStream) throws IOException
@@ -145,7 +145,7 @@ public class MagicaVoxelLoader
 		{
 			colorTable[i] = new Color(paletteInputStream.read(), paletteInputStream.read(), paletteInputStream.read());
 		}
-		
+
 		paletteInputStream.close();
 
 		return new Palette(colorTable);

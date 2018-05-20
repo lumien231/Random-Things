@@ -20,20 +20,20 @@ import net.minecraft.world.storage.WorldSavedData;
 public class EnderLetterHandler extends WorldSavedData
 {
 	public static String ID = "RTEnderLetters";
-	
+
 	HashMap<UUID, EnderMailboxInventory> inventoryMap;
 
 	public EnderLetterHandler(String name)
 	{
 		super(name);
-		
+
 		inventoryMap = new HashMap<>();
 	}
 
 	public EnderLetterHandler()
 	{
 		super(ID);
-		
+
 		inventoryMap = new HashMap<>();
 	}
 
@@ -50,17 +50,17 @@ public class EnderLetterHandler extends WorldSavedData
 			return inventoryMap.get(playerUUID);
 		}
 	}
-	
+
 	public static EnderLetterHandler get(World worldObj)
 	{
 		EnderLetterHandler handler = (EnderLetterHandler) worldObj.loadData(EnderLetterHandler.class, ID);
-		
-		if (handler==null)
+
+		if (handler == null)
 		{
 			handler = new EnderLetterHandler();
 			worldObj.setData(ID, handler);
 		}
-		
+
 		return handler;
 	}
 
@@ -114,7 +114,7 @@ public class EnderLetterHandler extends WorldSavedData
 		compound.setTag("entryList", nbtList);
 
 		modNBT.setTag("enderLetters", compound);
-		
+
 		return modNBT;
 	}
 
@@ -297,14 +297,14 @@ public class EnderLetterHandler extends WorldSavedData
 		public boolean isEmpty()
 		{
 			for (ItemStack itemstack : this.enderLetters)
-	        {
-	            if (!itemstack.isEmpty())
-	            {
-	                return false;
-	            }
-	        }
+			{
+				if (!itemstack.isEmpty())
+				{
+					return false;
+				}
+			}
 
-	        return true;
+			return true;
 		}
 	}
 }

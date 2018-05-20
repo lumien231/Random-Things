@@ -79,7 +79,6 @@ public class ModRecipes
 				}
 			}
 
-
 			RandomThings.instance.logger.log(Level.DEBUG, "Added " + toAdd.size() + " Glowing Mushroom Recipes");
 			conversionList.addAll(toAdd);
 		}
@@ -468,7 +467,6 @@ public class ModRecipes
 		RecipeSorter.register("luminousPowder", luminousPowderRecipe.getClass(), Category.SHAPELESS, "");
 		ForgeRegistries.RECIPES.register(luminousPowderRecipe);
 
-
 		// Emerald Compass
 		IRecipe emeraldCompassRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "emeraldcompass_settarget"))
 		{
@@ -689,11 +687,11 @@ public class ModRecipes
 				UUID uuid = ItemIDCard.getUUID(camo);
 
 				NBTTagCompound camoTag = result.getOrCreateSubCompound("camo");
-				
+
 				NBTTagCompound stackTag = new NBTTagCompound();
 				camo.writeToNBT(stackTag);
 				camoTag.setTag("stack", stackTag);
-				
+
 				return result;
 			}
 

@@ -181,7 +181,7 @@ public class SpectreCube implements IInventoryChangedListener
 	{
 		ItemStack spawnPosStack = inventory.getStackInSlot(0);
 
-		if (spawnPosStack == null || spawnPosStack.getItem()!=ModItems.positionFilter)
+		if (spawnPosStack == null || spawnPosStack.getItem() != ModItems.positionFilter)
 		{
 			spawnBlock = new BlockPos(position * 16 + 8, 0, 8);
 		}

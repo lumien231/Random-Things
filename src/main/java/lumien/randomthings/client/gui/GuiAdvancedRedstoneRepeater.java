@@ -5,25 +5,12 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.client.gui.elements.GuiBoolButton;
-import lumien.randomthings.client.gui.elements.GuiCustomButton;
-import lumien.randomthings.client.gui.elements.GuiEnumButton;
 import lumien.randomthings.container.ContainerAdvancedRedstoneRepeater;
-import lumien.randomthings.container.ContainerBlockDestabilizer;
-import lumien.randomthings.container.ContainerIronDropper;
 import lumien.randomthings.container.ContainerTE;
-import lumien.randomthings.container.redstoneinterface.ContainerAdvancedRedstoneInterface;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageContainerSignal;
 import lumien.randomthings.tileentity.TileEntityAdvancedRedstoneRepeater;
-import lumien.randomthings.tileentity.TileEntityBlockDestabilizer;
-import lumien.randomthings.tileentity.TileEntityIronDropper;
-import lumien.randomthings.tileentity.TileEntityIronDropper.EFFECTS;
-import lumien.randomthings.tileentity.TileEntityIronDropper.PICKUP_DELAY;
-import lumien.randomthings.tileentity.TileEntityIronDropper.REDSTONE_MODE;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiButtonImage;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -50,19 +37,19 @@ public class GuiAdvancedRedstoneRepeater extends GuiContainerBase
 	public void initGui()
 	{
 		super.initGui();
-		
+
 		this.buttonList.add(new GuiButtonExt(0, this.guiLeft + 5, this.guiTop + 15, 10, 10, "-"));
 		this.buttonList.add(new GuiButtonExt(1, this.guiLeft + 5 + 70, this.guiTop + 15, 10, 10, "+"));
 
 		this.buttonList.add(new GuiButtonExt(2, this.guiLeft + 5, this.guiTop + 39, 10, 10, "-"));
 		this.buttonList.add(new GuiButtonExt(3, this.guiLeft + 5 + 70, this.guiTop + 39, 10, 10, "+"));
 	}
-	
+
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
-		
+
 		MessageContainerSignal message = new MessageContainerSignal(button.id + (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? 4 : 0));
 		PacketHandler.INSTANCE.sendToServer(message);
 	}
@@ -82,11 +69,11 @@ public class GuiAdvancedRedstoneRepeater extends GuiContainerBase
 	{
 		fontRenderer.drawString(I18n.format("Turn Off Delay", new Object[0]), 7, 5, 0);
 		fontRenderer.drawString(I18n.format("Turn On Delay", new Object[0]), 9, 29, 0);
-		
-		String turnOnDelayString = ((ContainerTE<TileEntityAdvancedRedstoneRepeater>)inventorySlots).getTE().getTurnOnDelay() + "";
+
+		String turnOnDelayString = ((ContainerTE<TileEntityAdvancedRedstoneRepeater>) inventorySlots).getTE().getTurnOnDelay() + "";
 		fontRenderer.drawString(turnOnDelayString, xSize / 2 - fontRenderer.getStringWidth(turnOnDelayString) / 2, 40, 9830400);
-		
-		String turnOffDelayString = ((ContainerTE<TileEntityAdvancedRedstoneRepeater>)inventorySlots).getTE().getTurnOffDelay() + "";
+
+		String turnOffDelayString = ((ContainerTE<TileEntityAdvancedRedstoneRepeater>) inventorySlots).getTE().getTurnOffDelay() + "";
 		fontRenderer.drawString(turnOffDelayString, xSize / 2 - fontRenderer.getStringWidth(turnOffDelayString) / 2, 16, 9830400);
 
 		for (GuiButton guibutton : this.buttonList)

@@ -30,24 +30,24 @@ public class BlockIgniter extends BlockBase
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(POWERED, false));
 		this.setHardness(1.5F);
 	}
-	
+
 	@Override
 	public boolean isFireSource(World world, BlockPos pos, EnumFacing side)
 	{
 		EnumFacing facing = world.getBlockState(pos).getValue(FACING);
-		
+
 		return side == facing;
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,BlockPos changedPos)
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos changedPos)
 	{
 		EnumFacing facing = state.getValue(FACING);
 		boolean powered = state.getValue(POWERED);
 
 		boolean newPowered = worldIn.isBlockIndirectlyGettingPowered(pos) > 0;
 		worldIn.setBlockState(pos, state.withProperty(POWERED, newPowered));
-		
+
 		if (powered && !newPowered)
 		{
 			IBlockState front = worldIn.getBlockState(pos.offset(facing));

@@ -114,7 +114,7 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 	{
 		return true;
 	}
-	
+
 	@Override
 	public boolean willAutoSync(ItemStack itemstack, EntityLivingBase player)
 	{
