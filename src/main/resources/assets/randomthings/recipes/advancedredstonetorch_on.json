@@ -1,8 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "X",
-    "#"
+    " X ",
+    "X#X",
+    " S "
   ],
   "key": {
     "#": {
@@ -11,6 +12,9 @@
     },
     "X": {
       "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "minecraft:stick"
     }
   },
   "result": {
