@@ -589,6 +589,9 @@ public class ModRecipes
 				return true;
 			}
 		};
+		
+		RecipeSorter.register("emeraldCompass", emeraldCompassRecipe.getClass(), Category.SHAPELESS, "");
+		ForgeRegistries.RECIPES.register(emeraldCompassRecipe);
 
 		// Emerald Compass
 		IRecipe portKeyCamoRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "portkey_camo"))

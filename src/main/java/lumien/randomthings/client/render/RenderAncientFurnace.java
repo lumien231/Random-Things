@@ -61,10 +61,6 @@ public class RenderAncientFurnace extends TileEntitySpecialRenderer<TileEntityAn
 
 		if (state == STATE.RUNNING || (state == STATE.STARTING && counter > 100))
 		{
-			// System.out.println(transparency + "/" + counter);
-
-			// transparency = 0.1f;
-
 			GlStateManager.alphaFunc(GL11.GL_ALWAYS, 0);
 
 			GlStateManager.enableBlend();
