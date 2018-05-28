@@ -26,6 +26,7 @@ import lumien.randomthings.tileentity.TileEntityPeaceCandle;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntitySlimeCube;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
+import lumien.randomthings.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -205,7 +206,7 @@ public class AsmHandler
 
 				if (!MinecraftForge.EVENT_BUS.post(event))
 				{
-					ItemHandlerHelper.giveItemToPlayer(player, stack);
+					ItemUtil.giveItemToPlayerSilent(player, stack, -1);
 				}
 			}
 

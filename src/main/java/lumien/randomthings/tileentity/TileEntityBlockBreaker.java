@@ -12,6 +12,7 @@ import com.mojang.authlib.GameProfile;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockBlockBreaker;
 import lumien.randomthings.enchantment.ModEnchantments;
+import lumien.randomthings.util.ItemUtil;
 import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -76,7 +77,9 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		enchantmentMap.put(ModEnchantments.magnetic, 1);
 		EnchantmentHelper.setEnchantments(enchantmentMap, unbreakingIronPickaxe);
 
-		fakePlayer.get().setHeldItem(EnumHand.MAIN_HAND, unbreakingIronPickaxe);
+		fakePlayer.get().setSilent(true);
+		
+		ItemUtil.setHeldItemSilent(fakePlayer.get(), EnumHand.MAIN_HAND, unbreakingIronPickaxe);
 		fakePlayer.get().onGround = true;
 
 		fakePlayer.get().connection = new NetHandlerPlayServer(FMLCommonHandler.instance().getMinecraftServerInstance(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
