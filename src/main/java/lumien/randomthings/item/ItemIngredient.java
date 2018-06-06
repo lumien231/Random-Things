@@ -3,20 +3,25 @@ package lumien.randomthings.item;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
+import lumien.randomthings.entitys.EntityGoldenEgg;
 import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -30,7 +35,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 	public enum INGREDIENT
 	{
-		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder"), SUPERLUBRICENT_TINCTURE("superLubricentTincture"), FLOO_POWDER("flooPowder"), PLATE_BASE("plateBase"), PRECIOUS_EMERALD("preciousEmerald"), LOTUS_BLOSSOM("lotusBlossom");
+		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder"), SUPERLUBRICENT_TINCTURE("superLubricentTincture"), FLOO_POWDER("flooPowder"), PLATE_BASE("plateBase"), PRECIOUS_EMERALD("preciousEmerald"), LOTUS_BLOSSOM("lotusBlossom"), GOLDEN_EGG("goldenEgg");
 
 		public String name;
 
@@ -196,9 +201,30 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 	{
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 
-		if (getIngredient(itemstack) == ItemIngredient.INGREDIENT.LOTUS_BLOSSOM)
+		INGREDIENT ingredient = getIngredient(itemstack);
+
+		if (ingredient == ItemIngredient.INGREDIENT.LOTUS_BLOSSOM)
 		{
 			playerIn.setActiveHand(handIn);
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+		}
+		else if (ingredient == ItemIngredient.INGREDIENT.GOLDEN_EGG)
+		{
+			if (!playerIn.capabilities.isCreativeMode)
+			{
+				itemstack.shrink(1);
+			}
+
+			worldIn.playSound((EntityPlayer) null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 1F));
+
+			if (!worldIn.isRemote)
+			{
+				EntityGoldenEgg entityegg = new EntityGoldenEgg(worldIn, playerIn);
+				entityegg.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+				worldIn.spawnEntity(entityegg);
+			}
+
+			playerIn.addStat(StatList.getObjectUseStats(this));
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 		}
 

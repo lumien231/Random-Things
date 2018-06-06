@@ -16,7 +16,9 @@ public class ModEntitys
 		registerEntity(EntityProjectedItem.class, "projectedItem", 4, RandomThings.instance, 80, 20, false);
 		registerEntity(EntityTemporaryFlooFireplace.class, "flooFirePlace", 5, RandomThings.instance, 80, 20, false);
 		registerEntity(EntityFallingBlockSpecial.class, "fallingBlockSpecial", 6, RandomThings.instance, 160, 20, true);
-
+		registerEntity(EntityGoldenChicken.class, "goldenChicken", 7, RandomThings.instance, 80, 3, true);
+		registerEntity(EntityGoldenEgg.class, "goldenEgg", 8, RandomThings.instance, 64, 10, true);
+		
 		EntityRegistry.registerEgg(new ResourceLocation("randomthings", "spirit"), 0, 2550);
 	}
 

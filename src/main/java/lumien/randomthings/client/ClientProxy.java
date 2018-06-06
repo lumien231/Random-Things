@@ -19,19 +19,24 @@ import lumien.randomthings.client.render.RenderArtificialEndPortal;
 import lumien.randomthings.client.render.RenderBiomeRadar;
 import lumien.randomthings.client.render.RenderEntityNothing;
 import lumien.randomthings.client.render.RenderFallingBlockSpecial;
+import lumien.randomthings.client.render.RenderGoldenChicken;
 import lumien.randomthings.client.render.RenderProjectedItem;
 import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
 import lumien.randomthings.client.render.RenderSpecialChest;
 import lumien.randomthings.client.render.RenderSpirit;
+import lumien.randomthings.client.render.RenderThrownItem;
 import lumien.randomthings.client.render.RenderVoxelProjector;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import lumien.randomthings.entitys.EntityFallingBlockSpecial;
+import lumien.randomthings.entitys.EntityGoldenChicken;
+import lumien.randomthings.entitys.EntityGoldenEgg;
 import lumien.randomthings.entitys.EntityProjectedItem;
 import lumien.randomthings.entitys.EntityReviveCircle;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
+import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemRezStone;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.IRTBlockColor;
@@ -192,7 +197,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityProjectedItem.class, new RenderProjectedItem(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTemporaryFlooFireplace.class, new RenderEntityNothing(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFallingBlockSpecial.class, new RenderFallingBlockSpecial(Minecraft.getMinecraft().getRenderManager()));
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityGoldenChicken.class, new RenderGoldenChicken(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGoldenEgg.class, new RenderThrownItem<>(Minecraft.getMinecraft().getRenderManager(), new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.GOLDEN_EGG.id), Minecraft.getMinecraft().getRenderItem()));
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBiomeRadar.class, new RenderBiomeRadar());
