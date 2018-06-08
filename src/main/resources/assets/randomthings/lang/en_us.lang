@@ -302,6 +302,10 @@ item.runeDust.magenta.name=Magenta Runic Dust
 item.runeDust.orange.name=Orange Runic Dust
 item.runeDust.white.name=White Runic Dust
 
+item.weatherEgg_sun.name=Weather Egg <Sun>
+item.weatherEgg_rain.name=Weather Egg <Rain>
+item.weatherEgg_storm.name=Weather Egg <Storm>
+
 tooltip.general.shift=Hold §6Shift§7 for more information
 tooltip.general.empty=§8<Empty>
 tooltip.positionFilter.dimension=Dimension: %d

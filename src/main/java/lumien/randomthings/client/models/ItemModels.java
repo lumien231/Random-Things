@@ -7,6 +7,8 @@ import lumien.randomthings.client.mesh.SoundPatternMesh;
 import lumien.randomthings.client.mesh.SoundRecorderMesh;
 import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.item.ItemIngredient;
+import lumien.randomthings.item.ItemWeatherEgg;
+import lumien.randomthings.item.ItemWeatherEgg.TYPE;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -156,6 +158,7 @@ public class ItemModels
 		registerBlockOfSticks();
 		registerLuminousBlocks();
 		registerAncientBrick();
+		registerWeatherEggs();
 
 		registerRuneDust();
 
@@ -170,6 +173,14 @@ public class ItemModels
 
 		ModelLoader.setCustomMeshDefinition(ModItems.soundPattern, new SoundPatternMesh());
 		ModelBakery.registerItemVariants(ModItems.soundPattern, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundpattern_empty"), new ModelResourceLocation("randomthings:soundpattern_full") });
+	}
+
+	private static void registerWeatherEggs()
+	{
+		for (TYPE t : ItemWeatherEgg.TYPE.values())
+		{
+			ModelLoader.setCustomModelResourceLocation(ModItems.weatherEgg, t.ordinal(), new ModelResourceLocation("randomthings:weathereggs/"+t.toString().toLowerCase(), "inventory"));
+		}
 	}
 
 	private static void registerRuneDust()

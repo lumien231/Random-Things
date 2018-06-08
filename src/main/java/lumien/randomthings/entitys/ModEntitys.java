@@ -18,6 +18,8 @@ public class ModEntitys
 		registerEntity(EntityFallingBlockSpecial.class, "fallingBlockSpecial", 6, RandomThings.instance, 160, 20, true);
 		registerEntity(EntityGoldenChicken.class, "goldenChicken", 7, RandomThings.instance, 80, 3, true);
 		registerEntity(EntityGoldenEgg.class, "goldenEgg", 8, RandomThings.instance, 64, 10, true);
+		registerEntity(EntityThrownWeatherEgg.class, "thrownWeatherEgg", 9, RandomThings.instance, 64, 10, true);
+		registerEntity(EntityWeatherCloud.class, "weatherCloud", 10, RandomThings.instance, 160, 10, true);
 		
 		EntityRegistry.registerEgg(new ResourceLocation("randomthings", "spirit"), 0, 2550);
 	}

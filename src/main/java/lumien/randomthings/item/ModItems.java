@@ -48,6 +48,7 @@ public class ModItems
 	public static ItemSoundRecorder soundRecorder;
 	public static ItemPortableSoundDampener portableSoundDampener;
 	public static ItemEscapeRope escapeRope;
+	public static ItemWeatherEgg weatherEgg;
 
 	public static ItemSpectreKey spectreKey;
 	public static ItemSpectreAnchor spectreAnchor;
@@ -98,6 +99,7 @@ public class ModItems
 		soundRecorder = new ItemSoundRecorder();
 		portableSoundDampener = new ItemPortableSoundDampener();
 		escapeRope = new ItemEscapeRope();
+		weatherEgg = new ItemWeatherEgg();
 
 		grassSeeds = new ItemGrassSeeds();
 
