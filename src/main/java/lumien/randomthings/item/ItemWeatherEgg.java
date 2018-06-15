@@ -30,50 +30,53 @@ public class ItemWeatherEgg extends ItemBase
 	public ItemWeatherEgg()
 	{
 		super("weatherEgg");
-		
+
 		this.setHasSubtypes(true);
-		
+
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BehaviorProjectileDispense()
-        {
-            /**
-             * Return the projectile entity spawned by this dispense behavior.
-             */
-            protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn)
-            {
-                return new EntityThrownWeatherEgg(worldIn, position.getX(),position.getY(),position.getZ(), TYPE.values()[stackIn.getItemDamage()]);
-            }
-        });
+		{
+			/**
+			 * Return the projectile entity spawned by this dispense behavior.
+			 */
+			protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn)
+			{
+				return new EntityThrownWeatherEgg(worldIn, position.getX(), position.getY(), position.getZ(), TYPE.values()[stackIn.getItemDamage()]);
+			}
+		});
 	}
-	
+
 	@Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
-    {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
 
-        if (!playerIn.capabilities.isCreativeMode)
-        {
-            itemstack.shrink(1);
-        }
+		if (!playerIn.capabilities.isCreativeMode)
+		{
+			itemstack.shrink(1);
+		}
 
-        worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		worldIn.playSound((EntityPlayer) null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-        if (!worldIn.isRemote)
-        {
-            EntityThrownWeatherEgg entityegg = new EntityThrownWeatherEgg(worldIn, playerIn, TYPE.values()[itemstack.getItemDamage()]);
-            entityegg.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-            worldIn.spawnEntity(entityegg);
-        }
+		if (!worldIn.isRemote)
+		{
+			EntityThrownWeatherEgg entityegg = new EntityThrownWeatherEgg(worldIn, playerIn, TYPE.values()[itemstack.getItemDamage()]);
+			entityegg.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+			worldIn.spawnEntity(entityegg);
+		}
 
-        playerIn.addStat(StatList.getObjectUseStats(this));
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
-    }
+		playerIn.addStat(StatList.getObjectUseStats(this));
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+	}
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
 	{
-		for (TYPE t : TYPE.values())
+		if (tab == this.getCreativeTab())
 		{
-			items.add(new ItemStack(this, 1, t.ordinal()));
+			for (TYPE t : TYPE.values())
+			{
+				items.add(new ItemStack(this, 1, t.ordinal()));
+			}
 		}
 	}
 

@@ -88,6 +88,7 @@ public class ItemModels
 		registerBlock(ModBlocks.soundBox);
 		registerBlock(ModBlocks.soundDampener);
 		registerBlock(ModBlocks.advancedRedstoneTorchOn);
+		registerBlock(ModBlocks.blockDiaphanous);
 
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);

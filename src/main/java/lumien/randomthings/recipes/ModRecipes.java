@@ -18,11 +18,14 @@ import lumien.randomthings.item.ModItems;
 import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.recipes.imbuing.ImbuingRecipeHandler;
 import lumien.randomthings.util.ReflectionUtil;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -589,7 +592,7 @@ public class ModRecipes
 				return true;
 			}
 		};
-		
+
 		RecipeSorter.register("emeraldCompass", emeraldCompassRecipe.getClass(), Category.SHAPELESS, "");
 		ForgeRegistries.RECIPES.register(emeraldCompassRecipe);
 
@@ -707,5 +710,183 @@ public class ModRecipes
 
 		RecipeSorter.register("portKeyCamoRecipe", portKeyCamoRecipe.getClass(), Category.SHAPELESS, "");
 		ForgeRegistries.RECIPES.register(portKeyCamoRecipe);
+
+		// Diaphanous Block
+		IRecipe diaphanousRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "spectreAnchorCombine"))
+		{
+			@Override
+			public boolean matches(InventoryCrafting inv, World worldIn)
+			{
+				ItemStack diaphanous = null;
+				IBlockState target = null;
+
+				Item diaphanousItem = Item.getItemFromBlock(ModBlocks.blockDiaphanous);
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == diaphanousItem)
+						{
+							if (diaphanous == null)
+							{
+								diaphanous = is;
+							}
+							else
+							{
+								return false;
+							}
+						}
+						else
+						{
+							if (target == null)
+							{
+								Item targetItem = is.getItem();
+								if (targetItem instanceof ItemBlock)
+								{
+									ItemBlock targetItemBlock = (ItemBlock) targetItem;
+									Block targetBlock = targetItemBlock.getBlock();
+
+									if (!targetBlock.hasTileEntity())
+									{
+										try
+										{
+											IBlockState state = targetBlock.getStateFromMeta(targetItemBlock.getMetadata(is));
+
+											if (state != null)
+											{
+												target = state;
+												continue;
+											}
+										}
+										catch (Exception e)
+										{
+
+										}
+									}
+								}
+
+								return false;
+							}
+							else
+							{
+								return false;
+							}
+						}
+					}
+				}
+				return diaphanous != null && target != null;
+			}
+
+			@Override
+			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
+			{
+				ItemStack diaphanous = null;
+				IBlockState target = Blocks.STONE.getDefaultState();
+				int meta = 0;
+
+				NonNullList list = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
+				
+				Item diaphanousItem = Item.getItemFromBlock(ModBlocks.blockDiaphanous);
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() != diaphanousItem)
+						{
+							ItemStack copy = is.copy();
+							copy.setCount(1);
+							list.set(i, copy);
+						}
+					}
+				}
+
+				return list;
+			}
+
+			@Override
+			public ItemStack getRecipeOutput()
+			{
+				return new ItemStack(ModItems.spectreAnchor);
+			}
+
+			@Override
+			public ItemStack getCraftingResult(InventoryCrafting inv)
+			{
+				ItemStack diaphanous = null;
+				IBlockState target = Blocks.STONE.getDefaultState();
+				int meta = 0;
+
+				Item diaphanousItem = Item.getItemFromBlock(ModBlocks.blockDiaphanous);
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == diaphanousItem)
+						{
+							diaphanous = is;
+						}
+						else
+						{
+							Item targetItem = is.getItem();
+							if (targetItem instanceof ItemBlock)
+							{
+								ItemBlock targetItemBlock = (ItemBlock) targetItem;
+								Block targetBlock = targetItemBlock.getBlock();
+
+								if (!targetBlock.hasTileEntity())
+								{
+									try
+									{
+										IBlockState state = targetBlock.getStateFromMeta(targetItemBlock.getMetadata(is));
+
+										if (state != null)
+										{
+											target = state;
+											meta = targetItemBlock.getMetadata(is);
+											continue;
+										}
+									}
+									catch (Exception e)
+									{
+
+									}
+								}
+							}
+						}
+					}
+				}
+
+				diaphanous = diaphanous.copy();
+				diaphanous.setCount(1);
+				
+				if (!diaphanous.hasTagCompound())
+				{
+					diaphanous.setTagCompound(new NBTTagCompound());
+				}
+
+				diaphanous.getTagCompound().setString("block", target.getBlock().getRegistryName().toString());
+				diaphanous.getTagCompound().setInteger("meta", meta);
+
+				return diaphanous;
+			}
+
+			@Override
+			public boolean canFit(int width, int height)
+			{
+				return true;
+			}
+		};
+
+		RecipeSorter.register("diaphanousSet", diaphanousRecipe.getClass(), Category.SHAPELESS, "");
+		ForgeRegistries.RECIPES.register(diaphanousRecipe);
 	}
 }

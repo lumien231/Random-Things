@@ -65,6 +65,7 @@ tile.soundBox.name=Sound Box
 tile.soundDampener.name=Sound Dampener
 tile.advancedRedstoneTorch_on.name=Advanced Redstone Torch
 tile.advancedRedstoneTorch_off.name=Advanced Redstone Torch
+tile.diaphanousBlock.name=Diaphanous Block
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
