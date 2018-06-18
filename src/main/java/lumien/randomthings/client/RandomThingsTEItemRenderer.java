@@ -46,7 +46,7 @@ public class RandomThingsTEItemRenderer
 			}
 			else if (ib.getBlock() == ModBlocks.blockDiaphanous)
 			{
-				if (itemStackIn.hasTagCompound())
+				if (itemStackIn.hasTagCompound() && itemStackIn.getTagCompound().hasKey("block"))
 				{
 					NBTTagCompound compound = itemStackIn.getTagCompound();
 

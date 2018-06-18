@@ -32,7 +32,8 @@
     "nbt": 
     {
     	"block": "minecraft:stone",
-    	"meta": 0
+    	"meta": 0,
+    	"inverted": false
     }
   }
 }

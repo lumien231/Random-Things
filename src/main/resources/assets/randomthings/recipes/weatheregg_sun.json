@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OFO",
+    "SCS",
+    "OFO"
+  ],
+  "key": {
+    "O": {
+      "item":"minecraft:obsidian"
+    },
+    "C": {
+      "item":"minecraft:fire_charge"
+    },
+    "F": {
+      "item":"minecraft:feather"
+    },
+    "S": {
+      "item":"minecraft:double_plant",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "randomthings:weatheregg",
+    "data": 0,
+    "count": 2
+  }
+}

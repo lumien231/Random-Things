@@ -14,6 +14,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityWeatherCloud extends Entity implements IEntityAdditionalSpawnData
 {
@@ -99,29 +101,21 @@ public class EntityWeatherCloud extends Entity implements IEntityAdditionalSpawn
 
 		if (this.world.isRemote)
 		{
-			switch (eggType)
-			{
-				case RAIN:
-					spawnDefaultCloud();
-					for (int i = 0; i < 2; i++)
-					{
-						double t = Math.PI * 2 * Math.random();
+			spawnParticles();
+		}
 
-						double a = 0.25;
-						double b = 0.35;
-
-						a /= 1.5 + Math.random();
-						b /= 1.5 + Math.random();
-
-						double elX = a * Math.cos(t);
-						double elZ = b * Math.sin(t);
-						this.world.spawnParticle(EnumParticleTypes.WATER_WAKE, true, this.posX + elX, this.posY - 0.2, this.posZ + elZ, 0, -0.05, 0);
-					}
-
-					break;
-				case STORM:
-					spawnDefaultCloud();
-
+		age++;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	private void spawnParticles()
+	{
+		switch (eggType)
+		{
+			case RAIN:
+				spawnDefaultCloud();
+				for (int i = 0; i < 2; i++)
+				{
 					double t = Math.PI * 2 * Math.random();
 
 					double a = 0.25;
@@ -132,23 +126,37 @@ public class EntityWeatherCloud extends Entity implements IEntityAdditionalSpawn
 
 					double elX = a * Math.cos(t);
 					double elZ = b * Math.sin(t);
+					this.world.spawnParticle(EnumParticleTypes.WATER_WAKE, true, this.posX + elX, this.posY - 0.2, this.posZ + elZ, 0, -0.05, 0);
+				}
 
-					EntityColoredSmokeFX particle = new EntityColoredSmokeFX(this.world, this.posX + elX, this.posY, this.posZ + elZ, Math.random() * 0.1 - 0.05, Math.random() * 0.2 - 0.1, Math.random() * 0.1 - 0.05);
-					particle.setRBGColorF(1, 1, 0);
-					Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+				break;
+			case STORM:
+				spawnDefaultCloud();
+
+				double t = Math.PI * 2 * Math.random();
+
+				double a = 0.25;
+				double b = 0.35;
+
+				a /= 1.5 + Math.random();
+				b /= 1.5 + Math.random();
+
+				double elX = a * Math.cos(t);
+				double elZ = b * Math.sin(t);
+
+				EntityColoredSmokeFX particle = new EntityColoredSmokeFX(this.world, this.posX + elX, this.posY, this.posZ + elZ, Math.random() * 0.1 - 0.05, Math.random() * 0.2 - 0.1, Math.random() * 0.1 - 0.05);
+				particle.setRBGColorF(1, 1, 0);
+				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 
 
-					break;
-				case SUN:
-					spawnNiceCloud();
+				break;
+			case SUN:
+				spawnNiceCloud();
 
-					break;
-				default:
-					break;
-			}
+				break;
+			default:
+				break;
 		}
-
-		age++;
 	}
 
 	private void spawnDefaultCloud()
@@ -170,6 +178,7 @@ public class EntityWeatherCloud extends Entity implements IEntityAdditionalSpawn
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	private void spawnNiceCloud()
 	{
 		for (double y = -1; y <= 1; y += 1)

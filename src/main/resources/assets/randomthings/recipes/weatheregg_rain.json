@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OWO",
+    "LCL",
+    "OWO"
+  ],
+  "key": {
+    "O": {
+      "item":"minecraft:obsidian"
+    },
+    "C": {
+      "item":"minecraft:fire_charge"
+    },
+    "L": {
+      "item":"minecraft:dye",
+      "data": 4
+    },
+    "W": {
+      "type" : "minecraft:item_nbt",
+      "item": "minecraft:potion",
+      "nbt": 
+      {
+        "Potion": "minecraft:water"
+      }
+    }
+  },
+  "result": {
+    "item": "randomthings:weatheregg",
+    "data": 1,
+    "count": 2
+  }
+}

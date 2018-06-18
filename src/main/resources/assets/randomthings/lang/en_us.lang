@@ -481,6 +481,7 @@ tile.soundBox.info=A Sound Box will play the sound represented by the Sound Patt
 tile.soundDampener.info=Sound Dampeners will prevent the sounds from the sound patterns inside of it from being played in a 10 block radius around it.
 tile.globalChatDetector.info=Unlike the normal Chat Detector the Global one isn't limited to the player who placed it. It will instead react to chat messages from all players. However to "consume" messages there has to be an id card for the player who wrote the message in the global chat detector.
 tile.advancedRedstoneTorch_on.info=Unlike a normal redstone torch which just emits either a redstone signal of 15 or 0 with an advanced one you can configure the signal strength for the two states freely. It's green while powered and red while unpowered.
+tile.diaphanousBlock.info=Diaphanous Blocks change their opacity depending on the distance to the player. By combining them with any block in a crafting table you can change their appeareance to any block that doesn’t have a tileentity. By default they don’t have a collision box and vanish when you get close to them. The inverted version you get by putting them in a crafting table on their own has a collision box and appears when you get close.
 
 tile.plate_redirector.info=Entities moving over this plate are redirected towards a different direction. Right clicking the plate allows you to change that direction.
 tile.plate_filteredredirector.info=Entities moving over this plate are redirected towards a different direction depending on which filter they match.
@@ -548,3 +549,6 @@ item.soundRecorder.info=A Sound Recorder allows you to record and save sounds in
 item.portableSoundDampener.info=Portable Sound Dampeners will prevent the sounds from the sound patterns inside of it from being played for the player that has it in their inventory.
 item.escapeRope.info=Holding right click with an Escape Rope in your hand while in a cave will make it search for a way to the surface. Once it finds one you will be teleported there and the rope takes some damage. Depending on the size of the cave the search might take up to a minute. You have to keep holding right click while it searches. You can use it 21 times before it breaks.
 item.ingredient.goldenEgg.info=When thrown a Chicken with a Golden Wattle will hatch that lays gold ingots instead of eggs.
+item.weatherEgg_sun.info=When thrown it will spawn a small cloud that will start to slowly go upwards. Once it reaches the sky it will change the weather to sunny.
+item.weatherEgg_rain.info=When thrown it will spawn a small cloud that will start to slowly go upwards. Once it reaches the sky it will change the weather to rain.
+item.weatherEgg_storm.info=When thrown it will spawn a small cloud that will start to slowly go upwards. Once it reaches the sky it will change the weather to a thunderstorm.

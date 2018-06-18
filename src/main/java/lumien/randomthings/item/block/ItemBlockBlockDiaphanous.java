@@ -34,6 +34,7 @@ public class ItemBlockBlockDiaphanous extends ItemBlock
 
 			stoneDiaphanous.getTagCompound().setString("block", "minecraft:stone");
 			stoneDiaphanous.getTagCompound().setInteger("meta", 0);
+			stoneDiaphanous.getTagCompound().setBoolean("inverted", false);
 
 			items.add(stoneDiaphanous);
 		}
@@ -50,7 +51,7 @@ public class ItemBlockBlockDiaphanous extends ItemBlock
 	{
 		String display = super.getItemStackDisplayName(stack);
 
-		if (stack.hasTagCompound())
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("block"))
 		{
 			NBTTagCompound compound = stack.getTagCompound();
 			IBlockState toDisplay;

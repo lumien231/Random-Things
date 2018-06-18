@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.Profile;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -164,7 +165,7 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 						int l = (int) ((float) (j >> 8 & 255) * green);
 						int i1 = (int) ((float) (j >> 16 & 255) * blue);
 
-						if (luminous)
+						if (luminous || te.isItem())
 						{
 							k = l = i1 = 255;
 						}
@@ -194,7 +195,6 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 
 			GlStateManager.alphaFunc(GL11.GL_ALWAYS, 0);
 			RenderUtils.enableDefaultBlending();
-			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 
 			if (!te.isItem())
 			{
@@ -212,11 +212,9 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 			else
 			{
 				GlStateManager.disableLighting();
-
-				Minecraft.getMinecraft().entityRenderer.disableLightmap();
 			}
 
-			if (luminous)
+			if (luminous && !te.isItem())
 			{
 				Minecraft.getMinecraft().entityRenderer.disableLightmap();
 			}
@@ -225,11 +223,13 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 
 			if (te.isItem())
 			{
-
+				GlStateManager.enableBlend();
+				GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			}
 			else
 			{
 				GlStateManager.enableLighting();
+				GlStateManager.disableBlend();
 			}
 
 			if (luminous && !te.isItem())
@@ -239,7 +239,6 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 
 			GlStateManager.popMatrix();
 
-			GlStateManager.disableBlend();
 			GlStateManager.alphaFunc(516, 0.1F);
 		}
 		// Cube End

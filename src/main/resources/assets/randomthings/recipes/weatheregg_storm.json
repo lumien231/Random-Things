@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OSO",
+    "LCL",
+    "OSO"
+  ],
+  "key": {
+    "O": {
+      "item":"minecraft:obsidian"
+    },
+    "C": {
+      "item":"minecraft:fire_charge"
+    },
+    "L": {
+      "item":"minecraft:dye",
+      "data": 4
+    },
+    "S": {
+      "item":"minecraft:sugar"
+    }
+  },
+  "result": {
+    "item": "randomthings:weatheregg",
+    "data": 2,
+    "count": 2
+  }
+}

@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -44,6 +45,12 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 
 		this.setSoundType(SoundType.GLASS);
 		this.setHardness(0.3F);
+	}
+	
+	@Override
+	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
+	{
+		
 	}
 
 	@Override
@@ -226,7 +233,7 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 
-		if (stack.hasTagCompound())
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("block"))
 		{
 			NBTTagCompound compound = stack.getTagCompound();
 			IBlockState toDisplay;
