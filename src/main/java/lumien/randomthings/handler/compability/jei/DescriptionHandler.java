@@ -54,6 +54,10 @@ public class DescriptionHandler
 
 		removeDes(overrideMap, ModBlocks.spectreLeaf, ModBlocks.natureCore, ModBlocks.spectreLog, ModBlocks.spectrePlank, ModBlocks.specialChest, ModBlocks.superLubricentPlatform, ModBlocks.filteredSuperLubricentPlatform);
 
+		
+		// Manually Add
+		registry.addDescription(new ItemStack(ModBlocks.blockDiaphanous, 1, OreDictionary.WILDCARD_VALUE), "tile.diaphanousBlock.info");
+		
 		Stream.concat(BlockBase.rtBlockList.stream(), ItemBase.rtItemList.stream()).forEach(new Consumer<Object>()
 		{
 			@Override

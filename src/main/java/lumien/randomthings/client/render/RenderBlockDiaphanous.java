@@ -20,6 +20,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.Profile;
@@ -212,6 +213,7 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 			else
 			{
 				GlStateManager.disableLighting();
+				Minecraft.getMinecraft().entityRenderer.disableLightmap();
 			}
 
 			if (luminous && !te.isItem())
@@ -219,10 +221,12 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 				Minecraft.getMinecraft().entityRenderer.disableLightmap();
 			}
 
+			GlStateManager.disableLighting();
 			tessellator.draw();
 
 			if (te.isItem())
 			{
+				GlStateManager.enableLighting();
 				GlStateManager.enableBlend();
 				GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			}
