@@ -4,6 +4,7 @@ import java.util.Random;
 
 import lumien.randomthings.item.block.ItemBlockBlockDiaphanous;
 import lumien.randomthings.tileentity.TileEntityBlockDiaphanous;
+import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,12 +22,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,6 +47,43 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	}
 
 	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntityBlockDiaphanous te = (TileEntityBlockDiaphanous) worldIn.getTileEntity(pos);
+
+		ItemStack drop = new ItemStack(this);
+
+		IBlockState displayState = te.getDisplayState();
+
+		drop.setTagCompound(new NBTTagCompound());
+
+		drop.getTagCompound().setString("block", displayState.getBlock().getRegistryName().toString());
+		drop.getTagCompound().setInteger("meta", displayState.getBlock().getMetaFromState(displayState));
+		drop.getTagCompound().setBoolean("inverted", te.isInverted());
+
+		WorldUtil.spawnItemStack(worldIn, pos, drop);
+	}
+
+	@Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	{
+
+	}
+	
+	@Override
+	public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles)
+	{
+		TileEntityBlockDiaphanous te = (TileEntityBlockDiaphanous) worldObj.getTileEntity(blockPosition);
+
+		IBlockState display = te.getDisplayState();
+		Block b = display.getBlock();
+
+		((WorldServer)worldObj).spawnParticle(EnumParticleTypes.BLOCK_DUST, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ(), numberOfParticles, 0.0D, 0.0D, 0.0D, 0.15000000596046448D, Block.getStateId(display));
+
+		return true;
+	}
+
+	@Override
 	public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager)
 	{
 		TileEntityBlockDiaphanous te = (TileEntityBlockDiaphanous) world.getTileEntity(pos);
@@ -56,14 +97,14 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 		}
 		catch (Exception e)
 		{
-			
+
 		}
-		
+
 		return true;
 	}
 
 	static final Random rand = new Random();
-	
+
 	@Override
 	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager)
 	{
@@ -75,53 +116,53 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 			{
 				IBlockState display = te.getDisplayState();
 				Block b = display.getBlock();
-				
+
 				BlockPos pos = target.getBlockPos();
 
 				try
 				{
 					int i = pos.getX();
-		            int j = pos.getY();
-		            int k = pos.getZ();
-		            float f = 0.1F;
-		            AxisAlignedBB axisalignedbb = display.getBoundingBox(worldObj, pos);
-		            double d0 = (double)i + rand.nextDouble() * (axisalignedbb.maxX - axisalignedbb.minX - 0.20000000298023224D) + 0.10000000149011612D + axisalignedbb.minX;
-		            double d1 = (double)j + rand.nextDouble() * (axisalignedbb.maxY - axisalignedbb.minY - 0.20000000298023224D) + 0.10000000149011612D + axisalignedbb.minY;
-		            double d2 = (double)k + rand.nextDouble() * (axisalignedbb.maxZ - axisalignedbb.minZ - 0.20000000298023224D) + 0.10000000149011612D + axisalignedbb.minZ;
+					int j = pos.getY();
+					int k = pos.getZ();
+					float f = 0.1F;
+					AxisAlignedBB axisalignedbb = display.getBoundingBox(worldObj, pos);
+					double d0 = (double) i + rand.nextDouble() * (axisalignedbb.maxX - axisalignedbb.minX - 0.20000000298023224D) + 0.10000000149011612D + axisalignedbb.minX;
+					double d1 = (double) j + rand.nextDouble() * (axisalignedbb.maxY - axisalignedbb.minY - 0.20000000298023224D) + 0.10000000149011612D + axisalignedbb.minY;
+					double d2 = (double) k + rand.nextDouble() * (axisalignedbb.maxZ - axisalignedbb.minZ - 0.20000000298023224D) + 0.10000000149011612D + axisalignedbb.minZ;
 
-		            EnumFacing side = target.sideHit;
-		            
-		            if (side == EnumFacing.DOWN)
-		            {
-		                d1 = (double)j + axisalignedbb.minY - 0.10000000149011612D;
-		            }
+					EnumFacing side = target.sideHit;
 
-		            if (side == EnumFacing.UP)
-		            {
-		                d1 = (double)j + axisalignedbb.maxY + 0.10000000149011612D;
-		            }
+					if (side == EnumFacing.DOWN)
+					{
+						d1 = (double) j + axisalignedbb.minY - 0.10000000149011612D;
+					}
 
-		            if (side == EnumFacing.NORTH)
-		            {
-		                d2 = (double)k + axisalignedbb.minZ - 0.10000000149011612D;
-		            }
+					if (side == EnumFacing.UP)
+					{
+						d1 = (double) j + axisalignedbb.maxY + 0.10000000149011612D;
+					}
 
-		            if (side == EnumFacing.SOUTH)
-		            {
-		                d2 = (double)k + axisalignedbb.maxZ + 0.10000000149011612D;
-		            }
+					if (side == EnumFacing.NORTH)
+					{
+						d2 = (double) k + axisalignedbb.minZ - 0.10000000149011612D;
+					}
 
-		            if (side == EnumFacing.WEST)
-		            {
-		                d0 = (double)i + axisalignedbb.minX - 0.10000000149011612D;
-		            }
+					if (side == EnumFacing.SOUTH)
+					{
+						d2 = (double) k + axisalignedbb.maxZ + 0.10000000149011612D;
+					}
 
-		            if (side == EnumFacing.EAST)
-		            {
-		                d0 = (double)i + axisalignedbb.maxX + 0.10000000149011612D;
-		            }
+					if (side == EnumFacing.WEST)
+					{
+						d0 = (double) i + axisalignedbb.minX - 0.10000000149011612D;
+					}
 
-		        	manager.addEffect(((ParticleDigging) new ParticleDigging.Factory().createParticle(0, worldObj, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(display))).setBlockPos(pos).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F));
+					if (side == EnumFacing.EAST)
+					{
+						d0 = (double) i + axisalignedbb.maxX + 0.10000000149011612D;
+					}
+
+					manager.addEffect(((ParticleDigging) new ParticleDigging.Factory().createParticle(0, worldObj, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(display))).setBlockPos(pos).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F));
 				}
 				catch (Exception e)
 				{
@@ -153,7 +194,9 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
-		return Block.NULL_AABB;
+		TileEntity te =  worldIn.getTileEntity(pos);
+
+		return (te instanceof TileEntityBlockDiaphanous && ((TileEntityBlockDiaphanous)te).isInverted()) ? Block.FULL_BLOCK_AABB : Block.NULL_AABB;
 	}
 
 	@Override
@@ -203,6 +246,7 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 
 			TileEntityBlockDiaphanous te = (TileEntityBlockDiaphanous) worldIn.getTileEntity(pos);
 			te.setDisplayState(toDisplay);
+			te.setInverted(compound.getBoolean("inverted"));
 		}
 
 		if (!worldIn.isRemote)

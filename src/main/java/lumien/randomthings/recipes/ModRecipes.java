@@ -712,7 +712,7 @@ public class ModRecipes
 		ForgeRegistries.RECIPES.register(portKeyCamoRecipe);
 
 		// Diaphanous Block
-		IRecipe diaphanousRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "spectreAnchorCombine"))
+		IRecipe diaphanousRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "diaphanousChange"))
 		{
 			@Override
 			public boolean matches(InventoryCrafting inv, World worldIn)
@@ -788,7 +788,7 @@ public class ModRecipes
 				int meta = 0;
 
 				NonNullList list = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
-				
+
 				Item diaphanousItem = Item.getItemFromBlock(ModBlocks.blockDiaphanous);
 
 				for (int i = 0; i < inv.getSizeInventory(); i++)
@@ -812,7 +812,7 @@ public class ModRecipes
 			@Override
 			public ItemStack getRecipeOutput()
 			{
-				return new ItemStack(ModItems.spectreAnchor);
+				return new ItemStack(ModBlocks.blockDiaphanous);
 			}
 
 			@Override
@@ -867,7 +867,7 @@ public class ModRecipes
 
 				diaphanous = diaphanous.copy();
 				diaphanous.setCount(1);
-				
+
 				if (!diaphanous.hasTagCompound())
 				{
 					diaphanous.setTagCompound(new NBTTagCompound());
@@ -888,5 +888,95 @@ public class ModRecipes
 
 		RecipeSorter.register("diaphanousSet", diaphanousRecipe.getClass(), Category.SHAPELESS, "");
 		ForgeRegistries.RECIPES.register(diaphanousRecipe);
+
+		// Diaphanous Block Invert
+		IRecipe diaphanousInvertRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "diaphanousInvert"))
+		{
+			@Override
+			public boolean matches(InventoryCrafting inv, World worldIn)
+			{
+				ItemStack diaphanous = null;
+				Item diaphanousItem = Item.getItemFromBlock(ModBlocks.blockDiaphanous);
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == diaphanousItem)
+						{
+							if (diaphanous == null)
+							{
+								diaphanous = is;
+							}
+							else
+							{
+								return false;
+							}
+						}
+						else
+						{
+							return false;
+						}
+					}
+				}
+				return diaphanous != null;
+			}
+
+			@Override
+			public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
+			{
+				return NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
+			}
+
+			@Override
+			public ItemStack getRecipeOutput()
+			{
+				return new ItemStack(ModBlocks.blockDiaphanous);
+			}
+
+			@Override
+			public ItemStack getCraftingResult(InventoryCrafting inv)
+			{
+				ItemStack diaphanous = null;
+				
+				Item diaphanousItem = Item.getItemFromBlock(ModBlocks.blockDiaphanous);
+
+				for (int i = 0; i < inv.getSizeInventory(); i++)
+				{
+					ItemStack is = inv.getStackInSlot(i);
+
+					if (!is.isEmpty())
+					{
+						if (is.getItem() == diaphanousItem)
+						{
+							diaphanous = is;
+						}
+					}
+				}
+
+				diaphanous = diaphanous.copy();
+				diaphanous.setCount(1);
+
+				if (!diaphanous.hasTagCompound())
+				{
+					diaphanous.setTagCompound(new NBTTagCompound());
+				}
+
+				diaphanous.getTagCompound().setBoolean("inverted", !diaphanous.getTagCompound().getBoolean("inverted"));
+
+				return diaphanous;
+			}
+
+			@Override
+			public boolean canFit(int width, int height)
+			{
+				return true;
+			}
+		};
+
+		RecipeSorter.register("diaphanousInvert", diaphanousInvertRecipe.getClass(), Category.SHAPELESS, "");
+		ForgeRegistries.RECIPES.register(diaphanousInvertRecipe);
 	}
 }

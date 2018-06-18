@@ -45,7 +45,7 @@ import net.minecraftforge.client.model.pipeline.VertexBufferConsumer;
 public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityBlockDiaphanous>
 {
 	static Field rawIntBuffer;
-	
+
 	static
 	{
 		try
@@ -62,9 +62,7 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 		}
 		rawIntBuffer.setAccessible(true);
 	}
-	
-	
-	
+
 	@Override
 	public void render(TileEntityBlockDiaphanous te, double x, double y, double z, float partialTicks, int destroyStage, float wat)
 	{
@@ -85,11 +83,18 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 
 		if (te.isItem())
 		{
-			alpha = (float) (Math.sin(RTEventHandler.clientAnimationCounter/20D) * 0.3 + 0.3 + 0.4);
+			alpha = (float) (Math.sin(RTEventHandler.clientAnimationCounter / 20D) * 0.3 + 0.3 + 0.4);
 		}
 		else
 		{
-			alpha = -1F / 2 * ((float) Math.cos(Math.PI * Math.min(Math.max(0, distance - 8), 25) / 25) - 1);
+			if (te.isInverted())
+			{
+				alpha = 1 - (-1F / 2 * ((float) Math.cos(Math.PI * Math.min(Math.max(0, distance - 8), 25) / 25) - 1));
+			}
+			else
+			{
+				alpha = -1F / 2 * ((float) Math.cos(Math.PI * Math.min(Math.max(0, distance - 8), 25) / 25) - 1);
+			}
 		}
 
 		if (!te.isItem() && thePlayer != null)
@@ -116,7 +121,7 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 
 			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 			GlStateManager.pushMatrix();
-			
+
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder bufferbuilder = tessellator.getBuffer();
 
@@ -220,7 +225,7 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 
 			if (te.isItem())
 			{
-				
+
 			}
 			else
 			{

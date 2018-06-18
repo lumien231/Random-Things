@@ -1,0 +1,38 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " G ",
+    "RQB",
+    " Y "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:stained_glass",
+      "data": 14
+    },
+    "G": {
+      "item": "minecraft:stained_glass",
+      "data": 13
+    },
+    "B": {
+      "item": "minecraft:stained_glass",
+      "data": 11
+    },
+    "Y": {
+      "item": "minecraft:stained_glass",
+      "data": 4
+    },
+    "Q": {
+      "item": "randomthings:quartzglass"
+    }
+  },
+  "result": {
+    "item": "randomthings:diaphanousblock",
+    "count": 4,
+    "nbt": 
+    {
+    	"block": "minecraft:stone",
+    	"meta": 0
+    }
+  }
+}

@@ -20,6 +20,7 @@ public class TileEntityBlockDiaphanous extends TileEntityBase
 	HashMap<EnumFacing, Boolean> renderMap;
 	
 	boolean isItem = false;
+	boolean inverted = false;
 
 	public TileEntityBlockDiaphanous()
 	{
@@ -51,6 +52,16 @@ public class TileEntityBlockDiaphanous extends TileEntityBase
 	{
 		return true;
 	}
+	
+	public void setInverted(boolean inverted)
+	{
+		this.inverted = inverted;
+	}
+	
+	public boolean isInverted()
+	{
+		return inverted;
+	}
 
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
@@ -62,6 +73,8 @@ public class TileEntityBlockDiaphanous extends TileEntityBase
 
 		compound.setString("block", toDisplay.getBlock().getRegistryName().toString());
 		compound.setInteger("meta", toDisplay.getBlock().getMetaFromState(toDisplay));
+		
+		compound.setBoolean("inverted", inverted);
 	}
 
 	@Override
@@ -84,6 +97,8 @@ public class TileEntityBlockDiaphanous extends TileEntityBase
 			e.printStackTrace();
 			toDisplay = Blocks.STONE.getDefaultState();
 		}
+		
+		this.inverted = compound.getBoolean("inverted");
 	}
 
 	@Override

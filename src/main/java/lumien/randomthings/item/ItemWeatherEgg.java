@@ -71,7 +71,7 @@ public class ItemWeatherEgg extends ItemBase
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
 	{
-		if (tab == this.getCreativeTab())
+		if (this.isInCreativeTab(tab))
 		{
 			for (TYPE t : TYPE.values())
 			{
