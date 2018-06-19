@@ -24,9 +24,10 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.lib.INoItem;
+import lumien.randomthings.lib.IStringCallback;
 import lumien.randomthings.tileentity.TileEntityAncientFurnace;
 
-public class BlockAncientBrick extends BlockBase implements INoItem
+public class BlockAncientBrick extends BlockBase
 {
 	public static enum VARIANT implements IStringSerializable
 	{
@@ -54,7 +55,7 @@ public class BlockAncientBrick extends BlockBase implements INoItem
 
 		this.setBlockUnbreakable().setResistance(6000000.0F);
 		this.setTickRandomly(true);
-
+		
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, VARIANT.RUNES));
 	}
 
@@ -82,10 +83,6 @@ public class BlockAncientBrick extends BlockBase implements INoItem
 	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
 	{
 		items.add(new ItemStack(this, 1, 0));
-		items.add(new ItemStack(this, 1, 1));
-		items.add(new ItemStack(this, 1, 2));
-		items.add(new ItemStack(this, 1, 3));
-		items.add(new ItemStack(this, 1, 4));
 	}
 
 	@Override

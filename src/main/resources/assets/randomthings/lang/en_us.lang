@@ -67,6 +67,7 @@ tile.advancedRedstoneTorch_on.name=Advanced Redstone Torch
 tile.advancedRedstoneTorch_off.name=Advanced Redstone Torch
 tile.diaphanousBlock.name=Diaphanous Block
 tile.diaphanousBlock_inverted.name=Inverted Diaphanous Block
+tile.ancientBrick.name=Ancient Brick [INTERNAL]
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
