@@ -89,6 +89,7 @@ public class ItemModels
 		registerBlock(ModBlocks.soundDampener);
 		registerBlock(ModBlocks.advancedRedstoneTorchOn);
 		registerBlock(ModBlocks.blockDiaphanous);
+		registerBlock(ModBlocks.sidedRedstone);
 
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);
@@ -180,7 +181,7 @@ public class ItemModels
 	{
 		for (TYPE t : ItemWeatherEgg.TYPE.values())
 		{
-			ModelLoader.setCustomModelResourceLocation(ModItems.weatherEgg, t.ordinal(), new ModelResourceLocation("randomthings:weathereggs/"+t.toString().toLowerCase(), "inventory"));
+			ModelLoader.setCustomModelResourceLocation(ModItems.weatherEgg, t.ordinal(), new ModelResourceLocation("randomthings:weathereggs/" + t.toString().toLowerCase(), "inventory"));
 		}
 	}
 

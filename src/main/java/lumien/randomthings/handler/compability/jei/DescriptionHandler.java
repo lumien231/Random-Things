@@ -42,6 +42,7 @@ public class DescriptionHandler
 		overrideMap.put(ModBlocks.luminousStainedBrick, "tile.luminousStainedBrick.info");
 		overrideMap.put(ModItems.grassSeeds, "item.grassSeeds.info");
 		overrideMap.put(ModItems.runeDust, "item.runeDust.info");
+		overrideMap.put(ModBlocks.ancientBrick, null);
 
 		List<ItemStack> stackBlackList = new ArrayList<>();
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.BIOME_SENSOR.id));
