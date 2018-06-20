@@ -22,6 +22,18 @@ public class BlockSidedRedstone extends BlockBase
 
 		this.setHardness(5.0F).setResistance(10.0F);
 	}
+	
+	@Override
+	public boolean shouldCheckWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isNormalCube(IBlockState state)
+	{
+		return true;
+	}
 
 	@Override
 	public boolean canProvidePower(IBlockState state)
@@ -39,7 +51,6 @@ public class BlockSidedRedstone extends BlockBase
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.onBlockAdded(worldIn, pos, state);
-		this.setDefaultFacing(worldIn, pos, state);
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
