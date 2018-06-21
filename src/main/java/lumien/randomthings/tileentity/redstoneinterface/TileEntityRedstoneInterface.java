@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.WeakHashMap;
 
@@ -114,11 +115,12 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
 
-			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<>();
-			interfaces.addAll(TileEntityRedstoneInterface.interfaces);
+			Iterator<TileEntityRedstoneInterface> iterator = interfaces.iterator();
 
-			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
+			while (iterator.hasNext())
 			{
+				TileEntityRedstoneInterface redstoneInterface = iterator.next();
+
 				if (!redstoneInterface.isInvalid() && redstoneInterface.world == blockWorld && redstoneInterface.isTargeting(checkingBlock))
 				{
 					int remotePower = redstoneInterface.weakPower.get(facing);
@@ -152,11 +154,12 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
 
-			ArrayList<TileEntityRedstoneInterface> interfaces = new ArrayList<>();
-			interfaces.addAll(TileEntityRedstoneInterface.interfaces);
+			Iterator<TileEntityRedstoneInterface> iterator = interfaces.iterator();
 
-			for (TileEntityRedstoneInterface redstoneInterface : interfaces)
+			while (iterator.hasNext())
 			{
+				TileEntityRedstoneInterface redstoneInterface = iterator.next();
+				
 				if (!redstoneInterface.isInvalid() && redstoneInterface.world == blockWorld && redstoneInterface.isTargeting(checkingBlock))
 				{
 					int remotePower = redstoneInterface.strongPower.get(facing);
