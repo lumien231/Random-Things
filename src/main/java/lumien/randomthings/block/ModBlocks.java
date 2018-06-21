@@ -83,6 +83,7 @@ public class ModBlocks
 	public static BlockSoundDampener soundDampener;
 	public static BlockBlockDiaphanous blockDiaphanous;
 	public static BlockSidedRedstone sidedRedstone;
+	public static BlockSpectreLens spectreLens;
 
 	public static BlockAncientFurnace ancientFurnace;
 	public static BlockAncientBrick ancientBrick;
@@ -202,6 +203,7 @@ public class ModBlocks
 		soundDampener = new BlockSoundDampener();
 		blockDiaphanous = new BlockBlockDiaphanous();
 		sidedRedstone = new BlockSidedRedstone();
+		spectreLens = new BlockSpectreLens();
 
 		unpoweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(false);
 		poweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(true);

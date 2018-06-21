@@ -31,6 +31,7 @@ import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.handler.spectre.SpectreHandler;
+import lumien.randomthings.handler.spectrelens.SpectreLensHandler;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemPortableSoundDampener;
 import lumien.randomthings.item.ItemSoundPattern;
@@ -519,7 +520,9 @@ public class RTEventHandler
 		if (tickEvent.type == TickEvent.Type.WORLD && tickEvent.phase == TickEvent.Phase.START)
 		{
 			World world = ((WorldTickEvent) tickEvent).world;
+			
 			FestivalHandler.get(world).tick(world);
+			SpectreLensHandler.get(world).tick(world);
 		}
 
 		if ((tickEvent.type == TickEvent.Type.CLIENT || tickEvent.type == TickEvent.Type.SERVER) && tickEvent.phase == TickEvent.Phase.END)

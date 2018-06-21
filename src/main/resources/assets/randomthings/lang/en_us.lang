@@ -69,6 +69,7 @@ tile.diaphanousBlock.name=Diaphanous Block
 tile.diaphanousBlock_inverted.name=Inverted Diaphanous Block
 tile.sidedRedstone.name=Sided Block of Redstone
 tile.ancientBrick.name=Ancient Brick [INTERNAL]
+tile.spectreLens.name=Spectre Lens
 
 tile.spectrePlank.name=Spectre Planks
 tile.spectreSapling.name=Spectre Sapling
@@ -485,6 +486,7 @@ tile.globalChatDetector.info=Unlike the normal Chat Detector the Global one isn'
 tile.advancedRedstoneTorch_on.info=Unlike a normal redstone torch which just emits either a redstone signal of 15 or 0 with an advanced one you can configure the signal strength for the two states freely. It's green while powered and red while unpowered.
 tile.diaphanousBlock.info=Diaphanous Blocks change their opacity depending on the distance to the player. By combining them with any block in a crafting table you can change their appeareance to any block that doesn’t have a tileentity. By default they don’t have a collision box and vanish when you get close to them. The inverted version you get by putting them in a crafting table on their own has a collision box and appears when you get close.
 tile.sidedRedstone.info=A Redstone Block that only emits power on one side.
+tile.spectreLens.info=Putting a Spectre Lens on top of a beacon will apply the effects of that beacon to your player wherever you are in the dimension of the beacon.
 
 tile.plate_redirector.info=Entities moving over this plate are redirected towards a different direction. Right clicking the plate allows you to change that direction.
 tile.plate_filteredredirector.info=Entities moving over this plate are redirected towards a different direction depending on which filter they match.

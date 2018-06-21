@@ -52,6 +52,7 @@ public class ModTileEntitys
 		registerTE(TileEntitySoundDampener.class, "soundDampener");
 		registerTE(TileEntityAdvancedRedstoneTorch.class, "advancedRedstoneTorch");
 		registerTE(TileEntityBlockDiaphanous.class, "diaphanousBlock");
+		registerTE(TileEntitySpectreLens.class, "spectreLens");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");
