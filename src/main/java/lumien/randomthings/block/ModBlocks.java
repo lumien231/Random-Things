@@ -84,6 +84,8 @@ public class ModBlocks
 	public static BlockBlockDiaphanous blockDiaphanous;
 	public static BlockSidedRedstone sidedRedstone;
 	public static BlockSpectreLens spectreLens;
+	public static BlockSpectreEnergyInjector spectreEnergyInjector;
+	public static BlockSpectreCoil spectreCoil;
 
 	public static BlockAncientFurnace ancientFurnace;
 	public static BlockAncientBrick ancientBrick;
@@ -204,6 +206,8 @@ public class ModBlocks
 		blockDiaphanous = new BlockBlockDiaphanous();
 		sidedRedstone = new BlockSidedRedstone();
 		spectreLens = new BlockSpectreLens();
+		spectreEnergyInjector = new BlockSpectreEnergyInjector();
+		spectreCoil = new BlockSpectreCoil();
 
 		unpoweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(false);
 		poweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(true);

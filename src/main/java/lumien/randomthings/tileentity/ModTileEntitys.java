@@ -53,6 +53,8 @@ public class ModTileEntitys
 		registerTE(TileEntityAdvancedRedstoneTorch.class, "advancedRedstoneTorch");
 		registerTE(TileEntityBlockDiaphanous.class, "diaphanousBlock");
 		registerTE(TileEntitySpectreLens.class, "spectreLens");
+		registerTE(TileEntitySpectreEnergyInjector.class, "spectreEnergyInjector");
+		registerTE(TileEntitySpectreCoil.class, "spectreCoil");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");
