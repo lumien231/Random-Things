@@ -46,11 +46,11 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 	{
 		if (!this.world.isRemote && this.owner != null)
 		{
-			EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockSpectreCoil.FACING);
+			EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockSpectreCoil.FACING).getOpposite();
 
 			TileEntity targetTe = this.world.getTileEntity(pos.offset(facing));
 
-			if (targetTe.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite()))
+			if (targetTe != null && targetTe.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite()))
 			{
 				IEnergyStorage targetStorage = targetTe.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
 
@@ -60,7 +60,7 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 
 					int available = coilStorage.extractEnergy(1024, true);
 
-					int remaining = targetStorage.receiveEnergy(available, false);
+					int remaining = available - targetStorage.receiveEnergy(available, false);
 					
 					if (remaining != available)
 					{

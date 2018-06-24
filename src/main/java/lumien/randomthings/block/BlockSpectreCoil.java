@@ -1,10 +1,12 @@
 package lumien.randomthings.block;
 
+import java.awt.Color;
+
 import com.mojang.authlib.GameProfile;
 
-import lumien.randomthings.tileentity.TileEntityItemCollector;
+import lumien.randomthings.lib.ILuminousBlock;
+import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.tileentity.TileEntitySpectreCoil;
-import lumien.randomthings.tileentity.TileEntitySpectreEnergyInjector;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -13,6 +15,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -22,18 +25,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.CapabilityItemHandler;
 
-public class BlockSpectreCoil extends BlockContainerBase
+public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlock, IRTBlockColor
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
-	protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 1.0F - 5 / 16.0F, 0.625F, 0.625F, 1.0F);
-	protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.375F, 0.375F, 0.0F, 0.625F, 0.625F, 5 / 16.0F);
-	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(1.0F - 5 / 16.0F, 0.375F, 0.375F, 1.0F, 0.625F, 0.625F);
-	protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0F, 0.375F, 0.375F, 5 / 16.0F, 0.625F, 0.625F);
-	protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.375F, 0.0F, 0.375F, 0.625F, 0.0F + 5 / 16.0F, 0.625F);
-	protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.375F, 1.0F - 5 / 16.0F, 0.375F, 0.625F, 1.0F, 0.625F);
+	// Height: 0.09375
+	protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.3125F, 0.3125F, 1.0F - 0.09375, 0.6875F, 0.6875F, 1.0F);
+	protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.3125F, 0.3125F, 0.0F, 0.6875F, 0.6875F, 0.09375);
+	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(1.0F - 0.09375, 0.3125F, 0.3125F, 1.0F, 0.6875F, 0.6875F);
+	protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0F, 0.3125F, 0.3125F, 0.09375, 0.6875F, 0.6875F);
+	protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.3125F, 0.0F, 0.3125F, 0.6875F, 0.09375, 0.6875F);
+	protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.3125F, 1.0F - 0.09375, 0.3125F, 0.6875F, 1.0F, 0.6875F);
 
 	protected BlockSpectreCoil()
 	{
@@ -62,9 +65,9 @@ public class BlockSpectreCoil extends BlockContainerBase
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer)
 	{
-		return BlockRenderLayer.CUTOUT;
+		return layer == BlockRenderLayer.CUTOUT || layer == BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
@@ -198,5 +201,17 @@ public class BlockSpectreCoil extends BlockContainerBase
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[] { FACING });
+	}
+
+	@Override
+	public boolean shouldGlow(IBlockState state, int tintIndex)
+	{
+		return true;
+	}
+
+	@Override
+	public int colorMultiplier(IBlockState state, IBlockAccess p_186720_2_, BlockPos pos, int tintIndex)
+	{
+		return Color.CYAN.getRGB();
 	}
 }

@@ -1,0 +1,19 @@
+{
+	"__comment": "Designed by Lumien with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "randomthings:blocks/spectrecoil/spectrecoil_layer2",
+		"layer1": "randomthings:blocks/spectrecoil/spectrecoil_layer1",
+		"layer2": "randomthings:blocks/spectrecoil/spectrecoil_layer2",
+		"layer3": "randomthings:blocks/spectrecoil/spectrecoil_layer3"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "TopOverlay",
+			"from": [ 6, 1, 6 ],
+			"to": [ 10, 1.5, 10 ],
+			"faces": {
+				"up": { "uv": [ 4, 4, 12, 12 ], "texture": "#layer1" }
+			}
+		}
+	]
+}

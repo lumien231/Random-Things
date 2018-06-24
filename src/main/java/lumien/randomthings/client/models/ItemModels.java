@@ -91,6 +91,7 @@ public class ItemModels
 		registerBlock(ModBlocks.blockDiaphanous);
 		registerBlock(ModBlocks.sidedRedstone);
 		registerBlock(ModBlocks.spectreLens);
+		registerBlock(ModBlocks.spectreCoil);
 
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);
