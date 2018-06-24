@@ -956,6 +956,11 @@ public class ModRecipes
 					}
 				}
 
+				if (diaphanous == null)
+				{
+					return ItemStack.EMPTY;
+				}
+				
 				diaphanous = diaphanous.copy();
 				diaphanous.setCount(1);
 
