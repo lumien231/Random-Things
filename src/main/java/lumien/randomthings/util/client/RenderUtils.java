@@ -433,63 +433,66 @@ public class RenderUtils
 
 		BlockModelRenderer bmr = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer();
 
-		try
+		if (bmr != null && stateIn != null && modelIn != null)
 		{
-			if (flag)
+			try
 			{
-				float[] afloat = new float[EnumFacing.values().length * 2];
-				BitSet bitset = new BitSet(3);
-
-				Object blockmodelrenderer$ambientocclusionface = constructor.newInstance(bmr);
-
-				for (EnumFacing enumfacing : EnumFacing.values())
+				if (flag)
 				{
-					List<BakedQuad> list = modelIn.getQuads(stateIn, enumfacing, rand);
+					float[] afloat = new float[EnumFacing.values().length * 2];
+					BitSet bitset = new BitSet(3);
 
-					if (!list.isEmpty() && faceMap.get(enumfacing))
+					Object blockmodelrenderer$ambientocclusionface = constructor.newInstance(bmr);
+
+					for (EnumFacing enumfacing : EnumFacing.values())
 					{
-						renderQuadsSmooth.invoke(bmr, worldIn, stateIn, posIn, buffer, list, afloat, bitset, blockmodelrenderer$ambientocclusionface);
+						List<BakedQuad> list = modelIn.getQuads(stateIn, enumfacing, rand);
+
+						if (!list.isEmpty() && faceMap.get(enumfacing))
+						{
+							renderQuadsSmooth.invoke(bmr, worldIn, stateIn, posIn, buffer, list, afloat, bitset, blockmodelrenderer$ambientocclusionface);
+						}
+					}
+
+					List<BakedQuad> list1 = modelIn.getQuads(stateIn, (EnumFacing) null, rand);
+
+					if (!list1.isEmpty())
+					{
+						renderQuadsSmooth.invoke(bmr, worldIn, stateIn, posIn, buffer, list1, afloat, bitset, blockmodelrenderer$ambientocclusionface);
 					}
 				}
-
-				List<BakedQuad> list1 = modelIn.getQuads(stateIn, (EnumFacing) null, rand);
-
-				if (!list1.isEmpty())
+				else
 				{
-					renderQuadsSmooth.invoke(bmr, worldIn, stateIn, posIn, buffer, list1, afloat, bitset, blockmodelrenderer$ambientocclusionface);
-				}
-			}
-			else
-			{
-				BitSet bitset = new BitSet(3);
+					BitSet bitset = new BitSet(3);
 
-				for (EnumFacing enumfacing : EnumFacing.values())
-				{
-					List<BakedQuad> list = modelIn.getQuads(stateIn, enumfacing, rand);
-
-					if (!list.isEmpty() && faceMap.get(enumfacing))
+					for (EnumFacing enumfacing : EnumFacing.values())
 					{
-						int i = stateIn.getPackedLightmapCoords(worldIn, posIn.offset(enumfacing));
-						renderQuadsFlat.invoke(bmr, worldIn, stateIn, posIn, i, false, buffer, list, bitset);
-						flag = true;
+						List<BakedQuad> list = modelIn.getQuads(stateIn, enumfacing, rand);
+
+						if (!list.isEmpty() && faceMap.get(enumfacing))
+						{
+							int i = stateIn.getPackedLightmapCoords(worldIn, posIn.offset(enumfacing));
+							renderQuadsFlat.invoke(bmr, worldIn, stateIn, posIn, i, false, buffer, list, bitset);
+							flag = true;
+						}
+					}
+
+					List<BakedQuad> list1 = modelIn.getQuads(stateIn, (EnumFacing) null, rand);
+
+					if (!list1.isEmpty())
+					{
+						renderQuadsFlat.invoke(bmr, worldIn, stateIn, posIn, -1, true, buffer, list1, bitset);
 					}
 				}
-
-				List<BakedQuad> list1 = modelIn.getQuads(stateIn, (EnumFacing) null, rand);
-
-				if (!list1.isEmpty())
-				{
-					renderQuadsFlat.invoke(bmr, worldIn, stateIn, posIn, -1, true, buffer, list1, bitset);
-				}
 			}
-		}
-		catch (Throwable throwable)
-		{
-			CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Tesselating block model");
-			CrashReportCategory crashreportcategory = crashreport.makeCategory("Block model being tesselated");
-			CrashReportCategory.addBlockInfo(crashreportcategory, posIn, stateIn);
-			crashreportcategory.addCrashSection("Using AO", Boolean.valueOf(flag));
-			throw new ReportedException(crashreport);
+			catch (Throwable throwable)
+			{
+				CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Tesselating block model");
+				CrashReportCategory crashreportcategory = crashreport.makeCategory("Block model being tesselated");
+				CrashReportCategory.addBlockInfo(crashreportcategory, posIn, stateIn);
+				crashreportcategory.addCrashSection("Using AO", Boolean.valueOf(flag));
+				throw new ReportedException(crashreport);
+			}
 		}
 	}
 
