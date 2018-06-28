@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TSE",
+    "SCS",
+    "EST"
+  ],
+  "key": {
+    "T": {
+      "item": "randomthings:stableenderpearl"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "C": {
+      "item": "randomthings:spectrecoil_redstone"
+    },
+    "S": {
+      "item": "randomthings:ingredient",
+      "data": 12
+    }
+  },
+  "result": {
+    "item": "randomthings:spectrecoil_ender"
+  }
+}

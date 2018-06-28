@@ -1,9 +1,12 @@
 package lumien.randomthings.block;
 
 import java.awt.Color;
+import java.util.List;
 
 import com.mojang.authlib.GameProfile;
 
+import lumien.randomthings.item.block.ItemBlockColored;
+import lumien.randomthings.item.block.ItemBlockSpectreCoil;
 import lumien.randomthings.lib.ILuminousBlock;
 import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.tileentity.TileEntitySpectreCoil;
@@ -13,6 +16,8 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
@@ -25,9 +30,25 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlock, IRTBlockColor
 {
+	public enum CoilType
+	{
+		NORMAL("normal", Color.CYAN.getRGB()), REDSTONE("redstone", Color.RED.getRGB()), ENDER("ender", new Color(200, 0, 210).getRGB()), NUMBER("number", Color.GREEN.getRGB()), GENESIS("genesis", Color.ORANGE.getRGB());
+
+		int color;
+		String name;
+
+		private CoilType(String name, int color)
+		{
+			this.name = name;
+			this.color = color;
+		}
+	}
+
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
 	// Height: 0.09375
@@ -38,12 +59,47 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 	protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.3125F, 0.0F, 0.3125F, 0.6875F, 0.09375, 0.6875F);
 	protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.3125F, 1.0F - 0.09375, 0.3125F, 0.6875F, 1.0F, 0.6875F);
 
-	protected BlockSpectreCoil()
+	CoilType coilType;
+
+	protected BlockSpectreCoil(CoilType type)
 	{
-		super("spectreCoil", Material.ROCK);
+		super("spectreCoil_" + type.name, Material.ROCK, ItemBlockSpectreCoil.class);
 
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		this.setHardness(0.3F);
+		
+		this.coilType = type;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
+	{
+		String display;
+		
+		switch (this.coilType)
+		{
+			case NORMAL:
+				display = I18n.format("tile.spectrecoil.transfer", "1024");
+				break;
+			case REDSTONE:
+				display = I18n.format("tile.spectrecoil.transfer", "4096");
+				break;
+			case ENDER:
+				display = I18n.format("tile.spectrecoil.transfer", "20480");
+				break;
+			case GENESIS:
+				display = I18n.format("tile.spectrecoil.generate", "Infinite");
+				break;
+			case NUMBER:
+				display = I18n.format("tile.spectrecoil.generate", "128");
+				break;
+			default:
+				display = I18n.format("tile.spectrecoil.transfer", "???");
+				break;
+		}
+		
+		tooltip.add(display);
 	}
 
 	@Override
@@ -61,7 +117,7 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state)
 	{
-		return new TileEntitySpectreCoil();
+		return new TileEntitySpectreCoil(coilType);
 	}
 
 	@Override
@@ -116,7 +172,7 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 			return false;
 		}
 
-		return te.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
+		return te.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite()) || te.hasCapability(CapabilityEnergy.ENERGY, null);
 	}
 
 	/**
@@ -141,20 +197,20 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 			worldIn.setBlockToAir(pos);
 		}
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		if (!worldIn.isRemote && placer instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) placer;
-			
+
 			GameProfile profile = player.getGameProfile();
-			
+
 			if (profile != null)
 			{
 				TileEntitySpectreCoil coil = (TileEntitySpectreCoil) worldIn.getTileEntity(pos);
-				
+
 				coil.setOwner(profile.getId());
 			}
 		}
@@ -212,6 +268,6 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 	@Override
 	public int colorMultiplier(IBlockState state, IBlockAccess p_186720_2_, BlockPos pos, int tintIndex)
 	{
-		return Color.CYAN.getRGB();
+		return this.coilType.color;
 	}
 }

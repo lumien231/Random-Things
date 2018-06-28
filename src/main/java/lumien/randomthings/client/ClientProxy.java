@@ -25,6 +25,7 @@ import lumien.randomthings.client.render.RenderProjectedItem;
 import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
 import lumien.randomthings.client.render.RenderSpecialChest;
+import lumien.randomthings.client.render.RenderSpectreEnergyInjector;
 import lumien.randomthings.client.render.RenderSpirit;
 import lumien.randomthings.client.render.RenderThrownItem;
 import lumien.randomthings.client.render.RenderThrownWeatherEgg;
@@ -51,6 +52,7 @@ import lumien.randomthings.tileentity.TileEntityBiomeRadar;
 import lumien.randomthings.tileentity.TileEntityBlockDiaphanous;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
+import lumien.randomthings.tileentity.TileEntitySpectreEnergyInjector;
 import lumien.randomthings.tileentity.TileEntityVoxelProjector;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityAdvancedRedstoneInterface;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityBasicRedstoneInterface;
@@ -213,6 +215,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBiomeRadar.class, new RenderBiomeRadar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAncientFurnace.class, new RenderAncientFurnace());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockDiaphanous.class, new RenderBlockDiaphanous());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpectreEnergyInjector.class, new RenderSpectreEnergyInjector());
 
 		registerColors();
 	}

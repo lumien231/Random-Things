@@ -10,6 +10,7 @@
 		"transform": "forge:default-block"
 	},
 	"variants": {
+	    "normal": [{}],
 		"facing": {
 			"north": {
 				"x": 90

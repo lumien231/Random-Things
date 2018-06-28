@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSR",
+    "SCS",
+    "RSB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:redstone_block"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "randomthings:spectrecoil_normal"
+    },
+    "S": {
+      "item": "randomthings:ingredient",
+      "data": 12
+    }
+  },
+  "result": {
+    "item": "randomthings:spectrecoil_redstone"
+  }
+}

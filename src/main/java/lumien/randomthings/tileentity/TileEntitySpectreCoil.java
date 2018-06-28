@@ -3,6 +3,7 @@ package lumien.randomthings.tileentity;
 import java.util.UUID;
 
 import lumien.randomthings.block.BlockSpectreCoil;
+import lumien.randomthings.block.BlockSpectreCoil.CoilType;
 import lumien.randomthings.handler.spectrecoils.SpectreCoilHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -16,9 +17,23 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 {
 	UUID owner;
 
+	CoilType coilType = CoilType.NORMAL;
+
+	public TileEntitySpectreCoil(CoilType coilType)
+	{
+		this.coilType = coilType;
+	}
+
+	public TileEntitySpectreCoil()
+	{
+
+	}
+
 	@Override
 	public void writeDataToNBT(NBTTagCompound compound, boolean sync)
 	{
+		compound.setInteger("coilType", coilType.ordinal());
+
 		if (owner != null)
 			compound.setString("owner", owner.toString());
 	}
@@ -26,6 +41,8 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 	@Override
 	public void readDataFromNBT(NBTTagCompound compound, boolean sync)
 	{
+		this.coilType = CoilType.values()[compound.getInteger("coilType")];
+
 		if (compound.hasKey("owner"))
 			this.owner = UUID.fromString(compound.getString("owner"));
 	}
@@ -42,6 +59,70 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 	}
 
 	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+	{
+		EnumFacing myFacing = this.world.getBlockState(this.pos).getValue(BlockSpectreCoil.FACING).getOpposite();
+
+		if (myFacing == facing && capability == CapabilityEnergy.ENERGY)
+		{
+			return true;
+		}
+
+		return super.hasCapability(capability, facing);
+	}
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+	{
+		EnumFacing myFacing = this.world.getBlockState(this.pos).getValue(BlockSpectreCoil.FACING).getOpposite();
+
+		if (myFacing == facing && capability == CapabilityEnergy.ENERGY)
+		{
+			return (T) new IEnergyStorage()
+			{
+
+				@Override
+				public int receiveEnergy(int maxReceive, boolean simulate)
+				{
+					return 0;
+				}
+
+				@Override
+				public int getMaxEnergyStored()
+				{
+					return 0;
+				}
+
+				@Override
+				public int getEnergyStored()
+				{
+					return 0;
+				}
+
+				@Override
+				public int extractEnergy(int maxExtract, boolean simulate)
+				{
+					return 0;
+				}
+
+				@Override
+				public boolean canReceive()
+				{
+					return false;
+				}
+
+				@Override
+				public boolean canExtract()
+				{
+					return false;
+				}
+			};
+		}
+
+		return super.getCapability(capability, facing);
+	}
+
+	@Override
 	public void update()
 	{
 		if (!this.world.isRemote && this.owner != null)
@@ -50,21 +131,53 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 
 			TileEntity targetTe = this.world.getTileEntity(pos.offset(facing));
 
-			if (targetTe != null && targetTe.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite()))
+			if (targetTe != null)
 			{
-				IEnergyStorage targetStorage = targetTe.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
-
-				if (targetStorage.canReceive())
+				IEnergyStorage targetStorage = null;
+				if (targetTe.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite()))
 				{
-					IEnergyStorage coilStorage = SpectreCoilHandler.get(this.world).getStorageCoil(this.owner);
+					targetStorage = targetTe.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
+				}
+				else if (targetTe.hasCapability(CapabilityEnergy.ENERGY, null))
+				{
+					targetStorage = targetTe.getCapability(CapabilityEnergy.ENERGY, null);
+				}
 
-					int available = coilStorage.extractEnergy(1024, true);
-
-					int remaining = available - targetStorage.receiveEnergy(available, false);
-					
-					if (remaining != available)
+				if (targetStorage != null && targetStorage.canReceive())
+				{
+					if (this.coilType == CoilType.NUMBER || this.coilType == CoilType.GENESIS)
 					{
-						coilStorage.extractEnergy(available - remaining, false);
+						int amount = coilType == CoilType.NUMBER ? 128 : 10000000;
+
+						targetStorage.receiveEnergy(amount, false);
+					}
+					else
+					{
+						IEnergyStorage coilStorage = SpectreCoilHandler.get(this.world).getStorageCoil(this.owner);
+
+						int rate = 1;
+						
+						if (coilType == CoilType.NORMAL)
+						{
+							rate = 1024;
+						}
+						else if (coilType == CoilType.REDSTONE)
+						{
+							rate = 4096;
+						}
+						else if (coilType == CoilType.ENDER)
+						{
+							rate = 20480;
+						}
+						
+						int available = coilStorage.extractEnergy(rate, true);
+
+						int remaining = available - targetStorage.receiveEnergy(available, false);
+
+						if (remaining != available)
+						{
+							coilStorage.extractEnergy(available - remaining, false);
+						}
 					}
 				}
 			}

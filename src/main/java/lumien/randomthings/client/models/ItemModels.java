@@ -91,7 +91,7 @@ public class ItemModels
 		registerBlock(ModBlocks.blockDiaphanous);
 		registerBlock(ModBlocks.sidedRedstone);
 		registerBlock(ModBlocks.spectreLens);
-		registerBlock(ModBlocks.spectreCoil);
+		registerBlock(ModBlocks.spectreEnergyInjector);
 
 		registerBlock(ModBlocks.acceleratorPlate);
 		registerBlock(ModBlocks.acceleratorPlateDirectional);
@@ -150,6 +150,7 @@ public class ItemModels
 		registerItem(ModItems.spectreShovel);
 		registerItem(ModItems.spectreAxe);
 
+		registerSpectreCoils();
 		registerBricks();
 		registerBiomeStone();
 		registerColoredGrass();
@@ -177,8 +178,24 @@ public class ItemModels
 
 		ModelLoader.setCustomMeshDefinition(ModItems.soundPattern, new SoundPatternMesh());
 		ModelBakery.registerItemVariants(ModItems.soundPattern, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundpattern_empty"), new ModelResourceLocation("randomthings:soundpattern_full") });
+	
+		SpectreStateMapper spectreStateMapper = new SpectreStateMapper();
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilNormal, spectreStateMapper);
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilRedstone, spectreStateMapper);
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilEnder, spectreStateMapper);
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilNumber, spectreStateMapper);
+		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilGenesis, spectreStateMapper);
 	}
 
+	private static void registerSpectreCoils()
+	{
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.spectreCoilNormal), 0, new ModelResourceLocation("randomthings:spectreCoil", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.spectreCoilRedstone), 0, new ModelResourceLocation("randomthings:spectreCoil", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.spectreCoilEnder), 0, new ModelResourceLocation("randomthings:spectreCoil", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.spectreCoilNumber), 0, new ModelResourceLocation("randomthings:spectreCoil", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.spectreCoilGenesis), 0, new ModelResourceLocation("randomthings:spectreCoil", "inventory"));
+	}
+	
 	private static void registerWeatherEggs()
 	{
 		for (TYPE t : ItemWeatherEgg.TYPE.values())

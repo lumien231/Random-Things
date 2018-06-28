@@ -55,21 +55,7 @@ public class LootHandler
 				addSingleItemWithChance(table, Item.getItemFromBlock(ModBlocks.slimeCube), 10);
 
 			if (Worldgen.NUMBERED_COILS)
-				addSingleItemWithChance(table, Item.getItemFromBlock(ModBlocks.spectreCoilNumber), 10, new LootFunction(new LootCondition[0])
-				{
-					@Override
-					public ItemStack apply(ItemStack stack, Random rand, LootContext context)
-					{
-						if (!stack.hasTagCompound())
-						{
-							stack.setTagCompound(new NBTTagCompound());
-						}
-
-						stack.getTagCompound().setInteger("number", rand.nextInt(500) + 1);
-
-						return stack;
-					}
-				}, onlyFound);
+				addSingleItemWithChance(table, Item.getItemFromBlock(ModBlocks.spectreCoilNumber), 10, onlyFound);
 		}
 		else if (Worldgen.LAVA_CHARM && event.getName().equals(LootTableList.CHESTS_NETHER_BRIDGE))
 		{
@@ -77,21 +63,7 @@ public class LootHandler
 		}
 		else if (Worldgen.NUMBERED_COILS && event.getName().equals(LootTableList.CHESTS_ABANDONED_MINESHAFT))
 		{
-			addSingleItemWithChance(table, Item.getItemFromBlock(ModBlocks.spectreCoilNumber), 8, new LootFunction(new LootCondition[0])
-			{
-				@Override
-				public ItemStack apply(ItemStack stack, Random rand, LootContext context)
-				{
-					if (!stack.hasTagCompound())
-					{
-						stack.setTagCompound(new NBTTagCompound());
-					}
-
-					stack.getTagCompound().setInteger("number", rand.nextInt(500) + 1);
-
-					return stack;
-				}
-			}, onlyFound);
+			addSingleItemWithChance(table, Item.getItemFromBlock(ModBlocks.spectreCoilNumber), 8, onlyFound);
 		}
 		else if (Worldgen.MAGIC_HOOD && event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH))
 		{
@@ -107,21 +79,7 @@ public class LootHandler
 		}
 		else if (Worldgen.NUMBERED_COILS && event.getName().equals(LootTableList.CHESTS_END_CITY_TREASURE))
 		{
-			addSingleItemWithChance(table, Item.getItemFromBlock(ModBlocks.spectreCoilNumber), 30, new LootFunction(new LootCondition[0])
-			{
-				@Override
-				public ItemStack apply(ItemStack stack, Random rand, LootContext context)
-				{
-					if (!stack.hasTagCompound())
-					{
-						stack.setTagCompound(new NBTTagCompound());
-					}
-
-					stack.getTagCompound().setInteger("number", rand.nextInt(500) + 1);
-
-					return stack;
-				}
-			}, onlyFound);
+			addSingleItemWithChance(table, Item.getItemFromBlock(ModBlocks.spectreCoilNumber), 30, onlyFound);
 		}
 
 		if (Worldgen.BIOME_CRYSTAL && event.getName().toString().startsWith("minecraft:chests/"))
@@ -175,6 +133,18 @@ public class LootHandler
 		String itemName = item.getRegistryName().getResourcePath().toString();
 
 		LootEntry entryItem = new LootEntryItem(item, chance, 0, new LootFunction[] { function }, new LootCondition[0], "item");
+		LootEntry entryEmpty = new LootEntryEmpty(100 - chance, 0, new LootCondition[0], "empty");
+
+		LootPool pool = new LootPool(new LootEntry[] { entryItem, entryEmpty }, new LootCondition[] {condition}, new RandomValueRange(1), new RandomValueRange(0), itemName);
+
+		table.addPool(pool);
+	}
+	
+	private static void addSingleItemWithChance(LootTable table, Item item, int chance, LootCondition condition)
+	{
+		String itemName = item.getRegistryName().getResourcePath().toString();
+
+		LootEntry entryItem = new LootEntryItem(item, chance, 0, new LootFunction[0], new LootCondition[0], "item");
 		LootEntry entryEmpty = new LootEntryEmpty(100 - chance, 0, new LootCondition[0], "empty");
 
 		LootPool pool = new LootPool(new LootEntry[] { entryItem, entryEmpty }, new LootCondition[] {condition}, new RandomValueRange(1), new RandomValueRange(0), itemName);

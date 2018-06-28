@@ -1,5 +1,6 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.block.BlockSpectreCoil.CoilType;
 import lumien.randomthings.block.plates.BlockAcceleratorPlate;
 import lumien.randomthings.block.plates.BlockBouncyPlate;
 import lumien.randomthings.block.plates.BlockCollectionPlate;
@@ -85,7 +86,12 @@ public class ModBlocks
 	public static BlockSidedRedstone sidedRedstone;
 	public static BlockSpectreLens spectreLens;
 	public static BlockSpectreEnergyInjector spectreEnergyInjector;
-	public static BlockSpectreCoil spectreCoil;
+	
+	public static BlockSpectreCoil spectreCoilNormal;
+	public static BlockSpectreCoil spectreCoilRedstone;
+	public static BlockSpectreCoil spectreCoilEnder;
+	public static BlockSpectreCoil spectreCoilNumber;
+	public static BlockSpectreCoil spectreCoilGenesis;
 
 	public static BlockAncientFurnace ancientFurnace;
 	public static BlockAncientBrick ancientBrick;
@@ -207,7 +213,12 @@ public class ModBlocks
 		sidedRedstone = new BlockSidedRedstone();
 		spectreLens = new BlockSpectreLens();
 		spectreEnergyInjector = new BlockSpectreEnergyInjector();
-		spectreCoil = new BlockSpectreCoil();
+		
+		spectreCoilNormal = new BlockSpectreCoil(CoilType.NORMAL);
+		spectreCoilRedstone = new BlockSpectreCoil(CoilType.REDSTONE);
+		spectreCoilEnder = new BlockSpectreCoil(CoilType.ENDER);
+		spectreCoilNumber = new BlockSpectreCoil(CoilType.NUMBER);
+		spectreCoilGenesis = new BlockSpectreCoil(CoilType.GENESIS);
 
 		unpoweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(false);
 		poweredAdvancedRedstoneRepeater = new BlockAdvancedRedstoneRepeater(true);

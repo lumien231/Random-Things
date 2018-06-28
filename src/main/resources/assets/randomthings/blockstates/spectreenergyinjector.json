@@ -1,0 +1,25 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "forge:multi-layer",
+		"custom": {
+			"base": "randomthings:spectreenergyinjector#base",
+			"Cutout": "randomthings:spectreenergyinjector#base",
+			"Translucent": "randomthings:spectreenergyinjector#overlay"
+		},
+		"transform": "forge:default-block"
+	},
+	"variants": {
+		"normal": [{ }],
+		"base": [
+			{
+				"model": "randomthings:spectreenergyinjector_solid"
+			}
+		],
+		"overlay": [
+			{
+				"model": "randomthings:spectreenergyinjector_transparent"
+			}
+		]
+	}
+}

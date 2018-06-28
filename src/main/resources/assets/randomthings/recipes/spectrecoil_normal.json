@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OSO",
+    "OIG",
+    "OSO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    },
+    "I": {
+      "item": "randomthings:ingredient",
+      "data": 3
+    },
+    "S": {
+      "item": "randomthings:ingredient",
+      "data": 12
+    }
+  },
+  "result": {
+    "item": "randomthings:spectrecoil_normal"
+  }
+}

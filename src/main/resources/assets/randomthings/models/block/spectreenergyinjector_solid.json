@@ -1,0 +1,23 @@
+{   "parent": "block/block",
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "blocks/glass",
+        "glass": "randomthings:blocks/spectreblock",
+        "obsidian": "blocks/obsidian",
+        "beacon": "blocks/beacon"
+    },
+    "elements": [
+        {   "__comment": "Obsidian base",
+            "from": [ 2, 0.1, 2 ],
+            "to": [ 14, 3, 14 ],
+            "faces": {
+                "down":  { "uv": [ 2,  2, 14, 14 ], "texture": "#obsidian" },
+                "up":    { "uv": [ 2,  2, 14, 14 ], "texture": "#obsidian" },
+                "north": { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
+                "south": { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
+                "west":  { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
+                "east":  { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" }
+            }
+        }
+    ]
+}
