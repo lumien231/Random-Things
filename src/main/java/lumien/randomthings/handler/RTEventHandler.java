@@ -384,63 +384,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void loadLootTable(LootTableLoadEvent event)
 	{
-		LootTable table = event.getTable();
-		if (event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON))
-		{
-			if (Worldgen.LAVA_CHARM)
-				addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.1f);
-
-			if (Worldgen.SUMMONING_PENDULUM)
-				addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.1f);
-
-			if (Worldgen.MAGIC_HOOD)
-				addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.15f);
-
-			if (Worldgen.SLIME_CUBE)
-				addSingleItemWithChance("slimeCube", table, Item.getItemFromBlock(ModBlocks.slimeCube), 0.3f);
-		}
-		else if (Worldgen.LAVA_CHARM && event.getName().equals(LootTableList.CHESTS_NETHER_BRIDGE))
-		{
-			addSingleItemWithChance("lavaCharm", table, ModItems.lavaCharm, 0.3f);
-		}
-		else if (Worldgen.MAGIC_HOOD && event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH))
-		{
-			addSingleItemWithChance("magicHood", table, ModItems.magicHood, 0.02f);
-		}
-		else if (Worldgen.SUMMONING_PENDULUM && event.getName().equals(LootTableList.CHESTS_STRONGHOLD_CORRIDOR))
-		{
-			addSingleItemWithChance("summoningPendulum", table, ModItems.summoningPendulum, 0.5f);
-		}
-		else if (Worldgen.SLIME_CUBE && event.getName().equals(LootTableList.CHESTS_JUNGLE_TEMPLE))
-		{
-			addSingleItemWithChance("slimeCube", table, Item.getItemFromBlock(ModBlocks.slimeCube), 0.8f);
-		}
-
-		if (Worldgen.BIOME_CRYSTAL && event.getName().toString().startsWith("minecraft:chests/"))
-		{
-			LootEntry crystalEntry = new LootEntryItem(ModItems.biomeCrystal, 1, 0, new LootFunction[] { new LootFunction(new LootCondition[] {})
-			{
-				@Override
-				public ItemStack apply(ItemStack stack, Random rand, LootContext context)
-				{
-					Object[] locationArray = Biome.REGISTRY.getKeys().toArray();
-					ResourceLocation randomLocation = (ResourceLocation) locationArray[rand.nextInt(locationArray.length)];
-
-					stack.setTagCompound(new NBTTagCompound());
-					stack.getTagCompound().setString("biomeName", randomLocation.toString());
-
-					return stack;
-				}
-			} }, new LootCondition[] {}, "randomthings:biomeCrystal");
-
-			LootPool crystalPool = new LootPool(new LootEntry[] { crystalEntry }, new LootCondition[] { new RandomChance(0.2f) }, new RandomValueRange(1, 1), new RandomValueRange(0, 0), "randomthings:biomeCrystal");
-			table.addPool(crystalPool);
-		}
-	}
-
-	private void addSingleItemWithChance(String name, LootTable table, Item item, float chance)
-	{
-		table.addPool(new LootPool(new LootEntry[] { new LootEntryItem(item, 1, 0, new LootFunction[] {}, new LootCondition[] {}, "randomthings:" + name) }, new LootCondition[] { new RandomChance(chance) }, new RandomValueRange(1, 1), new RandomValueRange(0, 0), "randomthings:" + name));
+		LootHandler.addLoot(event);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
