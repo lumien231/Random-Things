@@ -13,10 +13,13 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nullable;
+
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.jcraft.jorbis.Block;
 
 import lumien.randomthings.asm.MCPNames;
 import net.minecraft.block.state.IBlockState;
@@ -24,16 +27,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BlockModelRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.BlockModelRenderer.AmbientOcclusionFace;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.model.pipeline.LightUtil;
@@ -45,40 +52,6 @@ public class RenderUtils
 	static Gui gui = new Gui();
 
 	static Cache<Biome, Integer> biomeColorCache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).build();
-
-	static Class occlusionFace;
-	static Method renderQuadsSmooth;
-	static Method renderQuadsFlat;
-	static Constructor constructor;
-
-
-	static
-	{
-		try
-		{
-			for (Class clazz : BlockModelRenderer.class.getDeclaredClasses())
-			{
-				if (clazz.getName().endsWith("AmbientOcclusionFace"))
-				{
-					occlusionFace = clazz;
-					break;
-				}
-			}
-
-			constructor = occlusionFace.getDeclaredConstructor(BlockModelRenderer.class);
-			constructor.setAccessible(true);
-
-			renderQuadsSmooth = BlockModelRenderer.class.getDeclaredMethod(MCPNames.method("func_187492_a"), IBlockAccess.class, IBlockState.class, BlockPos.class, BufferBuilder.class, List.class, float[].class, BitSet.class, occlusionFace);
-			renderQuadsFlat = BlockModelRenderer.class.getDeclaredMethod(MCPNames.method("func_187496_a"), IBlockAccess.class, IBlockState.class, BlockPos.class, int.class, boolean.class, BufferBuilder.class, List.class, BitSet.class);
-
-			renderQuadsSmooth.setAccessible(true);
-			renderQuadsFlat.setAccessible(true);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
 
 	public static int getBiomeColor(IBlockAccess worldIn, final Biome biome, final BlockPos pos)
 	{
@@ -442,7 +415,7 @@ public class RenderUtils
 					float[] afloat = new float[EnumFacing.values().length * 2];
 					BitSet bitset = new BitSet(3);
 
-					Object blockmodelrenderer$ambientocclusionface = constructor.newInstance(bmr);
+					AmbientOcclusionFace blockmodelrenderer$ambientocclusionface = bmr.new AmbientOcclusionFace();
 
 					for (EnumFacing enumfacing : EnumFacing.values())
 					{
@@ -450,7 +423,7 @@ public class RenderUtils
 
 						if (!list.isEmpty() && faceMap.get(enumfacing))
 						{
-							renderQuadsSmooth.invoke(bmr, worldIn, stateIn, posIn, buffer, list, afloat, bitset, blockmodelrenderer$ambientocclusionface);
+							renderQuadsSmooth(worldIn, stateIn, posIn, buffer, list, afloat, bitset, blockmodelrenderer$ambientocclusionface);
 						}
 					}
 
@@ -458,7 +431,7 @@ public class RenderUtils
 
 					if (!list1.isEmpty())
 					{
-						renderQuadsSmooth.invoke(bmr, worldIn, stateIn, posIn, buffer, list1, afloat, bitset, blockmodelrenderer$ambientocclusionface);
+						renderQuadsSmooth(worldIn, stateIn, posIn, buffer, list1, afloat, bitset, blockmodelrenderer$ambientocclusionface);
 					}
 				}
 				else
@@ -472,7 +445,7 @@ public class RenderUtils
 						if (!list.isEmpty() && faceMap.get(enumfacing))
 						{
 							int i = stateIn.getPackedLightmapCoords(worldIn, posIn.offset(enumfacing));
-							renderQuadsFlat.invoke(bmr, worldIn, stateIn, posIn, i, false, buffer, list, bitset);
+							renderQuadsFlat(worldIn, stateIn, posIn, i, false, buffer, list, bitset);
 							flag = true;
 						}
 					}
@@ -481,7 +454,7 @@ public class RenderUtils
 
 					if (!list1.isEmpty())
 					{
-						renderQuadsFlat.invoke(bmr, worldIn, stateIn, posIn, -1, true, buffer, list1, bitset);
+						renderQuadsFlat(worldIn, stateIn, posIn, -1, true, buffer, list1, bitset);
 					}
 				}
 			}
@@ -523,5 +496,186 @@ public class RenderUtils
 	{
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	private static void renderQuadsSmooth(IBlockAccess blockAccessIn, IBlockState stateIn, BlockPos posIn, BufferBuilder buffer, List<BakedQuad> list, float[] quadBounds, BitSet bitSet, BlockModelRenderer.AmbientOcclusionFace aoFace)
+	{
+		Vec3d vec3d = stateIn.getOffset(blockAccessIn, posIn);
+		double d0 = (double) posIn.getX() + vec3d.x;
+		double d1 = (double) posIn.getY() + vec3d.y;
+		double d2 = (double) posIn.getZ() + vec3d.z;
+		int i = 0;
+
+		for (int j = list.size(); i < j; ++i)
+		{
+			BakedQuad bakedquad = list.get(i);
+			fillQuadBounds(stateIn, bakedquad.getVertexData(), bakedquad.getFace(), quadBounds, bitSet);
+			aoFace.updateVertexBrightness(blockAccessIn, stateIn, posIn, bakedquad.getFace(), quadBounds, bitSet);
+			buffer.addVertexData(bakedquad.getVertexData());
+			buffer.putBrightness4(aoFace.vertexBrightness[0], aoFace.vertexBrightness[1], aoFace.vertexBrightness[2], aoFace.vertexBrightness[3]);
+			if (bakedquad.shouldApplyDiffuseLighting())
+			{
+				float diffuse = net.minecraftforge.client.model.pipeline.LightUtil.diffuseLight(bakedquad.getFace());
+				aoFace.vertexColorMultiplier[0] *= diffuse;
+				aoFace.vertexColorMultiplier[1] *= diffuse;
+				aoFace.vertexColorMultiplier[2] *= diffuse;
+				aoFace.vertexColorMultiplier[3] *= diffuse;
+			}
+			if (bakedquad.hasTintIndex())
+			{
+				int k = Minecraft.getMinecraft().getBlockColors().colorMultiplier(stateIn, blockAccessIn, posIn, bakedquad.getTintIndex());
+
+				if (EntityRenderer.anaglyphEnable)
+				{
+					k = TextureUtil.anaglyphColor(k);
+				}
+
+				float f = (float) (k >> 16 & 255) / 255.0F;
+				float f1 = (float) (k >> 8 & 255) / 255.0F;
+				float f2 = (float) (k & 255) / 255.0F;
+				buffer.putColorMultiplier(aoFace.vertexColorMultiplier[0] * f, aoFace.vertexColorMultiplier[0] * f1, aoFace.vertexColorMultiplier[0] * f2, 4);
+				buffer.putColorMultiplier(aoFace.vertexColorMultiplier[1] * f, aoFace.vertexColorMultiplier[1] * f1, aoFace.vertexColorMultiplier[1] * f2, 3);
+				buffer.putColorMultiplier(aoFace.vertexColorMultiplier[2] * f, aoFace.vertexColorMultiplier[2] * f1, aoFace.vertexColorMultiplier[2] * f2, 2);
+				buffer.putColorMultiplier(aoFace.vertexColorMultiplier[3] * f, aoFace.vertexColorMultiplier[3] * f1, aoFace.vertexColorMultiplier[3] * f2, 1);
+			}
+			else
+			{
+				buffer.putColorMultiplier(aoFace.vertexColorMultiplier[0], aoFace.vertexColorMultiplier[0], aoFace.vertexColorMultiplier[0], 4);
+				buffer.putColorMultiplier(aoFace.vertexColorMultiplier[1], aoFace.vertexColorMultiplier[1], aoFace.vertexColorMultiplier[1], 3);
+				buffer.putColorMultiplier(aoFace.vertexColorMultiplier[2], aoFace.vertexColorMultiplier[2], aoFace.vertexColorMultiplier[2], 2);
+				buffer.putColorMultiplier(aoFace.vertexColorMultiplier[3], aoFace.vertexColorMultiplier[3], aoFace.vertexColorMultiplier[3], 1);
+			}
+
+			buffer.putPosition(d0, d1, d2);
+		}
+	}
+
+	private static void fillQuadBounds(IBlockState stateIn, int[] vertexData, EnumFacing face, @Nullable float[] quadBounds, BitSet boundsFlags)
+	{
+		float f = 32.0F;
+		float f1 = 32.0F;
+		float f2 = 32.0F;
+		float f3 = -32.0F;
+		float f4 = -32.0F;
+		float f5 = -32.0F;
+
+		for (int i = 0; i < 4; ++i)
+		{
+			float f6 = Float.intBitsToFloat(vertexData[i * 7]);
+			float f7 = Float.intBitsToFloat(vertexData[i * 7 + 1]);
+			float f8 = Float.intBitsToFloat(vertexData[i * 7 + 2]);
+			f = Math.min(f, f6);
+			f1 = Math.min(f1, f7);
+			f2 = Math.min(f2, f8);
+			f3 = Math.max(f3, f6);
+			f4 = Math.max(f4, f7);
+			f5 = Math.max(f5, f8);
+		}
+
+		if (quadBounds != null)
+		{
+			quadBounds[EnumFacing.WEST.getIndex()] = f;
+			quadBounds[EnumFacing.EAST.getIndex()] = f3;
+			quadBounds[EnumFacing.DOWN.getIndex()] = f1;
+			quadBounds[EnumFacing.UP.getIndex()] = f4;
+			quadBounds[EnumFacing.NORTH.getIndex()] = f2;
+			quadBounds[EnumFacing.SOUTH.getIndex()] = f5;
+			int j = EnumFacing.values().length;
+			quadBounds[EnumFacing.WEST.getIndex() + j] = 1.0F - f;
+			quadBounds[EnumFacing.EAST.getIndex() + j] = 1.0F - f3;
+			quadBounds[EnumFacing.DOWN.getIndex() + j] = 1.0F - f1;
+			quadBounds[EnumFacing.UP.getIndex() + j] = 1.0F - f4;
+			quadBounds[EnumFacing.NORTH.getIndex() + j] = 1.0F - f2;
+			quadBounds[EnumFacing.SOUTH.getIndex() + j] = 1.0F - f5;
+		}
+
+		float f9 = 1.0E-4F;
+		float f10 = 0.9999F;
+
+		switch (face)
+		{
+			case DOWN:
+				boundsFlags.set(1, f >= 1.0E-4F || f2 >= 1.0E-4F || f3 <= 0.9999F || f5 <= 0.9999F);
+				boundsFlags.set(0, (f1 < 1.0E-4F || stateIn.isFullCube()) && f1 == f4);
+				break;
+			case UP:
+				boundsFlags.set(1, f >= 1.0E-4F || f2 >= 1.0E-4F || f3 <= 0.9999F || f5 <= 0.9999F);
+				boundsFlags.set(0, (f4 > 0.9999F || stateIn.isFullCube()) && f1 == f4);
+				break;
+			case NORTH:
+				boundsFlags.set(1, f >= 1.0E-4F || f1 >= 1.0E-4F || f3 <= 0.9999F || f4 <= 0.9999F);
+				boundsFlags.set(0, (f2 < 1.0E-4F || stateIn.isFullCube()) && f2 == f5);
+				break;
+			case SOUTH:
+				boundsFlags.set(1, f >= 1.0E-4F || f1 >= 1.0E-4F || f3 <= 0.9999F || f4 <= 0.9999F);
+				boundsFlags.set(0, (f5 > 0.9999F || stateIn.isFullCube()) && f2 == f5);
+				break;
+			case WEST:
+				boundsFlags.set(1, f1 >= 1.0E-4F || f2 >= 1.0E-4F || f4 <= 0.9999F || f5 <= 0.9999F);
+				boundsFlags.set(0, (f < 1.0E-4F || stateIn.isFullCube()) && f == f3);
+				break;
+			case EAST:
+				boundsFlags.set(1, f1 >= 1.0E-4F || f2 >= 1.0E-4F || f4 <= 0.9999F || f5 <= 0.9999F);
+				boundsFlags.set(0, (f3 > 0.9999F || stateIn.isFullCube()) && f == f3);
+		}
+	}
+
+	private static void renderQuadsFlat(IBlockAccess blockAccessIn, IBlockState stateIn, BlockPos posIn, int brightnessIn, boolean ownBrightness, BufferBuilder buffer, List<BakedQuad> list, BitSet bitSet)
+	{
+		Vec3d vec3d = stateIn.getOffset(blockAccessIn, posIn);
+		double d0 = (double) posIn.getX() + vec3d.x;
+		double d1 = (double) posIn.getY() + vec3d.y;
+		double d2 = (double) posIn.getZ() + vec3d.z;
+		int i = 0;
+
+		for (int j = list.size(); i < j; ++i)
+		{
+			BakedQuad bakedquad = list.get(i);
+
+			if (ownBrightness)
+			{
+				fillQuadBounds(stateIn, bakedquad.getVertexData(), bakedquad.getFace(), (float[]) null, bitSet);
+				BlockPos blockpos = bitSet.get(0) ? posIn.offset(bakedquad.getFace()) : posIn;
+				brightnessIn = stateIn.getPackedLightmapCoords(blockAccessIn, blockpos);
+			}
+
+			buffer.addVertexData(bakedquad.getVertexData());
+			buffer.putBrightness4(brightnessIn, brightnessIn, brightnessIn, brightnessIn);
+
+			if (bakedquad.hasTintIndex())
+			{
+				int k = Minecraft.getMinecraft().getBlockColors().colorMultiplier(stateIn, blockAccessIn, posIn, bakedquad.getTintIndex());
+
+				if (EntityRenderer.anaglyphEnable)
+				{
+					k = TextureUtil.anaglyphColor(k);
+				}
+
+				float f = (float) (k >> 16 & 255) / 255.0F;
+				float f1 = (float) (k >> 8 & 255) / 255.0F;
+				float f2 = (float) (k & 255) / 255.0F;
+				if (bakedquad.shouldApplyDiffuseLighting())
+				{
+					float diffuse = net.minecraftforge.client.model.pipeline.LightUtil.diffuseLight(bakedquad.getFace());
+					f *= diffuse;
+					f1 *= diffuse;
+					f2 *= diffuse;
+				}
+				buffer.putColorMultiplier(f, f1, f2, 4);
+				buffer.putColorMultiplier(f, f1, f2, 3);
+				buffer.putColorMultiplier(f, f1, f2, 2);
+				buffer.putColorMultiplier(f, f1, f2, 1);
+			}
+			else if (bakedquad.shouldApplyDiffuseLighting())
+			{
+				float diffuse = net.minecraftforge.client.model.pipeline.LightUtil.diffuseLight(bakedquad.getFace());
+				buffer.putColorMultiplier(diffuse, diffuse, diffuse, 4);
+				buffer.putColorMultiplier(diffuse, diffuse, diffuse, 3);
+				buffer.putColorMultiplier(diffuse, diffuse, diffuse, 2);
+				buffer.putColorMultiplier(diffuse, diffuse, diffuse, 1);
+			}
+
+			buffer.putPosition(d0, d1, d2);
+		}
 	}
 }
