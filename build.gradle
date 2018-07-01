@@ -31,7 +31,7 @@ targetCompatibility = 1.8
 
 jar {
     manifest {
-        attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "lumien.randomthings.asm.LoadingPlugin")
+        attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "lumien.randomthings.asm.LoadingPlugin", "FMLAT": "randomthings_at.cfg")
     }
 }
 
@@ -90,6 +90,9 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+    
+    // Copy Access Transformer
+    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
