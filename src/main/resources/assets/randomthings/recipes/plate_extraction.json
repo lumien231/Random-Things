@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BIB",
+    "IHI",
+    "BIB"
+  ],
+  "key": {
+    "B": {
+      "item": "randomthings:ingredient",
+      "data": 8
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "H": {
+    	"item": "minecraft:hopper"
+    }
+  },
+  "result": {
+    "item": "randomthings:plate_extraction",
+    "data": 0,
+    "count": 2
+  }
+}

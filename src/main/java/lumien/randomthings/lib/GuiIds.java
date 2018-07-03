@@ -33,4 +33,6 @@ public class GuiIds
 	public static final int PORTABLE_SOUND_DAMPENER = 29;
 	public static final int SOUND_DAMPENER = 30;
 	public static final int ADVANCED_REDSTONE_TORCH = 31;
+	public static final int PROCESSING_PLATE = 32;
+	public static final int EXTRACTION_PLATE = 33;
 }

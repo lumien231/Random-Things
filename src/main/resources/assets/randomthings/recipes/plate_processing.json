@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B B",
+    "E C",
+    "B B"
+  ],
+  "key": {
+    "E": {
+      "item": "randomthings:plate_extraction"
+    },
+    "C": {
+      "item": "randomthings:plate_collection"
+    },
+    "B": {
+      "item": "randomthings:ingredient",
+      "data": 8
+    }
+  },
+  "result": {
+    "item": "randomthings:plate_processing",
+    "data": 0,
+    "count": 2
+  }
+}

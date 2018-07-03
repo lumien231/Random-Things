@@ -6,6 +6,7 @@ import lumien.randomthings.block.plates.BlockBouncyPlate;
 import lumien.randomthings.block.plates.BlockCollectionPlate;
 import lumien.randomthings.block.plates.BlockCorrectorPlate;
 import lumien.randomthings.block.plates.BlockDirectionalAcceleratorPlate;
+import lumien.randomthings.block.plates.BlockExtractionPlate;
 import lumien.randomthings.block.plates.BlockFilteredRedirectorPlate;
 import lumien.randomthings.block.plates.BlockItemRejuvenatorPlate;
 import lumien.randomthings.block.plates.BlockItemSealerPlate;
@@ -144,6 +145,7 @@ public class ModBlocks
 	public static BlockRedstonePlate redstonePlate;
 	public static BlockRedstonePlate redstonePlatePowered;
 	public static BlockProcessingPlate processingPlate;
+	public static BlockExtractionPlate extractionPlate;
 
 	public static void load(FMLPreInitializationEvent event)
 	{
@@ -266,5 +268,6 @@ public class ModBlocks
 		acceleratorPlateDirectional = new BlockDirectionalAcceleratorPlate();
 		bouncyPlate = new BlockBouncyPlate();
 		collectionPlate = new BlockCollectionPlate();
+		extractionPlate = new BlockExtractionPlate();
 	}
 }

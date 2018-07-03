@@ -1,0 +1,42 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "north": "randomthings:blocks/plates/extraction_none",
+            "east": "randomthings:blocks/plates/extraction_none",
+            "south": "randomthings:blocks/plates/extraction_none",
+            "west": "randomthings:blocks/plates/extraction_none",
+            "output": "randomthings:blocks/plates/extraction_output"
+        },
+        "model": "randomthings:plate_extraction",
+        "uvlock": true
+    },
+    "variants": {
+        "outputfacing": {
+            "north" :
+            {
+                "textures": {
+                    "north": "#output"
+                }
+            },
+            "south" :
+            {
+                "textures": {
+                    "south": "#output"
+                }
+            },
+            "west" :
+            {
+                "textures": {
+                    "west": "#output"
+                }
+            },
+            "east" :
+            {
+                "textures": {
+                    "east": "#output"
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,8 @@
 package lumien.randomthings.block.plates;
 
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockContainerBase;
+import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.TileEntityProcessingPlate;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -130,7 +132,7 @@ public class BlockProcessingPlate extends BlockContainerBase
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (side == EnumFacing.UP)
+		if (side == EnumFacing.UP && playerIn.isSneaking())
 		{
 			EnumFacing currentOutput = state.getValue(OUTPUT_FACING);
 
@@ -138,8 +140,14 @@ public class BlockProcessingPlate extends BlockContainerBase
 			
 			return true;
 		}
-
-		return false;
+		else
+		{
+			if (!worldIn.isRemote)
+			{
+				playerIn.openGui(RandomThings.instance, GuiIds.PROCESSING_PLATE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			}
+			return true;
+		}
 	}
 	
 	@Override
@@ -182,7 +190,7 @@ public class BlockProcessingPlate extends BlockContainerBase
 			TileEntityProcessingPlate me = (TileEntityProcessingPlate) worldIn.getTileEntity(pos);
 			TileEntity downTE = worldIn.getTileEntity(pos.down());
 			
-			EnumFacing inputFacing = me.getInputFacing();
+			EnumFacing inputFacing = me.getInsertFacing();
 			
 			if (downTE != null && downTE.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, inputFacing))
 			{

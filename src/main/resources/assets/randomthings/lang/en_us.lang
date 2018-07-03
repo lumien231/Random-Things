@@ -100,6 +100,8 @@ tile.plate_itemsealer.name=Item Sealer Plate
 tile.plate_bouncy.name=Bouncy Plate
 tile.plate_collection.name=Collection Plate
 tile.plate_redstone.name=Redstone Plate
+tile.plate_processing.name=Processing Plate
+tile.plate_extraction.name=Extraction Plate
 
 tile.stainedBrick.black.name=Black Stained Bricks
 tile.stainedBrick.red.name=Red Stained Bricks
@@ -515,6 +517,8 @@ tile.plate_itemsealer.info=Item entities that move over this plate can't be pick
 tile.plate_bouncy.info=Entities that move over this plate are propelled upwards.
 tile.plate_collection.info=Item entities moving over this plate are collected into adjacent inventories.
 tile.plate_redstone.info=Entities moving over this plate are redirected towards a different direction. Powered by redstone they will keep going straight instead.
+tile.plate_extraction.info=Extracts Items and pushes them towards the output side. It extracts from the Inventory below and the Inventory on the opposite side of the output. You can change the output side by shift right clicking with an empty hand. You can change the side it extracts from in the gui.
+tile.plate_processing.info=Combines an Extraction and Collection Plate. It will attempt to insert items going over it into the inventory below it. It will also extract items and push them towards the output (White) side. You can change the output side by shift right clicking it with an empty hand. The Sides it extracts from / inserts into can be changed in the gui.
 
 item.positionFilter.info=This filter represents a block position (x/y/z), you set it by right clicking a block with it in your hand.
 item.biomeCrystal.info=You find Biome Crystals in dungeon chests, they can be used to find the biome they represent using a Biome Radar.

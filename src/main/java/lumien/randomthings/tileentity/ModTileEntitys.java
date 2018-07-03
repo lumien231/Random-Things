@@ -56,6 +56,7 @@ public class ModTileEntitys
 		registerTE(TileEntitySpectreEnergyInjector.class, "spectreEnergyInjector");
 		registerTE(TileEntitySpectreCoil.class, "spectreCoil");
 		registerTE(TileEntityProcessingPlate.class, "processingPlate");
+		registerTE(TileEntityExtractionPlate.class, "extractionPlate");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

@@ -102,6 +102,8 @@ public class ItemModels
 		registerBlock(ModBlocks.itemSealerPlate);
 		registerBlock(ModBlocks.bouncyPlate);
 		registerBlock(ModBlocks.collectionPlate);
+		registerBlock(ModBlocks.processingPlate);
+		registerBlock(ModBlocks.extractionPlate);
 
 		registerBlock(ModBlocks.spectreLeaf);
 		registerBlock(ModBlocks.spectreLog);

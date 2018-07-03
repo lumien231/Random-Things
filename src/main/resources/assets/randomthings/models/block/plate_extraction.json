@@ -1,11 +1,11 @@
 {
 	"textures": {
-	    "base" : "randomthings:blocks/plates/processing_base",
-		"particle": "randomthings:blocks/plates/processing_base",
-        "north": "randomthings:blocks/plates/processing_grey",
-        "east": "randomthings:blocks/plates/processing_invisible",
-        "south": "randomthings:blocks/plates/processing_black",
-        "west": "randomthings:blocks/plates/processing_white"
+	    "base" : "randomthings:blocks/plates/extraction_base",
+		"particle": "randomthings:blocks/plates/extraction_base",
+        "north": "randomthings:blocks/plates/extraction_none",
+        "east": "randomthings:blocks/plates/extraction_none",
+        "south": "randomthings:blocks/plates/extraction_none",
+        "west": "randomthings:blocks/plates/extraction_none"
     },
 	"elements": [ 	 
 		{
