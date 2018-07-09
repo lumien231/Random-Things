@@ -113,8 +113,11 @@ public class RandomThings implements LoadingCallback
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this);
 
 		// IMC
-		String enderIOMagneticMessage = "<enchantment name=\"enchantment.randomthings.magnetic\" costPerLevel=\"20\" >" + "    <itemStack modID=\"minecraft\" itemName=\"iron_block\" itemMeta=\"0\" />" + "</enchantment>";
-		FMLInterModComms.sendMessage("enderio", "recipe:enchanter", enderIOMagneticMessage);
+	      FMLInterModComms.sendMessage("enderio", "recipe:xml",
+	              "<?xml version=\"1.0\" encoding=\"UTF-8\"?><recipes>"
+	                  + "<recipe name=\"Enchanter: randomthings:magnetic\" required=\"true\" disabled=\"false\"><enchanting>"
+	                  + "<input name=\"oredict:blockIron\" amount=\"4\"/><enchantment name=\"" + "randomthings"
+	                  + ":magnetic\" costMultiplier=\"1\"/></enchanting></recipe></recipes>");
 	}
 
 	@EventHandler
