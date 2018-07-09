@@ -7,15 +7,19 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import akka.io.Tcp.Register;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockBase;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.item.ItemBase;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import mezz.jei.api.IModRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
@@ -58,6 +62,7 @@ public class DescriptionHandler
 		
 		// Manually Add
 		registry.addDescription(new ItemStack(ModBlocks.blockDiaphanous, 1, OreDictionary.WILDCARD_VALUE), "tile.diaphanousBlock.info");
+		registry.addDescription(ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(ModEnchantments.magnetic, 1)), "enchantment.randomthings.magnetic.desc");
 		
 		Stream.concat(BlockBase.rtBlockList.stream(), ItemBase.rtItemList.stream()).forEach(new Consumer<Object>()
 		{

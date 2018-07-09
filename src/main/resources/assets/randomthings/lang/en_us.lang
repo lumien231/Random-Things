@@ -425,6 +425,7 @@ fluid.biomeEssence=Biome Essence
 enchantment.randomthings.magnetic=Magnetic
 enchantment.randomthings.magnetic.desc=The drops from blocks you mine with a tool that has the magnetic enchantment go directly into your inventory instead of dropping on the ground.
 
+
 command.festival.scheduled=Scheduled a Festival for the nearby Village
 command.festival.failed=Failed to schedule a Festival for the nearby Village
 command.festival.novillager=No Villager nearby
