@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -41,6 +42,12 @@ public class ItemSummoningPendulum extends ItemBase
 		 */
 
 		this.setMaxStackSize(1);
+	}
+	
+	@Override
+	public int getRGBDurabilityForDisplay(ItemStack stack)
+	{
+		return EnumDyeColor.PURPLE.getColorValue();
 	}
 
 	@Override
