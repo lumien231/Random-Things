@@ -25,6 +25,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,7 +46,7 @@ public class ItemSummoningPendulum extends ItemBase
 
 		this.setMaxStackSize(1);
 	}
-	
+
 	@Override
 	public int getRGBDurabilityForDisplay(ItemStack stack)
 	{
@@ -98,7 +101,7 @@ public class ItemSummoningPendulum extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World world, List tooltip, ITooltipFlag advanced)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
 		int entityCount = 0;
 
@@ -115,10 +118,13 @@ public class ItemSummoningPendulum extends ItemBase
 
 			for (int i = 0; i < tagList.tagCount(); i++)
 			{
-				Class entityClass = EntityList.getClass(new ResourceLocation(tagList.getCompoundTagAt(i).getString("id")));
-				String name = EntityUtil.getEntityName(entityClass);
+				ResourceLocation entityLocation = new ResourceLocation(tagList.getCompoundTagAt(i).getString("id"));
+				EntityEntry entry = ForgeRegistries.ENTITIES.getValue(entityLocation);
 
-				tooltip.add("- " + name);
+				if (entry != null)
+				{
+					tooltip.add("- " + I18n.format("entity." + entry.getName() + ".name"));
+				}
 			}
 			return;
 		}
