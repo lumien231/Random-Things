@@ -30,7 +30,7 @@ public class BlockExtractionPlate extends BlockContainerBase
 {
 	protected static final AxisAlignedBB AABB = null;
 	protected static final AxisAlignedBB VISUAL_AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.03125D, 1D);
-	
+
 	public static final PropertyDirection OUTPUT_FACING = PropertyDirection.create("outputfacing", EnumFacing.Plane.HORIZONTAL);
 
 	public BlockExtractionPlate()
@@ -117,13 +117,19 @@ public class BlockExtractionPlate extends BlockContainerBase
 	{
 		EnumFacing currentOutput = state.getValue(OUTPUT_FACING);
 
-		return currentOutput.ordinal();
+		return currentOutput.ordinal() - 2;
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing output = EnumFacing.values()[meta];
+		if (meta > 3)
+		{
+			meta = 0;
+		}
+		
+		
+		EnumFacing output = EnumFacing.values()[meta + 2];
 		return this.getDefaultState().withProperty(OUTPUT_FACING, output);
 	}
 
@@ -157,7 +163,7 @@ public class BlockExtractionPlate extends BlockContainerBase
 			{
 				playerIn.openGui(RandomThings.instance, GuiIds.EXTRACTION_PLATE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			}
-			
+
 			return true;
 		}
 
@@ -181,7 +187,7 @@ public class BlockExtractionPlate extends BlockContainerBase
 	{
 		if (!worldIn.isRemote)
 		{
-			
+
 		}
 	}
 
