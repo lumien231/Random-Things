@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import lumien.randomthings.config.Features;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.material.Material;
@@ -60,8 +61,11 @@ public class BlockPod extends BlockBase
 		{
 			drops.add(new ItemStack(Items.EMERALD, emeraldAmount));
 		}
-		
-		drops.add(new ItemStack(ModItems.ingredients,1,ItemIngredient.INGREDIENT.GOLDEN_EGG.id));
+
+		if (Features.GOLDEN_EGG)
+		{
+			drops.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.GOLDEN_EGG.id));
+		}
 
 		return drops;
 	}

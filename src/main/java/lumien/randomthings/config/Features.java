@@ -20,4 +20,7 @@ public class Features
 
 	@ConfigOption(category = "visual", name = "HideCoordinates", comment = "When set to true the coordinates a position filter / portkey point to won't be displayed in its tooltip.")
 	public static boolean HIDE_CORDS = false;
+	
+	@ConfigOption(category = "features", name = "GoldenEgg", comment = "Should there be an Golden Egg in every Bean Pod?")
+	public static boolean GOLDEN_EGG = true;
 }
