@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OBO",
+    " E "
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "B": {
+      "item": "randomthings:enderbucket"
+    },
+    "E": {
+    	"item": "randomthings:stableenderpearl"
+    }
+  },
+  "result": {
+    "item": "randomthings:reinforcedenderbucket"
+  }
+}

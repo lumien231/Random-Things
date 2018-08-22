@@ -15,6 +15,8 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelDynBucket;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemModels
@@ -187,6 +189,10 @@ public class ItemModels
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilEnder, spectreStateMapper);
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilNumber, spectreStateMapper);
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilGenesis, spectreStateMapper);
+		
+		ModelLoader.setCustomModelResourceLocation(ModItems.enderBucket, 0, new ModelResourceLocation("randomthings:enderbucket", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(ModItems.reinforcedEnderBucket, 0, new ModelResourceLocation("randomthings:reinforcedenderbucket", "inventory"));
+	
 	}
 
 	private static void registerSpectreCoils()

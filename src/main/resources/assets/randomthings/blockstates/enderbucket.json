@@ -1,0 +1,18 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"inventory": {
+			"model": "forge:forgebucket",
+			"textures": {
+				"base": "randomthings:items/enderbucket/enderbucket_base",
+				"fluid": "randomthings:items/enderbucket/enderbucket_fluid"
+			},
+			"transform": "forge:default-item",
+			"custom": {
+				"fluid": "water",
+				"flipGas": true,
+				"applyTint": true
+			}
+		}
+	}
+}
