@@ -33,4 +33,7 @@ public class Numbers
 
 	@ConfigOption(category = "Numbers", name = "AncientFurnaceLimit", comment = "How many blocks an Ancient Furnace can transform before stopping")
 	public static int ANCIENT_FURNACE_LIMIT = 10000;
+	
+	@ConfigOption(category = "Numbers", name = "NumberedSpectreCoilEnergy", comment = "How much Energy a Numbered Spectre Coil produces per Tick")
+	public static int NUMBERED_SPECTRECOIL_ENERGY = 128;
 }

@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import lumien.randomthings.block.BlockSpectreCoil;
 import lumien.randomthings.block.BlockSpectreCoil.CoilType;
+import lumien.randomthings.config.Numbers;
 import lumien.randomthings.handler.spectrecoils.SpectreCoilHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -147,7 +148,7 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 				{
 					if (this.coilType == CoilType.NUMBER || this.coilType == CoilType.GENESIS)
 					{
-						int amount = coilType == CoilType.NUMBER ? 128 : 10000000;
+						int amount = coilType == CoilType.NUMBER ? Numbers.NUMBERED_SPECTRECOIL_ENERGY : 10000000;
 
 						targetStorage.receiveEnergy(amount, false);
 					}

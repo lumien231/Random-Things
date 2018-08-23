@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mojang.authlib.GameProfile;
 
+import lumien.randomthings.config.Numbers;
 import lumien.randomthings.item.block.ItemBlockColored;
 import lumien.randomthings.item.block.ItemBlockSpectreCoil;
 import lumien.randomthings.lib.ILuminousBlock;
@@ -92,7 +93,7 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 				display = I18n.format("tile.spectrecoil.generate", "Infinite");
 				break;
 			case NUMBER:
-				display = I18n.format("tile.spectrecoil.generate", "128");
+				display = I18n.format("tile.spectrecoil.generate", Numbers.NUMBERED_SPECTRECOIL_ENERGY + "");
 				break;
 			default:
 				display = I18n.format("tile.spectrecoil.transfer", "???");
