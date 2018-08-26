@@ -53,6 +53,11 @@ public class ItemEnderBucket extends ItemBase
 	{
 		IFluidHandlerItem item = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 
+		if (item == null)
+		{
+			return 16; // Fluid Handler isn't present during Capability Gathering and Astral Sorcery wants the stack size during it.
+		}
+		
 		FluidStack fluidStack = item.drain(1000, false);
 
 		if (fluidStack != null)

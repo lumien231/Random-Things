@@ -21,6 +21,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
@@ -57,7 +58,7 @@ public class ItemReinforcedEnderBucket extends ItemBase
 	{
 		return true;
 	}
-	
+
 	@Override
 	public int getRGBDurabilityForDisplay(ItemStack stack)
 	{
@@ -75,6 +76,13 @@ public class ItemReinforcedEnderBucket extends ItemBase
 			else if (f == FluidRegistry.LAVA)
 			{
 				return Color.ORANGE.getRGB();
+			}
+			else if (f != null && f.getName() != null)
+			{
+				if (f.getName().equals("astralsorcery.liquidstarlight"))
+				{
+					return Color.WHITE.getRGB();
+				}
 			}
 		}
 
@@ -96,7 +104,7 @@ public class ItemReinforcedEnderBucket extends ItemBase
 		{
 			filledPercent = contained.amount / (1000F * 10F);
 		}
-		
+
 		return 1F - filledPercent;
 	}
 
