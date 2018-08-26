@@ -72,6 +72,11 @@ tile.ancientBrick.name=远古砖块
 tile.spectreLens.name=通灵镜片
 tile.spectreEnergyInjector.name=通灵能量注入器
 
+item.enderBucket.name=末影桶
+item.enderBucket.filled.name=%s末影桶
+item.reinforcedEnderBucket.name=强化末影桶
+item.reinforcedEnderBucket.filled.name=强化末影%s桶
+
 tile.spectrePlank.name=通灵木板
 tile.spectreSapling.name=通灵树苗
 tile.spectreLeaf.name=通灵树叶
@@ -579,3 +584,5 @@ item.ingredient.goldenEgg.info=投掷后会生成一只金鸡，其会下金锭�
 item.weatherEgg_sun.info=投掷后会生成一片云朵，其会慢慢上升。一旦到达天空，它便会改变天气至晴天。
 item.weatherEgg_rain.info=投掷后会生成一片云朵，其会慢慢上升。一旦到达天空，它便会改变天气至雨天。
 item.weatherEgg_storm.info=投掷后会生成一片云朵，其会慢慢上升。一旦到达天空，它便会改变天气至雷暴天。
+item.enderBucket.info=末影桶的功能类似原版的桶，但不完全是。当你手持其右击流动的流体（非源头）时，它会自动盛装该流体的源头。
+item.reinforcedEnderBucket.info=强化末影桶的功能类似末影桶。值得注意的是，它至多能盛装10桶相同类似的流体。
