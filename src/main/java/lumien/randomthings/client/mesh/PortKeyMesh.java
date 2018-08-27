@@ -2,7 +2,7 @@ package lumien.randomthings.client.mesh;
 
 import java.util.Map;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import lumien.randomthings.util.ReflectionUtil;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -25,13 +25,13 @@ public class PortKeyMesh implements ItemMeshDefinition
 			Item item = camoStack.getItem();
 			int meta = camoStack.getItemDamage();
 
-			Map<IRegistryDelegate<Item>, TIntObjectHashMap<ModelResourceLocation>> modelMap = ReflectionUtil.getModelMap();
+			Map<IRegistryDelegate<Item>, Int2ObjectMap<ModelResourceLocation>> modelMap = ReflectionUtil.getModelMap();
 
 			if (modelMap != null && modelMap.containsKey(item.delegate))
 			{
-				TIntObjectHashMap<ModelResourceLocation> metaMap = modelMap.get(item.delegate);
+				Int2ObjectMap<ModelResourceLocation> metaMap = modelMap.get(item.delegate);
 
-				if (metaMap.contains(meta))
+				if (metaMap.containsKey(meta))
 				{
 					return metaMap.get(meta);
 				}

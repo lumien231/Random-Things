@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import lumien.randomthings.asm.MCPNames;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -108,7 +108,7 @@ public class ReflectionUtil
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static Map<IRegistryDelegate<Item>, TIntObjectHashMap<ModelResourceLocation>> getModelMap()
+	public static Map<IRegistryDelegate<Item>, Int2ObjectMap<ModelResourceLocation>> getModelMap()
 	{
 		if (simpleShapes == null)
 		{
@@ -129,7 +129,7 @@ public class ReflectionUtil
 
 		try
 		{
-			return (Map<IRegistryDelegate<Item>, TIntObjectHashMap<ModelResourceLocation>>) simpleShapes.get(Minecraft.getMinecraft().getRenderItem().getItemModelMesher());
+			return (Map<IRegistryDelegate<Item>, Int2ObjectMap<ModelResourceLocation>>) simpleShapes.get(Minecraft.getMinecraft().getRenderItem().getItemModelMesher());
 		}
 		catch (IllegalArgumentException e)
 		{
