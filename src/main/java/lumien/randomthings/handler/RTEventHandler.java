@@ -25,6 +25,7 @@ import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
+import lumien.randomthings.handler.compability.tc.TConUtil;
 import lumien.randomthings.handler.festival.FestivalHandler;
 import lumien.randomthings.handler.floo.FlooNetworkHandler;
 import lumien.randomthings.handler.magicavoxel.ClientModelLibrary;
@@ -524,7 +525,7 @@ public class RTEventHandler
 		{
 			ItemStack equipped = event.getEntityPlayer().getHeldItem(event.getHand());
 
-			if (!equipped.isEmpty() && equipped.getItem() instanceof ItemSpade)
+			if (!equipped.isEmpty() && (equipped.getItem() instanceof ItemSpade || TConUtil.isTconShovel(equipped)))
 			{
 				RightClickBlock rcEvent = (RightClickBlock) event;
 				IBlockState targetState = event.getWorld().getBlockState(event.getPos());
