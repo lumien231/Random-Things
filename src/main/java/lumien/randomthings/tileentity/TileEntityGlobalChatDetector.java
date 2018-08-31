@@ -8,6 +8,7 @@ import java.util.WeakHashMap;
 import lumien.randomthings.block.BlockGlobalChatDetector;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.item.ItemIDCard;
+import lumien.randomthings.lib.IOpable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class TileEntityGlobalChatDetector extends TileEntityBase implements ITickable
+public class TileEntityGlobalChatDetector extends TileEntityBase implements ITickable, IOpable
 {
 	public static Set<TileEntityGlobalChatDetector> detectors = Collections.newSetFromMap(new WeakHashMap<TileEntityGlobalChatDetector, Boolean>());
 
@@ -149,7 +150,7 @@ public class TileEntityGlobalChatDetector extends TileEntityBase implements ITic
 							}
 						}
 					}
-					return validConsume;
+					return validConsume || isOp();
 				}
 				else
 				{

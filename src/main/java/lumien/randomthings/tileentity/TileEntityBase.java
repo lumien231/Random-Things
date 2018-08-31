@@ -2,6 +2,7 @@ package lumien.randomthings.tileentity;
 
 import java.util.HashMap;
 
+import lumien.randomthings.lib.IOpable;
 import lumien.randomthings.lib.IRedstoneSensitive;
 import lumien.randomthings.lib.ISlotFilter;
 import lumien.randomthings.lib.ItemHandlerWrapper;
@@ -29,6 +30,13 @@ public abstract class TileEntityBase extends TileEntity
 	private boolean itemHandlerInternal = true;
 
 	private boolean redstonePowered;
+	
+	private boolean op;
+	
+	public boolean isOp()
+	{
+		return op;
+	}
 
 	protected void setItemHandler(int slots)
 	{
@@ -101,6 +109,11 @@ public abstract class TileEntityBase extends TileEntity
 			NBTTagCompound inventoryCompound = ((ItemStackHandler) inventoryHandler).serializeNBT();
 			compound.setTag("inventory", inventoryCompound);
 		}
+		
+		if (this instanceof IOpable)
+		{
+			compound.setBoolean("op", op);
+		}
 
 		if (this instanceof IRedstoneSensitive)
 		{
@@ -125,6 +138,11 @@ public abstract class TileEntityBase extends TileEntity
 		if (this instanceof IRedstoneSensitive)
 		{
 			this.redstonePowered = compound.getBoolean("redstonePowered");
+		}
+		
+		if (this instanceof IOpable)
+		{
+			this.op = compound.getBoolean("op");
 		}
 	}
 
@@ -258,5 +276,12 @@ public abstract class TileEntityBase extends TileEntity
 	public IItemHandler getItemHandler()
 	{
 		return inventoryHandler;
+	}
+
+	public boolean toggleOp()
+	{
+		this.op = !op;
+		
+		return this.op;
 	}
 }

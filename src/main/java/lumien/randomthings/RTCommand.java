@@ -13,8 +13,10 @@ import lumien.randomthings.handler.floo.FlooNetworkHandler;
 import lumien.randomthings.item.ItemBiomeCrystal;
 import lumien.randomthings.item.ItemPositionFilter;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.lib.IOpable;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageNotification;
+import lumien.randomthings.tileentity.TileEntityBase;
 import lumien.randomthings.worldgen.WorldGenAncientFurnace;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -29,6 +31,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -59,7 +62,7 @@ public class RTCommand extends CommandBase
 	{
 		if (args.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn", "notify", "fireplaces", "festival" });
+			return getListOfStringsMatchingLastWord(args, new String[] { "generateBiomeCrystalChests", "setBiomeCrystal", "tpFilter", "testSlimeSpawn", "notify", "fireplaces", "festival", "op" });
 		}
 		else
 		{
@@ -76,6 +79,13 @@ public class RTCommand extends CommandBase
 				else if (args.length == 5)
 				{
 					return getListOfStringsMatchingLastWord(args, server.getOnlinePlayerNames());
+				}
+			}
+			else if (args[0].equals("op"))
+			{
+				if (args.length > 1 && args.length <= 4)
+				{
+					return getTabCompletionCoordinate(args, 1, pos);
 				}
 			}
 		}
@@ -239,6 +249,28 @@ public class RTCommand extends CommandBase
 		else if (args[0].equals("ancientFurnace"))
 		{
 			WorldGenAncientFurnace.pattern.place(sender.getEntityWorld(), sender.getPosition(), 3);
+		}
+		else if (args[0].equals("op") && args.length == 4)
+		{
+			if (sender instanceof EntityPlayerMP && sender.canUseCommand(2, "op"))
+			{
+				EntityPlayerMP player = (EntityPlayerMP) sender;
+
+				BlockPos target = parseBlockPos(sender, args, 1, false);
+
+				TileEntity teTarget = player.world.getTileEntity(target);
+
+				if (teTarget instanceof TileEntityBase && teTarget instanceof IOpable)
+				{
+					boolean newValue = ((TileEntityBase) teTarget).toggleOp();
+
+					sender.sendMessage(new TextComponentTranslation("rt.command.op.feedback", newValue + ""));
+				}
+				else
+				{
+					sender.sendMessage(new TextComponentTranslation("rt.command.op.error"));
+				}
+			}
 		}
 	}
 
