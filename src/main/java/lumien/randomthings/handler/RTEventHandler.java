@@ -25,6 +25,7 @@ import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
+import lumien.randomthings.handler.compability.baubles.BaublesSpectreAnchor;
 import lumien.randomthings.handler.compability.tc.TConUtil;
 import lumien.randomthings.handler.festival.FestivalHandler;
 import lumien.randomthings.handler.floo.FlooNetworkHandler;
@@ -133,6 +134,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
@@ -389,6 +391,18 @@ public class RTEventHandler
 	{
 		LootHandler.addLoot(event);
 	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void playerDropsEarly(PlayerDropsEvent event)
+	{
+		BaublesSpectreAnchor.handleDropsEarly(event);
+	}
+	
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void playerDropsLate(PlayerDropsEvent event)
+	{
+		BaublesSpectreAnchor.handleDropsLate(event);
+	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void playerClone(PlayerEvent.Clone event)
@@ -397,7 +411,7 @@ public class RTEventHandler
 		{
 			EntityPlayer oldPlayer = event.getOriginal();
 			EntityPlayer newPlayer = event.getEntityPlayer();
-
+			
 			for (int i = 0; i < oldPlayer.inventory.getSizeInventory(); i++)
 			{
 				ItemStack is = oldPlayer.inventory.getStackInSlot(i);
@@ -429,6 +443,9 @@ public class RTEventHandler
 					}
 				}
 			}
+			
+			// Baubles
+			BaublesSpectreAnchor.handleClone(event);
 		}
 	}
 
