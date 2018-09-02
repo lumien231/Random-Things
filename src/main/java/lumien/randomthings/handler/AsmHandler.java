@@ -571,47 +571,4 @@ public class AsmHandler
 
 		return original;
 	}
-
-	public static void modifyInput(MovementInputFromOptions input)
-	{
-		EntityPlayerSP player = Minecraft.getMinecraft().player;
-
-		PotionEffect effect;
-		if (player != null && (effect = player.getActivePotionEffect(ModPotions.collapse)) != null && effect.getAmplifier() == 0)
-		{
-			boolean left = input.leftKeyDown;
-			boolean right = input.rightKeyDown;
-
-			boolean forward = input.forwardKeyDown;
-			boolean backwards = input.backKeyDown;
-
-			if (left)
-			{
-				input.moveStrafe -= 2;
-				input.leftKeyDown = false;
-				input.rightKeyDown = true;
-			}
-
-			if (right)
-			{
-				input.moveStrafe += 2;
-				input.rightKeyDown = false;
-				input.leftKeyDown = true;
-			}
-
-			if (forward)
-			{
-				input.moveForward -= 2;
-				input.forwardKeyDown = false;
-				input.backKeyDown = true;
-			}
-
-			if (backwards)
-			{
-				input.moveForward += 2;
-				input.backKeyDown = false;
-				input.forwardKeyDown = true;
-			}
-		}
-	}
 }

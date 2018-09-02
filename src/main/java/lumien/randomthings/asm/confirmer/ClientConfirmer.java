@@ -22,7 +22,6 @@ public class ClientConfirmer extends ServerConfirmer
 		fun(LayerArmorBase.class);
 		fun(EntityRenderer.class);
 		fun(VertexLighterFlat.class);
-		fun(MovementInputFromOptions.class);
 		fun(PlayerControllerMP.class);
 	}
 }

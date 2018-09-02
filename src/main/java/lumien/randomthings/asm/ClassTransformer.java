@@ -135,11 +135,6 @@ public class ClassTransformer implements IClassTransformer
 			transformations++;
 			return patchVertexLighterFlat(basicClass);
 		}
-		else if (transformedName.equals("net.minecraft.util.MovementInputFromOptions"))
-		{
-			transformations++;
-			return patchMovementInput(basicClass);
-		}
 		else if (transformedName.equals("net.minecraft.entity.monster.EntitySlime"))
 		{
 			transformations++;
@@ -376,56 +371,6 @@ public class ClassTransformer implements IClassTransformer
 						toInsert.add(new InsnNode(POP));
 
 						getCanSpawnHere.instructions.insert(skip, toInsert);
-					}
-				}
-			}
-		}
-
-		CustomClassWriter writer = new CustomClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-		classNode.accept(writer);
-
-		return writer.toByteArray();
-	}
-
-	private byte[] patchMovementInput(byte[] basicClass)
-	{
-		ClassNode classNode = new ClassNode();
-		ClassReader classReader = new ClassReader(basicClass);
-		classReader.accept(classNode, 0);
-		logger.log(Level.DEBUG, "Found MovementInputFromOptions Class: " + classNode.name);
-
-		MethodNode updatePlayerMoveState = null;
-
-		for (MethodNode mn : classNode.methods)
-		{
-			if (mn.name.equals(MCPNames.method("func_78898_a")))
-			{
-				updatePlayerMoveState = mn;
-				break;
-			}
-		}
-
-		if (updatePlayerMoveState != null)
-		{
-			logger.log(Level.DEBUG, " - Found updatePlayerMoveState");
-
-			for (int i = 0; i < updatePlayerMoveState.instructions.size(); i++)
-			{
-				AbstractInsnNode ain = updatePlayerMoveState.instructions.get(i);
-
-				if (ain instanceof FieldInsnNode)
-				{
-					FieldInsnNode fin = (FieldInsnNode) ain;
-
-					if (fin.name.equals(MCPNames.field("field_78899_d")))
-					{
-						logger.log(Level.DEBUG, " - Found insert point");
-
-						InsnList toInsert = new InsnList();
-						toInsert.add(new VarInsnNode(ALOAD, 0));
-						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "modifyInput", "(Lnet/minecraft/util/MovementInputFromOptions;)V", false));
-						updatePlayerMoveState.instructions.insert(fin, toInsert);
-						break;
 					}
 				}
 			}

@@ -96,6 +96,7 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.MovementInput;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -115,6 +116,7 @@ import net.minecraft.world.storage.loot.conditions.RandomChance;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
+import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -1093,6 +1095,52 @@ public class RTEventHandler
 			event.setResult(Result.ALLOW);
 			event.getWorld().setBlockState(event.getPos(), ModBlocks.fertilizedDirtTilled.getDefaultState());
 			event.getWorld().playSound(null, event.getPos().add(0.5, 0.5, 0.5), ModBlocks.fertilizedDirtTilled.getSoundType().getStepSound(), SoundCategory.BLOCKS, (ModBlocks.fertilizedDirtTilled.getSoundType().getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.getSoundType().getPitch() * 0.8F);
+		}
+	}
+	
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void updateInputEvent(InputUpdateEvent event)
+	{
+		EntityPlayer player = event.getEntityPlayer();
+		MovementInput input = event.getMovementInput();
+
+		PotionEffect effect;
+		if (player != null && (effect = player.getActivePotionEffect(ModPotions.collapse)) != null && effect.getAmplifier() == 0)
+		{
+			boolean left = input.leftKeyDown;
+			boolean right = input.rightKeyDown;
+
+			boolean forward = input.forwardKeyDown;
+			boolean backwards = input.backKeyDown;
+
+			if (left)
+			{
+				input.moveStrafe -= 2;
+				input.leftKeyDown = false;
+				input.rightKeyDown = true;
+			}
+
+			if (right)
+			{
+				input.moveStrafe += 2;
+				input.rightKeyDown = false;
+				input.leftKeyDown = true;
+			}
+
+			if (forward)
+			{
+				input.moveForward -= 2;
+				input.forwardKeyDown = false;
+				input.backKeyDown = true;
+			}
+
+			if (backwards)
+			{
+				input.moveForward += 2;
+				input.backKeyDown = false;
+				input.forwardKeyDown = true;
+			}
 		}
 	}
 
