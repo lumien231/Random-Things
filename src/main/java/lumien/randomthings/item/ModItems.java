@@ -49,6 +49,7 @@ public class ModItems
 	public static ItemPortableSoundDampener portableSoundDampener;
 	public static ItemEscapeRope escapeRope;
 	public static ItemWeatherEgg weatherEgg;
+	public static ItemChunkAnalyzer chunkAnalyzer;
 	
 	public static ItemEnderBucket enderBucket;
 	public static ItemReinforcedEnderBucket reinforcedEnderBucket;
@@ -105,6 +106,7 @@ public class ModItems
 		weatherEgg = new ItemWeatherEgg();
 		enderBucket = new ItemEnderBucket();
 		reinforcedEnderBucket = new ItemReinforcedEnderBucket();
+		chunkAnalyzer = new ItemChunkAnalyzer();
 
 		grassSeeds = new ItemGrassSeeds();
 

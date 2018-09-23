@@ -1,0 +1,31 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B B",
+		"IGI",
+		"SID"
+	],
+	"key": {
+		"B": {
+			"item": "minecraft:iron_bars"
+		},
+		"I": {
+			"item": "minecraft:iron_ingot"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "blockGlass"
+		},
+		"S": {
+			"item": "minecraft:stone",
+			"data": 0
+		},
+		"D": {
+			"item": "minecraft:dirt",
+			"data": 0
+		}
+	},
+	"result": {
+		"item": "randomthings:chunkanalyzer"
+	}
+}
