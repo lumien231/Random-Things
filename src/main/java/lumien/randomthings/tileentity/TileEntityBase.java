@@ -151,11 +151,6 @@ public abstract class TileEntityBase extends TileEntity
 	{
 		handleUpdateTag(packet.getNbtCompound());
 
-		if (this instanceof IRedstoneSensitive)
-		{
-			this.redstonePowered = packet.getNbtCompound().getBoolean("redstonePowered");
-		}
-
 		if (renderAfterData())
 		{
 			IBlockState state = this.world.getBlockState(this.pos);
@@ -171,6 +166,11 @@ public abstract class TileEntityBase extends TileEntity
 		if (syncAdditionalData())
 		{
 			readDataFromNBT(tag, true);
+		}
+		
+		if (this instanceof IRedstoneSensitive)
+		{
+			this.redstonePowered = tag.getBoolean("redstonePowered");
 		}
 	}
 
