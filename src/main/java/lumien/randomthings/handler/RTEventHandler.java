@@ -34,6 +34,7 @@ import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.handler.spectrelens.SpectreLensHandler;
+import lumien.randomthings.item.ItemFlooPouch;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemPortableSoundDampener;
 import lumien.randomthings.item.ItemSoundPattern;
@@ -391,13 +392,13 @@ public class RTEventHandler
 	{
 		LootHandler.addLoot(event);
 	}
-	
+
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void playerDropsEarly(PlayerDropsEvent event)
 	{
 		BaublesSpectreAnchor.handleDropsEarly(event);
 	}
-	
+
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void playerDropsLate(PlayerDropsEvent event)
 	{
@@ -411,7 +412,7 @@ public class RTEventHandler
 		{
 			EntityPlayer oldPlayer = event.getOriginal();
 			EntityPlayer newPlayer = event.getEntityPlayer();
-			
+
 			for (int i = 0; i < oldPlayer.inventory.getSizeInventory(); i++)
 			{
 				ItemStack is = oldPlayer.inventory.getStackInSlot(i);
@@ -443,7 +444,7 @@ public class RTEventHandler
 					}
 				}
 			}
-			
+
 			// Baubles
 			BaublesSpectreAnchor.handleClone(event);
 		}
@@ -484,7 +485,7 @@ public class RTEventHandler
 		if (tickEvent.type == TickEvent.Type.WORLD && tickEvent.phase == TickEvent.Phase.START)
 		{
 			World world = ((WorldTickEvent) tickEvent).world;
-			
+
 			FestivalHandler.get(world).tick(world);
 			SpectreLensHandler.get(world).tick(world);
 		}
@@ -730,36 +731,50 @@ public class RTEventHandler
 				event.setCanceled(true);
 			}
 		}
-		else if ((player.capabilities.isCreativeMode || (!flooDust.isEmpty() && flooDust.getItem() instanceof ItemIngredient && flooDust.getItemDamage() == ItemIngredient.INGREDIENT.FLOO_POWDER.id)) && state.getBlock() == ModBlocks.flooBrick)
+		else if (state.getBlock() == ModBlocks.flooBrick)
 		{
-			String target = event.getMessage();
+			ItemStack pouch = InventoryUtil.getPlayerInventoryItem(ModItems.flooPouch, player);
+			boolean hasFlooInHand = (!flooDust.isEmpty() && flooDust.getItem() instanceof ItemIngredient && flooDust.getItemDamage() == ItemIngredient.INGREDIENT.FLOO_POWDER.id);
+			boolean hasFlooPouch = !pouch.isEmpty() && ItemFlooPouch.getFlooCount(pouch) > 0;
 
-			TileEntityFlooBrick te = (TileEntityFlooBrick) player.world.getTileEntity(below);
-			UUID firePlaceUUID = te.getFirePlaceUid();
-
-			if (firePlaceUUID != null)
+			if (player.capabilities.isCreativeMode || hasFlooPouch || hasFlooInHand)
 			{
-				FlooNetworkHandler networkHandler = FlooNetworkHandler.get(player.world);
+				String target = event.getMessage();
 
-				TileEntity masterTE = networkHandler.getFirePlaceTE(player.world, firePlaceUUID);
+				TileEntityFlooBrick te = (TileEntityFlooBrick) player.world.getTileEntity(below);
+				UUID firePlaceUUID = te.getFirePlaceUid();
 
-				if (masterTE instanceof TileEntityFlooBrick)
+				if (firePlaceUUID != null)
 				{
-					TileEntityFlooBrick masterBrick = ((TileEntityFlooBrick) masterTE);
+					FlooNetworkHandler networkHandler = FlooNetworkHandler.get(player.world);
 
-					if (masterBrick.isMaster())
+					TileEntity masterTE = networkHandler.getFirePlaceTE(player.world, firePlaceUUID);
+
+					if (masterTE instanceof TileEntityFlooBrick)
 					{
-						boolean success = networkHandler.teleport(player.world, masterBrick.getPos(), masterBrick, player, target);
+						TileEntityFlooBrick masterBrick = ((TileEntityFlooBrick) masterTE);
 
-						if (success)
+						if (masterBrick.isMaster())
 						{
-							if (!player.capabilities.isCreativeMode)
-							{
-								flooDust.shrink(1);
-							}
-						}
+							boolean success = networkHandler.teleport(player.world, masterBrick.getPos(), masterBrick, player, target);
 
-						event.setCanceled(true);
+							if (success)
+							{
+								if (!player.capabilities.isCreativeMode)
+								{
+									if (hasFlooInHand)
+									{
+										flooDust.shrink(1);
+									}
+									else
+									{
+										ItemFlooPouch.setFlooCount(pouch, ItemFlooPouch.getFlooCount(pouch) - 1);
+									}
+								}
+							}
+
+							event.setCanceled(true);
+						}
 					}
 				}
 			}
@@ -1114,7 +1129,7 @@ public class RTEventHandler
 			event.getWorld().playSound(null, event.getPos().add(0.5, 0.5, 0.5), ModBlocks.fertilizedDirtTilled.getSoundType().getStepSound(), SoundCategory.BLOCKS, (ModBlocks.fertilizedDirtTilled.getSoundType().getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.getSoundType().getPitch() * 0.8F);
 		}
 	}
-	
+
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void updateInputEvent(InputUpdateEvent event)

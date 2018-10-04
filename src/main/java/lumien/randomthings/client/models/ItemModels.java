@@ -150,6 +150,7 @@ public class ItemModels
 		registerItem(ModItems.portableSoundDampener);
 		registerItem(ModItems.escapeRope);
 		registerItem(ModItems.chunkAnalyzer);
+		registerItem(ModItems.flooPouch);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);

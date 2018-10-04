@@ -256,6 +256,7 @@ item.soundPattern.name=Sound Pattern
 item.portableSoundDampener.name=Portable Sound Dampener
 item.escapeRope.name=Escape Rope
 item.chunkAnalyzer.name=Chunk Analyzer
+item.flooPouch.name=Floo Pouch
 
 item.bean.name=Bean
 item.lesserMagicBean.name=Lesser Magic Bean
@@ -591,3 +592,4 @@ item.weatherEgg_storm.info=When thrown it will spawn a small cloud that will sta
 item.enderBucket.info=An Ender Bucket works mostly like a normal Iron Bucket. However when you right click a non source block it will try to find the closest connected source block and pick that up instead of doing nothing.
 item.reinforcedEnderBucket.info=A Reinforced Ender Bucket works like an Ender Bucket but it can hold 10 Buckets of Fluid instead of just one. Also when you hold shift while picking up fluids it won't stop after it finds one source block but will keep going until it is either full or there is no fluid left.
 item.chunkAnalyzer.info=The Chunk Analyzer allows you to check what blocks a chunk contains. Open its gui and press Scan. After a few seconds you will get the results for the chunk you are in.
+item.flooPouch.info=The Floo Pouch can store 128 Floo Powder. Instead of having Floo Powder in your hand you can also have a Floo Pouch anywhere in your inventory when using a Floo Fireplace. Shift-Right click to fill it up with Floo Powder from your inventory.

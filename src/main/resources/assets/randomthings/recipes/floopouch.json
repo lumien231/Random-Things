@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "LFL",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "F": {
+      "item": "randomthings:ingredient",
+      "data": 7
+    }
+  },
+  "result": {
+    "item": "randomthings:floopouch"
+  }
+}
