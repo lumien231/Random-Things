@@ -1,5 +1,6 @@
 package lumien.randomthings.recipes;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionHelper;
-import net.minecraft.potion.PotionHelper.MixPredicate;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.NonNullList;
@@ -56,20 +56,24 @@ public class ModRecipes
 			Field listField = PotionHelper.class.getDeclaredField(MCPNames.field("field_185213_a"));
 			ReflectionUtil.makeModifiable(listField);
 
-			Field inputField = MixPredicate.class.getDeclaredField(MCPNames.field("field_185198_a"));
+			Class mpClass = Class.forName("net.minecraft.potion.PotionHelper.MixPredicate");
+			
+			Constructor constructor = mpClass.getConstructor(Object.class, Ingredient.class, Object.class);
+			
+			Field inputField = mpClass.getDeclaredField(MCPNames.field("field_185198_a"));
 			ReflectionUtil.makeModifiable(inputField);
 
-			Field reagentField = MixPredicate.class.getDeclaredField(MCPNames.field("field_185199_b"));
+			Field reagentField = mpClass.getDeclaredField(MCPNames.field("field_185199_b"));
 			ReflectionUtil.makeModifiable(reagentField);
 
-			Field outputField = MixPredicate.class.getDeclaredField(MCPNames.field("field_185200_c"));
+			Field outputField = mpClass.getDeclaredField(MCPNames.field("field_185200_c"));
 			ReflectionUtil.makeModifiable(outputField);
 
-			List<PotionHelper.MixPredicate<PotionType>> conversionList = (List<MixPredicate<PotionType>>) listField.get(null);
+			List<Object> conversionList = (List<Object>) listField.get(null);
 
-			List<MixPredicate<PotionType>> toAdd = new ArrayList<MixPredicate<PotionType>>();
+			List<Object> toAdd = new ArrayList<>();
 
-			for (MixPredicate<PotionType> p : conversionList)
+			for (Object p : conversionList)
 			{
 				Ingredient reagent = (Ingredient) reagentField.get(p);
 
@@ -78,7 +82,7 @@ public class ModRecipes
 					PotionType input = (PotionType) inputField.get(p);
 					PotionType output = (PotionType) outputField.get(p);
 
-					toAdd.add(new MixPredicate<PotionType>(input, Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.glowingMushroom)), output));
+					toAdd.add(constructor.newInstance(input, Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.glowingMushroom)), output));
 				}
 			}
 
