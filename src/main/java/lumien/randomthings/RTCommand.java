@@ -2,7 +2,9 @@ package lumien.randomthings;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
@@ -18,6 +20,7 @@ import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.messages.MessageNotification;
 import lumien.randomthings.tileentity.TileEntityBase;
 import lumien.randomthings.worldgen.WorldGenAncientFurnace;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -40,6 +43,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class RTCommand extends CommandBase

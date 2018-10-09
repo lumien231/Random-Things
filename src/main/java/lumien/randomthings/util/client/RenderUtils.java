@@ -1,6 +1,7 @@
 package lumien.randomthings.util.client;
 
 import java.awt.Color;
+import java.awt.color.ColorSpace;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.BitSet;
@@ -12,6 +13,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
@@ -22,13 +24,16 @@ import com.google.common.cache.CacheBuilder;
 import com.jcraft.jorbis.Block;
 
 import lumien.randomthings.asm.MCPNames;
+import lumien.randomthings.handler.RTEventHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BlockModelRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.Profile;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.BlockModelRenderer.AmbientOcclusionFace;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -39,10 +44,12 @@ import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ReportedException;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.model.animation.Animation;
 import net.minecraftforge.client.model.pipeline.LightUtil;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -52,6 +59,8 @@ public class RenderUtils
 	static Gui gui = new Gui();
 
 	static Cache<Biome, Integer> biomeColorCache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).build();
+
+	
 
 	public static int getBiomeColor(IBlockAccess worldIn, final Biome biome, final BlockPos pos)
 	{
