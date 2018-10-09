@@ -43,6 +43,8 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.IRegistryDelegate;
 
 public class ModRecipes
 {
@@ -56,9 +58,10 @@ public class ModRecipes
 			Field listField = PotionHelper.class.getDeclaredField(MCPNames.field("field_185213_a"));
 			ReflectionUtil.makeModifiable(listField);
 
-			Class mpClass = Class.forName("net.minecraft.potion.PotionHelper.MixPredicate");
+			Class mpClass = Class.forName("net.minecraft.potion.PotionHelper$MixPredicate");
 			
-			Constructor constructor = mpClass.getConstructor(Object.class, Ingredient.class, Object.class);
+			Constructor constructor = mpClass.getConstructor(IForgeRegistryEntry.Impl.class, Ingredient.class, IForgeRegistryEntry.Impl.class);
+			constructor.setAccessible(true);
 			
 			Field inputField = mpClass.getDeclaredField(MCPNames.field("field_185198_a"));
 			ReflectionUtil.makeModifiable(inputField);
@@ -79,8 +82,8 @@ public class ModRecipes
 
 				if (reagent.test(new ItemStack(Items.GLOWSTONE_DUST)))
 				{
-					PotionType input = (PotionType) inputField.get(p);
-					PotionType output = (PotionType) outputField.get(p);
+					PotionType input = (PotionType) ((IRegistryDelegate) inputField.get(p)).get();
+					PotionType output = (PotionType) ((IRegistryDelegate) outputField.get(p)).get();
 
 					toAdd.add(constructor.newInstance(input, Ingredient.fromItem(Item.getItemFromBlock(ModBlocks.glowingMushroom)), output));
 				}
