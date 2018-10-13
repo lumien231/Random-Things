@@ -1,0 +1,99 @@
+{
+	"pools": [
+		{
+			"name": "Iron",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:iron_ingot",
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 8,
+								"max": 20
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Gold",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:gold_ingot",
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 4,
+								"max": 15
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Diamond",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:diamond",
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 1,
+								"max": 5
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Emerald",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:emerald",
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 2
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Beans",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "randomthings:beans",
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 4,
+								"max": 8
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

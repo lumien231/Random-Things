@@ -11,11 +11,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
 
 public class BlockPod extends BlockBase
 {
+	static ResourceLocation lootTable = new ResourceLocation("randomthings","beanpod");
 
 	protected BlockPod()
 	{
@@ -23,50 +29,32 @@ public class BlockPod extends BlockBase
 
 		this.setHardness(1.5F);
 	}
-
+	
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
 	{
-		ArrayList<ItemStack> drops = new ArrayList<>();
-		Random rng = new Random();
-		rng.setSeed(System.currentTimeMillis());
+        if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots)
+        {
+    		Random random = new Random();
+    		
+    		LootTable loottable = worldIn.getLootTableManager().getLootTableFromLocation(lootTable);
 
-		int ironAmount = rng.nextInt(13) + 8;
-		int goldAmount = rng.nextInt(12) + 4;
-		int diamondAmount = rng.nextInt(5) + 1;
-		int emeraldAmount = rng.nextInt(3);
-		int beanAmount = rng.nextInt(5) + 4;
+            LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer)worldIn);
 
-		if (beanAmount > 0)
-		{
-			drops.add(new ItemStack(ModItems.beans, beanAmount));
-		}
-
-		if (ironAmount > 0)
-		{
-			drops.add(new ItemStack(Items.IRON_INGOT, ironAmount));
-		}
-
-		if (goldAmount > 0)
-		{
-			drops.add(new ItemStack(Items.GOLD_INGOT, goldAmount));
-		}
-
-		if (diamondAmount > 0)
-		{
-			drops.add(new ItemStack(Items.DIAMOND, diamondAmount));
-		}
-
-		if (emeraldAmount > 0)
-		{
-			drops.add(new ItemStack(Items.EMERALD, emeraldAmount));
-		}
-
-		if (Features.GOLDEN_EGG)
-		{
-			drops.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.GOLDEN_EGG.id));
-		}
-
-		return drops;
+            List<ItemStack> drops = loottable.generateLootForPools(random, lootcontext$builder.build());
+        	
+    		if (Features.GOLDEN_EGG)
+    		{
+    			drops.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.GOLDEN_EGG.id));
+    		}
+            
+            for (ItemStack drop : drops)
+            {
+                if (worldIn.rand.nextFloat() <= chance)
+                {
+                    spawnAsEntity(worldIn, pos, drop);
+                }
+            }
+        }
 	}
 }
