@@ -24,7 +24,7 @@ dependencies {
     deobfCompile "mezz.jei:jei_1.12.2:4.10.0.199"
 }
 
-version = "4.2.0"
+version = "4.2.2"
 group= "lumien.randomthings"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
