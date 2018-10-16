@@ -51,6 +51,7 @@ public class ModItems
 	public static ItemWeatherEgg weatherEgg;
 	public static ItemChunkAnalyzer chunkAnalyzer;
 	public static ItemFlooPouch flooPouch;
+	public static ItemTimeInABottle timeInABottle;
 	
 	public static ItemEnderBucket enderBucket;
 	public static ItemReinforcedEnderBucket reinforcedEnderBucket;
@@ -109,6 +110,7 @@ public class ModItems
 		reinforcedEnderBucket = new ItemReinforcedEnderBucket();
 		chunkAnalyzer = new ItemChunkAnalyzer();
 		flooPouch = new ItemFlooPouch();
+		timeInABottle = new ItemTimeInABottle();
 
 		grassSeeds = new ItemGrassSeeds();
 

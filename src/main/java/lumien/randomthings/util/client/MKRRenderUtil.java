@@ -184,7 +184,8 @@ public class MKRRenderUtil
 			renderCircleDecTriPart3Tri(2 * radius / 4, 1.5 * radius / 4, dotColorFunction.darker(), 30);
 			renderCircleDecTriPart3Tri(2.5 * radius / 4, 2 * radius / 4, dotColorFunction.darker(), 30);
 			// renderCircleDecTriPart5Tri(radius, 3 * radius / 4, (i) -> {
-			// Color c = Color.getHSBColor(1F / 50 * i + progress / 100, 1, 0.8F);
+			// Color c = Color.getHSBColor(1F / 50 * i + progress / 100, 1,
+			// 0.8F);
 			//
 			// return c;
 			// }, 50);
@@ -291,7 +292,7 @@ public class MKRRenderUtil
 		GlStateManager.glVertex3f(0, 0, 0);
 
 		int currentTriCount = 0;
-		for (int c = 0; c < 11; c++)
+		for (int c = 0; c < 10; c++)
 		{
 			int countForC = countFunction.apply(c);
 
@@ -316,7 +317,9 @@ public class MKRRenderUtil
 			double nX = dX / length;
 			double nZ = dZ / length;
 
-			for (int p = 0; p < countForC; p++)
+			GlStateManager.glVertex3f((float) (pX), 0, (float) (pZ));
+
+			for (int p = 1; p <= countForC; p++)
 			{
 				if (currentTriCount < triCount)
 				{
