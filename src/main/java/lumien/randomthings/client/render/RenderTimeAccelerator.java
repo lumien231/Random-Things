@@ -127,8 +127,8 @@ public class RenderTimeAccelerator extends Render<EntityTimeAccelerator>
 		GlStateManager.enableCull();
 
 		Minecraft.getMinecraft().entityRenderer.enableLightmap();
-
-		GlStateManager.disableBlend();
+		
+		GlStateManager.color(1, 1, 1, 1);
 
 		GlStateManager.enableTexture2D();
 	}
