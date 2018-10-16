@@ -5,12 +5,18 @@ import lumien.randomthings.config.Features;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import lumien.randomthings.entitys.EntityGoldenEgg;
 import lumien.randomthings.lib.IRTItemColor;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
+import net.minecraft.dispenser.BehaviorProjectileDispense;
+import net.minecraft.dispenser.IBehaviorDispenseItem;
+import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
@@ -53,6 +59,37 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 		super("ingredient");
 
 		this.setHasSubtypes(true);
+		
+		
+		BehaviorProjectileDispense pro = new BehaviorProjectileDispense()
+		{
+			
+			@Override
+			protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn)
+			{
+				return new EntityGoldenEgg(worldIn, position.getX(), position.getY(), position.getZ());
+			}
+		};
+		
+		BehaviorDefaultDispenseItem def = new BehaviorDefaultDispenseItem();
+
+		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new IBehaviorDispenseItem()
+		{
+
+			@Override
+			public ItemStack dispense(IBlockSource source, ItemStack stack)
+			{
+				if (stack.getItemDamage() != INGREDIENT.GOLDEN_EGG.id)
+				{
+			        return def.dispense(source, stack);
+				}
+				else
+				{
+					return pro.dispense(source, stack);
+				}
+			}
+			
+		});
 	}
 
 	@Override
