@@ -1,10 +1,17 @@
 {
     "variants": {
-        "facing=down":  { "model": "randomthings:prismarineenderbridge_vertical", "x": 180 },
-        "facing=up":    { "model": "randomthings:prismarineenderbridge_vertical" },
-        "facing=north": { "model": "randomthings:prismarineenderbridge" },
-        "facing=south": { "model": "randomthings:prismarineenderbridge", "y": 180 },
-        "facing=west":  { "model": "randomthings:prismarineenderbridge", "y": 270 },
-        "facing=east":  { "model": "randomthings:prismarineenderbridge", "y": 90 }
+        "active=false,facing=down":  { "model": "randomthings:prismarineenderbridge_vertical", "x": 180 },
+        "active=false,facing=up":    { "model": "randomthings:prismarineenderbridge_vertical" },
+        "active=false,facing=north": { "model": "randomthings:prismarineenderbridge" },
+        "active=false,facing=south": { "model": "randomthings:prismarineenderbridge", "y": 180 },
+        "active=false,facing=west":  { "model": "randomthings:prismarineenderbridge", "y": 270 },
+        "active=false,facing=east":  { "model": "randomthings:prismarineenderbridge", "y": 90 },
+        
+        "active=true,facing=down":  { "model": "randomthings:prismarineenderbridge_vertical_active", "x": 180 },
+        "active=true,facing=up":    { "model": "randomthings:prismarineenderbridge_vertical_active" },
+        "active=true,facing=north": { "model": "randomthings:prismarineenderbridge_active" },
+        "active=true,facing=south": { "model": "randomthings:prismarineenderbridge_active", "y": 180 },
+        "active=true,facing=west":  { "model": "randomthings:prismarineenderbridge_active", "y": 270 },
+        "active=true,facing=east":  { "model": "randomthings:prismarineenderbridge_active", "y": 90 }
     }
 }

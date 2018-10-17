@@ -1,10 +1,17 @@
 {
     "variants": {
-        "facing=down":  { "model": "randomthings:enderbridge_vertical", "x": 180 },
-        "facing=up":    { "model": "randomthings:enderbridge_vertical" },
-        "facing=north": { "model": "randomthings:enderbridge" },
-        "facing=south": { "model": "randomthings:enderbridge", "y": 180 },
-        "facing=west":  { "model": "randomthings:enderbridge", "y": 270 },
-        "facing=east":  { "model": "randomthings:enderbridge", "y": 90 }
+        "active=false,facing=down":  { "model": "randomthings:enderbridge_vertical", "x": 180 },
+        "active=false,facing=up":    { "model": "randomthings:enderbridge_vertical" },
+        "active=false,facing=north": { "model": "randomthings:enderbridge" },
+        "active=false,facing=south": { "model": "randomthings:enderbridge", "y": 180 },
+        "active=false,facing=west":  { "model": "randomthings:enderbridge", "y": 270 },
+        "active=false,facing=east":  { "model": "randomthings:enderbridge", "y": 90 },
+        
+        "active=true,facing=down":  { "model": "randomthings:enderbridge_vertical_active", "x": 180 },
+        "active=true,facing=up":    { "model": "randomthings:enderbridge_vertical_active" },
+        "active=true,facing=north": { "model": "randomthings:enderbridge_active" },
+        "active=true,facing=south": { "model": "randomthings:enderbridge_active", "y": 180 },
+        "active=true,facing=west":  { "model": "randomthings:enderbridge_active", "y": 270 },
+        "active=true,facing=east":  { "model": "randomthings:enderbridge_active", "y": 90 }
     }
 }

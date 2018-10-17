@@ -88,10 +88,14 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 						}
 
 						state = WAITING;
+						
+						this.world.setBlockState(this.pos, world.getBlockState(this.pos).withProperty(BlockEnderBridge.ACTIVE, false));
 					}
 					else if (!nextState.getBlock().isAir(nextState, world, nextPos))
 					{
 						state = WAITING;
+						
+						this.world.setBlockState(this.pos, world.getBlockState(this.pos).withProperty(BlockEnderBridge.ACTIVE, false));
 					}
 				}
 
@@ -113,10 +117,14 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 				{
 					scanningCounter = 2;
 					state = SCANNING;
+					
+					this.world.setBlockState(this.pos, world.getBlockState(this.pos).withProperty(BlockEnderBridge.ACTIVE, true));
 				}
 				else if (state == SCANNING && !powered)
 				{
 					state = IDLE;
+					
+					this.world.setBlockState(this.pos, world.getBlockState(this.pos).withProperty(BlockEnderBridge.ACTIVE, false));
 				}
 				else if (state == WAITING && !powered)
 				{

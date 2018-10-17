@@ -7,6 +7,7 @@ import static lumien.randomthings.tileentity.TileEntityPrismarineEnderBridge.BRI
 import java.util.List;
 
 import lumien.randomthings.block.BlockEnderBridge;
+import lumien.randomthings.block.BlockPrismarineEnderBridge;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
@@ -74,10 +75,14 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 							}
 
 							state = WAITING;
+							
+							this.world.setBlockState(this.pos, world.getBlockState(this.pos).withProperty(BlockPrismarineEnderBridge.ACTIVE, false));
 						}
 						else if (!nextState.getBlock().isAir(nextState, world, nextPos))
 						{
 							state = WAITING;
+							
+							this.world.setBlockState(this.pos, world.getBlockState(this.pos).withProperty(BlockPrismarineEnderBridge.ACTIVE, false));
 						}
 					}
 
@@ -100,10 +105,14 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 				{
 					scanningCounter = 2;
 					state = SCANNING;
+					
+					this.world.setBlockState(this.pos, world.getBlockState(this.pos).withProperty(BlockPrismarineEnderBridge.ACTIVE, true));
 				}
 				else if (state == SCANNING && !powered)
 				{
 					state = IDLE;
+					
+					this.world.setBlockState(this.pos, world.getBlockState(this.pos).withProperty(BlockPrismarineEnderBridge.ACTIVE, false));
 				}
 				else if (state == WAITING && !powered)
 				{
