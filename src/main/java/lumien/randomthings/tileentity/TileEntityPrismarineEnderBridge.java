@@ -64,7 +64,9 @@ public class TileEntityPrismarineEnderBridge extends TileEntityBase implements I
 
 								for (Entity e : entityList)
 								{
-									if (TileEntityEnderBridge.entityWhitelist.contains(e.getClass()))
+									if (TileEntityEnderBridge.entityWhitelist.stream().anyMatch((c) -> {
+										return c.isAssignableFrom(e.getClass());
+									}))
 									{
 										WorldUtil.setEntityPosition(e, target.getX() + 0.5, target.getY(), target.getZ() + 0.5);
 									}

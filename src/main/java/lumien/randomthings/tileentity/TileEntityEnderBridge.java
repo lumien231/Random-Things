@@ -15,6 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -42,6 +43,7 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 		entityWhitelist = new HashSet<>();
 		entityWhitelist.add(EntityPlayerMP.class);
 		entityWhitelist.add(EntityItem.class);
+		entityWhitelist.add(EntityMinecart.class);
 	}
 
 	public TileEntityEnderBridge()
@@ -76,7 +78,9 @@ public class TileEntityEnderBridge extends TileEntityBase implements ITickable
 
 							for (Entity e : entityList)
 							{
-								if (TileEntityEnderBridge.entityWhitelist.contains(e.getClass()))
+								if (TileEntityEnderBridge.entityWhitelist.stream().anyMatch((c) -> {
+									return c.isAssignableFrom(e.getClass());
+								}))
 								{
 									WorldUtil.setEntityPosition(e, target.getX() + 0.5, target.getY(), target.getZ() + 0.5);
 								}
