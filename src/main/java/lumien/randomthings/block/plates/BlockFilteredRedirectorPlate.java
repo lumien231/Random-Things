@@ -4,6 +4,7 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.block.BlockContainerBase;
 import lumien.randomthings.lib.EntityFilterItemStack;
 import lumien.randomthings.lib.GuiIds;
+import lumien.randomthings.tileentity.TileEntityAdvancedItemCollector;
 import lumien.randomthings.tileentity.TileEntityFilteredRedirectorPlate;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -16,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -39,6 +41,15 @@ public class BlockFilteredRedirectorPlate extends BlockContainerBase
 
 		this.setHardness(0.3f);
 		this.setSoundType(SoundType.STONE);
+	}
+	
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		TileEntityFilteredRedirectorPlate tileentity = (TileEntityFilteredRedirectorPlate) worldIn.getTileEntity(pos);
+		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity.getInventory());
+
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
