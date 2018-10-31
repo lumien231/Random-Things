@@ -25,7 +25,7 @@ public class ItemTimeInABottle extends ItemBase
 	public ItemTimeInABottle()
 	{
 		super("timeInABottle");
-		
+
 		this.setMaxStackSize(1);
 	}
 
@@ -58,11 +58,41 @@ public class ItemTimeInABottle extends ItemBase
 	{
 		if (!worldIn.isRemote)
 		{
-			NBTTagCompound timeData = stack.getOrCreateSubCompound("timeData");
-
-			if (timeData.getInteger("storedTime") < 622080000)
+			if (worldIn.getTotalWorldTime() % 20 == 0)
 			{
-				timeData.setInteger("storedTime", timeData.getInteger("storedTime") + 1);
+				NBTTagCompound timeData = stack.getOrCreateSubCompound("timeData");
+
+				if (timeData.getInteger("storedTime") < 622080000)
+				{
+					timeData.setInteger("storedTime", timeData.getInteger("storedTime") + 20);
+				}
+			}
+
+			if (worldIn.getTotalWorldTime() % 60 == 0)
+			{
+				if (entityIn instanceof EntityPlayer)
+				{
+					EntityPlayer player = (EntityPlayer) entityIn;
+
+					for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+					{
+						ItemStack invStack = player.inventory.getStackInSlot(i);
+
+						if (invStack.getItem() == this && invStack != stack)
+						{
+							NBTTagCompound otherTimeData = invStack.getOrCreateSubCompound("timeData");
+							NBTTagCompound myTimeData = stack.getOrCreateSubCompound("timeData");
+
+							int myTime = myTimeData.getInteger("storedTime");
+							int theirTime = otherTimeData.getInteger("storedTime");
+							
+							if (myTime < theirTime)
+							{
+								myTimeData.setInteger("storedTime", 0);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
