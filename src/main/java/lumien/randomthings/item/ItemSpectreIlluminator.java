@@ -3,6 +3,7 @@ package lumien.randomthings.item;
 import lumien.randomthings.entitys.EntitySpectreIlluminator;
 import lumien.randomthings.handler.spectreilluminator.SpectreIlluminationHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -37,6 +38,12 @@ public class ItemSpectreIlluminator extends ItemBase
 				EntitySpectreIlluminator illuminator = new EntitySpectreIlluminator(worldIn, pos.getX() + 0.5, pos.getY() + 1.2, pos.getZ() + 0.5);
 
 				worldIn.spawnEntity(illuminator);
+				
+				if (!player.capabilities.isCreativeMode)
+				{
+					ItemStack me = player.getHeldItem(hand);
+					me.shrink(1);
+				}
 			}
 		}
 
