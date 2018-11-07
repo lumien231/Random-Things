@@ -52,6 +52,7 @@ public class ModItems
 	public static ItemChunkAnalyzer chunkAnalyzer;
 	public static ItemFlooPouch flooPouch;
 	public static ItemTimeInABottle timeInABottle;
+	public static ItemSpectreIlluminator spectreIlluminator;
 	
 	public static ItemEnderBucket enderBucket;
 	public static ItemReinforcedEnderBucket reinforcedEnderBucket;
@@ -111,6 +112,7 @@ public class ModItems
 		chunkAnalyzer = new ItemChunkAnalyzer();
 		flooPouch = new ItemFlooPouch();
 		timeInABottle = new ItemTimeInABottle();
+		spectreIlluminator = new ItemSpectreIlluminator();
 
 		grassSeeds = new ItemGrassSeeds();
 

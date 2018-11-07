@@ -26,6 +26,7 @@ import lumien.randomthings.client.render.RenderReviveCircle;
 import lumien.randomthings.client.render.RenderSoul;
 import lumien.randomthings.client.render.RenderSpecialChest;
 import lumien.randomthings.client.render.RenderSpectreEnergyInjector;
+import lumien.randomthings.client.render.RenderSpectreIlluminator;
 import lumien.randomthings.client.render.RenderSpirit;
 import lumien.randomthings.client.render.RenderThrownItem;
 import lumien.randomthings.client.render.RenderThrownWeatherEgg;
@@ -39,6 +40,7 @@ import lumien.randomthings.entitys.EntityGoldenEgg;
 import lumien.randomthings.entitys.EntityProjectedItem;
 import lumien.randomthings.entitys.EntityReviveCircle;
 import lumien.randomthings.entitys.EntitySoul;
+import lumien.randomthings.entitys.EntitySpectreIlluminator;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
 import lumien.randomthings.entitys.EntityThrownWeatherEgg;
@@ -212,6 +214,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrownWeatherEgg.class, new RenderThrownWeatherEgg(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWeatherCloud.class, new RenderWeatherCloud(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeAccelerator.class, new RenderTimeAccelerator(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpectreIlluminator.class, new RenderSpectreIlluminator(Minecraft.getMinecraft().getRenderManager()));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());

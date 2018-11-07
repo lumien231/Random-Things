@@ -8,11 +8,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.logging.log4j.Level;
+
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.block.BlockTriggerGlass;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
+import lumien.randomthings.handler.spectreilluminator.SpectreIlluminationClientHandler;
+import lumien.randomthings.handler.spectreilluminator.SpectreIlluminationHandler;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemPortKey;
 import lumien.randomthings.item.ItemRedstoneTool;
@@ -20,7 +25,6 @@ import lumien.randomthings.item.ItemSpectreKey;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.item.spectretools.ItemSpectreSword;
 import lumien.randomthings.lib.ISuperLubricent;
-import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.tileentity.TileEntityLightRedirector;
 import lumien.randomthings.tileentity.TileEntityPeaceCandle;
 import lumien.randomthings.tileentity.TileEntityRainShield;
@@ -28,11 +32,11 @@ import lumien.randomthings.tileentity.TileEntitySlimeCube;
 import lumien.randomthings.tileentity.redstoneinterface.TileEntityRedstoneInterface;
 import lumien.randomthings.util.ItemUtil;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -50,15 +54,14 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.management.PlayerInteractionManager;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MovementInputFromOptions;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -68,7 +71,6 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 public class AsmHandler
 {
@@ -81,6 +83,59 @@ public class AsmHandler
 		{
 			getFields();
 		}
+	}
+
+	public static boolean worldGenDisabler = false;
+
+	public static int overrideLightValue(Block b, IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		if (state.getBlock() instanceof BlockAir)
+			return -1;
+
+		boolean isClient;
+
+		if (world instanceof ChunkCache)
+		{
+			isClient = true;
+		}
+		else if (world instanceof World)
+		{
+			isClient = ((World) world).isRemote;
+		}
+		else
+		{
+			isClient = FMLCommonHandler.instance().getEffectiveSide().isClient();
+		}
+
+		if (isClient)
+		{
+			return overrideLightValueClient(b, state, world, pos);
+		}
+		else
+		{
+			if (world instanceof World)
+			{
+				World worldObj = (World) world;
+
+				SpectreIlluminationHandler handler = SpectreIlluminationHandler.get(worldObj);
+
+				if (handler.isIlluminated(pos))
+				{
+					return 14;
+				}
+			}
+			else
+			{
+				RandomThings.instance.logger.log(Level.DEBUG, "Am on Server but have no World!?");
+			}
+		}
+
+		return -1;
+	}
+
+	private static int overrideLightValueClient(Block b, IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		return SpectreIlluminationClientHandler.isIlluminated(pos) ? 15 : -1;
 	}
 
 	public static boolean overrideFallThrough(boolean original, IBlockState state)
@@ -333,16 +388,16 @@ public class AsmHandler
 
 							switch (enumblockrendertype)
 							{
-							case MODEL:
-								IBakedModel model = dispatcher.getModelForState(state);
-								state = state.getBlock().getExtendedState(state, blockAccess, changedPos);
-								return dispatcher.getBlockModelRenderer().renderModel(blockAccess, model, state, pos, worldRendererIn, true) ? 1 : 0;
-							case ENTITYBLOCK_ANIMATED:
-								return 0;
-							case LIQUID:
-								return 2;
-							default:
-								return 0;
+								case MODEL:
+									IBakedModel model = dispatcher.getModelForState(state);
+									state = state.getBlock().getExtendedState(state, blockAccess, changedPos);
+									return dispatcher.getBlockModelRenderer().renderModel(blockAccess, model, state, pos, worldRendererIn, true) ? 1 : 0;
+								case ENTITYBLOCK_ANIMATED:
+									return 0;
+								case LIQUID:
+									return 2;
+								default:
+									return 0;
 							}
 						}
 					}

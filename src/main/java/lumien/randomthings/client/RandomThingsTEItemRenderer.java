@@ -1,11 +1,15 @@
 package lumien.randomthings.client;
 
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.render.RenderSpectreIlluminator;
+import lumien.randomthings.entitys.EntitySpectreIlluminator;
+import lumien.randomthings.item.ModItems;
 import lumien.randomthings.tileentity.TileEntityBlockDiaphanous;
 import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -25,9 +29,21 @@ public class RandomThingsTEItemRenderer
 	TileEntitySpecialChest waterChest = new TileEntitySpecialChest(1);
 
 	TileEntityBlockDiaphanous diaphanous = new TileEntityBlockDiaphanous();
+	
+	RenderSpectreIlluminator rsi = new RenderSpectreIlluminator(Minecraft.getMinecraft().getRenderManager());
 
 	public boolean renderByItem(ItemStack itemStackIn)
 	{
+		if (itemStackIn.getItem() == ModItems.spectreIlluminator)
+		{
+			GlStateManager.scale(1.8, 1.8, 1.8);
+			rsi.doRender(null, 0.3, 0.3, 0.3, 0, Minecraft.getMinecraft().getRenderPartialTicks());
+			GlStateManager.scale(10 / 18, 10 / 18, 10 / 18);
+			Minecraft.getMinecraft().entityRenderer.disableLightmap();
+
+			return true;
+		}
+
 		if (itemStackIn.getItem() instanceof ItemBlock)
 		{
 			ItemBlock ib = (ItemBlock) itemStackIn.getItem();

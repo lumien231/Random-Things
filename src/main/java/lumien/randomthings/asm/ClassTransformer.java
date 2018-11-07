@@ -1187,6 +1187,7 @@ public class ClassTransformer implements IClassTransformer
 		logger.log(Level.DEBUG, "Found Block Class: " + classNode.name);
 
 		MethodNode addCollisionBoxesToList = null;
+		MethodNode getLightValue = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
@@ -1194,11 +1195,37 @@ public class ClassTransformer implements IClassTransformer
 			{
 				addCollisionBoxesToList = mn;
 			}
+			else if (mn.name.equals("getLightValue") && mn.desc.equals("(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)I"))
+			{
+				getLightValue = mn;
+			}
+		}
+
+		if (getLightValue != null)
+		{
+			logger.log(Level.DEBUG, "- Found getLightValue (1/2)");
+
+			InsnList toInsert = new InsnList();
+
+			LabelNode l0 = new LabelNode(new Label());
+
+			toInsert.add(new VarInsnNode(ALOAD, 0));
+			toInsert.add(new VarInsnNode(ALOAD, 1));
+			toInsert.add(new VarInsnNode(ALOAD, 2));
+			toInsert.add(new VarInsnNode(ALOAD, 3));
+			toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "overrideLightValue", "(Lnet/minecraft/block/Block;Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)I", false));
+			toInsert.add(new InsnNode(DUP));
+			toInsert.add(new JumpInsnNode(IFLT, l0));
+			toInsert.add(new InsnNode(IRETURN));
+			toInsert.add(l0);
+			toInsert.add(new InsnNode(POP));
+
+			getLightValue.instructions.insert(toInsert);
 		}
 
 		if (addCollisionBoxesToList != null)
 		{
-			logger.log(Level.DEBUG, "- Found addCollisionBoxesToList (1/1)");
+			logger.log(Level.DEBUG, "- Found addCollisionBoxesToList (2/2)");
 
 			InsnList toInsert = new InsnList();
 			LabelNode l1 = new LabelNode(new Label());

@@ -152,6 +152,7 @@ public class ItemModels
 		registerItem(ModItems.chunkAnalyzer);
 		registerItem(ModItems.flooPouch);
 		registerItem(ModItems.timeInABottle);
+		registerItem(ModItems.spectreIlluminator);
 
 		registerItem(ModItems.spectrePickaxe);
 		registerItem(ModItems.spectreShovel);
