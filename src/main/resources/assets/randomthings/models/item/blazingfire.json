@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "randomthings:blocks/blazingfire/fire_layer_0"
+    }
+}
