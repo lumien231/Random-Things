@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "randomthings:items/spectrecharger/ender",
+        "layer1": "randomthings:items/spectrecharger/glow"
+    }
+}

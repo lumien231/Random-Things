@@ -5,6 +5,7 @@ import lumien.randomthings.client.mesh.PortKeyMesh;
 import lumien.randomthings.client.mesh.RedstoneActivatorMesh;
 import lumien.randomthings.client.mesh.SoundPatternMesh;
 import lumien.randomthings.client.mesh.SoundRecorderMesh;
+import lumien.randomthings.client.mesh.SpectreChargerMesh;
 import lumien.randomthings.handler.runes.EnumRuneDust;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemWeatherEgg;
@@ -187,6 +188,9 @@ public class ItemModels
 		ModelLoader.setCustomMeshDefinition(ModItems.soundPattern, new SoundPatternMesh());
 		ModelBakery.registerItemVariants(ModItems.soundPattern, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundpattern_empty"), new ModelResourceLocation("randomthings:soundpattern_full") });
 	
+		ModelLoader.setCustomMeshDefinition(ModItems.spectreCharger, new SpectreChargerMesh());
+		ModelBakery.registerItemVariants(ModItems.spectreCharger, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:spectrecharger/normal"), new ModelResourceLocation("randomthings:spectrecharger/redstone"), new ModelResourceLocation("randomthings:spectrecharger/ender"), new ModelResourceLocation("randomthings:spectrecharger/genesis"),new ModelResourceLocation("randomthings:spectrecharger/normal_enabled"), new ModelResourceLocation("randomthings:spectrecharger/redstone_enabled"), new ModelResourceLocation("randomthings:spectrecharger/ender_enabled"), new ModelResourceLocation("randomthings:spectrecharger/genesis_enabled") });
+		
 		SpectreStateMapper spectreStateMapper = new SpectreStateMapper();
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilNormal, spectreStateMapper);
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilRedstone, spectreStateMapper);

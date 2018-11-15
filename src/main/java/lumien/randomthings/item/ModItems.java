@@ -53,6 +53,7 @@ public class ModItems
 	public static ItemFlooPouch flooPouch;
 	public static ItemTimeInABottle timeInABottle;
 	public static ItemSpectreIlluminator spectreIlluminator;
+	public static ItemSpectreCharger spectreCharger;
 	
 	public static ItemEnderBucket enderBucket;
 	public static ItemReinforcedEnderBucket reinforcedEnderBucket;
@@ -113,6 +114,7 @@ public class ModItems
 		flooPouch = new ItemFlooPouch();
 		timeInABottle = new ItemTimeInABottle();
 		spectreIlluminator = new ItemSpectreIlluminator();
+		spectreCharger = new ItemSpectreCharger();
 
 		grassSeeds = new ItemGrassSeeds();
 
