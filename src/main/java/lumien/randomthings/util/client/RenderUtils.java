@@ -366,9 +366,8 @@ public class RenderUtils
 
 		GlStateManager.disableTexture2D();
 
-		GlStateManager.pushMatrix();
 		GlStateManager.translate(posX, posY, posZ);
-
+		
 		wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
 
 		wr.pos(0F, 0F, 0F).color(red, green, blue, alpha).endVertex(); // P1
@@ -403,7 +402,7 @@ public class RenderUtils
 
 		t.draw();
 
-		GlStateManager.popMatrix();
+		GlStateManager.translate(-posX, -posY, -posZ);
 		GlStateManager.enableTexture2D();
 
 		Minecraft.getMinecraft().entityRenderer.enableLightmap();

@@ -1,5 +1,7 @@
 package lumien.randomthings.client.models;
 
+import java.awt.image.renderable.RenderableImageProducer;
+
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.mesh.PortKeyMesh;
 import lumien.randomthings.client.mesh.RedstoneActivatorMesh;
@@ -7,10 +9,12 @@ import lumien.randomthings.client.mesh.SoundPatternMesh;
 import lumien.randomthings.client.mesh.SoundRecorderMesh;
 import lumien.randomthings.client.mesh.SpectreChargerMesh;
 import lumien.randomthings.handler.runes.EnumRuneDust;
+import lumien.randomthings.item.ItemDiviningRod;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemWeatherEgg;
 import lumien.randomthings.item.ItemWeatherEgg.TYPE;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.item.ItemDiviningRod.Rod;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -173,6 +177,7 @@ public class ItemModels
 		registerLuminousBlocks();
 		registerAncientBrick();
 		registerWeatherEggs();
+		registerDiviningRods();
 
 		registerRuneDust();
 
@@ -210,6 +215,16 @@ public class ItemModels
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.spectreCoilEnder), 0, new ModelResourceLocation("randomthings:spectreCoil", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.spectreCoilNumber), 0, new ModelResourceLocation("randomthings:spectreCoil", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.spectreCoilGenesis), 0, new ModelResourceLocation("randomthings:spectreCoil", "inventory"));
+	}
+	
+	private static void registerDiviningRods()
+	{
+		int meta = 0;
+		for (Rod r:ItemDiviningRod.types)
+		{
+			ModelLoader.setCustomModelResourceLocation(ModItems.diviningRod, meta, new ModelResourceLocation("randomthings:diviningrod/" + r.name, "inventory"));
+			meta++;
+		}
 	}
 	
 	private static void registerWeatherEggs()

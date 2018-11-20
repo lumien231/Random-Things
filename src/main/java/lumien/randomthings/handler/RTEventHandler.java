@@ -516,6 +516,11 @@ public class RTEventHandler
 		if ((tickEvent.type == TickEvent.Type.CLIENT))
 		{
 			clientAnimationCounter++;
+			
+			if (tickEvent.phase == Phase.END)
+			{
+				DiviningRodHandler.get().tick();
+			}
 		}
 
 		if (tickEvent instanceof ServerTickEvent)
@@ -1389,5 +1394,7 @@ public class RTEventHandler
 				}
 			}
 		}
+		
+		DiviningRodHandler.get().render();
 	}
 }

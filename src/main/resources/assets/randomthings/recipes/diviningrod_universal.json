@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CSD",
+    "IBE",
+    "GLR"
+  ],
+  "key": {
+    "C": {
+        "item": "randomthings:diviningrod",
+        "data": 0
+    },
+    "I": {
+        "item": "randomthings:diviningrod",
+        "data": 1
+    },
+    "G": {
+        "item": "randomthings:diviningrod",
+        "data": 2
+    },
+    "L": {
+        "item": "randomthings:diviningrod",
+        "data": 3
+    },
+    "R": {
+        "item": "randomthings:diviningrod",
+        "data": 4
+    },
+    "E": {
+        "item": "randomthings:diviningrod",
+        "data": 5
+    },
+    "D": {
+        "item": "randomthings:diviningrod",
+        "data": 6
+    },
+    "S": {
+        "item": "minecraft:stick"
+    },
+    "B": {
+        "item": "minecraft:slime_ball"
+    }
+  },
+  "result": {
+    "item": "randomthings:diviningrod",
+    "data": 7
+  }
+}

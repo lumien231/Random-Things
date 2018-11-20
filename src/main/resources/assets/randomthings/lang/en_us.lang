@@ -260,6 +260,14 @@ item.flooPouch.name=Floo Pouch
 item.timeInABottle.name=Time in a bottle
 item.spectreIlluminator.name=Spectre Illuminator
 
+item.diviningRod.coal.name=Coal Divining Rod
+item.diviningRod.iron.name=Iron Divining Rod
+item.diviningRod.gold.name=Gold Divining Rod
+item.diviningRod.lapis.name=Lapis Divining Rod
+item.diviningRod.redstone.name=Redstone Divining Rod
+item.diviningRod.emerald.name=Emerald Divining Rod
+item.diviningRod.diamond.name=Diamond Divining Rod
+
 item.spectreCharger.normal.name=Spectre Charger
 item.spectreCharger.redstone.name=Redstone Spectre Charger
 item.spectreCharger.ender.name=Ender Spectre Charger
@@ -612,3 +620,10 @@ item.spectreCharger.normal.info=When toggled on by right clicking this item will
 item.spectreCharger.redstone.info=When toggled on by right clicking this item will transfer 4096 RF/t from your spectre energy buffer into any item in your inventory that can accept energy.
 item.spectreCharger.ender.info=When toggled on by right clicking this item will transfer 20480 RF/t from your spectre energy buffer into any item in your inventory that can accept energy.
 item.spectreCharger.genesis.info=When toggled on by right clicking this item will transfer as much RF/t as possible into any item in your inventory that can accept energy.
+item.diviningRod.coal.info=Holding this in your main or off hand will highlight every coal ore in a 11x11 cube centered on you.
+item.diviningRod.iron.info=Holding this in your main or off hand will highlight every iron ore in a 11x11 cube centered on you.
+item.diviningRod.gold.info=Holding this in your main or off hand will highlight any gold ore in a 11x11 cube centered on you.
+item.diviningRod.lapis.info=Holding this in your main or off hand will highlight any lapis ore in a 11x11 cube centered on you.
+item.diviningRod.emerald.info=Holding this in your main or off hand will highlight any emerald ore in a 11x11 cube centered on you.
+item.diviningRod.diamond.info=Holding this in your main or off hand will highlight any diamond ore in a 11x11 cube centered on you.
+item.diviningRod.universal.info=Holding this in your main or off hand will highlight any ore in a 11x11 cube centered on you.
