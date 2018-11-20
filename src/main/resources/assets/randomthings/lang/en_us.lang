@@ -438,6 +438,9 @@ entity.goldenChicken.name=Golden Chicken
 entity.randomthings.goldenEgg.name=Golden Egg
 entity.goldenEgg.name=Golden Egg
 
+entity.randomthings.spectreIlluminator.name=Spectre Illuminator
+entity.spectreIlluminator.name=Spectre Illuminator
+
 fluid.biomeEssence=Biome Essence
 
 enchantment.randomthings.magnetic=Magnetic
