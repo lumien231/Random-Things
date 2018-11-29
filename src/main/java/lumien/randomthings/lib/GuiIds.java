@@ -36,4 +36,5 @@ public class GuiIds
 	public static final int PROCESSING_PLATE = 32;
 	public static final int EXTRACTION_PLATE = 33;
 	public static final int CHUNK_ANALYZER = 34;
+	public static final int IGNITER = 35;
 }

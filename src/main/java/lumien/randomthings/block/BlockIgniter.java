@@ -2,6 +2,9 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.lib.GuiIds;
+import lumien.randomthings.tileentity.TileEntityIgniter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -10,25 +13,37 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockIgniter extends BlockBase
+public class BlockIgniter extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	public static final PropertyBool POWERED = PropertyBool.create("powered");
 
 	protected BlockIgniter()
 	{
 		super("igniter", Material.ROCK);
 
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(POWERED, false));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setHardness(1.5F);
+	}
+	
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		if (!worldIn.isRemote)
+		{
+			playerIn.openGui(RandomThings.instance, GuiIds.IGNITER, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		}
+		return true;
 	}
 
 	@Override
@@ -40,44 +55,11 @@ public class BlockIgniter extends BlockBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos changedPos)
-	{
-		EnumFacing facing = state.getValue(FACING);
-		boolean powered = state.getValue(POWERED);
-
-		boolean newPowered = worldIn.isBlockIndirectlyGettingPowered(pos) > 0;
-		worldIn.setBlockState(pos, state.withProperty(POWERED, newPowered));
-
-		if (powered && !newPowered)
-		{
-			IBlockState front = worldIn.getBlockState(pos.offset(facing));
-
-			if (front.getBlock() == Blocks.FIRE)
-			{
-				worldIn.setBlockToAir(pos.offset(facing));
-			}
-		}
-		else if (newPowered && !powered)
-		{
-			if (worldIn.isAirBlock(pos.offset(facing)))
-			{
-				worldIn.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
-				worldIn.setBlockState(pos.offset(facing), Blocks.FIRE.getDefaultState());
-			}
-		}
-		else
-		{
-			return;
-		}
-	}
-
-	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.onBlockAdded(worldIn, pos, state);
 
 		this.setDefaultFacing(worldIn, pos, state);
-		worldIn.setBlockState(pos, state.withProperty(POWERED, worldIn.isBlockIndirectlyGettingPowered(pos) > 0 ? true : false));
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
@@ -133,7 +115,7 @@ public class BlockIgniter extends BlockBase
 			powered = true;
 		}
 
-		return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta]).withProperty(POWERED, powered);
+		return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta]);
 	}
 
 	@Override
@@ -141,17 +123,18 @@ public class BlockIgniter extends BlockBase
 	{
 		int i = state.getValue(FACING).getIndex();
 
-		if (state.getValue(POWERED))
-		{
-			i += 6;
-		}
-
 		return i;
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { FACING, POWERED });
+		return new BlockStateContainer(this, new IProperty[] { FACING });
+	}
+
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state)
+	{
+		return new TileEntityIgniter();
 	}
 }

@@ -413,6 +413,10 @@ gui.entityDetector.filter.player=Players
 gui.entityDetector.filter.item=Items
 gui.entityDetector.filter.custom=Custom
 
+gui.igniter.toggle=Toggle Fire
+gui.igniter.ignite=Ignite
+gui.igniter.keepIgnited=Keep Ignited
+
 floo.info.teleport=§7Teleporting to §a%s
 floo.info.same=§cYou are already at your destination
 
