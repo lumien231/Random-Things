@@ -112,6 +112,12 @@ public class TileEntityBlockDiaphanous extends TileEntityBase
 
 		syncTE();
 	}
+	
+	@Override
+	public boolean shouldRenderInPass(int pass)
+	{
+		return pass == 1;
+	}
 
 	public boolean shouldRenderSide(EnumFacing facing)
 	{
