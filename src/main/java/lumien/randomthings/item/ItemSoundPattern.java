@@ -2,8 +2,12 @@ package lumien.randomthings.item;
 
 import java.util.List;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -13,6 +17,27 @@ public class ItemSoundPattern extends ItemBase
 	public ItemSoundPattern()
 	{
 		super("soundPattern");
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		if (playerIn.isSneaking())
+		{
+			ItemStack me = playerIn.getHeldItem(handIn);
+
+			ResourceLocation sound = getSoundLocation(me);
+
+			if (sound != null)
+			{
+				me.getTagCompound().removeTag("sound");
+				me.setTagCompound(null);
+
+				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, me);
+			}
+		}
+
+		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
 	@Override
