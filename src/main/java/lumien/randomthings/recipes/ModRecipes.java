@@ -311,7 +311,9 @@ public class ModRecipes
 					{
 						if (is.getItem() == ModItems.positionFilter)
 						{
-							aitemstack.set(i, is.copy());
+							ItemStack cp = is.copy();
+							cp.setCount(1);
+							aitemstack.set(i, cp);
 						}
 					}
 				}
@@ -539,7 +541,9 @@ public class ModRecipes
 					{
 						if (is.getItem() == ModItems.idCard)
 						{
-							aitemstack.set(i, is.copy());
+							ItemStack copy = is.copy();
+							copy.setCount(1);
+							aitemstack.set(i, copy);
 						}
 					}
 				}
