@@ -3,6 +3,8 @@ package lumien.randomthings.item;
 import java.awt.Color;
 import java.util.List;
 
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.handler.spectrecoils.SpectreCoilHandler;
 import lumien.randomthings.lib.ILuminousItem;
@@ -12,6 +14,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -23,10 +26,12 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSpectreCharger extends ItemBase implements IRTItemColor, ILuminousItem
+@Optional.Interface(iface = "baubles.api.IBauble", modid = "baubles")
+public class ItemSpectreCharger extends ItemBase implements IRTItemColor, ILuminousItem, IBauble
 {
 	public enum TIER
 	{
@@ -202,5 +207,17 @@ public class ItemSpectreCharger extends ItemBase implements IRTItemColor, ILumin
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{
 		return tintIndex == 1 ? (TIER.values()[stack.getItemDamage()].color) : -1;
+	}
+
+	@Override
+	public BaubleType getBaubleType(ItemStack itemstack)
+	{
+		return BaubleType.BELT;
+	}
+	
+	@Override
+	public void onWornTick(ItemStack itemstack, EntityLivingBase player)
+	{
+		onUpdate(itemstack, player.world, player, 0, false);
 	}
 }
