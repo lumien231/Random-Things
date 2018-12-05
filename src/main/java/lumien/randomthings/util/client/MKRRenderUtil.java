@@ -13,12 +13,79 @@ import lumien.randomthings.client.render.magiccircles.ITriangleFunction;
 import lumien.randomthings.handler.RTEventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.animation.Animation;
 
 public class MKRRenderUtil
 {
 	static ResourceLocation mkrFont = new ResourceLocation("randomthings", "textures/entitys/mkr_font.png");
+
+	public static void renderIcosahedron(double x, double y, double z)
+	{
+		Minecraft mc = Minecraft.getMinecraft();
+
+		GlStateManager.disableTexture2D();
+		GlStateManager.disableLighting();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+
+		GlStateManager.color(1, 1, 1);
+
+		GlStateManager.translate(x, y, z);
+
+		float phi = (float) ((1 + Math.sqrt(5)) / 2);
+
+		float[][] v = new float[][] { { phi, 1, 0 }, { -phi, 1, 0 }, { phi, -1, 0 }, { -phi, -1, 0 }, { 1, 0, phi }, { 1, 0, -phi }, { -1, 0, phi }, { -1, 0, -phi }, { 0, phi, 1 }, { 0, -phi, 1 }, { 0, phi, -1 }, { 0, -phi, -1 } };
+
+		float[][][] mesh = new float[][][] { { v[0], v[8], v[4] }, { v[0], v[5], v[10] }, { v[2], v[4], v[9] }, { v[2], v[11], v[5] }, { v[1], v[6], v[8] }, { v[1], v[10], v[7] }, { v[3], v[9], v[6] }, { v[3], v[7], v[11] }, { v[0], v[10], v[8] }, { v[1], v[8], v[10] }, { v[2], v[9], v[11] }, { v[11], v[9], v[3] }, { v[4], v[2], v[0] }, { v[5], v[0], v[2] }, { v[6], v[1], v[3] }, { v[7], v[3], v[1] }, { v[8], v[6], v[4] }, { v[9], v[4], v[6] }, { v[10], v[5], v[7] }, { v[11], v[7], v[5] } };
+
+		Color cB = new Color(255, 0, 255);
+
+		Random rng = new Random(500);
+
+		float angle1 = RTEventHandler.clientAnimationCounter + Animation.getPartialTickTime();
+
+		float rX = rng.nextFloat();
+		float rZ = rng.nextFloat();
+
+		GlStateManager.rotate(angle1, rX, 1, rZ);
+
+		float aP = RTEventHandler.clientAnimationCounter + Animation.getPartialTickTime();
+
+		// GlStateManager.disableCull();
+
+		GlStateManager.glBegin(GL11.GL_TRIANGLES);
+		for (int ti = 0; ti < mesh.length; ti++)
+		{
+			float[][] vertices = mesh[ti];
+
+			for (int i = 0; i < vertices.length; i++)
+			{
+				float[] vertex = vertices[i];
+
+				float mod = 0.1F;
+
+				Color c = Color.getHSBColor(0.83f, 1, (float) (Math.sin((aP + rng.nextInt(100) + ti) / 50) * 0.2F + 0.8F));
+				ColorUtil.applyColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), 200));
+
+				GlStateManager.glVertex3f(vertex[0] * mod, vertex[1] * mod, vertex[2] * mod);
+			}
+		}
+
+		GlStateManager.glEnd();
+
+		// GlStateManager.enableCull();
+
+		GlStateManager.rotate(-angle1, rX, 1, rZ);
+
+		GlStateManager.enableTexture2D();
+		GlStateManager.enableLighting();
+		GlStateManager.disableBlend();
+
+		GlStateManager.translate(-x, -y, -z);
+	}
 
 	public static void circle1(double posX, double posY, double posZ, Color c1, Color c2, boolean fullCircle)
 	{
