@@ -88,6 +88,7 @@ public class ModBlocks
 	public static BlockSidedRedstone sidedRedstone;
 	public static BlockSpectreLens spectreLens;
 	public static BlockSpectreEnergyInjector spectreEnergyInjector;
+	public static BlockLinkOrb linkOrb;
 	
 	public static BlockSpectreCoil spectreCoilNormal;
 	public static BlockSpectreCoil spectreCoilRedstone;
@@ -218,6 +219,7 @@ public class ModBlocks
 		spectreLens = new BlockSpectreLens();
 		spectreEnergyInjector = new BlockSpectreEnergyInjector();
 		processingPlate = new BlockProcessingPlate();
+		linkOrb = new BlockLinkOrb();
 		
 		spectreCoilNormal = new BlockSpectreCoil(CoilType.NORMAL);
 		spectreCoilRedstone = new BlockSpectreCoil(CoilType.REDSTONE);

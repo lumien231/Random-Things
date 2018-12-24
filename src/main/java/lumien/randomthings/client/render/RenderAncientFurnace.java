@@ -95,32 +95,32 @@ public class RenderAncientFurnace extends TileEntitySpecialRenderer<TileEntityAn
 
 					switch (f)
 					{
-					case NORTH:
-						renderer.pos(iX, y, iZ - 0.001).tex(1, 1).endVertex();
-						renderer.pos(iX, y + 1, iZ - 0.001).tex(1, 0).endVertex();
-						renderer.pos(iX + 1, y + 1, iZ - 0.001).tex(0, 0).endVertex();
-						renderer.pos(iX + 1, y, iZ - 0.001).tex(0, 1).endVertex();
-						break;
-					case SOUTH:
-						renderer.pos(iX, y, iZ + 1.001).tex(0, 1).endVertex();
-						renderer.pos(iX + 1, y, iZ + 1.001).tex(1, 1).endVertex();
-						renderer.pos(iX + 1, y + 1, iZ + 1.001).tex(1, 0).endVertex();
-						renderer.pos(iX, y + 1, iZ + 1.001).tex(0, 0).endVertex();
-						break;
-					case WEST:
-						renderer.pos(iX - 0.001, y, iZ).tex(0, 1).endVertex();
-						renderer.pos(iX - 0.001, y, iZ + 1).tex(1, 1).endVertex();
-						renderer.pos(iX - 0.001, y + 1, iZ + 1).tex(1, 0).endVertex();
-						renderer.pos(iX - 0.001, y + 1, iZ).tex(0, 0).endVertex();
-						break;
-					case EAST:
-						renderer.pos(iX + 1.001, y, iZ).tex(1, 1).endVertex();
-						renderer.pos(iX + 1.001, y + 1, iZ).tex(1, 0).endVertex();
-						renderer.pos(iX + 1.001, y + 1, iZ + 1).tex(0, 0).endVertex();
-						renderer.pos(iX + 1.001, y, iZ + 1).tex(0, 1).endVertex();
-						break;
-					default:
-						break;
+						case NORTH:
+							renderer.pos(iX, y, iZ - 0.001).tex(1, 1).endVertex();
+							renderer.pos(iX, y + 1, iZ - 0.001).tex(1, 0).endVertex();
+							renderer.pos(iX + 1, y + 1, iZ - 0.001).tex(0, 0).endVertex();
+							renderer.pos(iX + 1, y, iZ - 0.001).tex(0, 1).endVertex();
+							break;
+						case SOUTH:
+							renderer.pos(iX, y, iZ + 1.001).tex(0, 1).endVertex();
+							renderer.pos(iX + 1, y, iZ + 1.001).tex(1, 1).endVertex();
+							renderer.pos(iX + 1, y + 1, iZ + 1.001).tex(1, 0).endVertex();
+							renderer.pos(iX, y + 1, iZ + 1.001).tex(0, 0).endVertex();
+							break;
+						case WEST:
+							renderer.pos(iX - 0.001, y, iZ).tex(0, 1).endVertex();
+							renderer.pos(iX - 0.001, y, iZ + 1).tex(1, 1).endVertex();
+							renderer.pos(iX - 0.001, y + 1, iZ + 1).tex(1, 0).endVertex();
+							renderer.pos(iX - 0.001, y + 1, iZ).tex(0, 0).endVertex();
+							break;
+						case EAST:
+							renderer.pos(iX + 1.001, y, iZ).tex(1, 1).endVertex();
+							renderer.pos(iX + 1.001, y + 1, iZ).tex(1, 0).endVertex();
+							renderer.pos(iX + 1.001, y + 1, iZ + 1).tex(0, 0).endVertex();
+							renderer.pos(iX + 1.001, y, iZ + 1).tex(0, 1).endVertex();
+							break;
+						default:
+							break;
 					}
 
 					tessellator.draw();

@@ -228,9 +228,9 @@ public abstract class TileEntityBase extends TileEntity
 
 			if (changed)
 			{
-				((IRedstoneSensitive) this).redstoneChange(redstonePowered, newPowered);
-
 				this.redstonePowered = newPowered;
+				
+				((IRedstoneSensitive) this).redstoneChange(redstonePowered, newPowered);
 
 				this.markDirty();
 				this.syncTE();

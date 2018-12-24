@@ -16,24 +16,54 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.model.animation.Animation;
 
 public class MKRRenderUtil
 {
 	static ResourceLocation mkrFont = new ResourceLocation("randomthings", "textures/entitys/mkr_font.png");
 
-	public static void renderIcosahedron(double x, double y, double z)
+	public static void renderLinkOrb(BlockPos pos, double x, double y, double z)
+	{
+		float progress = ((RTEventHandler.clientAnimationCounter + pos.hashCode() + Animation.getPartialTickTime()) / 2) % 100;
+
+		float rotation = RTEventHandler.clientAnimationCounter + pos.hashCode() + Animation.getPartialTickTime();
+
+		y = y + Math.sin(rotation / 40) * 0.05;
+
+		GlStateManager.translate(x, y, z);
+
+		GlStateManager.rotate(-rotation, -0.5F, 0.5F, 0.5F);
+		renderIcosahedron(x, y, z, 0.1F, ColorFunctions.constant(new Color(150, 10, 180, 200)).next(ColorFunctions.flicker(20, 20)).tt(progress));
+		GlStateManager.rotate(rotation, -0.5F, 0.5F, 0.5F);
+
+		GlStateManager.rotate(rotation, 0.5F, 0.5F, 0.5F);
+		renderIcosahedron(x, y, z, 0.2F, ColorFunctions.constant(new Color(235, 63, 229, 200)).next(ColorFunctions.flicker(0, 20)).tt(progress));
+
+		GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+
+		GL11.glLineWidth(2);
+		renderIcosahedron(x, y, z, 0.201F, (t) -> Color.WHITE);
+		GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
+
+		GlStateManager.rotate(-rotation, 0.5F, 0.5F, 0.5F);
+
+		GlStateManager.translate(-x, -y, -z);
+	}
+
+	public static void renderIcosahedron(double x, double y, double z, float sizeMod, ITriangleFunction triangleFunction)
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 
+		mc.entityRenderer.disableLightmap();
 		GlStateManager.disableTexture2D();
 		GlStateManager.disableLighting();
 		GlStateManager.enableBlend();
+
 		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
 
 		GlStateManager.color(1, 1, 1);
-
-		GlStateManager.translate(x, y, z);
 
 		float phi = (float) ((1 + Math.sqrt(5)) / 2);
 
@@ -42,15 +72,6 @@ public class MKRRenderUtil
 		float[][][] mesh = new float[][][] { { v[0], v[8], v[4] }, { v[0], v[5], v[10] }, { v[2], v[4], v[9] }, { v[2], v[11], v[5] }, { v[1], v[6], v[8] }, { v[1], v[10], v[7] }, { v[3], v[9], v[6] }, { v[3], v[7], v[11] }, { v[0], v[10], v[8] }, { v[1], v[8], v[10] }, { v[2], v[9], v[11] }, { v[11], v[9], v[3] }, { v[4], v[2], v[0] }, { v[5], v[0], v[2] }, { v[6], v[1], v[3] }, { v[7], v[3], v[1] }, { v[8], v[6], v[4] }, { v[9], v[4], v[6] }, { v[10], v[5], v[7] }, { v[11], v[7], v[5] } };
 
 		Color cB = new Color(255, 0, 255);
-
-		Random rng = new Random(500);
-
-		float angle1 = RTEventHandler.clientAnimationCounter + Animation.getPartialTickTime();
-
-		float rX = rng.nextFloat();
-		float rZ = rng.nextFloat();
-
-		GlStateManager.rotate(angle1, rX, 1, rZ);
 
 		float aP = RTEventHandler.clientAnimationCounter + Animation.getPartialTickTime();
 
@@ -61,16 +82,13 @@ public class MKRRenderUtil
 		{
 			float[][] vertices = mesh[ti];
 
+			ColorUtil.applyColor(triangleFunction.apply(ti));
+
 			for (int i = 0; i < vertices.length; i++)
 			{
 				float[] vertex = vertices[i];
 
-				float mod = 0.1F;
-
-				Color c = Color.getHSBColor(0.83f, 1, (float) (Math.sin((aP + rng.nextInt(100) + ti) / 50) * 0.2F + 0.8F));
-				ColorUtil.applyColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), 200));
-
-				GlStateManager.glVertex3f(vertex[0] * mod, vertex[1] * mod, vertex[2] * mod);
+				GlStateManager.glVertex3f(vertex[0] * sizeMod, vertex[1] * sizeMod, vertex[2] * sizeMod);
 			}
 		}
 
@@ -78,13 +96,10 @@ public class MKRRenderUtil
 
 		// GlStateManager.enableCull();
 
-		GlStateManager.rotate(-angle1, rX, 1, rZ);
-
 		GlStateManager.enableTexture2D();
 		GlStateManager.enableLighting();
 		GlStateManager.disableBlend();
-
-		GlStateManager.translate(-x, -y, -z);
+		mc.entityRenderer.enableLightmap();
 	}
 
 	public static void circle1(double posX, double posY, double posZ, Color c1, Color c2, boolean fullCircle)

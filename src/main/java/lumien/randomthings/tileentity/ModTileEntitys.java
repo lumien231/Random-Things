@@ -58,6 +58,7 @@ public class ModTileEntitys
 		registerTE(TileEntityProcessingPlate.class, "processingPlate");
 		registerTE(TileEntityExtractionPlate.class, "extractionPlate");
 		registerTE(TileEntityIgniter.class, "igniter");
+		registerTE(TileEntityLinkOrb.class, "linkOrb");
 
 		registerTE(TileEntityItemCollector.class, "itemCollector");
 		registerTE(TileEntityAdvancedItemCollector.class, "advancedItemCollector");

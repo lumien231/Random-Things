@@ -3,7 +3,9 @@ package lumien.randomthings.handler;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -53,6 +55,7 @@ import lumien.randomthings.recipes.anvil.AnvilRecipeHandler;
 import lumien.randomthings.tileentity.TileEntityChatDetector;
 import lumien.randomthings.tileentity.TileEntityFlooBrick;
 import lumien.randomthings.tileentity.TileEntityGlobalChatDetector;
+import lumien.randomthings.tileentity.TileEntityLinkOrb;
 import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntityRedstoneObserver;
 import lumien.randomthings.tileentity.TileEntityRuneBase;
@@ -97,12 +100,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovementInput;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -175,7 +180,7 @@ public class RTEventHandler
 		if (event.getWorld().isRemote)
 			SpectreIlluminationClientHandler.loadChunk(event.getChunk());
 	}
-	
+
 	@SubscribeEvent
 	public void chunkWatch(ChunkWatchEvent.Watch event)
 	{
@@ -516,7 +521,7 @@ public class RTEventHandler
 		if ((tickEvent.type == TickEvent.Type.CLIENT))
 		{
 			clientAnimationCounter++;
-			
+
 			if (tickEvent.phase == Phase.END)
 			{
 				DiviningRodHandler.get().tick();
@@ -1074,6 +1079,68 @@ public class RTEventHandler
 				{
 					handleFireProtection(event);
 				}
+
+				// Linking Orbs
+
+
+				LinkedHashSet<EntityLivingBase> distributedEntities = new LinkedHashSet<EntityLivingBase>();
+				for (TileEntityLinkOrb tlo : TileEntityLinkOrb.orbs)
+				{
+					if (!tlo.isInvalid() && !tlo.getWorld().isRemote)
+					{
+						UUID owner = tlo.getOwner();
+
+						if (owner != null && player.getGameProfile().getId().equals(owner))
+						{
+							World world = tlo.getWorld();
+
+							distributedEntities.addAll(world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(tlo.getPos()).grow(5), EntitySelectors.IS_ALIVE));
+						}
+					}
+				}
+
+				distributedEntities.remove(player);
+
+				if (distributedEntities.size() > 0)
+				{
+					float damage = event.getAmount();
+					float part = damage / distributedEntities.size();
+
+					System.out.println("Distributing " + damage + " damage to " + distributedEntities.size() + " entities with " + part + " per Entity");
+
+					while (damage > 0 && !distributedEntities.isEmpty())
+					{
+						Iterator<EntityLivingBase> iterator = distributedEntities.iterator();
+
+						while (iterator.hasNext())
+						{
+							EntityLivingBase next = iterator.next();
+
+							float entityHealth = next.getHealth();
+
+							float dealtDamage = Math.min(next.getHealth(), part);
+
+							next.attackEntityFrom(event.getSource(), dealtDamage);
+
+							if (next.isDead || next.getHealth() == 0)
+							{
+								iterator.remove();
+							}
+
+							damage -= dealtDamage;
+						}
+					}
+
+					if (damage <= 0.1)
+					{
+						event.setCanceled(true);
+					}
+					else
+					{
+						event.setCanceled(true);
+						player.attackEntityFrom(event.getSource(), damage);
+					}
+				}
 			}
 
 			if (!event.isCanceled() && event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof EntityDamageSourceIndirect))
@@ -1099,6 +1166,7 @@ public class RTEventHandler
 				}
 			}
 		}
+
 	}
 
 	private void handleFireProtection(LivingAttackEvent event)
@@ -1394,7 +1462,7 @@ public class RTEventHandler
 				}
 			}
 		}
-		
+
 		DiviningRodHandler.get().render();
 	}
 }
