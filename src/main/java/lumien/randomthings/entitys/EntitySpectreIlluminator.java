@@ -33,6 +33,21 @@ public class EntitySpectreIlluminator extends Entity
 
 		this.setSize(0.5F, 0.5F);
 	}
+	
+	@Override
+	public void onKillCommand()
+	{
+		// TODO Auto-generated method stub
+		super.onKillCommand();
+		
+		if (!world.isRemote)
+		{
+			SpectreIlluminationHandler handler = SpectreIlluminationHandler.get(this.world);
+
+			if (handler.isIlluminated(this.getPosition()))
+				handler.toggleChunk(this.world, this.getPosition());
+		}
+	}
 
 	@Override
 	public boolean isInRangeToRenderDist(double distance)
