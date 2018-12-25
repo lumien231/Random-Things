@@ -43,6 +43,7 @@ import org.objectweb.asm.tree.FieldInsnNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.InsnNode;
+import org.objectweb.asm.tree.IntInsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LdcInsnNode;
@@ -1515,6 +1516,42 @@ public class ClassTransformer implements IClassTransformer
 						toInsert.add(new JumpInsnNode(IFEQ, labelNode));
 						renderRainSnow.instructions.insertBefore(insnPoint, toInsert);
 						i += 4;
+					}
+					
+					if (min.name.equals("shouldRenderRainSnow") && min.owner.equals("sereneseasons/season/SeasonASMHelper"))
+					{
+						// Serene Seasons Compability
+						logger.log(Level.DEBUG, "- Found Serene Seasons shouldRenderRainSnow");
+						
+						int worldIndex = 5;
+						int blockPosIndex = 21;
+
+						// Optifine Why :'(
+						for (LocalVariableNode lv : renderRainSnow.localVariables)
+						{
+							if (lv.desc.equals("Lnet/minecraft/client/multiplayer/WorldClient;") || lv.desc.equals("Lnet/minecraft/world/World;"))
+							{
+								worldIndex = lv.index;
+							}
+							else if (lv.desc.equals("Lnet/minecraft/util/math/BlockPos$MutableBlockPos;"))
+							{
+								blockPosIndex = lv.index;
+							}
+						}
+						
+						LabelNode l0 = new LabelNode();
+						
+						InsnList toInsert = new InsnList();
+						toInsert.add(new VarInsnNode(ALOAD, worldIndex));
+						toInsert.add(new VarInsnNode(ALOAD, blockPosIndex));
+						toInsert.add(new MethodInsnNode(INVOKESTATIC, asmHandler, "shouldRain", "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Z", false));
+						toInsert.add(new JumpInsnNode(IFNE, l0));
+						toInsert.add(new InsnNode(POP));
+						toInsert.add(new IntInsnNode(BIPUSH, 0));
+						toInsert.add(l0);
+						
+						renderRainSnow.instructions.insert(min, toInsert);
+						i += 7;
 					}
 				}
 			}
