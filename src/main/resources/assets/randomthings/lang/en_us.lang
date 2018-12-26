@@ -323,6 +323,7 @@ item.ingredient.preciousEmerald.name=Precious Emerald
 item.ingredient.lotusBlossom.name=Lotus Blossom
 item.ingredient.goldenEgg.name=Golden Egg
 item.ingredient.spectreString.name=Spectre String
+item.ingredient.blackoutPowder.name=Blackout Powder
 
 item.spectrePickaxe.name=Spectre Pickaxe
 item.spectreAxe.name=Spectre Axe
@@ -598,6 +599,7 @@ item.runeDust.info=Decorative Colored dust that can be placed on top of other bl
 item.ingredient.sakanadeSpores.info=Sakande Spores can be found on the bottom of huge brown mushrooms.
 item.ingredient.ectoPlasm.info=Whenever an entity dies there's a small chance a Spirit will spawn, killing that Spirit using Magic (For Example Potions) yields 1-2 Ectoplasm.
 item.ingredient.luminousPowder.info=Besides being a crafting ingredient you can also combine luminous powder and enchanted items in a crafting table to make the enchantment glint glow in the dark.
+item.ingredient.blackoutPowder.info=Right clicking a block in a chunk illuminated by a Spectre Illuminator will drop the spectre illuminator at the position you clicked and make the chunk dark again.
 item.runePattern.info=Right clicking runic dust with a piece of paper will give you a runic pattern. You can then create copies of the dust by right clicking the top of a block with the pattern. This will still use up runic dust from your inventory if you aren't in creative mode.
 item.superLubricentBoots.info=Wearing Super Lubricent Boots makes you glide over blocks without friction as if you were walking on Super Lubricent Ice.
 item.flooSign.info=Right clicking a connected line of bricks with a Floo Sign will turn them into Floo Bricks and create a Floo Fireplace. When you are holding Floo Dust while standing on top of Floo Bricks & type a message in chat you will be teleported to the fireplace which name is closest to the message you typed. The name of a fireplace is defined by the name of the Floo Sign used to create it (Rename it in an Anvil). Fireplaces without a name can still be used to teleport but can't be teleported to. Players will arrrive facing the opposite direction you were facing while creating the fireplace.

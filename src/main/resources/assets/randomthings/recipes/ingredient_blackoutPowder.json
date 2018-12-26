@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DG",
+    " M"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:coal_block"
+    },
+    "D": {
+        "item" : "minecraft:dye",
+        "data": 0
+    },
+    "M": {
+        "item" : "minecraft:dye",
+        "data": 4
+    }
+  },
+  "result": {
+    "item": "randomthings:ingredient",
+    "data": 13,
+    "count": 4
+  }
+}

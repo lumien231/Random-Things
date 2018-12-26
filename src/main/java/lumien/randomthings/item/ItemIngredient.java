@@ -1,9 +1,16 @@
 package lumien.randomthings.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.common.base.Predicates;
+
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
 import lumien.randomthings.entitys.EntityGoldenEgg;
+import lumien.randomthings.entitys.EntitySpectreIlluminator;
+import lumien.randomthings.handler.spectreilluminator.SpectreIlluminationHandler;
 import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
@@ -15,6 +22,7 @@ import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -28,7 +36,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,7 +51,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 	public enum INGREDIENT
 	{
-		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder"), SUPERLUBRICENT_TINCTURE("superLubricentTincture"), FLOO_POWDER("flooPowder"), PLATE_BASE("plateBase"), PRECIOUS_EMERALD("preciousEmerald"), LOTUS_BLOSSOM("lotusBlossom"), GOLDEN_EGG("goldenEgg"), SPECTRE_STRING("spectreString");
+		SAKANADE_SPORES("sakanadeSpores"), EVIL_TEAR("evilTear"), ECTO_PLASM("ectoPlasm"), SPECTRE_INGOT("spectreIngot"), BIOME_SENSOR("biomeSensor"), LUMINOUS_POWDER("luminousPowder"), SUPERLUBRICENT_TINCTURE("superLubricentTincture"), FLOO_POWDER("flooPowder"), PLATE_BASE("plateBase"), PRECIOUS_EMERALD("preciousEmerald"), LOTUS_BLOSSOM("lotusBlossom"), GOLDEN_EGG("goldenEgg"), SPECTRE_STRING("spectreString"), BLACKOUT_POWDER("blackoutPowder");
 
 		public String name;
 
@@ -59,18 +69,17 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 		super("ingredient");
 
 		this.setHasSubtypes(true);
-		
-		
+
 		BehaviorProjectileDispense pro = new BehaviorProjectileDispense()
 		{
-			
+
 			@Override
 			protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn)
 			{
 				return new EntityGoldenEgg(worldIn, position.getX(), position.getY(), position.getZ());
 			}
 		};
-		
+
 		BehaviorDefaultDispenseItem def = new BehaviorDefaultDispenseItem();
 
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new IBehaviorDispenseItem()
@@ -81,14 +90,14 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 			{
 				if (stack.getItemDamage() != INGREDIENT.GOLDEN_EGG.id)
 				{
-			        return def.dispense(source, stack);
+					return def.dispense(source, stack);
 				}
 				else
 				{
 					return pro.dispense(source, stack);
 				}
 			}
-			
+
 		});
 	}
 
@@ -134,7 +143,10 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
-		if (getIngredient(stack) == INGREDIENT.ECTO_PLASM)
+
+		INGREDIENT ingredient = getIngredient(stack);
+
+		if (ingredient == INGREDIENT.ECTO_PLASM)
 		{
 			IBlockState state = worldIn.getBlockState(pos);
 
@@ -157,7 +169,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 				}
 			}
 		}
-		else if (getIngredient(stack) == INGREDIENT.EVIL_TEAR && Features.ARTIFICIAL_END_PORTAL)
+		else if (ingredient == INGREDIENT.EVIL_TEAR && Features.ARTIFICIAL_END_PORTAL)
 		{
 			IBlockState state = worldIn.getBlockState(pos);
 
@@ -174,6 +186,31 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 					return EnumActionResult.SUCCESS;
 				}
+			}
+		}
+		else if (ingredient == INGREDIENT.BLACKOUT_POWDER && !worldIn.isRemote)
+		{
+			SpectreIlluminationHandler handler = SpectreIlluminationHandler.get(worldIn);
+
+			if (handler.isIlluminated(pos))
+			{
+				List<EntitySpectreIlluminator> list = new ArrayList<EntitySpectreIlluminator>();
+				ChunkPos chunkPos = worldIn.getChunkFromBlockCoords(pos).getPos();
+				worldIn.getChunkFromBlockCoords(pos).getEntitiesOfTypeWithinAABB(EntitySpectreIlluminator.class, new AxisAlignedBB(chunkPos.getXStart() - 2, 0, chunkPos.getZStart() - 2, chunkPos.getXEnd() + 2, 255, chunkPos.getZEnd() + 2), list, Predicates.alwaysTrue());
+
+				if (!list.isEmpty())
+				{
+					EntitySpectreIlluminator first = list.get(0);
+
+					first.setDead();
+
+					BlockPos spawnPos = pos.offset(facing);
+					worldIn.spawnEntity(new EntityItem(worldIn, spawnPos.getX() + 0.5, spawnPos.getY() + 0.5, spawnPos.getZ() + 0.5, new ItemStack(ModItems.spectreIlluminator)));
+				}
+				
+				handler.toggleChunk(worldIn, pos);
+				
+				return EnumActionResult.SUCCESS;
 			}
 		}
 
