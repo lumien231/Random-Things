@@ -23,4 +23,7 @@ public class Features
 	
 	@ConfigOption(category = "features", name = "GoldenEgg", comment = "Should there be an Golden Egg in every Bean Pod?")
 	public static boolean GOLDEN_EGG = true;
+	
+	@ConfigOption(category = "features", name = "MagneticEnchantment", comment = "Whether the magnetic enchantment should be available.")
+	public static boolean MAGNETIC_ENCHANTMENT = true;
 }
