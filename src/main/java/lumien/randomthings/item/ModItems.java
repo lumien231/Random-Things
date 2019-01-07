@@ -1,5 +1,6 @@
 package lumien.randomthings.item;
 
+import lumien.randomthings.item.diviningrod.ItemDiviningRod;
 import lumien.randomthings.item.spectretools.ItemSpectreAxe;
 import lumien.randomthings.item.spectretools.ItemSpectrePickaxe;
 import lumien.randomthings.item.spectretools.ItemSpectreShovel;

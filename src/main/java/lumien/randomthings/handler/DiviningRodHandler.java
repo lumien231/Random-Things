@@ -8,8 +8,9 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-import lumien.randomthings.item.ItemDiviningRod;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.item.diviningrod.ItemDiviningRod;
+import lumien.randomthings.item.diviningrod.RodType;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -46,9 +47,9 @@ public class DiviningRodHandler
 		blockColorMap.put(Blocks.DIAMOND_ORE, new Color(87, 221, 229, 50));
 	}
 
-	public boolean shouldGlow(Block detectedBlock)
+	public boolean shouldGlow(RodType rodType)
 	{
-		return !indicators.isEmpty() && (detectedBlock == null || indicators.stream().anyMatch((i) -> i.block == detectedBlock));
+		return !indicators.isEmpty() && (indicators.stream().anyMatch((i) -> i.type == rodType));
 	}
 
 	int modX, modY, modZ;
@@ -119,7 +120,7 @@ public class DiviningRodHandler
 				if (!rod.isEmpty())
 				{
 					BlockPos playerPos = player.getPosition();
-					Block[] detectedBlocks = ItemDiviningRod.getDetectedBlocks(rod);
+					RodType type = ItemDiviningRod.getRodType(rod);
 
 					for (int i = 0; i < 60; i++)
 					{
@@ -143,21 +144,16 @@ public class DiviningRodHandler
 						}
 
 						BlockPos target = playerPos.add(modX, modY, modZ);
-
+						IBlockState blockState = world.getBlockState(target);
+						
+						
 						if (world.isBlockLoaded(target))
 						{
-							IBlockState state = world.getBlockState(target);
-
-							for (Block db : detectedBlocks)
+							if (type.matches(world, target, blockState))
 							{
-								if (state.getBlock() == db)
-								{
-									Indicator indicator = new Indicator(target, 160, blockColorMap.get(db), db);
+								Indicator indicator = new Indicator(target, 160, type.getIndicatorColor(world, target, blockState), type);
 
-									indicators.add(indicator);
-
-									break;
-								}
+								indicators.add(indicator);
 							}
 						}
 					}
@@ -171,15 +167,16 @@ public class DiviningRodHandler
 		BlockPos target;
 		int duration;
 		Color color;
-		Block block;
+		
+		RodType type;
 
-		public Indicator(BlockPos target, int duration, Color color, Block block)
+		public Indicator(BlockPos target, int duration, Color color, RodType type)
 		{
 			super();
 			this.target = target;
 			this.duration = duration;
 			this.color = color;
-			this.block = block;
+			this.type = type;
 		}
 	}
 

@@ -1,7 +1,5 @@
 package lumien.randomthings.client.models;
 
-import java.awt.image.renderable.RenderableImageProducer;
-
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.mesh.PortKeyMesh;
 import lumien.randomthings.client.mesh.RedstoneActivatorMesh;
@@ -9,19 +7,17 @@ import lumien.randomthings.client.mesh.SoundPatternMesh;
 import lumien.randomthings.client.mesh.SoundRecorderMesh;
 import lumien.randomthings.client.mesh.SpectreChargerMesh;
 import lumien.randomthings.handler.runes.EnumRuneDust;
-import lumien.randomthings.item.ItemDiviningRod;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemWeatherEgg;
 import lumien.randomthings.item.ItemWeatherEgg.TYPE;
 import lumien.randomthings.item.ModItems;
-import lumien.randomthings.item.ItemDiviningRod.Rod;
+import lumien.randomthings.item.diviningrod.ItemDiviningRod;
+import lumien.randomthings.item.diviningrod.RodType;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelDynBucket;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemModels
@@ -220,9 +216,9 @@ public class ItemModels
 	private static void registerDiviningRods()
 	{
 		int meta = 0;
-		for (Rod r:ItemDiviningRod.types)
+		for (RodType r:ItemDiviningRod.types)
 		{
-			ModelLoader.setCustomModelResourceLocation(ModItems.diviningRod, meta, new ModelResourceLocation("randomthings:diviningrod/" + r.name, "inventory"));
+			ModelLoader.setCustomModelResourceLocation(ModItems.diviningRod, meta, new ModelResourceLocation("randomthings:diviningrod", "inventory"));
 			meta++;
 		}
 	}
