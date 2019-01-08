@@ -36,13 +36,18 @@ public class OreRodType extends RodType
 			int meta = state.getBlock().getMetaFromState(state);
 			if (item != null)
 			{
-				int[] ids = OreDictionary.getOreIDs(new ItemStack(item, 1, meta));
+				ItemStack stack = new ItemStack(item, 1, meta);
 
-				for (int i : ids)
+				if (!stack.isEmpty())
 				{
-					if (i == oreID)
+					int[] ids = OreDictionary.getOreIDs(stack);
+
+					for (int i : ids)
 					{
-						return true;
+						if (i == oreID)
+						{
+							return true;
+						}
 					}
 				}
 			}

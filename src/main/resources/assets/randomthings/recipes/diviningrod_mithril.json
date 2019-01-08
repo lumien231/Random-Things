@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RSR",
+    "SES",
+    "S S"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "ingotMithril"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "E": {
+      "item": "minecraft:spider_eye"
+    }
+  },
+  "result": {
+    "item": "randomthings:diviningrod",
+    "data": 16
+  }
+}

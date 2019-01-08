@@ -267,7 +267,26 @@ item.diviningRod.lapis.name=Lapis Divining Rod
 item.diviningRod.redstone.name=Redstone Divining Rod
 item.diviningRod.emerald.name=Emerald Divining Rod
 item.diviningRod.diamond.name=Diamond Divining Rod
-item.diviningRod.universal.name=Universal Divining Rod
+item.diviningRod.universal.name=Vanilla Divining Rod
+
+item.diviningRod.copper.name=Copper Divining Rod
+item.diviningRod.tin.name=Tin Divining Rod
+item.diviningRod.silver.name=Silver Divining Rod
+item.diviningRod.lead.name=Lead Divining Rod
+item.diviningRod.aluminum.name=Aluminum Divining Rod
+item.diviningRod.nickel.name=Nickel Divining Rod
+item.diviningRod.platinum.name=Platinum Divining Rod
+item.diviningRod.iridium.name=Iridium Divining Rod
+item.diviningRod.mithril.name=Mithril Divining Rod
+
+item.diviningRod.draconium.name=Draconium Divining Rod
+
+item.diviningRod.cobalt.name=Cobalt Divining Rod
+item.diviningRod.ardite.name=Ardite Divining Rod
+
+item.diviningRod.blackquartz.name=Black Quartz Divining Rod
+
+item.diviningRod.certus.name=Certus Quartz Divining Rod
 
 item.spectreCharger.normal.name=Spectre Charger
 item.spectreCharger.redstone.name=Redstone Spectre Charger
@@ -633,4 +652,5 @@ item.diviningRod.gold.info=Holding this in your main or off hand will highlight 
 item.diviningRod.lapis.info=Holding this in your main or off hand will highlight any lapis ore in a 11x11 cube centered on you.
 item.diviningRod.emerald.info=Holding this in your main or off hand will highlight any emerald ore in a 11x11 cube centered on you.
 item.diviningRod.diamond.info=Holding this in your main or off hand will highlight any diamond ore in a 11x11 cube centered on you.
-item.diviningRod.universal.info=Holding this in your main or off hand will highlight any ore in a 11x11 cube centered on you.
+item.diviningRod.universal.info=Holding this in your main or off hand will highlight any vanilla ore in a 11x11 cube centered on you.
+item.diviningRod.general.info=Holding this in your main or off hand will highlight the corresponding ore in a 11x11 cube centered on you.

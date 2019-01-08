@@ -1,7 +1,9 @@
 package lumien.randomthings;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
+import java.util.TreeSet;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
@@ -30,14 +32,13 @@ import lumien.randomthings.potion.ModPotions;
 import lumien.randomthings.recipes.ModRecipes;
 import lumien.randomthings.tileentity.ModTileEntitys;
 import lumien.randomthings.tileentity.TileEntityEnderAnchor;
-import lumien.randomthings.util.WorldUtil;
 import lumien.randomthings.worldgen.WorldGenAncientFurnace;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenEventHandler;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;

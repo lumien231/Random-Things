@@ -15,6 +15,7 @@ import lumien.randomthings.enchantment.ModEnchantments;
 import lumien.randomthings.item.ItemBase;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
+import lumien.randomthings.item.diviningrod.ItemDiviningRod;
 import mezz.jei.api.IModRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
@@ -57,14 +58,21 @@ public class DescriptionHandler
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.PLATE_BASE.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.PRECIOUS_EMERALD.id));
 		stackBlackList.add(new ItemStack(ModItems.ingredients, 1, ItemIngredient.INGREDIENT.SPECTRE_STRING.id));
-		
+
+		for (int i = 8; i < ItemDiviningRod.types.size(); i++)
+		{
+			stackBlackList.add(new ItemStack(ModItems.diviningRod, 1, i));
+			registry.addDescription(new ItemStack(ModItems.diviningRod, 1, i), "item.diviningRod.general.info");
+		}
+
+
 		removeDes(overrideMap, ModBlocks.spectreLeaf, ModBlocks.natureCore, ModBlocks.spectreLog, ModBlocks.spectrePlank, ModBlocks.specialChest, ModBlocks.superLubricentPlatform, ModBlocks.filteredSuperLubricentPlatform);
 
-		
+
 		// Manually Add
 		registry.addDescription(new ItemStack(ModBlocks.blockDiaphanous, 1, OreDictionary.WILDCARD_VALUE), "tile.diaphanousBlock.info");
 		registry.addDescription(ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(ModEnchantments.magnetic, 1)), "enchantment.randomthings.magnetic.desc");
-		
+
 		Stream.concat(BlockBase.rtBlockList.stream(), ItemBase.rtItemList.stream()).forEach(new Consumer<Object>()
 		{
 			@Override

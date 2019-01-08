@@ -53,6 +53,12 @@ public class ItemDiviningRod extends ItemBase implements IRTItemColor
 		// Tinkers
 		types.add(new OreRodType("cobalt", "oreCobalt", new Color(5, 18, 64, 50)));
 		types.add(new OreRodType("ardite", "oreArdite", new Color(138, 104, 38, 50)));
+		
+		// Actually Additions
+		types.add(new OreRodType("blackquartz", "oreQuartzBlack", new Color(10, 10, 10, 50)));
+		
+		// Applied Energistics
+		types.add(new OreRodType("certus", "oreCertusQuartz", new Color(136, 166, 193, 50)));
 	}
 
 	public ItemDiviningRod()
