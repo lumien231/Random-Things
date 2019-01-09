@@ -219,7 +219,6 @@ public class ModBlocks
 		spectreLens = new BlockSpectreLens();
 		spectreEnergyInjector = new BlockSpectreEnergyInjector();
 		processingPlate = new BlockProcessingPlate();
-		linkOrb = new BlockLinkOrb();
 		
 		spectreCoilNormal = new BlockSpectreCoil(CoilType.NORMAL);
 		spectreCoilRedstone = new BlockSpectreCoil(CoilType.REDSTONE);
