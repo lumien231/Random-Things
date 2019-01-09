@@ -230,7 +230,7 @@ public abstract class TileEntityBase extends TileEntity
 			{
 				this.redstonePowered = newPowered;
 				
-				((IRedstoneSensitive) this).redstoneChange(redstonePowered, newPowered);
+				((IRedstoneSensitive) this).redstoneChange(!newPowered, newPowered);
 
 				this.markDirty();
 				this.syncTE();
