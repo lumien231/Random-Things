@@ -118,7 +118,8 @@ public class RandomThings implements LoadingCallback
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this);
 
 		// IMC
-		FMLInterModComms.sendMessage("enderio", "recipe:xml", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><recipes>" + "<recipe name=\"Enchanter: randomthings:magnetic\" required=\"true\" disabled=\"false\"><enchanting>" + "<input name=\"oredict:blockIron\" amount=\"4\"/><enchantment name=\"" + "randomthings" + ":magnetic\" costMultiplier=\"1\"/></enchanting></recipe></recipes>");
+		if (Features.MAGNETIC_ENCHANTMENT)
+			FMLInterModComms.sendMessage("enderio", "recipe:xml", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><recipes>" + "<recipe name=\"Enchanter: randomthings:magnetic\" required=\"true\" disabled=\"false\"><enchanting>" + "<input name=\"oredict:blockIron\" amount=\"4\"/><enchantment name=\"" + "randomthings" + ":magnetic\" costMultiplier=\"1\"/></enchanting></recipe></recipes>");
 	}
 
 	@EventHandler
@@ -154,8 +155,7 @@ public class RandomThings implements LoadingCallback
 		ModRecipes.addGlowingMushroomRecipes();
 
 		// ThermalExpansionComp.postInit(event); NU
-		
-		
+
 		ItemDiviningRod.postInit();
 	}
 
