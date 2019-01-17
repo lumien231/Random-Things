@@ -3,6 +3,7 @@ package lumien.randomthings.item;
 import java.util.List;
 import java.util.Optional;
 
+import lumien.randomthings.config.Numbers;
 import lumien.randomthings.entitys.EntityTimeAccelerator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -58,7 +59,9 @@ public class ItemTimeInABottle extends ItemBase
 	{
 		if (!worldIn.isRemote)
 		{
-			if (worldIn.getTotalWorldTime() % 20 == 0)
+			int secondWorth = Numbers.TIME_IN_A_BOTTLE_SECOND;
+			
+			if (secondWorth == 0 || worldIn.getTotalWorldTime() % secondWorth == 0)
 			{
 				NBTTagCompound timeData = stack.getOrCreateSubCompound("timeData");
 

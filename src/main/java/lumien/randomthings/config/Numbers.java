@@ -36,4 +36,7 @@ public class Numbers
 	
 	@ConfigOption(category = "Numbers", name = "NumberedSpectreCoilEnergy", comment = "How much Energy a Numbered Spectre Coil produces per Tick")
 	public static int NUMBERED_SPECTRECOIL_ENERGY = 128;
+	
+	@ConfigOption(category = "Numbers", name = "TimeInABottlePerSecond", comment = "How many ticks have to pass for a Time in a Bottle to gain 1 second (20 = 1 Second)")
+	public static int TIME_IN_A_BOTTLE_SECOND = 20;
 }
