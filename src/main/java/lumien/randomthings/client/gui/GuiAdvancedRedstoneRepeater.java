@@ -50,7 +50,25 @@ public class GuiAdvancedRedstoneRepeater extends GuiContainerBase
 	{
 		super.actionPerformed(button);
 
-		MessageContainerSignal message = new MessageContainerSignal(button.id + (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? 4 : 0));
+		int mod = 0;
+
+		boolean shift = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
+		boolean ctrl = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL);
+		
+		if (shift && ctrl)
+		{
+			mod = 12;
+		}
+		else if (ctrl)
+		{
+			mod = 8;
+		}
+		else if (shift)
+		{
+			mod = 4;
+		}
+
+		MessageContainerSignal message = new MessageContainerSignal(button.id + mod);
 		PacketHandler.INSTANCE.sendToServer(message);
 	}
 

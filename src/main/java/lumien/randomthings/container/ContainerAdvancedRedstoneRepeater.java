@@ -40,6 +40,30 @@ public class ContainerAdvancedRedstoneRepeater extends ContainerTE<TileEntityAdv
 		case 7:
 			te.increaseTurnOnDelay(10);
 			break;
+		case 8:
+			te.decreaseTurnOffDelay(100);
+			break;
+		case 9:
+			te.increaseTurnOffDelay(100);
+			break;
+		case 10:
+			te.decreaseTurnOnDelay(100);
+			break;
+		case 11:
+			te.increaseTurnOnDelay(100);
+			break;
+		case 12:
+			te.decreaseTurnOffDelay(1000);
+			break;
+		case 13:
+			te.increaseTurnOffDelay(1000);
+			break;
+		case 14:
+			te.decreaseTurnOnDelay(1000);
+			break;
+		case 15:
+			te.increaseTurnOnDelay(1000);
+			break;
 		}
 	}
 }
