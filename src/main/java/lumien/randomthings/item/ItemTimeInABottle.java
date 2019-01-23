@@ -9,11 +9,14 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -136,6 +139,28 @@ public class ItemTimeInABottle extends ItemBase
 						eta.setTimeRate(nextRate);
 						eta.setRemainingTime(eta.getRemainingTime() + timeAdded);
 
+						float pitch = 1;
+						
+						switch (nextRate)
+						{
+							case 2:
+								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.793701F);
+								break;
+							case 4:
+								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.890899F);
+								break;
+							case 8:
+								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 1.059463F);
+								break;
+							case 16:
+								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.943874F);
+								break;
+							case 32:
+								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.890899F);
+								break;
+						}
+						
+						// C# D E G F E
 						return EnumActionResult.SUCCESS;
 					}
 				}
@@ -155,6 +180,7 @@ public class ItemTimeInABottle extends ItemBase
 					n.setTimeRate(1);
 					n.setRemainingTime(20 * 30);
 
+					world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.749154F);
 					world.spawnEntity(n);
 
 					return EnumActionResult.SUCCESS;
