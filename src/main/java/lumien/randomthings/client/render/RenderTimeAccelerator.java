@@ -38,6 +38,20 @@ public class RenderTimeAccelerator extends Render<EntityTimeAccelerator>
 	{
 		super(renderManager);
 	}
+	
+	IColorFunction innerFunction = ColorFunctions.alternateN(new Color(100, 100, 100, 80), Color.LIGHT_GRAY, 6, 2);
+
+	IColorFunction outerFunction1 = ColorFunctions.constant(Color.LIGHT_GRAY).next(ColorFunctions.flicker(50, 100)).next(ColorFunctions.limit(ColorFunctions.constant(new Color(0, 0, 0, 0)), (i) -> {
+		return (i + 2) % 6 != 0;
+	}));
+	
+	IColorFunction outerFunction2 = ColorFunctions.constant(Color.LIGHT_GRAY).next(ColorFunctions.limit(ColorFunctions.constant(new Color(0, 0, 0, 0)), (i) -> {
+		return (i + 2) % 6 == 0 || (i+4) % 6 == 0 || (i+6) % 6 == 0;
+	})).next(ColorFunctions.flicker(400, 100));
+
+	IColorFunction outerFunction4 = ColorFunctions.alternateN(new Color(100, 100, 100, 80), Color.LIGHT_GRAY, 2, 5).next(ColorFunctions.flicker(800, 100)).next(ColorFunctions.limit(ColorFunctions.constant(new Color(100, 100, 100, 80)), (i) -> {
+		return (i) % 2 == 0 || ((i) / 5) % 2 == 1;
+	}));
 
 	@Override
 	public void doRender(EntityTimeAccelerator entity, double x, double y, double z, float entityYaw, float partialTicks)
@@ -68,20 +82,6 @@ public class RenderTimeAccelerator extends Render<EntityTimeAccelerator>
 
 			GlStateManager.rotate(90, rotZ, rotY, rotX);
 			GlStateManager.rotate(progress, 0, 1, 0);
-
-			IColorFunction innerFunction = ColorFunctions.alternateN(new Color(100, 100, 100, 80), Color.LIGHT_GRAY, 6, 2);
-
-			IColorFunction outerFunction1 = ColorFunctions.constant(Color.LIGHT_GRAY).next(ColorFunctions.flicker(50, 100)).next(ColorFunctions.limit(ColorFunctions.constant(new Color(0, 0, 0, 0)), (i) -> {
-				return (i + 2) % 6 != 0;
-			}));
-			
-			IColorFunction outerFunction2 = ColorFunctions.constant(Color.LIGHT_GRAY).next(ColorFunctions.limit(ColorFunctions.constant(new Color(0, 0, 0, 0)), (i) -> {
-				return (i + 2) % 6 == 0 || (i+4) % 6 == 0 || (i+6) % 6 == 0;
-			})).next(ColorFunctions.flicker(400, 100));
-
-			IColorFunction outerFunction4 = ColorFunctions.alternateN(new Color(100, 100, 100, 80), Color.LIGHT_GRAY, 2, 5).next(ColorFunctions.flicker(800, 100)).next(ColorFunctions.limit(ColorFunctions.constant(new Color(100, 100, 100, 80)), (i) -> {
-				return (i) % 2 == 0 || ((i) / 5) % 2 == 1;
-			}));
 
 			MKRRenderUtil.renderCircleDecTriInner(0.05, innerFunction.tt(progress), 33, (i) -> {
 				return 3;
