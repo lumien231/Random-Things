@@ -126,7 +126,14 @@ public class AsmHandler
 			}
 			else
 			{
-				RandomThings.instance.logger.log(Level.DEBUG, "Am on Server but have no World!?");
+				// RandomThings.instance.logger.log(Level.DEBUG, "Am on Server
+				// but have no World!?");
+				// RandomThings.instance.logger.log(Level.DEBUG, " - " +
+				// world.getClass().getName());
+				//
+				// new RuntimeException().printStackTrace();
+
+				// Probably Fine
 			}
 		}
 
