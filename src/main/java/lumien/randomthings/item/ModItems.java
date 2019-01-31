@@ -56,6 +56,7 @@ public class ModItems
 	public static ItemSpectreIlluminator spectreIlluminator;
 	public static ItemSpectreCharger spectreCharger;
 	public static ItemDiviningRod diviningRod;
+	public static ItemEclipsedClock eclipsedClock;
 	
 	public static ItemEnderBucket enderBucket;
 	public static ItemReinforcedEnderBucket reinforcedEnderBucket;
@@ -118,6 +119,7 @@ public class ModItems
 		spectreIlluminator = new ItemSpectreIlluminator();
 		spectreCharger = new ItemSpectreCharger();
 		diviningRod = new ItemDiviningRod();
+		eclipsedClock = new ItemEclipsedClock();
 
 		grassSeeds = new ItemGrassSeeds();
 

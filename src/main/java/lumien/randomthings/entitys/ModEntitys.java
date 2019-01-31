@@ -22,6 +22,7 @@ public class ModEntitys
 		registerEntity(EntityWeatherCloud.class, "weatherCloud", 10, RandomThings.instance, 160, 10, true);
 		registerEntity(EntityTimeAccelerator.class, "timeAccelerator", 11, RandomThings.instance, 64, 10, false);
 		registerEntity(EntitySpectreIlluminator.class, "spectreIlluminator", 12, RandomThings.instance, 160, 3, true);
+		registerEntity(EntityEclipsedClock.class, "eclipsedClock", 13, RandomThings.instance, 160, Integer.MAX_VALUE, false);
 		
 		EntityRegistry.registerEgg(new ResourceLocation("randomthings", "spirit"), 0, 2550);
 	}

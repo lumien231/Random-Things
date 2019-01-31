@@ -190,4 +190,18 @@ public class ItemTimeInABottle extends ItemBase
 
 		return EnumActionResult.SUCCESS;
 	}
+	
+	public static int getStoredTime(ItemStack is)
+	{
+		NBTTagCompound timeData = is.getSubCompound("timeData");
+		int timeAvailable = timeData.getInteger("storedTime");
+		
+		return timeAvailable;
+	}
+	
+	public static void setStoredTime(ItemStack is, int time)
+	{
+		NBTTagCompound timeData = is.getSubCompound("timeData");
+		timeData.setInteger("storedTime",time);
+	}
 }

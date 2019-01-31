@@ -14,6 +14,7 @@ import lumien.randomthings.asm.confirmer.ServerConfirmer;
 import lumien.randomthings.biomes.ModBiomes;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.GuiHandler;
+import lumien.randomthings.client.ModSounds;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.config.ModConfiguration;
 import lumien.randomthings.container.SyncHandler;
@@ -102,6 +103,7 @@ public class RandomThings implements LoadingCallback
 		ModPotions.preInit(event);
 		ModEnchantments.preInit(event);
 		ModBiomes.preInit(event);
+		ModSounds.preInit(event);
 		proxy.registerModels();
 
 		RTEventHandler eventHandler = new RTEventHandler();

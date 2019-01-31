@@ -7,7 +7,9 @@ import java.util.Map;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import lumien.randomthings.asm.MCPNames;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
@@ -24,6 +26,7 @@ public class ReflectionUtil
 	static Field simpleShapes;
 	static Field village;
 	static Field biomeName;
+	static Field pointedEntity;
 	static
 	{
 		try
@@ -36,6 +39,9 @@ public class ReflectionUtil
 
 			biomeName = Biome.class.getDeclaredField(MCPNames.field("field_76791_y"));
 			biomeName.setAccessible(true);
+			
+			pointedEntity = EntityRenderer.class.getDeclaredField(MCPNames.field("field_78528_u"));
+			pointedEntity.setAccessible(true);
 		}
 		catch (Exception e)
 		{
@@ -51,6 +57,25 @@ public class ReflectionUtil
 		modifiers = modifiers & ~Modifier.FINAL;
 		modifierField.setAccessible(true);
 		modifierField.setInt(nameField, modifiers);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static Entity getPointedEntity(EntityRenderer entityRenderer)
+	{
+		try
+		{
+			return (Entity) pointedEntity.get(entityRenderer);
+		}
+		catch (IllegalArgumentException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	public static String getBiomeName(Biome b)

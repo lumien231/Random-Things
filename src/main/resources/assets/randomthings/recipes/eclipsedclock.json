@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OGO",
+    "GEG",
+    "OGO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "E": {
+      "item": "randomthings:ingredient",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "randomthings:eclipsedclock"
+  }
+}

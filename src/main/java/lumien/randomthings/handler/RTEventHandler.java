@@ -1,15 +1,17 @@
 package lumien.randomthings.handler;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+
 import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
@@ -22,8 +24,8 @@ import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.client.models.blocks.ModelInventoryRerouter;
 import lumien.randomthings.client.models.blocks.ModelRune;
 import lumien.randomthings.config.Numbers;
-import lumien.randomthings.config.Worldgen;
 import lumien.randomthings.container.inventories.InventoryItem;
+import lumien.randomthings.entitys.EntityEclipsedClock;
 import lumien.randomthings.entitys.EntitySoul;
 import lumien.randomthings.entitys.EntitySpirit;
 import lumien.randomthings.entitys.EntityTemporaryFlooFireplace;
@@ -42,6 +44,7 @@ import lumien.randomthings.item.ItemFlooPouch;
 import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemPortableSoundDampener;
 import lumien.randomthings.item.ItemSoundPattern;
+import lumien.randomthings.item.ItemTimeInABottle;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.AtlasSprite;
 import lumien.randomthings.lib.Colors;
@@ -62,6 +65,7 @@ import lumien.randomthings.tileentity.TileEntityRuneBase;
 import lumien.randomthings.tileentity.TileEntitySoundDampener;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
+import lumien.randomthings.util.ReflectionUtil;
 import lumien.randomthings.util.WorldUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import lumien.randomthings.worldgen.WorldGenSakanade;
@@ -113,16 +117,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootEntry;
-import net.minecraft.world.storage.loot.LootEntryItem;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.conditions.LootCondition;
-import net.minecraft.world.storage.loot.conditions.RandomChance;
-import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup;
 import net.minecraftforge.client.event.InputUpdateEvent;
@@ -881,12 +875,12 @@ public class RTEventHandler
 			}
 			else if (event.getType() == RenderGameOverlayEvent.ElementType.CROSSHAIRS)
 			{
-				renderRedstoneTool(event);
+				renderItemOverlay(event);
 			}
 		}
 	}
 
-	private void renderRedstoneTool(RenderGameOverlayEvent event)
+	private void renderItemOverlay(RenderGameOverlayEvent event)
 	{
 		ItemStack equippedItem;
 
@@ -927,6 +921,37 @@ public class RTEventHandler
 				Minecraft.getMinecraft().fontRenderer.drawString(b.getBiomeName(), width / 2 + 5, height / 2 + 5, Colors.WHITE_INT);
 				GlStateManager.color(1, 1, 1, 1);
 				GlStateManager.enableBlend();
+			}
+			else
+			{
+				Entity pointedEntity = ReflectionUtil.getPointedEntity(Minecraft.getMinecraft().entityRenderer);
+				if (equippedItem.getItem() == ModItems.timeInABottle && pointedEntity instanceof EntityEclipsedClock)
+				{
+					int targetTime = ((EntityEclipsedClock) pointedEntity).getTargetTime();
+
+					int stored = ItemTimeInABottle.getStoredTime(equippedItem);
+
+					int width = event.getResolution().getScaledWidth();
+					int height = event.getResolution().getScaledHeight();
+
+					int dif = (targetTime - (int) minecraft.world.getWorldTime()) % 24000;
+
+					if (dif < 0)
+					{
+						dif += 24000;
+					}
+
+					String myTime = "06:00";
+					SimpleDateFormat df = new SimpleDateFormat("mm:ss");
+					Calendar cal = Calendar.getInstance();
+					cal.set(0, 0, 0, 0, 0, (int) (1 / 20D * dif));
+					String display = df.format(cal.getTime());
+
+					GlStateManager.disableBlend();
+					Minecraft.getMinecraft().fontRenderer.drawString(display, width / 2 + 5, height / 2 + 5, stored >= dif ? Colors.WHITE_INT : Colors.RED_INT);
+					GlStateManager.color(1, 1, 1, 1);
+					GlStateManager.enableBlend();
+				}
 			}
 		}
 	}

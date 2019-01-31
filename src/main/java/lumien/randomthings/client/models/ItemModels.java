@@ -201,6 +201,8 @@ public class ItemModels
 		
 		ModelLoader.setCustomModelResourceLocation(ModItems.enderBucket, 0, new ModelResourceLocation("randomthings:enderbucket", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ModItems.reinforcedEnderBucket, 0, new ModelResourceLocation("randomthings:reinforcedenderbucket", "inventory"));
+		
+		ModelLoader.setCustomModelResourceLocation(ModItems.eclipsedClock, 0, new ModelResourceLocation("randomthings:eclipsedclock/eclipsedclock", "inventory"));
 	
 	}
 

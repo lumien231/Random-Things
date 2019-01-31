@@ -35,6 +35,7 @@ import lumien.randomthings.client.render.RenderTimeAccelerator;
 import lumien.randomthings.client.render.RenderVoxelProjector;
 import lumien.randomthings.client.render.RenderWeatherCloud;
 import lumien.randomthings.entitys.EntityArtificialEndPortal;
+import lumien.randomthings.entitys.EntityEclipsedClock;
 import lumien.randomthings.entitys.EntityFallingBlockSpecial;
 import lumien.randomthings.entitys.EntityGoldenChicken;
 import lumien.randomthings.entitys.EntityGoldenEgg;
@@ -217,6 +218,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityWeatherCloud.class, new RenderWeatherCloud(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeAccelerator.class, new RenderTimeAccelerator(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpectreIlluminator.class, new RenderSpectreIlluminator(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEclipsedClock.class, new RenderEclipsedClock(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpecialChest.class, new RenderSpecialChest());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoxelProjector.class, new RenderVoxelProjector());
