@@ -23,6 +23,7 @@ import lumien.randomthings.client.models.blocks.ModelCustomWorkbench;
 import lumien.randomthings.client.models.blocks.ModelFluidDisplay;
 import lumien.randomthings.client.models.blocks.ModelInventoryRerouter;
 import lumien.randomthings.client.models.blocks.ModelRune;
+import lumien.randomthings.config.Internals;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.entitys.EntityEclipsedClock;
@@ -65,7 +66,7 @@ import lumien.randomthings.tileentity.TileEntityRuneBase;
 import lumien.randomthings.tileentity.TileEntitySoundDampener;
 import lumien.randomthings.util.EntityUtil;
 import lumien.randomthings.util.InventoryUtil;
-import lumien.randomthings.util.ReflectionUtil;
+import lumien.randomthings.util.ReflectionUtilClient;
 import lumien.randomthings.util.WorldUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import lumien.randomthings.worldgen.WorldGenSakanade;
@@ -924,7 +925,7 @@ public class RTEventHandler
 			}
 			else
 			{
-				Entity pointedEntity = ReflectionUtil.getPointedEntity(Minecraft.getMinecraft().entityRenderer);
+				Entity pointedEntity = ReflectionUtilClient.getPointedEntity(Minecraft.getMinecraft().entityRenderer);
 				if (equippedItem.getItem() == ModItems.timeInABottle && pointedEntity instanceof EntityEclipsedClock)
 				{
 					int targetTime = ((EntityEclipsedClock) pointedEntity).getTargetTime();
@@ -1300,7 +1301,7 @@ public class RTEventHandler
 			if (event.getEntityLiving() instanceof EntityPlayer)
 			{
 				EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-				if (player.dimension == ModDimensions.SPECTRE_ID)
+				if (player.dimension == Internals.SPECTRE_ID)
 				{
 					SpectreHandler spectreHandler;
 
@@ -1417,7 +1418,7 @@ public class RTEventHandler
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void potentialSpawns(PotentialSpawns event)
 	{
-		if (event.getWorld().provider.getDimension() == ModDimensions.SPECTRE_ID)
+		if (event.getWorld().provider.getDimension() == Internals.SPECTRE_ID)
 		{
 			event.setCanceled(true);
 		}

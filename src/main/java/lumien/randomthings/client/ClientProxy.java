@@ -18,6 +18,7 @@ import lumien.randomthings.client.render.RenderAncientFurnace;
 import lumien.randomthings.client.render.RenderArtificialEndPortal;
 import lumien.randomthings.client.render.RenderBiomeRadar;
 import lumien.randomthings.client.render.RenderBlockDiaphanous;
+import lumien.randomthings.client.render.RenderEclipsedClock;
 import lumien.randomthings.client.render.RenderEntityNothing;
 import lumien.randomthings.client.render.RenderFallingBlockSpecial;
 import lumien.randomthings.client.render.RenderGoldenChicken;
