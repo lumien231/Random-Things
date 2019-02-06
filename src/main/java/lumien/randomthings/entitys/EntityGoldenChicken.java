@@ -1,5 +1,6 @@
 package lumien.randomthings.entitys;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -20,6 +21,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -36,6 +38,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class EntityGoldenChicken extends EntityAnimal
 {
@@ -46,14 +49,13 @@ public class EntityGoldenChicken extends EntityAnimal
     public float oFlap;
     public float wingRotDelta = 1.0F;
     /** The time until the next egg is spawned. */
-    public int timeUntilNextNugget;
+    public int ingotDropTimer;
     public boolean chickenJockey;
 
     public EntityGoldenChicken(World worldIn)
     {
         super(worldIn);
         this.setSize(0.4F, 0.7F);
-        this.timeUntilNextNugget = this.rand.nextInt(6000) + 6000;
         this.setPathPriority(PathNodeType.WATER, 0.0F);
     }
 
@@ -106,11 +108,48 @@ public class EntityGoldenChicken extends EntityAnimal
 
         this.wingRotation += this.wingRotDelta * 2.0F;
 
-        if (!this.world.isRemote && !this.isChild() && !this.isChickenJockey() && --this.timeUntilNextNugget <= 0)
+        if (!this.world.isRemote && ingotDropTimer > 0 && --this.ingotDropTimer <= 0)
         {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.5F);
-            this.dropItem(Items.GOLD_INGOT, 1);
-            this.timeUntilNextNugget = this.rand.nextInt(3000) + 3000;
+            this.dropItem(Items.GOLD_INGOT, 3);
+        }
+        
+        if (this.ingotDropTimer == 0)
+        {
+        	List<EntityItem> items = this.world.getEntitiesWithinAABB(EntityItem.class, this.getEntityBoundingBox().grow(0.5));
+        	
+        	if (items.size() > 0)
+        	{
+        		int goldOreID = OreDictionary.getOreID("oreGold");
+        		for (EntityItem ei:items)
+        		{
+        			ItemStack stack = ei.getItem();
+        			
+        			if (!stack.isEmpty())
+        			{
+        				int[] ids = OreDictionary.getOreIDs(stack);
+        				
+        				boolean found = false;
+        				for (int i:ids)
+        				{
+        					if (i == goldOreID)
+        					{
+        						stack.shrink(1);
+        						ei.setItem(stack);
+        						
+        						found = true;
+        						break;
+        					}
+        				}
+        				
+        				if (found)
+        				{
+        					this.ingotDropTimer = 600 + this.rand.nextInt(600);
+        					break;
+        				}
+        			}
+        		}
+        	}
         }
     }
 
@@ -178,11 +217,7 @@ public class EntityGoldenChicken extends EntityAnimal
     {
         super.readEntityFromNBT(compound);
         this.chickenJockey = compound.getBoolean("IsChickenJockey");
-
-        if (compound.hasKey("EggLayTime"))
-        {
-            this.timeUntilNextNugget = compound.getInteger("EggLayTime");
-        }
+        this.ingotDropTimer = compound.getInteger("ingotDropTimer");
     }
 
     /**
@@ -192,7 +227,7 @@ public class EntityGoldenChicken extends EntityAnimal
     {
         super.writeEntityToNBT(compound);
         compound.setBoolean("IsChickenJockey", this.chickenJockey);
-        compound.setInteger("EggLayTime", this.timeUntilNextNugget);
+        compound.setInteger("ingotDropTimer", this.ingotDropTimer);
     }
 
     /**
