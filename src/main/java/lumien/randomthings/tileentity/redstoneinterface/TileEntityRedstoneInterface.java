@@ -99,18 +99,10 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 		}
 	}
 
-	static HashSet<BlockPos> checkedWeakPositions = new HashSet<>();
-
 	public static int getRedstonePower(World blockWorld, BlockPos pos, EnumFacing facing)
 	{
 		synchronized (lock)
 		{
-			if (checkedWeakPositions.contains(pos))
-			{
-				return 0;
-			}
-			checkedWeakPositions.add(pos);
-
 			int totalPower = 0;
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
@@ -124,7 +116,6 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 				if (!redstoneInterface.isInvalid() && redstoneInterface.world == blockWorld && redstoneInterface.isTargeting(checkingBlock))
 				{
 					int remotePower = redstoneInterface.weakPower.get(facing);
-					checkedWeakPositions.remove(pos);
 
 					if (remotePower > totalPower)
 					{
@@ -133,23 +124,14 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 				}
 			}
 
-			checkedWeakPositions.remove(pos);
 			return totalPower;
 		}
 	}
-
-	static HashSet<BlockPos> checkedStrongPositions = new HashSet<>();
 
 	public static int getStrongPower(World blockWorld, BlockPos pos, EnumFacing facing)
 	{
 		synchronized (lock)
 		{
-			if (checkedStrongPositions.contains(pos))
-			{
-				return 0;
-			}
-			checkedStrongPositions.add(pos);
-
 			int totalPower = 0;
 
 			BlockPos checkingBlock = pos.offset(facing.getOpposite());
@@ -163,7 +145,6 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 				if (!redstoneInterface.isInvalid() && redstoneInterface.world == blockWorld && redstoneInterface.isTargeting(checkingBlock))
 				{
 					int remotePower = redstoneInterface.strongPower.get(facing);
-					checkedStrongPositions.remove(pos);
 
 					if (remotePower > totalPower)
 					{
@@ -171,8 +152,7 @@ public abstract class TileEntityRedstoneInterface extends TileEntityBase impleme
 					}
 				}
 			}
-
-			checkedStrongPositions.remove(pos);
+			
 			return totalPower;
 		}
 	}
