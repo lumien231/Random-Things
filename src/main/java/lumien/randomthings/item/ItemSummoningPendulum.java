@@ -184,7 +184,9 @@ public class ItemSummoningPendulum extends ItemBase
 				{
 					NBTTagCompound entityNBT = tagList.getCompoundTagAt(0);
 					tagList.removeTag(0);
-
+					
+					entityNBT.setInteger("Dimension", worldIn.provider.getDimension());
+					
 					Entity entity = EntityList.createEntityFromNBT(entityNBT, worldIn);
 					if (entity != null)
 					{
