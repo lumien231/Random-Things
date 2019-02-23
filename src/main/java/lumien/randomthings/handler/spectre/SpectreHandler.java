@@ -3,6 +3,7 @@ package lumien.randomthings.handler.spectre;
 import java.util.HashMap;
 import java.util.UUID;
 
+import lumien.randomthings.config.Internals;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.util.PlayerUtil;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -31,7 +32,7 @@ public class SpectreHandler extends WorldSavedData
 		super(name);
 
 		cubes = new HashMap<>();
-		this.worldObj = DimensionManager.getWorld(ModDimensions.SPECTRE_ID);
+		this.worldObj = DimensionManager.getWorld(Internals.SPECTRE_ID);
 
 		positionCounter = 0;
 	}
@@ -41,14 +42,14 @@ public class SpectreHandler extends WorldSavedData
 		this(ID);
 
 		cubes = new HashMap<>();
-		this.worldObj = DimensionManager.getWorld(ModDimensions.SPECTRE_ID);
+		this.worldObj = DimensionManager.getWorld(Internals.SPECTRE_ID);
 
 		positionCounter = 0;
 	}
 
 	public SpectreCube getSpectreCubeFromPos(World worldObj, BlockPos pos)
 	{
-		if (worldObj.provider.getDimension() != ModDimensions.SPECTRE_ID)
+		if (worldObj.provider.getDimension() != Internals.SPECTRE_ID)
 		{
 			return null;
 		}
@@ -105,9 +106,9 @@ public class SpectreHandler extends WorldSavedData
 
 		BlockPos spawn = spectreCube.getSpawnBlock();
 
-		if (player.dimension != ModDimensions.SPECTRE_ID)
+		if (player.dimension != Internals.SPECTRE_ID)
 		{
-			PlayerUtil.teleportPlayerToDimension(player, ModDimensions.SPECTRE_ID);
+			PlayerUtil.teleportPlayerToDimension(player, Internals.SPECTRE_ID);
 		}
 		player.connection.setPlayerLocation(spawn.getX() + 0.5, spawn.getY() + 1, spawn.getZ() + 0.5, player.rotationYaw, player.rotationPitch);
 	}
@@ -166,7 +167,7 @@ public class SpectreHandler extends WorldSavedData
 
 	public static SpectreHandler getInstance()
 	{
-		WorldServer world = DimensionManager.getWorld(ModDimensions.SPECTRE_ID);
+		WorldServer world = DimensionManager.getWorld(Internals.SPECTRE_ID);
 		if (world != null)
 		{
 			WorldSavedData handler = world.getPerWorldStorage().getOrLoadData(SpectreHandler.class, ID);
@@ -184,7 +185,7 @@ public class SpectreHandler extends WorldSavedData
 
 	public static void reset()
 	{
-		WorldServer world = DimensionManager.getWorld(ModDimensions.SPECTRE_ID);
+		WorldServer world = DimensionManager.getWorld(Internals.SPECTRE_ID);
 		if (world != null)
 		{
 			world.getMapStorage().setData(ID, new SpectreHandler());

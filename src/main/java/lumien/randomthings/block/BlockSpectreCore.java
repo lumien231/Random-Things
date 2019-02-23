@@ -1,5 +1,6 @@
 package lumien.randomthings.block;
 
+import lumien.randomthings.config.Internals;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.spectre.SpectreCube;
 import lumien.randomthings.handler.spectre.SpectreHandler;
@@ -147,7 +148,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if (worldIn.provider.getDimension() == ModDimensions.SPECTRE_ID)
+		if (worldIn.provider.getDimension() == Internals.SPECTRE_ID)
 		{
 			ItemStack holding = playerIn.getHeldItem(hand);
 

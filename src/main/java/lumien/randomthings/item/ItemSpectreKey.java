@@ -1,5 +1,6 @@
 package lumien.randomthings.item;
 
+import lumien.randomthings.config.Internals;
 import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.handler.spectre.SpectreWorldProvider;
@@ -64,7 +65,7 @@ public class ItemSpectreKey extends ItemBase
 
 			if ((spectreHandler = SpectreHandler.getInstance()) != null)
 			{
-				if (par2World.provider.getDimension() != ModDimensions.SPECTRE_ID)
+				if (par2World.provider.getDimension() != Internals.SPECTRE_ID)
 				{
 					spectreHandler.teleportPlayerToSpectreCube((EntityPlayerMP) livingEntity);
 				}
