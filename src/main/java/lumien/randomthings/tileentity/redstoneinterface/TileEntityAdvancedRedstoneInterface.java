@@ -110,35 +110,38 @@ public class TileEntityAdvancedRedstoneInterface extends TileEntityRedstoneInter
 
 			HashSet<BlockPos> changedPositions = new HashSet<>();
 
-			synchronized (TileEntityRedstoneInterface.lock)
+			if (!this.world.isRemote)
 			{
-				for (BlockPos target : newTargets)
+				synchronized (TileEntityRedstoneInterface.lock)
 				{
-					if (!targets.contains(target))
+					for (BlockPos target : newTargets)
 					{
-						changedPositions.add(target); // Added
+						if (!targets.contains(target))
+						{
+							changedPositions.add(target); // Added
+						}
 					}
-				}
 
-				for (BlockPos oldTarget : targets)
-				{
-					if (!newTargets.contains(oldTarget))
+					for (BlockPos oldTarget : targets)
 					{
-						changedPositions.add(oldTarget); // Added
+						if (!newTargets.contains(oldTarget))
+						{
+							changedPositions.add(oldTarget); // Added
+						}
 					}
-				}
 
-				this.targets = newTargets;
+					this.targets = newTargets;
 
-				IBlockState state = this.world.getBlockState(this.pos);
-				this.world.notifyBlockUpdate(pos, state, state, 3);
+					IBlockState state = this.world.getBlockState(this.pos);
+					this.world.notifyBlockUpdate(pos, state, state, 3);
 
-				for (BlockPos changedPos : changedPositions)
-				{
-					IBlockState targetState = world.getBlockState(changedPos);
-					targetState.neighborChanged(world, changedPos, Blocks.REDSTONE_BLOCK, this.pos); // TODO
-																										// DANGEROUS
-					world.notifyNeighborsOfStateChange(changedPos, Blocks.REDSTONE_BLOCK, false);
+					for (BlockPos changedPos : changedPositions)
+					{
+						IBlockState targetState = world.getBlockState(changedPos);
+						targetState.neighborChanged(world, changedPos, Blocks.REDSTONE_BLOCK, this.pos); // TODO
+																											// DANGEROUS
+						world.notifyNeighborsOfStateChange(changedPos, Blocks.REDSTONE_BLOCK, false);
+					}
 				}
 			}
 		}
