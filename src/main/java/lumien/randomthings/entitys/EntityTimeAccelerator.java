@@ -61,16 +61,40 @@ public class EntityTimeAccelerator extends Entity implements IEntityAdditionalSp
 	{
 		this.remainingTime = remainingTime;
 	}
+	
+	static Class clazz;
+	
+	static
+	{
+		try
+		{
+			clazz = Class.forName("cofh.core.block.TileCore");
+		}
+		catch (Exception e)
+		{
+			
+		}
+	}
 
 	@Override
 	public void onEntityUpdate()
 	{
 		super.onEntityUpdate();
+		
+		TileEntity targetTE = this.world.getTileEntity(target);
+
+		boolean horror = false;
+		
+		if (clazz != null && targetTE instanceof ITickable)
+		{
+			horror = clazz.isInstance(targetTE);
+		}
+		
 		for (int i = 0; i < getTimeRate(); i++)
 		{
-			TileEntity targetTE = this.world.getTileEntity(target);
-
-			if (targetTE != null && targetTE instanceof ITickable)
+			targetTE = this.world.getTileEntity(target);
+			
+			if (targetTE != null && targetTE instanceof ITickable && (!horror || !this.world.isRemote))
 			{
 				((ITickable) targetTE).update();
 			}
