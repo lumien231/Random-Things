@@ -6,6 +6,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
 import lumien.randomthings.client.render.magiccircles.ColorFunctions;
 import lumien.randomthings.client.render.magiccircles.IColorFunction;
@@ -22,6 +23,60 @@ import net.minecraftforge.client.model.animation.Animation;
 public class MKRRenderUtil
 {
 	static ResourceLocation mkrFont = new ResourceLocation("randomthings", "textures/entitys/mkr_font.png");
+
+	public static void renderLightningArc(float x1, float y1, float z1, float x2, float y2, float z2)
+	{
+		Minecraft mc = Minecraft.getMinecraft();
+
+		mc.entityRenderer.disableLightmap();
+		GlStateManager.disableTexture2D();
+		GlStateManager.disableLighting();
+		GlStateManager.enableBlend();
+
+		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+
+		for (int i = 0; i < 5; i++)
+		{
+			GlStateManager.glBegin(GL11.GL_LINE_STRIP);
+
+			ColorUtil.applyColor(new Color(235, 63, 229, 200));
+
+			Vector3f vec1 = new Vector3f(x1, y1, z1);
+			Vector3f vec2 = new Vector3f(x2, y2, z2);
+
+			Vector3f dif = Vector3f.sub(vec2, vec1, null);
+
+			float length = dif.length();
+			float passedLength = 0;
+
+
+			GlStateManager.glVertex3f(x1, y1, z1);
+
+			Random rng = new Random(i);
+
+			while (length > 0.1F)
+			{
+				float nextPoint = (float) (rng.nextFloat() * 0.05F + 0.05F);
+				passedLength += nextPoint;
+
+				Vector3f nextPointVec = Vector3f.add(vec1, (Vector3f) new Vector3f(dif).normalise(null).scale(passedLength), null);
+
+				GlStateManager.glVertex3f(nextPointVec.x + rng.nextFloat() * 0.1F - 0.05F, nextPointVec.y + rng.nextFloat() * 0.1F - 0.05F, nextPointVec.z + rng.nextFloat() * 0.1F - 0.05F);
+
+				length -= nextPoint;
+			}
+
+			GlStateManager.glVertex3f(x2, y2, z2);
+
+			GlStateManager.glEnd();
+		}
+
+		GlStateManager.enableTexture2D();
+		GlStateManager.enableLighting();
+		GlStateManager.disableBlend();
+		mc.entityRenderer.enableLightmap();
+	}
 
 	public static void renderLinkOrb(BlockPos pos, double x, double y, double z)
 	{
