@@ -474,12 +474,12 @@ public class AsmHandler
 
 	public static int getRedstonePower(World worldObj, BlockPos pos, EnumFacing facing)
 	{
-		return Math.max(TileEntityRedstoneInterface.getRedstonePower(worldObj, pos, facing), worldObj.isRemote ? 0 : RedstoneSignalHandler.getHandler().getStrongPower(worldObj, pos, facing));
+		return Math.max(TileEntityRedstoneInterface.getRedstonePower(worldObj, pos, facing), worldObj.isRemote ? 0 : (FMLCommonHandler.instance().getMinecraftServerInstance() != null ? RedstoneSignalHandler.getHandler().getStrongPower(worldObj, pos, facing) : 0));
 	}
 
 	public static int getStrongPower(World worldObj, BlockPos pos, EnumFacing facing)
 	{
-		return Math.max(TileEntityRedstoneInterface.getStrongPower(worldObj, pos, facing), worldObj.isRemote ? 0 : RedstoneSignalHandler.getHandler().getStrongPower(worldObj, pos, facing));
+		return Math.max(TileEntityRedstoneInterface.getStrongPower(worldObj, pos, facing), worldObj.isRemote ? 0 : (FMLCommonHandler.instance().getMinecraftServerInstance() != null ? RedstoneSignalHandler.getHandler().getStrongPower(worldObj, pos, facing) : 0));
 	}
 
 	// Returns whether to cancel normal behaviour
