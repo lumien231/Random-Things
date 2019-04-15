@@ -607,7 +607,7 @@ public class ModRecipes
 		RecipeSorter.register("emeraldCompass", emeraldCompassRecipe.getClass(), Category.SHAPELESS, "");
 		ForgeRegistries.RECIPES.register(emeraldCompassRecipe);
 
-		// Emerald Compass
+		// Port Key Recipe
 		IRecipe portKeyCamoRecipe = new SimpleRecipe(new ResourceLocation("randomthings", "portkey_camo"))
 		{
 			@Override
@@ -662,7 +662,9 @@ public class ModRecipes
 					{
 						if (is.getItem() != ModItems.portKey)
 						{
-							aitemstack.set(i, is.copy());
+							ItemStack copy = is.copy();
+							copy.setCount(1);
+							aitemstack.set(i, copy);
 						}
 					}
 				}
