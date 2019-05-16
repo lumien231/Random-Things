@@ -8,6 +8,7 @@ import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.INoItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -32,7 +33,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLotus extends BlockBase implements IPlantable, INoItem
+public class BlockLotus extends BlockBase implements IPlantable, IGrowable
 {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 
@@ -210,5 +211,22 @@ public class BlockLotus extends BlockBase implements IPlantable, INoItem
 			return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 		}
 		return this.canSustainBush(worldIn.getBlockState(pos.down()));
+	}
+
+	@Override
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	{
+		return state.getValue(AGE) < 3;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
 	}
 }

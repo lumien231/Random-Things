@@ -25,6 +25,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 @JEIPlugin
@@ -57,6 +58,8 @@ public class RandomThingsPlugin implements IModPlugin
 		{
 			anvilRecipes.add(jeiHelpers.getVanillaRecipeFactory().createAnvilRecipe(ar.getFirst(), Lists.newArrayList(ar.getSecond()), Lists.newArrayList(ar.getOutput())));
 		}
+		
+		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ModBlocks.lotus));
 
 		registry.addRecipes(anvilRecipes, VanillaRecipeCategoryUid.ANVIL);
 

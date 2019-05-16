@@ -37,6 +37,7 @@ import lumien.randomthings.worldgen.WorldGenAncientFurnace;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenEventHandler;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -137,6 +138,8 @@ public class RandomThings implements LoadingCallback
 		{
 			OCComp.init();
 		}
+		
+		FMLInterModComms.sendMessage("Thaumcraft", "harvestClickableCrop", new ItemStack(ModBlocks.lotus, 1, 3));
 	}
 
 	@EventHandler
