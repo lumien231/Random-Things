@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import lumien.randomthings.container.ContainerTE;
 import lumien.randomthings.network.IRTMessage;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -36,12 +37,19 @@ public class MessageContainerSignal implements IRTMessage
 	@Override
 	public void onMessage(MessageContext context)
 	{
-		EntityPlayerMP player = context.getServerHandler().player;
-
-		if (player.openContainer instanceof ContainerTE)
+		FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(new Runnable()
 		{
-			((ContainerTE) player.openContainer).signal(signal);
-		}
+			@Override
+			public void run()
+			{
+				EntityPlayerMP player = context.getServerHandler().player;
+		
+				if (player.openContainer instanceof ContainerTE)
+				{
+					((ContainerTE) player.openContainer).signal(signal);
+				}
+			}
+		});
 	}
 
 	@Override
