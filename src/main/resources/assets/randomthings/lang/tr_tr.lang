@@ -1,0 +1,492 @@
+itemGroup.rt.name=Random Things
+
+tile.fertilizedDirt.name=Gübrelenmiş Toprak
+tile.playerInterface.name=Oyuncu Arayüzü
+tile.creativePlayerInterface.name=Yaratıcı Oyuncu Arayüzü
+tile.lapisGlass.name=Lapis Cam
+tile.biomeGlass.name=Biyom Cam
+tile.lapisLamp.name=Lapis Lambası
+tile.dyeingMachine.name=Boyama Makinesi
+tile.onlineDetector.name=Çevrimiçi Dedektörü
+tile.enderAnchor.name=Ender Çıpası
+tile.enderBridge.name=Ender Köprüsü
+tile.prismarineEnderBridge.name=Prizmarin Ender Köprüsü
+tile.beanStalk.name=Sihirli Fasulye Sapı
+tile.lesserBeanStalk.name=Küçük Fasulye Sapı
+tile.beanPod.name=Fasulye Kozası
+tile.beanSprout.name=Fasulye Filizi
+tile.chatDetector.name=Sohbet Dedektörü
+tile.globalChatDetector.name=Küresel Sohbet Dedektörü
+tile.lightRedirector.name=Işık Yönlendirici
+tile.imbuingStation.name=Aşılama İstasyonu
+tile.spectreBlock.name=Hayalet Blok
+tile.analogEmitter.name=Analog Yayıcı
+tile.fluidDisplay.name=Sıvı Gösterici
+tile.customWorkbench.name=Üretim Masası
+tile.enderMailbox.name=Ender Posta Kutusu
+tile.pitcherPlant.name=Pitcher Bitkisi
+tile.entityDetector.name=Varlık Dedektörü
+tile.quartzLamp.name=Kuvars Lamba
+tile.quartzGlass.name=Kuvars Cam
+tile.potionVaporizer.name=İksir Buharlaştırıcı
+tile.voxelProjector.name=[WIP] Voksel Projektörü
+tile.contactButton.name=İletişim Düğmesi
+tile.contactLever.name=İletişim Şalteri
+tile.sakanade.name=Sakanade
+tile.rainShield.name=Yağmur Kalkanı
+tile.blockBreaker.name=Blok Kırıcı
+tile.spectreCore.name=Hayalet Çekirdeği
+tile.rainbowLamp.name=Rengarenk Lamba
+tile.superLubricentIce.name=Süperkaygan Buz
+tile.compressedSlimeBlock.name=Sıkıştırılmış Balçık Bloğu
+tile.superLubricentPlatform.name=Süper Kayganlaştırılmış Platform
+tile.filteredSuperLubricentPlatform.name=Filtreli Süper Kaygan Platform
+tile.redstoneObserver.name=Kızıltaş Gözlemcisi
+tile.biomeRadar.name=Biyom Radarı
+tile.ironDropper.name=Demir Bırakıcı
+tile.itemProjector.name=[WIP] Eşya Projektörü
+tile.blockOfSticks.normal.name=Çubuklu Blok
+tile.blockOfSticks.returning.name=Çubuklu Blok (Geri Dönebilen)
+tile.igniter.name=Yakıcı
+tile.inventoryRerouter.name=Envanter Yönlendirici
+tile.slimeCube.name=§aBalçık Küpü§7
+tile.peaceCandle.name=Barış Mumu
+tile.notificationInterface.name=Bildirim Arayüzü
+tile.glowingMushroom.name=Parlayan Mantar
+tile.inventoryTester.name=Envanter Test Edici
+tile.flooBrick.name=Floo Tuğlası
+tile.superlubricentstone.name=Süper Kaygan Taş
+tile.triggerGlass.name=Aktifleşen Cam
+tile.blockDestabilizer.name=Blok Destabilizörü
+tile.advancedRedstoneRepeater.name=Gelişmiş Kızıltaş Yineleyici
+tile.lotus.name=Lotus
+tile.ancientBrick.name=Antik Tuğla
+tile.soundBox.name=Ses Kutusu
+tile.soundDampener.name=Ses Soğurucu
+tile.advancedRedstoneTorch_on.name=Gelişmiş Kızıltaş Meşalesi
+tile.advancedRedstoneTorch_off.name=Gelişmiş Kızıltaş Meşalesi
+tile.diaphanousBlock.name=Saydamlaşan Blok
+tile.diaphanousBlock_inverted.name=Tersine Saydamlaşan Blok
+tile.sidedRedstone.name=Yanlı Kızıltaş Bloğu
+tile.ancientBrick.name=Antik Tuğla [INTERNAL]
+tile.spectreLens.name=Hayalet Lens
+tile.spectreEnergyInjector.name=Hayalet Enerji Enjektörü
+
+item.enderBucket.name=Ender Kovası
+item.enderBucket.filled.name=%s Ender Kovası
+item.reinforcedEnderBucket.name=Sağlam Ender Kovası
+item.reinforcedEnderBucket.filled.name=%s Sağlam Ender Kovası
+
+tile.spectrePlank.name=Hayalet Tahtası
+tile.spectreSapling.name=Hayalet Fidanı
+tile.spectreLeaf.name=Hayalet Yaprağı
+tile.spectreLog.name=Hayalet Odunu
+
+tile.spectreCoil_normal.name=Hayalet Bobini
+tile.spectreCoil_redstone.name=Kızıltaş Hayalet Bobini
+tile.spectreCoil_ender.name=Ender Hayalet Bobini
+tile.spectreCoil_number.name=%d. Hayalet Bobini
+tile.spectreCoil_genesis.name=Genesis Hayalet Bobini
+
+tile.itemCollector.name=Eşya Toplayıcı
+tile.advancedItemCollector.name=Gelişmiş Eşya Toplayıcı
+
+tile.natureCore.name=Doğal Çekirdek
+tile.netherCore.name=Nether Çekirdeği
+tile.enderCore.name=Ender Çekirdeği
+
+tile.plate_redirector.name=Yönlendirici Plaka
+tile.plate_filteredredirector.name=Filtreli Yönlendirici Plaka
+tile.plate_accelerator.name=Hızlandırıcı Plaka
+tile.plate_corrector.name=Doğrulayıcı Plaka
+tile.plate_accelerator_directional.name=Yönlü Hızlandırıcı Plaka
+tile.plate_itemrejuvenator.name=Eşya Gençleştirici Plaka
+tile.plate_itemsealer.name=Eşya Yalıtıcı Plaka
+tile.plate_bouncy.name=Zıplak Plaka
+tile.plate_collection.name=Toplayıcı Plaka
+tile.plate_redstone.name=Kızıltaş Plaka
+tile.plate_processing.name=İşleyen Plaka
+tile.plate_extraction.name=Çıkarıcı Plaka
+
+tile.stainedBrick.black.name=Siyah Renkli Tuğla
+tile.stainedBrick.red.name=Kırmızı Renkli Tuğla
+tile.stainedBrick.green.name=Yeşil Renkli Tuğla
+tile.stainedBrick.brown.name=Kahve Renkli Tuğla
+tile.stainedBrick.blue.name=Lacivert Renkli Tuğla
+tile.stainedBrick.purple.name=Mor Renkli Tuğla
+tile.stainedBrick.cyan.name=Camgöbeği Renkli Tuğla
+tile.stainedBrick.silver.name=Açık Gri Renkli Tuğla
+tile.stainedBrick.gray.name=Gri Renkli Tuğla
+tile.stainedBrick.pink.name=Pembe Renkli Tuğla
+tile.stainedBrick.lime.name=Kireç Renkli Tuğla
+tile.stainedBrick.yellow.name=Sarı Renkli Tuğla
+tile.stainedBrick.lightBlue.name=Açık Mavi Renkli Tuğla
+tile.stainedBrick.magenta.name=Eflatun Renkli Tuğla
+tile.stainedBrick.orange.name=Turuncu Renkli Tuğla
+tile.stainedBrick.white.name=Beyaz Renkli Tuğla
+
+tile.luminousStainedBrick.black.name=Beyaz Renkli Parlak Tuğla
+tile.luminousStainedBrick.red.name=Kırmızı Renkli Parlak Tuğla
+tile.luminousStainedBrick.green.name=Yeşil Renkli Parlak Tuğla
+tile.luminousStainedBrick.brown.name=Kahve Renkli Parlak Tuğla
+tile.luminousStainedBrick.blue.name=Lacivert Renkli Parlak Tuğla
+tile.luminousStainedBrick.purple.name=Mor Renkli Parlak Tuğla
+tile.luminousStainedBrick.cyan.name=Camgöbeği Renkli Parlak Tuğla
+tile.luminousStainedBrick.silver.name=Açık Gri Renkli Parlak Tuğla
+tile.luminousStainedBrick.gray.name=Gri Renkli Parlak Tuğla
+tile.luminousStainedBrick.pink.name=Pembe Renkli Parlak Tuğla
+tile.luminousStainedBrick.lime.name=Kireç Renkli Parlak Tuğla
+tile.luminousStainedBrick.yellow.name=Sarı Renkli Parlak Tuğla
+tile.luminousStainedBrick.lightBlue.name=Açık Mavi Renkli Parlak Tuğla
+tile.luminousStainedBrick.magenta.name=Eflatun Renkli Parlak Tuğla
+tile.luminousStainedBrick.orange.name=Turuncu Renkli Parlak Tuğla
+tile.luminousStainedBrick.white.name=Beyaz Renkli Parlak Tuğla
+
+tile.coloredGrass.black.name=Siyah Çimen
+tile.coloredGrass.red.name=Kırmızı Çimen
+tile.coloredGrass.green.name=Yeşil Çimen
+tile.coloredGrass.brown.name=Kahverengi Çimen
+tile.coloredGrass.blue.name=Lacivert Çimen
+tile.coloredGrass.purple.name=Mor Çimen
+tile.coloredGrass.cyan.name=Camgöbeği Çimen
+tile.coloredGrass.silver.name=Açık Gri Çimen
+tile.coloredGrass.gray.name=Gri Çimen
+tile.coloredGrass.pink.name=Pembe Çimen
+tile.coloredGrass.lime.name=Kireç Çimen
+tile.coloredGrass.yellow.name=Sarı Çimen
+tile.coloredGrass.lightBlue.name=Açık Mavi Çimen
+tile.coloredGrass.lightBlue.name=Açık Mavi Çimen
+tile.coloredGrass.magenta.name=Eflatun Çimen
+tile.coloredGrass.orange.name=Turuncu Çimen
+tile.coloredGrass.white.name=Beyaz Çimen
+
+tile.luminousBlock.black.name=Siyah Parlak Blok
+tile.luminousBlock.red.name=Kırmızı Parlak Blok
+tile.luminousBlock.green.name=Yeşil Parlak Blok
+tile.luminousBlock.brown.name=Kahverengi Parlak Blok
+tile.luminousBlock.blue.name=Lacivert Parlak Blok
+tile.luminousBlock.purple.name=Mor Parlak Blok
+tile.luminousBlock.cyan.name=Camgöbeği Parlak Blok
+tile.luminousBlock.silver.name=Açık Gri Parlak Blok
+tile.luminousBlock.gray.name=Gri Parlak Blok
+tile.luminousBlock.pink.name=Pembe Parlak Blok
+tile.luminousBlock.lime.name=Kireç Parlak Blok
+tile.luminousBlock.yellow.name=Sarı Parlak Blok
+tile.luminousBlock.lightBlue.name=Açık Mavi Parlak Blok
+tile.luminousBlock.magenta.name=Eflatun Parlak Blok
+tile.luminousBlock.orange.name=Turuncu Parlak Blok
+tile.luminousBlock.white.name=Beyaz Parlak Blok
+
+tile.translucentLuminousBlock.black.name=Siyah Saydam Parlak Blok
+tile.translucentLuminousBlock.red.name=Kırmızı Saydam Parlak Blok
+tile.translucentLuminousBlock.green.name=Yeşil Saydam Parlak Blok
+tile.translucentLuminousBlock.brown.name=Kahverengi Saydam Parlak Blok
+tile.translucentLuminousBlock.blue.name=Lacivert Saydam Parlak Blok
+tile.translucentLuminousBlock.purple.name=Mor Saydam Parlak Blok
+tile.translucentLuminousBlock.cyan.name=Camgöbeği Saydam Parlak Blok
+tile.translucentLuminousBlock.silver.name=Açık Gri Saydam Parlak Blok
+tile.translucentLuminousBlock.gray.name=Gri Saydam Parlak Blok
+tile.translucentLuminousBlock.pink.name=Pembe Saydam Parlak Blok
+tile.translucentLuminousBlock.lime.name=Kireç Saydam Parlak Blok
+tile.translucentLuminousBlock.yellow.name=Sarı Saydam Parlak Blok
+tile.translucentLuminousBlock.lightBlue.name=Açık Mavi Saydam Parlak Blok
+tile.translucentLuminousBlock.magenta.name=Eflatun Saydam Parlak Blok
+tile.translucentLuminousBlock.orange.name=Turuncu Saydam Parlak Blok
+tile.translucentLuminousBlock.white.name=Beyaz Saydam Parlak Blok
+
+tile.biomeStone.cobble.name=Biyom Kırıktaş
+tile.biomeStone.smooth.name=Biyom Taş
+tile.biomeStone.brick.name=Biyom Taş Tuğla
+tile.biomeStone.cracked.name=Kırık Biyom Taş Tuğla
+tile.biomeStone.chiseled.name=Oyma Biyom Taş Tuğla
+
+tile.specialChest.nature.name=Doğal Sandık
+tile.specialChest.water.name=Su Sandık
+
+tile.platform.oak.name=Meşe Platform
+tile.platform.spruce.name=Ladin Platform
+tile.platform.birch.name=Huş Platform
+tile.platform.acacia.name=Akasya Platform
+tile.platform.jungle.name=Orman Ağacı Platform
+tile.platform.darkoak.name=Koyu Meşe Platform
+
+tile.basicRedstoneInterface.name=Basit Kızıltaş Arayüzü
+tile.advancedRedstoneInterface.name=Gelişmiş Kızıltaş Arayüzü
+
+tile.spectrecoil.transfer=%s RF/t Aktarır
+tile.spectrecoil.generate=%s RF/t Üretir
+
+item.chaliceOfImmortality.name=Ebedilik Kadehi
+item.positionFilter.name=Pozisyon Filtresi
+item.biomeCrystal.name=Biyom Kristali
+item.summoningPendulum.name=Canlandırma Pandülü
+item.stableEnderpearl.name=Sabit Ender İncisi
+item.craftingRecipe.name=Üretim Tarifi
+item.redstoneTool.name=Kızıltaş Aleti
+item.waterWalkingBoots.name=Su Yürüş Botları
+item.dungeonChestGenerator.name=Ganimet Oluşturucu
+item.lavaCharm.name=Lav Tılsımı
+item.lavaWader.name=Lav Botları
+item.obsidianSkull.name=Obsidyen Kurukafa
+item.obsidianSkullRing.name=Obsidyen Kurukafa Yüzüğü
+item.obsidianWaterWalkingBoots.name=Obsidyen Su Yürüyüş Botları
+item.magicHood.name=Sihirli Kapüşon
+item.bottleOfAir.name=Hava Dolu Şişe
+item.rezStone.name=Kan Taşı
+item.enderLetter.name=Ender Mektubu
+item.entityFilter.name=Varlık Filtresi
+item.itemFilter.name=Eşya Filtresi
+item.spectreKey.name=Hayalet Anahtar
+item.soundRecorder.name=Ses Kaydedici
+item.redstoneActivator.name=Kızıltaş Etkinleştirici
+item.redstoneRemote.name=Kızıltaş Kumandası
+item.spectreAnchor.name=Hayalet Anchor
+item.spectreSword.name=Hayalet Kılıcı
+item.goldenCompass.name=Altın Pusula
+item.blazeAndSteel.name=Alaz ve Çelik
+item.runePattern.name=Rünik Desen
+item.superLubricentBoots.name=Süperkaygan Botlar
+item.flooSign.name=Floo Tabelası
+item.idcard.name=ID Kardı
+item.emeraldcompass.name=Zümrüt Pusula
+item.flootoken.name=Floo Jetonu
+item.portKey.name=Portkey
+item.lotusseeds.name=Lotus Tohumları
+item.soundPattern.name=Ses Deseni
+item.portableSoundDampener.name=Taşınabilir Ses Soğurucu
+item.escapeRope.name=Kaçış Halatı
+item.chunkAnalyzer.name=Yığın Analizörü
+item.flooPouch.name=Floo Kesesi
+item.timeInABottle.name=Şişe İçinde Zaman
+item.spectreIlluminator.name=Hayalet Parlatıcı
+item.eclipsedClock.name=Tutulma Saati
+
+item.diviningRod.coal.name=Kömür Dovsing Çubuğu
+item.diviningRod.iron.name=Demir Dovsing Çubuğu
+item.diviningRod.gold.name=Altın Dovsing Çubuğu
+item.diviningRod.lapis.name=Lapis Dovsing Çubuğu
+item.diviningRod.redstone.name=Kızıltaş Dovsing Çubuğu
+item.diviningRod.emerald.name=Zümrüt Dovsing Çubuğu
+item.diviningRod.diamond.name=Elmas Dovsing Çubuğu
+item.diviningRod.universal.name=Sade Dovsing Çubuğu
+
+item.diviningRod.copper.name=Bakır Dovsing Çubuğu
+item.diviningRod.tin.name=Kalay Dovsing Çubuğu
+item.diviningRod.silver.name=Gümüş Dovsing Çubuğu
+item.diviningRod.lead.name=Kurşun Dovsing Çubuğu
+item.diviningRod.aluminum.name=Alüminyum Dovsing Çubuğu
+item.diviningRod.nickel.name=Nikel Dovsing Çubuğu
+item.diviningRod.platinum.name=Platinyum Dovsing Çubuğu
+item.diviningRod.iridium.name=İridyum Dovsing Çubuğu
+item.diviningRod.mithril.name=Mitril Dovsing Çubuğu
+
+item.diviningRod.draconium.name=Draconium Dovsing Çubuğu
+
+item.diviningRod.cobalt.name=Kobalt Dovsing Çubuğu
+item.diviningRod.ardite.name=Ardite Dovsing Çubuğu
+
+item.diviningRod.blackquartz.name=Siyah Kuvars Dovsing Çubuğu
+
+item.diviningRod.certus.name=Certus Kuvars Dovsing Çubuğu
+
+item.spectreCharger.normal.name=Hayalet Şarj Aleti
+item.spectreCharger.redstone.name=Kızıltaş Şarj Aleti
+item.spectreCharger.ender.name=Ender Şarj Aleti
+item.spectreCharger.genesis.name=Genesis Hayalet Şarj Aleti
+
+item.spectreCharger.charge=%s RF/t Şarj Eder
+
+item.bean.name=Fasulye
+item.lesserMagicBean.name=Küçük Sihirli Fasulye
+item.magicBean.name=Sihirli Fasulye
+item.beanStew.name=Fasulye Çorbası
+
+item.grassSeeds.normal.name=Çimen Tohumu
+item.grassSeeds.black.name=Siyah Çimen Tohumu
+item.grassSeeds.red.name=Kırmızı Çimen Tohumu
+item.grassSeeds.green.name=Yeşil Çimen Tohumu
+item.grassSeeds.brown.name=Kahverengi Çimen Tohumu
+item.grassSeeds.blue.name=Mavi Çimen Tohumu
+item.grassSeeds.purple.name=Mor Çimen Tohumu
+item.grassSeeds.cyan.name=Camgöbeği Çimen Tohumu
+item.grassSeeds.silver.name=Açık Gri Çimen Tohumu
+item.grassSeeds.gray.name=Gri Çimen Tohumu
+item.grassSeeds.pink.name=Pembe Çimen Tohumu
+item.grassSeeds.lime.name=Kireç Çimen Tohumu
+item.grassSeeds.yellow.name=Sarı Çimen Tohumu
+item.grassSeeds.lightBlue.name=Açık Mavi Çimen Tohumu
+item.grassSeeds.magenta.name=Eflatun Çimen Tohumu
+item.grassSeeds.orange.name=Turuncu Çimen Tohumu
+item.grassSeeds.white.name=Beyaz Çimen Tohumu
+
+item.imbue.fire.name=Ateş Aşısı
+item.imbue.poison.name=Zehir Aşısı
+item.imbue.experience.name=Tecrübe Aşısı
+item.imbue.wither.name=Wither Aşısı
+item.imbue.collapse.name=(KALDIRILDI) Çöküş Aşısı
+
+potion.effect.rtcollapse=Çöküş İksiri
+splash_potion.effect.rtcollapse=Patlayıcı Çöküş İksiri
+lingering_potion.effect.rtcollapse=Kalıcı Çöküş İksiri
+tipped_arrow.effect.rtcollapse=Çöküş Büyülü Oku
+
+item.ingredient.sakanadeSpores.name=Sakanade Sporları
+item.ingredient.evilTear.name=Şeytani Gözyaşı
+item.ingredient.ectoPlasm.name=Ektoplazma
+item.ingredient.spectreIngot.name=Hayalet Külçesi
+item.ingredient.biomeSensor.name=Biyom Sensörü
+item.ingredient.luminousPowder.name=Parlak Toz
+item.ingredient.superLubricentTincture.name=Süperkaygan Tentür
+item.ingredient.flooPowder.name=Floo Tozu
+item.ingredient.plateBase.name=Plaka Temeli
+item.ingredient.preciousEmerald.name=Değerli Zümrüt
+item.ingredient.lotusBlossom.name=Lotus Çiçeği
+item.ingredient.goldenEgg.name=Altın Yumurta
+item.ingredient.spectreString.name=Hayalet İp
+item.ingredient.blackoutPowder.name=Kara Toz
+
+item.spectrePickaxe.name=Hayalet Kazma
+item.spectreAxe.name=Hayalet Balta
+item.spectreShovel.name=Hayalet Kürek
+
+item.runeDust.black.name=Siyah Rünik Toz
+item.runeDust.red.name=Kırmızı Rünik Toz
+item.runeDust.green.name=Yeşil Rünik Toz
+item.runeDust.brown.name=Kahverengi Rünik Toz
+item.runeDust.blue.name=Mavi Rünik Toz
+item.runeDust.purple.name=Mor Rünik Toz
+item.runeDust.cyan.name=Camgöbeği Rünik Toz
+item.runeDust.silver.name=Gümüş Rünik Toz
+item.runeDust.gray.name=Gri Rünik Toz
+item.runeDust.pink.name=Pembe Rünik Toz
+item.runeDust.lime.name=Kireç Rünik Toz
+item.runeDust.yellow.name=Sarı Rünik Toz
+item.runeDust.light_blue.name=Açık Mavi Rünik Toz
+item.runeDust.magenta.name=Eflatun Rünik Toz
+item.runeDust.orange.name=Turuncu Rünik Toz
+item.runeDust.white.name=Beyaz Rünik Toz
+
+item.weatherEgg_sun.name=Hava Durumu Yumurtası <Güneş>
+item.weatherEgg_rain.name=Hava Durumu Yumurtası <Yağmur>
+item.weatherEgg_storm.name=Hava Durumu Yumurtası <Fırtına>
+
+tooltip.general.shift=Daha fazla bilgi için §6Shift§7 tuşuna bas
+tooltip.general.empty=§8<Boş>
+tooltip.positionFilter.dimension=Boyut: %d
+tooltip.positionFilter.x=Pozisyon-X: %d
+tooltip.positionFilter.y=Pozisyon-Y: %d
+tooltip.positionFilter.z=Pozisyon-Z: %d
+tooltip.summoningPendulum.entityCount.singular=§5 %d Varlığı tutuluyor
+tooltip.summoningPendulum.entityCount.plural=§5 %d Varlıkları tutuluyor
+tooltip.stableEnderpearl.boundto=§5 %s 'a bağlandı
+tooltip.entityFilter.invalidEntity=Geçersiz varlık
+tooltip.redstoneactivator.duration=Süre: %d ticks
+
+tooltip.itemFilter.metadata=Metadata'yı kontrol et
+tooltip.itemFilter.nometadata=Metadata'yı umursama
+tooltip.itemFilter.oredict=OreDictionary'i kontrol et
+tooltip.itemFilter.nooredict=OreDictionary'i umursama
+tooltip.itemFilter.nbt=NBT'yi kontrol et
+tooltip.itemFilter.nonbt=NBT'yi umursama
+tooltip.itemFilter.whitelist=Beyazliste
+tooltip.itemFilter.blacklist=Karaliste
+
+tooltip.spectreAnchor.item=Bağlandı
+tooltip.luminousEnchantment=Parlak
+
+tooltip.ironDropper.redstoneMode.pulse=Kızıltaş darbesi aldığında dışarı çıkarır
+tooltip.ironDropper.redstoneMode.repeatPowered=Güce bağlıyken durmaksızın dışarı çıkarır
+tooltip.ironDropper.redstoneMode.repeat=Durmadan dışarı çıkarır
+tooltip.ironDropper.pickupDelay.none=Toplama gecikmesi yok
+tooltip.ironDropper.pickupDelay.5=5 Tick toplama gecikmesi
+tooltip.ironDropper.pickupDelay.20=20 Tick toplama gecikmesi
+tooltip.ironDropper.randomMotion.yes=Rastgele Sürat
+tooltip.ironDropper.randomMotion.no=Sabit Sürat
+tooltip.ironDropper.effects.none=Efekt yok
+tooltip.ironDropper.effects.soundOnly=Ses efektleri
+tooltip.ironDropper.effects.particlesOnly=Parçacık efektleri
+tooltip.ironDropper.effects.both=Ses & Parçacık efektleri
+
+tooltip.itemProjector.selectionMode.first=İlk slottan başla
+tooltip.itemProjector.selectionMode.last=Son slottan başla
+tooltip.itemProjector.selectionMode.biggest=En büyük yığını seç
+
+tooltip.entityDetector.normalOutput=Normal Çıkış
+tooltip.entityDetector.invertedOutput=Ters Çıkış
+tooltip.entityDetector.weakOutput=Zayıf Kızıltaş Çıkışı
+tooltip.entityDetector.strongOutput=Güçlü Kızıltaş Çıkışı
+
+tooltip.timeInABottle=%d Sa | %d Dk | %d Sn
+
+gui.basicRedstoneInterface.notarget=Hedef Yok
+gui.basicRedstoneInterface.targetX=X-Hedefi: %s
+gui.basicRedstoneInterface.targetY=Y-Hedefi: %s
+gui.basicRedstoneInterface.targetZ=Z-Hedefi: %s
+
+gui.entityDetector.radiusX=X Çevresi: %s
+gui.entityDetector.radiusY=Y Çevresi: %s
+gui.entityDetector.radiusZ=Z Çevresi: %s
+gui.entityDetector.filter.all=Tüm Varlıklar
+gui.entityDetector.filter.living=Yaşayan Varlıklar
+gui.entityDetector.filter.animal=Hayvanlar
+gui.entityDetector.filter.monster=Canavarlar
+gui.entityDetector.filter.player=Oyuncular
+gui.entityDetector.filter.item=Eşyalar
+gui.entityDetector.filter.custom=Özel
+
+gui.igniter.toggle=Ateşi Kapa/Aç
+gui.igniter.ignite=Yak
+gui.igniter.keepIgnited=Sürekli Yak
+
+floo.info.teleport=§7 Işınlanılıyor: §a%s
+floo.info.same=§cZaten kendi konumundasın
+
+tooltip.inventoryTester.invertSignal.yes=Başarısız ise kızıltaş yayın
+tooltip.inventoryTester.invertSignal.no=Başarılı ise kızıltaş yayın
+
+block.enderMailbox.owner=Bu posta kutusunun sahibi değilsiniz.
+
+item.dungeonChestGenerator.category=Kategori: %s
+item.dungeonChestGenerator.shiftCategory=Shift + sağ/sol tık ile kategoriyi değiştirebilirsin
+
+item.enderLetter.sender=Yollayıcı: %s
+item.enderLetter.receiver=Alıcı: %s
+item.enderLetter.noPlayer=%s bu dünyada bulunmamakta
+item.enderLetter.noSpace=Mektup reddedilmiş durumdadır
+
+item.portkey.notset=<Hedef belirlenmedi>
+item.portkey.set=<Hedef belirlendi>
+item.portkey.x=X: %d
+item.portkey.y=Y: %d
+item.portkey.z=Z: %d
+
+entity.randomthings.spirit.name=Ruh
+entity.spirit.name=Ruh
+
+entity.randomthings.playerSoul.name=Oyuncu Ruhu
+entity.playerSoul.name=Oyuncu Ruhu
+
+entity.randomthings.goldenChicken.name=Altın Tavuk
+entity.goldenChicken.name=Altın Tavuk
+
+entity.randomthings.goldenEgg.name=Altın Yumurta
+entity.goldenEgg.name=Altın Yumurta
+
+entity.randomthings.spectreIlluminator.name=Hayalet Parlatıcı
+entity.spectreIlluminator.name=Hayalet Parlatıcı
+
+entity.randomthings.eclipsedClock.name=Tutulma Saati
+entity.eclipsedClock.name=Tutulma Saati
+
+fluid.biomeEssence=Biyom Esansı
+
+enchantment.randomthings.magnetic=Manyetik
+enchantment.randomthings.magnetic.desc=Manyetik büyüye sahip eşyalarla blok kazarsan, eşyalar yere düşmek yerine direk envanterine yollanır.
+
+command.festival.scheduled=Yakın bir köyde Festival planlandı.
+command.festival.failed=Yakın bir köyde Festival planlanması başarısız.
+command.festival.novillager=Yakınlarda Köylü bulunmuyor.
+
+rt.command.op.error=O blok op'lenemez.
+
+festival.celebrating=Yakınında bulunan köydeki Köylüler kutlama yapıyor!
