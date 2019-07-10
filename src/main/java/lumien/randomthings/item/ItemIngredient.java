@@ -154,17 +154,22 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 
 			if (state.getBlock() != ModBlocks.spectreSapling)
 			{
-				for (int id : OreDictionary.getOreIDs(new ItemStack(state.getBlock())))
-				{
-					if (id == saplingID)
-					{
-						if (!worldIn.isRemote)
-						{
-							stack.shrink(1);
-							worldIn.setBlockState(pos, ModBlocks.spectreSapling.getDefaultState());
-						}
+				ItemStack is = new ItemStack(state.getBlock());
 
-						return EnumActionResult.SUCCESS;
+				if (!is.isEmpty())
+				{
+					for (int id : OreDictionary.getOreIDs(new ItemStack(state.getBlock())))
+					{
+						if (id == saplingID)
+						{
+							if (!worldIn.isRemote)
+							{
+								stack.shrink(1);
+								worldIn.setBlockState(pos, ModBlocks.spectreSapling.getDefaultState());
+							}
+
+							return EnumActionResult.SUCCESS;
+						}
 					}
 				}
 			}
@@ -207,9 +212,9 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 					BlockPos spawnPos = pos.offset(facing);
 					worldIn.spawnEntity(new EntityItem(worldIn, spawnPos.getX() + 0.5, spawnPos.getY() + 0.5, spawnPos.getZ() + 0.5, new ItemStack(ModItems.spectreIlluminator)));
 				}
-				
+
 				handler.toggleChunk(worldIn, pos);
-				
+
 				return EnumActionResult.SUCCESS;
 			}
 		}
