@@ -52,7 +52,8 @@ public class SpectreCoilHandler extends WorldSavedData
 
 				int newEnergy = Math.min(MAX_ENERGY, currentEnergy + maxReceive);
 
-				coilEntries.put(owner, newEnergy);
+				if (!simulate)
+					coilEntries.put(owner, newEnergy);
 
 				return newEnergy - currentEnergy;
 			}
