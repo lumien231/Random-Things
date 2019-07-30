@@ -6,6 +6,7 @@ import lumien.randomthings.block.BlockSpectreCoil;
 import lumien.randomthings.block.BlockSpectreCoil.CoilType;
 import lumien.randomthings.config.Numbers;
 import lumien.randomthings.handler.spectrecoils.SpectreCoilHandler;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -62,11 +63,16 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		EnumFacing myFacing = this.world.getBlockState(this.pos).getValue(BlockSpectreCoil.FACING).getOpposite();
+		IBlockState state = this.world.getBlockState(this.pos);
 
-		if (myFacing == facing && capability == CapabilityEnergy.ENERGY)
+		if (state.getBlock() instanceof BlockSpectreCoil) // Maybe i'm already unloaded
 		{
-			return true;
+			EnumFacing myFacing = state.getValue(BlockSpectreCoil.FACING).getOpposite();
+
+			if (myFacing == facing && capability == CapabilityEnergy.ENERGY)
+			{
+				return true;
+			}
 		}
 
 		return super.hasCapability(capability, facing);
@@ -75,51 +81,54 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		EnumFacing myFacing = this.world.getBlockState(this.pos).getValue(BlockSpectreCoil.FACING).getOpposite();
-
-		if (myFacing == facing && capability == CapabilityEnergy.ENERGY)
+		IBlockState state = this.world.getBlockState(this.pos);
+		if (state.getBlock() instanceof BlockSpectreCoil) // Maybe i'm already unloaded
 		{
-			return (T) new IEnergyStorage()
+			EnumFacing myFacing = state.getValue(BlockSpectreCoil.FACING).getOpposite();
+
+			if (myFacing == facing && capability == CapabilityEnergy.ENERGY)
 			{
-
-				@Override
-				public int receiveEnergy(int maxReceive, boolean simulate)
+				return (T) new IEnergyStorage()
 				{
-					return 0;
-				}
 
-				@Override
-				public int getMaxEnergyStored()
-				{
-					return 0;
-				}
+					@Override
+					public int receiveEnergy(int maxReceive, boolean simulate)
+					{
+						return 0;
+					}
 
-				@Override
-				public int getEnergyStored()
-				{
-					return 0;
-				}
+					@Override
+					public int getMaxEnergyStored()
+					{
+						return 0;
+					}
 
-				@Override
-				public int extractEnergy(int maxExtract, boolean simulate)
-				{
-					return 0;
-				}
+					@Override
+					public int getEnergyStored()
+					{
+						return 0;
+					}
 
-				@Override
-				public boolean canReceive()
-				{
-					return false;
-				}
+					@Override
+					public int extractEnergy(int maxExtract, boolean simulate)
+					{
+						return 0;
+					}
 
-				@Override
-				public boolean canExtract()
-				{
-					return false;
-				}
-			};
+					@Override
+					public boolean canReceive()
+					{
+						return false;
+					}
+
+					@Override
+					public boolean canExtract()
+					{
+						return false;
+					}
+				};
+			}
 		}
-
 		return super.getCapability(capability, facing);
 	}
 
@@ -157,7 +166,7 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 						IEnergyStorage coilStorage = SpectreCoilHandler.get(this.world).getStorageCoil(this.owner);
 
 						int rate = 1;
-						
+
 						if (coilType == CoilType.NORMAL)
 						{
 							rate = 1024;
@@ -170,7 +179,7 @@ public class TileEntitySpectreCoil extends TileEntityBase implements ITickable
 						{
 							rate = 20480;
 						}
-						
+
 						int available = coilStorage.extractEnergy(rate, true);
 
 						int remaining = available - targetStorage.receiveEnergy(available, false);
