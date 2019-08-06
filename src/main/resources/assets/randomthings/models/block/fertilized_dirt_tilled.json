@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/template_farmland",
+	"textures": {
+		"particle": "randomthings:blocks/fertilized_dirt",
+		"dirt": "randomthings:blocks/fertilized_dirt",
+		"top": "randomthings:blocks/fertilized_dirt"
+	}
+}

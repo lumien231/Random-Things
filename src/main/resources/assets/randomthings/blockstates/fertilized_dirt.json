@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "tilled=false": { "model": "randomthings:block/fertilized_dirt" },
+        "tilled=true": { "model": "randomthings:block/fertilized_dirt_tilled" }
+    }
+}

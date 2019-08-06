@@ -1,0 +1,12 @@
+modLoader="javafml" #mandatory
+loaderVersion="[26,)" #mandatory (24 is current forge version)
+
+displayURL="https://www.curseforge.com/minecraft/mc-mods/random-things"
+authors="Lumien"
+issueTrackerURL="https://github.com/lumien231/Random-Things"
+
+[[mods]]
+    displayName="Random Things"
+    modId="randomthings"
+    description="Random Things packed into one Mod."
+    version="${file.jarVersion}"
