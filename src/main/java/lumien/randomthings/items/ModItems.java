@@ -34,17 +34,19 @@ public class ModItems
 		IForgeRegistry<Item> registry = itemRegistryEvent.getRegistry();
 
 		registerItemForBlock(registry, ModBlocks.FERTILIZED_DIRT);
-
-		registerItemForBlock(registry, ModBlocks.BLOCK_OF_STICKS);
-		registerItemForBlock(registry, ModBlocks.BLOCK_OF_STICKS_RETURNING);
 		registerItemForBlock(registry, ModBlocks.RAINBOW_LAMP);
+		registerItemForBlock(registry, ModBlocks.BLOCK_OF_STICKS, ModBlocks.BLOCK_OF_STICKS_RETURNING);
+		registerItemForBlock(registry, ModBlocks.PLATFORM_OAK, ModBlocks.PLATFORM_SPRUCE, ModBlocks.PLATFORM_BIRCH, ModBlocks.PLATFORM_JUNGLE, ModBlocks.PLATFORM_ACACIA, ModBlocks.PLATFORM_DARKOAK);
 	}
 
-	private static void registerItemForBlock(IForgeRegistry<Item> registry, Block block)
+	private static void registerItemForBlock(IForgeRegistry<Item> registry, Block... blocks)
 	{
-		Item itemInstance = new BlockItem(block, new Item.Properties().group(RT_ITEM_GROUP));
-		itemInstance.setRegistryName(block.getRegistryName());
-		registry.register(itemInstance);
+		for (Block block : blocks)
+		{
+			Item itemInstance = new BlockItem(block, new Item.Properties().group(RT_ITEM_GROUP));
+			itemInstance.setRegistryName(block.getRegistryName());
+			registry.register(itemInstance);
+		}
 	}
 
 	public static void initItemGroup()

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["WWW", " E "],
+  "key": {
+    "W": {
+      "item": "minecraft:birch_planks"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "randomthings:platform_birch",
+    "count": 6
+  }
+}

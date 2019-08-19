@@ -1,6 +1,13 @@
 {
+  "itemGroup.randomthings": "Random Things",
   "block.randomthings.fertilized_dirt": "Fertilized Dirt",
   "block.randomthings.block_of_sticks": "Block of Sticks",
   "block.randomthings.block_of_sticks_returning": "Returning Block of Sticks",
-  "block.randomthings.rainbow_lamp": "Rainbow Lamp"
+  "block.randomthings.rainbow_lamp": "Rainbow Lamp",
+  "block.randomthings.platform_oak": "Oak Platform",
+  "block.randomthings.platform_spruce": "Spruce Platform",
+  "block.randomthings.platform_birch": "Birch Platform",
+  "block.randomthings.platform_jungle": "Jungle Platform",
+  "block.randomthings.platform_acacia": "Acacia Platform",
+  "block.randomthings.platform_darkoak": "Dark Oak Platform"
 }
