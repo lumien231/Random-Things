@@ -14,7 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
-import net.minecraft.item.Items;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -22,8 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -33,28 +32,29 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class RandomThings
 {
 	private static final Logger LOGGER = LogManager.getLogger();
-	
+
 	public static RandomThings INSTANCE;
-	
+
 	ItemGroup rtItemGroup;
 
 	public RandomThings()
 	{
 		INSTANCE = this;
-		
+
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-		
+
 		MinecraftForge.EVENT_BUS.register(this);
-		
+
 		MinecraftForge.EVENT_BUS.addListener((UseHoeEvent event) -> {
 			ItemUseContext context = event.getContext();
-			
+
 			World world = context.getWorld();
 			BlockPos pos = context.getPos();
 			BlockState state = world.getBlockState(pos);
-			
-			
-			if (state.getBlock() == ModBlocks.FERTILIZED_DIRT && !state.get(FertilizedDirtBlock.TILLED))
+
+
+			if (state.getBlock() == ModBlocks.FERTILIZED_DIRT
+					&& !state.get(FertilizedDirtBlock.TILLED))
 			{
 				event.setResult(Result.ALLOW);
 				world.setBlockState(pos, state.with(FertilizedDirtBlock.TILLED, true));
@@ -63,7 +63,7 @@ public class RandomThings
 			}
 		});
 	}
-	
+
 	public void setup(final FMLCommonSetupEvent event)
 	{
 
@@ -74,10 +74,10 @@ public class RandomThings
 	{
 		@SubscribeEvent
 		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
-		{			
+		{
 			ModBlocks.registerBlocks(blockRegistryEvent);
 		}
-		
+
 		@SubscribeEvent
 		public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent)
 		{
@@ -89,7 +89,7 @@ public class RandomThings
 					return new ItemStack(ModBlocks.FERTILIZED_DIRT);
 				}
 			};
-			
+
 			ModItems.registerItems(itemRegistryEvent);
 		}
 	}

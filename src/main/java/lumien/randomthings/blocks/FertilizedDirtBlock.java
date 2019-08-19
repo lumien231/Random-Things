@@ -22,7 +22,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.common.ToolType;
 
-@RTBlock("fertilized_dirt")
+
 public class FertilizedDirtBlock extends Block
 {
 	private static final VoxelShape SHAPE_TILLED = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
@@ -35,7 +35,7 @@ public class FertilizedDirtBlock extends Block
 
 		this.setDefaultState(this.stateContainer.getBaseState().with(TILLED, false));
 	}
-	
+
 	@Override
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
 	{
@@ -56,7 +56,7 @@ public class FertilizedDirtBlock extends Block
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean isToolEffective(BlockState state, ToolType tool)
 	{
@@ -90,7 +90,7 @@ public class FertilizedDirtBlock extends Block
 	{
 		PlantType plantType = plantable.getPlantType(world, pos.up());
 		boolean tilled = state.get(TILLED);
-		
+
 		switch (plantType)
 		{
 			case Desert:
@@ -102,7 +102,8 @@ public class FertilizedDirtBlock extends Block
 			case Cave:
 				return !tilled;
 			case Plains:
-				return !tilled || tilled && world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
+				return !tilled || tilled
+						&& world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
 			case Water:
 				return false;
 			case Beach:
@@ -111,7 +112,7 @@ public class FertilizedDirtBlock extends Block
 
 		return false;
 	}
-	
+
 	@Override
 	public boolean isFertile(BlockState state, IBlockReader world, BlockPos pos)
 	{
