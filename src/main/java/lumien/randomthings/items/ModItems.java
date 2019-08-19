@@ -5,6 +5,8 @@ import lumien.randomthings.blocks.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
@@ -24,6 +26,9 @@ public class ModItems
 	@ObjectHolder("rainbow_lamp")
 	public static Item RAINBOW_LAMP;
 
+
+	public static ItemGroup RT_ITEM_GROUP;
+
 	public static void registerItems(Register<Item> itemRegistryEvent)
 	{
 		IForgeRegistry<Item> registry = itemRegistryEvent.getRegistry();
@@ -37,9 +42,21 @@ public class ModItems
 
 	private static void registerItemForBlock(IForgeRegistry<Item> registry, Block block)
 	{
-		Item itemInstance = new BlockItem(block, new Item.Properties().group(RandomThings.INSTANCE.getItemGroup()));
+		Item itemInstance = new BlockItem(block, new Item.Properties().group(RT_ITEM_GROUP));
 		itemInstance.setRegistryName(block.getRegistryName());
 		registry.register(itemInstance);
+	}
+
+	public static void initItemGroup()
+	{
+		RT_ITEM_GROUP = new ItemGroup("randomthings")
+		{
+			@Override
+			public ItemStack createIcon()
+			{
+				return new ItemStack(ModBlocks.FERTILIZED_DIRT);
+			}
+		};
 	}
 
 }

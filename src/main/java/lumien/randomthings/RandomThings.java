@@ -35,8 +35,6 @@ public class RandomThings
 
 	public static RandomThings INSTANCE;
 
-	ItemGroup rtItemGroup;
-
 	public RandomThings()
 	{
 		INSTANCE = this;
@@ -81,21 +79,9 @@ public class RandomThings
 		@SubscribeEvent
 		public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent)
 		{
-			RandomThings.INSTANCE.rtItemGroup = new ItemGroup("randomthings")
-			{
-				@Override
-				public ItemStack createIcon()
-				{
-					return new ItemStack(ModBlocks.FERTILIZED_DIRT);
-				}
-			};
+			ModItems.initItemGroup();
 
 			ModItems.registerItems(itemRegistryEvent);
 		}
-	}
-
-	public ItemGroup getItemGroup()
-	{
-		return rtItemGroup;
 	}
 }
