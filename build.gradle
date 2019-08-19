@@ -33,6 +33,8 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
+            jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,address=8000,suspend=y'
+
             mods {
                 randomthings {
                     source sourceSets.main
