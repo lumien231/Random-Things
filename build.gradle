@@ -20,7 +20,7 @@ archivesBaseName = 'RandomThings-MC1.14.3'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190621-1.14.2'
+    mappings channel: 'snapshot', version: '20190819-1.14.3'
     
     // accessTransformer = file('build/resources/main/META-INF/accesstransformer.cfg')
 
@@ -75,7 +75,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.3-27.0.25'
+    minecraft 'net.minecraftforge:forge:1.14.4-28.0.49'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
