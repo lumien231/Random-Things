@@ -37,7 +37,8 @@ public class FertilizedDirtBlock extends Block
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	@SuppressWarnings("deprecation")
+	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) 
 	{
 		super.tick(state, worldIn, pos, random);
 

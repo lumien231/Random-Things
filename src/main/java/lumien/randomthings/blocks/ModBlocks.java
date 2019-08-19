@@ -1,8 +1,5 @@
 package lumien.randomthings.blocks;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -20,7 +17,8 @@ public class ModBlocks
 	@ObjectHolder("block_of_sticks_returning")
 	public static Block BLOCK_OF_STICKS_RETURNING;
 
-	private static final Logger LOGGER = LogManager.getLogger();
+	@ObjectHolder("rainbow_lamp")
+	public static Block RAINBOW_LAMP;
 
 	public static void registerBlocks(RegistryEvent.Register<Block> blockRegistryEvent)
 	{
@@ -30,5 +28,7 @@ public class ModBlocks
 
 		registry.register(new SticksBlock(false).setRegistryName("block_of_sticks"));
 		registry.register(new SticksBlock(true).setRegistryName("block_of_sticks_returning"));
+
+		registry.register(new RainbowLampBlock().setRegistryName("rainbow_lamp"));
 	}
 }

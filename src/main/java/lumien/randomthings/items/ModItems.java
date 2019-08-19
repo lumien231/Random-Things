@@ -21,6 +21,9 @@ public class ModItems
 	@ObjectHolder("block_of_sticks_returning")
 	public static Item BLOCK_OF_STICKS_RETURNING;
 
+	@ObjectHolder("rainbow_lamp")
+	public static Item RAINBOW_LAMP;
+
 	public static void registerItems(Register<Item> itemRegistryEvent)
 	{
 		IForgeRegistry<Item> registry = itemRegistryEvent.getRegistry();
@@ -29,6 +32,7 @@ public class ModItems
 
 		registerItemForBlock(registry, ModBlocks.BLOCK_OF_STICKS);
 		registerItemForBlock(registry, ModBlocks.BLOCK_OF_STICKS_RETURNING);
+		registerItemForBlock(registry, ModBlocks.RAINBOW_LAMP);
 	}
 
 	private static void registerItemForBlock(IForgeRegistry<Item> registry, Block block)

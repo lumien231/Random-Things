@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" G ", "RLB"],
+  "key": {
+    "G": {
+      "tag": "forge:dyes/green"
+    },
+    "R": {
+      "tag": "forge:dyes/red"
+    },
+    "B": {
+      "tag": "forge:dyes/blue"
+    },
+    "L": {
+      "item": "minecraft:redstone_lamp"
+    }
+  },
+  "result": {
+    "item": "randomthings:rainbow_lamp"
+  }
+}
