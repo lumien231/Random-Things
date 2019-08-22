@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=east,color=red": { "model": "randomthings:block/advanced_redstone_wall_torch" },
+    "facing=south,color=red": { "model": "randomthings:block/advanced_redstone_wall_torch", "y": 90 },
+    "facing=west,color=red": { "model": "randomthings:block/advanced_redstone_wall_torch", "y": 180 },
+    "facing=north,color=red": { "model": "randomthings:block/advanced_redstone_wall_torch", "y": 270 },
+    "facing=east,color=green": { "model": "randomthings:block/advanced_redstone_wall_torch_green" },
+    "facing=south,color=green": { "model": "randomthings:block/advanced_redstone_wall_torch_green", "y": 90 },
+    "facing=west,color=green": { "model": "randomthings:block/advanced_redstone_wall_torch_green", "y": 180 },
+    "facing=north,color=green": { "model": "randomthings:block/advanced_redstone_wall_torch_green", "y": 270 }
+  }
+}

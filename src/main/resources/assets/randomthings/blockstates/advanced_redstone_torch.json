@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "color=red": { "model": "randomthings:block/advanced_redstone_torch" },
+    "color=green": { "model": "randomthings:block/advanced_redstone_torch_green" }
+  }
+}

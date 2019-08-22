@@ -1,4 +1,4 @@
-package lumien.randomthings.blocks;
+package lumien.randomthings.block;
 
 import java.util.Random;
 
@@ -38,7 +38,7 @@ public class FertilizedDirtBlock extends Block
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) 
+	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
 	{
 		super.tick(state, worldIn, pos, random);
 
@@ -103,8 +103,7 @@ public class FertilizedDirtBlock extends Block
 			case Cave:
 				return !tilled;
 			case Plains:
-				return !tilled || tilled
-						&& world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
+				return !tilled || tilled && world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
 			case Water:
 				return false;
 			case Beach:

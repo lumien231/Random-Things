@@ -3,17 +3,21 @@ package lumien.randomthings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import lumien.randomthings.blocks.FertilizedDirtBlock;
-import lumien.randomthings.blocks.ModBlocks;
-import lumien.randomthings.items.ModItems;
+import lumien.randomthings.block.FertilizedDirtBlock;
+import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.screen.ModScreens;
+import lumien.randomthings.container.ModContainerTypes;
+import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.ModConstants;
+import lumien.randomthings.network.RTPacketHandler;
+import lumien.randomthings.tileentity.ModTileEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +28,7 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -39,7 +44,8 @@ public class RandomThings
 	{
 		INSTANCE = this;
 
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 
 		MinecraftForge.EVENT_BUS.register(this);
 
@@ -51,8 +57,7 @@ public class RandomThings
 			BlockState state = world.getBlockState(pos);
 
 
-			if (state.getBlock() == ModBlocks.FERTILIZED_DIRT
-					&& !state.get(FertilizedDirtBlock.TILLED))
+			if (state.getBlock() == ModBlocks.FERTILIZED_DIRT && !state.get(FertilizedDirtBlock.TILLED))
 			{
 				event.setResult(Result.ALLOW);
 				world.setBlockState(pos, state.with(FertilizedDirtBlock.TILLED, true));
@@ -62,9 +67,14 @@ public class RandomThings
 		});
 	}
 
-	public void setup(final FMLCommonSetupEvent event)
+	private void setupCommon(final FMLCommonSetupEvent event)
 	{
+		RTPacketHandler.register();
+	}
 
+	private void setupClient(final FMLClientSetupEvent event)
+	{
+		ModScreens.register();
 	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -82,6 +92,18 @@ public class RandomThings
 			ModItems.initItemGroup();
 
 			ModItems.registerItems(itemRegistryEvent);
+		}
+
+		@SubscribeEvent
+		public static void onTileEntityTypesRegistry(final RegistryEvent.Register<TileEntityType<?>> tileEntityTypeRegistryEvent)
+		{
+			ModTileEntityTypes.registerTypes(tileEntityTypeRegistryEvent);
+		}
+
+		@SubscribeEvent
+		public static void onContainerTypesRegistry(final RegistryEvent.Register<ContainerType<?>> containerTypeRegistryEvent)
+		{
+			ModContainerTypes.registerContainerTypes(containerTypeRegistryEvent);
 		}
 	}
 }

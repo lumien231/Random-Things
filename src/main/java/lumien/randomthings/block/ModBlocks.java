@@ -1,4 +1,4 @@
-package lumien.randomthings.blocks;
+package lumien.randomthings.block;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
@@ -13,6 +13,13 @@ public class ModBlocks
 
 	@ObjectHolder("rainbow_lamp")
 	public static Block RAINBOW_LAMP;
+
+
+	@ObjectHolder("advanced_redstone_torch")
+	public static Block ADVANCED_REDSTONE_TORCH;
+
+	@ObjectHolder("advanced_redstone_wall_torch")
+	public static Block ADVANCED_WALL_REDSTONE_TORCH;
 
 
 	@ObjectHolder("block_of_sticks")
@@ -46,6 +53,9 @@ public class ModBlocks
 
 		registry.register(new FertilizedDirtBlock().setRegistryName("fertilized_dirt"));
 		registry.register(new RainbowLampBlock().setRegistryName("rainbow_lamp"));
+
+		registry.register(new AdvancedRedstoneTorchBlock().setRegistryName("advanced_redstone_torch"));
+		registry.register(new AdvancedRedstoneWallTorchBlock().setRegistryName("advanced_redstone_wall_torch"));
 
 		registry.register(new SticksBlock(false).setRegistryName("block_of_sticks"));
 		registry.register(new SticksBlock(true).setRegistryName("block_of_sticks_returning"));

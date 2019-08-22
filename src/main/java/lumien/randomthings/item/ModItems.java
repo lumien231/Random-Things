@@ -1,12 +1,12 @@
-package lumien.randomthings.items;
+package lumien.randomthings.item;
 
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.blocks.ModBlocks;
+import lumien.randomthings.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.WallOrFloorItem;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
@@ -16,6 +16,7 @@ public class ModItems
 {
 	@ObjectHolder("fertilized_dirt")
 	public static Item FERTILIZED_DIRT;
+
 
 	@ObjectHolder("block_of_sticks")
 	public static Item BLOCK_OF_STICKS;
@@ -34,7 +35,11 @@ public class ModItems
 		IForgeRegistry<Item> registry = itemRegistryEvent.getRegistry();
 
 		registerItemForBlock(registry, ModBlocks.FERTILIZED_DIRT);
+
 		registerItemForBlock(registry, ModBlocks.RAINBOW_LAMP);
+
+		registry.register(new WallOrFloorItem(ModBlocks.ADVANCED_REDSTONE_TORCH, ModBlocks.ADVANCED_WALL_REDSTONE_TORCH, new Item.Properties().group(RT_ITEM_GROUP)).setRegistryName(ModBlocks.ADVANCED_REDSTONE_TORCH.getRegistryName()));
+
 		registerItemForBlock(registry, ModBlocks.BLOCK_OF_STICKS, ModBlocks.BLOCK_OF_STICKS_RETURNING);
 		registerItemForBlock(registry, ModBlocks.PLATFORM_OAK, ModBlocks.PLATFORM_SPRUCE, ModBlocks.PLATFORM_BIRCH, ModBlocks.PLATFORM_JUNGLE, ModBlocks.PLATFORM_ACACIA, ModBlocks.PLATFORM_DARKOAK);
 	}

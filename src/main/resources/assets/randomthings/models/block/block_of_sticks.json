@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthings:blocks/block_of_sticks"
+    "all": "randomthings:block/block_of_sticks"
   }
 }

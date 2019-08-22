@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:block/cube_all",
-    "textures": {
-        "all": "randomthings:blocks/fertilized_dirt"
-    }
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "randomthings:block/fertilized_dirt"
+  }
 }

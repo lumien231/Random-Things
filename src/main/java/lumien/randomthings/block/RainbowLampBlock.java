@@ -1,4 +1,4 @@
-package lumien.randomthings.blocks;
+package lumien.randomthings.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -9,5 +9,8 @@
   "block.randomthings.platform_birch": "Birch Platform",
   "block.randomthings.platform_jungle": "Jungle Platform",
   "block.randomthings.platform_acacia": "Acacia Platform",
-  "block.randomthings.platform_darkoak": "Dark Oak Platform"
+  "block.randomthings.platform_darkoak": "Dark Oak Platform",
+  "block.randomthings.advanced_redstone_torch": "Advanced Redstone Torch",
+  "gui.randomthings.advanced_redstone_torch.rs": "Red Strength",
+  "gui.randomthings.advanced_redstone_torch.gs": "Green Strength"
 }

@@ -1,11 +1,11 @@
-package lumien.randomthings.blocks;
+package lumien.randomthings.block;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import lumien.randomthings.items.ModItems;
+import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;

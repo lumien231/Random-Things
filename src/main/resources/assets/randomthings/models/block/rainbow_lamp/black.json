@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "randomthings:blocks/rainbow_lamp/black"
+    "all": "randomthings:block/rainbow_lamp/black"
   }
 }
