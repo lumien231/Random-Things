@@ -2,10 +2,12 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import net.minecraft.block.AttachedStemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.StemBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.pathfinding.PathType;
@@ -91,6 +93,13 @@ public class FertilizedDirtBlock extends Block
 	{
 		PlantType plantType = plantable.getPlantType(world, pos.up());
 		boolean tilled = state.get(TILLED);
+
+		Block b = plantable.getPlant(world, pos.offset(facing)).getBlock();
+
+		if (b.getBlock() instanceof AttachedStemBlock)
+		{
+			return true;
+		}
 
 		switch (plantType)
 		{
