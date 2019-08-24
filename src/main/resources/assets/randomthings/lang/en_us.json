@@ -11,6 +11,14 @@
   "block.randomthings.platform_acacia": "Acacia Platform",
   "block.randomthings.platform_darkoak": "Dark Oak Platform",
   "block.randomthings.advanced_redstone_torch": "Advanced Redstone Torch",
+  "item.randomthings.divining_rod_coal": "Coal Divining Rod",
+  "item.randomthings.divining_rod_iron": "Iron Divining Rod",
+  "item.randomthings.divining_rod_gold": "Gold Divining Rod",
+  "item.randomthings.divining_rod_lapis": "Lapis Divining Rod",
+  "item.randomthings.divining_rod_redstone": "Redstone Divining Rod",
+  "item.randomthings.divining_rod_emerald": "Emerald Divining Rod",
+  "item.randomthings.divining_rod_diamond": "Diamond Divining Rod",
+  "item.randomthings.divining_rod_vanilla": "Vanilla Divining Rod",
   "gui.randomthings.advanced_redstone_torch.rs": "Red Strength",
   "gui.randomthings.advanced_redstone_torch.gs": "Green Strength"
 }

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import lumien.randomthings.block.FertilizedDirtBlock;
 import lumien.randomthings.block.ModBlocks;
+import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.screen.ModScreens;
 import lumien.randomthings.container.ModContainerTypes;
 import lumien.randomthings.item.ModItems;
@@ -22,8 +23,11 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -65,6 +69,13 @@ public class RandomThings
 				world.playSound(playerentity, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 		});
+
+		MinecraftForge.EVENT_BUS.addListener((ClientTickEvent event) -> {
+			if (event.phase == TickEvent.Phase.END)
+			{
+				DiviningRodRenderer.get().tick();
+			}
+		});
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event)
@@ -75,7 +86,13 @@ public class RandomThings
 	private void setupClient(final FMLClientSetupEvent event)
 	{
 		ModScreens.register();
+
+		MinecraftForge.EVENT_BUS.addListener((RenderWorldLastEvent rwl) -> {
+			DiviningRodRenderer.get().render();
+		});
 	}
+
+
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents
