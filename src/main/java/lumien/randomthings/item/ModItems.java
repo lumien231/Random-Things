@@ -55,6 +55,7 @@ public class ModItems
 		// Item Blocks
 		registerItemForBlock(registry, ModBlocks.FERTILIZED_DIRT);
 		registerItemForBlock(registry, ModBlocks.RAINBOW_LAMP);
+		registerItemForBlock(registry, ModBlocks.SUPER_LUBRICENT_STONE);
 		registry.register(new WallOrFloorItem(ModBlocks.ADVANCED_REDSTONE_TORCH, ModBlocks.ADVANCED_WALL_REDSTONE_TORCH, new Item.Properties().group(RT_ITEM_GROUP)).setRegistryName(ModBlocks.ADVANCED_REDSTONE_TORCH.getRegistryName()));
 		registerItemForBlock(registry, ModBlocks.BLOCK_OF_STICKS, ModBlocks.BLOCK_OF_STICKS_RETURNING);
 		registerItemForBlock(registry, ModBlocks.PLATFORM_OAK, ModBlocks.PLATFORM_SPRUCE, ModBlocks.PLATFORM_BIRCH, ModBlocks.PLATFORM_JUNGLE, ModBlocks.PLATFORM_ACACIA, ModBlocks.PLATFORM_DARKOAK);

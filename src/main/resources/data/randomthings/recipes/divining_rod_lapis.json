@@ -3,8 +3,7 @@
   "pattern": ["RSR", "SES", "S S"],
   "key": {
     "R": {
-      "item": "minecraft:dye",
-      "data": 4
+      "item": "minecraft:lapis_lazuli"
     },
     "S": {
       "item": "minecraft:stick"

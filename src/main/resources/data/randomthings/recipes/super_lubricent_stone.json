@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["GSG", "STS", "GSG"],
+  "key": {
+    "S": {
+      "item": "minecraft:seagrass"
+    },
+    "G": {
+      "item": "minecraft:snowball"
+    },
+    "T": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "randomthings:super_lubricent_stone",
+    "count": 4
+  }
+}

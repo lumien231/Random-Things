@@ -21,6 +21,9 @@ public class ModBlocks
 	@ObjectHolder("advanced_redstone_wall_torch")
 	public static Block ADVANCED_WALL_REDSTONE_TORCH;
 
+	@ObjectHolder("super_lubricent_stone")
+	public static Block SUPER_LUBRICENT_STONE;
+
 
 	@ObjectHolder("block_of_sticks")
 	public static Block BLOCK_OF_STICKS;
@@ -59,6 +62,8 @@ public class ModBlocks
 
 		registry.register(new SticksBlock(false).setRegistryName("block_of_sticks"));
 		registry.register(new SticksBlock(true).setRegistryName("block_of_sticks_returning"));
+
+		registry.register(new SuperLubricentStoneBlock().setRegistryName("super_lubricent_stone"));
 
 		registry.register(new PlatformBlock().setRegistryName("platform_oak"));
 		registry.register(new PlatformBlock().setRegistryName("platform_spruce"));
