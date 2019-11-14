@@ -15,6 +15,9 @@ public class ModTileEntityTypes
 {
 	@ObjectHolder("advanced_redstone_torch")
 	public static TileEntityType<AdvancedRedstoneTorchTileEntity> ADVANCED_REDSTONE_TORCH;
+	
+	@ObjectHolder("blood_rose")
+	public static TileEntityType<BloodRoseTileEntity> BLOOD_ROSE;
 
 
 	public static void registerTypes(RegistryEvent.Register<TileEntityType<?>> typeRegistryEvent)
@@ -22,6 +25,7 @@ public class ModTileEntityTypes
 		IForgeRegistry<TileEntityType<?>> registry = typeRegistryEvent.getRegistry();
 
 		registerSimple(registry, "advanced_redstone_torch", AdvancedRedstoneTorchTileEntity::new, ModBlocks.ADVANCED_REDSTONE_TORCH, ModBlocks.ADVANCED_WALL_REDSTONE_TORCH);
+		registerSimple(registry, "blood_rose", BloodRoseTileEntity::new, ModBlocks.BLOOD_ROSE);
 	}
 
 	private static void registerSimple(IForgeRegistry<TileEntityType<?>> registry, String name, Supplier<? extends TileEntity> factoryIn, Block... validBlocks)

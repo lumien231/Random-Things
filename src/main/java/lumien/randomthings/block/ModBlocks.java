@@ -49,6 +49,9 @@ public class ModBlocks
 
 	@ObjectHolder("platform_darkoak")
 	public static Block PLATFORM_DARKOAK;
+	
+	@ObjectHolder("blood_rose")
+	public static Block BLOOD_ROSE;
 
 	public static void registerBlocks(RegistryEvent.Register<Block> blockRegistryEvent)
 	{
@@ -71,5 +74,7 @@ public class ModBlocks
 		registry.register(new PlatformBlock().setRegistryName("platform_jungle"));
 		registry.register(new PlatformBlock().setRegistryName("platform_acacia"));
 		registry.register(new PlatformBlock().setRegistryName("platform_darkoak"));
+		
+		registry.register(new BloodRoseBlock().setRegistryName("blood_rose"));
 	}
 }

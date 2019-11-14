@@ -1,9 +1,15 @@
 package lumien.randomthings.network;
 
 import lumien.randomthings.network.messages.ContainerSignalMessage;
+import lumien.randomthings.network.messages.VisualEffectMessage;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
+import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 /**
@@ -19,11 +25,18 @@ public class RTPacketHandler
 		int disc = 0;
 
 		register(disc++, ContainerSignalMessage.class);
+		register(disc++, VisualEffectMessage.class);
 	}
 
 	public static void sendToServer(IRTMessage message)
 	{
 		HANDLER.sendToServer(message);
+	}
+
+	public static void sendToAllNear(IRTMessage message, World world, BlockPos pos, float radius)
+	{
+		PacketTarget target = PacketDistributor.NEAR.with(() -> new TargetPoint(pos.getX(), pos.getY(), pos.getZ(), radius, world.getDimension().getType()));
+		HANDLER.send(target, message);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

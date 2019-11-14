@@ -3,15 +3,19 @@ package lumien.randomthings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import lumien.randomthings.asm.AsmHandler;
 import lumien.randomthings.block.FertilizedDirtBlock;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.client.renderer.DiviningRodRenderer;
 import lumien.randomthings.client.screen.ModScreens;
+import lumien.randomthings.client.vfx.VFXHandler;
 import lumien.randomthings.container.ModContainerTypes;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.lib.ModConstants;
 import lumien.randomthings.network.RTPacketHandler;
 import lumien.randomthings.tileentity.ModTileEntityTypes;
+import lumien.randomthings.worldgen.BloodRoseFeature;
+import lumien.randomthings.worldgen.ModFeatures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,6 +27,12 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.placement.FrequencyConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -35,6 +45,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 
 
 @Mod(ModConstants.MOD_ID)
@@ -60,7 +71,6 @@ public class RandomThings
 			BlockPos pos = context.getPos();
 			BlockState state = world.getBlockState(pos);
 
-
 			if (state.getBlock() == ModBlocks.FERTILIZED_DIRT && !state.get(FertilizedDirtBlock.TILLED))
 			{
 				event.setResult(Result.ALLOW);
@@ -74,13 +84,19 @@ public class RandomThings
 			if (event.phase == TickEvent.Phase.END)
 			{
 				DiviningRodRenderer.get().tick();
+				VFXHandler.INSTANCE.tick();
 			}
 		});
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event)
 	{
+		AsmHandler.modBlockLight(0F, 1);
 		RTPacketHandler.register();
+		
+		ForgeRegistries.BIOMES.forEach(b -> {
+			b.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(ModFeatures.BLOOD_ROSES, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_32, new FrequencyConfig(1)));
+		});
 	}
 
 	private void setupClient(final FMLClientSetupEvent event)
@@ -89,6 +105,7 @@ public class RandomThings
 
 		MinecraftForge.EVENT_BUS.addListener((RenderWorldLastEvent rwl) -> {
 			DiviningRodRenderer.get().render();
+			VFXHandler.INSTANCE.render(rwl.getPartialTicks());
 		});
 	}
 
@@ -121,6 +138,11 @@ public class RandomThings
 		public static void onContainerTypesRegistry(final RegistryEvent.Register<ContainerType<?>> containerTypeRegistryEvent)
 		{
 			ModContainerTypes.registerContainerTypes(containerTypeRegistryEvent);
+		}
+		
+		@SubscribeEvent
+		public static void onFeaturesRegistry(final RegistryEvent.Register<Feature<?>> featureRegistryEvent) {
+			ModFeatures.registerFeatures(featureRegistryEvent);
 		}
 	}
 }

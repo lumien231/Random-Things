@@ -31,7 +31,9 @@ public class ModItems
 
 	@ObjectHolder("rainbow_lamp")
 	public static Item RAINBOW_LAMP;
-
+	
+	@ObjectHolder("blood_rose_petal")
+	public static Item BLOOD_ROSE_PETAL;
 
 	public static ItemGroup RT_ITEM_GROUP;
 
@@ -40,6 +42,9 @@ public class ModItems
 		IForgeRegistry<Item> registry = itemRegistryEvent.getRegistry();
 
 		// Items
+		registry.register(new Item(new Item.Properties().group(RT_ITEM_GROUP)).setRegistryName("blood_rose_petal"));
+		
+		// Divining Rods
 		registerDiviningRod(registry, "coal", new Color(20, 20, 20, 50), Tags.Blocks.ORES_COAL.getId().toString());
 		registerDiviningRod(registry, "iron", new Color(211, 180, 159, 50), Tags.Blocks.ORES_IRON.getId().toString());
 		registerDiviningRod(registry, "gold", new Color(246, 233, 80, 50), Tags.Blocks.ORES_GOLD.getId().toString());
@@ -48,7 +53,7 @@ public class ModItems
 		registerDiviningRod(registry, "emerald", new Color(0, 220, 0, 50), Tags.Blocks.ORES_EMERALD.getId().toString());
 		registerDiviningRod(registry, "diamond", new Color(87, 221, 229, 50), Tags.Blocks.ORES_DIAMOND.getId().toString());
 		registerDiviningRod(registry, "vanilla", colorHolder.toArray(new Color[0]), tagHolder.toArray(new String[0]));
-
+		
 		tagHolder.clear();
 		colorHolder.clear();
 
@@ -59,6 +64,7 @@ public class ModItems
 		registry.register(new WallOrFloorItem(ModBlocks.ADVANCED_REDSTONE_TORCH, ModBlocks.ADVANCED_WALL_REDSTONE_TORCH, new Item.Properties().group(RT_ITEM_GROUP)).setRegistryName(ModBlocks.ADVANCED_REDSTONE_TORCH.getRegistryName()));
 		registerItemForBlock(registry, ModBlocks.BLOCK_OF_STICKS, ModBlocks.BLOCK_OF_STICKS_RETURNING);
 		registerItemForBlock(registry, ModBlocks.PLATFORM_OAK, ModBlocks.PLATFORM_SPRUCE, ModBlocks.PLATFORM_BIRCH, ModBlocks.PLATFORM_JUNGLE, ModBlocks.PLATFORM_ACACIA, ModBlocks.PLATFORM_DARKOAK);
+		registerItemForBlock(registry, ModBlocks.BLOOD_ROSE);
 	}
 
 	static ArrayList<Color> colorHolder = new ArrayList<Color>();

@@ -6,6 +6,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Function;
+
+import javax.vecmath.Vector3f;
+
+import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 
@@ -56,6 +62,7 @@ public class DiviningRodRenderer
 		double playerY = pos.getY();
 		double playerZ = pos.getZ();
 
+		GlStateManager.disableTexture();
 		GlStateManager.disableDepthTest();
 		RenderUtils.enableDefaultBlending();
 
@@ -66,9 +73,82 @@ public class DiviningRodRenderer
 			Color c = indicator.color;
 			RenderUtils.drawCube((float) (indicator.target.getX() + 0.5 - size / 2), (float) (indicator.target.getY() + 0.5 - size / 2), (float) (indicator.target.getZ() + 0.5 - size / 2), size, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
 		}
+
+		// Undo
+
+		RenderUtils.enableDefaultBlending();
+		GlStateManager.enableTexture();
+
 		GlStateManager.translated(playerX, playerY, playerZ);
 
 		GlStateManager.enableDepthTest();
+	}
+
+	private void renderWat()
+	{
+		float renderX = -698;
+		float renderY = 73;
+		float renderZ = -92;
+
+		float partialTicks = Minecraft.getInstance().getRenderPartialTicks();
+
+		ActiveRenderInfo ari = Minecraft.getInstance().gameRenderer.getActiveRenderInfo();
+
+
+		int height = 5;
+
+		int lineLength = 200;
+
+		float time = ari.getRenderViewEntity().world.getGameTime() + partialTicks;
+
+		Random rng = new Random(5);
+
+		int loopHeight = height * 100 + lineLength;
+
+		float circleRadius = 1F;
+
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+		GlStateManager.lineWidth(2f);
+		GlStateManager.alphaFunc(GL11.GL_ALWAYS, 0);
+		for (float p = 0; p < Math.PI * 2; p += Math.PI / 4F)
+		{
+			float myProgress = (float) ((time / 100F + rng.nextFloat() * 5) % (Math.PI * 0.5));
+			int startY = (int) (Math.sin((myProgress)) * loopHeight);
+
+			float g = rng.nextFloat();
+			float b = rng.nextFloat();
+
+			int endY = Math.min(loopHeight, startY + lineLength);
+
+			if (startY < lineLength)
+			{
+				startY = Math.max(0, startY - lineLength);
+				endY = Math.max(0, endY - lineLength);
+			}
+			else
+			{
+				startY -= lineLength;
+				endY -= lineLength;
+			}
+
+			GlStateManager.begin(GL11.GL_LINE_STRIP);
+			for (int modY = startY; modY <= endY; modY += 1)
+			{
+				float radius = (float) Math.sin(Math.PI / height * modY / 100F) * circleRadius;
+				float modX = (float) Math.sin(p) * radius;
+				float modZ = (float) Math.cos(p) * radius;
+
+				float alpha = endY - modY < 10 ? (1 / 10F * (endY - modY)) : 1;
+
+				GlStateManager.color4f(0.2F, g, b, alpha);
+
+				GlStateManager.vertex3f(renderX + modX, renderY + modY / 100F, renderZ + modZ);
+			}
+			GlStateManager.end();
+		}
+
+		RenderUtils.enableDefaultBlending();
+		GlStateManager.enableTexture();
 	}
 
 	public void tick()
