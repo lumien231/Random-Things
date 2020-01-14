@@ -53,6 +53,7 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 
 		GlStateManager.disableCull();
 
+        GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, z);
 
 		float progress = (2) * (RTEventHandler.clientAnimationCounter + partialTicks);
@@ -74,6 +75,7 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 			
 
 			// x - Axis
+            GlStateManager.pushMatrix();
 			GlStateManager.rotate(rotX, 1, 0, 0);
 			GlStateManager.rotate(rotZ, 0, 0, 1);
 			GlStateManager.rotate(progress, 0, 1, 0);
@@ -85,14 +87,10 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 				return 3;
 			});
 			MKRRenderUtil.renderCircleDecTriPart3Tri(radius, 0.04, outerFunction.next(ColorFunctions.flicker(rng.nextInt(1000), 40)).tt(progress), 30);
-			GlStateManager.rotate(-progress, 0, 1, 0);
-			GlStateManager.rotate(-rotZ, 0, 0, 1);
-			GlStateManager.rotate(-rotX, 1, 0, 0);
+            GlStateManager.popMatrix();
 		}
 
-
-
-		GlStateManager.translate(-(x), -(y), -(z));
+        GlStateManager.popMatrix();
 
 		GlStateManager.enableCull();
 
