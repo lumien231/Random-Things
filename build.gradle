@@ -14,14 +14,14 @@ repositories {
         url = "http://maven.cil.li/" 
     }
     maven{
-        url = "http://dvs1.progwml6.com/files/maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
     }
 }
 
 dependencies {
     compile "li.cil.oc:OpenComputers:MC1.12.1-1.7.0.7+:api"
     //compile fileTree(dir: 'libs', include: ['*.*'])
-    deobfCompile "mezz.jei:jei_1.12.2:4.10.0.199"
+    compile "mezz.jei:jei_1.12.2:4.10.0.199"
 }
 
 version = "4.2.7.3"
@@ -48,7 +48,7 @@ minecraft {
     
     replaceIn "lib/Reference.java"
     replace "@VERSION@",project.version
-	replace "@FINGERPRINT@", project.signSHA1
+	replace "@FINGERPRINT@", project.findProperty("'signSHA1'")
     
     useDepAts = true
 }
@@ -102,10 +102,10 @@ task signJar(type: SignJar, dependsOn: reobfJar) {
         project.hasProperty('keyStore')
     }
 
-    keyStore = project.keyStore
-    alias = project.keyStoreAlias
-    storePass = project.keyStorePass
-    keyPass = project.keyStoreKeyPass
+    keyStore = project.findProperty("keyStore")
+    alias = project.findProperty("keyStoreAlias'")
+    storePass = project.findProperty("keyStorePass")
+    keyPass = project.findProperty("keyStoreKeyPass")
     inputFile = jar.archivePath
     outputFile = jar.archivePath
 }
