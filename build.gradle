@@ -14,7 +14,7 @@ repositories {
         url = "http://maven.cil.li/" 
     }
     maven{
-        url = "https://dvs1.progwml6.com/files/maven/"
+        url = "http://dvs1.progwml6.com/files/maven/"
     }
 }
 
