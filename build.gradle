@@ -48,7 +48,7 @@ minecraft {
     
     replaceIn "lib/Reference.java"
     replace "@VERSION@",project.version
-	replace "@FINGERPRINT@", project.findProperty("'signSHA1'")
+	replace "@FINGERPRINT@", project.findProperty("signSHA1")
     
     useDepAts = true
 }
