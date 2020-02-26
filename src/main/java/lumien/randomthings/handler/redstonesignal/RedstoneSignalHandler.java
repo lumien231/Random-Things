@@ -76,9 +76,11 @@ public class RedstoneSignalHandler extends WorldSavedData
 		}
 	}
 	public  synchronized  boolean switchSignal(World worldObj, BlockPos pos, int strength){
-		if(worldObj.isBlockLoaded(pos)){
+		if(worldObj.isBlockLoaded(pos))
+		{
 			RedstoneSignal redstoneSignalNow = isPowered(worldObj,pos);
-			if(redstoneSignalNow!=null){
+			if(redstoneSignalNow!=null)
+			{
 				redstoneSignalNow.setPowered(false);
 			}
 			else
@@ -87,7 +89,9 @@ public class RedstoneSignalHandler extends WorldSavedData
 				updatePosition(worldObj,pos);
 			}
 			return true;
-		}else {
+		}
+		else
+		{
 			return false;
 		}
 	}
@@ -95,8 +99,6 @@ public class RedstoneSignalHandler extends WorldSavedData
 
 	public synchronized void tick()
 	{
-		//deal added redstone signal events
-		// it is synchronized, it can run at add action time
 		Iterator<RedstoneSignal> iterator = redstoneSignals.iterator();
 
 		while (iterator.hasNext())

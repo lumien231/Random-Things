@@ -15,7 +15,6 @@ public class RedstoneSignal
 
 	private int redstoneStrength;
 	private boolean isPowered=true;
-
 	private boolean isStill=false;
 
 	public RedstoneSignal()
@@ -47,11 +46,9 @@ public class RedstoneSignal
 
 	public boolean tick() //executed period 0.02 second
 	{
-		if(isStill){ // if need active all the time
-			if(isPowered){  //if signal has not been cancelled
-				return false;
-			}else {  //if signal has been cancelled
-				return true;  // disable signal active
+		if(isStill){
+			if(!isPowered){
+				return true;
 			}
 		}else {
 			this.age++;
@@ -59,11 +56,8 @@ public class RedstoneSignal
 			{
 				return true;
 			}
-			else
-			{
-				return false;
-			}
 		}
+		return false;
 	}
 
 	public void writeToNBT(NBTTagCompound compound)

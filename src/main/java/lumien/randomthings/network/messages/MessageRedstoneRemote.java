@@ -56,18 +56,17 @@ public class MessageRedstoneRemote implements IRTMessage
 			if (using != null && using.getItem() instanceof ItemRedstoneRemote)
 			{
 				InventoryItem itemInventory = new InventoryItem("RedstoneRemote", 18, using);
-
 				ItemStack positionFilter = itemInventory.getStackInSlot(slotUsed);//get position filter from remote redstone
 
 				if (positionFilter != null && positionFilter.getItem() == ModItems.positionFilter)
 				{
 					BlockPos target = ItemPositionFilter.getPosition(positionFilter); //get position from position filter
 
+
 					if (target != null)
 					{
-						//@todo: I find it! This code can add redstone signal to the cube we targetted.
-						//RedstoneSignalHandler.getHandler().addSignal(player.world, target, 20, 15);
-						RedstoneSignalHandler.getHandler().switchSignal(player.world, target,15);
+						RedstoneSignalHandler.getHandler().addSignal(player.world, target, 20, 15);
+						//RedstoneSignalHandler.getHandler().switchSignal(player.world, target,15);
 					}
 				}
 			}
