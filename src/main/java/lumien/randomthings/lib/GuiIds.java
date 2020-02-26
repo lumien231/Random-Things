@@ -37,4 +37,9 @@ public class GuiIds
 	public static final int EXTRACTION_PLATE = 33;
 	public static final int CHUNK_ANALYZER = 34;
 	public static final int IGNITER = 35;
+
+	public static final int REDSTONE_REMOTE_STILL_EDIT = 36;
+	public static final int REDSTONE_REMOTE_STILL_USE = 37;
+
+
 }

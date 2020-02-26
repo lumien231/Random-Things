@@ -240,6 +240,7 @@ item.spectreKey.name=通灵之钥
 item.soundRecorder.name=录音机
 item.redstoneActivator.name=红石脉冲器
 item.redstoneRemote.name=远程红石脉冲器
+item.redstoneRemoteStill.name=远程持续红石脉冲器
 item.spectreAnchor.name=通灵锚
 item.spectreSword.name=通灵之剑
 item.goldenCompass.name=黄金指南针

@@ -137,6 +137,7 @@ public class ItemModels
 		registerItem(ModItems.itemFilter);
 		registerItem(ModItems.spectreKey);
 		registerItem(ModItems.redstoneRemote);
+		registerItem(ModItems.redstoneRemoteStill);
 		registerItem(ModItems.spectreAnchor);
 		registerItem(ModItems.spectreSword);
 		registerItem(ModItems.goldenCompass);

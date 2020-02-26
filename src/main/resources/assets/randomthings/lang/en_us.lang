@@ -240,6 +240,7 @@ item.spectreKey.name=Spectre Key
 item.soundRecorder.name=Sound Recorder
 item.redstoneActivator.name=Redstone Activator
 item.redstoneRemote.name=Redstone Remote
+item.redstoneRemoteStill.name=Redstone Remote Still
 item.spectreAnchor.name=Spectre Anchor
 item.spectreSword.name=Spectre Sword
 item.goldenCompass.name=Golden Compass

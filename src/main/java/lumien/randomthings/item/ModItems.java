@@ -35,6 +35,7 @@ public class ModItems
 	public static ItemItemFilter itemFilter;
 	public static ItemRedstoneActivator redstoneActivator;
 	public static ItemRedstoneRemote redstoneRemote;
+	public static ItemRedstoneRemoteStill redstoneRemoteStill;
 	public static ItemGoldenCompass goldenCompass;
 	public static ItemBlazeAndSteel blazeAndSteel;
 	public static ItemRunePattern runePattern;
@@ -96,6 +97,7 @@ public class ModItems
 		itemFilter = new ItemItemFilter();
 		redstoneActivator = new ItemRedstoneActivator();
 		redstoneRemote = new ItemRedstoneRemote();
+		redstoneRemoteStill = new ItemRedstoneRemoteStill();
 		goldenCompass = new ItemGoldenCompass();
 		blazeAndSteel = new ItemBlazeAndSteel();
 		runePattern = new ItemRunePattern();

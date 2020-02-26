@@ -1,5 +1,6 @@
 package lumien.randomthings.client.gui.redstoneremote;
 
+import lumien.randomthings.container.ContainerRedstoneRemoteStill;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.client.gui.GuiContainerBase;

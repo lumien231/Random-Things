@@ -240,6 +240,7 @@ item.spectreKey.name=Призрачный ключ
 item.soundRecorder.name=Звукозаписывающее устройство
 item.redstoneActivator.name=Активатор редстоун
 item.redstoneRemote.name=Дистанционное управление редстоун
+item.redstoneRemoteStill.name=дистанционный длительно импульсный рубин
 item.spectreAnchor.name=Призрачный якорь
 item.spectreSword.name=Призрачный меч
 item.goldenCompass.name=Золотой компас

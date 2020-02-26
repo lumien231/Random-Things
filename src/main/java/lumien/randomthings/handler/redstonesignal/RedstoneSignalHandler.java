@@ -76,17 +76,17 @@ public class RedstoneSignalHandler extends WorldSavedData
 		}
 	}
 	public  synchronized  boolean switchSignal(World worldObj, BlockPos pos, int strength){
-		if(worldObj.isBlockLoaded(pos))
+		if(worldObj.isBlockLoaded(pos)) //if block is uploaded
 		{
-			RedstoneSignal redstoneSignalNow = isPowered(worldObj,pos);
-			if(redstoneSignalNow!=null)
+			RedstoneSignal redstoneSignalNow = isPowered(worldObj,pos);  // get class RedstoneSignal according to pos in list if has
+			if(redstoneSignalNow!=null) //if has block in list
 			{
-				redstoneSignalNow.setPowered(false);
+				redstoneSignalNow.setPowered(false); // set isPowered false, make tick() return true and remove it from list
 			}
-			else
+			else //if there is no block in list
 			{
-				redstoneSignals.add(new RedstoneSignal(worldObj.provider.getDimension(), pos, strength));
-				updatePosition(worldObj,pos);
+				redstoneSignals.add(new RedstoneSignal(worldObj.provider.getDimension(), pos, strength)); //new one and add it to list
+				updatePosition(worldObj,pos); //update
 			}
 			return true;
 		}
