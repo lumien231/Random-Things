@@ -1,13 +1,5 @@
 package lumien.randomthings;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
-
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
-
 import lumien.randomthings.asm.ClassTransformer;
 import lumien.randomthings.asm.CustomClassWriter;
 import lumien.randomthings.asm.confirmer.ServerConfirmer;
@@ -36,7 +28,6 @@ import lumien.randomthings.tileentity.TileEntityEnderAnchor;
 import lumien.randomthings.worldgen.WorldGenAncientFurnace;
 import lumien.randomthings.worldgen.WorldGenCores;
 import lumien.randomthings.worldgen.WorldGenEventHandler;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -53,13 +44,13 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, acceptedMinecraftVersions = "[1.12,1.13)", certificateFingerprint = Reference.MOD_FINGERPRINT, dependencies = "after:jei@[4.7.11.100,);")
 public class RandomThings implements LoadingCallback

@@ -67,7 +67,6 @@ public class RedstoneSignalHandler extends WorldSavedData
 		if (worldObj.isBlockLoaded(pos))
 		{
 			redstoneSignals.add(new RedstoneSignal(worldObj.provider.getDimension(), pos, duration, strength));
-
 			updatePosition(worldObj, pos);
 			return true;
 		}
@@ -76,9 +75,28 @@ public class RedstoneSignalHandler extends WorldSavedData
 			return false;
 		}
 	}
+	public  synchronized  boolean switchSignal(World worldObj, BlockPos pos, int strength){
+		if(worldObj.isBlockLoaded(pos)){
+			RedstoneSignal redstoneSignalNow = isPowered(worldObj,pos);
+			if(redstoneSignalNow!=null){
+				redstoneSignalNow.setPowered(false);
+			}
+			else
+			{
+				redstoneSignals.add(new RedstoneSignal(worldObj.provider.getDimension(), pos, strength));
+				updatePosition(worldObj,pos);
+			}
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 
 	public synchronized void tick()
 	{
+		//deal added redstone signal events
+		// it is synchronized, it can run at add action time
 		Iterator<RedstoneSignal> iterator = redstoneSignals.iterator();
 
 		while (iterator.hasNext())
@@ -88,11 +106,10 @@ public class RedstoneSignalHandler extends WorldSavedData
 
 			if (signalWorld != null && signalWorld.isBlockLoaded(rs.getPosition()))
 			{
-				if (rs.tick())
+				if (rs.tick()) //if redstone duration run out
 				{
-					iterator.remove();
-
-					updatePosition(signalWorld, rs.getPosition());
+					iterator.remove(); // remove event from redstoneSinals
+					updatePosition(signalWorld, rs.getPosition()); //update neighbor redstone signal
 				}
 			}
 		}
@@ -116,6 +133,23 @@ public class RedstoneSignalHandler extends WorldSavedData
 		return 0;
 	}
 
+	public synchronized RedstoneSignal isPowered(World worldObj, BlockPos pos){
+		int dimension = worldObj.provider.getDimension();
+		for (RedstoneSignal rs : redstoneSignals)
+		{
+			if (rs.getDimension() == dimension)
+			{
+				if (rs.getPosition().equals(pos))
+				{
+					if(rs.isPowered()){
+						return rs;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public synchronized void readFromNBT(NBTTagCompound nbt)
 	{
@@ -133,21 +167,18 @@ public class RedstoneSignalHandler extends WorldSavedData
 	}
 
 	@Override
-	public synchronized NBTTagCompound writeToNBT(NBTTagCompound nbt)
+	public synchronized NBTTagCompound writeToNBT(NBTTagCompound nbt)  //execute period 45 seconds
 	{
 		NBTTagList nbtSignalList = new NBTTagList();
 
-		for (RedstoneSignal rs : redstoneSignals)
+		for (RedstoneSignal rs : redstoneSignals) // deal every write action came to being in 45 seconds
 		{
 			NBTTagCompound signalCompound = new NBTTagCompound();
-
 			rs.writeToNBT(signalCompound);
-
 			nbtSignalList.appendTag(signalCompound);
 		}
 
 		nbt.setTag("redstoneSignals", nbtSignalList);
-
 		return nbt;
 	}
 

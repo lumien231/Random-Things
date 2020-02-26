@@ -47,7 +47,7 @@ minecraft {
     mappings = "snapshot_20171220"
     
     replaceIn "lib/Reference.java"
-    replace "@VERSION@",project.version
+    replace "@VERSION@", project.version
 	replace "@FINGERPRINT@", project.findProperty("signSHA1")
     
     useDepAts = true

@@ -1,6 +1,7 @@
 package lumien.randomthings.handler.redstonesignal;
 
 import lumien.randomthings.util.NBTUtil;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
@@ -13,6 +14,9 @@ public class RedstoneSignal
 	private int age;
 
 	private int redstoneStrength;
+	private boolean isPowered=true;
+
+	private boolean isStill=false;
 
 	public RedstoneSignal()
 	{
@@ -25,21 +29,40 @@ public class RedstoneSignal
 		this.position = position;
 		this.duration = duration;
 		this.redstoneStrength = redstoneStrength;
-
 		this.age = 0;
 	}
 
-	public boolean tick()
-	{
-		this.age++;
+	public RedstoneSignal(int dimension, BlockPos position, int redstoneStrength) {
+		this.dimension = dimension;
+		this.position = position;
+		this.redstoneStrength = redstoneStrength;
 
-		if (this.age >= this.duration)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
+		isStill = true;
+		isPowered = true;
+	}
+
+	public void setPowered(boolean powered) {
+		isPowered = powered;
+	}
+
+	public boolean tick() //executed period 0.02 second
+	{
+		if(isStill){ // if need active all the time
+			if(isPowered){  //if signal has not been cancelled
+				return false;
+			}else {  //if signal has been cancelled
+				return true;  // disable signal active
+			}
+		}else {
+			this.age++;
+			if (this.age >= this.duration)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 
@@ -74,5 +97,9 @@ public class RedstoneSignal
 	public int getRedstoneStrength()
 	{
 		return redstoneStrength;
+	}
+
+	public boolean isPowered() {
+		return isPowered;
 	}
 }

@@ -23,15 +23,15 @@ public class ContainerRedstoneRemote extends Container
 
 	public ContainerRedstoneRemote(EntityPlayer player, World world, int x, int y, int z)
 	{
-		remoteStack = player.getHeldItemMainhand();
+		remoteStack = player.getHeldItemMainhand(); //get item which held by player
 		using = EnumHand.MAIN_HAND;
-		if (remoteStack.isEmpty())
+		if (remoteStack.isEmpty())  //if player didn't hold item
 		{
 			remoteStack = player.getHeldItemOffhand();
 			using = EnumHand.OFF_HAND;
 		}
 
-		if (!remoteStack.isEmpty() && remoteStack.getItem() == ModItems.redstoneRemote)
+		if (!remoteStack.isEmpty() && remoteStack.getItem() == ModItems.redstoneRemote)// if player get redstoneRemote
 		{
 			remoteInventory = new InventoryItem("RedstoneRemote", 18, remoteStack);
 
@@ -41,7 +41,6 @@ public class ContainerRedstoneRemote extends Container
 			{
 				addSlotToContainer(new SlotFiltered(remoteInventory, col + row * 9, 8 + col * 18, 18 + row * 18, new Predicate<ItemStack>()
 				{
-
 					@Override
 					public boolean apply(ItemStack input)
 					{
