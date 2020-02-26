@@ -1,28 +1,6 @@
 package lumien.randomthings.network;
 
-import lumien.randomthings.network.messages.MessageAdvancedItemCollector;
-import lumien.randomthings.network.messages.MessageAnalogEmitter;
-import lumien.randomthings.network.messages.MessageChatDetector;
-import lumien.randomthings.network.messages.MessageChunkAnalyzer;
-import lumien.randomthings.network.messages.MessageContainerSignal;
-import lumien.randomthings.network.messages.MessageEclipsedClock;
-import lumien.randomthings.network.messages.MessageEnderLetter;
-import lumien.randomthings.network.messages.MessageEntityDetector;
-import lumien.randomthings.network.messages.MessageFlooParticles;
-import lumien.randomthings.network.messages.MessageFlooToken;
-import lumien.randomthings.network.messages.MessageGlobalChatDetector;
-import lumien.randomthings.network.messages.MessageItemFilter;
-import lumien.randomthings.network.messages.MessageLightRedirector;
-import lumien.randomthings.network.messages.MessageSpectreIllumination;
-import lumien.randomthings.network.messages.MessageNotification;
-import lumien.randomthings.network.messages.MessageNotificationInterface;
-import lumien.randomthings.network.messages.MessageOnlineDetector;
-import lumien.randomthings.network.messages.MessagePlayedSound;
-import lumien.randomthings.network.messages.MessagePotionVaporizerParticles;
-import lumien.randomthings.network.messages.MessageRedstoneRemote;
-import lumien.randomthings.network.messages.MessageSelectSound;
-import lumien.randomthings.network.messages.MessageSetBiome;
-import lumien.randomthings.network.messages.MessageVoxelProjector;
+import lumien.randomthings.network.messages.*;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelData;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelList;
 import lumien.randomthings.network.messages.magicavoxel.MessageModelRequest;
@@ -46,6 +24,7 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageItemFilter.class);
 		INSTANCE.registerMessage(MessageLightRedirector.class);
 		INSTANCE.registerMessage(MessageRedstoneRemote.class);
+		INSTANCE.registerMessage(MessageRedstoneRemoteStill.class);
 		INSTANCE.registerMessage(MessageModelData.class);
 		INSTANCE.registerMessage(MessageModelRequest.class);
 		INSTANCE.registerMessage(MessageModelRequestUpdate.class);

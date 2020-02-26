@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import lumien.randomthings.container.inventories.InventoryItem;
 import lumien.randomthings.handler.redstonesignal.RedstoneSignalHandler;
 import lumien.randomthings.item.ItemPositionFilter;
-import lumien.randomthings.item.ItemRedstoneRemote;
 import lumien.randomthings.item.ItemRedstoneRemoteStill;
 import lumien.randomthings.item.ModItems;
 import lumien.randomthings.network.IRTMessage;
@@ -48,7 +47,6 @@ public class MessageRedstoneRemoteStill implements IRTMessage {
     public void onMessage(MessageContext context)
     {
         EntityPlayerMP player = context.getServerHandler().player;
-
         if (slotUsed >= 0 && slotUsed < 9 && player != null)
         {
             ItemStack using = player.getHeldItem(usingHand);
@@ -57,7 +55,6 @@ public class MessageRedstoneRemoteStill implements IRTMessage {
             {
                 InventoryItem itemInventory = new InventoryItem("RedstoneRemoteStill", 18, using);
                 ItemStack positionFilter = itemInventory.getStackInSlot(slotUsed);//get position filter from remote redstone
-
                 if (positionFilter != null && positionFilter.getItem() == ModItems.positionFilter)
                 {
                     BlockPos target = ItemPositionFilter.getPosition(positionFilter); //get position from position filter
