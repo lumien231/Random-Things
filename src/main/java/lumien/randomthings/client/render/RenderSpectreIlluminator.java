@@ -3,32 +3,18 @@ package lumien.randomthings.client.render;
 import java.awt.Color;
 import java.util.Random;
 
-import lumien.randomthings.client.ClientProxy;
 import lumien.randomthings.client.render.magiccircles.ColorFunctions;
 import lumien.randomthings.client.render.magiccircles.IColorFunction;
-import lumien.randomthings.entitys.EntityGoldenChicken;
 import lumien.randomthings.entitys.EntitySpectreIlluminator;
-import lumien.randomthings.entitys.EntityTimeAccelerator;
-import lumien.randomthings.entitys.EntityWeatherCloud;
 import lumien.randomthings.handler.RTEventHandler;
-import lumien.randomthings.item.ItemWeatherEgg;
 import lumien.randomthings.util.client.MKRRenderUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelChicken;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -53,7 +39,7 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 
 		GlStateManager.disableCull();
 
-        GlStateManager.pushMatrix();
+		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, z);
 
 		float progress = (2) * (RTEventHandler.clientAnimationCounter + partialTicks);
@@ -72,10 +58,10 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 			float rotZ = rng.nextInt(360) + progress / (rng.nextInt(4) + 1);
 
 			float radius = rng.nextFloat() * 0.5F + 0.07F;
-			
+
 
 			// x - Axis
-            GlStateManager.pushMatrix();
+			GlStateManager.pushMatrix();
 			GlStateManager.rotate(rotX, 1, 0, 0);
 			GlStateManager.rotate(rotZ, 0, 0, 1);
 			GlStateManager.rotate(progress, 0, 1, 0);
@@ -87,10 +73,10 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 				return 3;
 			});
 			MKRRenderUtil.renderCircleDecTriPart3Tri(radius, 0.04, outerFunction.next(ColorFunctions.flicker(rng.nextInt(1000), 40)).tt(progress), 30);
-            GlStateManager.popMatrix();
+			GlStateManager.popMatrix();
 		}
 
-        GlStateManager.popMatrix();
+		GlStateManager.popMatrix();
 
 		GlStateManager.enableCull();
 
