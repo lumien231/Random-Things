@@ -29,6 +29,7 @@ group= "lumien.randomthings"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+
 jar {
     manifest {
         attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "lumien.randomthings.asm.LoadingPlugin", "FMLAT": "randomthings_at.cfg")
@@ -46,10 +47,8 @@ minecraft {
     // simply re-run your setup task after changing the mappings to update your workspace.
     mappings = "snapshot_20171220"
     
-    replaceIn "lib/Reference.java"
-    replace "@VERSION@", project.version
-	replace "@FINGERPRINT@", project.findProperty("signSHA1")
-    
+    replaceIn("lib/Reference.java")
+    replace("@VERSION@", project.version)
     useDepAts = true
 }
 
@@ -94,7 +93,7 @@ processResources
     // Copy Access Transformer
     rename '(.+_at.cfg)', 'META-INF/$1'
 }
-
+/*
 task signJar(type: SignJar, dependsOn: reobfJar) {
 
     // Skips if the keyStore property is missing.
@@ -111,4 +110,7 @@ task signJar(type: SignJar, dependsOn: reobfJar) {
 }
 
 // Runs this task automatically when build is ran. 
-build.dependsOn signJar
+build.dependsOn(signJar)
+*/
+//signFiles, 2020-2-27, PrivateKeyEntry,
+//证书指纹 (SHA1): 70:0E:99:8F:1B:40:BE:28:99:1D:E2:41:1A:C8:72:46:52:DA:E4:71

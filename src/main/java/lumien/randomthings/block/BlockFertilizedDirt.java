@@ -29,7 +29,7 @@ public class BlockFertilizedDirt extends BlockBase
 
 	protected BlockFertilizedDirt(boolean tilled)
 	{
-		super("fertilizedDirt" + (tilled ? "Tilled" : ""), Material.GROUND);
+		super("fertilizedDirt" + (tilled ? "Tilled" : ""), Material.GOURD);
 
 		this.tilled = tilled;
 		this.setTickRandomly(true);
